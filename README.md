@@ -1,5 +1,6 @@
+
 RequireJS, jQuery, Bootstrap and Backbone Project Template
-==========================================================
+
 
 This is a simple project as that the RequireJS [optimization section](http://requirejs.org/docs/optimization.html) 
 describes.
@@ -68,4 +69,5 @@ LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE A
 IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 
