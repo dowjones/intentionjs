@@ -1,0 +1,43 @@
+# Hello and welcome to Intentions! 
+
+
+## Authored by
+	
+	* Joe Kendall
+	* Erin Sparling
+
+
+### Usage
+	
+```
+//include the script in your HTML file:
+<script src="intention.js"></script>
+
+...
+
+// Implement like so:
+window.appIntentions = new window.Intention({
+	thresholds:{mobile:400, desktop:768},
+	respond:function(info){
+		console.log(info);
+		//do whatever crazy stuff you want!
+	}});
+
+//Or simply (if the names are not important):
+window.appIntentions = new window.Intention({
+	thresholds:[400,768],
+	respond:function(info){
+		console.log(info);
+		//do whatever crazy stuff you want!
+	}});
+
+// access any value on the appIntentions object like so:
+window.appIntentions.value('width'); // returns the current width of the window
+
+// OR
+window.appIntentions.value('threshold'); // returns the name of the current threshold
+
+```
+
+this implementation will likely change when the framework is made into a jquery plugin
+or dojo widget

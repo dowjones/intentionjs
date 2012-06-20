@@ -1,0 +1,24 @@
+{
+  "author": "Yuriy Nemtsov <georgecalm@gmail.com> (https://plus.google.com/109828394194059139561/posts)",
+  "name": "requirejs-jquery-backbone-bootstrap-tpl",
+  "description": "Project template using: RequireJS, jQuery, Backbone & Bootstrap.",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/georgecalm/requirejs-jquery-backbone-bootstrap-tpl.git"
+  },
+  "dependencies": {
+    "jquery": "~1.7.2",
+    "should": "~0.6.3",
+    "requirejs": "~1.0.8",
+    "mocha": "~1.0.3"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "test": "make test"
+  }
+}
