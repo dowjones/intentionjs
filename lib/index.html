@@ -29,7 +29,7 @@
         position:relative;
         height:300px;
         width:100%;
-        background:green;
+        background:tan;
         display: none;
       }
 
@@ -116,7 +116,7 @@
   <body>
   
 
-    <div data-intention data-mobile-class="on" id="mobile_box"></div>
+     <div data-intention data-mobile-class="on" id="mobile_box"></div>
 
     <div data-intention data-tablet-class="on" id="tablet_box"></div>
 
@@ -124,22 +124,48 @@
 
     <div data-intention data-luxury-class="on" id="lux_box"></div>
 
+ 
 
-  <div
+    <div
 
-    id="responder"
+      id="responder"
 
-      data-intention
-      data-tablet-move = "#tablet_box"
-      data-tablet-class = "blue"
-      data-standard-move="#desk_box"
-      data-standard-class="red"
-      >
+        data-intention
+
+        data-move = "#standard_box"
+        data-mobile-move = "#mobile_box"
+
+        data-tablet-move = "#tablet_box"
+
+        data-tablet-touch-move = "#tablet_box_b"
 
 
-  </div>
+
+        data-move = "#standard_box"
+
+        
+        
+        data-tablet-mouse-class = "yellow"
+
+
+        data-class = "color newsItem"
+        data-tablet-class = "blue"
+        data-tablet-touch-class = "black"
+
+
+
+        data-attr-href = "http://www.pandas.com/a"
+        data-tablet-attr-href = "http://www.pandas.com/b"
+        data-tablet-mouse-attr-href = "http://www.pandas.com/c"
+
+        data-standard-move="#desk_box"
+        data-standard-class="red"
+
+        ></div>
+
     <!-- Le javascript -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script data-main="assets/js/main" src="assets/js/require/require.js"></script>
   </body>
 </html>
+  
