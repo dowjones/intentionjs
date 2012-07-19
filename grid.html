@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" /> 
+		<title>
+			Intentional Grid
+		</title>
+    <link href="responsivegrid.css" rel="stylesheet">
+<style type="text/css">
+
+	.grid {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA78AAAABCAMAAAAhFukwAAAABlBMVEXR0dH///9WxthCAAAAH0lEQVR42u3NIQEAAADCMOhfGkmCu6/AwugZGBhQwQC9YABkomSpkAAAAABJRU5ErkJggg==);
+	background-size: 100%;
+	}
+	
+    /*presentation styles for daniel*/
+    .ux.theme .module > h2 {
+        font-size:2em;
+        font-weight:bold;
+    }
+
+    .ux.theme .module.orange {
+        background-color:rgba(255,142,0,.2);
+    }
+
+    .ux.theme .module.green {
+        background-color:rgba(49,142,0,.2);
+    }
+
+    .ux.theme .module.pink {
+        background-color:rgba(255,142,188,.2);
+    }
+
+    .ux.theme .module.blue {
+        background-color:rgba(0,142,188,.2);
+    }
+
+	.ux.theme .module.slimAd {
+		min-height:50px;
+	}
+
+	.ux.theme .module.wideAd {
+		min-height:100px;
+	}
+
+	.ux.theme .module.squareAd {
+		min-height:300px;
+	}
+
+</style>
+	</head>
+	<body>
+		<div class="fullwide ux theme grid col10wide colum" data-class-display-mobile="col3wide" data-class-display-tablet="col6wide" data-class-display-standard="col10wide" data-class-display-luxury="col14wide">
+			<div>
+				<div data-asset-luxury="responsive-snippet.php">
+				</div>
+				<section class="colgroup">
+					<section class="col10wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col6wide" data-class-display-standard="col1wide" data-class-display-luxury="col14wide">
+						<div class="module green">
+							<h2>
+								Header 
+							</h2>
+						</div>
+						<div data-id-placeholder-tablet="ad">
+						</div>
+					</section>
+				</section>
+				<section class="colgroup">
+					<section class="col6wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col3wide" data-class-display-standard="col6wide" data-class-display-luxury="col8wide">
+						<div data-id-placeholder-mobile="ad">
+						</div>
+						<div class="module orange">
+							<h2>
+								Left Column 
+							</h2>
+						</div>
+						<section class="" data-class-display-mobile="col3wide column" data-class-display-tablet="placeholder" data-class-display-standard="placeholder" data-class-display-luxury="placeholder">
+							<div data-id-placeholder-mobile="mdm">
+							</div>
+						</section>
+						<section class="colgroup">
+							<section class="col3wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col3wide" data-class-display-standard="col3wide" data-class-display-luxury="col4wide">
+								<div class="module orange">
+									<h2>
+										Sub Left Column 
+									</h2>
+								</div>
+							</section>
+							<section class="col3wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col3wide" data-class-display-standard="col3wide" data-class-display-luxury="col4wide">
+								<div class="module orange">
+									<h2>
+										Sub Right Column 
+									</h2>
+								</div>
+							</section>
+						</section>
+						<section class="colgroup">
+							<section class="col2wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col2wide" data-class-display-standard="col2wide" data-class-display-luxury="col3wide">
+								<div class="module orange">
+									<h2>
+										Tertiary Column 1 
+									</h2>
+								</div>
+							</section>
+							<section class="col2wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col2wide" data-class-display-standard="col2wide" data-class-display-luxury="col2wide">
+								<div class="module orange">
+									<h2>
+										Tertiary Column 2 
+									</h2>
+								</div>
+							</section>
+							<section class="col2wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col2wide" data-class-display-standard="col2wide" data-class-display-luxury="col3wide">
+								<div class="module orange">
+									<h2>
+										Tertiary Column 3 
+									</h2>
+								</div>
+							</section>
+						</section>
+					</section>
+					<section class="col4wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col3wide" data-class-display-standard="col4wide" data-class-display-luxury="col6wide">
+						<div id="ad" data-id-placeholder-standard="ad" data-id-placeholder-luxury="ad">
+							<div class="module blue" data-class-display-mobile="slimAd" data-class-display-tablet="wideAd" data-class-display-standard="squareAd" data-class-display-luxury="squareAd">
+								<h2>
+									Right Column Ad 
+								</h2>
+							</div>
+						</div>
+						
+						<div id="mdm" data-id-placeholder-tablet="mdm" data-id-placeholder-standard="mdm" data-id-placeholder-luxury="mdm">
+							<div class="module blue">
+								<h2>
+									Market Data Right Module 
+								</h2>
+							</div>
+						</div><section class="colgroup">
+											<section class="col2wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col2wide" data-class-display-standard="col2wide" data-class-display-luxury="col3wide">
+								<div class="module orange">
+									<h2>
+										Secondary Column 1 
+									</h2>
+								</div>
+							</section>
+							<section class="col2wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col2wide" data-class-display-standard="col2wide" data-class-display-luxury="col2wide">
+								<div class="module orange">
+									<h2>
+										Secondary Column 2 
+									</h2>
+								</div>
+							</section></section>
+					</section>
+				
+
+				
+				</section>
+				<section class="colgroup">
+					<section class="col10wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col6wide" data-class-display-standard="col1wide" data-class-display-luxury="col14wide">
+						<div class="module green">
+							<h2>
+								Footer 
+							</h2>
+						</div>
+					</section>
+				</section>
+				<section class="colgroup">
+					<section class="col1wide column" data-class-display-mobile="col1wide" data-class-display-tablet="col1wide" data-class-display-standard="col1wide" data-class-display-luxury="col1wide">
+						<div class="module">
+							<h2>
+								module 1 
+							</h2>
+						</div>
+					</section>
+					<section class="col9wide column" data-class-display-mobile="col2wide" data-class-display-tablet="col5wide" data-class-display-standard="col9wide" data-class-display-luxury="col13wide">
+						<div class="module">
+							<h2>
+								module 2 
+							</h2>
+						</div>
+					</section>
+				</section>
+				<section class="colgroup">
+					<section class="col2wide column" data-class-display-mobile="col1wide" data-class-display-tablet="col2wide" data-class-display-standard="col2wide" data-class-display-luxury="col3wide">
+						<div class="module">
+							<h2>
+								module 3 
+							</h2>
+						</div>
+					</section>
+					<section class="col8wide column" data-class-display-mobile="col2wide" data-class-display-tablet="col4wide" data-class-display-standard="col8wide" data-class-display-luxury="col11wide">
+						<div class="module">
+							<h2>
+								module 4 
+							</h2>
+						</div>
+					</section>
+				</section>
+				<section class="colgroup">
+					<section class="col3wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col2wide" data-class-display-standard="col3wide" data-class-display-luxury="col4wide">
+						<div class="module">
+							<h2>
+								module 5 
+							</h2>
+						</div>
+					</section>
+					<section class="col7wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col4wide" data-class-display-standard="col7wide" data-class-display-luxury="col10wide">
+						<div class="module">
+							<h2>
+								module 6 
+							</h2>
+						</div>
+					</section>
+				</section>
+				<section class="colgroup">
+					<section class="col4wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col2wide" data-class-display-standard="col4wide" data-class-display-luxury="col6wide">
+						<div class="module">
+							<h2>
+								module 7 
+							</h2>
+						</div>
+					</section>
+					<section class="col6wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col4wide" data-class-display-standard="col6wide" data-class-display-luxury="col8wide">
+						<div class="module">
+							<h2>
+								module 8 
+							</h2>
+						</div>
+					</section>
+				</section>
+				<section class="colgroup">
+					<section class="col5wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col3wide" data-class-display-standard="col5wide" data-class-display-luxury="col7wide">
+						<div class="module">
+							<h2>
+								module 9 
+							</h2>
+						</div>
+					</section>
+					<section class="col5wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col3wide" data-class-display-standard="col5wide" data-class-display-luxury="col7wide">
+						<div class="module">
+							<h2>
+								module 10 
+							</h2>
+						</div>
+					</section>
+				</section>
+				<section class="colgroup">
+					<section class="col3wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col2wide" data-class-display-standard="col3wide" data-class-display-luxury="col4wide">
+						<div class="module">
+							<h2>
+								module a 
+							</h2>
+						</div>
+					</section>
+					<section class="col3wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col2wide" data-class-display-standard="col3wide" data-class-display-luxury="col4wide">
+						<div class="module">
+							<h2>
+								module b 
+							</h2>
+						</div>
+					</section>
+					<section class="col4wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col2wide" data-class-display-standard="col4wide" data-class-display-luxury="col6wide">
+						<div class="module">
+							<h2>
+								module c 
+							</h2>
+						</div>
+					</section>
+				</section>
+				<section class="colgroup">
+					<section class="col6wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col4wide" data-class-display-standard="col6wide" data-class-display-luxury="col8wide">
+						<div class="module">
+							<h2>
+								module 11 
+							</h2>
+						</div>
+					</section>
+					<section class="col4wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col2wide" data-class-display-standard="col4wide" data-class-display-luxury="col6wide">
+						<div class="module">
+							<h2>
+								module 12 
+							</h2>
+						</div>
+					</section>
+				</section>
+				<section class="colgroup">
+					<section class="col7wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col4wide" data-class-display-standard="col7wide" data-class-display-luxury="col10wide">
+						<div class="module">
+							<h2>
+								module 13 
+							</h2>
+						</div>
+					</section>
+					<section class="col3wide column" data-class-display-mobile="col3wide" data-class-display-tablet="col2wide" data-class-display-standard="col3wide" data-class-display-luxury="col4wide">
+						<div class="module">
+							<h2>
+								module 14 
+							</h2>
+						</div>
+					</section>
+				</section>
+				<section class="colgroup">
+					<section class="col8wide column" data-class-display-mobile="col2wide" data-class-display-tablet="col4wide" data-class-display-standard="col8wide" data-class-display-luxury="col10wide">
+						<div class="module">
+							<h2>
+								module 15 
+							</h2>
+						</div>
+					</section>
+					<section class="col2wide column" data-class-display-mobile="col1wide" data-class-display-tablet="col2wide" data-class-display-standard="col2wide" data-class-display-luxury="col4wide">
+						<div class="module">
+							<h2>
+								module 16 
+							</h2>
+						</div>
+					</section>
+				</section>
+				<section class="colgroup">
+					<section class="col9wide column" data-class-display-mobile="col2wide" data-class-display-tablet="col5wide" data-class-display-standard="col9wide" data-class-display-luxury="col13wide">
+						<div class="module">
+							<h2>
+								module 17 
+							</h2>
+						</div>
+					</section>
+					<section class="col1wide column" data-class-display-mobile="col1wide" data-class-display-tablet="col1wide" data-class-display-standard="col1wide" data-class-display-luxury="col1wide">
+						<div class="module">
+							<h2>
+								module 18 
+							</h2>
+						</div>
+					</section>
+				</section>
+			</div>
+		</div>
+	</body>
+</html>
