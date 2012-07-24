@@ -8,6 +8,7 @@ body {
 .module {
 	min-height: 150px;
 	display: block;
+	overflow: hidden;
 }
 
 .module:not(:last-child) {
@@ -96,24 +97,24 @@ body {
 }
 
 /* Inside a col6wide */
-.col6wide > .colgroup > .col3wide {
+.col6wide .colgroup > .col3wide {
 	width: 49.1%;
 }
 
-.col6wide > .colgroup > .col2wide {
+.col6wide .colgroup > .col2wide {
 	width: 32%;
 }
 
-.col6wide > .colgroup > .column {
+.col6wide .colgroup > .column {
 	margin-left: 2%; /* <- This value is larger than it should be. */
 }
 
 /* Inside a col4wide */
-.col4wide > .colgroup > .col2wide {
+.col4wide .colgroup > .col2wide {
 	width: 48.54%;
 }
 
-.col4wide > .colgroup > .column {
+.col4wide .colgroup > .column {
 	margin-left: 2.92%; 
 }
 
@@ -137,5 +138,12 @@ body {
 .col3wide > .colgroup > .col3wide,
 .col4wide > .colgroup > .col4wide,
 .col6wide > .colgroup > .col6wide {
+	width: 100%;
+}
+
+/* handle non-10-col-based contexts */
+.luxury .col14wide,
+.tablet .col6wide,
+.mobile .col3wide {
 	width: 100%;
 }
