@@ -83,9 +83,7 @@
 								Header 
 							</h2>
 						</div>
-						<div 
-						data-id-placeholder-tablet="ad">
-						</div>
+						<div id="tablet_ad"></div>
 					</section>
 				</section>
 				<section class="colgroup">
@@ -96,9 +94,7 @@
 					data-tablet-class="col3wide" 
 					data-standard-class="col6wide" 
 					>
-						<div 
-						data-id-placeholder-mobile="ad">
-						</div>
+						<div  id="mobile_ad"></div>
 						<div class="module orange">
 							<h2>
 								Left Column 
@@ -111,9 +107,7 @@
 						data-tablet-class="placeholder" 
 						data-standard-class="placeholder" 
 						>
-							<div 
-							data-id-placeholder-mobile="mdm">
-							</div>
+							<div id="mobile_mdm"></div>
 						</section>
 						<section class="colgroup">
 							<section class="col3wide column" 
@@ -193,32 +187,42 @@
 					data-tablet-class="col3wide" 
 					data-standard-class="col4wide" 
 					>
-						<div id="ad" 
-						data-standard-move="ad" 
-						data-luxury-move="ad">
-							<div class="module blue" 
+						<div id="ad">
+							<div
 							data-intention
-							data-class="module blue"
-							data-mobile-class="slimAd" 
-							data-tablet-class="wideAd" 
-							data-standard-class="squareAd" 
-							>
-								<h2>
-									Right Column Ad 
-								</h2>
+							data-move-append="#ad"
+							data-standard-move-append="#ad"
+							data-mobile-move-append="#mobile_ad"
+							data-table-move-append="#tablet_ad">
+								<div class="module blue" 
+								data-intention
+								data-class="module blue"
+								data-mobile-class="slimAd" 
+								data-tablet-class="wideAd" 
+								data-standard-class="squareAd" 
+								>
+									<h2>
+										Right Column Ad 
+									</h2>
+								</div>
 							</div>
 						</div>
-						
-						<div id="mdm" 
-						data-id-placeholder-tablet="mdm" 
-						data-id-placeholder-standard="mdm" 
-						data-id-placeholder-luxury="mdm">
-							<div class="module blue">
-								<h2>
-									Market Data Right Module 
-								</h2>
+						<div id="mdm">
+							<!-- TODO: tablet spec was: data-tablet-move-append="#tablet_mdm" container not found-->
+							<div 
+							data-intention
+							data-move-prepend="#mdm"
+							
+							data-standard-move-append="#mdm"
+							data-mobile-move-append="#mobile_mdm" >
+								<div class="module blue">
+									<h2>
+										Market Data Right Module 
+									</h2>
+								</div>
 							</div>
-						</div><section class="colgroup">
+						</div>
+						<section class="colgroup">
 											<section class="col2wide column" 
 											data-intention
 											data-class="column"
