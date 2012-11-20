@@ -118,6 +118,9 @@ body {
 	margin-left: 2.92%; 
 }
 
+.col3wide .column.col3wide {
+	margin-left: 0 !important; /* <- No column margins in phone view */
+}
 
 /* reset nested columns */
 .col1wide > .col1wide,
