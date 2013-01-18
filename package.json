@@ -8,10 +8,12 @@
     "url": "git://github.com/georgecalm/requirejs-jquery-backbone-bootstrap-tpl.git"
   },
   "dependencies": {
-    "jquery": "~1.7.2",
-    "should": "~0.6.3",
-    "requirejs": "~1.0.8",
+
+    "requirejs": "~2.1.2",
+    "jquery": ">=1.8.3",
     "mocha": "~1.0.3"
+    
+
   },
   "devDependencies": {},
   "optionalDependencies": {},
