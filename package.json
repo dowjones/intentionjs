@@ -1,26 +1,16 @@
 {
-  "author": "Yuriy Nemtsov <georgecalm@gmail.com> (https://plus.google.com/109828394194059139561/posts)",
-  "name": "requirejs-jquery-backbone-bootstrap-tpl",
-  "description": "Project template using: RequireJS, jQuery, Backbone & Bootstrap.",
-  "version": "0.1.0",
+  "author": "Joe Kendall <joe@megazine.xxx>)",
+  "name": "intention.js",
+  "description": "responsive design framework with an html interface",
+  "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "git://github.com/georgecalm/requirejs-jquery-backbone-bootstrap-tpl.git"
+    "url": "git://github.com/1800joe/intentionjs.git"
   },
   "dependencies": {
-
     "requirejs": "~2.1.2",
     "jquery": ">=1.8.3",
     "mocha": "~1.0.3"
-    
-
   },
-  "devDependencies": {},
-  "optionalDependencies": {},
-  "engines": {
-    "node": "*"
-  },
-  "scripts": {
-    "test": "make test"
-  }
+  "scripts": {}
 }

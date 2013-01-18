@@ -16,8 +16,6 @@ Intention
 
 	in the case of classes (multi-value attribute) a combination algo is used. simple union
 
-	
-
 
 Context
 	Reports information about the browser window when the dimension crosses a user defined threshold
@@ -30,9 +28,6 @@ Context
 
 	The purpose of this software is to constantly incorporate new interaction modes and the transition between them
 		i.e. Device A transitions from touch interaction mode -> mouse interaction via a mouseDeviceDetected event (imaginary js event)
-
-
-
 
 
 
@@ -73,6 +68,12 @@ Context
 	* Erin Sparling
 
 
+## Authors
+	
+	* Joe Kendall
+	* Erin Sparling
+
+
 That will create a directory called **build/**. Open **build/main.html** in the browser.
 You'll see that it will only pull **4 files**. That is because the build-step combines 
 all CSS and JS into the fewest possible number of files.
@@ -89,6 +90,9 @@ Run the following to test the project (testing is done via [Mocha](http://vision
 
 
 ## License
+
+### Intention.js
+
 // Copyright (c) 2012 The Wall Street Journal, 
 // http://wsj.com/
 
@@ -117,6 +121,7 @@ Run the following to test the project (testing is done via [Mocha](http://vision
 RequireJS 0.22.0 Copyright (c) 2010, The Dojo Foundation All Rights Reserved.
 Available via the MIT or new BSD license.
 see: http://github.com/jrburke/requirejs for details
+
 
 
 ## SORT THROUGH
@@ -245,5 +250,4 @@ see: http://github.com/jrburke/requirejs for details
 		class
 		move
 		attr
-
 
