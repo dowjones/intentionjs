@@ -29,7 +29,7 @@
         this._setStaticPatterns();
 
         var intentHandler = this._hitch(this, function(info){
-
+          
           this.info=info;
           this.filters = this._makeFilterPatterns(info);
 

@@ -17,13 +17,17 @@
             }
           }
           
+          this._listeners = {};
+          
           this.thresholds = this._setThresholds();
+
+          this.contextualize();
 
           this._bindEvents();
 
           this._context = this._getContext();
 
-          this._listeners = {};
+          
 
           this._setInfo();
 
@@ -177,7 +181,7 @@
           },
 
           contextualize: function(trigger){
-
+            console.log(2134)
             
             if(typeof window.innerHeight === 'number') {
               this.width = window.innerWidth;
@@ -260,11 +264,7 @@
           },
 
           _getContext: function(){
-            
             for(var i=0; i<this.thresholds.length; i++){
-
-
-
               if(this.width <= this.thresholds[i]){
                 return i;
                 break;
