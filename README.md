@@ -1,65 +1,73 @@
 # Intention.js
 
-## Howda do
+DOM Manipulation based on a html attribute specification
 
-install the dependencies [jquery]
+## Installation
+
+install the dependencies [jquery, mocha]
 
 	npm install
 
+include the script on your page via require
 
-Intention
-	DOM Manipulation based on a html attribute specifications
+	<script data-main="assets/js/main" src="assets/js/require/require.js"></script>
 
-	Three manipulation types: class, attribute, placement (move)
+initialize the script
 
-	An algo to determine the best match in a set of attributes is used for single value attributes
-
-	in the case of classes (multi-value attribute) a combination algo is used. simple union
+	new Intention();
 
 
-Context
-	Reports information about the browser window when the dimension crosses a user defined threshold
+## Usage
 
-	information reported is: 
-		threshold value (number in pixels)
-		name of threshold (allows for easy integration with intention framework)
-		pixel density
-		interaction mode (mouse or touch)
+By default Intention provides three responsive contexts: mobile (320), tablet (768) and desktop (1000)
 
-	The purpose of this software is to constantly incorporate new interaction modes and the transition between them
-		i.e. Device A transitions from touch interaction mode -> mouse interaction via a mouseDeviceDetected event (imaginary js event)
+a "base" context is recommended to solve the scenario where the client enters a context that has not been specified on an element. in other words this is the *fallback* context
+
+Three manipulation types: class, attr, move (placement) 
+
+### Attribute Manipulation
+
+	<!-- mark an element as responsive, set the base(default) attr, specify which image to load in a given context -->
+	<img 
+		data-intention 
+		data-base-src="medium_img.png" 
+		data-mobile-src="small_img.png"
+		data-desktop-src="big_img.png" />
+
+	<!-- the above spec will produce the following in each context
+		mobile: <img src="small_img.png" />
+		tablet: <img src="medium_img.png" />
+		desktop: <img src="big_img.png" />
+	-->
+
+
+### Class Manipulation
+
+	<!--  -->
+
+
+### Placement Manipulation
+
+	<!--  -->
+
+Intention determines the best match in a set of attributes when more that one may apply
 
 
 
-### Usage
+## Context
 
+Reports information about the browser window when the dimension crosses a user defined threshold
 
-	//include the script in your HTML file:
-	<script src="intention.js"></script>
+information reported is: 
+----------------------------------------------------
++	threshold value (number in pixels)
++	name of threshold
++	pixel density
++	interaction mode (mouse or touch)
 
+-----------------------------------------------------
 
-	// Implement like so:
-	window.appIntentions = new window.Intention({
-		thresholds:{mobile:400, desktop:768},
-		respond:function(info){
-			console.log(info);
-			//do whatever crazy stuff you want!
-		}});
-
-	//Or simply (if the names are not important):
-	window.appIntentions = new window.Intention({
-		thresholds:[400,768],
-		respond:function(info){
-			console.log(info);
-			//do whatever crazy stuff you want!
-		}});
-
-	// access any value on the appIntentions object like so:
-	window.appIntentions.value('width'); // returns the current width of the window
-
-	// OR
-	window.appIntentions.value('threshold'); // returns the name of the current threshold
-
+The purpose of this software is to constantly incorporate new interaction modes and the events that transition between contexts (resize, orientation change, etc.)
 
 
 ## Authors
@@ -67,16 +75,6 @@ Context
 	* Joe Kendall
 	* Erin Sparling
 
-
-## Authors
-	
-	* Joe Kendall
-	* Erin Sparling
-
-
-That will create a directory called **build/**. Open **build/main.html** in the browser.
-You'll see that it will only pull **4 files**. That is because the build-step combines 
-all CSS and JS into the fewest possible number of files.
 
 ## Testing
 
@@ -124,20 +122,9 @@ see: http://github.com/jrburke/requirejs for details
 
 
 
-## SORT THROUGH
+## IGNORE BELOW!!! SORT THROUGH
 
 	
-	derive context features
-		placement
-		class/attr base
-		set theory: union (all options are the union of the base plus context spec, if there is no context spec it is the base)
-		empty attr + context specific attr means there is no base
-			provide a list of supported attrs and save all of their bases 
-
-
-	fix the getter and setter for "responsive elms" in intention
-
-
 	would one ever want multiple contextualizers?
 		sure
 			you could contextualize on a per mod level opposed to the window lvl
@@ -146,7 +133,6 @@ see: http://github.com/jrburke/requirejs for details
 		yes
 			i wrote with the option for multiple instantiations so that we could think about a per module responsiveness
 			wherein we manufacture a resize or other context change event for an individual element on the page
-
 
 
 
@@ -164,7 +150,6 @@ see: http://github.com/jrburke/requirejs for details
 
 	data-mobile-touch-move-append 9
 
-
 	data-attr-class 5
 	data-mobile-attr-class 8
 	data-touch-attr-class 6
@@ -173,7 +158,6 @@ see: http://github.com/jrburke/requirejs for details
 	data-mobile-touch-attr-class 10
 	data-touch-mobile-attr-class 10
 	data-touch-mobile-class 10 
-
 
 	[data, attr, class, touch, mobile, value]
 
@@ -184,15 +168,11 @@ see: http://github.com/jrburke/requirejs for details
 
 	attr([which attr], which val)
 
-
 	class
-
 
 	data-attr-id
 
 	data-itn-mobile-touch-attr-class
-
-
 
 	prefix option
 
@@ -206,7 +186,6 @@ see: http://github.com/jrburke/requirejs for details
 
 	once we have found the subset of attrs to consider the data should be organized by filter
 	remove "data"
-
 
 	to organize into the respective functions first check to see if a sub func is employed
 
