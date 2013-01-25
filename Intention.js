@@ -2,10 +2,8 @@
 
     'use strict';
 
-    var intentionWrapper = function($){
-
+    var intentionWrapper = function($, ctx){
       var Intention = function(params){
-
 
         if(params){
           for(var param in params){
@@ -14,14 +12,12 @@
             }
           }
         }
-
+        
+        this.context = new ctx(this.thresholds);
+        
         // by default the container is the document
         this._setResponsiveElms(this.container);  
                 
-        if(this.derive_context){
-          this._deriveContext();
-        }
-
         // this part of initialization allows me to externalize the
         // messiness of a regex to arrays that are stored as props of 
         // the intention object. abstraction for clarity, or regexes are
@@ -29,7 +25,6 @@
         this._setStaticPatterns();
 
         var intentHandler = this._hitch(this, function(info){
-          
           this.info=info;
           this.filters = this._makeFilterPatterns(info);
 
@@ -50,8 +45,6 @@
 
         // public props
         container: document,
-
-        derive_context:false,
 
         // privates
         _funcs: ['move', 'class', 'attr'],
@@ -174,8 +167,8 @@
 
                 } else {
 
-                  instructions[func].options.push(attr)
-                  
+                  instructions[func].options.push(attr);
+
                 }
               }
             }
@@ -194,10 +187,13 @@
             notInteractions = '';
           // looking for the context or the interaction or the function NO ORDER
           
+          // TODO: ficks
           // build the context filter for the regex
-          for(var i=0; i<this.context.thresholdNames.length;i++) {
-            if(this.context.thresholdNames[i] !== context.name){
-              notContexts+='(' + this.context.thresholdNames[i] + ')|'  
+          var thresholds=this.context._thresholds;
+
+          for(var i=0; i<thresholds.length;i++) {
+            if(thresholds[i].name !== context.name){
+              notContexts+='(' + thresholds[i].name + ')|'  
             }
           }
 
@@ -239,8 +235,8 @@
 
           var contextPattern = '';
 
-          for(var i=0; i<this.context.thresholdNames.length;i++) {
-            contextPattern += this.context.thresholdNames[i] + '|';
+          for(var i=0; i<this.context._thresholds.length;i++) {
+            contextPattern += this.context._thresholds[i].name + '|';
           }
 
           contextPattern = contextPattern.replace(/\|$/, '');
@@ -442,8 +438,6 @@
                 this['_' + instruction](elm, instructions[instruction]);
               }
             }
-
-
           }
         },
 
@@ -456,8 +450,6 @@
             }));
             return;
           } 
-          // TODO: throw error?
-
         },
 
         add: function(elm){
@@ -479,7 +471,7 @@
     };
 
     if ( typeof define === "function" && define.amd ) {
-      define( "Intention", ['jquery'], intentionWrapper );
+      define( ['jquery', 'Context'], intentionWrapper );
     } else {
 
       if(!window.jQuery) {

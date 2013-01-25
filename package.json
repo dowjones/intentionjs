@@ -1,5 +1,5 @@
 {
-  "author": "Joe Kendall <joe@megazine.xxx>)",
+  "author": "Joe Kendall <joe@megazine.xxx>) & Erin Sparling <erin.sparling@dowjones.com>",
   "name": "intention.js",
   "description": "responsive design framework with an html interface",
   "version": "0.0.1",
@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "requirejs": "~2.1.2",
-    "jquery": ">=1.8.3",
     "mocha": "~1.0.3"
   },
   "scripts": {}

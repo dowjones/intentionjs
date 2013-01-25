@@ -6,9 +6,8 @@
 			Intentional Grid
 		</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <link href="../lib/assets/css/responsivegrid.css" rel="stylesheet">
+	    <link href="../lib/assets/css/responsivegrid.css" rel="stylesheet">
 
-    <script src="../node_modules/requirejs/require.js"></script>
 <style type="text/css">
 
 	.grid {
@@ -567,20 +566,7 @@ data-intention
 			</div>
 		</div>
 		
-		
+		<script data-main="main" src="../node_modules/requirejs/require.js"></script>		
 
-		<script>
-			(function(){
-
-				var pageWrapper = function(Intention, Context) {
-					new Intention({context:new Context});
-				};
-
-		      define('Page', ['Intention', 'Context'], pageWrapper);
-
-				    
-			})()
-			
-		</script>
 	</body>
 </html>
