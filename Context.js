@@ -12,7 +12,6 @@
               }
             }
           }
-
           this._listeners = {};
 
           this._thresholds = this._makeThresholds(this.thresholds);
@@ -152,12 +151,6 @@
             return false;
           },
 
-          _getInfo:function(){
-
-            return this._info;
-
-          },
-
           _setInfo: function(){
 
             var pixelRatio = 1,
@@ -240,7 +233,7 @@
             if(this._hasChanged()){
 
               // update the info about the new context
-              var e = this._getInfo();
+              var e = this._info;
 
               for(var param in e){
                 if(e.hasOwnProperty(param)){
@@ -276,7 +269,7 @@
           },
 
           info:function(){
-            return this._getInfo();
+            return this._info;
           }
 
         };

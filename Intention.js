@@ -103,34 +103,6 @@
 
         },
 
-
-
-        _deriveContext: function(){
-
-          var setBase = function(elm){
-
-            var attrs = elm.attributes;
-
-            // find any attr w/ a func: data- + (func)
-
-            // of those figure out if there is no base: func + reverse lookback of context
-
-            // of those look to see if there is a attr set: i.e. "class"
-
-            // if we have a definition for "class" -> data-class="whatever" otherwise data-class=""
-
-
-          };
-
-
-          for(var i=0; i<this.elms.length; i++){
-
-
-
-          }
-
-        },
-
         _makeInstructions: function(elm){
           
           var attrs=elm.attributes,
@@ -417,6 +389,15 @@
           return true;
         },
 
+        // get all the keys in an object
+        _keys: function(obj){
+          var keys=[];
+          for(var k in obj){
+            if(obj.hasOwnProperty(k)) keys.push(k);
+          }
+          return keys;
+        },
+
 
         // public methods
         intent: function(context){
@@ -444,7 +425,7 @@
         addFrom: function(context){
           if(context){
             // in the elms array before adding it
-            $('[data-intention]', context).each(
+            $('[data-intention][intention]', context).each(
               this._hitch(this, function(i, elm){
                 this.elms.push(elm);
             }));

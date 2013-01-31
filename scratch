@@ -1,0 +1,138 @@
+intention === tin
+
+data-class=""
+tin-class=""
+tin-class=""
+tin-aware-class=""
+tin-touch-mobile-class=""
+
+class="standard" 
+data-tablet-class="tablet" 
+data-standard-class="standard"
+
+resolution?
+data-mobile-class=">1.5:mobile"
+
+
+
+var ctx = {
+	base:{
+		class:'base classes'
+	},
+	mobile: {
+		class:"=touch:one",
+		src:"ok.png",
+		title:"small ok"
+	},
+	tablet: {
+		class:"three two",
+		src="ok2.png",
+		title:"medium ok"
+	},
+	touchMobile: {
+		class=">1.5:highrez"
+	}
+}
+
+data-tin="{ \
+	base:{ \
+		class:\"base classes\" \
+	}, \
+	mobile: { \
+		class:\"=touch:one\", \
+		src:\"ok.png\", \
+		title:\"small ok\" \
+	}, \
+	tablet: { \
+		class:\"three two\", \
+		src=\"ok2.png\", \
+		title:\"medium ok\" \
+	}, \
+	touchMobile: { \
+		class=\">1.5:highrez\" \
+	} \
+}"
+
+===
+
+<div data-tin="{ \
+	base:{ \
+		class:\"base classes\" \
+	}, \
+	mobile: { \
+		class:\"=touch:one\", \
+	}, \
+	tablet: { \
+		class:\"three two\", \
+	}, \
+	mobileTouch: { \
+		class=\">1.5:highrez\" \
+	} \
+}">
+
+
+===
+
+<div tin-class="base classes"
+	mobile-class="=touch:one"
+	tablet-class="three two"
+	mobileTouch-class=">1.5:highrez">
+
+TODO:
+	"data-" is optional
+	figure out what all this is going to be tested on
+	test load perfomance of an image baked into html vs loaded via js
+	add element organization around context (might not be worth it considering 
+			most of the time all elements will be responsive in every context)
+
+	testable functions:
+		context:
+			on
+			off
+			fire
+			_thresholdIndex
+			_hasChanged
+			--_getInfo-- removed
+			_getContext
+			_isTouchDevice
+			add
+			value
+			info
+
+			how?
+				_hitch
+				_throttle
+
+
+
+
+		intention:
+			_listToPattern
+			_makeInstructions
+			_makeFilterPatterns
+			_findBest
+			_combine
+			_divideAttrs
+			_union
+			_keys
+
+
+
+
+	untestable functions
+		context:
+			_bindEvents
+			_setInfo
+
+		intention:
+			_setStaticPatterns
+			_setResponsiveElms
+			_class
+			_attr
+			_move
+			addFrom
+			add
+			remove
+
+	listen for attribute changes : onpropertychange, DOMAttrModified, setInterval
+	
