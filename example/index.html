@@ -21,15 +21,15 @@
 </body>
 <script src="intention.js"></script>
 <script>
-		window.itn = new window.Intention({respond:function(info){
+		window.tn = new window.Intention({respond:function(info){
 			console.log('hello', info)
 		}});
 
-		itn.on('change', function(){
+		tn.on('change', function(){
 			console.log('ohhhh it changed');
 		});
 
-		itn.on('change', function(){
+		tn.on('change', function(){
 			console.log('changed');
 		});
 		

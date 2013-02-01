@@ -425,7 +425,7 @@
         addFrom: function(context){
           if(context){
             // in the elms array before adding it
-            $('[data-intention][intention]', context).each(
+            $('[data-intention][intention][tn]', context).each(
               this._hitch(this, function(i, elm){
                 this.elms.push(elm);
             }));
@@ -444,21 +444,35 @@
               return false;
             }
           }));
+        },
+
+        respondTo: function(contexts, evaluation){
+
+          var currentContext;
+
+          return function(e){
+            if(contexts.length){
+              var retVal = evaluation();
+              var i;
+              for(i=0; i<contexts.length; i++) {
+                if(contexts[i].check(retVal)) {
+                  return retVal;
+                }
+              }
+            }
+          }
         }
       };
 
       return Intention;
-
     };
 
     if ( typeof define === "function" && define.amd ) {
       define( ['jquery', 'Context'], intentionWrapper );
     } else {
-
       if(!window.jQuery) {
         throw('jQuery is not defined!!');
       }
-
       window.Intention = intentionWrapper(jQuery);
     }
 

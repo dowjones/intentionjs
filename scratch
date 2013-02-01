@@ -1,10 +1,10 @@
 intention === tin
 
 data-class=""
-tin-class=""
-tin-class=""
-tin-aware-class=""
-tin-touch-mobile-class=""
+tn-class=""
+tn-class=""
+tn-aware-class=""
+tn-touch-mobile-class=""
 
 class="standard" 
 data-tablet-class="tablet" 
@@ -34,7 +34,7 @@ var ctx = {
 	}
 }
 
-data-tin="{ \
+data-tn="{ \
 	base:{ \
 		class:\"base classes\" \
 	}, \
@@ -73,10 +73,11 @@ data-tin="{ \
 
 ===
 
-<div tin-class="base classes"
-	mobile-class="=touch:one"
-	tablet-class="three two"
-	mobileTouch-class=">1.5:highrez">
+
+<div tn-class="base classes"
+	 tn-mobile-class="=touch:one"
+	 tn-tablet-class="three two"
+	 tn-mobileTouch-class=">1.5:highrez">
 
 TODO:
 	"data-" is optional
@@ -135,4 +136,86 @@ TODO:
 			remove
 
 	listen for attribute changes : onpropertychange, DOMAttrModified, setInterval
-	
+
+
+
+
+
+
+
+
+
+
+
+RESPOND TO:::
+
+// scroll Depth Checker
+var scrollCheck = function(val){
+	return function(retVal){
+		if(retVal>val){
+			return true;
+		}
+		return false;
+	}
+}
+
+$(window).on('scroll', tn.respondTo([
+	{
+		name:'reallyShallow', 
+		check:scrollCheck(0)
+	},
+	{
+		name:'shallow', 
+		check:scrollCheck(1000)
+	},
+	{
+		name:'deep', 
+		check:scrollCheck(7000)
+}], callback))
+
+
+
+<div tn-reallyShallow-class="super shallow"></div>
+
+
+
+// scroll Depth Checker
+var verticalCheck = function(val){
+	return function(retVal){
+		if(retVal>val){
+			return true;
+		}
+		return false;
+	}
+}
+
+$(window).on('resize', tn.respondTo([
+	{
+		name:'short', 
+		check:verticalCheck(0)
+	},
+	{
+		name:'medHeight', 
+		check:verticalCheck(500)
+	},
+	{
+		name:'tall', 
+		check:verticalCheck(1000)
+}], callback))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

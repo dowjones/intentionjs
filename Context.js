@@ -12,18 +12,16 @@
               }
             }
           }
+
           this._listeners = {};
 
           this._thresholds = this._makeThresholds(this.thresholds);
 
           this.contextualize();
-
           this._bindEvents();
-
           this._context = this._getContext();
-
           this._setInfo();
-
+          
           return this;
 
         };
