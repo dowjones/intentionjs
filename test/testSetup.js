@@ -8,5 +8,5 @@ require.config({
 });
 
 requirejs([
-   'page'
+   'test/test'
 ]);

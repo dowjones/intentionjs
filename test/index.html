@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+	<title>intention testing</title>
+	
+	
+  <link rel="stylesheet" href="vendor/jasmine/jasmine.css">
+  <script src="vendor/jquery.js"></script>
+  <script src="vendor/jasmine/jasmine.js"></script>
+  <script src="vendor/jasmine/jasmine-html.js"></script>
+
+  <!-- source -->
+  <script src="../Context.js"></script>
+  <script src="../Intention.js"></script>
+
+  <!-- tests -->
+  <script src="tnTests.js"></script>
+  <!-- <script src="ctxTests.js"></script> -->
+
+</head>
+<body>	
+	<script>
+    var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+
+      var htmlReporter = new jasmine.HtmlReporter();
+
+      jasmineEnv.addReporter(htmlReporter);
+
+      jasmineEnv.specFilter = function(spec) {
+        return htmlReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function() {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+        execJasmine();
+      };
+
+      function execJasmine() {
+        jasmineEnv.execute();
+      }
+  </script>
+</body>
+</html>

@@ -304,3 +304,9 @@ Outline: Intentions Presentation
                design involves crumpling
         -  [ ] Resize window, blue screen
         -  [ ] Resize window, YouTube-style window falling.
+
+JOES NOTES:
+TALK ABOUT sensible css scope through class names not media queries
+  todo: come up with a scenario where you want a specification that requires a. two media queries b. some info in a media query some out c. a really commplicated media query
+
+  media queries blow (i dont think in screen widths) I do think in names

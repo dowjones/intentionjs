@@ -4,7 +4,7 @@
 
     var intentionWrapper = function($, ctx){
       var Intention = function(params){
-
+        
         if(params){
           for(var param in params){
             if(params.hasOwnProperty(param)){
@@ -16,7 +16,7 @@
         this.context = new ctx(this.thresholds);
         
         // by default the container is the document
-        this._setResponsiveElms(this.container);  
+        this.setElms(this.container);  
                 
         // this part of initialization allows me to externalize the
         // messiness of a regex to arrays that are stored as props of 
@@ -29,7 +29,7 @@
           this.filters = this._makeFilterPatterns(info);
 
           // set the context information to the info (event object that comes from context)
-          this.intent(info.name);
+          this.intend();
         });
         
         // run the intention on initialization to setup any elms that need setting
@@ -37,7 +37,7 @@
 
         this.context.on('change', intentHandler);
         
-        return intentHandler;
+        return this;
 
       };
 
@@ -45,6 +45,7 @@
 
         // public props
         container: document,
+        elms:$(),
 
         // privates
         _funcs: ['move', 'class', 'attr'],
@@ -198,7 +199,6 @@
 
         },
 
-
         _findBest: function(func, options){
 
           // perhaps there's a more efficient way of doing this but naively this seems to work
@@ -230,7 +230,6 @@
 
             for(var j=0; j<points.length; j++){
               if(new RegExp(points[j].pattern).test(options[i].name)){
-                
                 rank+=points[j].value;
               }
             }
@@ -239,7 +238,6 @@
               best=options[i];
               lastRank=rank;
             }
-
           }
 
           return best;
@@ -267,26 +265,6 @@
           return values;
 
         },
-
-        _setResponsiveElms: function(context){
-
-          if(context){
-            // in the elms array before adding it
-            this.elms = $('[data-intention]', context);
-
-            var itnAttr = $(context).attr('data-intention');
-
-            if((itnAttr !== false) && (itnAttr !== undefined)){
-              this.elms.push(context);
-            }
-
-          } else {
-            this.elms = $('[data-intention]');
-          }
-
-          
-        },
-
 
         _class:function(elm, instruction){
 
@@ -398,61 +376,73 @@
           return keys;
         },
 
-
         // public methods
-        intent: function(context){
-          
-          // get the context name if a number is passed??
-          // if(typeof context === 'number'){}
+        intend: function(){
           
           // go through all of the elms
-          for(var i=0; i<this.elms.length; i++){
-            var elm = this.elms[i], 
-              instructions = this._makeInstructions(elm);
+          this.elms.each(this._hitch(this, function(i, elm){
+            var instructions = this._makeInstructions(elm);
 
-            if(this._isEmpty(instructions)) {
-              continue;
-            }
+            if(this._isEmpty(instructions)) return;
 
-            for(var instruction in instructions) {
-              if(instructions.hasOwnProperty(instruction)){
-                this['_' + instruction](elm, instructions[instruction]);
-              }
-            }
-          }
-        },
+            $.each(instructions, this._hitch(this, 
+              function(instructionName, instruction){
+                this['_' + instructionName](elm, instruction);
+              }));
 
-        addFrom: function(context){
-          if(context){
-            // in the elms array before adding it
-            $('[data-intention][intention][tn]', context).each(
-              this._hitch(this, function(i, elm){
-                this.elms.push(elm);
-            }));
-            return;
-          } 
-        },
-
-        add: function(elm){
-          this.elms.push(elm);
-        },
-
-        remove: function(elm){
-          $.each(this.elms, this._hitch(this, function(i, candidate){
-            if(elm === candidate){
-              this.elms.splice(i, 1);
-              return false;
-            }
           }));
+
+
+          return this;
         },
 
-        respondTo: function(contexts, evaluation){
+        setElms: function(scope){
+          // find all responsive elms in a specific dom scope
+          if(!scope) var scope = document;
+
+          this.elms = $('[data-intention],[intention],[data-tn],[tn]', scope);
+
+          return this;
+        },
+
+        add: function(elms){
+          // is expecting a jquery object
+
+          var respElms=this.elms;
+
+          elms.each(function(){
+            respElms.push(this);
+          });
+          
+          return this;
+        },
+
+        remove: function(elms){
+          // is expecting a jquery object
+
+          var respElms = this.elms;
+          // elms to remove
+          elms.each(function(i, elm){
+            // elms to check against
+            respElms.each(function(i, candidate){
+              if(elm === candidate){
+                respElms.splice(i, 1);
+                // found the match, break the loop
+                return false;
+              }
+            });
+          });
+
+          return this;
+        },
+
+        respondTo: function(name, contexts, hasChanged){
 
           var currentContext;
 
           return function(e){
             if(contexts.length){
-              var retVal = evaluation();
+              var retVal = hasChanged();
               var i;
               for(i=0; i<contexts.length; i++) {
                 if(contexts[i].check(retVal)) {
@@ -472,8 +462,10 @@
     } else {
       if(!window.jQuery) {
         throw('jQuery is not defined!!');
+      } else if (!window.Context){
+        throw('Context is not defined!!');
       }
-      window.Intention = intentionWrapper(jQuery);
+      window.Intention = intentionWrapper(jQuery, Context);
     }
 
 })();

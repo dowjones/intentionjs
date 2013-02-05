@@ -105,8 +105,6 @@ TODO:
 				_throttle
 
 
-
-
 		intention:
 			_listToPattern
 			_makeInstructions
@@ -116,6 +114,10 @@ TODO:
 			_divideAttrs
 			_union
 			_keys
+
+			--setElms--
+			--add-- TODO: should this method add the tn 	attr for lookup later?
+			--remove-- TODO: should this method rm the 		tn attr so it's not looked up later
 
 
 
@@ -131,9 +133,7 @@ TODO:
 			_class
 			_attr
 			_move
-			addFrom
-			add
-			remove
+			
 
 	listen for attribute changes : onpropertychange, DOMAttrModified, setInterval
 
@@ -202,15 +202,6 @@ $(window).on('resize', tn.respondTo([
 		name:'tall', 
 		check:verticalCheck(1000)
 }], callback))
-
-
-
-
-
-
-
-
-
 
 
 
