@@ -14,6 +14,8 @@
         }
         
         this.context = new ctx(this.thresholds);
+
+        this._listeners = {};
         
         // by default the container is the document
         this.setElms(this.container);  
@@ -60,7 +62,6 @@
           'align',
           'background',
           'bgcolor',
-          'class',
           'contenteditable',
           'contextmenu',
           'draggable',
@@ -375,8 +376,51 @@
           }
           return keys;
         },
+        _emitter: function(event){
+          if(typeof event === 'string') {
+            event={type:event};
+          }
+
+          if(!event.target){
+            event.target=this;
+          }
+
+          if(!event.type){
+            throw new Error(event.type + ' is not a supported event.');
+          }
+
+          if($.isArray(this._listeners[event.type])){
+            var listeners = this._listeners[event.type];
+            for(var i=0; i<listeners.length; i++){
+              listeners[i].call(this, event);
+            }
+          }
+
+        },
 
         // public methods
+        // code and concept taken from simple implementation of observer pattern outlined here:
+        // http://www.nczonline.net/blog/2010/03/09/custom-events-in-javascript/
+        on: function(type, listener){
+          if(typeof this._listeners[type] === 'undefined') {
+            this._listeners[type]=[];
+          }
+          this._listeners[type].push(listener)
+        },
+
+        off: function(type, listener){
+          if($.isArray(this._listeners[type])){
+            var listeners = this._listeners[type];
+            for(var i=0;listeners.length; i++){
+              if(listeners[i] === listener){
+                listeners.splice(i,1);
+                break;
+              }
+            }
+          }
+        },
+
+
         intend: function(){
           
           // go through all of the elms
@@ -451,9 +495,73 @@
               }
             }
           }
+        },
+
+        response: function(name, contexts, matcher, callback){
+
+          this._responders[name] = {ctxs:contexts,matcher:matcher}
+
+          // event callback?
+          if($.isFunction(callback)) {
+            this.on(name, callback);
+          }
+
+          this.on(name, this.doTheDamnThing);
+        },
+
+        _respond: function(){
+
+        },
+
+        responsive:function(name, contexts, canary, matcher){
+          var currentContext,
+            emitter = this._hitch(this, this._emitter);
+
+          this.on(name, this._respond);
+          
+          return function(){
+            var info;
+            if($.isFunction(canary) === false) { 
+              if(arguments.length) {
+                info =arguments[0];
+              } 
+            } else {
+              // the canary will return a val to compare to each
+              // context that was passed, if no matcher function
+              // is specified it should return the name of the context
+              info = canary.apply(this, arguments);
+            }
+            var contextualize = function(info){
+              currentContext = info;
+              // emit the event name with the info 
+              // passed along to the event object
+              emitter($.extend({},{type:name}, info));
+            };
+
+            $.each(contexts, function(i, ctx){
+              if($.isFunction(matcher)) {
+                if( matcher(info, ctx)) {
+                  // first time, or different than last context
+                  if( (currentContext===undefined) || 
+                    (info.name !== currentContext.name)){
+                    contextualize(ctx);
+                    // break the loop
+                    return false;
+                  }
+                }
+              } else {
+                // there's no matcher fall back to direct test
+                if(info !== ctx.name ) {
+                  contextualize({name:info});
+                  // break the loop
+                  return false;
+                }
+              }
+            });
+            return currentContext;
+          }
         }
       };
-
       return Intention;
     };
 
