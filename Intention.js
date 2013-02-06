@@ -521,9 +521,10 @@
           
           return function(){
             var info;
-            if($.isFunction(canary) === false) { 
+            // if there is no canary
+            if($.isFunction(canary) === false) {
               if(arguments.length) {
-                info =arguments[0];
+                info = arguments[0];
               } 
             } else {
               // the canary will return a val to compare to each
@@ -532,7 +533,7 @@
               info = canary.apply(this, arguments);
             }
             var contextualize = function(info){
-              currentContext = info;
+              
               // emit the event name with the info 
               // passed along to the event object
               emitter($.extend({},{type:name}, info));
@@ -540,15 +541,19 @@
 
             $.each(contexts, function(i, ctx){
               if($.isFunction(matcher)) {
+                console.log(info, ctx)
                 if( matcher(info, ctx)) {
                   // first time, or different than last context
                   if( (currentContext===undefined) || 
-                    (info.name !== currentContext.name)){
+                    (ctx.name !== currentContext.name)){
                     contextualize(ctx);
+                    currentContext = info;
                     // break the loop
                     return false;
                   }
+                  return false;
                 }
+                
               } else {
                 // there's no matcher fall back to direct test
                 if(info !== ctx.name ) {

@@ -1,10 +1,29 @@
+var assert = chai.assert,
+      expect = chai.expect,
+      should = chai.should(); // Note that should has to be executed
+
+describe('Foobar', function() {
+  describe('#sayHello()', function() {
+    it('should return some text', function() {
+      var foobar = {
+        sayHello: function() {
+          return 'funky chicken';
+        }
+      };
+
+      assert(foobar.sayHello() === 'funky chicken');
+    })
+  })
+})
+
+
 describe("Intention", function() {
 
   tn = new Intention;
 
   describe("Constructor", function(){
     it("Should return an object", function(){
-      expect(typeof tn).toBe('object');
+      assert.typeOf(tn, 'object', 'constructor is an object');
     })
   });
 
@@ -28,16 +47,16 @@ describe("Intention", function() {
   describe("add and remove: add and remove responsive elements", 
     function(){
       it("Should add three items to tn.elms", function(){
-        expect(tn.elms.length).toBe(0);
+        expect(tn.elms.length).to.equal(0);
         // tn.add returns the tn object so i should be able access the elms prop
         var divs = container.find('div');
-        expect(tn.add(divs).elms.length).toBe(3);
+        expect(tn.add(divs).elms.length).to.equal(3);
       });
 
       it("Should remove one item from tn.elms", function(){
         // find the element that should be removed
         var rmElm = container.find('#getRidOfMe');
-        expect(tn.remove(rmElm).elms.length).toBe(2);
+        expect(tn.remove(rmElm).elms.length).to.equal(2);
       });
     });
 
@@ -47,12 +66,12 @@ describe("Intention", function() {
         with all the *reponsive* elms in the container div", function(){
           // set the tn.elms to be empty just to keep things clean
           tn.elms=$();
-          expect(tn.setElms(container).elms.length).toBe(2);
+          expect(tn.setElms(container).elms.length).to.equal(2);
         });
 
       it("Should query the dom for responsive elms, there are none.", 
         function(){
-          expect(tn.setElms().elms.length).toBe(0);
+          expect(tn.setElms().elms.length).to.equal(0);
         });
     });
 
@@ -106,13 +125,6 @@ describe("Intention", function() {
         return response > context.val;
       });
 
-    $(window).on('scroll', tn.responsive('depth', [{name:'shallow', val:500}], 
-      function(){
-        return window.scrollDepth;
-      }, function(context, response){
-        if(context.value > response) return true;
-      }));
-
     var contexts = ['big', 'medium','small'],
       simpleResponder = tn.responsive('simple', 
         contexts, function(i, contexts){ return contexts[i]; });
@@ -123,38 +135,105 @@ describe("Intention", function() {
     
 
     it("Should return a function", function(){
-      expect($.isFunction(responder)).toBe(true);
+      expect($.isFunction(responder)).to.equal(true);
     });
 
     // this is incorrect at < 400 screen sizes, fix
     it("Should execute to return the current context", function(){
-      expect(responder()).toEqual(
+      expect(responder()).to.deep.equal(
         $(window).width() < 400 ? {name:'small',val:0}:{name:'big',val:400});
     });
 
     it("Should execute to return the specified context", function(){
-      expect(simplerResponder('big')).toEqual({name: 'big'});
+      expect(simplerResponder('big')).to.deep.equal({name: 'big'});
     });
 
     it("Should execute to return alternative context", function(){
-      expect(simplerResponder('small')).toEqual({name: 'small'});
+      expect(simplerResponder('small')).to.deep.equal({name: 'small'});
     });
 
     it("Should return the item specified via the index. multiple arguments", 
       function(){
-        expect(simpleResponder(0, contexts)).toEqual({name: 'big'});
+        expect(simpleResponder(0, contexts)).to.deep.equal({name: 'big'});
     });
 
     it("Should fire the simple event", function(){
       var simpleEventCount=0;
       tn.on('simple', function(ctx){simpleEventCount++;})
       simpleResponder(0, contexts);
-      expect(simpleEventCount).toBe(1);
+      expect(simpleEventCount).to.equal(1);
     });
 
 
+
+
+
+    var performTest = false,
+      currentContext,
+      winW,
+      resizeContexts = [{name:'standard', min:769, max:Infinity}, 
+        {name:'tablet', min:321, max:768},
+        {name:'mobile', min:0, max:320}],
+      // hResponder is a function which passes arguments to the 
+      // callback canary
+      hResponder = tn.responsive('xa', resizeContexts,
+        // callback, return value is passed to matcher()
+        // to compare against current context
+        function(e){
+          performTest=true;
+          return $(window).width();
+        },
+        // compare the return value of the callback to each context
+        // return true for a match
+        function(test, context){
+          if((test>=context.min) && (test<=context.max)){
+            return true;
+          }
+        });
+
+    $(window).on('resize', hResponder);
+    $(window).trigger('resize');
+
+    it("should wrap the window resize event callback", function(){
+      expect(performTest).to.equal(true);
+    });
+
+
+    var dfd = {},
+      contextName,
+      winW;
+
+    $.each(resizeContexts, function(i,ctx){
+      
+      dfd[ctx.name] = new jQuery.Deferred();
+      
+      it('switch to ' + ctx.name + ' context', function(done){
+        this.timeout(5000)
+        dfd[ctx.name].done(function(){
+          console.log('window  ', ctx.name, winW, ctx.min)
+          expect(winW).to.be.at.least(ctx.min);
+          if(resizeContexts[i-1]) {
+            console.log('max ', resizeContexts[i-1].min)
+            // expect($(window).width()).to.be.below(resizeContexts[i-1].min);  
+          } else {
+            console.log('max', 15000 )
+            // expect($(window).width()).to.be.below(15999);  
+          }
+          expect(contextName).to.equal(ctx.name);
+          done();
+        });
+      });
+    });
+
+    tn.on('xa', function(context){
+      console.log('really', context)
+      contextName = context.name;
+      winW=$(window).width();
+      dfd[context.name].resolve();
+      
+    });
+
+
+
   });
-
-
-
 });

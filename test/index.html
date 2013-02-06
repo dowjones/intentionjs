@@ -4,10 +4,14 @@
 	<title>intention testing</title>
 	
 	
-  <link rel="stylesheet" href="vendor/jasmine/jasmine.css">
+  <!-- <link rel="stylesheet" href="vendor/jasmine/jasmine.css"> -->
   <script src="vendor/jquery.js"></script>
-  <script src="vendor/jasmine/jasmine.js"></script>
-  <script src="vendor/jasmine/jasmine-html.js"></script>
+  <!--<script src="vendor/jasmine/jasmine.js"></script>
+  <script src="vendor/jasmine/jasmine-html.js"></script>-->
+  <script src="vendor/mocha.js"></script>
+  <script src="vendor/chai.js"></script>
+  <link rel="stylesheet" href="vendor/mocha.css" />
+  <script>mocha.setup('bdd')</script>
 
   <!-- source -->
   <script src="../Context.js"></script>
@@ -18,31 +22,17 @@
   <!-- <script src="ctxTests.js"></script> -->
 
 </head>
-<body>	
+<body>
+	<div id="mocha"></div>
 	<script>
-    var jasmineEnv = jasmine.getEnv();
-      jasmineEnv.updateInterval = 1000;
-
-      var htmlReporter = new jasmine.HtmlReporter();
-
-      jasmineEnv.addReporter(htmlReporter);
-
-      jasmineEnv.specFilter = function(spec) {
-        return htmlReporter.specFilter(spec);
-      };
-
-      var currentWindowOnload = window.onload;
-
-      window.onload = function() {
-        if (currentWindowOnload) {
-          currentWindowOnload();
-        }
-        execJasmine();
-      };
-
-      function execJasmine() {
-        jasmineEnv.execute();
-      }
+		var assert = chai.assert,
+	    expect = chai.expect,
+	    should = chai.should(); // Note that should has to be executed
+    $(function() {
+      mocha.run();
+    })
   </script>
+
+	
 </body>
 </html>
