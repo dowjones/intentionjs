@@ -443,9 +443,7 @@
         setElms: function(scope){
           // find all responsive elms in a specific dom scope
           if(!scope) var scope = document;
-
           this.elms = $('[data-intention],[intention],[data-tn],[tn]', scope);
-
           return this;
         },
 
@@ -518,7 +516,7 @@
             emitter = this._hitch(this, this._emitter);
 
           this.on(name, this._respond);
-          
+
           return function(){
             var info;
             // if there is no canary
@@ -532,22 +530,22 @@
               // is specified it should return the name of the context
               info = canary.apply(this, arguments);
             }
+
             var contextualize = function(info){
-              
               // emit the event name with the info 
               // passed along to the event object
               emitter($.extend({},{type:name}, info));
+              currentContext = info;
             };
-
             $.each(contexts, function(i, ctx){
               if($.isFunction(matcher)) {
-                console.log(info, ctx)
+                
                 if( matcher(info, ctx)) {
                   // first time, or different than last context
                   if( (currentContext===undefined) || 
                     (ctx.name !== currentContext.name)){
                     contextualize(ctx);
-                    currentContext = info;
+                    
                     // break the loop
                     return false;
                   }

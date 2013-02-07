@@ -165,18 +165,15 @@ describe("Intention", function() {
     });
 
 
-
-
-
     var performTest = false,
       currentContext,
       winW,
-      resizeContexts = [{name:'standard', min:769, max:Infinity}, 
-        {name:'tablet', min:321, max:768},
-        {name:'mobile', min:0, max:320}],
+      resizeContexts = [{name:'standard', min:769}, 
+        {name:'tablet', min:321},
+        {name:'mobile', min:0}],
       // hResponder is a function which passes arguments to the 
       // callback canary
-      hResponder = tn.responsive('xa', resizeContexts,
+      hResponder = tn.responsive('hr', resizeContexts,
         // callback, return value is passed to matcher()
         // to compare against current context
         function(e){
@@ -186,7 +183,7 @@ describe("Intention", function() {
         // compare the return value of the callback to each context
         // return true for a match
         function(test, context){
-          if((test>=context.min) && (test<=context.max)){
+          if(test>=context.min){
             return true;
           }
         });
@@ -198,42 +195,49 @@ describe("Intention", function() {
       expect(performTest).to.equal(true);
     });
 
-
-    var dfd = {},
+    var testDfd,
       contextName,
       winW;
 
-    $.each(resizeContexts, function(i,ctx){
+    it('should switch between all contexts', function(done){
       
-      dfd[ctx.name] = new jQuery.Deferred();
-      
-      it('switch to ' + ctx.name + ' context', function(done){
-        this.timeout(5000)
-        dfd[ctx.name].done(function(){
-          console.log('window  ', ctx.name, winW, ctx.min)
-          expect(winW).to.be.at.least(ctx.min);
-          if(resizeContexts[i-1]) {
-            console.log('max ', resizeContexts[i-1].min)
-            // expect($(window).width()).to.be.below(resizeContexts[i-1].min);  
-          } else {
-            console.log('max', 15000 )
-            // expect($(window).width()).to.be.below(15999);  
-          }
-          expect(contextName).to.equal(ctx.name);
-          done();
-        });
+      this.timeout(9000);
+
+      var tablet = $.Deferred().done(function(){
+        expect(winW).to.be.below(769);
+        expect(hResponder().name).to.equal('tablet');
+      }),
+      standard = $.Deferred().done(function(){
+        expect(winW).to.be.at.least(769);
+        expect(hResponder().name).to.equal('standard');
+      }),
+      mobile = $.Deferred().done(function(){
+        expect(winW).to.be.below(321);
+        expect(hResponder().name).to.equal('mobile');
       });
+
+      testDfd = $.when(tablet, mobile, standard).done(function(){
+        done();
+      });
+
+      tn.on('hr', function(context){
+
+        winW=$(window).width();
+
+        if(context.name === 'mobile') {
+          mobile.resolve();
+        } else if (context.name === 'tablet'){
+          tablet.resolve();
+        } else if (context.name === 'standard'){
+          standard.resolve();
+        }
+        
+      });
+
+      // alert('RESIZE the window small to large or vise versa')
     });
 
-    tn.on('xa', function(context){
-      console.log('really', context)
-      contextName = context.name;
-      winW=$(window).width();
-      dfd[context.name].resolve();
-      
-    });
-
-
+    
 
   });
 });
