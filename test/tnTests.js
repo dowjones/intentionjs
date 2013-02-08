@@ -2,21 +2,6 @@ var assert = chai.assert,
       expect = chai.expect,
       should = chai.should(); // Note that should has to be executed
 
-describe('Foobar', function() {
-  describe('#sayHello()', function() {
-    it('should return some text', function() {
-      var foobar = {
-        sayHello: function() {
-          return 'funky chicken';
-        }
-      };
-
-      assert(foobar.sayHello() === 'funky chicken');
-    })
-  })
-})
-
-
 describe("Intention", function() {
 
   tn = new Intention;
@@ -173,6 +158,7 @@ describe("Intention", function() {
         {name:'mobile', min:0}],
       // hResponder is a function which passes arguments to the 
       // callback canary
+
       hResponder = tn.responsive('hr', resizeContexts,
         // callback, return value is passed to matcher()
         // to compare against current context
@@ -189,19 +175,21 @@ describe("Intention", function() {
         });
 
     $(window).on('resize', hResponder);
+
+
+
     $(window).trigger('resize');
 
     it("should wrap the window resize event callback", function(){
       expect(performTest).to.equal(true);
     });
 
-    var testDfd,
-      contextName,
-      winW;
-
+    
     it('should switch between all contexts', function(done){
       
-      this.timeout(9000);
+      this.timeout(9); //000
+
+      var winW;
 
       var tablet = $.Deferred().done(function(){
         expect(winW).to.be.below(769);
@@ -216,7 +204,7 @@ describe("Intention", function() {
         expect(hResponder().name).to.equal('mobile');
       });
 
-      testDfd = $.when(tablet, mobile, standard).done(function(){
+      $.when(tablet, mobile, standard).done(function(){
         done();
       });
 
@@ -236,8 +224,111 @@ describe("Intention", function() {
 
       // alert('RESIZE the window small to large or vise versa')
     });
-
+    
     
 
+
+    it('_respond: should change appropriate attrs in a given context', function(done){
+      
+      this.timeout(90);
+      var testElm = $('<div class="original" tn-mobile-class="mobile small" \
+            tn-tablet-class="tablet medium" tn-standard-class="standard big" \
+            ></div>');
+
+      // test the _respond attr matching method
+      var match= false;
+
+      $.each(testElm[0].attributes, function(i, attr){
+
+        if(attr.name === 'class'){
+          match = true
+          expect(attr.value).to.equal('original')
+        }
+      });
+
+      expect(match).to.equal(true);
+
+      expect(
+        tn.add(
+          testElm).elms.length).to.equal(1);
+  
+      // done();
+      
+      var tablet = $.Deferred().done(function(){
+          
+        }),
+
+        standard = $.Deferred().done(function(){
+          
+        }),
+        mobile = $.Deferred().done(function(){
+          
+        });
+
+      $.when(tablet, mobile, standard).done(function(){
+        done();
+      });
+
+      tn.on('hr', function(context){
+        if(context.name === 'mobile') {
+          mobile.resolve();
+        } else if (context.name === 'tablet'){
+          tablet.resolve();
+        } else if (context.name === 'standard'){
+          standard.resolve();
+        }
+      });
+
+      
+
+      // alert('RESIZE the window small to large or vise versa')
+    });
   });
+
+
+  describe("regex tests", function(){
+
+    var attrPattern = new RegExp('(^tn-|^intention-|^data-tn-|^data-intention-)?' 
+      + 'mobile' + '-' + 'class' + '$');
+
+    it('should match on an abbreviated nonstandard prefix', function(){
+        expect(
+          attrPattern
+            .test('tn-mobile-class')).to.equal(true);
+
+    });
+
+    it('should match on an abbreviated standard prefix', function(){
+        expect(
+          attrPattern
+            .test('data-tn-mobile-class')).to.equal(true);
+    });
+
+    it('should match on a nonstandard prefix', function(){
+        expect(
+          attrPattern
+            .test('intention-mobile-class')).to.equal(true);
+
+    });
+
+    it('should match on an standard prefix', function(){
+        expect(
+          attrPattern
+            .test('data-intention-mobile-class')).to.equal(true);
+
+    });
+
+    it('should match without a prefix', function(){
+        expect(
+          attrPattern
+            .test('mobile-class')).to.equal(true);
+    });
+
+  });
+
+
+
+
+
+
 });

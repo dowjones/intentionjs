@@ -48,35 +48,36 @@
         // public props
         container: document,
         elms:$(),
-
+        _contexts: [],
         // privates
-        _funcs: ['move', 'class', 'attr'],
-        _placements:['before', 'after', 'prepend', 'append'],
-        _attrs: [
+        _funcs: ['move', 'class', 
+          // attrs
           'src',
           'href',
+          'height',
+          'width',
+          'title',
+          'tabindex',
+          'id',
+          'style',
+          'align',
           'dir',
+          'contenteditable',
           'lang',
           'xml:lang',
           'accesskey',
-          'align',
           'background',
           'bgcolor',
-          'contenteditable',
           'contextmenu',
           'draggable',
-          'height',
           'hidden',
-          'id',
           'item',
           'itemprop',
           'spellcheck',
-          'style',
           'subject',
-          'tabindex',
-          'title',
-          'valign',
-          'width'],
+          'valign'],
+
+        _placements:['before', 'after', 'prepend', 'append'],
 
         _staticPatterns: {},
 
@@ -123,7 +124,6 @@
             }
             
             if(this.filters.context.test(attr.name)){
-
               // at this point we have a hold on a data attrs that is not of the 
               // current context it may be a base data attr a context attr
               // or a data attr that we are not interested in
@@ -376,6 +376,7 @@
           }
           return keys;
         },
+
         _emitter: function(event){
           if(typeof event === 'string') {
             event={type:event};
@@ -507,36 +508,106 @@
           this.on(name, this.doTheDamnThing);
         },
 
-        _respond: function(){
+        _respond: function(contexts){
 
-        },
+          
+          // TODO: currentContexts could be passed
+          var funcs = this._funcs,
+            currentContexts = this._contexts,
+            resolutions = {};
 
-        responsive:function(name, contexts, canary, matcher){
-          var currentContext,
+          // TODO: this could be moved to the tn object for testing
+          var resolve= function(elm, func, val){
+
+          };
+
+          this.elms.each(function(i, elm){
+            var attrs = elm.attributes;
+
+            $.each(currentContexts, function(i, ctx){
+              // go through currentCtxs (ordered by priority) TODO:
+              $.each(attrs, function(i, attr){
+
+                $.each(funcs, function(i, func){
+
+                  if(resolutions[func]){
+                    // if the function is already resolved continue
+                    // to the next func
+                    return;
+                  }
+
+                  // go through each attr
+                  if(new RegExp('(^tn-|^intention-|^data-tn-|^data-intention-)?' +
+                    + ctx.name + '-' + func + '$').test(attr.name)) {
+                    // there is an appropriate match
+
+
+                    if(func === 'class'){ 
+                      // class gets resolved uniquely because it is a multi-
+                      // value attr
+                      if(resolutions.class === undefined) {
+                        resolutions.class=[]
+                      }
+
+
+                    } else {
+                      // resolve the function to prevent further checks
+                      resolutions[func]=true;
+                    }
+
+                  }
+
+                });                
+              });
+            });
+            
+
+          });
+
+
+        }, 
+
+        responsive:function(name, contexts, measure, matcher){
+
+          // todo: switch order of matcher and measure
+          // i could get rid of the name if i bound all events to 
+          // the object returned by this function
+          // hypothetical: (contexts, matcher, measure)
+          // responder.on('contextName', func)
+          // responder.on('change', func) ??
+
+          var contextList = this._contexts, 
+            currentContext,
             emitter = this._hitch(this, this._emitter);
 
           this.on(name, this._respond);
 
           return function(){
             var info;
-            // if there is no canary
-            if($.isFunction(canary) === false) {
+            // if there is no measure
+            if($.isFunction(measure) === false) {
               if(arguments.length) {
                 info = arguments[0];
               } 
             } else {
-              // the canary will return a val to compare to each
+              // the measure will return a val to compare to each
               // context that was passed, if no matcher function
               // is specified it should return the name of the context
-              info = canary.apply(this, arguments);
+              info = measure.apply(this, arguments);
             }
 
             var contextualize = function(info){
               // emit the event name with the info 
               // passed along to the event object
               emitter($.extend({},{type:name}, info));
+
+              // remove the currentContext from the context list
+
+
+              // add the current info object to the context list
               currentContext = info;
             };
+
             $.each(contexts, function(i, ctx){
               if($.isFunction(matcher)) {
                 
@@ -545,10 +616,10 @@
                   if( (currentContext===undefined) || 
                     (ctx.name !== currentContext.name)){
                     contextualize(ctx);
-                    
                     // break the loop
                     return false;
                   }
+                  // same context, break the loop
                   return false;
                 }
                 
@@ -561,6 +632,7 @@
                 }
               }
             });
+            // always return the current context
             return currentContext;
           }
         }
