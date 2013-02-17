@@ -50,8 +50,12 @@
         elms:$(),
         _contexts: [],
         // privates
-        _funcs: ['move', 'class', 
-          // attrs
+        _funcs: [
+          // the only(?) multi-val attr
+          'class', 
+          // placement attrs
+          'append', 'prepend', 'before', 'after',
+          // single val attrs
           'src',
           'href',
           'height',
@@ -83,7 +87,7 @@
 
         _setStaticPatterns: function(){
 
-          var patterns = ['funcs', 'attrs', 'placements'];
+          var patterns = ['funcs', 'placements'];
 
           for(var i=0; i<patterns.length; i++){
             this._staticPatterns[patterns[i]] = 
@@ -479,89 +483,64 @@
           return this;
         },
 
-        respondTo: function(name, contexts, hasChanged){
-
-          var currentContext;
-
-          return function(e){
-            if(contexts.length){
-              var retVal = hasChanged();
-              var i;
-              for(i=0; i<contexts.length; i++) {
-                if(contexts[i].check(retVal)) {
-                  return retVal;
-                }
-              }
-            }
-          }
-        },
-
-        response: function(name, contexts, matcher, callback){
-
-          this._responders[name] = {ctxs:contexts,matcher:matcher}
-
-          // event callback?
-          if($.isFunction(callback)) {
-            this.on(name, callback);
-          }
-
-          this.on(name, this.doTheDamnThing);
-        },
-
         _respond: function(contexts){
 
-          
           // TODO: currentContexts could be passed
           var funcs = this._funcs,
             currentContexts = this._contexts,
             resolutions = {};
 
-          // TODO: this could be moved to the tn object for testing
-          var resolve= function(elm, func, val){
+          var resolveAttr = function(attr, funcs, resolutions){
+            // go through the possible functions
+            $.each(funcs, function(i, func){
 
+              // check to see if there's a resolution on the attr's func
+              if(resolutions[func]){
+                // if the function is already resolved continue
+                // to the next func
+                return;
+              }
+
+              // test the attr name, is it relevant
+              if(new RegExp('(^tn-|^intention-|^data-tn-|^data-intention-)?' +
+                + ctx.name + '-' + func + '$').test(attr.name)) {
+                // there is an appropriate match
+
+
+                if(func === 'class'){ 
+                  // class gets resolved uniquely because it is a multi-
+                  // value attr
+                  if(resolutions.class === undefined) {
+                    resolutions.class=[]
+                  }
+
+                } else {
+                  // resolve the function to prevent further checks
+                  resolutions[func]=true;
+                }
+
+              }
+
+            });
+
+            return resolutions;
           };
 
+          // go through all of the responsive elms
           this.elms.each(function(i, elm){
             var attrs = elm.attributes;
 
+            // go through currentCtxs (ordered by priority) TODO:
             $.each(currentContexts, function(i, ctx){
-              // go through currentCtxs (ordered by priority) TODO:
+
+              // go through the elements attrs
               $.each(attrs, function(i, attr){
+                // if the attr does not match the current context
+                // move on
+                console.log(ctx, attr);
 
-                $.each(funcs, function(i, func){
-
-                  if(resolutions[func]){
-                    // if the function is already resolved continue
-                    // to the next func
-                    return;
-                  }
-
-                  // go through each attr
-                  if(new RegExp('(^tn-|^intention-|^data-tn-|^data-intention-)?' +
-                    + ctx.name + '-' + func + '$').test(attr.name)) {
-                    // there is an appropriate match
-
-
-                    if(func === 'class'){ 
-                      // class gets resolved uniquely because it is a multi-
-                      // value attr
-                      if(resolutions.class === undefined) {
-                        resolutions.class=[]
-                      }
-
-
-                    } else {
-                      // resolve the function to prevent further checks
-                      resolutions[func]=true;
-                    }
-
-                  }
-
-                });                
               });
             });
-            
-
           });
 
 
@@ -602,9 +581,10 @@
               emitter($.extend({},{type:name}, info));
 
               // remove the currentContext from the context list
-
+              // TODO:
 
               // add the current info object to the context list
+
               currentContext = info;
             };
 
