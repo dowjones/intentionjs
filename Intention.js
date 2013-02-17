@@ -487,7 +487,6 @@
 
           // TODO: currentContexts could be passed
           var funcs = this._funcs,
-            currentContexts = this._contexts,
             resolutions = {};
 
           var resolveAttr = function(attr, funcs, resolutions){
@@ -531,7 +530,7 @@
             var attrs = elm.attributes;
 
             // go through currentCtxs (ordered by priority) TODO:
-            $.each(currentContexts, function(i, ctx){
+            $.each(contexts, function(i, ctx){
 
               // go through the elements attrs
               $.each(attrs, function(i, attr){
@@ -546,7 +545,7 @@
 
         }, 
 
-        responsive:function(name, contexts, measure, matcher){
+        responsive:function(contexts, measure, matcher){
 
           // todo: switch order of matcher and measure
           // i could get rid of the name if i bound all events to 
@@ -559,10 +558,37 @@
             currentContext,
             emitter = this._hitch(this, this._emitter);
 
-          this.on(name, this._respond);
+          // bind an the _respond function to each context name
+          $.each(contexts, this._hitch(this, function(i, ctx){
+            this.on(ctx.name, this._hitch(this,
+                function(){this._respond(contextList);}));
+          }));
 
           return function(){
-            var info;
+            // TODO: info is a bad name
+            var info,
+              contextualize = function(newContext){
+
+                var removeCtx = function(contexts, irrCtx){
+                  $.each(contexts, function(i, ctx){
+                    if(irrCtx.name === ctx.name) {
+                      contexts.splice(i, 1);
+                      return false;
+                    }
+                  });
+                  return contexts;
+                };
+
+                // remove other contexts in the group from the list
+                $.each(contexts, function(i, ctx){
+                  if( newContext.name !== ctx.name ){
+                    removeCtx(contextList, ctx);
+                  }
+                });
+                
+                return newContext;
+              };
+
             // if there is no measure
             if($.isFunction(measure) === false) {
               if(arguments.length) {
@@ -575,27 +601,16 @@
               info = measure.apply(this, arguments);
             }
 
-            var contextualize = function(info){
-              // emit the event name with the info 
-              // passed along to the event object
-              emitter($.extend({},{type:name}, info));
-
-              // remove the currentContext from the context list
-              // TODO:
-
-              // add the current info object to the context list
-
-              currentContext = info;
-            };
-
             $.each(contexts, function(i, ctx){
+
               if($.isFunction(matcher)) {
                 
                 if( matcher(info, ctx)) {
                   // first time, or different than last context
                   if( (currentContext===undefined) || 
                     (ctx.name !== currentContext.name)){
-                    contextualize(ctx);
+
+                    currentContext = contextualize(ctx);
                     // break the loop
                     return false;
                   }
@@ -606,13 +621,16 @@
               } else {
                 // there's no matcher fall back to direct test
                 if(info !== ctx.name ) {
-                  contextualize({name:info});
+                  currentContext = contextualize({name:info});
                   // break the loop
                   return false;
                 }
               }
             });
-            // always return the current context
+            
+            emitter($.extend({},{type:currentContext.name}, currentContext));
+
+            // return the current context
             return currentContext;
           }
         }

@@ -60,16 +60,7 @@ describe("Intention", function() {
         });
     });
 
-  describe("_makeInstructions: create a list of instructions \
-    from a reponsive element", function(){
-
-      // it("Should return an object", function(){
-
-      // })
-
-    });
-
-  describe("respondTo: create custom responders", function(){
+  // describe("respondTo: create custom responders", function(){
 
 
     // we need the callback and the evaluator function
@@ -99,11 +90,11 @@ describe("Intention", function() {
     //     {context:'tablet', val:768},
     //     {context:'standard', val:1000}
     //   ])
-  });
+  // });
 
   describe("responsive: creating responsive functions", function(){
 
-    var responder = tn.responsive('resize', 
+    var responder = tn.responsive( 
       [{name:'big', val:400}, {name:'small', val:0}], 
       function(){return $(window).width();},
       function(response, context){
@@ -111,13 +102,10 @@ describe("Intention", function() {
       });
 
     var contexts = ['big', 'medium','small'],
-      simpleResponder = tn.responsive('simple', 
+      simpleResponder = tn.responsive(
         contexts, function(i, contexts){ return contexts[i]; });
 
-    var simplerResponder = tn.responsive('simpler', 
-      ['big', 'small']);
-
-    
+    var simplerResponder = tn.responsive(['big', 'small']);
 
     it("Should return a function", function(){
       expect($.isFunction(responder)).to.equal(true);
@@ -144,7 +132,7 @@ describe("Intention", function() {
 
     it("Should fire the simple event", function(){
       var simpleEventCount=0;
-      tn.on('simple', function(ctx){simpleEventCount++;})
+      tn.on('big', function(ctx){simpleEventCount++;})
       simpleResponder(0, contexts);
       expect(simpleEventCount).to.equal(1);
     });
@@ -159,7 +147,7 @@ describe("Intention", function() {
       // hResponder is a function which passes arguments to the 
       // callback canary
 
-      hResponder = tn.responsive('hr', resizeContexts,
+      hResponder = tn.responsive(resizeContexts,
         // callback, return value is passed to matcher()
         // to compare against current context
         function(e){
