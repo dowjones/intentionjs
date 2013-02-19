@@ -96,16 +96,18 @@ describe("Intention", function() {
 
     var responder = tn.responsive( 
       [{name:'big', val:400}, {name:'small', val:0}], 
-      function(){return $(window).width();},
+      function(){
+        return $(window).width();
+      },
       function(response, context){
         return response > context.val;
       });
 
-    var contexts = ['big', 'medium','small'],
+    var contexts = [{name:'big'}, {name:'medium'},{name:'small'}],
       simpleResponder = tn.responsive(
-        contexts, function(i, contexts){ return contexts[i]; });
+        contexts, function(i, contexts){ return contexts[i].name; });
 
-    var simplerResponder = tn.responsive(['big', 'small']);
+    var simplerResponder = tn.responsive([{name:'big'}, {name:'small'}]);
 
     it("Should return a function", function(){
       expect($.isFunction(responder)).to.equal(true);
@@ -130,10 +132,10 @@ describe("Intention", function() {
         expect(simpleResponder(0, contexts)).to.deep.equal({name: 'big'});
     });
 
-    it("Should fire the simple event", function(){
+    it("Should fire the 'small' event", function(){
       var simpleEventCount=0;
-      tn.on('big', function(ctx){simpleEventCount++;})
-      simpleResponder(0, contexts);
+      tn.on('small', function(ctx){simpleEventCount++;})
+      simpleResponder(2, contexts);
       expect(simpleEventCount).to.equal(1);
     });
 

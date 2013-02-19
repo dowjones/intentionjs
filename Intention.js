@@ -568,7 +568,7 @@
         },
 
         responsive:function(contexts, measure, matcher){
-
+          
           // todo: switch order of matcher and measure
           // i could get rid of the name if i bound all events to 
           // the object returned by this function
@@ -581,16 +581,25 @@
             emitter = this._hitch(this, this._emitter),
             contextualize = this._contextualize;
 
+          // if no matcher function is specified expect to compare a 
+          // string to the ctx.name property
+          if($.isFunction(matcher) === false) {
+            var matcher = function(measure, ctx){
+              if(measure===ctx.name) return true;
+              return false;
+            }
+          }
+
           // bind an the _respond function to each context name
           $.each(contexts, this._hitch(this, function(i, ctx){
             this.on(ctx.name, this._hitch(this,
                 function(){this._respond(contextList);}));
           }));
-
+          
           return function(){
             // TODO: info is a bad name
             var info;
-
+            
             // if there is no measure
             if($.isFunction(measure) === false) {
               if(arguments.length) {
@@ -602,24 +611,19 @@
               // is specified it should return the name of the context
               info = measure.apply(this, arguments);
             }
-
-            if($.isFunction(matcher) === false) {
-              var matcher = function(measure, ctx){
-                if(measure===ctx) return true;
-
-                return false;
-                
-              }
-            }
-
+            
             $.each(contexts, function(i, ctx){
-  
+              
               if( matcher(info, ctx)) {
                 // first time, or different than last context
                 if( (currentContext===undefined) || 
                   (ctx.name !== currentContext.name)){
+                  
                   currentContext = ctx;
+
                   contextList = contextualize(ctx, contexts, contextList);
+                  
+                  emitter($.extend({}, {type:currentContext.name}, currentContext));
                   // break the loop
                   return false;
                 }
@@ -628,8 +632,7 @@
               }
             });
             
-            emitter($.extend({}, {type:currentContext.name}, currentContext));
-
+            
             // return the current context
             return currentContext;
           }
