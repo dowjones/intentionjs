@@ -541,9 +541,31 @@
               });
             });
           });
+        },
 
+        _contextualize: function(inContext, ofContexts, currentContexts){
 
-        }, 
+          var removeCtx = function(outCtx, contexts){
+            $.each(contexts, function(i, ctx){
+              if(outCtx.name === ctx.name) {
+                contexts.splice(i, 1);
+                return false;
+              }
+            });
+            return contexts;
+          };
+
+          // remove other contexts in the --group-- from the list
+          $.each(ofContexts, function(i, ctx){
+            if( inContext.name !== ctx.name ){
+              currentContexts = removeCtx(ctx, currentContexts);
+            } else if( !$.inArray(ctx, currentContexts) ) {
+              currentContexts.push(ctx)
+            }
+          });
+          
+          return currentContexts;
+        },
 
         responsive:function(contexts, measure, matcher){
 
@@ -556,7 +578,8 @@
 
           var contextList = this._contexts, 
             currentContext,
-            emitter = this._hitch(this, this._emitter);
+            emitter = this._hitch(this, this._emitter),
+            contextualize = this._contextualize;
 
           // bind an the _respond function to each context name
           $.each(contexts, this._hitch(this, function(i, ctx){
@@ -566,28 +589,7 @@
 
           return function(){
             // TODO: info is a bad name
-            var info,
-              contextualize = function(newContext){
-
-                var removeCtx = function(contexts, irrCtx){
-                  $.each(contexts, function(i, ctx){
-                    if(irrCtx.name === ctx.name) {
-                      contexts.splice(i, 1);
-                      return false;
-                    }
-                  });
-                  return contexts;
-                };
-
-                // remove other contexts in the group from the list
-                $.each(contexts, function(i, ctx){
-                  if( newContext.name !== ctx.name ){
-                    removeCtx(contextList, ctx);
-                  }
-                });
-                
-                return newContext;
-              };
+            var info;
 
             // if there is no measure
             if($.isFunction(measure) === false) {
@@ -601,34 +603,32 @@
               info = measure.apply(this, arguments);
             }
 
+            if($.isFunction(matcher) === false) {
+              var matcher = function(measure, ctx){
+                if(measure===ctx) return true;
+
+                return false;
+                
+              }
+            }
+
             $.each(contexts, function(i, ctx){
-
-              if($.isFunction(matcher)) {
-                
-                if( matcher(info, ctx)) {
-                  // first time, or different than last context
-                  if( (currentContext===undefined) || 
-                    (ctx.name !== currentContext.name)){
-
-                    currentContext = contextualize(ctx);
-                    // break the loop
-                    return false;
-                  }
-                  // same context, break the loop
-                  return false;
-                }
-                
-              } else {
-                // there's no matcher fall back to direct test
-                if(info !== ctx.name ) {
-                  currentContext = contextualize({name:info});
+  
+              if( matcher(info, ctx)) {
+                // first time, or different than last context
+                if( (currentContext===undefined) || 
+                  (ctx.name !== currentContext.name)){
+                  currentContext = ctx;
+                  contextList = contextualize(ctx, contexts, contextList);
                   // break the loop
                   return false;
                 }
+                // same context, break the loop
+                return false;
               }
             });
             
-            emitter($.extend({},{type:currentContext.name}, currentContext));
+            emitter($.extend({}, {type:currentContext.name}, currentContext));
 
             // return the current context
             return currentContext;
