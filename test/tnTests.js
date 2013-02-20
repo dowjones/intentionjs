@@ -322,6 +322,37 @@ describe("Intention", function() {
 
   });
 
+  describe('_union: creates a union of two arrays, also makes unique',
+    function(){
+
+      var tn=new Intention;
+
+      it('should unionize the two arrays and get rid of dups', function(){
+        var itemCounts = {};
+        $.each(['a', 'b','c','d', 'e'], function(i, item){
+          expect($.inArray(item, tn._union(['a', 'b', 'c'], ['c', 'd', 'e'])))
+            .to.not.equal(-1);
+
+          if(!itemCounts[item]) itemCounts[item]=0
+          itemCounts[item]++
+
+          expect(itemCounts[item]).to.equal(1);
+        });
+        
+      });
+
+      it('should not fail when empty array is passed', function(){
+        expect(tn._union(['a', 'b', 'c'], []).sort())
+          .to.deep.equal(['a', 'b','c']);
+      });
+
+      it('should not fail when two empties passed', function(){
+        expect(tn._union([], []))
+          .to.deep.equal([]);
+      });
+
+    });
+
   describe("regex tests", function(){
 
     var attrPattern = new RegExp('(^(data-)?(tn|intention)-)?' 
@@ -361,10 +392,5 @@ describe("Intention", function() {
     });
 
   });
-
-
-
-
-
 
 });
