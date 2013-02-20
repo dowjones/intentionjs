@@ -26,8 +26,9 @@ describe("Intention", function() {
     .attr('tn-touch-class','touch')
     .attr('tn-standard-class','standard');
   
-  container.append(nonResponsiveElm, responsiveElm1, $('<div tn>'))
+  container.append(nonResponsiveElm, responsiveElm1, $('<div tn>'));
 
+  
 
   describe("add and remove: add and remove responsive elements", 
     function(){
@@ -45,18 +46,18 @@ describe("Intention", function() {
       });
     });
 
-  describe("setElms: set the responsive elements from a dom scope", 
-    function(){
-      it("Should replace whatever is in the tn.elms \
-        with all the *reponsive* elms in the container div", function(){
-          // set the tn.elms to be empty just to keep things clean
-          tn.elms=$();
-          expect(tn.setElms(container).elms.length).to.equal(2);
-        });
+    describe("setElms: set the responsive elements from a dom scope", 
+      function(){
+        it("Should replace whatever is in the tn.elms \
+          with all the *reponsive* elms in the container div", function(){
+            // set the tn.elms to be empty just to keep things clean
+            tn.elms=$();
+            expect(tn.setElms(container).elms.length).to.equal(2);
+          });
 
-      it("Should query the dom for responsive elms, there are none.", 
-        function(){
-          expect(tn.setElms().elms.length).to.equal(0);
+        it("Should query the dom for responsive elms, there are none.", 
+          function(){
+            expect(tn.setElms().elms.length).to.equal(0);
         });
     });
 
@@ -96,16 +97,16 @@ describe("Intention", function() {
 
     var responder = tn.responsive( 
       [{name:'big', val:400}, {name:'small', val:0}], 
-      function(){
-        return $(window).width();
-      },
       function(response, context){
         return response > context.val;
+      },
+      function(){
+        return $(window).width();
       });
 
     var contexts = [{name:'big'}, {name:'medium'},{name:'small'}],
       simpleResponder = tn.responsive(
-        contexts, function(i, contexts){ return contexts[i].name; });
+        contexts, null, function(i, contexts){ return contexts[i].name; });
 
     var simplerResponder = tn.responsive([{name:'big'}, {name:'small'}]);
 
@@ -150,22 +151,21 @@ describe("Intention", function() {
       // callback canary
 
       hResponder = tn.responsive(resizeContexts,
-        // callback, return value is passed to matcher()
-        // to compare against current context
-        function(e){
-          performTest=true;
-          return $(window).width();
-        },
         // compare the return value of the callback to each context
         // return true for a match
         function(test, context){
           if(test>=context.min){
             return true;
           }
+        },
+        // callback, return value is passed to matcher()
+        // to compare against current context
+        function(e){
+          performTest=true;
+          return $(window).width();
         });
 
     $(window).on('resize', hResponder);
-
 
 
     $(window).trigger('resize');
@@ -274,11 +274,57 @@ describe("Intention", function() {
       // alert('RESIZE the window small to large or vise versa')
     });
   });
+  
 
+  describe("_contextualize: keeping track of the current contexts", function(){
+
+    
+    it('should return a list including the "foo" and the "baz" context', function(){
+      var inCtx = {name:'foo'},
+        expectedCtxs = [{ name:"baz"},{ name:"foo"}],
+        currentContexts = tn._contextualize(inCtx, 
+        [inCtx, {name:'bar'}], 
+        expectedCtxs);
+
+      $.each(expectedCtxs, function(i, ctx){
+        expect($.inArray(ctx, currentContexts)).to.be.at.least(0);  
+      });
+    });
+
+    it('should add the context even though none of the group are current', function(){
+      var inCtx = {name:'foo'},
+        constantCtx = {name:'baz'},
+        currentCtxs = tn._contextualize(inCtx, 
+          [inCtx, {name:'bar'}], 
+          [constantCtx]);
+      
+      expect($.inArray(inCtx, currentCtxs)).to.be.at.least(0);
+      expect($.inArray(constantCtx, currentCtxs)).to.be.at.least(0);
+
+    });
+  });
+
+  describe("_respond: altering attrs based on context", function(){
+    var tn=new Intention;
+    tn.add($('<div tn-foo-class="foo" tn-a-class="a">'))
+      .add($('<div tn-bar-class="bar" tn-b-class="b">'))
+      .add($('<div tn-baz-class="baz" tn-c-class="c">'))
+
+    var foos = tn.responsive([{name:'foo'}, {name:'bar'}, {name:'baz'}]),
+      alpha = tn.responsive([{name:'a'}, {name:'b'}, {name:'c'}]);
+
+    foos('foo');
+    alpha('a');
+
+
+    // foos('bar');
+    // alpha('a');
+
+  });
 
   describe("regex tests", function(){
 
-    var attrPattern = new RegExp('(^tn-|^intention-|^data-tn-|^data-intention-)?' 
+    var attrPattern = new RegExp('(^(data-)?(tn|intention)-)?' 
       + 'mobile' + '-' + 'class' + '$');
 
     it('should match on an abbreviated nonstandard prefix', function(){
