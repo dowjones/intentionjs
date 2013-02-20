@@ -64,43 +64,6 @@
           'subject',
           'valign'],
 
-        _class:function(elm, instruction){
-
-          $(elm).attr('class', this._combine(instruction.options));
-
-          return;
-        },
-
-        _attr: function(elm, instruction) {
-
-          var attrs = this._divideAttrs(instruction.options);
-          for(var attr in attrs){
-            if(attrs.hasOwnProperty(attr) ){
-              var attrVal = this._findBest('attr', attrs[attr]).value;
-              $(elm).attr(attr, attrVal);
-            }
-          }
-          return;
-
-        },
-
-        _move: function(elm, instruction) {
-
-          // find the base
-          var choice = this._findBest('move', instruction.options),
-            moveSelector = choice.value;
-
-          var placementSpec = choice.name.match(new RegExp('move-('+ 
-                this._staticPatterns.placements + '$)'));
-
-          if(placementSpec){
-            $(moveSelector)[placementSpec[1]]( elm );
-          } else {
-            $(moveSelector).append( elm );
-          }
-
-        },
-
         _hitch: function(scope,fn){
           return function(){
             return fn.apply(scope, arguments); 
@@ -128,22 +91,6 @@
           }
           return res;
         },
-
-        // _isEmpty: function(obj){
-        //   for(var prop in obj) {
-        //     if(obj.hasOwnProperty(prop)){ return false; }
-        //   }
-        //   return true;
-        // },
-
-        // // get all the keys in an object
-        // _keys: function(obj){
-        //   var keys=[];
-        //   for(var k in obj){
-        //     if(obj.hasOwnProperty(k)) keys.push(k);
-        //   }
-        //   return keys;
-        // },
 
         _emitter: function(event){
           if(typeof event === 'string') {
@@ -228,7 +175,7 @@
         _resolveAttr : function(attr, changes){
           var moveFuncs = ['append', 'prepend', 'before', 'after'];
           // go through the possible functions
-          $.each(this._funcs, function(i, func){
+          $.each(this._funcs, this._hitch(this, function(i, func){
             // if the func is not in the attr.name move on
             if(attr.name.indexOf(func) === -1){
               return;
@@ -240,15 +187,14 @@
               if(changes.class === undefined) {
                 changes.class=[]
               }
-              changes.class = changes.class
-                .concat(attr.value.split(' '));
+              changes.class = this._union(changes.class, 
+                attr.value.split(' '));
 
             } else if(changes[func]){
               // TODO: this is a little weird
               // if the function is already resolved continue
               // to the next func
               return;
-
             } else if($.inArray(func, moveFuncs) !== -1 ) {
               // resolve all move funcs
               $.each(moveFuncs, function(i, moveFunc){
@@ -262,8 +208,7 @@
               // resolve the function to prevent further checks
               changes[func]=attr.value;
             }
-
-          });
+          }));
           return changes;
         },
 
@@ -284,19 +229,31 @@
               }
             });
           });
+          return changes;
         },
 
         _makeChanges: function(elm, changes){
-          $.each(changes, function(i, change){
-            console.log(change)
-          });
+          $.each(changes, this._hitch(this, function(func, change){
+            // this keeps out the cancelled move
+            // TODO: could make the check search the changes for other move
+              // func instead of marking false (this coupling sux)
+            if(change===false){
+              return;
+            }
+            if($.inArray(func, 
+              ['append', 'prepend', 'before', 'after']) !== -1){
+              elm[func](change);
+            } else {
+              elm.attr(func, change);
+            }
+            return elm;
+          }));
         },
 
         _respond: function(contexts, elms){
-          return;
           // go through all of the responsive elms
           elms.each(this._hitch(this, function(i, elm){
-            this._makeChanges(elm, this._changes(elm.attributes, contexts));
+            this._makeChanges($(elm), this._changes(elm.attributes, contexts));
           }));
         },
 
