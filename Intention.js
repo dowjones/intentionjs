@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    var intentionWrapper = function($, ctx){
+    var intentionWrapper = function($){
       var Intention = function(params){
         if(params){
           for(var param in params){
@@ -9,22 +9,11 @@
             }
           }
         }
-        // this.context = new ctx(this.thresholds);
         this._listeners = {};
         this._contexts= [];
-
+        this.elms=$(); // bundle these 
         // by default the container is the document
         this.setElms(this.container);  
-        this.elms=$(); // bundle these 
-
-        // var intentHandler = this._hitch(this, function(info){
-        //   this.info=info;
-        //   this.filters = this._makeFilterPatterns(info);
-
-        //   // set the context information to the info (event object that comes from context)
-        // });
-
-        // run the intention on initialization to setup any elms that need setting
 
         return this;
       };
@@ -151,7 +140,6 @@
           elms.each(function(){
             respElms.push(this);
           });
-          
           return this;
         },
 
@@ -209,6 +197,7 @@
               changes[func]=attr.value;
             }
           }));
+
           return changes;
         },
 
@@ -242,7 +231,9 @@
             }
             if($.inArray(func, 
               ['append', 'prepend', 'before', 'after']) !== -1){
-              elm[func](change);
+              $(change)[func](elm);
+            } else if(func === 'class') {
+              elm.attr(func, change.join(' '));
             } else {
               elm.attr(func, change);
             }
@@ -274,7 +265,7 @@
               currentContexts = removeCtx(ctx, currentContexts);
               return;
             } else if( $.inArray(ctx, currentContexts) === -1 ) {
-              currentContexts.push(ctx);
+              currentContexts.unshift(ctx);
             }
           });
           return currentContexts;
@@ -297,7 +288,7 @@
           // bind an the respond function to each context name
           $.each(contexts, this._hitch(this, function(i, ctx){
             this.on(ctx.name, this._hitch(this,
-                function(){this._respond(currentContexts, this.elms);}));
+                function(){console.log(currentContexts);this._respond(currentContexts, this.elms);}));
           }));
           
           return function(measurement){
@@ -335,13 +326,11 @@
     };
 
     if ( typeof define === "function" && define.amd ) {
-      define( ['jquery', 'Context'], intentionWrapper );
+      define( ['jquery'], intentionWrapper );
     } else {
       if(!window.jQuery) {
         throw('jQuery is not defined!!');
-      } else if (!window.Context){
-        throw('Context is not defined!!');
-      }
-      window.Intention = intentionWrapper(jQuery, Context);
+      } 
+      window.Intention = intentionWrapper(jQuery);
     }
 })();
