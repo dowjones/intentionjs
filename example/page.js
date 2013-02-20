@@ -23,7 +23,8 @@
 		          return $(window).width();
 		    	}),
 		    baseResponder = tn.responsive([{name:'base'}])('base');
-
+		    
+		hResponder();
 		$(window).on('resize', hResponder);
 	});
 
