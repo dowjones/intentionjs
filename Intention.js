@@ -11,6 +11,7 @@
         }
         this._listeners = {};
         this._contexts= [];
+
         this.elms=$(); // bundle these 
         // by default the container is the document
         this.setElms(this.container);  

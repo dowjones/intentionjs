@@ -1,8 +1,6 @@
 (function(){
 
   define(['intention'], function(intention) {
-		
-
 
 		var tn = new intention,
 			resizeContexts = [{name:'standard', min:769}, 
@@ -23,7 +21,7 @@
 		          return $(window).width();
 		    	}),
 		    baseResponder = tn.responsive([{name:'base'}])('base');
-		    
+
 		hResponder();
 		$(window).on('resize', hResponder);
 	});
