@@ -3,7 +3,8 @@
     var intentionWrapper = function($){
       var Intention = function(params){
         if(params){
-          for(var param in params){
+          var param;
+          for(param in params){
             if(params.hasOwnProperty(param)){
               this[param] = params[param];  
             }
@@ -14,9 +15,8 @@
 
         this.elms=$(); // bundle these 
         // by default the container is the document
-        this.setElms(this.container);  
-
-        return this;
+        
+        return this.setElms(this.container);
       };
       Intention.prototype = {
 
@@ -63,18 +63,19 @@
         // this supports the base attr functionality
         _union: function(x,y) {
 
-          var obj = {};
+          var obj = {},
+            i,
+            res = [],
+            k;
 
-          for (var i=x.length-1; i >= 0; --i) {
+          for (i=x.length-1; i >= 0; --i) {
             obj[x[i]] = x[i];
           }
-          for (var i=y.length-1; i >= 0; --i){
+          for (i=y.length-1; i >= 0; --i){
             obj[y[i]] = y[i];
           }
-           
-          var res = [];
-
-          for (var k in obj) {
+          
+          for (k in obj) {
             if (obj.hasOwnProperty(k)){
               res.push(obj[k]); // <-- optional
             }  
@@ -96,8 +97,9 @@
           }
 
           if($.isArray(this._listeners[event.type])){
-            var listeners = this._listeners[event.type];
-            for(var i=0; i<listeners.length; i++){
+            var listeners = this._listeners[event.type],
+              i;
+            for(i=0; i<listeners.length; i++){
               listeners[i].call(this, event);
             }
           }
@@ -108,16 +110,17 @@
         // observer pattern outlined here:
         // http://www.nczonline.net/blog/2010/03/09/custom-events-in-javascript/
         on: function(type, listener){
-          if(typeof this._listeners[type] === 'undefined') {
+          if(this._listeners[type] === undefined) {
             this._listeners[type]=[];
           }
-          this._listeners[type].push(listener)
+          this._listeners[type].push(listener);
         },
 
         off: function(type, listener){
           if($.isArray(this._listeners[type])){
-            var listeners = this._listeners[type];
-            for(var i=0;listeners.length; i++){
+            var listeners = this._listeners[type],
+              i;
+            for(i=0;listeners.length; i++){
               if(listeners[i] === listener){
                 listeners.splice(i,1);
                 break;
@@ -128,7 +131,7 @@
 
         setElms: function(scope){
           // find all responsive elms in a specific dom scope
-          if(!scope) var scope = document;
+          if(!scope) scope = document;
           this.elms = $('[data-intention],[intention],[data-tn],[tn]', 
               scope);
           return this;
@@ -173,10 +176,10 @@
             if(func === 'class'){
               // class gets resolved uniquely because it is a multi-
               // value attr
-              if(changes.class === undefined) {
-                changes.class=[]
+              if(changes.classes === undefined) {
+                changes.classes=[];
               }
-              changes.class = this._union(changes.class, 
+              changes.classes = this._union(changes.classes, 
                 attr.value.split(' '));
 
             } else if(changes[func]){
@@ -233,8 +236,8 @@
             if($.inArray(func, 
               ['append', 'prepend', 'before', 'after']) !== -1){
               $(change)[func](elm);
-            } else if(func === 'class') {
-              elm.attr(func, change.join(' '));
+            } else if(func === 'classes') {
+              elm.attr('class', change.join(' '));
             } else {
               elm.attr(func, change);
             }
@@ -281,18 +284,18 @@
           // if no matcher function is specified expect to compare a 
           // string to the ctx.name property
           if($.isFunction(matcher) === false) {
-            var matcher = function(measure, ctx){
+            matcher = function(measure, ctx){
               if(measure===ctx.name) return true;
               return false;
-            }
+            };
           }
           // bind an the respond function to each context name
           $.each(contexts, this._hitch(this, function(i, ctx){
             this.on(ctx.name, this._hitch(this,
-                function(){console.log(currentContexts);this._respond(currentContexts, this.elms);}));
+                function(){this._respond(currentContexts, this.elms);}));
           }));
           
-          return function(measurement){
+          var responder = function(measurement){
             
             if($.isFunction(measure)) {
               // the measure will return a val to compare to each
@@ -320,7 +323,11 @@
             });
             // return the current context
             return currentContext;
-          }
+          };
+          // this makes the contexts accessible from the outside world
+          responder.contexts = contexts;
+
+          return responder;
         }
       };
       return Intention;
