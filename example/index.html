@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
-
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
 	<script type="text/javascript" src="../Intention.js"></script>
@@ -11,18 +9,89 @@
 
 	<meta name="apple-mobile-web-app-capable" content="yes"><meta name="format-detection" content="telephone=no">
 	<style type="text/css">
+
 		body {
 			height:5000px;
+			font-family: monospace;
+			margin:0;
 		}
-	</style>
 
+		#intro {
+			height:25px;
+			background:green;
+		}
+
+		nav {
+			height:25px;
+			background:red;
+		}
+
+		nav.fix{
+			position: fixed;
+			top:0;
+			left:0;
+			z-index: 10;
+			width: 100%;
+		}
+
+		h1 {
+			white-space: nowrap;
+			font-weight: normal;
+			text-transform: uppercase;
+			text-align: center;
+		}
+		h1.mobile {
+			font-size: 25px;
+		}
+		h1.tablet {
+			font-size: 50px;
+		}
+		h1.standard {
+			font-size: 100px;
+		}
+
+		h1.frequenter:after {
+			content:'back yet again';
+		}
+
+		h1.returning:after {
+			content:'Welcome back!';
+		}
+
+		h1.first:after {
+			content:'Welcome!';
+		}
+
+
+	</style>
 </head>
 <body>
-	<h1>RESPONSIVE</h1>
+	<header>
+		<div id="intro">whatever</div>
+		<nav tn tn-beyond-class="fix"
+			tn-shallow-class=""></nav>
+	</header>
+
+	<h1 tn tn-mobile-class="mobile"
+		tn-tablet-class="tablet"
+		tn-standard-class="standard"
+		tn-frequenter-class="frequenter"
+		tn-returning-class="returning"
+		tn-first-class="first"
+	><span></span></h1>
 	
 </body>
 <script>
 	(function($){
+		
+		if(!window.localStorage.getItem('visits')){
+			window.localStorage.setItem('visits', 0);
+		}
+
+		var visits = parseInt(window.localStorage.getItem('visits'), 10) + 1;
+		window.localStorage.setItem('visits', visits);
+
+		
 		var tn = new Intention,
 			resizeContexts = [{name:'standard', min:769}, 
 		        {name:'tablet', min:321},
@@ -42,7 +111,40 @@
 		          return $(window).width();
 		    	});
 
+		hResponder();
 		$(window).on('resize', hResponder);
+
+		var visitTracker = tn.responsive([
+	    	{name: 'frequenter', visits:5},
+	    	{name:'returning', visits:2},
+	    	{name:'first', visits:1}],
+	    	// matcher
+	    	function(measure, ctx){
+	    		if(measure >= ctx.visits) return true;
+	    		return false;
+	    	},
+	    	// measure
+	    	function(){
+	    		return parseInt(window.localStorage.getItem('visits'));
+	    	});
+
+		visitTracker();
+
+		var depthTracker = tn.responsive([
+	    	{name: 'shallow', depth:25},
+	    	{name:'beyond', depth:Infinity}],
+	    	// matcher
+	    	function(measure, ctx){
+	    		if(measure < ctx.depth) return true;
+	    		return false;
+	    	},
+	    	// measure
+	    	function(){
+	    		return window.pageYOffset;
+	    });
+		
+		$(window).on('scroll', depthTracker);
+		
 
 	})(jQuery)
 </script>
