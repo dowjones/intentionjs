@@ -57,7 +57,14 @@
           return fn.apply(scope, arguments); 
         };
       },
-
+      _keys: function(obj){
+        var k,
+          keys=[];
+        for(k in obj){
+          if(obj.hasOwnProperty(k)) keys.push(k);
+        }
+        return keys;
+      },
       // this supports the base attr functionality
       _union: function(x,y) {
         var obj = {},
@@ -179,14 +186,25 @@
             // if the function is already resolved continue
             // to the next func
             return;
-          } else if($.inArray(func, moveFuncs) !== -1 ) {
+          } else if($.inArray(func, moveFuncs) !== -1) {
+
+            // TODO: pretty verbose and inefficient is there another way?
+            var resolved=false;
+            $.each(moveFuncs, this._hitch(this, function(i, moveFunc){
+              if($.inArray(moveFunc, this._keys(changes)) !== -1){
+                resolved=true;
+                return false;
+              }
+            }));
+            if(resolved) return;
+
             // resolve all move funcs
             $.each(moveFuncs, function(i, moveFunc){
               if(func === moveFunc) {
                 changes[func] = attr.value;
                 return;
               }
-              changes[moveFunc]=false;
+              // changes[moveFunc]=false;
             });
           } else {
             // resolve the function to prevent further checks
@@ -216,13 +234,8 @@
       },
 
       _makeChanges: function(elm, changes){
+
         $.each(changes, this._hitch(this, function(func, change){
-          // this keeps out the cancelled move
-          // TODO: could make the check search the changes for other move
-            // func instead of marking false (this coupling sux)
-          if(change===false){
-            return;
-          }
           if($.inArray(func, 
             ['append', 'prepend', 'before', 'after']) !== -1){
             $(change)[func](elm);
