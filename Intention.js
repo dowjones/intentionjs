@@ -14,12 +14,10 @@
       this._contexts= [];
 
       this.elms=$(); // bundle these 
-      // by default the container is the document
-      
+      // by default the container is the document      
       return this.setElms(this.container);
     };
     Intention.prototype = {
-
       // public props
       container: document,
       // privates
@@ -62,19 +60,16 @@
 
       // this supports the base attr functionality
       _union: function(x,y) {
-
         var obj = {},
           i,
           res = [],
           k;
-
         for (i=x.length-1; i >= 0; --i) {
           obj[x[i]] = x[i];
         }
         for (i=y.length-1; i >= 0; --i){
           obj[y[i]] = y[i];
         }
-        
         for (k in obj) {
           if (obj.hasOwnProperty(k)){
             res.push(obj[k]); // <-- optional
@@ -87,15 +82,12 @@
         if(typeof event === 'string') {
           event={type:event};
         }
-
         if(!event.target){
           event.target=this;
         }
-
         if(!event.type){
           throw new Error(event.type + ' is not a supported event.');
         }
-
         if($.isArray(this._listeners[event.type])){
           var listeners = this._listeners[event.type],
             i;
@@ -201,7 +193,6 @@
             changes[func]=attr.value;
           }
         }));
-
         return changes;
       },
 
@@ -209,7 +200,6 @@
 
         var changes = {},
           resolve=this._hitch(this, this._resolveAttr);
-
         // go through currentCtxs (ordered by priority) TODO:
         $.each(contexts, function(i, ctx){
           // go through the elements attrs
@@ -333,29 +323,16 @@
     return Intention;
   };
 
-  // if ( typeof define === "function" && define.amd ) {
-  //   define( ['jquery'], intentionWrapper );
-  // } else {
-  //   if(!window.jQuery) {
-  //     throw('jQuery is not defined!!');
-  //   } 
-  //   window.Intention = intentionWrapper(jQuery);
-  // }
-
   (function (root, factory) {
-    console.log(root, factory)
     if (typeof exports === 'object') {
       // Node. Does not work with strict CommonJS, but
       // only CommonJS-like enviroments that support module.exports,
       // like Node.
       module.exports = factory(require('jquery'));
     } else if (typeof define === 'function' && define.amd) {
-      // AMD. Register as an anonymous module.
       define(['jquery'], factory);
     } else {
-      // Browser globals (root is window)
       root.Intention = factory(root.jQuery);
     }
   }(this, intentionWrapper));
-
 // })();
