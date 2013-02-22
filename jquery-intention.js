@@ -9,3 +9,24 @@
 }(function ($) {
     $.tn = new Intention;
 }));
+
+
+
+/* 
+
+tin.tin(elm, ctxInfo)
+
+$('#elm').tn({
+	base:{
+		class:'nothing special',
+		append:'body',
+		href:'http://mysite/img/medium.png'
+	},
+	mobile:{
+		class:'narrow touch',
+		prepend:'#main',
+		href:'http://mysite/img/small.png'
+	}
+});
+
+*/
