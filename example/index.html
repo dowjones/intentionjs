@@ -14,19 +14,24 @@
 			height:5000px;
 			font-family: monospace;
 			margin:0;
+			background:lavender;
 		}
 
 		#intro {
 			height:25px;
-			background:green;
+			background:darkseagreen;
+		}
+
+		.fix #intro {
+			margin-top:25px;
 		}
 
 		nav {
 			height:25px;
-			background:red;
+			background:seagreen;
 		}
 
-		nav.fix{
+		.fix nav{
 			position: fixed;
 			top:0;
 			left:0;
@@ -39,37 +44,72 @@
 			font-weight: normal;
 			text-transform: uppercase;
 			text-align: center;
+			width: 300px;
+			margin:0 auto;
 		}
-		h1.mobile {
+
+
+		h2 {
+			position: fixed;
+			text-align: center;
+			top:50px;
+			right:50px;
 			font-size: 25px;
-		}
-		h1.tablet {
-			font-size: 50px;
-		}
-		h1.standard {
-			font-size: 100px;
-		}
-
-		h1.frequenter:after {
-			content:'back yet again';
+			height:50px;
+			line-height: 50px;
+			width:50px;
+			background: yellow;
+			border-radius: 50%;
 		}
 
-		h1.returning:after {
-			content:'Welcome back!';
+		h2.one:after {
+			content:'|';
 		}
 
-		h1.first:after {
-			content:'Welcome!';
+		h2.two:after {
+			content:'/';
 		}
 
+		h2.three:after {
+			content:'-';
+		}
+
+		h2.four:after {
+			content:'\\';
+		}
+
+		h1:after {
+			content:'.';
+			clear:both;
+			height:0;
+			visibility: hidden;
+			display: block;
+		}
+
+		h1 span {
+			height:100px;
+			width:100px;
+			float:left;
+			line-height: 100px;
+		}
+
+		.a {
+			background:lime;
+		}
+		.b {
+			background:skyblue;
+		}
+		.c {
+			background: tomato;
+		}
 
 	</style>
 </head>
 <body>
-	<header>
-		<div id="intro">whatever</div>
-		<nav tn tn-beyond-class="fix"
-			tn-shallow-class=""></nav>
+	<header tn tn-beyond-class="fix"
+			tn-shallow-class="">
+		<div id="intro"></div>
+		<nav></nav>
 	</header>
 
 	<h1 tn tn-mobile-class="mobile"
@@ -78,7 +118,24 @@
 		tn-frequenter-class="frequenter"
 		tn-returning-class="returning"
 		tn-first-class="first"
-	><span></span></h1>
+	>
+		<span tn tn-base-class="a"
+			tn-base-append='h1'
+			tn-base-append='h1'>a</span>
+		<span tn tn-base-class="b"
+			tn-base-append='h1'
+			tn-tablet-after='.c'>b</span>
+		<span tn tn-base-class="c"
+			tn-base-append='h1'
+			tn-tablet-prepend='h1'>c</span>
+
+	</h1>
+
+	<h2 tn
+		tn-f1-class="one"
+		tn-f2-class="two"
+		tn-f3-class="three"
+		tn-f4-class="four"></h2>
 	
 </body>
 <script>
@@ -111,8 +168,11 @@
 		          return $(window).width();
 		    	});
 
+		baseResponder = tn.responsive([{name:'base'}])('base');
 		hResponder();
-		$(window).on('resize', hResponder);
+		$(window).on('resize', function(){
+			hResponder()
+		});
 
 		var visitTracker = tn.responsive([
 	    	{name: 'frequenter', visits:5},
@@ -128,7 +188,7 @@
 	    		return parseInt(window.localStorage.getItem('visits'));
 	    	});
 
-		visitTracker();
+		// visitTracker();
 
 		var depthTracker = tn.responsive([
 	    	{name: 'shallow', depth:25},
@@ -144,8 +204,23 @@
 	    });
 		
 		$(window).on('scroll', depthTracker);
-		
-
+		//  | / - \
+		var flipper = tn.responsive([
+	    	{name: 'f1', div:0},
+	    	{name:'f2', div:1},
+	    	{name:'f3', div:2},
+	    	{name:'f4', div:3}],
+	    	// matcher
+	    	function(measure, ctx){
+	    		if((Math.floor(measure/100) % 4) === ctx.div) return true;
+	    		return false;
+	    	},
+	    	// measure
+	    	function(){
+	    		return window.pageYOffset;
+	    });
+		flipper();
+		$(window).on('scroll', flipper);
 	})(jQuery)
 </script>
 </html>	
