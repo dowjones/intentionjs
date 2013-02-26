@@ -1,515 +1,351 @@
-// Copyright (c) 2012 The Wall Street Journal, 
-// http://wsj.com/
+// (function () {
+  'use strict';
+  var intentionWrapper = function($){
+    var Intention = function(params){
+      if(params){
+        var param;
+        for(param in params){
+          if(params.hasOwnProperty(param)){
+            this[param] = params[param];  
+          }
+        }
+      }
+      this._listeners = {};
+      this._contexts= [];
 
-// Permission is hereby granted, free of charge, to any person obtaining
-// a copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to
-// permit persons to whom the Software is furnished to do so, subject to
-// the following conditions:
+      this.elms=$(); // bundle these 
+      // by default the container is the document      
+      return this.setElms(this.container);
+    };
+    Intention.prototype = {
+      // public props
+      container: document,
+      // privates
+      _funcs: [
+        // the only(?) multi-val attr
+        'class', 
+        // placement attrs
+        'append', 'prepend', 'before', 'after',
+        // single val attrs
+        'src',
+        'href',
+        'height',
+        'width',
+        'title',
+        'tabindex',
+        'id',
+        'style',
+        'align',
+        'dir',
+        'contenteditable',
+        'lang',
+        'xml:lang',
+        'accesskey',
+        'background',
+        'bgcolor',
+        'contextmenu',
+        'draggable',
+        'hidden',
+        'item',
+        'itemprop',
+        'spellcheck',
+        'subject',
+        'valign'],
 
-// The above copyright notice and this permission notice shall be
-// included in all copies or substantial portions of the Software.
+      _hitch: function(scope,fn){
+        return function(){
+          return fn.apply(scope, arguments); 
+        };
+      },
+      _keys: function(obj){
+        var k,
+          keys=[];
+        for(k in obj){
+          if(obj.hasOwnProperty(k)) keys.push(k);
+        }
+        return keys;
+      },
+      // this supports the base attr functionality
+      _union: function(x,y) {
+        var obj = {},
+          i,
+          res = [],
+          k;
+        for (i=x.length-1; i >= 0; --i) {
+          obj[x[i]] = x[i];
+        }
+        for (i=y.length-1; i >= 0; --i){
+          obj[y[i]] = y[i];
+        }
+        for (k in obj) {
+          if (obj.hasOwnProperty(k)){
+            res.push(obj[k]); // <-- optional
+          }  
+        }
+        return res;
+      },
 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+      _emitter: function(event){
+        if(typeof event === 'string') {
+          event={type:event};
+        }
+        if(!event.target){
+          event.target=this;
+        }
+        if(!event.type){
+          throw new Error(event.type + ' is not a supported event.');
+        }
+        if($.isArray(this._listeners[event.type])){
+          var listeners = this._listeners[event.type],
+            i;
+          for(i=0; i<listeners.length; i++){
+            listeners[i].call(this, event);
+          }
+        }
+      },
 
+      // public methods
+      // code and concept taken from simple implementation of 
+      // observer pattern outlined here:
+      // http://www.nczonline.net/blog/2010/03/09/custom-events-in-javascript/
+      on: function(type, listener){
+        if(this._listeners[type] === undefined) {
+          this._listeners[type]=[];
+        }
+        this._listeners[type].push(listener);
+      },
 
-(function () {
-
-    'use strict';
-
-    var intentionWrapper = function($){
-
-      var Intention = function(params){
-
-
-        if(params){
-          for(var param in params){
-            if(params.hasOwnProperty(param)){
-              this[param] = params[param];  
+      off: function(type, listener){
+        if($.isArray(this._listeners[type])){
+          var listeners = this._listeners[type],
+            i;
+          for(i=0;listeners.length; i++){
+            if(listeners[i] === listener){
+              listeners.splice(i,1);
+              break;
             }
           }
         }
+      },
 
-        // by default the container is the document
-        this._setResponsiveElms(this.container);  
-                
-        if(this.derive_context){
-          this._deriveContext();
-        }
+      setElms: function(scope){
+        // find all responsive elms in a specific dom scope
+        if(!scope) scope = document;
+        this.elms = $('[data-intention],[intention],[data-tn],[tn]', 
+            scope);
+        return this;
+      },
 
-        // this part of initialization allows me to externalize the
-        // messiness of a regex to arrays that are stored as props of 
-        // the intention object. abstraction for clarity, or regexes are
-        // regexes
-        this._setStaticPatterns();
+      add: function(elms){
+        // is expecting a jquery object
+        var respElms=this.elms;
 
-        var intentHandler = this._hitch(this, function(info){
-
-          this.info=info;
-          this.filters = this._makeFilterPatterns(info);
-
-          // set the context information to the info (event object that comes from context)
-          this.intent(info.name);
+        elms.each(function(){
+          respElms.push(this);
         });
-        
-        // run the intention on initialization to setup any elms that need setting
-        intentHandler(this.context.info());
-
-        this.context.on('change', intentHandler);
-        
-        return intentHandler;
-
-      };
-
-      Intention.prototype = {
-
-        // public props
-        container: document,
-
-        derive_context:false,
-
-        // privates
-        _funcs: ['move', 'class', 'attr'],
-        _placements:['before', 'after', 'prepend', 'append'],
-        _attrs: [
-          'src',
-          'href',
-          'dir',
-          'lang',
-          'xml:lang',
-          'accesskey',
-          'align',
-          'background',
-          'bgcolor',
-          'class',
-          'contenteditable',
-          'contextmenu',
-          'draggable',
-          'height',
-          'hidden',
-          'id',
-          'item',
-          'itemprop',
-          'spellcheck',
-          'style',
-          'subject',
-          'tabindex',
-          'title',
-          'valign',
-          'width'],
-
-        _staticPatterns: {},
-
-        _setStaticPatterns: function(){
-
-          var patterns = ['funcs', 'attrs', 'placements'];
-
-          for(var i=0; i<patterns.length; i++){
-            this._staticPatterns[patterns[i]] = 
-              this._listToPattern(this['_' + patterns[i]])
-          }
-
-        },
-
-        _listToPattern: function(list){
-
-          // this function takes the above list and converts it into a pattern
-          // for use with the intentional attrs
-          var pattern='';
-
-          for(var i=0; i<list.length; i++) {
-            pattern+= list[i] + '|'; 
-          }
-
-          return pattern.replace(/\|$/, '');
-
-        },
-
-
-
-        _deriveContext: function(){
-
-          var setBase = function(elm){
-
-            var attrs = elm.attributes;
-
-            // find any attr w/ a func: data- + (func)
-
-            // of those figure out if there is no base: func + reverse lookback of context
-
-            // of those look to see if there is a attr set: i.e. "class"
-
-            // if we have a definition for "class" -> data-class="whatever" otherwise data-class=""
-
-
-          };
-
-
-          for(var i=0; i<this.elms.length; i++){
-
-
-
-          }
-
-        },
-
-        _makeInstructions: function(elm){
-          
-          var attrs=elm.attributes,
-            instructions={},
-            interaction=this.info.interaction,
-            context=this.info.name;
-
-          
-          for(var i=0; i<attrs.length;i++){
-
-            var attr = attrs[i];
-
-            // if the attr is not the current interaction mode, try the next one
-            if(this.filters.interaction.test(attr.name)){
-              continue;
-            }
-            
-            if(this.filters.context.test(attr.name)){
-
-              // at this point we have a hold on a data attrs that is not of the 
-              // current context it may be a base data attr a context attr
-              // or a data attr that we are not interested in
-              var funcMatch = attr.name.match(this.filters.func);
-
-              if(funcMatch){
-
-                var func = funcMatch[0];
-
-                if(!instructions[func]){
-
-                  instructions[func] = {
-                    options:[attr]
-                  }
-
-                } else {
-
-                  instructions[func].options.push(attr)
-                  
-                }
-              }
-            }
-          }
-          return instructions;
-
-        },
-
-        _makeFilterPatterns: function(context){
-
-          // to keep things clear for myself and for those that may look at this code
-          // i am breaking the task of matching relevant attrs into two regexes
-          // this also gives the added benefit of allowing me on the second pass
-          // to extract the function string and create the instruction object right there
-          var notContexts = '',
-            notInteractions = '';
-          // looking for the context or the interaction or the function NO ORDER
-          
-          // build the context filter for the regex
-          for(var i=0; i<this.context.thresholdNames.length;i++) {
-            if(this.context.thresholdNames[i] !== context.name){
-              notContexts+='(' + this.context.thresholdNames[i] + ')|'  
-            }
-          }
-
-          for(var i=0; i<this.context.interactionModes.length;i++) {
-            
-            if(this.context.interactionModes[i] !== 
-                context.interaction){
-              notInteractions+='(' + this.context.interactionModes[i] + ')|'  
-            }
-          }
-
-          notInteractions = notInteractions.replace(/\|$/, '');
-
-          notContexts = notContexts.replace(/\|$/, '');
-
-          // these patterns should not be generated for every element,
-            // they happen on a per "change" basis
-
-          // pattern is a reverse lookback meaning: match anything that is not [string]
-          var patterns = { 
-            context: new RegExp('^data-((?!'+ notContexts +').)*$'),
-            func: new RegExp(this._staticPatterns.funcs),
-
-            // find the interaction mode we're not in
-            // do a reverse lookback regex
-            interaction: new RegExp(notInteractions)
-          };
-
-          return patterns;
-
-        },
-
-
-        _findBest: function(func, options){
-
-          // perhaps there's a more efficient way of doing this but naively this seems to work
-
-          // context[mobile] +4, interaction[touch] +2, subfunction[append] +3
-
-          var contextPattern = '';
-
-          for(var i=0; i<this.context.thresholdNames.length;i++) {
-            contextPattern += this.context.thresholdNames[i] + '|';
-          }
-
-          contextPattern = contextPattern.replace(/\|$/, '');
-          
-          var points = [
-            {pattern:contextPattern, value:4}, 
-            // for the foreseeable future there are not going to be any interaction modes
-            // other than touch and mouse, but a dynamic pattern to come from context is in order
-            {pattern: 'touch|mouse', value:2}, 
-            {pattern: func + '-[a-zA-Z\-\_]+$', value:3}]
-
-          // search for string, apply rank
-          var best,
-            lastRank=0;
-
-          for(var i=0; i<options.length; i++) {
-
-            var rank=1;
-
-            for(var j=0; j<points.length; j++){
-              if(new RegExp(points[j].pattern).test(options[i].name)){
-                
-                rank+=points[j].value;
-              }
-            }
-
-            if(rank > lastRank){
-              best=options[i];
-              lastRank=rank;
-            }
-
-          }
-
-          return best;
-          
-        },
-
-        _combine:function(options){
-
-          // take the base and make it into an array
-          // a.split(' ')
-          // a =union(a,b);
-          // a.toString();
-          // a.replace(/,/g, ' ')
-
-          var values = [];
-
-          for(var i=0; i<options.length; i++){
-            values=this._union(values, options[i].value.split(' '))
-          }
-
-          values = values.toString();
-
-          values = values.replace(/,/g, ' ');
-
-          return values;
-
-        },
-
-        _setResponsiveElms: function(context){
-
-          if(context){
-            // in the elms array before adding it
-            this.elms = $('[data-intention]', context);
-
-            var itnAttr = $(context).attr('data-intention');
-
-            if((itnAttr !== false) && (itnAttr !== undefined)){
-              this.elms.push(context);
-            }
-
-          } else {
-            this.elms = $('[data-intention]');
-          }
-
-          
-        },
-
-
-        _class:function(elm, instruction){
-
-          $(elm).attr('class', this._combine(instruction.options));
-
-          return;
-        },
-
-
-        _attr: function(elm, instruction) {
-
-          var attrs = this._divideAttrs(instruction.options);
-
-          for(var attr in attrs){
-            if(attrs.hasOwnProperty(attr) ){
-              var attrVal = this._findBest('attr', attrs[attr]).value;
-              $(elm).attr(attr, attrVal);
-            }
-          }
-
-          return;
-
-        },
-
-        _move: function(elm, instruction) {
-
-          // find the base
-          var choice = this._findBest('move', instruction.options),
-            moveSelector = choice.value;
-
-          var placementSpec = choice.name.match(new RegExp('move-('+ 
-                this._staticPatterns.placements + '$)'));
-
-          if(placementSpec){
-            $(moveSelector)[placementSpec[1]]( elm );
-          } else {
-            $(moveSelector).append( elm );
-          }
-
-        },
-
-        _divideAttrs: function(options){
-
-          var attrs = {};
-
-          for(var i=0, l=options.length; i<l; i++){
-
-            // find the specific attr we are manipulating
-
-            // until we come up with a more intelligent algo, i'm just going to
-            // take everything after the "func" hence the regex below          
-
-            // this line is ready for some articulation
-            var attrName = options[i]
-                  .name.match(new RegExp('attr' + '-('+ this._staticPatterns.attrs +'$)'))[1];
-
-            if(attrs[attrName]) {
-              attrs[attrName].push(options[i])
-            } else {
-              attrs[attrName] = [options[i]];
-            }
-          }
-
-          return attrs;
-      
-        },
-
-        _hitch: function(scope,fn){
-            return function(){
-              return fn.apply(scope, arguments); 
-            };
-        },
-
-        // this supports the base attr functionality
-        _union: function(x,y) {
-
-          var obj = {};
-
-          for (var i=x.length-1; i >= 0; --i) {
-            obj[x[i]] = x[i];
-          }
-          for (var i=y.length-1; i >= 0; --i){
-            obj[y[i]] = y[i];
-          }
-           
-          var res = [];
-
-          for (var k in obj) {
-            if (obj.hasOwnProperty(k)){
-              res.push(obj[k]); // <-- optional
-            }  
-          }
-          return res;
-        },
-
-        _isEmpty: function(obj){
-          for(var prop in obj) {
-            if(obj.hasOwnProperty(prop)){ return false; }
-          }
-          return true;
-        },
-
-
-        // public methods
-        intent: function(context){
-          
-          // get the context name if a number is passed??
-          // if(typeof context === 'number'){}
-          
-          // go through all of the elms
-          for(var i=0; i<this.elms.length; i++){
-            var elm = this.elms[i], 
-              instructions = this._makeInstructions(elm);
-
-            if(this._isEmpty(instructions)) {
-              continue;
-            }
-
-            for(var instruction in instructions) {
-              if(instructions.hasOwnProperty(instruction)){
-                this['_' + instruction](elm, instructions[instruction]);
-              }
-            }
-
-
-          }
-        },
-
-        addFrom: function(context){
-          if(context){
-            // in the elms array before adding it
-            $('[data-intention]', context).each(
-              this._hitch(this, function(i, elm){
-                this.elms.push(elm);
-            }));
-            return;
-          } 
-          // TODO: throw error?
-
-        },
-
-        add: function(elm){
-          this.elms.push(elm);
-        },
-
-        remove: function(elm){
-          $.each(this.elms, this._hitch(this, function(i, candidate){
+        return this;
+      },
+
+      remove: function(elms){
+        // is expecting a jquery object
+        var respElms = this.elms;
+        // elms to remove
+        elms.each(function(i, elm){
+          // elms to check against
+          respElms.each(function(i, candidate){
             if(elm === candidate){
-              this.elms.splice(i, 1);
+              respElms.splice(i, 1);
+              // found the match, break the loop
               return false;
             }
-          }));
+          });
+        });
+        return this;
+      },
+
+      _resolveAttr : function(attr, changes){
+        var moveFuncs = ['append', 'prepend', 'before', 'after'];
+        // go through the possible functions
+        $.each(this._funcs, this._hitch(this, function(i, func){
+          // if the func is not in the attr.name move on
+          if(attr.name.indexOf(func) === -1){
+            return;
+          }
+          // check to see if there's a resolution on the attr's func
+          if(func === 'class'){
+            // class gets resolved uniquely because it is a multi-
+            // value attr
+            if(changes.classes === undefined) {
+              changes.classes=[];
+            }
+            changes.classes = this._union(changes.classes, 
+              attr.value.split(' '));
+
+          } else if(changes[func]){
+            // TODO: this is a little weird
+            // if the function is already resolved continue
+            // to the next func
+            return;
+          } else if($.inArray(func, moveFuncs) !== -1) {
+
+            // TODO: pretty verbose and inefficient is there another way?
+            var resolved=false;
+            $.each(moveFuncs, this._hitch(this, function(i, moveFunc){
+              if($.inArray(moveFunc, this._keys(changes)) !== -1){
+                resolved=true;
+                return false;
+              }
+            }));
+            if(resolved) return;
+
+            // resolve all move funcs
+            $.each(moveFuncs, function(i, moveFunc){
+              if(func === moveFunc) {
+                changes[func] = attr.value;
+                return;
+              }
+              // changes[moveFunc]=false;
+            });
+          } else {
+            // resolve the function to prevent further checks
+            changes[func]=attr.value;
+          }
+        }));
+        return changes;
+      },
+
+      _changes: function(attrs, contexts){
+
+        var changes = {},
+          resolve=this._hitch(this, this._resolveAttr);
+        // go through currentCtxs (ordered by priority) TODO:
+        $.each(contexts, function(i, ctx){
+          // go through the elements attrs
+          $.each(attrs,  function(i, attr){
+            // if the attr does not match the current context
+            // move on
+            if(new RegExp('(^(data-)?(tn|intention)-)?' 
+                + ctx.name).test(attr.name)) {
+              changes = resolve(attr, changes);
+            }
+          });
+        });
+        return changes;
+      },
+
+      _makeChanges: function(elm, changes){
+
+        $.each(changes, this._hitch(this, function(func, change){
+          if($.inArray(func, 
+            ['append', 'prepend', 'before', 'after']) !== -1){
+            $(change)[func](elm);
+          } else if(func === 'classes') {
+            elm.attr('class', change.join(' '));
+          } else {
+            elm.attr(func, change);
+          }
+          return elm;
+        }));
+      },
+
+      _respond: function(contexts, elms){
+        // go through all of the responsive elms
+        elms.each(this._hitch(this, function(i, elm){
+          this._makeChanges($(elm), this._changes(elm.attributes, contexts));
+        }));
+      },
+
+      _contextualize: function(inContext, ofContexts, currentContexts){
+
+        var removeCtx = function(outCtx, contexts){
+          $.each(contexts, function(i, ctx){
+            if(outCtx.name === ctx.name) {
+              contexts.splice(i, 1);
+              return false;
+            }
+          });
+          return contexts;
+        };
+        // remove other contexts in the --group-- from the list
+        $.each(ofContexts, function(i, ctx){
+          if( inContext.name !== ctx.name ){
+            currentContexts = removeCtx(ctx, currentContexts);
+            return;
+          } else if( $.inArray(ctx, currentContexts) === -1 ) {
+            currentContexts.unshift(ctx);
+          }
+        });
+        return currentContexts;
+      },
+
+      responsive:function(contexts, matcher, measure){
+        var currentContexts = this._contexts,
+          currentContext,
+          emitter = this._hitch(this, this._emitter),
+          contextualize = this._contextualize;
+
+        // if no matcher function is specified expect to compare a 
+        // string to the ctx.name property
+        if($.isFunction(matcher) === false) {
+          matcher = function(measure, ctx){
+            if(measure===ctx.name) return true;
+            return false;
+          };
         }
-      };
+        // bind an the respond function to each context name
+        $.each(contexts, this._hitch(this, function(i, ctx){
+          this.on(ctx.name, this._hitch(this,
+              function(){this._respond(currentContexts, this.elms);}));
+        }));
+        
+        var responder = function(measurement){
+          
+          if($.isFunction(measure)) {
+            // the measure will return a val to compare to each
+            // context that was passed, if no matcher function
+            // is specified it should return the name of the context
+            measurement = measure.apply(this, arguments);
+          }
+          $.each(contexts, function(i, ctx){
+            if( matcher(measurement, ctx)) {
+              // first time, or different than last context
+              if( (currentContext===undefined) || 
+                (ctx.name !== currentContext.name)){
+                
+                currentContext = ctx;
+                currentContexts = contextualize(ctx, contexts, 
+                    currentContexts);
+                emitter($.extend({}, {type:currentContext.name}, 
+                    currentContext));
+                // done, break the loop
+                return false;
+              }
+              // same context, break the loop
+              return false;
+            }
+          });
+          // return the current context
+          return currentContext;
+        };
+        // this makes the contexts accessible from the outside world
+        responder.contexts = contexts;
 
-      return Intention;
-
-    };
-
-    if ( typeof define === "function" && define.amd ) {
-      define( "Intention", ['jquery'], intentionWrapper );
-    } else {
-
-      if(!window.jQuery) {
-        throw('jQuery is not defined!!');
+        return responder;
       }
+    };
+    return Intention;
+  };
 
-      window.Intention = intentionWrapper(jQuery);
+  (function (root, factory) {
+    if (typeof exports === 'object') {
+      // Node. Does not work with strict CommonJS, but
+      // only CommonJS-like enviroments that support module.exports,
+      // like Node.
+      module.exports = factory(require('jquery'));
+    } else if (typeof define === 'function' && define.amd) {
+      define(['jquery'], factory);
+    } else {
+      root.Intention = factory(root.jQuery);
     }
-
-})();
+  }(this, intentionWrapper));
+// })();
