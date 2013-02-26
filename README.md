@@ -4,7 +4,7 @@ DOM Manipulation based on a html attribute specification
 
 ## Why Intention.js
 
-The interface to define differences between documents should be in HTML. The manipulation of attributes is a better way to restructure a page than media queries. Because relying on CSS/HTML document flow patterns to change the hierarchy of a design is not sufficient to convey appropriate infomation. needs some finess.
+The interface to define differences between documents should be in HTML. The manipulation of attributes is a better way to restructure a page than media queries. Because relying on CSS/HTML document flow patterns to change the hierarchy of a design is not sufficient to convey appropriate infomation. 
 
 ## Installation
 
