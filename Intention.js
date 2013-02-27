@@ -1,20 +1,14 @@
 'use strict';
 var intentionWrapper = function($){
+
   var Intention = function(params){
-    if(params){
-      var param;
-      for(param in params){
-        if(params.hasOwnProperty(param)){
-          this[param] = params[param];  
-        }
-      }
-    }
-    this._listeners = {};
-    this._contexts= [];
-    this.elms=$(); // bundle these 
-    // by default the container is the document      
-    return this.setElms(this.container);
+
+    return $.extend(this, 
+        params, 
+        {_listeners:{}, _contexts:[], elms:$()})
+      .setElms(this.container);
   };
+
   Intention.prototype = {
     // public props
     container: document,
@@ -128,7 +122,7 @@ var intentionWrapper = function($){
 
     setElms: function(scope){
       // find all responsive elms in a specific dom scope
-      if(!scope) scope = document;
+      if(!scope) scope = this.container;
       this.elms = $('[data-intention],[intention],[data-tn],[tn]', 
           scope);
       return this;
