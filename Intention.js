@@ -2,11 +2,8 @@
 var intentionWrapper = function($){
 
   var Intention = function(params){
-
-    return $.extend(this, 
-        params, 
-        {_listeners:{}, _contexts:[], elms:$()})
-      .setElms(this.container);
+    return $.extend(this, params, 
+        {_listeners:{}, _contexts:[], elms:$()}).setElms(this.container);
   };
 
   Intention.prototype = {
@@ -57,22 +54,21 @@ var intentionWrapper = function($){
       }
       return keys;
     },
+    
     // this supports the base attr functionality
     _union: function(x,y) {
-      var obj = {},
-        i,
-        res = [],
-        k;
-      for (i=x.length-1; i >= 0; --i) {
+      var obj = {}, res = [], i, k;
+
+      for(i=x.length-1; i >= 0; --i) {
         obj[x[i]] = x[i];
       }
-      for (i=y.length-1; i >= 0; --i){
+      for(i=y.length-1; i >= 0; --i){
         obj[y[i]] = y[i];
       }
-      for (k in obj) {
+      for(k in obj) {
         if (obj.hasOwnProperty(k)){
-          res.push(obj[k]); // <-- optional
-        }  
+          res.push(obj[k]);
+        }
       }
       return res;
     },
@@ -136,6 +132,7 @@ var intentionWrapper = function($){
         respElms.each(function(i, respElm){
           if(elm === respElm) {
             exists=true;
+            return false;
           }
         });
         if(exists === false) respElms.push(elm);
@@ -333,7 +330,7 @@ var intentionWrapper = function($){
   return Intention;
 };
 
-(function (root, factory) {
+(function(root, factory) {
   if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like enviroments that support module.exports,
