@@ -54,7 +54,7 @@ var intentionWrapper = function($){
       }
       return keys;
     },
-    
+
     // this supports the base attr functionality
     _union: function(x,y) {
       var obj = {}, res = [], i, k;
@@ -218,8 +218,7 @@ var intentionWrapper = function($){
         $.each(attrs,  function(i, attr){
           // if the attr does not match the current context
           // move on
-          if(new RegExp('(^(data-)?(tn|intention)-)?' 
-              + ctx.name).test(attr.name)) {
+          if(ctx.pattern.test(attr.name)) {
             changes = resolve(attr, changes);
           }
         });
@@ -286,21 +285,28 @@ var intentionWrapper = function($){
           return false;
         };
       }
+      //  check for measure and if not there 
+      // function takes one arg and returns it
+      if($.isFunction(measure) === false) {
+        measure = function(arg){
+          return arg;
+        };
+      }
+
       // bind an the respond function to each context name
       $.each(contexts, this._hitch(this, function(i, ctx){
+        // set the regex to match attrs to
+        ctx.pattern=new RegExp('(^(data-)?(tn|intention)-)?' + ctx.name);
         this.on(ctx.name, this._hitch(this,
             function(){this._respond(currentContexts, this.elms);}));
       }));
       
-      var responder = function(measurement){
+      var responder = function(){
         
-        if($.isFunction(measure)) {
-          // the measure will return a val to compare to each
-          // context that was passed, if no matcher function
-          // is specified it should return the name of the context
-          measurement = measure.apply(this, arguments);
-        }
+        var measurement = measure.apply(this, arguments);
+        
         $.each(contexts, function(i, ctx){
+
           if( matcher(measurement, ctx)) {
             // first time, or different than last context
             if( (currentContext===undefined) || 
