@@ -177,20 +177,20 @@ describe("Intention", function() {
     
     it('should switch between all contexts', function(done){
       
-      this.timeout(9); //000
+      this.timeout(9000); //000
 
-      var winW;
+      
 
       var tablet = $.Deferred().done(function(){
-        expect(winW).to.be.below(769);
+        expect($(window).width()).to.be.below(769);
         expect(hResponder().name).to.equal('tablet');
       }),
       standard = $.Deferred().done(function(){
-        expect(winW).to.be.at.least(769);
+        expect($(window).width()).to.be.at.least(769);
         expect(hResponder().name).to.equal('standard');
       }),
       mobile = $.Deferred().done(function(){
-        expect(winW).to.be.below(321);
+        expect($(window).width()).to.be.below(321);
         expect(hResponder().name).to.equal('mobile');
       });
 
@@ -198,19 +198,9 @@ describe("Intention", function() {
         done();
       });
 
-      tn.on('hr', function(context){
-
-        winW=$(window).width();
-
-        if(context.name === 'mobile') {
-          mobile.resolve();
-        } else if (context.name === 'tablet'){
-          tablet.resolve();
-        } else if (context.name === 'standard'){
-          standard.resolve();
-        }
-        
-      });
+      tn.on('tablet', tablet.resolve);
+      tn.on('mobile', mobile.resolve);
+      tn.on('standard', standard.resolve);
 
       // alert('RESIZE the window small to large or vise versa')
     });
@@ -220,7 +210,7 @@ describe("Intention", function() {
 
     it('_respond: should change appropriate attrs in a given context', function(done){
       
-      this.timeout(90);
+      this.timeout(9000);
       var testElm = $('<div class="original" tn-mobile-class="mobile small" \
             tn-tablet-class="tablet medium" tn-standard-class="standard big" \
             ></div>');
@@ -242,7 +232,6 @@ describe("Intention", function() {
         tn.add(
           testElm).elms.length).to.equal(1);
   
-      // done();
       
       var tablet = $.Deferred().done(function(){
           
@@ -259,15 +248,9 @@ describe("Intention", function() {
         done();
       });
 
-      tn.on('hr', function(context){
-        if(context.name === 'mobile') {
-          mobile.resolve();
-        } else if (context.name === 'tablet'){
-          tablet.resolve();
-        } else if (context.name === 'standard'){
-          standard.resolve();
-        }
-      });
+      tn.on('tablet', tablet.resolve);
+      tn.on('mobile', mobile.resolve);
+      tn.on('standard', standard.resolve);
 
       
 
