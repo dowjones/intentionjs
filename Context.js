@@ -29,7 +29,8 @@
 
     var tn = new tn,
       // horizontal resize contexts
-      resizeContexts = [{name:'standard', min:769}, 
+      resizeContexts = [{name:'luxury', min:900},
+        {name:'standard', min:900}, 
         {name:'tablet', min:321},
         {name:'mobile', min:0}],
       // horizontal responsive function
