@@ -3,7 +3,7 @@ var intentionWrapper = function($){
 
   var Intention = function(params){
     return $.extend(this, params, 
-        {_listeners:{}, _contexts:[], elms:$()}).setElms(this.container);
+        {_listeners:{}, contexts:[], elms:$()}).setElms(this.container);
   };
 
   Intention.prototype = {
@@ -55,22 +55,98 @@ var intentionWrapper = function($){
       return keys;
     },
 
-    // this supports the base attr functionality
-    _union: function(x,y) {
-      var obj = {}, res = [], i, k;
-
-      for(i=x.length-1; i >= 0; --i) {
-        obj[x[i]] = x[i];
-      }
-      for(i=y.length-1; i >= 0; --i){
-        obj[y[i]] = y[i];
-      }
-      for(k in obj) {
-        if (obj.hasOwnProperty(k)){
-          res.push(obj[k]);
+    // each, identity, isFunction, any, map, uniq, union, difference taken from underscore.js and modified slightly
+    _each: function(obj, iterator, context) {
+      if (obj == null) return;
+      if (Array.prototype.forEach && obj.forEach === Array.prototype.forEach) {
+        obj.forEach(iterator, context);
+      } else if (obj.length === +obj.length) {
+        for (var i = 0, l = obj.length; i < l; i++) {
+          if (iterator.call(context, obj[i], i, obj) === breaker) return;
+        }
+      } else {
+        for (var key in obj) {
+          if (obj.hasOwnProperty(key)) {
+            if (iterator.call(context, obj[key], key, obj) === breaker) return;
+          }
         }
       }
-      return res;
+    },
+
+    _identity: function(value) {
+      return value;
+    },
+
+    _isFunction: function(obj) {
+      return typeof obj === 'function';
+    },
+
+    _any : function(obj, iterator, context) {
+      iterator || (iterator = this._identity);
+      var result = false;
+      if (obj == null) return result;
+      if (Array.prototype.some && obj.some === Array.prototype.some) return obj.some(iterator, context);
+      this._each(obj, function(value, index, list) {
+        if (result || (result = iterator.call(context, value, index, list))) return breaker;
+      });
+      return !!result;
+    },
+
+    _contains: function(obj, target) {
+      if (obj == null) return false;
+      if (Array.prototype.indexOf && obj.indexOf === Array.prototype.indexOf) return obj.indexOf(target) != -1;
+      return this._any(obj, function(value) {
+        return value === target;
+      });
+    },
+
+    _filter: function(obj, iterator, context) {
+      var results = [];
+      if (obj == null) return results;
+      if (Array.prototype.filter && obj.filter === Array.prototype.filter) return obj.filter(iterator, context);
+      this._each(obj, function(value, index, list) {
+        if (iterator.call(context, value, index, list)) results[results.length] = value;
+      });
+      return results;
+    },
+
+    _map: function(obj, iterator, context) {
+      var results = [];
+      if (obj == null) return results;
+      if (Array.prototype.map && obj.map === Array.prototype.map) return obj.map(iterator, context);
+      this._each(obj, function(value, index, list) {
+        results[results.length] = iterator.call(context, value, index, list);
+      });
+      return results;
+    },
+
+    _uniq: function(array, isSorted, iterator, context) {
+      if (this._isFunction(isSorted)) {
+        context = iterator;
+        iterator = isSorted;
+        isSorted = false;
+      }
+      var initial = iterator ? _.map(array, iterator, context) : array,
+        results = [],
+        seen = [],
+        _contains = this._contains;
+      this._each(initial, function(value, index) {
+        if (isSorted ? (!index || seen[seen.length - 1] !== value) : !_contains(seen, value)) {
+          seen.push(value);
+          results.push(array[index]);
+        }
+      });
+      return results;
+    },
+
+    _union: function() {
+      return this._uniq(Array.prototype.concat.apply(Array.prototype, arguments));
+    },
+
+    _difference: function(array) {
+      var contains=this._contains,
+        rest = Array.prototype.concat.apply(Array.prototype, Array.prototype.slice.call(arguments, 1));
+      return this._filter(array, function(value){ return !contains(rest, value); });
     },
 
     _emitter: function(event){
@@ -117,11 +193,51 @@ var intentionWrapper = function($){
     },
 
     setElms: function(scope){
+
+      var elmSpec = this._elmSpec,
+        specPattern = new RegExp('(^(data-)?(tn|intention)-)?([a-zA-Z_]+)-([a-z:]+)');
+
       // find all responsive elms in a specific dom scope
       if(!scope) scope = this.container;
+
       this.elms = $('[data-intention],[intention],[data-tn],[tn]', 
-          scope);
+          scope).each(function(i, elm){
+        $(elm).data('tn.spec', elmSpec(elm.attributes, specPattern));
+      });
+
       return this;
+    },
+
+    _elmSpec: function(attrs, pattern){
+
+      var spec={},
+        tmpl={},
+        funcs={};
+      
+      $.each(attrs, function(i, attr){
+        var specMatch = attr.name.match(pattern),
+          ctxName,
+          funcName,
+          attrSpec={};
+
+        if(specMatch !== null){
+
+          specMatch = specMatch.slice(-2);
+          ctxName = specMatch[0];
+          funcName = specMatch[1];
+
+          attrSpec[ctxName] = {};
+          attrSpec[ctxName][funcName] = attr.value;
+          funcs[funcName]='';
+
+          if(tmpl[ctxName]===undefined){
+            tmpl[ctxName]=funcs;
+          }
+        }
+        $.extend(true, spec, attrSpec);
+      });
+      
+      return $.extend(true, {}, tmpl, spec);
     },
 
     add: function(elms){
@@ -157,83 +273,80 @@ var intentionWrapper = function($){
       return this;
     },
 
-    _resolveAttr : function(attr, changes){
-      var moveFuncs = ['append', 'prepend', 'before', 'after'];
-      // go through the possible functions
-      $.each(this._funcs, this._hitch(this, function(i, func){
-        // if the func is not in the attr.name move on
-        if(attr.name.indexOf(func) === -1){
-          return;
-        }
-        // check to see if there's a resolution on the attr's func
-        if(func === 'class'){
-          // class gets resolved uniquely because it is a multi-
-          // value attr
-          if(changes.classes === undefined) {
-            changes.classes=[];
+    _resolveSpecs: function(specList, specs){
+      var changes={},
+        changeBuffer={},
+        union=this._hitch(this, this._union),
+        moveFuncs=['append', 'prepend', 'before', 'after'];
+
+      $.each(specList, function(i, specName){
+        $.each(specs[specName], function(func, val){
+          if(func==='class'){
+            if(!changes[func]) changes[func] = [];
+
+            changes[func] = union(changes[func], val.split(' '));
+
+          } else if(((changes.move === undefined) || 
+              (changes.move.value === '')) && 
+              ($.inArray(func, moveFuncs) !== -1)){
+
+            changes.move = {value:val, placement:func};
+
+          } else {
+            if((changes[func] === undefined) || (changes[func] === '')){
+              changes[func]=val;
+            }
           }
-          changes.classes = this._union(changes.classes, 
-            attr.value.split(' '));
+        })
+      });
 
-        } else if(changes[func]){
-          // TODO: this is a little weird
-          // if the function is already resolved continue
-          // to the next func
-          return;
-        } else if($.inArray(func, moveFuncs) !== -1) {
-
-          // TODO: pretty verbose and inefficient is there another way?
-          var resolved=false;
-          $.each(moveFuncs, this._hitch(this, function(i, moveFunc){
-            if($.inArray(moveFunc, this._keys(changes)) !== -1){
-              resolved=true;
-              return false;
-            }
-          }));
-          if(resolved) return;
-
-          // resolve all move funcs
-          $.each(moveFuncs, function(i, moveFunc){
-            if(func === moveFunc) {
-              changes[func] = attr.value;
-              return;
-            }
-            // changes[moveFunc]=false;
-          });
-        } else {
-          // resolve the function to prevent further checks
-          changes[func]=attr.value;
-        }
-      }));
       return changes;
     },
 
-    _changes: function(attrs, contexts){
+    _changes: function(specs, contexts){
 
       var changes = {},
-        resolve=this._hitch(this, this._resolveAttr);
+        // resolve=this._hitch(this, this._resolveAttr),
+        inSpecs=[], outSpecs=[];
       // go through currentCtxs (ordered by priority) TODO:
       $.each(contexts, function(i, ctx){
-        // go through the elements attrs
-        $.each(attrs,  function(i, attr){
-          // if the attr does not match the current context
-          // move on
-          if(ctx.pattern.test(attr.name)) {
-            changes = resolve(attr, changes);
+        if(specs[ctx.name] !== undefined) {
+          inSpecs.push(ctx.name);
+          return;
+        }
+      });
+
+      $.each(specs, function(specName, spec){
+        var match;
+        $.each(inSpecs, function(i,spec){
+          if(specName===spec){
+            match=true;
           }
         });
+        if(!match) outSpecs.push(specName);
       });
-      return changes;
+
+      return {
+        inSpecs:this._resolveSpecs(inSpecs, specs),
+        outSpecs:this._resolveSpecs(outSpecs, specs)
+      };
     },
 
     _makeChanges: function(elm, changes){
+      var difference = this._hitch(this, this._difference),
+        union=this._hitch(this, this._union);
 
-      $.each(changes, this._hitch(this, function(func, change){
-        if($.inArray(func, 
-          ['append', 'prepend', 'before', 'after']) !== -1){
-          $(change)[func](elm);
-        } else if(func === 'classes') {
-          elm.attr('class', change.join(' '));
+      $.each(changes.inSpecs, this._hitch(this, function(func, change){
+        if(func==='move'){
+          $(change.value)[change.placement](elm);
+        } else if(func === 'class') {
+
+          var classes = elm.attr('class').split(' ');
+          classes = union(change, 
+            difference(classes, changes.outSpecs['class']));
+
+          elm.attr('class', classes.join(' '));
+
         } else {
           elm.attr(func, change);
         }
@@ -244,7 +357,8 @@ var intentionWrapper = function($){
     _respond: function(contexts, elms){
       // go through all of the responsive elms
       elms.each(this._hitch(this, function(i, elm){
-        this._makeChanges($(elm), this._changes(elm.attributes, contexts));
+        this._makeChanges($(elm), this._changes(
+          $(elm).data('tn.spec'), contexts));
       }));
     },
 
@@ -272,7 +386,7 @@ var intentionWrapper = function($){
     },
 
     responsive:function(contexts, matcher, measure){
-      var currentContexts = this._contexts,
+      var currentContexts = this.contexts,
         currentContext,
         emitter = this._hitch(this, this._emitter),
         contextualize = this._contextualize;

@@ -186,7 +186,7 @@ describe("Intention", function() {
     
     it('should switch between all contexts', function(done){
       
-      this.timeout(9000); //000
+      this.timeout(90); //000
 
       
 
@@ -221,7 +221,8 @@ describe("Intention", function() {
     it('_respond: should change appropriate attrs in a given context', function(done){
       
 
-      this.timeout(9000);
+      this.timeout(90);
+
       var testElm = $('<div class="original" tn-mobile-class="mobile small" \
             tn-tablet-class="tablet medium" tn-standard-class="standard big" \
             ></div>');
@@ -270,82 +271,98 @@ describe("Intention", function() {
   });
   
 
-  describe("_contextualize: keeping track of the current contexts", function(){
+  // describe("_contextualize: keeping track of the current contexts", function(){
 
     
-    it('should return a list including the "foo" and the "baz" context', function(){
-      var inCtx = {name:'foo'},
-        expectedCtxs = [{ name:"baz"},{ name:"foo"}],
-        currentContexts = tn._contextualize(inCtx, 
-        [inCtx, {name:'bar'}], 
-        expectedCtxs);
+  //   it('should return a list including the "foo" and the "baz" context', function(){
+  //     var inCtx = {name:'foo'},
+  //       expectedCtxs = [{ name:"baz"},{ name:"foo"}],
+  //       currentContexts = tn._contextualize(inCtx, 
+  //       [inCtx, {name:'bar'}], 
+  //       expectedCtxs);
 
-      $.each(expectedCtxs, function(i, ctx){
-        expect($.inArray(ctx, currentContexts)).to.be.at.least(0);  
-      });
-    });
+  //     $.each(expectedCtxs, function(i, ctx){
+  //       expect($.inArray(ctx, currentContexts)).to.be.at.least(0);  
+  //     });
+  //   });
 
-    it('should add the context even though none of the group are current', function(){
-      var inCtx = {name:'foo'},
-        constantCtx = {name:'baz'},
-        currentCtxs = tn._contextualize(inCtx, 
-          [inCtx, {name:'bar'}], 
-          [constantCtx]);
+  //   it('should add the context even though none of the group are current', function(){
+  //     var inCtx = {name:'foo'},
+  //       constantCtx = {name:'baz'},
+  //       currentCtxs = tn._contextualize(inCtx, 
+  //         [inCtx, {name:'bar'}], 
+  //         [constantCtx]);
       
-      expect($.inArray(inCtx, currentCtxs)).to.be.at.least(0);
-      expect($.inArray(constantCtx, currentCtxs)).to.be.at.least(0);
+  //     expect($.inArray(inCtx, currentCtxs)).to.be.at.least(0);
+  //     expect($.inArray(constantCtx, currentCtxs)).to.be.at.least(0);
 
-    });
-  });
+  //   });
+  // });
 
-  describe("_respond: altering attrs based on context", function(){
+  // describe("_respond: altering attrs based on context", function(){
+  //   var tn=new Intention;
+  //   tn.add($('<div tn-foo-class="foo" tn-a-class="a">'))
+  //     .add($('<div tn-bar-class="bar" tn-b-class="b">'))
+  //     .add($('<div tn-baz-class="baz" tn-c-class="c">'))
+
+  //   var foos = tn.responsive([{name:'foo'}, {name:'bar'}, {name:'baz'}]),
+  //     alpha = tn.responsive([{name:'a'}, {name:'b'}, {name:'c'}]);
+
+  //   foos('foo');
+  //   alpha('a');
+
+
+  //   // foos('bar');
+  //   // alpha('a');
+
+  // });
+
+  
+  describe('util funcs', function(){
     var tn=new Intention;
-    tn.add($('<div tn-foo-class="foo" tn-a-class="a">'))
-      .add($('<div tn-bar-class="bar" tn-b-class="b">'))
-      .add($('<div tn-baz-class="baz" tn-c-class="c">'))
 
-    var foos = tn.responsive([{name:'foo'}, {name:'bar'}, {name:'baz'}]),
-      alpha = tn.responsive([{name:'a'}, {name:'b'}, {name:'c'}]);
+    describe('_union: creates a union of two arrays, also makes unique',
+      function(){
 
-    foos('foo');
-    alpha('a');
+        it('should unionize the two arrays and get rid of dups', function(){
+          var itemCounts = {};
+          $.each(['a', 'b','c','d', 'e'], function(i, item){
+            expect($.inArray(item, tn._union(['a', 'b', 'c'], ['c', 'd', 'e'])))
+              .to.not.equal(-1);
 
+            if(!itemCounts[item]) itemCounts[item]=0
+            itemCounts[item]++
 
-    // foos('bar');
-    // alpha('a');
-
-  });
-
-  describe('_union: creates a union of two arrays, also makes unique',
-    function(){
-
-      var tn=new Intention;
-
-      it('should unionize the two arrays and get rid of dups', function(){
-        var itemCounts = {};
-        $.each(['a', 'b','c','d', 'e'], function(i, item){
-          expect($.inArray(item, tn._union(['a', 'b', 'c'], ['c', 'd', 'e'])))
-            .to.not.equal(-1);
-
-          if(!itemCounts[item]) itemCounts[item]=0
-          itemCounts[item]++
-
-          expect(itemCounts[item]).to.equal(1);
+            expect(itemCounts[item]).to.equal(1);
+          });
+          
         });
-        
+
+        it('should not fail when empty array is passed', function(){
+          expect(tn._union(['a', 'b', 'c'], []).sort())
+            .to.deep.equal(['a', 'b','c']);
+        });
+
+        it('should not fail when two empties passed', function(){
+          expect(tn._union([], []))
+            .to.deep.equal([]);
+        });
+
       });
 
-      it('should not fail when empty array is passed', function(){
-        expect(tn._union(['a', 'b', 'c'], []).sort())
-          .to.deep.equal(['a', 'b','c']);
-      });
 
-      it('should not fail when two empties passed', function(){
-        expect(tn._union([], []))
-          .to.deep.equal([]);
+    describe('_difference:', function(){
+
+      it('should subtract all items in one array from another', function(){
+        expect(tn._difference([1,2,3], [4,5,6])).to.deep.equal([1,2,3]);
+        expect(tn._difference([1,2,3,4], [4,5,6])).to.deep.equal([1,2,3]);
+        expect(tn._difference([1,2,3,4,4], [4,5,6])).to.deep.equal([1,2,3]);
+        expect(tn._difference([1,2,3,4,5,6], [4,5,6])).to.deep.equal([1,2,3]);
       });
 
     });
+
+  })
 
   describe("regex tests", function(){
 
