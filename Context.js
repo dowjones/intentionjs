@@ -65,9 +65,9 @@
       define(['jquery', 'Intention'], factory);
     } else {
       // Browser globals
-      root.tn = factory(root.jQuery, root.Itn);
+      root.tn = factory(root.jQuery, root.Intention);
     }
-  }(this, function ($, tn) {
+  }(window, function ($, tn) {
     return context($, tn);
   }));
 
