@@ -95,8 +95,11 @@ describe("Intention", function() {
 
   describe("responsive: creating responsive functions", function(){
 
-    var responder = tn.responsive( 
-      [{name:'big', val:400}, {name:'small', val:0}], 
+
+    var respCtxs = [{name:'big', val:400}, {name:'small', val:0}],
+     responder = tn.responsive( 
+      respCtxs, 
+
       function(response, context){
         return response > context.val;
       },
@@ -108,7 +111,10 @@ describe("Intention", function() {
       simpleResponder = tn.responsive(
         contexts, null, function(i, contexts){ return contexts[i].name; });
 
-    var simplerResponder = tn.responsive([{name:'big'}, {name:'small'}]);
+
+    var simpleContexts = [{name:'big'}, {name:'small'}],
+      simplerResponder = tn.responsive(simpleContexts);
+
 
     it("Should return a function", function(){
       expect($.isFunction(responder)).to.equal(true);
@@ -117,20 +123,23 @@ describe("Intention", function() {
     // this is incorrect at < 400 screen sizes, fix
     it("Should execute to return the current context", function(){
       expect(responder()).to.deep.equal(
-        $(window).width() < 400 ? {name:'small',val:0}:{name:'big',val:400});
+
+        $(window).width() < 400 ? respCtxs[1]:respCtxs[0]);
     });
 
     it("Should execute to return the specified context", function(){
-      expect(simplerResponder('big')).to.deep.equal({name: 'big'});
+      expect(simplerResponder('big')).to.deep.equal(simpleContexts[0]);
     });
 
     it("Should execute to return alternative context", function(){
-      expect(simplerResponder('small')).to.deep.equal({name: 'small'});
+      expect(simplerResponder('small')).to.deep.equal(simpleContexts[1]);
+
     });
 
     it("Should return the item specified via the index. multiple arguments", 
       function(){
-        expect(simpleResponder(0, contexts)).to.deep.equal({name: 'big'});
+        expect(simpleResponder(0, contexts)).to.deep.equal(simpleContexts[0]);
+
     });
 
     it("Should fire the 'small' event", function(){
@@ -177,20 +186,20 @@ describe("Intention", function() {
     
     it('should switch between all contexts', function(done){
       
-      this.timeout(9); //000
+      this.timeout(9000); //000
 
-      var winW;
+      
 
       var tablet = $.Deferred().done(function(){
-        expect(winW).to.be.below(769);
+        expect($(window).width()).to.be.below(769);
         expect(hResponder().name).to.equal('tablet');
       }),
       standard = $.Deferred().done(function(){
-        expect(winW).to.be.at.least(769);
+        expect($(window).width()).to.be.at.least(769);
         expect(hResponder().name).to.equal('standard');
       }),
       mobile = $.Deferred().done(function(){
-        expect(winW).to.be.below(321);
+        expect($(window).width()).to.be.below(321);
         expect(hResponder().name).to.equal('mobile');
       });
 
@@ -198,19 +207,10 @@ describe("Intention", function() {
         done();
       });
 
-      tn.on('hr', function(context){
 
-        winW=$(window).width();
-
-        if(context.name === 'mobile') {
-          mobile.resolve();
-        } else if (context.name === 'tablet'){
-          tablet.resolve();
-        } else if (context.name === 'standard'){
-          standard.resolve();
-        }
-        
-      });
+      tn.on('tablet', tablet.resolve);
+      tn.on('mobile', mobile.resolve);
+      tn.on('standard', standard.resolve);
 
       // alert('RESIZE the window small to large or vise versa')
     });
@@ -220,7 +220,8 @@ describe("Intention", function() {
 
     it('_respond: should change appropriate attrs in a given context', function(done){
       
-      this.timeout(90);
+
+      this.timeout(9000);
       var testElm = $('<div class="original" tn-mobile-class="mobile small" \
             tn-tablet-class="tablet medium" tn-standard-class="standard big" \
             ></div>');
@@ -242,7 +243,6 @@ describe("Intention", function() {
         tn.add(
           testElm).elms.length).to.equal(1);
   
-      // done();
       
       var tablet = $.Deferred().done(function(){
           
@@ -259,16 +259,10 @@ describe("Intention", function() {
         done();
       });
 
-      tn.on('hr', function(context){
-        if(context.name === 'mobile') {
-          mobile.resolve();
-        } else if (context.name === 'tablet'){
-          tablet.resolve();
-        } else if (context.name === 'standard'){
-          standard.resolve();
-        }
-      });
 
+      tn.on('tablet', tablet.resolve);
+      tn.on('mobile', mobile.resolve);
+      tn.on('standard', standard.resolve);
       
 
       // alert('RESIZE the window small to large or vise versa')
