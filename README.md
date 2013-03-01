@@ -9,13 +9,13 @@ The interface to define differences between documents should be in HTML. The man
 ## Installation
 
 include the script on your page via require
-
+```html
 	<script data-main="assets/js/main" src="assets/js/require/require.js"></script>
-
+```
 initialize the script
-
+```javascript
 	new Intention();
-
+```
 
 ## Usage
 
@@ -26,7 +26,7 @@ a "base" context is recommended to solve the scenario where the client enters a 
 Three manipulation types: class, attr, move (placement) 
 
 ### Attribute Manipulation
-
+```html
 	<!-- mark an element as responsive, set the base(default) attr, specify which image to load in a given context -->
 	<img 
 		data-intention 
@@ -39,17 +39,17 @@ Three manipulation types: class, attr, move (placement)
 		tablet: <img src="medium_img.png" />
 		desktop: <img src="big_img.png" />
 	-->
-
+```
 
 ### Class Manipulation
-
+```html
 	<!--  -->
-
+```
 
 ### Placement Manipulation
-
+```html
 	<!--  -->
-
+```
 Intention determines the best match in a set of attributes when more that one may apply
 
 
