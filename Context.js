@@ -57,6 +57,14 @@
     })();
     hResponder();
 
+    tn.responsive(
+      // contexts
+      [{name:'highrez'}],
+      // matching:
+      function(measure, context){
+        if(window.devicePixelRatio > 1) return true;
+      })();
+
     $(window).on('resize', throttle(hResponder, 100));
     return tn;
   };
