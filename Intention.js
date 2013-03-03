@@ -62,12 +62,12 @@ var intentionWrapper = function($){
         obj.forEach(iterator, context);
       } else if (obj.length === +obj.length) {
         for (var i = 0, l = obj.length; i < l; i++) {
-          if (iterator.call(context, obj[i], i, obj) === breaker) return;
+          if (iterator.call(context, obj[i], i, obj) === {}) return;
         }
       } else {
         for (var key in obj) {
           if (obj.hasOwnProperty(key)) {
-            if (iterator.call(context, obj[key], key, obj) === breaker) return;
+            if (iterator.call(context, obj[key], key, obj) === {}) return;
           }
         }
       }
@@ -87,7 +87,7 @@ var intentionWrapper = function($){
       if (obj == null) return result;
       if (Array.prototype.some && obj.some === Array.prototype.some) return obj.some(iterator, context);
       this._each(obj, function(value, index, list) {
-        if (result || (result = iterator.call(context, value, index, list))) return breaker;
+        if (result || (result = iterator.call(context, value, index, list))) return {};
       });
       return !!result;
     },
@@ -213,14 +213,14 @@ var intentionWrapper = function($){
       var funcs = {},
         tmpl = {};
 
-      $.each(spec, function(context, value){
-        $.each(value, function(func){
+      this._each(spec, function(value, context){
+        this._each(value, function(val, func){
           funcs[func]='';
         });
         if(tmpl[context] === undefined) {
           tmpl[context]=funcs;
         }
-      });
+      }, this);
       return $.extend(true, {}, tmpl, spec);
     },
 
@@ -232,7 +232,7 @@ var intentionWrapper = function($){
           obj[name] = value;
           return obj;
         };
-      $.each(attrs, function(i, attr){
+      this._each(attrs, function(attr){
         var specMatch = attr.name.match(pattern);
         if(specMatch !== null){
           specMatch = specMatch.slice(-2);
@@ -240,7 +240,6 @@ var intentionWrapper = function($){
             addProp({}, specMatch[1], attr.value)));
         }
       });
-
       return spec;
     },
 
@@ -283,8 +282,8 @@ var intentionWrapper = function($){
         union=this._hitch(this, this._union),
         moveFuncs=['append', 'prepend', 'before', 'after'];
 
-      $.each(specList, function(i, specName){
-        $.each(specs[specName], function(func, val){
+      this._each(specList, function(specName){
+        this._each(specs[specName], function(val, func){
           if(func==='class'){
             if(!changes[func]) changes[func] = [];
 
@@ -301,9 +300,8 @@ var intentionWrapper = function($){
               changes[func]=val;
             }
           }
-        })
-      });
-
+        }, this);
+      }, this);
       return changes;
     },
 
@@ -313,22 +311,21 @@ var intentionWrapper = function($){
         // resolve=this._hitch(this, this._resolveAttr),
         inSpecs=[], outSpecs=[];
       // go through currentCtxs (ordered by priority) TODO:
-      $.each(contexts, function(i, ctx){
+      this._each(contexts, function(ctx){
         if(specs[ctx.name] !== undefined) {
           inSpecs.push(ctx.name);
           return;
         }
       });
-      $.each(specs, function(specName, spec){
+      this._each(specs, function(spec, specName){
         var match;
-        $.each(inSpecs, function(i,spec){
+        this._each(inSpecs, function(spec){
           if(specName===spec){
             match=true;
           }
         });
         if(!match) outSpecs.push(specName);
-      });
-
+      }, this);
       return {
         inSpecs:this._resolveSpecs(inSpecs, specs),
         outSpecs:this._resolveSpecs(outSpecs, specs)
@@ -336,10 +333,8 @@ var intentionWrapper = function($){
     },
 
     _makeChanges: function(elm, changes){
-      var difference = this._hitch(this, this._difference),
-        union=this._hitch(this, this._union);
       
-      $.each(changes.inSpecs, this._hitch(this, function(func, change){
+      this._each(changes.inSpecs, function(change, func){
         if(func==='move'){
           if( (elm.data('tn.placement') !== change.placement)
             || (elm.data('tn.move') !== change.value)){
@@ -355,8 +350,8 @@ var intentionWrapper = function($){
 
           var classes = elm.attr('class') || '';
           
-          classes = union(change, 
-            difference(classes.split(' '), changes.outSpecs['class']));
+          classes = this._union(change, 
+            this._difference(classes.split(' '), changes.outSpecs['class']));
           
           elm.attr('class', classes.join(' '));
 
@@ -364,7 +359,7 @@ var intentionWrapper = function($){
           elm.attr(func, change);
         }
         return elm;
-      }));
+      }, this);
     },
 
     _respond: function(contexts, elms){
@@ -377,7 +372,7 @@ var intentionWrapper = function($){
 
     _contextualize: function(inContext, ofContexts, currentContexts){
 
-      var removeCtx = function(outCtx, contexts){
+      var removeCtx = this._hitch(this, function(outCtx, contexts){
         $.each(contexts, function(i, ctx){
           if(outCtx.name === ctx.name) {
             contexts.splice(i, 1);
@@ -385,9 +380,9 @@ var intentionWrapper = function($){
           }
         });
         return contexts;
-      };
+      });
       // remove other contexts in the --group-- from the list
-      $.each(ofContexts, function(i, ctx){
+      this._each(ofContexts, function(ctx){
         if( inContext.name !== ctx.name ){
           currentContexts = removeCtx(ctx, currentContexts);
           return;
@@ -402,7 +397,7 @@ var intentionWrapper = function($){
       var currentContexts = this.contexts,
         currentContext,
         emitter = this._hitch(this, this._emitter),
-        contextualize = this._contextualize;
+        contextualize = this._hitch(this, this._contextualize);
 
       // if no matcher function is specified expect to compare a 
       // string to the ctx.name property
@@ -419,21 +414,19 @@ var intentionWrapper = function($){
           return arg;
         };
       }
-
       // bind an the respond function to each context name
-      $.each(contexts, this._hitch(this, function(i, ctx){
+      this._each(contexts, function(ctx){
         // set the regex to match attrs to
         ctx.pattern=new RegExp('(^(data-)?(tn|intention)-)?' + ctx.name);
         this.on(ctx.name, this._hitch(this,
             function(){this._respond(currentContexts, this.elms);}));
-      }));
+      }, this);
       
       var responder = function(){
         
         var measurement = measure.apply(this, arguments);
         
-        $.each(contexts, function(i, ctx){
-
+        $.each(contexts, function(i,ctx){
           if( matcher(measurement, ctx)) {
             // first time, or different than last context
             if( (currentContext===undefined) || 
