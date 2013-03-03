@@ -245,17 +245,26 @@ var intentionWrapper = function($){
 
     add: function(elms){
       // is expecting a jquery object
-      var respElms=this.elms;
-      elms.each(function(i, elm){
+      elms.each(this._hitch(this, function(i, elm){
         var exists = false;
-        respElms.each(function(i, respElm){
+        this.elms.each(function(i, respElm){
           if(elm === respElm) {
             exists=true;
             return false;
           }
         });
-        if(exists === false) respElms.push(elm);
-      });
+        if(exists === false){
+          // create the elements responsive data
+          $(elm).data('tn.spec', 
+            this._fillSpec(this._attrsToSpec(elm.attributes)));
+          // make any appropriate changes based on the current contexts
+          this._makeChanges($(elm), this._changes(
+            $(elm).data('tn.spec'), this.contexts))
+
+          this.elms.push(elm);
+        }
+
+      }));
       return this;
     },
 
