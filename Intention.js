@@ -194,50 +194,54 @@ var intentionWrapper = function($){
 
     setElms: function(scope){
 
-      var elmSpec = this._elmSpec,
-        specPattern = new RegExp('(^(data-)?(tn|intention)-)?([a-zA-Z_]+)-([a-z:]+)');
+      var elmSpec = this._elmSpec;
 
       // find all responsive elms in a specific dom scope
       if(!scope) scope = this.container;
 
       this.elms = $('[data-intention],[intention],[data-tn],[tn]', 
-          scope).each(function(i, elm){
-        $(elm).data('tn.spec', elmSpec(elm.attributes, specPattern));
-      });
+          scope).each(this._hitch(this, function(i, elm){
+        $(elm).data('tn.spec', 
+          this._fillSpec(this._attrsToSpec(elm.attributes)));
+      }));
 
       return this;
     },
 
-    _elmSpec: function(attrs, pattern){
+    _fillSpec: function(spec){
+
+      var funcs = {},
+        tmpl = {};
+
+      $.each(spec, function(context, value){
+        $.each(value, function(func){
+          funcs[func]='';
+        });
+        if(tmpl[context] === undefined) {
+          tmpl[context]=funcs;
+        }
+      });
+      return $.extend(true, {}, tmpl, spec);
+    },
+
+    _attrsToSpec: function(attrs){
 
       var spec={},
-        tmpl={},
-        funcs={};
-      
+        pattern = new RegExp('(^(data-)?(tn|intention)-)?([a-zA-Z_0-9]+)-([a-z:]+)'),
+        addProp=function(obj, name, value){
+          obj[name] = value;
+          return obj;
+        };
       $.each(attrs, function(i, attr){
-        var specMatch = attr.name.match(pattern),
-          ctxName,
-          funcName,
-          attrSpec={};
-
+        var specMatch = attr.name.match(pattern);
         if(specMatch !== null){
-
           specMatch = specMatch.slice(-2);
-          ctxName = specMatch[0];
-          funcName = specMatch[1];
-
-          attrSpec[ctxName] = {};
-          attrSpec[ctxName][funcName] = attr.value;
-          funcs[funcName]='';
-
-          if(tmpl[ctxName]===undefined){
-            tmpl[ctxName]=funcs;
-          }
+          $.extend(true, spec, addProp({}, specMatch[0],
+            addProp({}, specMatch[1], attr.value)));
         }
-        $.extend(true, spec, attrSpec);
       });
-      
-      return $.extend(true, {}, tmpl, spec);
+
+      return spec;
     },
 
     add: function(elms){
@@ -315,7 +319,6 @@ var intentionWrapper = function($){
           return;
         }
       });
-
       $.each(specs, function(specName, spec){
         var match;
         $.each(inSpecs, function(i,spec){
@@ -335,16 +338,26 @@ var intentionWrapper = function($){
     _makeChanges: function(elm, changes){
       var difference = this._hitch(this, this._difference),
         union=this._hitch(this, this._union);
-
+      
       $.each(changes.inSpecs, this._hitch(this, function(func, change){
         if(func==='move'){
-          $(change.value)[change.placement](elm);
+          if( (elm.data('tn.placement') !== change.placement)
+            || (elm.data('tn.move') !== change.value)){
+
+            $(change.value)[change.placement](elm);
+            // save the last placement of the element so 
+            // we're not moving it around for no good reason
+            elm.data('tn.placement', change.placement);
+            elm.data('tn.move', change.value);
+          }
+
         } else if(func === 'class') {
 
-          var classes = elm.attr('class').split(' ');
+          var classes = elm.attr('class') || '';
+          
           classes = union(change, 
-            difference(classes, changes.outSpecs['class']));
-
+            difference(classes.split(' '), changes.outSpecs['class']));
+          
           elm.attr('class', classes.join(' '));
 
         } else {
@@ -425,7 +438,6 @@ var intentionWrapper = function($){
             // first time, or different than last context
             if( (currentContext===undefined) || 
               (ctx.name !== currentContext.name)){
-              
               currentContext = ctx;
               currentContexts = contextualize(ctx, contexts, 
                   currentContexts);
