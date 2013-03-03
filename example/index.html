@@ -170,9 +170,7 @@
 
 		baseResponder = tn.responsive([{name:'base'}])('base');
 		hResponder();
-		$(window).on('resize', function(){
-			hResponder()
-		});
+		$(window).on('resize', hResponder);
 
 		var visitTracker = tn.responsive([
 	    	{name: 'frequenter', visits:5},
@@ -218,7 +216,8 @@
 	    	// measure
 	    	function(){
 	    		return window.pageYOffset;
-	    });
+	    	});
+
 		flipper();
 		$(window).on('scroll', flipper);
 	})(jQuery)
