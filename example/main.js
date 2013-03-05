@@ -13,6 +13,6 @@ require.config({
   }
 });
 
-requirejs([
-   'page'
+define([
+   'Context'
 ]);
