@@ -1,9 +1,13 @@
 'use strict';
-var intentionWrapper = function($){
+var intentionWrapper = function($, _){
 
   var Intention = function(params){
-    return $.extend(this, params, 
-        {_listeners:{}, contexts:[], elms:$()}).setElms(this.container);
+    var tn = $.extend(this, params, 
+        {_listeners:{}, contexts:[], elms:$()});
+
+    $(function(){tn._setElms(tn.container)});
+
+    return tn;
   };
 
   Intention.prototype = {
@@ -41,114 +45,6 @@ var intentionWrapper = function($){
       'subject',
       'valign'],
 
-    _hitch: function(scope,fn){
-      return function(){
-        return fn.apply(scope, arguments); 
-      };
-    },
-    _keys: function(obj){
-      var k,
-        keys=[];
-      for(k in obj){
-        if(obj.hasOwnProperty(k)) keys.push(k);
-      }
-      return keys;
-    },
-
-    // each, identity, isFunction, any, map, uniq, union, difference taken from underscore.js and modified slightly
-    _each: function(obj, iterator, context) {
-      if (obj == null) return;
-      if (Array.prototype.forEach && obj.forEach === Array.prototype.forEach) {
-        obj.forEach(iterator, context);
-      } else if (obj.length === +obj.length) {
-        for (var i = 0, l = obj.length; i < l; i++) {
-          if (iterator.call(context, obj[i], i, obj) === {}) return;
-        }
-      } else {
-        for (var key in obj) {
-          if (obj.hasOwnProperty(key)) {
-            if (iterator.call(context, obj[key], key, obj) === {}) return;
-          }
-        }
-      }
-    },
-
-    _identity: function(value) {
-      return value;
-    },
-
-    _isFunction: function(obj) {
-      return typeof obj === 'function';
-    },
-
-    _any : function(obj, iterator, context) {
-      iterator || (iterator = this._identity);
-      var result = false;
-      if (obj == null) return result;
-      if (Array.prototype.some && obj.some === Array.prototype.some) return obj.some(iterator, context);
-      this._each(obj, function(value, index, list) {
-        if (result || (result = iterator.call(context, value, index, list))) return {};
-      });
-      return !!result;
-    },
-
-    _contains: function(obj, target) {
-      if (obj == null) return false;
-      if (Array.prototype.indexOf && obj.indexOf === Array.prototype.indexOf) return obj.indexOf(target) != -1;
-      return this._any(obj, function(value) {
-        return value === target;
-      });
-    },
-
-    _filter: function(obj, iterator, context) {
-      var results = [];
-      if (obj == null) return results;
-      if (Array.prototype.filter && obj.filter === Array.prototype.filter) return obj.filter(iterator, context);
-      this._each(obj, function(value, index, list) {
-        if (iterator.call(context, value, index, list)) results[results.length] = value;
-      });
-      return results;
-    },
-
-    _map: function(obj, iterator, context) {
-      var results = [];
-      if (obj == null) return results;
-      if (Array.prototype.map && obj.map === Array.prototype.map) return obj.map(iterator, context);
-      this._each(obj, function(value, index, list) {
-        results[results.length] = iterator.call(context, value, index, list);
-      });
-      return results;
-    },
-
-    _uniq: function(array, isSorted, iterator, context) {
-      if (this._isFunction(isSorted)) {
-        context = iterator;
-        iterator = isSorted;
-        isSorted = false;
-      }
-      var initial = iterator ? _.map(array, iterator, context) : array,
-        results = [],
-        seen = [],
-        _contains = this._contains;
-      this._each(initial, function(value, index) {
-        if (isSorted ? (!index || seen[seen.length - 1] !== value) : !_contains(seen, value)) {
-          seen.push(value);
-          results.push(array[index]);
-        }
-      });
-      return results;
-    },
-
-    _union: function() {
-      return this._uniq(Array.prototype.concat.apply(Array.prototype, arguments));
-    },
-
-    _difference: function(array) {
-      var contains=this._contains,
-        rest = Array.prototype.concat.apply(Array.prototype, Array.prototype.slice.call(arguments, 1));
-      return this._filter(array, function(value){ return !contains(rest, value); });
-    },
-
     _emitter: function(event){
       if(typeof event === 'string') {
         event={type:event};
@@ -159,7 +55,7 @@ var intentionWrapper = function($){
       if(!event.type){
         throw new Error(event.type + ' is not a supported event.');
       }
-      if($.isArray(this._listeners[event.type])){
+      if(_.isArray(this._listeners[event.type])){
         var listeners = this._listeners[event.type],
           i;
         for(i=0; i<listeners.length; i++){
@@ -180,7 +76,7 @@ var intentionWrapper = function($){
     },
 
     off: function(type, listener){
-      if($.isArray(this._listeners[type])){
+      if(_.isArray(this._listeners[type])){
         var listeners = this._listeners[type],
           i;
         for(i=0;listeners.length; i++){
@@ -192,18 +88,17 @@ var intentionWrapper = function($){
       }
     },
 
-    setElms: function(scope){
+    _setElms: function(scope){
 
       var elmSpec = this._elmSpec;
 
       // find all responsive elms in a specific dom scope
       if(!scope) scope = this.container;
 
-      this.elms = $('[data-intention],[intention],[data-tn],[tn]', 
-          scope).each(this._hitch(this, function(i, elm){
-        $(elm).data('tn.spec', 
-          this._fillSpec(this._attrsToSpec(elm.attributes)));
-      }));
+      $('[data-intention],[intention],[data-tn],[tn]', 
+          scope).each(_.bind(function(i, elm){
+            this.add($(elm));
+      }, this));
 
       return this;
     },
@@ -213,8 +108,8 @@ var intentionWrapper = function($){
       var funcs = {},
         tmpl = {};
 
-      this._each(spec, function(value, context){
-        this._each(value, function(val, func){
+      _.each(spec, function(value, context){
+        _.each(value, function(val, func){
           funcs[func]='';
         });
         if(tmpl[context] === undefined) {
@@ -232,7 +127,7 @@ var intentionWrapper = function($){
           obj[name] = value;
           return obj;
         };
-      this._each(attrs, function(attr){
+      _.each(attrs, function(attr){
         var specMatch = attr.name.match(pattern);
         if(specMatch !== null){
           specMatch = specMatch.slice(-2);
@@ -245,7 +140,7 @@ var intentionWrapper = function($){
 
     add: function(elms){
       // is expecting a jquery object
-      elms.each(this._hitch(this, function(i, elm){
+      elms.each(_.bind(function(i, elm){
         var exists = false;
         this.elms.each(function(i, respElm){
           if(elm === respElm) {
@@ -264,7 +159,8 @@ var intentionWrapper = function($){
           this.elms.push(elm);
         }
 
-      }));
+      }, this));
+
       return this;
     },
 
@@ -288,15 +184,14 @@ var intentionWrapper = function($){
     _resolveSpecs: function(specList, specs){
       var changes={},
         changeBuffer={},
-        union=this._hitch(this, this._union),
         moveFuncs=['append', 'prepend', 'before', 'after'];
 
-      this._each(specList, function(specName){
-        this._each(specs[specName], function(val, func){
+      _.each(specList, function(specName){
+        _.each(specs[specName], function(val, func){
           if(func==='class'){
             if(!changes[func]) changes[func] = [];
 
-            changes[func] = union(changes[func], val.split(' '));
+            changes[func] = _.union(changes[func], val.split(' '));
 
           } else if(((changes.move === undefined) || 
               (changes.move.value === '')) && 
@@ -317,18 +212,17 @@ var intentionWrapper = function($){
     _changes: function(specs, contexts){
 
       var changes = {},
-        // resolve=this._hitch(this, this._resolveAttr),
         inSpecs=[], outSpecs=[];
       // go through currentCtxs (ordered by priority) TODO:
-      this._each(contexts, function(ctx){
+      _.each(contexts, function(ctx){
         if(specs[ctx.name] !== undefined) {
           inSpecs.push(ctx.name);
           return;
         }
       });
-      this._each(specs, function(spec, specName){
+      _.each(specs, function(spec, specName){
         var match;
-        this._each(inSpecs, function(spec){
+        _.each(inSpecs, function(spec){
           if(specName===spec){
             match=true;
           }
@@ -343,7 +237,7 @@ var intentionWrapper = function($){
 
     _makeChanges: function(elm, changes){
       
-      this._each(changes.inSpecs, function(change, func){
+      _.each(changes.inSpecs, function(change, func){
         if(func==='move'){
           if( (elm.data('tn.placement') !== change.placement)
             || (elm.data('tn.move') !== change.value)){
@@ -359,8 +253,8 @@ var intentionWrapper = function($){
 
           var classes = elm.attr('class') || '';
           
-          classes = this._union(change, 
-            this._difference(classes.split(' '), changes.outSpecs['class']));
+          classes = _.union(change, 
+            _.difference(classes.split(' '), changes.outSpecs['class']));
           
           elm.attr('class', classes.join(' '));
 
@@ -373,15 +267,15 @@ var intentionWrapper = function($){
 
     _respond: function(contexts, elms){
       // go through all of the responsive elms
-      elms.each(this._hitch(this, function(i, elm){
+      elms.each(_.bind(function(i, elm){
         this._makeChanges($(elm), this._changes(
           $(elm).data('tn.spec'), contexts));
-      }));
+      }, this));
     },
 
     _contextualize: function(inContext, ofContexts, currentContexts){
 
-      var removeCtx = this._hitch(this, function(outCtx, contexts){
+      var removeCtx = _.bind(function(outCtx, contexts){
         $.each(contexts, function(i, ctx){
           if(outCtx.name === ctx.name) {
             contexts.splice(i, 1);
@@ -389,9 +283,9 @@ var intentionWrapper = function($){
           }
         });
         return contexts;
-      });
+      }, this);
       // remove other contexts in the --group-- from the list
-      this._each(ofContexts, function(ctx){
+      _.each(ofContexts, function(ctx){
         if( inContext.name !== ctx.name ){
           currentContexts = removeCtx(ctx, currentContexts);
           return;
@@ -405,12 +299,12 @@ var intentionWrapper = function($){
     responsive:function(contexts, matcher, measure){
       var currentContexts = this.contexts,
         currentContext,
-        emitter = this._hitch(this, this._emitter),
-        contextualize = this._hitch(this, this._contextualize);
+        emitter = _.bind(this._emitter, this),
+        contextualize = _.bind(this._contextualize, this);
 
       // if no matcher function is specified expect to compare a 
       // string to the ctx.name property
-      if($.isFunction(matcher) === false) {
+      if(_.isFunction(matcher) === false) {
         matcher = function(measure, ctx){
           if(measure===ctx.name) return true;
           return false;
@@ -418,24 +312,22 @@ var intentionWrapper = function($){
       }
       //  check for measure and if not there 
       // function takes one arg and returns it
-      if($.isFunction(measure) === false) {
+      if(_.isFunction(measure) === false) {
         measure = function(arg){
           return arg;
         };
       }
       // bind an the respond function to each context name
-      this._each(contexts, function(ctx){
+      _.each(contexts, function(ctx){
         // set the regex to match attrs to
         ctx.pattern=new RegExp('(^(data-)?(tn|intention)-)?' + ctx.name);
-        this.on(ctx.name, this._hitch(this,
-            function(){this._respond(currentContexts, this.elms);}));
+        this.on(ctx.name, _.bind(
+            function(){this._respond(currentContexts, this.elms);}, this));
       }, this);
       
-      var responder = function(){
-        
+      function responder(){
         var measurement = measure.apply(this, arguments);
-        
-        $.each(contexts, function(i,ctx){
+        _.every(contexts, function(ctx){
           if( matcher(measurement, ctx)) {
             // first time, or different than last context
             if( (currentContext===undefined) || 
@@ -451,6 +343,7 @@ var intentionWrapper = function($){
             // same context, break the loop
             return false;
           }
+          return true;
         });
         // return the current context
         return currentContext;
@@ -471,8 +364,8 @@ var intentionWrapper = function($){
     // like Node.
     module.exports = factory(require('jquery'));
   } else if (typeof define === 'function' && define.amd) {
-    define(['jquery'], factory);
+    define(['jquery', 'underscore'], factory);
   } else {
-    root.Intention = factory(root.jQuery);
+    root.Intention = factory(root.jQuery, root._);
   }
 }(this, intentionWrapper));
