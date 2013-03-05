@@ -49,24 +49,24 @@
     // create a base context that is always on
     $(window).on('resize', throttle(hResponder, 100));
 
-    $(function(){
-
-      tn.responsive([{name:'base'}])('base');
-
-      // create a touch context that is always on in the case of a touch device
-      tn.responsive([{name:'touch'}], function() {
+    // catchall, false as the second arg suppresses the event being fired
+    tn.responsive([{name:'base'}])('base')
+      // touch device?
+      .responsive([{name:'touch'}], function() {
         return "ontouchstart" in window;
-      })();
-
-      tn.responsive(
+      })()
+      // retina display?
+      .responsive(
         // contexts
         [{name:'highres'}],
         // matching:
         function(measure, context){
           return window.devicePixelRatio > 1;
         })();
-      hResponder();
-    });
+
+    // width context
+    hResponder()
+      .addFrom(document);
 
     return tn;
   };
