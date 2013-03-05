@@ -5,45 +5,10 @@ var intentionWrapper = function($, _){
     var intent = $.extend(this, params, 
         {_listeners:{}, contexts:[], elms:$()});
 
-    $(function(){intent._setElms(intent.container)});
-
     return intent;
   };
 
   Intention.prototype = {
-    // public props
-    container: document,
-    // privates
-    _funcs: [
-      // the only multi-val attr
-      'class', 
-      // placement attrs
-      'append', 'prepend', 'before', 'after',
-      // single val attrs
-      'src',
-      'href',
-      'height',
-      'width',
-      'title',
-      'tabindex',
-      'id',
-      'style',
-      'align',
-      'dir',
-      'contenteditable',
-      'lang',
-      'xml:lang',
-      'accesskey',
-      'background',
-      'bgcolor',
-      'contextmenu',
-      'draggable',
-      'hidden',
-      'item',
-      'itemprop',
-      'spellcheck',
-      'subject',
-      'valign'],
 
     _emitter: function(event){
       if(typeof event === 'string') {
@@ -88,21 +53,6 @@ var intentionWrapper = function($, _){
       }
     },
 
-    _setElms: function(scope){
-
-      var elmSpec = this._elmSpec;
-
-      // find all responsive elms in a specific dom scope
-      if(!scope) scope = this.container;
-
-      $('[data-intent],[intent],[data-in],[in]', 
-          scope).each(_.bind(function(i, elm){
-            this.add($(elm));
-          }, this));
-
-      return this;
-    },
-
     _fillSpec: function(spec){
 
       var funcs = {},
@@ -122,21 +72,40 @@ var intentionWrapper = function($, _){
     _attrsToSpec: function(attrs){
 
       var spec={},
-        pattern = new RegExp('(^(data-)?(in|intent)-)?([a-zA-Z_0-9]+)-([a-z:]+)'),
+        pattern = new RegExp(
+          '(^(data-)?(in|intent)-)?([a-zA-Z_0-9]+)-([a-z:]+)'),
         addProp=function(obj, name, value){
           obj[name] = value;
           return obj;
         };
       _.each(attrs, function(attr){
         var specMatch = attr.name.match(pattern);
-        if(specMatch !== null){
+        if(specMatch !== null) {
           specMatch = specMatch.slice(-2);
+        
           $.extend(true, spec, addProp({}, specMatch[0],
             addProp({}, specMatch[1], attr.value)));
         }
       });
+
       return spec;
     },
+
+    addFrom: function(scope){
+
+      var elmSpec = this._elmSpec;
+
+      // find all responsive elms in a specific dom scope
+      if(!scope) scope = this.container;
+
+      $('[data-intent],[intent],[data-in],[in]', 
+          scope).each(_.bind(function(i, elm){
+            this.add($(elm));
+          }, this));
+
+      return this;
+    },
+
 
     add: function(elms){
       // is expecting a jquery object
@@ -318,14 +287,14 @@ var intentionWrapper = function($, _){
       }
       // bind an the respond function to each context name
       _.each(contexts, function(ctx){
-        // set the regex to match attrs to
-        ctx.pattern=new RegExp('(^(data-)?(in|intent)-)?' + ctx.name);
         this.on(ctx.name, _.bind(
             function(){this._respond(currentContexts, this.elms);}, this));
       }, this);
       
-      function responder(){
+      var responder = _.bind(function(){
+        
         var measurement = measure.apply(this, arguments);
+
         _.every(contexts, function(ctx){
           if( matcher(measurement, ctx)) {
             // first time, or different than last context
@@ -334,8 +303,10 @@ var intentionWrapper = function($, _){
               currentContext = ctx;
               currentContexts = contextualize(ctx, contexts, 
                   currentContexts);
+              // emit the context event
               emitter($.extend({}, {type:currentContext.name}, 
-                  currentContext));
+                currentContext));  
+              
               // done, break the loop
               return false;
             }
@@ -344,11 +315,12 @@ var intentionWrapper = function($, _){
           }
           return true;
         });
-        // return the current context
-        return currentContext;
-      };
+        // return the intention object for chaining
+        return this;
+
+      }, this);
       // this makes the contexts accessible from the outside world
-      responder.contexts = contexts;
+      responder.axis = contexts;
 
       return responder;
     }
