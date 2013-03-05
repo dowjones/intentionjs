@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" /> 
-		<title>
-			Intentional Grid
-		</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-	    <link href="../lib/assets/css/responsivegrid.css" rel="stylesheet">
-
-<style type="text/css">
+<head>
+	<meta charset="utf-8" />
+	<title> Intentional Grid </title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js">
+	</script>
+	<link href="css/rw-mobilemain.css" rel="stylesheet">
+	<link href="css/responsivegrid.css" rel="stylesheet">
+	<style type="text/css">
 
 	.grid {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA78AAAABCAMAAAAhFukwAAAABlBMVEXR0dH///9WxthCAAAAH0lEQVR42u3NIQEAAADCMOhfGkmCu6/AwugZGBhQwQC9YABkomSpkAAAAABJRU5ErkJggg==);
@@ -27,6 +26,10 @@
     .ux.theme .module > h2 {
         font-size:2em;
         font-weight:bold;
+    }
+
+    .ux.theme .module {
+        background-color:rgba(240,240,240,.6);
     }
 
     .ux.theme .module.orange {
@@ -57,516 +60,171 @@
 		min-height:300px;
 	}
 
-</style>
-	</head>
-	<body tn data-tn-base-class="" class="standard" data-tn-tablet-class="tablet" data-tn-standard-class="standard" data-tn-mobile-class="mobile">
-		<div class="fullwide ux theme grid col10wide colum" 
-		tn
-		data-tn-base-class="ux theme grid colum"
-		data-tn-mobile-class="col3wide" 
-		data-tn-tablet-class="col6wide" 
-		data-tn-standard-class="col10wide" 
-		>
-			<div>
-				<div 
-				data-asset-luxury="responsive-snippet.php">
+	</style>
+</head>
+<body tn data-tn-base-class="" class="" data-tn-tablet-class="tablet" data-tn-standard-class="standard" data-tn-mobile-class="mobile">
+<div class="pageFrame ux theme grid">
+	<div class="contentFrame" tn data-tn-base-class="contentFrame colgroup" data-tn-mobile-class="col3wide" data-tn-tablet-class="col6wide" data-tn-standard-class="col10wide">
+		<header class="col3wide" tn data-tn-base-class="column" data-tn-mobile-class="col3wide" data-tn-tablet-class="col6wide" data-tn-standard-class="col10wide">
+			<div class="nameplate module mastheadOps">
+				<div class="mastHead">
+					<h1>
+						<a href="#">The Wall Street Journal</a> 
+					</h1>
 				</div>
-				<section class="colgroup">
-					<section class="col10wide column"
-					tn
-					data-tn-base-class="column" 
-					data-tn-mobile-class="col3wide" 
-					data-tn-tablet-class="col6wide" 
-					data-tn-standard-class="col10wide" 
-					>
-						<div class="module green">
-							<h2>
-								Header 
-							</h2>
-						</div>
-						<div id="tablet_ad"></div>
-					</section>
-				</section>
-				<section class="colgroup">
-					<section class="col6wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col3wide" 
-					data-tn-tablet-class="col3wide" 
-					data-tn-standard-class="col6wide" 
-					>
-						<div  id="mobile_ad"></div>
-						<div class="module orange">
-							<h2>
-								Left Column 
-							</h2>
-						</div>
-						<section class="" 
-						tn
-						data-tn-base-class=""
-						data-tn-mobile-class="col3wide column" 
-						data-tn-tablet-class="placeholder" 
-						data-tn-standard-class="placeholder" 
-						>
-							<div id="mobile_mdm"></div>
-						</section>
-						<section class="colgroup">
-							<section class="col3wide column" 
-							tn
-							data-tn-base-class="column" 
-							data-tn-mobile-class="col3wide" 
-							data-tn-tablet-class="col3wide" 
-							data-tn-standard-class="col3wide" 
-							>
-								<div class="module orange">
-									<h2>
-										Sub Left Column 
-									</h2>
-								</div>
-							</section>
-							<section class="col3wide column" 
-							tn
-							data-tn-base-class="column" 
-							data-tn-mobile-class="col3wide" 
-							data-tn-tablet-class="col3wide" 
-							data-tn-standard-class="col3wide" 
-							>
-								<div class="module orange">
-									<h2>
-										Sub Right Column 
-									</h2>
-								</div>
-							</section>
-						</section>
-						<section class="colgroup">
-							<section class="col2wide column" 
-
-							tn
-							data-tn-base-class="column" 
-							data-tn-mobile-class="col3wide" 
-							data-tn-tablet-class="col2wide" 
-							data-tn-standard-class="col2wide" 
-							>
-								<div class="module orange">
-									<h2>
-										Tertiary Column 1 
-									</h2>
-								</div>
-							</section>
-							<section class="col2wide column" 
-							tn
-							data-tn-base-class="column" 
-							data-tn-mobile-class="col3wide" 
-							data-tn-tablet-class="col2wide" 
-							data-tn-standard-class="col2wide" 
-							>
-								<div class="module orange">
-									<h2>
-										Tertiary Column 2 
-									</h2>
-								</div>
-							</section>
-							<section class="col2wide column" 
-							tn
-							data-tn-base-class="column"
-							data-tn-mobile-class="col3wide" 
-							data-tn-tablet-class="col2wide" 
-							data-tn-standard-class="col2wide" 
-							>
-								<div class="module orange">
-									<h2>
-										Tertiary Column 3 
-									</h2>
-								</div>
-							</section>
-						</section>
-					</section>
-					<section class="col4wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col3wide" 
-					data-tn-tablet-class="col3wide" 
-					data-tn-standard-class="col4wide" 
-					>
-						<div id="ad">
-							<div
-							tn
-							data-tn-base-append="#ad"
-							data-tn-standard-append="#ad"
-							data-tn-mobile-append="#mobile_ad"
-							data-tn-tablet-append="#tablet_ad">
-								<div class="module blue" 
-								tn
-								data-tn-base-class="module blue"
-								data-tn-mobile-class="slimAd" 
-								data-tn-tablet-class="wideAd" 
-								data-tn-standard-class="squareAd" 
-								>
-									<h2>
-										Right Column Ad 
-									</h2>
-								</div>
-							</div>
-						</div>
-						<div id="mdm">
-							<!-- TODO: tablet spec was: data-tn-tablet-append="#tablet_mdm" container not found-->
-							<div 
-							tn
-							data-tn-base-prepend="#mdm"
-							
-							data-tn-standard-append="#mdm"
-							data-tn-mobile-append="#mobile_mdm" >
-								<div class="module blue">
-									<h2>
-										Market Data Right Module 
-									</h2>
-								</div>
-							</div>
-						</div>
-						<section class="colgroup">
-											<section class="col2wide column" 
-											tn
-											data-tn-base-class="column"
-											data-tn-mobile-class="col3wide" 
-											data-tn-tablet-class="col2wide" 
-											data-tn-standard-class="col2wide" 
-											>
-								<div class="module orange">
-									<h2>
-										Secondary Column 1 
-									</h2>
-								</div>
-							</section>
-							<section class="col2wide column" 
-							tn
-							data-tn-base-class="column"
-							data-tn-mobile-class="col3wide" 
-							data-tn-tablet-class="col2wide" 
-							data-tn-standard-class="col2wide" 
-							>
-								<div class="module orange">
-									<h2>
-										Secondary Column 2 
-									</h2>
-								</div>
-							</section></section>
-					</section>
-				
-
-				
-				</section>
-				<section class="colgroup">
-					<section class="col10wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col3wide" 
-					data-tn-tablet-class="col6wide" 
-					data-tn-standard-class="col10wide" 
-					>
-						<div class="module green">
-							<h2>
-								Footer 
-							</h2>
-						</div>
-					</section>
-				</section>
-				<section class="colgroup">
-					<section class="col1wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col1wide" 
-					data-tn-tablet-class="col1wide" 
-					data-tn-standard-class="col1wide" 
-					>
-						<div class="module">
-							<h2>
-								module 1 
-							</h2>
-						</div>
-					</section>
-					<section class="col9wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col2wide" 
-					data-tn-tablet-class="col5wide" 
-					data-tn-standard-class="col9wide" 
-					>
-						<div class="module">
-							<h2>
-								module 2 
-							</h2>
-						</div>
-					</section>
-				</section>
-				<section class="colgroup">
-					<section class="col2wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col1wide" 
-					data-tn-tablet-class="col2wide" 
-					data-tn-standard-class="col2wide" 
-					>
-						<div class="module">
-							<h2>
-								module 3 
-							</h2>
-						</div>
-					</section>
-					<section class="col8wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col2wide" 
-					data-tn-tablet-class="col4wide" 
-					data-tn-standard-class="col8wide" 
-					>
-						<div class="module">
-							<h2>
-								module 4 
-							</h2>
-						</div>
-					</section>
-				</section>
-				<section class="colgroup">
-					<section class="col3wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col3wide" 
-					data-tn-tablet-class="col2wide" 
-					data-tn-standard-class="col3wide" 
-					>
-						<div class="module">
-							<h2>
-								module 5 
-							</h2>
-						</div>
-					</section>
-					<section class="col7wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col3wide" 
-					data-tn-tablet-class="col4wide" 
-					data-tn-standard-class="col7wide" 
-					>
-						<div class="module">
-							<h2>
-								module 6 
-							</h2>
-						</div>
-					</section>
-				</section>
-				<section class="colgroup">
-					<section class="col4wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col3wide" 
-					data-tn-tablet-class="col2wide" 
-					data-tn-standard-class="col4wide" 
-					>
-						<div class="module">
-							<h2>
-								module 7 
-							</h2>
-						</div>
-					</section>
-					<section class="col6wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col3wide" 
-					data-tn-tablet-class="col4wide" 
-					data-tn-standard-class="col6wide" 
-					>
-						<div class="module">
-							<h2>
-								module 8 
-							</h2>
-						</div>
-					</section>
-				</section>
-				<section class="colgroup">
-					<section class="col5wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col3wide" 
-					data-tn-tablet-class="col3wide" 
-					data-tn-standard-class="col5wide" 
-					>
-						<div class="module">
-							<h2>
-								module 9 
-							</h2>
-						</div>
-					</section>
-					<section class="col5wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col3wide" 
-					data-tn-tablet-class="col3wide" 
-					data-tn-standard-class="col5wide" 
-					>
-						<div class="module">
-							<h2>
-								module 10 
-							</h2>
-						</div>
-					</section>
-				</section>
-				<section class="colgroup">
-					<section class="col3wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col3wide" 
-					data-tn-tablet-class="col2wide" 
-					data-tn-standard-class="col3wide" 
-					>
-						<div class="module">
-							<h2>
-								module a 
-							</h2>
-						</div>
-					</section>
-					<section class="col3wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col3wide" 
-					data-tn-tablet-class="col2wide" 
-					data-tn-standard-class="col3wide" 
-					>
-						<div class="module">
-							<h2>
-								module b 
-							</h2>
-						</div>
-					</section>
-					<section class="col4wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col3wide" 
-					data-tn-tablet-class="col2wide" 
-					data-tn-standard-class="col4wide" 
-					>
-						<div class="module">
-							<h2>
-								module c 
-							</h2>
-						</div>
-					</section>
-				</section>
-				<section class="colgroup">
-					<section class="col6wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col3wide" 
-					data-tn-tablet-class="col4wide" 
-					data-tn-standard-class="col6wide" 
-					>
-						<div class="module">
-							<h2>
-								module 11 
-							</h2>
-						</div>
-					</section>
-					<section class="col4wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col3wide" 
-					data-tn-tablet-class="col2wide" 
-					data-tn-standard-class="col4wide" 
-					>
-						<div class="module">
-							<h2>
-								module 12 
-							</h2>
-						</div>
-					</section>
-				</section>
-				<section class="colgroup">
-					<section class="col7wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col3wide" 
-					data-tn-tablet-class="col4wide" 
-					data-tn-standard-class="col7wide" 
-					>
-						<div class="module">
-							<h2>
-								module 13 
-							</h2>
-						</div>
-					</section>
-					<section class="col3wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col3wide" 
-					data-tn-tablet-class="col2wide" 
-					data-tn-standard-class="col3wide" 
-					>
-						<div class="module">
-							<h2>
-								module 14 
-							</h2>
-						</div>
-					</section>
-				</section>
-				<section class="colgroup">
-					<section class="col8wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col2wide" 
-					data-tn-tablet-class="col4wide" 
-					data-tn-standard-class="col8wide" 
-					>
-						<div class="module">
-							<h2>
-								module 15 
-							</h2>
-						</div>
-					</section>
-					<section class="col2wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col1wide" 
-					data-tn-tablet-class="col2wide" 
-					data-tn-standard-class="col2wide" 
-					>
-						<div class="module">
-							<h2>
-								module 16 
-							</h2>
-						</div>
-					</section>
-				</section>
-				<section class="colgroup">
-					<section class="col9wide column" 
-					tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col2wide" 
-					data-tn-tablet-class="col5wide" 
-					data-tn-standard-class="col9wide" 
-					>
-						<div class="module">
-							<h2>
-								module 17 
-							</h2>
-						</div>
-					</section>
-					<section class="col1wide column" 
-tn
-					data-tn-base-class="column"
-					data-tn-mobile-class="col1wide" 
-					data-tn-tablet-class="col1wide" 
-					data-tn-standard-class="col1wide" 
-					>
-						<div class="module">
-							<h2>
-								module 18 
-							</h2>
-						</div>
-					</section>
-				</section>
 			</div>
+		</header>
+		<div class="colgroup">
+			<section tn data-tn-base-class="column" data-tn-mobile-class="col3wide" data-tn-tablet-class="col3wide" data-tn-standard-class="col6wide">
+				<div class="content module set">
+					<ul class="setList hedType-large">
+						<li class="section"> 
+						<h3 class="content module section">
+							<a href="#" class="section">U.S.</a> <a href="#" class="subsection">Election 2012</a> 
+						</h3>
+						</li>
+						<li class="hedSumm imgType-A"> 
+						<figure class="imgType-A">
+							<img src="img/IMG_grumpy-76.jpg" alt="cat" width="76" height="76"> 
+						</figure>
+						<h2>
+							<a href="#">Micron CEO Dies in Plane Crash</a> 
+						</h2>
+						<p>
+							Micron Technology said Steven Appleton, the chip maker's chairman and chief executive, died Friday in a small-plane accident in Idaho. 
+						</p>
+						</li>
+						<li class="hedSumm pType-none"> 
+						<h2>
+							<a href="#">Caterpillar to Close Canadian Plant in Lockout Dispute </a> 
+						</h2>
+						</li>
+						<li class="hedSumm imgType-A pType-none"> 
+						<figure class="imgType-A">
+							<img src="img/IMG_grumpy-76.jpg" alt="cat" width="76" height="76"> 
+						</figure>
+						<h2>
+							<a href="#">Rookies at Super Bowl? Preposterous</a> 
+						</h2>
+						</li>
+					</ul>
+				</div>
+				<div class="module mostPopular">
+					<h3 class="section">
+						Most Popular 
+					</h3>
+					<ol>
+						<li class="hedSumm"> 
+						<h2>
+							<a href="#">Opinion: Stephen Moore: The Education of John Boehner</a> 
+						</h2>
+						</li>
+						<li class="hedSumm"> 
+						<h2>
+							<a href="#">For Newly Minted M.B.A.s, a Smaller Paycheck Awaits</a> 
+						</h2>
+						</li>
+						<li class="hedSumm subPrev"> 
+						<h2>
+							<a href="#">BofA Deal Resolves Mortgage Headache</a> 
+						</h2>
+						</li>
+						<li class="hedSumm"> 
+						<h2>
+							<a href="#">Opinion: Crovitz: Inconvenient Truths About Al Jazeera</a> 
+						</h2>
+						</li>
+						<li class="hedSumm"> 
+						<h2>
+							<a href="#">Law-Firm Partners Face Layoffs</a> 
+						</h2>
+						</li>
+					</ol>
+				</div>
+			</section>
+			<section class="col4wide column" tn data-tn-base-class="column" data-tn-mobile-class="col3wide" data-tn-tablet-class="col3wide" data-tn-standard-class="col4wide">
+				<div class="content module set">
+					<h3 class="section">
+						World 
+					</h3>
+					<ul class="setList">
+						<li class="hedSumm imgType-D"> 
+						<figure class="imgType-D">
+							<img src="img/IMG_grumpy-262.jpg" alt="cat" width="262" height="174"> 
+						</figure>
+						<h2>
+							<a href="#">Around the World in Eight Days </a> 
+						</h2>
+						<p>
+							A writer attempts an art-inspired challenge, traveling around the globe on a tight budget to visit all 11 Gagosian Galleries in hopes of winning a Damien Hirst print. 
+						</p>
+						</li>
+						<li class="hedSumm imgType-A"> 
+						<figure class="imgType-A">
+							<img src="img/IMG_grumpy-76.jpg" alt="cat" width="76" height="76"> 
+						</figure>
+						<h2>
+							<a href="#">Model Lara Stone</a> 
+						</h2>
+						<p>
+							The Dutch beauty discusses quitting smoking, taking up knitting and marriage. 
+						</p>
+						</li>
+						<li class="hedSumm imgType-A"> 
+						<figure class="imgType-A">
+							<img src="img/IMG_grumpy-76.jpg" alt="cat" width="76" height="76"> 
+						</figure>
+						<h2>
+							<a href="#">In Praise of the Gross</a> 
+						</h2>
+						<p>
+							Making a case that it was the insolent tone of "Tropic of Cancer"—more than the now tame sex scenes—that incited the book-banners. Lee Sandlin reviews "Renegade." 
+						</p>
+						</li>
+					</ul>
+				</div>
+			</section>
 		</div>
-		
-		<script data-main="main" src="../test/vendor/require.js"></script>		
+		<div class="colgroup">
+			<footer tn data-tn-base-class="column" data-tn-mobile-class="col3wide" data-tn-tablet-class="col6wide" data-tn-standard-class="col10wide">
+				<div class="footplate module footerBox">
+					<div class="footerOps">
+						<div class="editionSwitch">
+							<label for="edition">Edition:</label> 
+							<select id="edition">
+								<option value="us" id="us">U.S.</option>
+							</select>
+						</div>
+						<div class="fontSwitch">
+							<label for="fontController">Text Size:</label> 
+							<select id="fontController">
+								<option value="small" id="small">Small</option>
+								<option value="medium" id="medium" selected="selected">Medium</option>
+								<option value="large" id="large">Large</option>
+							</select>
+						</div>
+					</div>
+					<div class="folio">
+						<p>
+							<em class="welcome">Welcome, <a href="#">Ben Rubenstein</a></em> <span class="loginOps"><a href="#">Log Out</a></span> 
+						</p>
+						<small class="copyright">©2011 Dow Jones &amp; Company, Inc. All Rights Reserved.</small> <nav> 
+						<ul>
+							<li class="nav-Home"><a href="#">Home</a></li>
+							<li class="nav-About"><a href="#">About</a></li>
+							<li class="nav-Help"><a href="#">Logout</a></li>
+							<li class="nav-Fullsite"><a href="#">Full Site</a></li>
+						</ul>
+						</nav> 
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+</div>
+<script data-main="main" src="../test/vendor/require.js">
 
-	</body>
+
+</script>
+</body>
 </html>
