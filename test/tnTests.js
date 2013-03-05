@@ -321,47 +321,6 @@ describe("Intention", function() {
   describe('util funcs', function(){
     var tn=new Intention;
 
-    describe('_union: creates a union of two arrays, also makes unique',
-      function(){
-
-        it('should unionize the two arrays and get rid of dups', function(){
-          var itemCounts = {};
-          $.each(['a', 'b','c','d', 'e'], function(i, item){
-            expect($.inArray(item, tn._union(['a', 'b', 'c'], ['c', 'd', 'e'])))
-              .to.not.equal(-1);
-
-            if(!itemCounts[item]) itemCounts[item]=0
-            itemCounts[item]++
-
-            expect(itemCounts[item]).to.equal(1);
-          });
-          
-        });
-
-        it('should not fail when empty array is passed', function(){
-          expect(tn._union(['a', 'b', 'c'], []).sort())
-            .to.deep.equal(['a', 'b','c']);
-        });
-
-        it('should not fail when two empties passed', function(){
-          expect(tn._union([], []))
-            .to.deep.equal([]);
-        });
-
-      });
-
-
-    describe('_difference:', function(){
-
-      it('should subtract all items in one array from another', function(){
-        expect(tn._difference([1,2,3], [4,5,6])).to.deep.equal([1,2,3]);
-        expect(tn._difference([1,2,3,4], [4,5,6])).to.deep.equal([1,2,3]);
-        expect(tn._difference([1,2,3,4,4], [4,5,6])).to.deep.equal([1,2,3]);
-        expect(tn._difference([1,2,3,4,5,6], [4,5,6])).to.deep.equal([1,2,3]);
-      });
-
-    });
-
   })
 
   describe("regex tests", function(){
