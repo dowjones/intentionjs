@@ -70,6 +70,8 @@
 	</style>
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+	<script src="../test/vendor/underscore.js"></script>
 	<script src="../Intention.js"></script>
 	<script>
 		$(function(){
@@ -85,7 +87,8 @@
 		    	},
 		    	// measure
 		    	function(){
-		    		return window.pageXOffset;
+		    		console.log(window.pageXOffset)
+		    		return window.pageXOffset ? window.pageXOffset : window.document.documentElement.scrollLeft;
 		    	});
 
 			var lastXOffset = 0,
@@ -99,7 +102,7 @@
 							lastXOffset = measure;
 							return false;
 						}, function(){
-							return window.pageXOffset;
+							return window.pageXOffset ? window.pageXOffset : window.document.documentElement.scrollLeft;
 						});
 
 			walking();
@@ -120,8 +123,11 @@
 			tn-step2-class="step2"
 			tn-step3-class="step3"
 			tn-step4-class="step4"
+
 			tn-back-class="backwards"
-			tn-forth-class="forwards"></div>
+			tn-forth-class="forwards"
+			></div>
+
 		<img src="img/Brooklyn_Panorama_2_small.jpg" />
 	</div>
 </body>
