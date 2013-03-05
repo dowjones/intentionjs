@@ -2,12 +2,12 @@
 var intentionWrapper = function($, _){
 
   var Intention = function(params){
-    var tn = $.extend(this, params, 
+    var intent = $.extend(this, params, 
         {_listeners:{}, contexts:[], elms:$()});
 
-    $(function(){tn._setElms(tn.container)});
+    $(function(){intent._setElms(intent.container)});
 
-    return tn;
+    return intent;
   };
 
   Intention.prototype = {
@@ -95,10 +95,10 @@ var intentionWrapper = function($, _){
       // find all responsive elms in a specific dom scope
       if(!scope) scope = this.container;
 
-      $('[data-intention],[intention],[data-tn],[tn]', 
+      $('[data-intent],[intent],[data-in],[in]', 
           scope).each(_.bind(function(i, elm){
             this.add($(elm));
-      }, this));
+          }, this));
 
       return this;
     },
@@ -122,7 +122,7 @@ var intentionWrapper = function($, _){
     _attrsToSpec: function(attrs){
 
       var spec={},
-        pattern = new RegExp('(^(data-)?(tn|intention)-)?([a-zA-Z_0-9]+)-([a-z:]+)'),
+        pattern = new RegExp('(^(data-)?(in|intent)-)?([a-zA-Z_0-9]+)-([a-z:]+)'),
         addProp=function(obj, name, value){
           obj[name] = value;
           return obj;
@@ -150,11 +150,11 @@ var intentionWrapper = function($, _){
         });
         if(exists === false){
           // create the elements responsive data
-          $(elm).data('tn.spec', 
+          $(elm).data('intent.spec', 
             this._fillSpec(this._attrsToSpec(elm.attributes)));
           // make any appropriate changes based on the current contexts
           this._makeChanges($(elm), this._changes(
-            $(elm).data('tn.spec'), this.contexts))
+            $(elm).data('intent.spec'), this.contexts))
 
           this.elms.push(elm);
         }
@@ -213,7 +213,7 @@ var intentionWrapper = function($, _){
 
       var changes = {},
         inSpecs=[], outSpecs=[];
-      // go through currentCtxs (ordered by priority) TODO:
+
       _.each(contexts, function(ctx){
         if(specs[ctx.name] !== undefined) {
           inSpecs.push(ctx.name);
@@ -239,16 +239,15 @@ var intentionWrapper = function($, _){
       
       _.each(changes.inSpecs, function(change, func){
         if(func==='move'){
-          if( (elm.data('tn.placement') !== change.placement)
-            || (elm.data('tn.move') !== change.value)){
+          if( (elm.data('intent.placement') !== change.placement)
+            || (elm.data('intent.move') !== change.value)){
 
             $(change.value)[change.placement](elm);
             // save the last placement of the element so 
             // we're not moving it around for no good reason
-            elm.data('tn.placement', change.placement);
-            elm.data('tn.move', change.value);
+            elm.data('intent.placement', change.placement);
+            elm.data('intent.move', change.value);
           }
-
         } else if(func === 'class') {
 
           var classes = elm.attr('class') || '';
@@ -269,7 +268,7 @@ var intentionWrapper = function($, _){
       // go through all of the responsive elms
       elms.each(_.bind(function(i, elm){
         this._makeChanges($(elm), this._changes(
-          $(elm).data('tn.spec'), contexts));
+          $(elm).data('intent.spec'), contexts));
       }, this));
     },
 
@@ -320,7 +319,7 @@ var intentionWrapper = function($, _){
       // bind an the respond function to each context name
       _.each(contexts, function(ctx){
         // set the regex to match attrs to
-        ctx.pattern=new RegExp('(^(data-)?(tn|intention)-)?' + ctx.name);
+        ctx.pattern=new RegExp('(^(data-)?(in|intent)-)?' + ctx.name);
         this.on(ctx.name, _.bind(
             function(){this._respond(currentContexts, this.elms);}, this));
       }, this);

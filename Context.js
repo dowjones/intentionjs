@@ -1,7 +1,6 @@
 (function () {
 
   'use strict';
-
   var context = function($, tn){
 
     function throttle(callback, interval){
@@ -39,33 +38,36 @@
         // compare the return value of the callback to each context
         // return true for a match
         function(test, context){
-          if(test>=context.min){
-            return true;
-          }
+          return test>=context.min
         },
         // callback, return value is passed to matcher()
         // to compare against current context
         function(e){
           return $(window).width();
       });
+
     // create a base context that is always on
-    tn.responsive([{name:'base'}])('base');
+    $(window).on('resize', throttle(hResponder, 100));
 
-    // create a touch context that is always on in the case of a touch device
-    tn.responsive([{name:'touch'}], function() {
-      return "ontouchstart" in window;
-    })();
-    hResponder();
+    $(function(){
 
-    tn.responsive(
-      // contexts
-      [{name:'highrez'}],
-      // matching:
-      function(measure, context){
-        if(window.devicePixelRatio > 1) return true;
+      tn.responsive([{name:'base'}])('base');
+
+      // create a touch context that is always on in the case of a touch device
+      tn.responsive([{name:'touch'}], function() {
+        return "ontouchstart" in window;
       })();
 
-    $(window).on('resize', throttle(hResponder, 100));
+      tn.responsive(
+        // contexts
+        [{name:'highres'}],
+        // matching:
+        function(measure, context){
+          return window.devicePixelRatio > 1;
+        })();
+      hResponder();
+    });
+
     return tn;
   };
 
@@ -77,8 +79,7 @@
       // Browser globals
       root.tn = factory(root.jQuery, root.Intention);
     }
-  }(window, function ($, tn) {
+  }(this, function ($, tn) {
     return context($, tn);
   }));
-
-})();
+}).call(this);
