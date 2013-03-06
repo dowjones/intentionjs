@@ -6,9 +6,26 @@ DOM Manipulation based on a html attribute specification
 
 The interface to define differences between documents should be in HTML. The manipulation of attributes is a better way to restructure a page than media queries. Because relying on CSS/HTML document flow patterns to change the hierarchy of a design is not sufficient to convey appropriate infomation. 
 
+## What's included:
+	* Intention.js
+	* Context.js
+
+Intention.js is the script that manages the responsive axis, manipulates elements based on their specifications and emmits events when contexts change.
+
+Context.js is an implementation of Intention.js that sets up common use patterns in responsive design.
+
+Specifically it has the responsive contexts:
+	* base (a catch-all)
+	* mobile (triggered by width)
+	* tablet (triggered by width)
+	* standard (triggered by width)
+	* touch
+	* highres
+
 ## Installation
 
-include the script on your page via require
+include both scripts on your page or just Intention via require or just straight up.
+
 ```html
 	<!-- use with context defaults -->
 	<script 
@@ -16,7 +33,8 @@ include the script on your page via require
 		src="assets/js/require/require.js"></script>
 	<!-- OR -->
 	<!-- use only intention to build your own context -->
-	<script src="intention.js"></script>
+	<script src="Intention.js"></script>
+	<script src="Context.js"></script>
 	<script>
 		// your amazing contextual threshold specification here!
 	</script>
@@ -25,15 +43,15 @@ include the script on your page via require
 
 ## Usage
 
-By default context.js provides a number of threshold groups via intention.js: browser width, touch/nontouch, highrez/normal, and a default group
+By default context.js provides a number of threshold groups via intention.js: browser widths, touch, highres, and a base group
 
 the default thresholds in each group are respectively: 
 mobile (320 and below), tablet (321 to 768) and standard (769 to Infinity)
 touch (are touch gestures available)
-highrez (devicePixelRatio > 1)
+highres (devicePixelRatio > 1)
 base (default, always on)
 
-Three manipulation types: class, attr, placement
+There are three manipulation types: class names, attributes, placement on the page
 
 ### Interface
 
@@ -45,7 +63,7 @@ Three manipulation types: class, attr, placement
 	<!-- For the purposes of the documentation I will always use the 
 		prefix "in-" instead of "data-in-" to keep things concise -->
 	<!-- attribute structure: prefix-context-function 
-		ie in-mobile-class OR in-highrez-src -->
+		ie in-mobile-class OR in-highres-src -->
 	<div class="not interesting" intent in-mobile-class="more interesting">
 ```
 
@@ -55,10 +73,10 @@ Three manipulation types: class, attr, placement
 	<img
 		intent 
 		in-base-src="small_img.png" 
-		in-highrez-src="big_img.png" />
+		in-highres-src="big_img.png" />
 	<!-- the above spec will produce the following in each context
 		default: <img src="small_img.png" />
-		highrez: <img src="big_img.png" />
+		highres: <img src="big_img.png" />
 	-->
 ```
 
@@ -110,13 +128,15 @@ when the device is 320px units or below the nav will appear at the top of the fo
 
 #### Why a base context?
 
-In most scenarios you don't want to have to specify the way something will change in *every* context. Often times an element will be one of two things among many different contexts. take an img tag with two possible sources, it's either going to be highrez or not. by specifying the in-highrez-src attribute, you know that the source will be appropriately applied in that scenario. With a in-base-src attribute, you can rely on the source being set accordingly for all other contexts.
+In most scenarios you don't want to have to specify the way something will change in *every* context. Often times an element will be one of two things among many different contexts. take an img tag with two possible sources, it's either going to be highres or not. by specifying the in-highres-src attribute, you know that the source will be appropriately applied in that scenario. With a in-base-src attribute, you can rely on the source being set accordingly for all other contexts.
 
-### Custom Thresholds
+### Making your own custom contexts
 
 In addition to what is provided as a set of useful page contexts in the context.js script. You can define your own contexts, for anything!
 
-Take this example for scroll depth:
+You can extend the functionality of context.js or scrap the whole thing entirely.
+
+Here is an example for scroll depth thresholds:
 
 ```javascript
 	var responsiveDepths = intent.responsive(
@@ -124,7 +144,7 @@ Take this example for scroll depth:
 		[{name:'shallow', value:20}, {name:'deep', value:1/0}],
 		// matching:
 		function(measure, context){
-			if(measure < context.value) return true;
+			return measure < context.value;
 		},
 		// measure
 		function(){
@@ -132,6 +152,23 @@ Take this example for scroll depth:
 		});
 	$(window).on('scroll', responsiveDepths);
 ```
+
+responsiveDepths is just a function, whenever you want to evaluate which context is relevant call that function.
+
+NOTE: if you scrap context.js you will have to add your responsive elements manually via the elements method.
+
+in the above example you could do something like this:
+
+```javascript
+	...
+	$(window).on('scroll', responsiveDepths);
+	intent.elements();
+```
+
+this will add all elements matching the "$('[data-intent],[intent],[data-in],[in]')" selector. Optionally pass a scope argument to this function to specify where in the dom to start searching. The default is the document.
+
+calling the elements function will change the elements' attributes to the specification provided in the html as it finds them. This way your responsive axis can all be defined *before* any changes are made to the DOM.
+
 
 #### The components intent.responsive
 
@@ -143,20 +180,20 @@ The thresholds are an array of context objects. the only requirement of these ob
 	// required
 	[{name:'shallow'}, {name:'deep'}]
 	// or with a little extra
-	[{name:'shallow', value:20}, {name:'deep', value: Infinity}]
+	[{name:'shallow', value:20}, 
+		{name:'deep', value: Infinity}]
 ```
 
 ##### Matching function
 
-The matching function is called for each item in the thresholds array until a match is made i.e. it returns true.
+The matching function is called for each item in the thresholds array until a match is made i.e. it returns true. it is totally optional. However if it is not specified a default will be used which matches based on the context name. have a look in the Default Compare Functions section for the specifics.
 
-The context that produces a match is then understood as the current context for the threshold group.
+The context that produces a match is then understood as the current context for the threshold group. In other words there will only every be ONE matched context for a threshold group.
 
 If a matching function is not specified this default is used:
 ```javascript
     function(measure, context){
-      if(measure===context.name) return true;
-      return false;
+      return measure === context.name;
     };
 ```
 
@@ -170,11 +207,7 @@ default measure function is a pass-through
     };
 ```
 
-why?
-
-intent.responsive() // outputs a function
-
-so calling the result of that function with an argument passed to it will get used as the measure arg in the *matcher* function
+why? intent.responsive() // outputs a function. so calling the result of that function with an argument passed to it will get used as the measure arg in the *matcher* function
 
 like so:
 
@@ -191,20 +224,23 @@ in this example window.pageYOffset would get passed as the first argument to the
 
 Threshold objects must be passed to intent.responsive as an array
 
-The only other requirement is that the threshold object has a "name" property, i.e. {name:'bruce'}. The name is used for two main things: emmiting an event of that name on the intent object and allowing you to create specifications in the html for that threshold.
+The only other requirement is that the threshold object has a "name" property, i.e. {name:'slow_page'}. The name is used for two main things: emmiting an event of that name on the intent object and allowing you to create specifications in the html for that threshold.
+
+	* names may *not* have dashes
+	* names can have "_"
+	* the regex to match them is simply: [_a-zA-Z0-9]+
 
 to create an event handler for a threshold:
 
 ```javascript
-intent.on('bruce', function(){
-	alert('bruce? what are you doing here?');
+intent.on('slow_page', function(){
+	alert('try another wifi network');
 });
 ```
-
 to specify changes to the html when in that threshold
 
 ```html
-	<img intent in-bruce-src="bruce_willis.gif" />
+	<img intent in-slow_page-src="toobad.gif" />
 ```
 
 #### Default Compare Functions
@@ -212,8 +248,7 @@ to specify changes to the html when in that threshold
 ```javascript
 	// matching default		      
     matcher = function(measure, ctx){
-      if(measure===ctx.name) return true;
-      return false;
+      return measure === ctx.name;
     };
   	// measure default is just a pass through
     measure = function(arg){
@@ -239,30 +274,7 @@ in other words just one match per context group
 	* before
 	* after
 #### Single-value attrs, (everything else)
-	* src
-	* href
-	* height
-	* width
-	* title
-	* tabindex
-	* id
-	* style
-	* align
-	* dir
-	* contenteditable
-	* lang
-	* xml:lang
-	* accesskey
-	* background
-	* bgcolor
-	* contextmenu
-	* draggable
-	* hidden
-	* item
-	* itemprop
-	* spellcheck
-	* subject
-	* valign
+	* any arbitrary atribute that doesn't include a dash.
 
 
 ## Authors
