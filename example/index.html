@@ -2,7 +2,7 @@
 <html>
 <head>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-
+	<script type="text/javascript" src="../test/vendor/underscore.js"></script>
 	<script type="text/javascript" src="../Intention.js"></script>
 	 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
@@ -106,36 +106,36 @@
 	</style>
 </head>
 <body>
-	<header tn tn-beyond-class="fix"
-			tn-shallow-class="">
+	<header intent in-beyond-class="fix"
+			in-shallow-class="">
 		<div id="intro"></div>
 		<nav></nav>
 	</header>
 
-	<h1 tn tn-mobile-class="mobile"
-		tn-tablet-class="tablet"
-		tn-standard-class="standard"
-		tn-frequenter-class="frequenter"
-		tn-returning-class="returning"
-		tn-first-class="first"
+	<h1 intent in-mobile-class="mobile"
+		in-tablet-class="tablet"
+		in-standard-class="standard"
+		in-frequenter-class="frequenter"
+		in-returning-class="returning"
+		in-first-class="first"
 	>
-		<span tn tn-base-class="a"
-			tn-base-append='h1'
-			tn-base-append='h1'>a</span>
-		<span tn tn-base-class="b"
-			tn-base-append='h1'
-			tn-tablet-after='.c'>b</span>
-		<span tn tn-base-class="c"
-			tn-base-append='h1'
-			tn-tablet-prepend='h1'>c</span>
+		<span intent in-base-class="a"
+			in-base-append='h1'
+			in-base-append='h1'>a</span>
+		<span intent in-base-class="b"
+			in-base-append='h1'
+			in-tablet-after='.c'>b</span>
+		<span intent in-base-class="c"
+			in-base-append='h1'
+			in-tablet-prepend='h1'>c</span>
 
 	</h1>
 
-	<h2 tn
-		tn-f1-class="one"
-		tn-f2-class="two"
-		tn-f3-class="three"
-		tn-f4-class="four"></h2>
+	<h2 intent
+		in-f1-class="one"
+		in-f2-class="two"
+		in-f3-class="three"
+		in-f4-class="four"></h2>
 	
 </body>
 <script>
@@ -220,6 +220,8 @@
 
 		flipper();
 		$(window).on('scroll', flipper);
+
+		tn.elements();
 	})(jQuery)
 </script>
 </html>	
