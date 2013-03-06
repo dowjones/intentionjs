@@ -66,7 +66,7 @@
 
     // width context
     hResponder()
-      .addFrom(document);
+      .elements(document);
 
     return tn;
   };
