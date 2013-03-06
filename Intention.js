@@ -10,93 +10,74 @@ var intentionWrapper = function($, _){
 
   Intention.prototype = {
 
-    _emitter: function(event){
-      if(typeof event === 'string') {
-        event={type:event};
-      }
-      if(!event.target){
-        event.target=this;
-      }
-      if(!event.type){
-        throw new Error(event.type + ' is not a supported event.');
-      }
-      if(_.isArray(this._listeners[event.type])){
-        var listeners = this._listeners[event.type],
-          i;
-        for(i=0; i<listeners.length; i++){
-          listeners[i].call(this, event);
-        }
-      }
-    },
-
     // public methods
-    // code and concept taken from simple implementation of 
-    // observer pattern outlined here:
-    // http://www.nczonline.net/blog/2010/03/09/custom-events-in-javascript/
-    on: function(type, listener){
-      if(this._listeners[type] === undefined) {
-        this._listeners[type]=[];
-      }
-      this._listeners[type].push(listener);
-    },
+    // TODO: break this function down a bit
+    responsive:function(contexts, matcher, measure){
+      var currentContexts = this.contexts,
+        currentContext,
+        emitter = _.bind(this._emitter, this),
+        contextualize = _.bind(this._contextualize, this);
 
-    off: function(type, listener){
-      if(_.isArray(this._listeners[type])){
-        var listeners = this._listeners[type],
-          i;
-        for(i=0;listeners.length; i++){
-          if(listeners[i] === listener){
-            listeners.splice(i,1);
-            break;
-          }
-        }
-      }
-    },
-
-    _fillSpec: function(spec){
-
-      var funcs = {},
-        tmpl = {};
-
-      _.each(spec, function(value, context){
-        _.each(value, function(val, func){
-          funcs[func]='';
-        });
-        if(tmpl[context] === undefined) {
-          tmpl[context]=funcs;
-        }
-      }, this);
-      return $.extend(true, {}, tmpl, spec);
-    },
-
-    _attrsToSpec: function(attrs){
-
-      var spec={},
-        pattern = new RegExp(
-          '(^(data-)?(in|intent)-)?([a-zA-Z_0-9]+)-([a-z:]+)'),
-        addProp=function(obj, name, value){
-          obj[name] = value;
-          return obj;
+      // if no matcher function is specified expect to compare a 
+      // string to the ctx.name property
+      if(_.isFunction(matcher) === false) {
+        matcher = function(measure, ctx){
+          return measure === ctx.name;
         };
-      _.each(attrs, function(attr){
-        var specMatch = attr.name.match(pattern);
-        if(specMatch !== null) {
-          specMatch = specMatch.slice(-2);
+      }
+      //  check for measure and if not there 
+      // function takes one arg and returns it
+      if(_.isFunction(measure) === false) {
+        measure = function(arg){
+          return arg;
+        };
+      }
+      // bind an the respond function to each context name
+      _.each(contexts, function(ctx){
+        this.on(ctx.name, _.bind(
+            function(){this._respond(currentContexts, this.elms);}, this));
+      }, this);
+      
+      var responder = _.bind(function(){
         
-          $.extend(true, spec, addProp({}, specMatch[0],
-            addProp({}, specMatch[1], attr.value)));
-        }
-      });
+        var measurement = measure.apply(this, arguments);
 
-      return spec;
+        _.every(contexts, function(ctx){
+          if( matcher(measurement, ctx)) {
+            // first time, or different than last context
+            if( (currentContext===undefined) || 
+              (ctx.name !== currentContext.name)){
+              currentContext = ctx;
+              currentContexts = contextualize(ctx, contexts, 
+                  currentContexts);
+              // emit the context event
+              emitter($.extend({}, {type:currentContext.name}, 
+                currentContext));  
+              
+              // done, break the loop
+              return false;
+            }
+            // same context, break the loop
+            return false;
+          }
+          return true;
+        });
+        // return the intention object for chaining
+        return this;
+
+      }, this);
+      // this makes the contexts accessible from the outside world
+      responder.axis = contexts;
+
+      return responder;
     },
 
-    addFrom: function(scope){
+    elements: function(scope){
 
       var elmSpec = this._elmSpec;
 
       // find all responsive elms in a specific dom scope
-      if(!scope) scope = this.container;
+      if(!scope) scope = document;
 
       $('[data-intent],[intent],[data-in],[in]', 
           scope).each(_.bind(function(i, elm){
@@ -105,7 +86,6 @@ var intentionWrapper = function($, _){
 
       return this;
     },
-
 
     add: function(elms){
       // is expecting a jquery object
@@ -148,6 +128,86 @@ var intentionWrapper = function($, _){
         });
       });
       return this;
+    },
+
+    // code and concept taken from simple implementation of 
+    // observer pattern outlined here:
+    // http://www.nczonline.net/blog/2010/03/09/custom-events-in-javascript/
+    on: function(type, listener){
+      if(this._listeners[type] === undefined) {
+        this._listeners[type]=[];
+      }
+      this._listeners[type].push(listener);
+    },
+
+    off: function(type, listener){
+      if(_.isArray(this._listeners[type])){
+        var listeners = this._listeners[type],
+          i;
+        for(i=0;listeners.length; i++){
+          if(listeners[i] === listener){
+            listeners.splice(i,1);
+            break;
+          }
+        }
+      }
+    },
+
+    _emitter: function(event){
+      if(typeof event === 'string') {
+        event={type:event};
+      }
+      if(!event.target){
+        event.target=this;
+      }
+      if(!event.type){
+        throw new Error(event.type + ' is not a supported event.');
+      }
+      if(_.isArray(this._listeners[event.type])){
+        var listeners = this._listeners[event.type],
+          i;
+        for(i=0; i<listeners.length; i++){
+          listeners[i].call(this, event);
+        }
+      }
+    },
+
+    _fillSpec: function(spec){
+
+      var funcs = {},
+        tmpl = {};
+
+      _.each(spec, function(value, context){
+        _.each(value, function(val, func){
+          funcs[func]='';
+        });
+        if(tmpl[context] === undefined) {
+          tmpl[context]=funcs;
+        }
+      }, this);
+      return $.extend(true, {}, tmpl, spec);
+    },
+
+    _attrsToSpec: function(attrs){
+
+      var spec={},
+        pattern = new RegExp(
+          '(^(data-)?(in|intent)-)?([_a-zA-Z0-9]+)-([a-z:]+)'),
+        addProp=function(obj, name, value){
+          obj[name] = value;
+          return obj;
+        };
+      _.each(attrs, function(attr){
+        var specMatch = attr.name.match(pattern);
+        if(specMatch !== null) {
+          specMatch = specMatch.slice(-2);
+        
+          $.extend(true, spec, addProp({}, specMatch[0],
+            addProp({}, specMatch[1], attr.value)));
+        }
+      });
+
+      return spec;
     },
 
     _resolveSpecs: function(specList, specs){
@@ -262,67 +322,6 @@ var intentionWrapper = function($, _){
         }
       });
       return currentContexts;
-    },
-
-    responsive:function(contexts, matcher, measure){
-      var currentContexts = this.contexts,
-        currentContext,
-        emitter = _.bind(this._emitter, this),
-        contextualize = _.bind(this._contextualize, this);
-
-      // if no matcher function is specified expect to compare a 
-      // string to the ctx.name property
-      if(_.isFunction(matcher) === false) {
-        matcher = function(measure, ctx){
-          if(measure===ctx.name) return true;
-          return false;
-        };
-      }
-      //  check for measure and if not there 
-      // function takes one arg and returns it
-      if(_.isFunction(measure) === false) {
-        measure = function(arg){
-          return arg;
-        };
-      }
-      // bind an the respond function to each context name
-      _.each(contexts, function(ctx){
-        this.on(ctx.name, _.bind(
-            function(){this._respond(currentContexts, this.elms);}, this));
-      }, this);
-      
-      var responder = _.bind(function(){
-        
-        var measurement = measure.apply(this, arguments);
-
-        _.every(contexts, function(ctx){
-          if( matcher(measurement, ctx)) {
-            // first time, or different than last context
-            if( (currentContext===undefined) || 
-              (ctx.name !== currentContext.name)){
-              currentContext = ctx;
-              currentContexts = contextualize(ctx, contexts, 
-                  currentContexts);
-              // emit the context event
-              emitter($.extend({}, {type:currentContext.name}, 
-                currentContext));  
-              
-              // done, break the loop
-              return false;
-            }
-            // same context, break the loop
-            return false;
-          }
-          return true;
-        });
-        // return the intention object for chaining
-        return this;
-
-      }, this);
-      // this makes the contexts accessible from the outside world
-      responder.axis = contexts;
-
-      return responder;
     }
   };
   return Intention;
