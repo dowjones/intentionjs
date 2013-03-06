@@ -28,9 +28,7 @@ var intentionWrapper = function($, _){
       //  check for measure and if not there 
       // function takes one arg and returns it
       if(_.isFunction(measure) === false) {
-        measure = function(arg){
-          return arg;
-        };
+        measure = _.identity;
       }
       // bind an the respond function to each context name
       _.each(contexts, function(ctx){
@@ -128,6 +126,12 @@ var intentionWrapper = function($, _){
         });
       });
       return this;
+    },
+
+    is: function(ctxName){
+      return _.some(this.contexts, function(ctx){
+        return ctxName === ctx.name;
+      });
     },
 
     // code and concept taken from simple implementation of 
