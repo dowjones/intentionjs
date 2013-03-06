@@ -1,16 +1,18 @@
 # intention.js
 
-DOM Manipulation based on a html attribute specification
+DOM Manipulation via html attribute specification
 
 ## Why Intention.js
 
-The interface to define differences between documents should be in HTML. The manipulation of attributes is a better way to restructure a page than media queries. Because relying on CSS/HTML document flow patterns to change the hierarchy of a design is not sufficient to convey appropriate infomation. 
+The technology for dealing with responsive design is all over the place. Media queries, often-hacky-javascript, and convoluted HTML. Intention.js allows you to make all of the changes to HTML in the HTML itself. Intention.js is a way to describe the differences of an HTML document from one context to another. 
+
+What should the classes of an element be on mobile vs tablet? Where should your advertising code get placed when you're on a desktop? Does the page require an alternate slideshow widget on touch enabled devices? These are all changes that Intention.js can make to the page based on a user's device. Context.js creates a set of common page contexts for width thresholds, touch devices, highres displays and a fallback. And you can easily add your own contexts on top of these or create all your own custom contexts.
 
 ## What's included:
 	* Intention.js
 	* Context.js
 
-Intention.js is the script that manages the responsive axis, manipulates elements based on their specifications and emmits events when contexts change.
+Intention.js is the script that manages the responsive axis, manipulates elements based on their specifications and emits events when contexts change.
 
 Context.js is an implementation of Intention.js that sets up common use patterns in responsive design.
 
