@@ -309,7 +309,7 @@ var intentionWrapper = function($, _){
         this._makeChanges($elm, this._changes(
           $elm.data('intent.spec'), contexts));
 
-        $elm.trigger('intent');
+        $elm.trigger('intent', this);
       }, this));
     },
 
