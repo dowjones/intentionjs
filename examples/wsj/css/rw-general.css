@@ -1,0 +1,414 @@
+figure.imgType-D { 
+  max-width: 100%; 
+}
+
+figure.imgType-A { 
+  max-width: 29.17%; 
+}
+
+figure img { 
+  height: auto; 
+}
+
+h3.section {
+	font-size: 1.2em;
+	font-family: Arial, Helvetica, sans-serif;
+	padding: .8rem .8rem .6rem .8rem;
+	display: block;
+	background-color: #eee;
+	font-weight: bold;
+	border-bottom: 1px dotted #999;
+	text-transform: uppercase;
+}
+
+.type-search h3.section {
+	background-color: #e4e1d9;
+}
+
+h3.section a {
+	color: #333;
+}
+
+h3.section a:before {
+	content: "//";
+	margin: 0 .67em 0 .33em;
+}
+
+h3.section a:first-child:before {
+	content: "";
+	margin: 0;
+}
+
+.sectionsBox {
+	background-color: #f6f4ee;
+}
+
+.sectionsBox h3.section {
+	background-color: transparent;
+	/* 
+	text-transform: uppercase;
+ */
+	padding: .8rem 0 .6rem 0;
+	margin: 0 .8rem 0 .8rem;
+}
+
+.content.module.announcement {
+	background-color: #ffffff;
+}
+
+.content.module.announcement > h4 {
+	padding: 0.8rem 0.8rem 0.8rem 0.8rem;
+	border-bottom: 0.1rem dotted #ccc;
+	font-size: 1.4rem;
+	color: #e36627;
+	font-weight: bold;
+}
+
+.content.module.announcement > h4 > a {
+	text-transform: uppercase;
+	font-weight: normal;
+	font-size: 1.1rem;
+	margin-left: 0.5em;
+}
+
+.content.module.announcement > h4 > a:after {
+	content: "»";
+	font-size: 1.1rem;
+	margin-left: 0.333em;
+	position: relative;
+	top: -.1rem;
+}
+
+.content.module.announcement > h4 > a:after {
+	content: "»";
+	font-size: 1.1rem;
+	margin-left: 0.333em;
+	position: relative;
+	top: -.1rem;
+}
+
+.content.module nav.sectional > ul {
+	-webkit-column-count: 2;
+	-webkit-column-gap: 1rem;
+	padding: 1.2rem .8rem;
+}
+
+.content.module nav.sectional > ul > li {
+	font-size: 1.6em;
+	line-height: 1em;
+	font-weight: bold;
+	margin-bottom: 1.6rem;
+	display: block;
+	-webkit-column-break-inside: avoid;
+}
+
+.content.module nav.sectional > ul > li.active a {
+	color: #e36627;
+}
+
+.content.module nav.sectional > ul > li.active a:before {
+	content: "»";
+	margin-right: .333em;
+}
+
+.content.module nav.table > ul > li {
+	border-bottom: 0.15rem solid #999;
+	font-size: 1.3rem;
+}
+
+.content.module nav.table > ul > li > a {
+	font-weight: bold;
+	display: block;
+	padding: 1rem 0 .8rem .8rem;
+	color: #333;
+}
+
+.content.module blockquote {
+	font-size: 1.86em;
+	line-height: 1.333em;
+	color: #333;
+	margin: 1rem 2rem 1rem 2rem;
+}
+
+.content.module a.loadMoreLink {
+	font-family: Arial, Helvetica, sans-serif;
+	font-style: italic;
+	display: block;
+	padding: 2rem 0 2rem .8rem;
+	font-size: 1.6em;
+	line-height: 1em;
+	position: relative;
+	text-align: center;
+}
+
+.content.module a.loadMoreLink:after {
+	/*
+	content: "...";
+*/
+	content: "\2026;";
+	padding-left: .25em;
+}
+
+.pageFrame > footer,
+.pageFrame > div >  footer,
+.pageFrame .sliderBox > div >  footer {
+	background-color: #f1eee4;
+	position: relative;
+}
+
+.pageFrame > footer:before,
+.pageFrame > div > footer:before,
+.pageFrame .sliderBox > div > footer:before {
+	content: "";
+	position: absolute;
+	top: -.1rem;
+	display: block;
+	width: 100%;
+	height: .1rem;
+	background-color: #999;
+	border-top: .2rem solid #ccc;
+}
+
+.footplate.module nav .navLinks {
+	-webkit-column-count: 2;
+	-webkit-column-gap: .8rem;
+	margin: 1rem .8rem 0 .8rem;
+}
+
+.footplate.module .footerOps {
+	font-size: 1.2em;
+	border-bottom: 1px dotted #999;
+	margin: .8rem;
+	padding-bottom: .8rem;
+}
+
+.footplate.module .footerOps:after {
+	content: "";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+	font-size: 0;
+}
+
+.footplate.module .footerOps .editionSwitch {
+	float: left;
+}
+
+.footplate.module .footerOps .fontSwitch {
+	float: right;
+}
+
+.footplate.module .footerOps .editionSwitch label,
+.footplate.module .footerOps .fontSwitch label {
+	font-weight: bold;
+	padding: .5rem .75rem 0 0;
+	float: left;
+}
+
+.footplate.module .footerOps .editionSwitch select,
+.footplate.module .footerOps .fontSwitch select {
+	float: left;
+	border: .15rem solid #999;
+	background-color: #FFFFFF;
+	padding: .5rem 2rem .5rem .5rem;
+	-webkit-appearance: none;
+	-webkit-border-radius: 0;
+	background-repeat: no-repeat;
+	background-position: 90% center;
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAKCAYAAABrGwT5AAAAgklEQVR42pXLMQrCMBSA4QdCDlDwAJ0CHqOTB3DtKvQqhdzDyak3cM3kDcShq5NTIP3fUAiByHP4pp9f3lfvcEf800VnNSAhGz1w0HE3G8cPekg5O0TDPELqWXl8f4w3SGtWU2N8oWvNpaUaEwaIZT5iLeYAsc7qjIwnnGWuBZxafQN45htdj3eT5AAAAABJRU5ErkJggg==");
+	background-size: .75rem .5rem;
+}
+
+.footplate.module .footerOps .editionSwitch select > option,
+.footplate.module .footerOps .fontSwitch select > option {
+	font-weight: bold;
+	font-size: 1.2em;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.footplate.module .folio {
+	padding: 0.8rem;
+	text-align: center;
+}
+
+.footplate.module .folio > p {
+	font-size: 1.2em;
+	margin-bottom: 1rem;
+}
+
+.footplate.module .folio > p .welcome {
+	font-style: normal;
+	font-weight: bold;
+}
+
+.footplate.module .folio > p .welcome a {
+	color: #e36627;
+}
+
+.footplate.module .folio > p .loginOps:not(:first-child):before {
+	content: "|";
+	margin: 0 .67rem 0 .67rem;
+}
+
+.footplate.module .folio > p .loginOps a {
+	font-weight: bold;
+	color: #004176;
+}
+
+.footplate.module .folio > small {
+	font-size: 1em;
+}
+
+.footplate.module nav ul li a {
+	color: #004176;
+}
+
+.footplate.module .folio nav ul {
+	display: inline-block;
+	margin: .8rem auto 0 auto;
+}
+
+.footplate.module .folio nav ul > li {
+	display: inline-block;
+	float: left;
+	font-size: 1.2em;
+}
+
+.footplate.module .folio nav ul > li:after {
+	content: "|";
+	padding: 0 .8rem 0 .8rem;
+}
+
+.footplate.module .folio nav ul > li:last-child:after {
+	content: "";
+	padding: 0;
+}
+
+.footplate.module .searchBar {
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#f5f3ed), color-stop(.1, #ebe8de), to(#f5f2ec));
+}
+
+.footplate.module .searchBar > .searchContents {
+	position: relative;
+	padding: 1.1rem 3.9rem 1rem 0.9rem;
+	text-align: center;
+}
+
+.footplate.module .searchBar > .searchContents input[type="search"] {
+	width: 26rem;
+	font-size: 1.4em;
+	/* <- Safari search fields are only allowed to have three sizes: small, medium and large. Anything 16px and over is large. */
+	border: .15rem solid #b9b9b9;
+	border-radius: 1.8rem;
+	-webkit-box-shadow: inset 0 .15rem .5rem rgba(0,0,0,0.33);
+	-webkit-appearance: none;
+	padding: .5rem .9rem;
+}
+
+.footplate.module .searchBar > .searchContents .searchButton {
+	border: none;
+	text-indent: -9999rem;
+	background-color: transparent;
+	position: absolute;
+	right: 1.2rem;
+	top: 1.2rem;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAArCAYAAADhXXHAAAAC/0lEQVR42s3XUWQbcRzA8XKEI4zQpzKOPpVSSuhTn0oJpZQySp9CKaWMMvZUwhijlFBipYRQRhhlZEqnhFL6VKuFUG3FbsvcpEv33zfk+Pu5ddf/XdZ7+BCXf36+7v7JXYY+fXwbRgo5FFHHGRRc1PEBG3Aw9BBKqdD+NSyD1/CgQqpj9n/HrsGFMlSDM+hYG6V7Ipqoo4xD1NGFCtDC9KBiUziCEtooYDJoCMefYKEfr4QuFuOPDT6jJQwHfHj4L+E5XIoZHibijF0NOCOr/sLfd3c21nEEpbnEFka14BEci3kNZOKIHUFbH66Hdn/dTqEBdY8OXoitcS5mbscR+0Zeen/BbcebRQcqpKIWPIa2uFpPo8TaYmDb36M/vW8jcKEeKK8FF6A0m1Fin4lhBf/NH+1WCcrANdL92Aw8sXeNY4sidrz3xnf3yoYHZSjfj+2pQmkc09gT/QffH/C11cxBBXBRRREHaEIF2NNiV0TsnGlsSxty4A9o3XxZgdIcYRGWHMKxMWyhra0/1GKnROyaUay4VZb9ATdXn1egcIyZMMNYl0EB1/igxToidsMoVmz+qj/g+vLcgtN7bYLPprXYcRG7bhrbFI93YpE5LXZGxC6ZxtbEPdweQOyGiJ0yjZU/2rkBxB6KE5IyjZ0WsRUMxWhMfInfR7kpWLgQwRMxxlbE7PmoDzLLYuAJ7BhCFwIeE62osRbOxOByxNAJePLOFdfDdxYdKLG/0gahcwHPx+/i/luzDCVcYDlkpIMdqAAuslFjpedQARp4hVlMwobTf72EfXFl7gt2sI2USay0AA8qogM0ZbB2bB8pk1hpHMeGkS7y/tYQwVIFKdNYaR5VdEJENrCOdMBebpgEy9iw0v3wlyiigmLfGkbF+jCxMtgyiI3dpggzCBaxA1aMFixjB28nZHAZVlBsooNl7GMohQzegyVikx8sYhMdvJuEWOsBwfnHipTBuyFiTx89lssbNthLQmzY4FoSYmXwHpTQRTYpsTJ6FafwUEO2d/wPc9idzGOb5qcAAAAASUVORK5CYII=);
+	background-repeat: no-repeat;
+	width: 2.2rem;
+	height: 2.2rem;
+	background-size: 2.15rem 2.15rem;
+	background-position: center center;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.continuation {
+	text-align: center;
+	/* 
+	border: none;
+ */
+	border-top: 1px dotted #999;
+}
+
+.continuation p {
+	font-size: 1.4em;
+}
+
+.continuation a {
+	display: block;
+	padding: 1.4rem;
+	/* 	color: #ff99ff; */
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+@media all {
+	.pageFrame {
+		/* 
+						width: 320px;
+				 */
+		margin: 0 auto 0 auto;
+	}
+	
+	/* This prevents the user from being able to select text */
+	
+	/*	div {
+				
+						-webkit-user-select: none;
+				 	}
+				*/
+	
+	input[type="search"]:focus {
+		outline-width: 0;
+	}
+	
+	body.fontSize-small .module .articleBody p {
+		font-size: 1.28em;
+	}
+	
+	body.fontSize-large .module .articleBody p {
+		font-size: 2.4em;
+	}
+	
+	body.fontSize-small .module .hedSumm p {
+		font-size: 1em;
+	}
+	
+	body.fontSize-large .module .hedSumm p {
+		font-size: 2em;
+	}
+}
+
+@media all {
+	html {
+		font-size: 10px;
+	}
+}
+
+@media all and (orientation:landscape) {
+	html {
+		-webkit-text-size-adjust: none;
+	}
+	
+	html:not(.orientation-portrait) { /* <- The :not() is to work around Android's insane triggering of portrait mode when the keyboard is invoked. */
+		font-size: 6.667px;
+	}
+}
+
+@media all and (device-width: 768px) and (device-height: 1024px) {
+	/* These styles will apply to tablets with iPad's resolution only. */
+	html {
+		font-size: 12.5px;
+	}
+	
+	.module.set figure.imgType-D,
+		  article.module figure.imgType-D {
+		float: left;
+		margin-right: 1.9rem;
+	}
+	
+	.module.set figure.imgType-D + h2,
+		  article.module figure.imgType-D + h2 {
+		margin-top: 1.6rem;
+	}
+}
