@@ -1,13 +1,9 @@
-var assert = chai.assert,
-      expect = chai.expect,
-      should = chai.should(); // Note that should has to be executed
-
 describe("Intention", function() {
 
   describe("Constructor:", function(){
     var intent = new Intention;
     it("Should return an object", function(){
-      assert.typeOf(intent, 'object', 'constructor is an object');
+      expect(intent).to.be.an('object')
     })
   });
 
@@ -171,7 +167,7 @@ describe("Intention", function() {
           }
           
         };
-      expect(intent._fillSpec(spec)).to.deep.equal(filled);
+      expect(intent._fillSpec(spec)).to.eql(filled);
     });
   });
   
@@ -251,7 +247,7 @@ describe("Intention", function() {
               'in-tablet-class':'bar',
               'in-standard-class':'baz'});
 
-        expect(intent._attrsToSpec(elm[0].attributes)).to.deep.equal({
+        expect(intent._attrsToSpec(elm[0].attributes)).to.eql({
           mobile:{
             'class':'foo'
           },
@@ -274,7 +270,7 @@ describe("Intention", function() {
               'in-standard-href':'http://baz.baz'});
 
         expect(intent._fillSpec(intent._attrsToSpec(elm[0].attributes)))
-          .to.deep.equal({
+          .to.eql({
             mobile:{
               'class':'foo',
               append:'#foo',
@@ -310,7 +306,7 @@ describe("Intention", function() {
               href:'http://bar.bar'
             }
           }))
-          .to.deep.equal({
+          .to.eql({
             'class':['foo', 'bar'],
             href:'http://bar.bar'
           });
@@ -334,13 +330,13 @@ describe("Intention", function() {
           }, [{name:'foo'}]);
 
         expect(changes.inSpecs)
-          .to.deep.equal({
+          .to.eql({
             'class':['foo'],
             move:{value:'#foo', placement:'append'}
           });
 
         expect(changes.outSpecs)
-          .to.deep.equal({
+          .to.eql({
             'class':['bar'],
             move:{value:'#bar', placement:'append'}
           });
@@ -437,8 +433,8 @@ describe("Intention", function() {
 
   describe('underscore test', function(){
     it('should be the relative complement', function(){
-      expect(_.difference([1,2,3], [3,4,5])).to.deep.equal([1,2]);
-      expect(_.difference([1,2,3], [3,2])).to.deep.equal([1]);
+      expect(_.difference([1,2,3], [3,4,5])).to.eql([1,2]);
+      expect(_.difference([1,2,3], [3,2])).to.eql([1]);
     });
   });
 
