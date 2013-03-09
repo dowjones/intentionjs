@@ -62,8 +62,8 @@ There are three manipulation types: class names, attributes, placement on the pa
 	<div intent>
 	<!-- or -->
 	<div data-intent>
-	<!-- For the purposes of the documentation I will always use the 
-		prefix "in-" instead of "data-in-" to keep things concise -->
+	<!-- For the purposes of the documentation the prefix "in-" will be 
+	used instead of "data-in-" to keep things concise -->
 	<!-- attribute structure: prefix-context-function 
 		ie in-mobile-class OR in-highres-src -->
 	<div class="not interesting" intent in-mobile-class="more interesting">
@@ -286,7 +286,7 @@ in other words just one match per context group
 
 
 ## License
-
+```javascript
 // MIT licesnse for everything
 
 // Copyright (c) 2012 The Wall Street Journal, 
@@ -310,3 +310,4 @@ in other words just one match per context group
 // LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```
