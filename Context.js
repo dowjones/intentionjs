@@ -47,7 +47,8 @@
       });
 
     // create a base context that is always on
-    $(window).on('resize', throttle(hResponder, 100));
+    $(window).on('resize', throttle(hResponder, 100))
+      .on('orientationchange', hResponder);
 
     // catchall, false as the second arg suppresses the event being fired
     tn.responsive([{name:'base'}])('base')
