@@ -8,12 +8,6 @@
 			</title>
     <link href="assets/css/responsivegrid.css" rel="stylesheet">
      <link href="assets/css/doc.css" rel="stylesheet">
-		<link href="assets/css/markdown.css" rel="stylesheet">
-		<link href="assets/css/intentions-markdown.css" rel="stylesheet">
-
-<script src="assets/js/Markdown.Converter.js"></script>
-<script src="assets/js/Markdown.Sanitizer.js"></script>
-<script src="assets/js/Markdown.Editor.js"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	
@@ -242,19 +236,8 @@
 					in-standard-class="col9wide" 
 					>
 					<div class="module white">
-						<div class="documentation">
-						
-
-
-		        <div class="wmd-panel">
-		            <div id="wmd-button-bar"></div>
-		            <textarea class="wmd-input" id="wmd-input">
-								Dynamically populated markdown
-								</textarea>
-		        </div>
-		        <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
-
-
+						<div class="documentation" id="readme">
+	
 
 					</div>
 					</div>
@@ -267,44 +250,8 @@
 
         
         	$(document).ready(function(){
-        		$.get("http://intentionjs.com/README.md", function(response){
-        			$('#wmd-input').text(response);
-  
-
-	            (function () {
-	                var converter1 = Markdown.getSanitizingConverter();
-	                
-	                converter1.hooks.chain("preBlockGamut", function (text, rbg) {
-	                    return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
-	                        return "<blockquote>" + rbg(inner) + "</blockquote>\n";
-	                    });
-	                });
-	                
-	                var editor1 = new Markdown.Editor(converter1);
-	                
-	                editor1.run();
-	                
-	                var converter2 = new Markdown.Converter();
-
-	                converter2.hooks.chain("preConversion", function (text) {
-	                    return text.replace(/\b(a\w*)/gi, "*$1*");
-	                });
-
-	                converter2.hooks.chain("plainLinkText", function (url) {
-	                    return "This is a link to " + url.replace(/^https?:\/\//, "");
-	                });
-	                
-	                var help = function () { alert("Do you need help?"); }
-	                var options = {
-	                    helpButton: { handler: help },
-	                    strings: { quoteexample: "whatever you're quoting, put it right here" }
-	                };
-	                var editor2 = new Markdown.Editor(converter2, "-second", options);
-	                
-	                editor2.run();
-	            })();
-
-	        
+        		$.get("http://intentionjs.com/README.html", function(response){
+        			$('#readme').text(response);        
         		});
         	});
 
