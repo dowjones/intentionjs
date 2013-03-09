@@ -13,10 +13,7 @@ var intentionWrapper = function($, _){
     // public methods
     // TODO: break this function down a bit
     responsive:function(contexts, matcher, measure){
-      var currentContexts = this.contexts,
-        currentContext,
-        emitter = _.bind(this._emitter, this),
-        contextualize = _.bind(this._contextualize, this);
+      var currentContext;
 
       // if no matcher function is specified expect to compare a 
       // string to the ctx.name property
@@ -33,7 +30,7 @@ var intentionWrapper = function($, _){
       // bind an the respond function to each context name
       _.each(contexts, function(ctx){
         this.on(ctx.name, _.bind(
-            function(){this._respond(currentContexts, this.elms);}, this));
+            function(){this._respond(this.contexts, this.elms);}, this));
       }, this);
       
       var responder = _.bind(function(){
@@ -46,11 +43,11 @@ var intentionWrapper = function($, _){
             if( (currentContext===undefined) || 
               (ctx.name !== currentContext.name)){
               currentContext = ctx;
-              currentContexts = contextualize(ctx, contexts, 
-                  currentContexts);
+              this.contexts = this._contextualize(ctx, contexts, 
+                  this.contexts);
               // emit the context event
-              emitter($.extend({}, {type:currentContext.name}, 
-                currentContext));
+              this._emitter($.extend({}, {type:currentContext.name}, 
+                currentContext), this);
               
               // done, break the loop
               return false;
@@ -59,7 +56,7 @@ var intentionWrapper = function($, _){
             return false;
           }
           return true;
-        });
+        }, this);
         // return the intention object for chaining
         return this;
 
@@ -339,7 +336,6 @@ var intentionWrapper = function($, _){
       }
       return currentContexts;
     }
-
   };
   return Intention;
 };
