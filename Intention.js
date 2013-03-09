@@ -50,7 +50,7 @@ var intentionWrapper = function($, _){
                   currentContexts);
               // emit the context event
               emitter($.extend({}, {type:currentContext.name}, 
-                currentContext));  
+                currentContext));
               
               // done, break the loop
               return false;
@@ -72,8 +72,6 @@ var intentionWrapper = function($, _){
 
     elements: function(scope){
 
-      var elmSpec = this._elmSpec;
-
       // find all responsive elms in a specific dom scope
       if(!scope) scope = document;
 
@@ -85,7 +83,7 @@ var intentionWrapper = function($, _){
       return this;
     },
 
-    add: function(elms){
+    add: function(elms, spec){
       // is expecting a jquery object
       elms.each(_.bind(function(i, elm){
         var exists = false;
@@ -95,13 +93,15 @@ var intentionWrapper = function($, _){
             return false;
           }
         });
+
         if(exists === false){
           // create the elements responsive data
-          $(elm).data('intent.spec', 
-            this._fillSpec(this._attrsToSpec(elm.attributes)));
+          $(elm).data('intent.spec',
+            this._fillSpec(
+              $.extend(true, spec, this._attrsToSpec(elm.attributes))));
           // make any appropriate changes based on the current contexts
           this._makeChanges($(elm), this._changes(
-            $(elm).data('intent.spec'), this.contexts))
+            $(elm).data('intent.spec'), this.contexts));
 
           this.elms.push(elm);
         }
@@ -178,25 +178,30 @@ var intentionWrapper = function($, _){
 
     _fillSpec: function(spec){
 
-      var funcs = {},
-        tmpl = {};
+      var applyToContext = function(func){
+        return function(funcName){
+          _.each(spec, function(ctx){
+            func(ctx, funcName);
+          });
+        };
+      };
 
-      _.each(spec, function(value, context){
-        _.each(value, function(val, func){
-          funcs[func]='';
+      applyToContext(function(ctx){
+        _.each(ctx, function(val, funcName){
+          applyToContext(function(ctx, funcName){
+            if(ctx[funcName] === undefined) ctx[funcName] = '';
+          })(funcName)
         });
-        if(tmpl[context] === undefined) {
-          tmpl[context]=funcs;
-        }
-      }, this);
-      return $.extend(true, {}, tmpl, spec);
+      })();
+
+      return spec;
     },
 
     _attrsToSpec: function(attrs){
 
       var spec={},
         pattern = new RegExp(
-          '(^(data-)?(in|intent)-)?([_a-zA-Z0-9]+)-([a-z:]+)'),
+          '(^(data-)?(in|intent)-)?([_a-zA-Z0-9]+)-([A-Za-z:-]+)'),
         addProp=function(obj, name, value){
           obj[name] = value;
           return obj;
@@ -216,7 +221,6 @@ var intentionWrapper = function($, _){
 
     _resolveSpecs: function(specList, specs){
       var changes={},
-        changeBuffer={},
         moveFuncs=['append', 'prepend', 'before', 'after'];
 
       _.each(specList, function(specName){
@@ -293,40 +297,49 @@ var intentionWrapper = function($, _){
         } else {
           elm.attr(func, change);
         }
-        return elm;
       }, this);
+
+      return elm;
     },
 
     _respond: function(contexts, elms){
       // go through all of the responsive elms
       elms.each(_.bind(function(i, elm){
-        this._makeChanges($(elm), this._changes(
-          $(elm).data('intent.spec'), contexts));
+        var $elm = $(elm);
+        this._makeChanges($elm, this._changes(
+          $elm.data('intent.spec'), contexts));
+
+        $elm.trigger('intent');
       }, this));
     },
 
-    _contextualize: function(inContext, ofContexts, currentContexts){
+    _contextualize: function(context, axis, currentContexts){
 
-      var removeCtx = _.bind(function(outCtx, contexts){
-        $.each(contexts, function(i, ctx){
-          if(outCtx.name === ctx.name) {
-            contexts.splice(i, 1);
+      var index = -1;
+      // go through the axis first because the current context list 
+      // can be empty
+      _.every(axis, function(current){
+
+        if(index !== -1) return false;
+
+        _.every(currentContexts, function(ctx, i){
+          if(ctx===current){
+            index = i;
             return false;
           }
+          return true;
         });
-        return contexts;
-      }, this);
-      // remove other contexts in the --group-- from the list
-      _.each(ofContexts, function(ctx){
-        if( inContext.name !== ctx.name ){
-          currentContexts = removeCtx(ctx, currentContexts);
-          return;
-        } else if( $.inArray(ctx, currentContexts) === -1 ) {
-          currentContexts.unshift(ctx);
-        }
+        return true;
       });
+
+      if(index !== -1) {
+        currentContexts.splice(index, 1, context);
+      } else {
+        currentContexts.unshift(context);
+      }
       return currentContexts;
     }
+
   };
   return Intention;
 };
