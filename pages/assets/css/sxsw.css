@@ -1,16 +1,11 @@
-.header {
-	
-}
-
-
-.cursor{
+.cursor {
 	width: 100%;
 	height: 65px;
 	background-color: rgba(255,255,255,.8);
 	top: 0px;
 
 }
-.cursor a{
+.cursor a {
 	text-decoration: none;
 	padding-left: 50px;
 	padding-top: 20px;
@@ -52,7 +47,7 @@
 	background-color: rgba(255,255,255,.8);
 }
 
-.twitter{
+.twitter {
 	width: 25px;
 	height: 25px;
 	background-image: url(img/Tblack.jpg);
@@ -61,7 +56,7 @@
 	padding-left: 20px;
 }
 
-.twitter:hover{
+.twitter:hover {
 	width: 25px;
 	height: 25px;
 	background-image: url(img/Thov.jpg);
@@ -70,8 +65,7 @@
 	padding-left: 20px;
 }
 
-
-.facebook{
+.facebook {
 	width: 25px;
 	height: 25px;
 	background-image: url(img/FBBlack.jpg);
@@ -79,7 +73,7 @@
 	float: left;
 	padding-left: 20px;
 }
-.facebook:hover{
+.facebook:hover {
 	width: 25px;
 	height: 25px;
 	background-image: url(img/FBhov.jpg);
@@ -88,7 +82,7 @@
 	padding-left: 20px;
 }
 
-.google{
+.google {
 	width: 25px;
 	height: 25px;
 	background-image: url(img/GBlack.jpg);
@@ -97,16 +91,15 @@
 	
 }
 
-.google:hover{
+.google:hover {
 	width: 25px;
 	height: 25px;
 	background-image: url(img/Ghov.jpg);
 	background-repeat: no-repeat;
 	float: left;
-	
 }
 
-.forkongithub{
+.forkongithub {
 	position:absolute;
 	display:block;
 	top:0;
@@ -115,30 +108,29 @@
 	overflow:hidden;
 	height:170px;}
 
-.forkongithub a:hover{
+.forkongithub a:hover {
 	background:#505b68;
-	color:#fff;}
+	color:#fff;
+}
 
-.forkongithub a{
-		background:#000;
-		color:#fff;
-		text-decoration:none;
-		font-family:"Century Gothic", sans-serif;
-		text-align:;
-		font-weight:bold;
-		padding:5px 40px;
-		font-size:1rem;
-		line-height:1.4rem;
-		width:170px;
-		position:absolute;
-		top:60px;
-		right:-70px; 
-		transform:rotate(45deg);
-		-webkit-transform:rotate(45deg);
-		box-shadow:4px 4px 10px rgba(0,0,0,0.8);
-	}
-
-
+.forkongithub a {
+	background:#000;
+	color:#fff;
+	text-decoration:none;
+	font-family:"Century Gothic", sans-serif;
+	text-align:;
+	font-weight:bold;
+	padding:5px 40px;
+	font-size:1rem;
+	line-height:1.4rem;
+	width:170px;
+	position:absolute;
+	top:60px;
+	right:-70px; 
+	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+	box-shadow:4px 4px 10px rgba(0,0,0,0.8);
+}
 
 .forkM	.forkongithub{
 	position:absolute;
@@ -147,13 +139,15 @@
 	right:0;
 	width:212px;
 	overflow:hidden;
-	height:180px;}
+	height:180px;
+}
 
 .forkM .forkongithub a:hover{
 	background:#e9e9e9;
-	color:#23b6b0;;}
+	color:#23b6b0;
+}
 
-.forkM .forkongithub a{
+.forkM .forkongithub a {
 		background:#e9e9e9;
 		color:#000;
 		text-decoration:none;
@@ -177,7 +171,6 @@
 	background-image: url(img/tin.png);
 	width: 330px;
 	height: 115px;
-	
 }
 
 .TinM {
@@ -195,7 +188,6 @@
 	height: 50px;
 	width: 675px;
 	background-repeat: no-repeat;
-
 }
 
 .subTnM {
@@ -206,11 +198,7 @@
 	background-image: url(img/backbigS.png);
 	width: 100%;
 	height: 500px;
-
-	
-	
 }
-
 
 .desktop{
 	width: 534px;
@@ -222,8 +210,6 @@
 	left: 30px;
 }
 
-
-
 .ipad {
 	background-image: url(img/ipad.png);
 	height: 292px;
@@ -232,10 +218,7 @@
 	position: absolute;
 	top:230px;
 	right: 90px;
-
 }
-
-
 
 .iphone {
 	background-image: url(img/iphone.png);
@@ -244,22 +227,14 @@
 	width: 55px;
 	margin: auto;
 	margin-right: 0px;
-
-	
-
 }
 
-
-
-
 .Info {
-	
 	width: 100%;
 	background-color: #e9e9e9;
 	height: 100%;
 	
 }
-
 
 .Information {
 	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
@@ -276,9 +251,6 @@
 .InfoM .SXSW {
 	display: none;
 }
-
-
-
 
 .SXSW{
 	background-image: url(img/SXSW.png);
@@ -297,7 +269,6 @@
 	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
 	background-color: #e9e9e9;
 	padding-top: 20px;
-
 }
 
 .navT a{
@@ -316,14 +287,11 @@
 	background-color: white;
 	height: 50px;
 	margin-left: 20px !important;
-
 }
 
 .navT .tabs {
-	
 	padding-left: 50px;
 	height: 60px;
-
 }
 
 
@@ -336,8 +304,6 @@
 
 }
 
-
-
 .navM a{
 	text-decoration: none;
 	padding-top: 20px;
@@ -349,12 +315,8 @@
 }
 
 .navM .tabs {
-	
 	width: 100%;
 	height: 90px;
-	
-	
-
 }
 
 .navM .tab {
@@ -363,23 +325,19 @@
 	border: 1px solid;
 	border-color: #e9e9e9;
 	background-color: white;	
-
 }
 
 .navM .onPage {
-	
 	width: 100%;
 	background-color: white;
 	height: 30px;
 	margin-left: 0px !important;
 	background-color: #e9e9e9;
-	
 }
 
 .navM .onPage a{
 	color: #23b6a6 !important;
 	padding-left: 20px !important; 
-
 }
 
 
@@ -390,17 +348,12 @@
 	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
 	background-color: #e9e9e9;
 	padding-top: 20px;
-
 }
 
 .nav .tabs {
-	
 	padding-left: 50px;
 	height: 60px;
-
 }
-
-
 
 .onPage {
 	float: left;
@@ -408,9 +361,7 @@
 	background-color: white;
 	height: 50px;
 	margin-left: 20px !important;
-
 }
-
 
 .onPage a{
 	color: #23b6a6 !important;
@@ -424,17 +375,11 @@
 	font-size: 1.2em;
 	color: black;
 	float: left;
-
 }
 
 a:hover{
 	color: #e2514e;
 }
-
-
-
-
-
 
 .column1{
 	margin-left: 50px;
@@ -443,8 +388,6 @@ a:hover{
 	float: left;
 	height: auto;
 	width: auto;
-
-
 }
 
 h6{
@@ -452,11 +395,7 @@ h6{
 	color: #23b6b0;
 	line-height: 1.3em;
 	font-family:"Century Gothic", sans-serif;
-
-
 }
-
-
 
 .column2 {
 	color: grey;
@@ -484,11 +423,6 @@ h6{
 	width: auto;
 	height: auto;
 }
-
-
-
-
-
 
 .erin {
 	float: left;
@@ -525,21 +459,4 @@ h6{
 
 h1, h2, h3, h4 {
 	font-family:"Century Gothic", sans-serif;
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
