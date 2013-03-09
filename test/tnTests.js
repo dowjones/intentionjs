@@ -144,28 +144,28 @@ describe("Intention", function() {
             append:'#default'
           },
           mobile: {
-            class: 'a',
+            'class': 'a',
             src: 'a.png',
             append: '#a'
           },
           tablet: {
-            class:'b',
-            src: 'b.jpg',
+            'class':'b',
+            src: 'b.jpg'
           }
         },
         filled = {
           base:{
             append:'#default',
-            class:'',
+            'class':'',
             src:''
           },
           mobile: {
-            class: 'a',
+            'class': 'a',
             src: 'a.png',
             append: '#a'
           },
           tablet: {
-            class:'b',
+            'class':'b',
             src: 'b.jpg',
             append:''
           }
@@ -253,13 +253,13 @@ describe("Intention", function() {
 
         expect(intent._attrsToSpec(elm[0].attributes)).to.deep.equal({
           mobile:{
-            class:'foo'
+            'class':'foo'
           },
           tablet:{
-            class:'bar'
+            'class':'bar'
           },
           standard:{
-            class:'baz'
+            'class':'baz'
           }
         });
       });
@@ -276,17 +276,17 @@ describe("Intention", function() {
         expect(intent._fillSpec(intent._attrsToSpec(elm[0].attributes)))
           .to.deep.equal({
             mobile:{
-              class:'foo',
+              'class':'foo',
               append:'#foo',
               href:''
             },
             tablet:{
-              class:'bar',
+              'class':'bar',
               append:'',
               href:''
             },
             standard:{
-              class:'baz',
+              'class':'baz',
               href:'http://baz.baz',
               append:''
             }
@@ -302,16 +302,16 @@ describe("Intention", function() {
         expect(
           intent._resolveSpecs(['foo', 'bar'], {
             foo: {
-              class:'foo',
+              'class':'foo',
               href:''
             },
             bar:{
-              class:'bar',
+              'class':'bar',
               href:'http://bar.bar'
             }
           }))
           .to.deep.equal({
-            class:['foo', 'bar'],
+            'class':['foo', 'bar'],
             href:'http://bar.bar'
           });
       });
@@ -324,24 +324,24 @@ describe("Intention", function() {
         var intent = new Intention,
           changes = intent._changes({
             foo:{
-              class:'foo',
+              'class':'foo',
               append:'#foo'
             },
             bar: {
-              class:'bar',
+              'class':'bar',
               append:'#bar'
             }
           }, [{name:'foo'}]);
 
         expect(changes.inSpecs)
           .to.deep.equal({
-            class:['foo'],
+            'class':['foo'],
             move:{value:'#foo', placement:'append'}
           });
 
         expect(changes.outSpecs)
           .to.deep.equal({
-            class:['bar'],
+            'class':['bar'],
             move:{value:'#bar', placement:'append'}
           });
       });
@@ -354,11 +354,11 @@ describe("Intention", function() {
           elm=$('<div class="baz">'),
           changes = intent._changes({
             foo:{
-              class:'foo',
+              'class':'foo',
               href:'http://foo.foo'
             },
             bar: {
-              class:'bar',
+              'class':'bar',
               append:'#bar'
             }
           }, [{name:'foo'}]);
