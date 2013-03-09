@@ -1,6 +1,6 @@
 require.config({
   appDir: './',
-  baseUrl: '../',
+  baseUrl: '../../',
   // shim: {
   //   underscore: {
   //     exports: '_'
@@ -8,8 +8,7 @@ require.config({
   // },
   paths: {
       jquery: 'test/vendor/jquery',
-      underscore: 'test/vendor/underscore',
-      page: 'example/page'
+      underscore: 'test/vendor/underscore'      
   }
 });
 
