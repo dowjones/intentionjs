@@ -4,8 +4,8 @@
 <p>The technology for dealing with responsive design is all over the place. Media queries, often-hacky-javascript, and convoluted HTML. Intention.js allows you to make all of the changes to HTML in the HTML itself. Intention.js is a way to describe the differences of an HTML document from one context to another. </p>
 <p>What should the classes of an element be on mobile vs tablet? Where should your advertising code get placed when you&#39;re on a desktop? Does the page require an alternate slideshow widget on touch enabled devices? These are all changes that Intention.js can make to the page based on a user&#39;s device. Context.js creates a set of common page contexts for width thresholds, touch devices, highres displays and a fallback. And you can easily add your own contexts on top of these or create all your own custom contexts.</p>
 <h2>What&#39;s included:</h2>
-<pre><code>* Intention.js
-* Context.js</code></pre>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code><span class="bullet">* </span>Intention.js
+<span class="bullet">* </span>Context.js</code></pre>
 <p>Intention.js is the script that manages the responsive axis, manipulates elements based on their specifications and emits events when contexts change.</p>
 <p>Context.js is an implementation of Intention.js that sets up common use patterns in responsive design.</p>
 <p>Specifically it has the responsive contexts:
@@ -17,17 +17,17 @@
     </em> highres</p>
 <h2>Installation</h2>
 <p>include both scripts on your page or just Intention via require or just straight up.</p>
-<pre><code class="lang-html">    &lt;!-- use with context defaults --&gt;
-    &lt;script 
-        data-main=&quot;assets/js/context&quot; 
-        src=&quot;assets/js/require/require.js&quot;&gt;&lt;/script&gt;
-    &lt;!-- OR --&gt;
-    &lt;!-- use only intention to build your own context --&gt;
-    &lt;script src=&quot;Intention.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;Context.js&quot;&gt;&lt;/script&gt;
-    &lt;script&gt;
-        // your amazing contextual threshold specification here!
-    &lt;/script&gt;</code></pre>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html">    <span class="comment" style="color:#998;font-style:italic;">&lt;!-- use with context defaults --></span>
+    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">script</span> 
+        <span class="attribute" style="color:#008080;">data-main</span>=<span class="value" style="color:#d14;">"assets/js/context"</span> 
+        <span class="attribute" style="color:#008080;">src</span>=<span class="value" style="color:#d14;">"assets/js/require/require.js"</span>></span><span class="javascript"></span><span class="tag" style="color:#000080;font-weight:normal;">&lt;/<span class="title" style="color:#000080;font-weight:normal;">script</span>></span>
+    <span class="comment" style="color:#998;font-style:italic;">&lt;!-- OR --></span>
+    <span class="comment" style="color:#998;font-style:italic;">&lt;!-- use only intention to build your own context --></span>
+    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">script</span> <span class="attribute" style="color:#008080;">src</span>=<span class="value" style="color:#d14;">"Intention.js"</span>></span><span class="javascript"></span><span class="tag" style="color:#000080;font-weight:normal;">&lt;/<span class="title" style="color:#000080;font-weight:normal;">script</span>></span>
+    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">script</span> <span class="attribute" style="color:#008080;">src</span>=<span class="value" style="color:#d14;">"Context.js"</span>></span><span class="javascript"></span><span class="tag" style="color:#000080;font-weight:normal;">&lt;/<span class="title" style="color:#000080;font-weight:normal;">script</span>></span>
+    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">script</span>></span><span class="javascript">
+        <span class="comment" style="color:#998;font-style:italic;">// your amazing contextual threshold specification here!</span>
+    </span><span class="tag" style="color:#000080;font-weight:normal;">&lt;/<span class="title" style="color:#000080;font-weight:normal;">script</span>></span></code></pre>
 <h2>Usage</h2>
 <p>By default context.js provides a number of threshold groups via intention.js: browser widths, touch, highres, and a base group</p>
 <p>the default thresholds in each group are respectively: 
@@ -37,127 +37,127 @@ highres (devicePixelRatio &gt; 1)
 base (default, always on)</p>
 <p>There are three manipulation types: class names, attributes, placement on the page</p>
 <h3>Interface</h3>
-<pre><code class="lang-html">    &lt;!-- flag the element as responsive --&gt;
-    &lt;div intent&gt;
-    &lt;!-- or --&gt;
-    &lt;div data-intent&gt;
-    &lt;!-- For the purposes of the documentation the prefix &quot;in-&quot; will be 
-    used instead of &quot;data-in-&quot; to keep things concise --&gt;
-    &lt;!-- attribute structure: prefix-context-function 
-        ie in-mobile-class OR in-highres-src --&gt;
-    &lt;div class=&quot;not interesting&quot; intent in-mobile-class=&quot;more interesting&quot;&gt;</code></pre>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html">    <span class="comment" style="color:#998;font-style:italic;">&lt;!-- flag the element as responsive --></span>
+    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">div</span> <span class="attribute" style="color:#008080;">intent</span>></span>
+    <span class="comment" style="color:#998;font-style:italic;">&lt;!-- or --></span>
+    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">div</span> <span class="attribute" style="color:#008080;">data-intent</span>></span>
+    <span class="comment" style="color:#998;font-style:italic;">&lt;!-- For the purposes of the documentation the prefix "in-" will be 
+    used instead of "data-in-" to keep things concise --></span>
+    <span class="comment" style="color:#998;font-style:italic;">&lt;!-- attribute structure: prefix-context-function 
+        ie in-mobile-class OR in-highres-src --></span>
+    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">div</span> <span class="attribute" style="color:#008080;">class</span>=<span class="value" style="color:#d14;">"not interesting"</span> <span class="attribute" style="color:#008080;">intent</span> <span class="attribute" style="color:#008080;">in-mobile-class</span>=<span class="value" style="color:#d14;">"more interesting"</span>></span></code></pre>
 <h4>Attribute Manipulation</h4>
-<pre><code class="lang-html">    &lt;!-- mark an element as responsive, set the base(default) attr, specify which image to load in a given context --&gt;
-    &lt;img
-        intent 
-        in-base-src=&quot;small_img.png&quot; 
-        in-highres-src=&quot;big_img.png&quot; /&gt;
-    &lt;!-- the above spec will produce the following in each context
-        default: &lt;img src=&quot;small_img.png&quot; /&gt;
-        highres: &lt;img src=&quot;big_img.png&quot; /&gt;
-    --&gt;</code></pre>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html">    <span class="comment" style="color:#998;font-style:italic;">&lt;!-- mark an element as responsive, set the base(default) attr, specify which image to load in a given context --></span>
+    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">img
+</span>        <span class="attribute" style="color:#008080;">intent</span> 
+        <span class="attribute" style="color:#008080;">in-base-src</span>=<span class="value" style="color:#d14;">"small_img.png"</span> 
+        <span class="attribute" style="color:#008080;">in-highres-src</span>=<span class="value" style="color:#d14;">"big_img.png"</span> /></span>
+    <span class="comment" style="color:#998;font-style:italic;">&lt;!-- the above spec will produce the following in each context
+        default: &lt;img src="small_img.png" />
+        highres: &lt;img src="big_img.png" />
+    --></span></code></pre>
 <h4>Class Manipulation</h4>
 <p>An element can have more than one class. intent&#39;s aim is to be as unobtrusive as possible, at the same time allowing for a lot of flexibility with the way classes are combined.</p>
-<pre><code class="lang-html">    &lt;section
-        class=&quot;column&quot;
-        intent
-        in-mobile-class=&quot;narrow&quot;
-        in-tablet-class=&quot;medium&quot;
-        in-standard-class=&quot;wide&quot;
-        in-luxury-class=&quot;x-wide&quot;
-        in-touch-class=&quot;swipe-nav&quot;
-    &gt;...&lt;/section&gt;
-    &lt;!--  --&gt;</code></pre>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html">    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">section
+</span>        <span class="attribute" style="color:#008080;">class</span>=<span class="value" style="color:#d14;">"column"</span>
+        <span class="attribute" style="color:#008080;">intent</span>
+        <span class="attribute" style="color:#008080;">in-mobile-class</span>=<span class="value" style="color:#d14;">"narrow"</span>
+        <span class="attribute" style="color:#008080;">in-tablet-class</span>=<span class="value" style="color:#d14;">"medium"</span>
+        <span class="attribute" style="color:#008080;">in-standard-class</span>=<span class="value" style="color:#d14;">"wide"</span>
+        <span class="attribute" style="color:#008080;">in-luxury-class</span>=<span class="value" style="color:#d14;">"x-wide"</span>
+        <span class="attribute" style="color:#008080;">in-touch-class</span>=<span class="value" style="color:#d14;">"swipe-nav"</span>
+    ></span>...<span class="tag" style="color:#000080;font-weight:normal;">&lt;/<span class="title" style="color:#000080;font-weight:normal;">section</span>></span>
+    <span class="comment" style="color:#998;font-style:italic;">&lt;!--  --></span></code></pre>
 <h4>Placement Manipulation</h4>
 <p>take this html structure</p>
-<pre><code class="lang-html">    &lt;header&gt;&lt;nav&gt;&lt;/nav&gt;&lt;/header&gt;
-    &lt;section&gt;...&lt;/section&gt;
-    &lt;footer&gt;...&lt;/footer&gt;</code></pre>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html">    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">header</span>></span><span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">nav</span>></span><span class="tag" style="color:#000080;font-weight:normal;">&lt;/<span class="title" style="color:#000080;font-weight:normal;">nav</span>></span><span class="tag" style="color:#000080;font-weight:normal;">&lt;/<span class="title" style="color:#000080;font-weight:normal;">header</span>></span>
+    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">section</span>></span>...<span class="tag" style="color:#000080;font-weight:normal;">&lt;/<span class="title" style="color:#000080;font-weight:normal;">section</span>></span>
+    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">footer</span>></span>...<span class="tag" style="color:#000080;font-weight:normal;">&lt;/<span class="title" style="color:#000080;font-weight:normal;">footer</span>></span></code></pre>
 <p>suppose we want to demote the status of the nav when the user is on smaller devices</p>
 <p>the following specification on the nav might do what we need</p>
-<pre><code class="lang-html">    &lt;nav intent 
-        in-mobile-prepend=&quot;footer&quot;
-        in-tablet-append=&quot;section&quot;
-        in-standard-append=&quot;header&quot;&gt;</code></pre>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html">    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">nav</span> <span class="attribute" style="color:#008080;">intent</span> 
+        <span class="attribute" style="color:#008080;">in-mobile-prepend</span>=<span class="value" style="color:#d14;">"footer"</span>
+        <span class="attribute" style="color:#008080;">in-tablet-append</span>=<span class="value" style="color:#d14;">"section"</span>
+        <span class="attribute" style="color:#008080;">in-standard-append</span>=<span class="value" style="color:#d14;">"header"</span>></span></code></pre>
 <p>when the device is 320px units or below the nav will appear at the top of the footer. when the device is between 320 and 768 it will go to the end of the section tag, and so forth.</p>
 <h5>Move functions</h5>
-<pre><code>* prepend
-* append
-* before
-* after</code></pre>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code><span class="bullet">* </span>prepend
+<span class="bullet">* </span>append
+<span class="bullet">* </span>before
+<span class="bullet">* </span>after</code></pre>
 <h4>Why a base context?</h4>
 <p>In most scenarios you don&#39;t want to have to specify the way something will change in <em>every</em> context. Often times an element will be one of two things among many different contexts. take an img tag with two possible sources, it&#39;s either going to be highres or not. by specifying the in-highres-src attribute, you know that the source will be appropriately applied in that scenario. With a in-base-src attribute, you can rely on the source being set accordingly for all other contexts.</p>
 <h3>Making your own custom contexts</h3>
 <p>In addition to what is provided as a set of useful page contexts in the context.js script. You can define your own contexts, for anything!</p>
 <p>You can extend the functionality of context.js or scrap the whole thing entirely.</p>
 <p>Here is an example for scroll depth thresholds:</p>
-<pre><code class="lang-javascript">    var responsiveDepths = intent.responsive(
-        // contexts
-        [{name:&#39;shallow&#39;, value:20}, {name:&#39;deep&#39;, value:1/0}],
-        // matching:
-        function(measure, context){
-            return measure &lt; context.value;
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">    <span class="keyword" style="color:#333;font-weight:bold;">var</span> responsiveDepths = intent.responsive(
+        <span class="comment" style="color:#998;font-style:italic;">// contexts</span>
+        [{name:<span class="string" style="color:#d14;">'shallow'</span>, value:<span class="number" style="color:#099;">20</span>}, {name:<span class="string" style="color:#d14;">'deep'</span>, value:<span class="number" style="color:#099;">1</span>/<span class="number" style="color:#099;">0</span>}],
+        <span class="comment" style="color:#998;font-style:italic;">// matching:</span>
+        <span class="keyword" style="color:#333;font-weight:bold;">function</span>(measure, context){
+            <span class="keyword" style="color:#333;font-weight:bold;">return</span> measure &lt; context.value;
         },
-        // measure
-        function(){
-            return window.pageYOffset;
+        <span class="comment" style="color:#998;font-style:italic;">// measure</span>
+        <span class="keyword" style="color:#333;font-weight:bold;">function</span>(){
+            <span class="keyword" style="color:#333;font-weight:bold;">return</span> window.pageYOffset;
         });
-    $(window).on(&#39;scroll&#39;, responsiveDepths);</code></pre>
+    $(window).on(<span class="string" style="color:#d14;">'scroll'</span>, responsiveDepths);</code></pre>
 <p>responsiveDepths is just a function, whenever you want to evaluate which context is relevant call that function.</p>
 <p>NOTE: if you scrap context.js you will have to add your responsive elements manually via the elements method.</p>
 <p>in the above example you could do something like this:</p>
-<pre><code class="lang-javascript">    ...
-    $(window).on(&#39;scroll&#39;, responsiveDepths);
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">    ...
+    $(window).on(<span class="string" style="color:#d14;">'scroll'</span>, responsiveDepths);
     intent.elements();</code></pre>
 <p>this will add all elements matching the &quot;$(&#39;[data-intent],[intent],[data-in],[in]&#39;)&quot; selector. Optionally pass a scope argument to this function to specify where in the dom to start searching. The default is the document.</p>
 <p>calling the elements function will change the elements&#39; attributes to the specification provided in the html as it finds them. This way your responsive axis can all be defined <em>before</em> any changes are made to the DOM.</p>
 <h4>The components intent.responsive</h4>
 <h5>Thresholds</h5>
 <p>The thresholds are an array of context objects. the only requirement of these objects is that they have a name property. Specifying any other property is up to you.</p>
-<pre><code class="lang-javascript">    // required
-    [{name:&#39;shallow&#39;}, {name:&#39;deep&#39;}]
-    // or with a little extra
-    [{name:&#39;shallow&#39;, value:20}, 
-        {name:&#39;deep&#39;, value: Infinity}]</code></pre>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">    <span class="comment" style="color:#998;font-style:italic;">// required</span>
+    [{name:<span class="string" style="color:#d14;">'shallow'</span>}, {name:<span class="string" style="color:#d14;">'deep'</span>}]
+    <span class="comment" style="color:#998;font-style:italic;">// or with a little extra</span>
+    [{name:<span class="string" style="color:#d14;">'shallow'</span>, value:<span class="number" style="color:#099;">20</span>}, 
+        {name:<span class="string" style="color:#d14;">'deep'</span>, value: <span class="literal">Infinity</span>}]</code></pre>
 <h5>Matching function</h5>
 <p>The matching function is called for each item in the thresholds array until a match is made i.e. it returns true. it is totally optional. However if it is not specified a default will be used which matches based on the context name. have a look in the Default Compare Functions section for the specifics.</p>
 <p>The context that produces a match is then understood as the current context for the threshold group. In other words there will only every be ONE matched context for a threshold group.</p>
 <p>If a matching function is not specified this default is used:</p>
-<pre><code class="lang-javascript">    function(measure, context){
-      return measure === context.name;
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">    <span class="keyword" style="color:#333;font-weight:bold;">function</span>(measure, context){
+      <span class="keyword" style="color:#333;font-weight:bold;">return</span> measure === context.name;
     };</code></pre>
 <h5>Measure function</h5>
 <p>default measure function is a pass-through</p>
-<pre><code class="lang-javascript">    function(arg){
-      return arg;
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">    <span class="keyword" style="color:#333;font-weight:bold;">function</span>(arg){
+      <span class="keyword" style="color:#333;font-weight:bold;">return</span> arg;
     };</code></pre>
 <p>why? intent.responsive() // outputs a function. so calling the result of that function with an argument passed to it will get used as the measure arg in the <em>matcher</em> function</p>
 <p>like so:</p>
-<pre><code class="lang-javascript">    // make a responsive group *thresholds* is the array of contexts and *matcher* is a custom comparison function
-    var responsive = intent.responsive(thresholds, matcher);
-    // assuming we want to compare the scroll depth against each context you could do something like this:
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">    <span class="comment" style="color:#998;font-style:italic;">// make a responsive group *thresholds* is the array of contexts and *matcher* is a custom comparison function</span>
+    <span class="keyword" style="color:#333;font-weight:bold;">var</span> responsive = intent.responsive(thresholds, matcher);
+    <span class="comment" style="color:#998;font-style:italic;">// assuming we want to compare the scroll depth against each context you could do something like this:</span>
     responsive(window.pageYOffset);</code></pre>
 <p>in this example window.pageYOffset would get passed as the first argument to the matcher function for every context until the matcher returns true.</p>
 <h4>Putting it all together</h4>
 <p>Threshold objects must be passed to intent.responsive as an array</p>
 <p>The only other requirement is that the threshold object has a &quot;name&quot; property, i.e. {name:&#39;slow_page&#39;}. The name is used for two main things: emmiting an event of that name on the intent object and allowing you to create specifications in the html for that threshold.</p>
-<pre><code>* names may *not* have dashes
-* names can have &quot;_&quot;
-* the regex to match them is simply: [_a-zA-Z0-9]+</code></pre>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code><span class="bullet">* </span>names may <span class="emphasis">*not*</span> have dashes
+<span class="bullet">* </span>names can have "_"
+<span class="bullet">* </span>the regex to match them is simply: [_a-zA-Z0-9]+</code></pre>
 <p>to create an event handler for a threshold:</p>
-<pre><code class="lang-javascript">intent.on(&#39;slow_page&#39;, function(){
-    alert(&#39;try another wifi network&#39;);
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">intent.on(<span class="string" style="color:#d14;">'slow_page'</span>, <span class="keyword" style="color:#333;font-weight:bold;">function</span>(){
+    alert(<span class="string" style="color:#d14;">'try another wifi network'</span>);
 });</code></pre>
 <p>to specify changes to the html when in that threshold</p>
-<pre><code class="lang-html">    &lt;img intent in-slow_page-src=&quot;toobad.gif&quot; /&gt;</code></pre>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html">    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">img</span> <span class="attribute" style="color:#008080;">intent</span> <span class="attribute" style="color:#008080;">in-slow_page-src</span>=<span class="value" style="color:#d14;">"toobad.gif"</span> /></span></code></pre>
 <h4>Default Compare Functions</h4>
-<pre><code class="lang-javascript">    // matching default              
-    matcher = function(measure, ctx){
-      return measure === ctx.name;
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">    <span class="comment" style="color:#998;font-style:italic;">// matching default              </span>
+    matcher = <span class="keyword" style="color:#333;font-weight:bold;">function</span>(measure, ctx){
+      <span class="keyword" style="color:#333;font-weight:bold;">return</span> measure === ctx.name;
     };
-      // measure default is just a pass through
-    measure = function(arg){
-      return arg;
+      <span class="comment" style="color:#998;font-style:italic;">// measure default is just a pass through</span>
+    measure = <span class="keyword" style="color:#333;font-weight:bold;">function</span>(arg){
+      <span class="keyword" style="color:#333;font-weight:bold;">return</span> arg;
     };</code></pre>
 <h4>About Matching</h4>
 <p>top down search, ends when a match is found
@@ -165,38 +165,38 @@ in other words just one match per context group</p>
 <h3>Stuff to note:</h3>
 <h3>Master list of functions:</h3>
 <h4>Multi-value attr (union of all current contexts)</h4>
-<pre><code>* class</code></pre>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code>* <span class="class" style="color:#458;font-weight:bold;"><span class="keyword" style="color:#333;font-weight:bold;">class</span></span></code></pre>
 <h4>Move Functions</h4>
-<pre><code>* append
-* prepend
-* before
-* after</code></pre>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code><span class="bullet">* </span>append
+<span class="bullet">* </span>prepend
+<span class="bullet">* </span>before
+<span class="bullet">* </span>after</code></pre>
 <h4>Single-value attrs, (everything else)</h4>
-<pre><code>* any arbitrary atribute that doesn&#39;t include a dash.</code></pre>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code>* <span class="keyword" style="color:#333;font-weight:bold;">any</span> arbitrary atribute that doesn<span class="string" style="color:#d14;">'t include a dash.</span></code></pre>
 <h2>Authors</h2>
-<pre><code>* Joe Kendall
-* Erin Sparling</code></pre>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code><span class="bullet">* </span>Joe Kendall
+<span class="bullet">* </span>Erin Sparling</code></pre>
 <h2>License</h2>
-<pre><code class="lang-javascript">// MIT licesnse for everything
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript"><span class="comment" style="color:#998;font-style:italic;">// MIT licesnse for everything</span>
 
-// Copyright (c) 2012 The Wall Street Journal, 
-// http://wsj.com/
+<span class="comment" style="color:#998;font-style:italic;">// Copyright (c) 2012 The Wall Street Journal, </span>
+<span class="comment" style="color:#998;font-style:italic;">// http://wsj.com/</span>
 
-// Permission is hereby granted, free of charge, to any person obtaining
-// a copy of this software and associated documentation files (the
-// &quot;Software&quot;), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to
-// permit persons to whom the Software is furnished to do so, subject to
-// the following conditions:
+<span class="comment" style="color:#998;font-style:italic;">// Permission is hereby granted, free of charge, to any person obtaining</span>
+<span class="comment" style="color:#998;font-style:italic;">// a copy of this software and associated documentation files (the</span>
+<span class="comment" style="color:#998;font-style:italic;">// "Software"), to deal in the Software without restriction, including</span>
+<span class="comment" style="color:#998;font-style:italic;">// without limitation the rights to use, copy, modify, merge, publish,</span>
+<span class="comment" style="color:#998;font-style:italic;">// distribute, sublicense, and/or sell copies of the Software, and to</span>
+<span class="comment" style="color:#998;font-style:italic;">// permit persons to whom the Software is furnished to do so, subject to</span>
+<span class="comment" style="color:#998;font-style:italic;">// the following conditions:</span>
 
-// The above copyright notice and this permission notice shall be
-// included in all copies or substantial portions of the Software.
+<span class="comment" style="color:#998;font-style:italic;">// The above copyright notice and this permission notice shall be</span>
+<span class="comment" style="color:#998;font-style:italic;">// included in all copies or substantial portions of the Software.</span>
 
-// THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</code></pre>
+<span class="comment" style="color:#998;font-style:italic;">// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,</span>
+<span class="comment" style="color:#998;font-style:italic;">// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF</span>
+<span class="comment" style="color:#998;font-style:italic;">// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND</span>
+<span class="comment" style="color:#998;font-style:italic;">// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE</span>
+<span class="comment" style="color:#998;font-style:italic;">// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION</span>
+<span class="comment" style="color:#998;font-style:italic;">// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION</span>
+<span class="comment" style="color:#998;font-style:italic;">// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</span></code></pre>
