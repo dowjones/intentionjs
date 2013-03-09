@@ -1,5 +1,5 @@
 ---
-title: Intention.js Documentation
+title: Intention.js
 ---
 
 # intention.js
