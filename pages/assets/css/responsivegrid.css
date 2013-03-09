@@ -6,15 +6,14 @@ body {
 /* end global */
 /* module styles */
 .module {
-	/*min-height: 150px;*/
 	display: block;
 	overflow: hidden;
 }
 
-/*.module:not(:last-child) {
+.module:not(:last-child) {
 	margin-bottom: 1rem;
 }
-*/
+
 .module:before,
 .module:after,
 .column:before,
@@ -39,7 +38,7 @@ body {
 /* grid */
 .column {
 	float: left;
-	/*margin-left: 1.15%;*/
+	margin-left: 1.15%;
 	/* Margin in a 10-col  */
 }
 
@@ -149,4 +148,17 @@ body {
 .tablet .col6wide,
 .mobile .col3wide {
 	width: 100%;
+}
+
+body>.grid {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA78AAAABCAMAAAAhFukwAAAABlBMVEXR0dH///9WxthCAAAAH0lEQVR42u3NIQEAAADCMOhfGkmCu6/AwugZGBhQwQC9YABkomSpkAAAAABJRU5ErkJggg==);
+	background-size: 100% 100%;
+}
+
+body.tablet>.grid {
+	background-size: 168% 168%;
+}
+
+body.mobile>.grid {
+	background-size: 343% 343%;
 }
