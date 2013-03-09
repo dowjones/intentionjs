@@ -251,7 +251,7 @@
         
         	$(document).ready(function(){
         		$.get("http://intentionjs.com/README.html", function(response){
-        			$('#readme').text(response);        
+        			$('#readme').append(response);        
         		});
         	});
 
