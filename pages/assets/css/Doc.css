@@ -10,7 +10,7 @@
 .cursor{
 	width: 100%;
 	height: 65px;
-	background-color: #fff;
+	background-color: rgba(255,255,255,.8);
 	top: 0px;
 
 }
@@ -54,7 +54,7 @@
 
 .icons {
 	height: 65px;
-	background-color: #fff;
+	background-color: rgba(255,255,255,.8);
 }
 
 .twitter{
