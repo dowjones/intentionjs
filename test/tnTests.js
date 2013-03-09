@@ -4,11 +4,10 @@ var assert = chai.assert,
 
 describe("Intention", function() {
 
-  tn = new Intention;
-
-  describe("Constructor", function(){
+  describe("Constructor:", function(){
+    var intent = new Intention;
     it("Should return an object", function(){
-      assert.typeOf(tn, 'object', 'constructor is an object');
+      assert.typeOf(intent, 'object', 'constructor is an object');
     })
   });
 
@@ -16,342 +15,415 @@ describe("Intention", function() {
   var container = $('<div>'),
     // this container does not have tn attrs
     nonResponsiveElm = $('<div id="getRidOfMe">'),
-    responsiveElm1 = $('<div data-tn>');
+    responsiveElm1 = $('<div data-intent>');
 
   // basic tn attrs
   responsiveElm1
-    .attr('tn-class','base')
-    .attr('tn-mobile-class','mobile')
-    .attr('tn-tablet-class','tablet')
-    .attr('tn-touch-class','touch')
-    .attr('tn-standard-class','standard');
+    .attr('in-class','base')
+    .attr('in-mobile-class','mobile')
+    .attr('in-tablet-class','tablet')
+    .attr('in-touch-class','touch')
+    .attr('in-standard-class','standard');
   
-  container.append(nonResponsiveElm, responsiveElm1, $('<div tn>'));
-
-  
+  container.append(nonResponsiveElm, responsiveElm1, $('<div intent>'));
 
   describe("add and remove: add and remove responsive elements", 
     function(){
-      it("Should add three items to tn.elms", function(){
-        expect(tn.elms.length).to.equal(0);
-        // tn.add returns the tn object so i should be able access the elms prop
+      var intent = new Intention;
+
+      it("Should add three items to intent.elms", function(){
+        expect(intent.elms.length).to.equal(0);
+        // intent.add returns the intent object so i should be able access the elms prop
         var divs = container.find('div');
-        expect(tn.add(divs).elms.length).to.equal(3);
+        expect(intent.add(divs).elms.length).to.equal(3);
       });
 
-      it("Should remove one item from tn.elms", function(){
+      it("Should remove one item from intent.elms", function(){
         // find the element that should be removed
         var rmElm = container.find('#getRidOfMe');
-        expect(tn.remove(rmElm).elms.length).to.equal(2);
+        expect(intent.remove(rmElm).elms.length).to.equal(2);
       });
     });
 
-    describe("setElms: set the responsive elements from a dom scope", 
-      function(){
-        it("Should replace whatever is in the tn.elms \
-          with all the *reponsive* elms in the container div", function(){
-            // set the tn.elms to be empty just to keep things clean
-            tn.elms=$();
-            expect(tn.setElms(container).elms.length).to.equal(2);
-          });
-
-        it("Should query the dom for responsive elms, there are none.", 
-          function(){
-            expect(tn.setElms().elms.length).to.equal(0);
+  describe("elements: set the responsive elements from a dom scope", 
+    function(){
+      it("Should add all *reponsive* elms in the container div", function(){
+          var intent = new Intention;
+          expect(intent.elements(container).elms.length).to.equal(2);
         });
+
+      it("Should query the dom for responsive elms, there are none.", 
+        function(){
+          var intent = new Intention;
+          expect(intent.elements(document).elms.length).to.equal(0);
+      });
     });
-
-  // describe("respondTo: create custom responders", function(){
-
-
-    // we need the callback and the evaluator function
-    // 1. name the response, that will be the event emmitted by tn
-    // 2. pass a list of contexts to check against {context:'name', val:true}
-      // name will be used in the data attrs
-      // val is what will be checked against the return value of the callback
-    // 3. the callback is what is going to be fired on this event
-    // 4. optionally pass an evaluation function to compare the callback return value with the context values
-      //  
-    // $(window).resize(tn.respondTo('width', [], callback, 
-    //   function(curContext, retVal){
-
-    //   }))
-
-
-    // var horizontalCheck = function(val){
-    //   return function(retVal){
-    //     if(retVal>val){
-    //       return true;
-    //     }
-    //     return false;
-    //   }
-    // }
-    // tn.respondTo('width', [
-    //     {context:'mobile', val:320},
-    //     {context:'tablet', val:768},
-    //     {context:'standard', val:1000}
-    //   ])
-  // });
 
   describe("responsive: creating responsive functions", function(){
 
-
-    var respCtxs = [{name:'big', val:400}, {name:'small', val:0}],
-     responder = tn.responsive( 
-      respCtxs, 
-
-      function(response, context){
-        return response > context.val;
-      },
-      function(){
-        return $(window).width();
-      });
-
-    var contexts = [{name:'big'}, {name:'medium'},{name:'small'}],
-      simpleResponder = tn.responsive(
-        contexts, null, function(i, contexts){ return contexts[i].name; });
-
-
-    var simpleContexts = [{name:'big'}, {name:'small'}],
-      simplerResponder = tn.responsive(simpleContexts);
-
+    var intent = new Intention,
+      big={name:'big', val:400},
+      small={name:'small', val:0},
+      medium={name:'medium', val:200},
+      sizeCtxs = [big, medium, small],
+      size = intent.responsive( 
+        sizeCtxs, 
+        function(response, context){
+          return response >= context.val;
+        });
 
     it("Should return a function", function(){
-      expect($.isFunction(responder)).to.equal(true);
+      expect(_.isFunction(size)).to.equal(true);
     });
 
     // this is incorrect at < 400 screen sizes, fix
-    it("Should execute to return the current context", function(){
-      expect(responder()).to.deep.equal(
-
-        $(window).width() < 400 ? respCtxs[1]:respCtxs[0]);
+    it("Should add the the appropriate context and remove all others", function(){
+      
+      // in the small context
+      expect(_.contains(size(0).contexts, small)).to.equal(true);
+      expect(_.contains(size(0).contexts, big)).to.equal(false);
+      expect(_.contains(size(0).contexts, medium)).to.equal(false);
+      // in the medium context
+      expect(_.contains(size(200).contexts, medium)).to.equal(true);
+      expect(_.contains(size(200).contexts, big)).to.equal(false);
+      expect(_.contains(size(200).contexts, small)).to.equal(false);
+      // in the big context
+      expect(_.contains(size(1000).contexts, big)).to.equal(true);
+      expect(_.contains(size(1000).contexts, small)).to.equal(false);
+      expect(_.contains(size(1000).contexts, medium)).to.equal(false);
     });
 
-    it("Should execute to return the specified context", function(){
-      expect(simplerResponder('big')).to.deep.equal(simpleContexts[0]);
-    });
-
-    it("Should execute to return alternative context", function(){
-      expect(simplerResponder('small')).to.deep.equal(simpleContexts[1]);
-
-    });
-
-    it("Should return the item specified via the index. multiple arguments", 
-      function(){
-        expect(simpleResponder(0, contexts)).to.deep.equal(simpleContexts[0]);
-
-    });
-
-    it("Should fire the 'small' event", function(){
-      var simpleEventCount=0;
-      tn.on('small', function(ctx){simpleEventCount++;})
-      simpleResponder(2, contexts);
-      expect(simpleEventCount).to.equal(1);
+    it("events should only fire when crossing a threshold", function(){
+      var callbackCount = 0;
+      // set the current context to small
+      size(0);
+      // attach a callback to big
+      intent.on('big', function(){
+        callbackCount++;
+      });
+      // change to the big context
+      size(1000);
+      expect(callbackCount).to.equal(1);
+      // resolve the responder to the big context again.
+      size(1000);
+      // the event should not have fired
+      expect(callbackCount).to.equal(1);
     });
 
 
-    var performTest = false,
-      currentContext,
-      winW,
-      resizeContexts = [{name:'standard', min:769}, 
-        {name:'tablet', min:321},
-        {name:'mobile', min:0}],
-      // hResponder is a function which passes arguments to the 
-      // callback canary
+  });
 
-      hResponder = tn.responsive(resizeContexts,
-        // compare the return value of the callback to each context
-        // return true for a match
-        function(test, context){
-          if(test>=context.min){
-            return true;
+  describe("is: test to see if a context name is in the .contexts property",
+    function(){
+      var intent = new Intention,
+        axis=intent.responsive([{name:'foo'}, {name:'bar'}]);
+      it('should confirm the applied context is current and others are not', 
+        function(){
+          // change the axis into the foo context
+          axis('foo');
+          expect(intent.is('foo')).to.equal(true);
+          expect(intent.is('bar')).to.equal(false);
+
+        });
+
+      it('should change contexts and confirm the new context is \
+        in the contexts list', function(){
+          axis('bar');
+          expect(intent.is('bar')).to.equal(true);
+          expect(intent.is('foo')).to.equal(false);  
+        });
+    });
+
+  describe("_fillSpec: takes a spec and fills in unspecified funcs", function(){
+    var intent = new Intention;
+
+    it('should take a spec and return a new one filled out', function(){
+
+      var spec = {
+          base:{
+            append:'#default'
+          },
+          mobile: {
+            class: 'a',
+            src: 'a.png',
+            append: '#a'
+          },
+          tablet: {
+            class:'b',
+            src: 'b.jpg',
           }
         },
-        // callback, return value is passed to matcher()
-        // to compare against current context
-        function(e){
-          performTest=true;
-          return $(window).width();
-        });
-
-    $(window).on('resize', hResponder);
-
-
-    $(window).trigger('resize');
-
-    it("should wrap the window resize event callback", function(){
-      expect(performTest).to.equal(true);
-    });
-
-    
-    it('should switch between all contexts', function(done){
-      
-      this.timeout(90); //000
-
-      
-
-      var tablet = $.Deferred().done(function(){
-        expect($(window).width()).to.be.below(769);
-        expect(hResponder().name).to.equal('tablet');
-      }),
-      standard = $.Deferred().done(function(){
-        expect($(window).width()).to.be.at.least(769);
-        expect(hResponder().name).to.equal('standard');
-      }),
-      mobile = $.Deferred().done(function(){
-        expect($(window).width()).to.be.below(321);
-        expect(hResponder().name).to.equal('mobile');
-      });
-
-      $.when(tablet, mobile, standard).done(function(){
-        done();
-      });
-
-
-      tn.on('tablet', tablet.resolve);
-      tn.on('mobile', mobile.resolve);
-      tn.on('standard', standard.resolve);
-
-      // alert('RESIZE the window small to large or vise versa')
-    });
-    
-    
-
-
-    it('_respond: should change appropriate attrs in a given context', function(done){
-      
-
-      this.timeout(90);
-
-      var testElm = $('<div class="original" tn-mobile-class="mobile small" \
-            tn-tablet-class="tablet medium" tn-standard-class="standard big" \
-            ></div>');
-
-      // test the _respond attr matching method
-      var match= false;
-
-      $.each(testElm[0].attributes, function(i, attr){
-
-        if(attr.name === 'class'){
-          match = true
-          expect(attr.value).to.equal('original')
-        }
-      });
-
-      expect(match).to.equal(true);
-
-      expect(
-        tn.add(
-          testElm).elms.length).to.equal(1);
-  
-      
-      var tablet = $.Deferred().done(function(){
+        filled = {
+          base:{
+            append:'#default',
+            class:'',
+            src:''
+          },
+          mobile: {
+            class: 'a',
+            src: 'a.png',
+            append: '#a'
+          },
+          tablet: {
+            class:'b',
+            src: 'b.jpg',
+            append:''
+          }
           
-        }),
-
-        standard = $.Deferred().done(function(){
-          
-        }),
-        mobile = $.Deferred().done(function(){
-          
-        });
-
-      $.when(tablet, mobile, standard).done(function(){
-        done();
-      });
-
-
-      tn.on('tablet', tablet.resolve);
-      tn.on('mobile', mobile.resolve);
-      tn.on('standard', standard.resolve);
-      
-
-      // alert('RESIZE the window small to large or vise versa')
+        };
+      expect(intent._fillSpec(spec)).to.deep.equal(filled);
     });
   });
   
 
-  // describe("_contextualize: keeping track of the current contexts", function(){
-
+  describe("_contextualize: keeping track of the current contexts", function(){
+    // takes a context object to add, the axis that context belongs 
+    // (ofContexts) and the list of current contexts
+    var intent = new Intention;
     
-  //   it('should return a list including the "foo" and the "baz" context', function(){
-  //     var inCtx = {name:'foo'},
-  //       expectedCtxs = [{ name:"baz"},{ name:"foo"}],
-  //       currentContexts = tn._contextualize(inCtx, 
-  //       [inCtx, {name:'bar'}], 
-  //       expectedCtxs);
+    it('should return a list including the "foo" and the "baz" context', function(){
+      var inCtx = {name:'foo'},
+        expectedCtxs = [{ name:"baz"},{ name:"foo"}],
+        currentContexts = intent._contextualize(inCtx, 
+          [inCtx, {name:'bar'}], 
+          expectedCtxs);
 
-  //     $.each(expectedCtxs, function(i, ctx){
-  //       expect($.inArray(ctx, currentContexts)).to.be.at.least(0);  
-  //     });
-  //   });
+      _.each(expectedCtxs, function(ctx){
+        expect(_.contains(ctx, currentContexts)).to.equal(false);  
+      });
+    });
 
-  //   it('should add the context even though none of the group are current', function(){
-  //     var inCtx = {name:'foo'},
-  //       constantCtx = {name:'baz'},
-  //       currentCtxs = tn._contextualize(inCtx, 
-  //         [inCtx, {name:'bar'}], 
-  //         [constantCtx]);
-      
-  //     expect($.inArray(inCtx, currentCtxs)).to.be.at.least(0);
-  //     expect($.inArray(constantCtx, currentCtxs)).to.be.at.least(0);
+    it('should add context from axis and remove any other from same context', 
+      function(){
+        var intent = new Intention,
+          inCtx = {name:'foo'},
+          constantCtx = {name:'base'},
+          outCtx = {name:'bar'},
+          current = intent._contextualize(inCtx, 
+            [inCtx, outCtx], 
+            [constantCtx]);
 
-  //   });
-  // });
+        expect(_.contains(current, inCtx)).to.equal(true);
+        expect(_.contains(current, constantCtx)).to.equal(true);
+        expect(_.contains(current, outCtx)).to.equal(false);
+      });
 
-  // describe("_respond: altering attrs based on context", function(){
-  //   var tn=new Intention;
-  //   tn.add($('<div tn-foo-class="foo" tn-a-class="a">'))
-  //     .add($('<div tn-bar-class="bar" tn-b-class="b">'))
-  //     .add($('<div tn-baz-class="baz" tn-c-class="c">'))
+    it('Should replace contexts of the same group at \
+      the same index of current contexts', function(){
+        var intent = new Intention,
+          inCtx = {name:'foo'},
+          outCtx = {name:'bar'},
+          ofCtxs = [inCtx, outCtx],
+          current=intent._contextualize(inCtx, ofCtxs, [{name:'base'}, outCtx]);
+        expect(_.indexOf(current, inCtx)).to.equal(1)
+      });
 
-  //   var foos = tn.responsive([{name:'foo'}, {name:'bar'}, {name:'baz'}]),
-  //     alpha = tn.responsive([{name:'a'}, {name:'b'}, {name:'c'}]);
+    it('Should put new contexts at the beginning of current contexts', 
+      function(){
+        var intent = new Intention,
+          ctxA={name:'a'},
+          ctxB={name:'b'},
+          ctxAA={name:'aa'},
+          axisA = intent.responsive([ctxA, ctxAA]);;
 
-  //   foos('foo');
-  //   alpha('a');
+        axisA('a')
 
+        intent.responsive([ctxB])('b');
 
-  //   // foos('bar');
-  //   // alpha('a');
+        expect(_.indexOf(intent.contexts, ctxA)).to.equal(1);
+        expect(_.indexOf(intent.contexts, ctxB)).to.equal(0);
 
-  // });
+        // switch axisA to ctx AA
+        axisA('aa');
 
+        // the index should be the same
+        expect(_.indexOf(intent.contexts, ctxAA)).to.equal(1);
+
+      });
+  });
+
+  describe("_attrsToSpec: convert element's attrs to a responsive specification", 
+    function(){
+      it('should match when only one func is specified (class)', function(){
+        var intent= new Intention,
+          elm = $('<div>')
+            .attr({'in-mobile-class':'foo',
+              'in-tablet-class':'bar',
+              'in-standard-class':'baz'});
+
+        expect(intent._attrsToSpec(elm[0].attributes)).to.deep.equal({
+          mobile:{
+            class:'foo'
+          },
+          tablet:{
+            class:'bar'
+          },
+          standard:{
+            class:'baz'
+          }
+        });
+      });
+
+      it('should match when many funcs are specified', function(){
+        var intent= new Intention,
+          elm = $('<div>')
+            .attr({'in-mobile-class':'foo',
+              'in-tablet-class':'bar',
+              'in-standard-class':'baz',
+              'in-mobile-append':'#foo',
+              'in-standard-href':'http://baz.baz'});
+
+        expect(intent._fillSpec(intent._attrsToSpec(elm[0].attributes)))
+          .to.deep.equal({
+            mobile:{
+              class:'foo',
+              append:'#foo',
+              href:''
+            },
+            tablet:{
+              class:'bar',
+              append:'',
+              href:''
+            },
+            standard:{
+              class:'baz',
+              href:'http://baz.baz',
+              append:''
+            }
+          });
+      });
+    });
   
-  describe('util funcs', function(){
-    var tn=new Intention;
+  describe('_resolveSpecs: from a list of names make object of changes', 
+    function(){
 
+      it('should combine the classes and cascade to specified attr', function(){
+        var intent = new Intention;
+        expect(
+          intent._resolveSpecs(['foo', 'bar'], {
+            foo: {
+              class:'foo',
+              href:''
+            },
+            bar:{
+              class:'bar',
+              href:'http://bar.bar'
+            }
+          }))
+          .to.deep.equal({
+            class:['foo', 'bar'],
+            href:'http://bar.bar'
+          });
+      });
+    });
+
+  describe('_changes: compiles a list of contexts to be applied and \
+    those that are not applied', 
+    function(){
+      it('should add the foo spec to in contexts and bar to out contexts', function(){
+        var intent = new Intention,
+          changes = intent._changes({
+            foo:{
+              class:'foo',
+              append:'#foo'
+            },
+            bar: {
+              class:'bar',
+              append:'#bar'
+            }
+          }, [{name:'foo'}]);
+
+        expect(changes.inSpecs)
+          .to.deep.equal({
+            class:['foo'],
+            move:{value:'#foo', placement:'append'}
+          });
+
+        expect(changes.outSpecs)
+          .to.deep.equal({
+            class:['bar'],
+            move:{value:'#bar', placement:'append'}
+          });
+      });
+    });
+
+  describe('_makeChanges: maniputate an element based on responsive specification', 
+    function(){
+
+        var intent = new Intention,
+          elm=$('<div class="baz">'),
+          changes = intent._changes({
+            foo:{
+              class:'foo',
+              href:'http://foo.foo'
+            },
+            bar: {
+              class:'bar',
+              append:'#bar'
+            }
+          }, [{name:'foo'}]);
+
+        intent._makeChanges(elm, changes);
+
+        it('should have classes of appropriate context', function(){
+          expect(elm.hasClass('foo')).to.equal(true);
+          expect(elm.hasClass('bar')).to.equal(false);
+        });
+
+        it('should have attr of current context', function(){
+          expect(elm.attr('href')).to.equal('http://foo.foo')
+        })
+
+        it('should not have deleted a class that is not specified in the out contexts', 
+          function(){
+            expect(elm.hasClass('baz')).to.equal(true);
+          });
+    });
+
+  describe('jquery event', function(){
+    it('should fire a jquery trigger event on every elm', function(){
+      var intent = new Intention,
+        fire=false;
+
+      intent.add($('<div>').on('intent', function(){
+        fire=true
+      }));
+
+      intent.responsive([{name:'base'}])('base');
+
+      expect(fire).to.equal(true);
+    })
   })
-
+  
   describe("regex tests", function(){
-
-    var attrPattern = new RegExp('(^(data-)?(tn|intention)-)?' 
-      + 'mobile' + '-' + 'class' + '$');
+    // TODO: update this regex
+    var attrPattern = new RegExp(
+      '(^(data-)?(in|intent)-)?([_a-zA-Z0-9]+)-([A-Za-z:-]+)');
 
     it('should match on an abbreviated nonstandard prefix', function(){
         expect(
           attrPattern
-            .test('tn-mobile-class')).to.equal(true);
+            .test('in-mobile-class')).to.equal(true);
 
     });
 
     it('should match on an abbreviated standard prefix', function(){
         expect(
           attrPattern
-            .test('data-tn-mobile-class')).to.equal(true);
+            .test('data-in-mobile-class')).to.equal(true);
     });
 
     it('should match on a nonstandard prefix', function(){
         expect(
           attrPattern
-            .test('intention-mobile-class')).to.equal(true);
+            .test('intent-mobile-class')).to.equal(true);
 
     });
 
     it('should match on an standard prefix', function(){
         expect(
           attrPattern
-            .test('data-intention-mobile-class')).to.equal(true);
+            .test('data-intent-mobile-class')).to.equal(true);
 
     });
 
@@ -361,6 +433,13 @@ describe("Intention", function() {
             .test('mobile-class')).to.equal(true);
     });
 
+  });
+
+  describe('underscore test', function(){
+    it('should be the relative complement', function(){
+      expect(_.difference([1,2,3], [3,4,5])).to.deep.equal([1,2]);
+      expect(_.difference([1,2,3], [3,2])).to.deep.equal([1]);
+    });
   });
 
 });
