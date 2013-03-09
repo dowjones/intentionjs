@@ -1,18 +1,20 @@
 <!doctype html>
 <html>
 <head>
-	<title>intention testing</title>
+	<title>intention tests</title>
 	
-	
-  <!-- <link rel="stylesheet" href="vendor/jasmine/jasmine.css"> -->
+	<link rel="stylesheet" href="vendor/mocha.css" />
+
+</head>
+<body>
+	<div id="mocha"></div>
   <script src="vendor/jquery.js"></script>
-  <!--<script src="vendor/jasmine/jasmine.js"></script>
-  <script src="vendor/jasmine/jasmine-html.js"></script>-->
+  
   <script src="vendor/mocha.js"></script>
   
-  <script src="vendor/chai.js"></script>
+  <script src="vendor/expect.js"></script>
 
-  <link rel="stylesheet" href="vendor/mocha.css" />
+  
   <script>mocha.setup('bdd')</script>
 
   <!-- source -->
@@ -20,12 +22,8 @@
   <script src="../Intention.js"></script>
 
   <!-- tests -->
-  <script src="tnTests.js"></script>
-  <!-- <script src="ctxTests.js"></script> -->
+  <script src="intention.tests.js"></script>
 
-</head>
-<body>
-	<div id="mocha"></div>
 	<script>
 		
     $(function() {
