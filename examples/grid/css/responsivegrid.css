@@ -1,0 +1,164 @@
+/* global */
+body {
+	margin: 0;
+}
+
+/* end global */
+/* module styles */
+.module {
+	display: block;
+	overflow: hidden;
+}
+
+.module:not(:last-child) {
+	margin-bottom: 1rem;
+}
+
+.module:before,
+.module:after,
+.column:before,
+.column:after,
+.colgroup:before,
+.colgroup:after {
+	content: "";
+	display: block;
+	height: 0;
+	overflow: hidden;
+}
+
+.module:after, 
+.column:after, 
+.colgroup:after {
+	clear: both;
+}
+
+/* end module styles */
+/* component styles */
+/* end component styles */
+/* grid */
+.column {
+	float: left;
+	margin-left: 1.15%;
+	/* Margin in a 10-col  */
+}
+
+.column:first-child {
+	margin-left: 0 !important;
+}
+
+.column + .column:last-child {
+	float: right; /* <- makes alignment look neater */
+	margin-left: 0 !important; /* <- reduces likelihood of inadvertent wrapping */
+}
+
+.col10wide {
+	width: 100%;
+}
+
+.col9wide {
+	width: 89.9%;
+}
+
+.col8wide {
+	width: 79.7%;
+}
+
+.col7wide {
+	width: 69.6%;
+}
+
+.col6wide {
+	width: 59.54%;
+}
+
+.col5wide {
+	width: 49.4%;
+}
+
+.col4wide {
+	width: 39.3%;
+}
+
+.col3wide {
+	width: 29.17%;
+}
+
+.col2wide {
+	width: 19.06%;
+}
+
+.col1wide {
+	width: 8.96%;
+}
+
+.placeholder {
+	display: none !important;
+}
+
+/* Inside a col6wide */
+.col6wide .colgroup > .col3wide {
+	width: 49.1%;
+}
+
+.col6wide .colgroup > .col2wide {
+	width: 32%;
+}
+
+.col6wide .colgroup > .column {
+	margin-left: 2%; /* <- This value is larger than it should be. */
+}
+
+/* Inside a col4wide */
+.col4wide .colgroup > .col2wide {
+	width: 48.54%;
+}
+
+.col4wide .colgroup > .column {
+	margin-left: 2.92%; 
+}
+
+.col3wide .column.col3wide {
+	margin-left: 0 !important; /* <- No column margins in phone view */
+}
+
+/* reset nested columns */
+.col1wide > .col1wide,
+.col2wide > .col2wide,
+.col3wide > .col3wide,
+.col4wide > .col4wide,
+.col5wide > .col5wide,
+.col6wide > .col6wide,
+.col7wide > .col7wide,
+.col8wide > .col8wide,
+.col9wide > .col9wide,
+.col10wide > .col10wide,
+.col11wide > .col11wide,
+.col12wide > .col12wide,
+.col13wide > .col13wide,
+.col14wide > .col14wide,
+.col2wide > .colgroup > .col2wide,
+.col3wide > .colgroup > .col3wide,
+.col4wide > .colgroup > .col4wide,
+.col6wide > .colgroup > .col6wide {
+	width: 100%;
+}
+
+/* handle non-10-col-based contexts */
+.luxury .col14wide,
+.tablet .col6wide,
+.mobile .col3wide {
+	width: 100%;
+}
+
+body>.grid {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA78AAAABCAMAAAAhFukwAAAABlBMVEXR0dH///9WxthCAAAAH0lEQVR42u3NIQEAAADCMOhfGkmCu6/AwugZGBhQwQC9YABkomSpkAAAAABJRU5ErkJggg==);
+	background-size: 100% 100%;
+}
+
+body.tablet>.grid {
+	background-size: 168% 168%;
+}
+
+body.mobile>.grid {
+	background-size: 343% 343%;
+}

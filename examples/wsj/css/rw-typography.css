@@ -1,0 +1,60 @@
+/*
+	
+	Date: 	44/11/08 7:45:09 PM
+	
+	File:	typography.css
+	
+	Disc: 	global typography
+	
+	Notes:	should be used in conjunction with typography, grids, and
+			things like that.
+	
+*/
+
+html {
+	font-size: 10px;
+	/* Standard starting point for web browsers; easy baseline for rem units. Will be overridden by media queries on mobile devices. */
+}
+
+body {
+	text-align: left;
+/* 	font-family: Georgia, 'Century Schoolbook', 'Times New Roman', Times, serif; */
+	font-family: Arial, Helvetica, sans-serif;
+	color: #333;
+}
+
+img {
+	border: 0;
+	/* no borders around images */
+	display: block;
+	/* no spaces under images */
+}
+
+/*	= Links - Basic
+---------------------------------------------------------- */
+
+a:link,
+	a:visited,
+	a:active {
+	color: #093d72;
+	text-decoration: none;
+	outline: none;
+}
+
+a:hover {
+	color: #c74b15;
+}
+
+a:active {
+	outline: none;
+}
+
+/*	= Headers - Basic
+---------------------------------------------------------- */
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+}
+
