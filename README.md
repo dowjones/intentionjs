@@ -1,7 +1,3 @@
----
-title: Intention.js
----
-
 # intention.js
 
 DOM Manipulation via html attribute specification
