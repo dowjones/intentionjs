@@ -1,6 +1,6 @@
 require.config({
   appDir: './',
-  baseUrl: '../',
+  baseUrl: '../../',
   // shim: {
   //   underscore: {
   //     exports: '_'
