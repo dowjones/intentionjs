@@ -8,7 +8,12 @@
 			</title>
     <link href="assets/css/responsivegrid.css" rel="stylesheet">
      <link href="assets/css/doc.css" rel="stylesheet">
+		<link href="assets/css/markdown.css" rel="stylesheet">
+		<link href="assets/css/intentions-markdown.css" rel="stylesheet">
 
+<script src="assets/js/Markdown.Converter.js"></script>
+<script src="assets/js/Markdown.Sanitizer.js"></script>
+<script src="assets/js/Markdown.Editor.js"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	
@@ -239,65 +244,71 @@
 					<div class="module white">
 						<div class="documentation">
 						
-							<h2>Installation</h3>
-<div class="line"></div>
-<p>Install the dependencies [jquery, mocha]</p>	
-<div class="code"><code>npm install</div>
-<p>Include the script on all your pages via require</p>
-
-<div class="code"><code>
-&lt;script data-main="assests/js/main" src="assets/js/require.js&gt;
-</code></div>
-
-<p>Initialize the script</p>
-
-<div class="code"><code>new Intention();</code></div>
 
 
-<h2>Usage</h2>
-<div class="line"></div>
-<p>By default Intention provides three responsive contexts: mobile (320), tablet (768) and desktop (1000).
-<br>
-a "base" context is recommended to solve the scenario where the client enters a context that has not been specified on an element. In other words this is the fallback context
-<br>
-Three manipulation types: class, attr, move (placement)</p>
+		        <div class="wmd-panel">
+		            <div id="wmd-button-bar"></div>
+		            <textarea class="wmd-input" id="wmd-input">
+								Dynamically populated markdown
+								</textarea>
+		        </div>
+		        <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
 
-<h3>Attribute Manipulation</h3>
 
-<!--<pre> tag cannot be used because it disables code from being responsive to tablet and mobile-->
 
-<div class="code"><code>
-img<br>
-&lt;!-- mark an element as responsive, set the base(default) attr, specify which image to load in a given context --&gt;<br>
-&lt;img <br>
-    intent <br>
-    data-base-src="medium_img.png" <br>
-    data-mobile-src="small_img.png"<br>
-    data-desktop-src="big_img.png"/&gt;<br>
-    <br>
-    <br>
-
-&lt;!-- the above spec will produce the following in each context<br>
-    mobile: &lt;img src="small_img.png"/&gt;<br>
-    tablet: &lt;img src="medium_img.png"/&gt;<br>
-    desktop: &lt;img src="big_img.png"/&gt;<br>
--->
-</code></div>
-<h3>Class Manipulation</h3>
-<div class="code"><code>&lt;---&gt;</code></div>
-						
-						</div>
 					</div>
 					</div>
 				</section>
 				
 						
-					
-							
-					
-				
 			</div>
 		</div>
+        <script type="text/javascript">
+
+        
+        	$(document).ready(function(){
+        		$.get("http://intentionjs.com/README.md", function(response){
+        			$('#wmd-input').text(response);
+  
+
+	            (function () {
+	                var converter1 = Markdown.getSanitizingConverter();
+	                
+	                converter1.hooks.chain("preBlockGamut", function (text, rbg) {
+	                    return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
+	                        return "<blockquote>" + rbg(inner) + "</blockquote>\n";
+	                    });
+	                });
+	                
+	                var editor1 = new Markdown.Editor(converter1);
+	                
+	                editor1.run();
+	                
+	                var converter2 = new Markdown.Converter();
+
+	                converter2.hooks.chain("preConversion", function (text) {
+	                    return text.replace(/\b(a\w*)/gi, "*$1*");
+	                });
+
+	                converter2.hooks.chain("plainLinkText", function (url) {
+	                    return "This is a link to " + url.replace(/^https?:\/\//, "");
+	                });
+	                
+	                var help = function () { alert("Do you need help?"); }
+	                var options = {
+	                    helpButton: { handler: help },
+	                    strings: { quoteexample: "whatever you're quoting, put it right here" }
+	                };
+	                var editor2 = new Markdown.Editor(converter2, "-second", options);
+	                
+	                editor2.run();
+	            })();
+
+	        
+        		});
+        	});
+
+        </script>		
 		<script data-main="main" src="../test/vendor/require.js"></script>		
 	</body>
 </html>
