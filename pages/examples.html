@@ -234,19 +234,7 @@
 							intent
 							in-tablet-class="column1"
 							in-standard-class="column1"
-							in-mobile-class="column1M">
-							<h3>Examples</h3>
-							<ul>
-								<li><a href="examples/animation/">Animation</a></li>
-								<li><a href="examples/grid/">Grid Demo</a></li>			
-								<li><a href="examples/performance/">Image Loading Performance</a></li>
-								<li><a href="examples/scrolldepth/">Scroll Depth</a></li>
-								<li><a href="examples/wsj/">WSJ Example</a></li>
-								<li><a href="examples/css_loader/">CSS Loader</a></li>
-								<li><a href="examples/mediaquery_link/">Media Query Optimizer</a></li>
-								<li><a href="test/">Tests</a></li>
-							</ul>
-			
+							in-mobile-class="column1M" id="examples">
 							
 						
 						</div>
@@ -261,6 +249,16 @@
 				
 			</div>
 		</div>
+    <script type="text/javascript">
+
+    
+    	$(document).ready(function(){
+    		$.get("http://intentionjs.com/pages/EXAMPLES.md.html", function(response){
+    			$('#examples').append(response);        
+    		});
+    	});
+
+    </script>			
 		<script data-main="main" src="../test/vendor/require.js"></script>		
 		<script type="text/javascript">
 
