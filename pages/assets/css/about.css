@@ -343,8 +343,6 @@ html, body {
 
 .navM{
 	width: 100%;
-	border-top:1px solid black;
-	border-bottom:1px solid black;
 	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
 	background-color: #e9e9e9;
 }
