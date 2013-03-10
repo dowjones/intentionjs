@@ -1,5 +1,4 @@
-<h2>intention.js examples</h2>
-<h3>Example Quick Links</h3>
+<h2>Example Quick Links</h2>
 <ul>
 <li><a href="/examples/animation">Animation</a> </li>
 <li><a href="/examples/grid">Grid Demo</a> </li>
@@ -10,8 +9,9 @@
 <li><a href="/examples/mediaquery_link">Media Query Optimizer</a> </li>
 <li><a href="/test/">Tests</a> </li>
 </ul>
-<h3>Descriptions</h3>
-<h4><a href="/examples/animation">Animation</a></h4>
+<hr>
+<h2>Descriptions</h2>
+<h3><a href="/examples/animation">Animation</a></h3>
 <p>Animation illustrates non-traditional uses of contexts. An animated character walks back and forth with the scroll position, cycling through 4 possibilities.</p>
 <pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">        <span class="keyword" style="color:#333;font-weight:bold;">var</span> intent = <span class="keyword" style="color:#333;font-weight:bold;">new</span> Intention;
         <span class="keyword" style="color:#333;font-weight:bold;">var</span> walking = intent.responsive([
@@ -49,18 +49,33 @@
 
         $(window).on(<span class="string" style="color:#d14;">'scroll'</span>, walking);
         $(window).on(<span class="string" style="color:#d14;">'scroll'</span>, flip);</code></pre>
-<h4><a href="/examples/grid">Grid Demo</a></h4>
+<hr>
+<h3><a href="/examples/grid">Grid Demo</a></h3>
 <p>Core grid manipulation functionality. Illustrates context-variable class modifications and move functionality.</p>
-<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html">                    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">section</span> <span class="attribute" style="color:#008080;">class</span>=<span class="value" style="color:#d14;">"col10wide column"</span>
-                        <span class="attribute" style="color:#008080;">in</span> <span class="attribute" style="color:#008080;">data-in-base-class</span>=<span class="value" style="color:#d14;">"column"</span> 
-                             <span class="attribute" style="color:#008080;">data-in-mobile-class</span>=<span class="value" style="color:#d14;">"col3wide"</span> 
-                             <span class="attribute" style="color:#008080;">data-in-tablet-class</span>=<span class="value" style="color:#d14;">"col6wide"</span> 
-                             <span class="attribute" style="color:#008080;">data-in-standard-class</span>=<span class="value" style="color:#d14;">"col10wide"</span>></span>
-                        ...
-                    <span class="tag" style="color:#000080;font-weight:normal;">&lt;/<span class="title" style="color:#000080;font-weight:normal;">section</span>></span>
-
-                    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">div</span> <span class="attribute" style="color:#008080;">in</span> <span class="attribute" style="color:#008080;">data-in-base-append</span>=<span class="value" style="color:#d14;">"#ad"</span>
-                                  <span class="attribute" style="color:#008080;">data-in-standard-append</span>=<span class="value" style="color:#d14;">"#ad"</span>
-                                  <span class="attribute" style="color:#008080;">data-in-mobile-append</span>=<span class="value" style="color:#d14;">"#mobile_ad"</span>
-                                  <span class="attribute" style="color:#008080;">data-in-tablet-append</span>=<span class="value" style="color:#d14;">"#tablet_ad"</span>></span>
-                    <span class="tag" style="color:#000080;font-weight:normal;">&lt;/<span class="title" style="color:#000080;font-weight:normal;">div</span>></span></code></pre>
+<h4>Context-specific re-classing</h4>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html"><span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">section</span> <span class="attribute" style="color:#008080;">class</span>=<span class="value" style="color:#d14;">"col10wide column"</span>
+    <span class="attribute" style="color:#008080;">in</span> <span class="attribute" style="color:#008080;">data-in-base-class</span>=<span class="value" style="color:#d14;">"column"</span> 
+         <span class="attribute" style="color:#008080;">data-in-mobile-class</span>=<span class="value" style="color:#d14;">"col3wide"</span> 
+         <span class="attribute" style="color:#008080;">data-in-tablet-class</span>=<span class="value" style="color:#d14;">"col6wide"</span> 
+         <span class="attribute" style="color:#008080;">data-in-standard-class</span>=<span class="value" style="color:#d14;">"col10wide"</span>></span>
+    ...
+<span class="tag" style="color:#000080;font-weight:normal;">&lt;/<span class="title" style="color:#000080;font-weight:normal;">section</span>></span></code></pre>
+<h4>Context-specific DOM manipulation</h4>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html"><span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">div</span> <span class="attribute" style="color:#008080;">id</span>=<span class="value" style="color:#d14;">"ad"</span>></span>
+    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">div</span> <span class="attribute" style="color:#008080;">in</span> <span class="attribute" style="color:#008080;">data-in-base-append</span>=<span class="value" style="color:#d14;">"#ad"</span>
+                  <span class="attribute" style="color:#008080;">data-in-standard-append</span>=<span class="value" style="color:#d14;">"#ad"</span>
+                  <span class="attribute" style="color:#008080;">data-in-mobile-append</span>=<span class="value" style="color:#d14;">"#mobile_ad"</span>
+                  <span class="attribute" style="color:#008080;">data-in-tablet-append</span>=<span class="value" style="color:#d14;">"#tablet_ad"</span>></span>
+        ...
+    <span class="tag" style="color:#000080;font-weight:normal;">&lt;/<span class="title" style="color:#000080;font-weight:normal;">div</span>></span>
+<span class="tag" style="color:#000080;font-weight:normal;">&lt;/<span class="title" style="color:#000080;font-weight:normal;">div</span>></span>
+<span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">div</span> <span class="attribute" style="color:#008080;">id</span>=<span class="value" style="color:#d14;">"mobile_ad"</span>></span><span class="tag" style="color:#000080;font-weight:normal;">&lt;/<span class="title" style="color:#000080;font-weight:normal;">div</span>></span>
+<span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">div</span> <span class="attribute" style="color:#008080;">id</span>=<span class="value" style="color:#d14;">"tablet_ad"</span>></span><span class="tag" style="color:#000080;font-weight:normal;">&lt;/<span class="title" style="color:#000080;font-weight:normal;">div</span>></span></code></pre>
+<hr>
+<h3><a href="/examples/performance">Performance</a></h3>
+<p>Image-loading as speed test, illustrating how early in the page-load the browser can respond to intentional deformations.</p>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html"><span class="comment" style="color:#998;font-style:italic;">&lt;!-- Only become valid src attributes after intent is determined --></span>
+<span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">img</span> <span class="attribute" style="color:#008080;">intent</span> <span class="attribute" style="color:#008080;">in-base-src</span>=<span class="value" style="color:#d14;">"img/tn-src.jpg"</span> /></span>
+<span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">img</span> <span class="attribute" style="color:#008080;">intent</span> <span class="attribute" style="color:#008080;">in-base-src</span>=<span class="value" style="color:#d14;">"img/tn-src2.jpg"</span> /></span>
+<span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">img</span> <span class="attribute" style="color:#008080;">intent</span> <span class="attribute" style="color:#008080;">in-base-src</span>=<span class="value" style="color:#d14;">"img/tn-src3.jpg"</span> /></span></code></pre>
+<hr>
