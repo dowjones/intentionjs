@@ -351,7 +351,6 @@ html, body {
 
 .navM a{
 	text-decoration: none;
-	padding-top: 20px;
 	margin-top: 20px;
 	padding-left: 20px;
 	font-size: 1em;
@@ -388,8 +387,7 @@ html, body {
 
 .navM .onPage a{
 	color: #23b6a6 !important;
-	padding-left: 20px !important; 
-
+	padding-top:0 !important;
 }
 
 
