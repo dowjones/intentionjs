@@ -26,9 +26,12 @@
       };
     }
 
-    var intent = new intent,
-      // horizontal resize contexts
-      resizeContexts = [
+    if(window.intent === undefined) {
+      window.intent = new intent;
+    }
+
+    // horizontal resize contexts
+    var resizeContexts = [
         // {name:'luxury', min:900},
         {name:'standard', min:769}, 
         {name:'tablet', min:321},
