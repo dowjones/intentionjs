@@ -4,11 +4,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<meta charset="utf-8" /> 
 		<title>
-				Documentation
+				About Intention.js
 			</title>
     <link href="assets/css/responsivegrid.css" rel="stylesheet">
-     <link href="assets/css/doc.css" rel="stylesheet">
+     <link href="assets/css/about.css" rel="stylesheet">
      <link href="assets/css/github-flavored-markdown.css" rel="stylesheet">
+
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	
@@ -119,6 +120,8 @@
 					</section>
 				
 				<div class="background">
+					
+
 					<section class="col6wide column placeholder" 
 					intent
 					in-base-class="column"
@@ -127,16 +130,9 @@
 					in-standard-class="col6wide" 
 					>
 						
-						
-							
-							<div class="desktop">
-							
-							</div>
+						<div class="desktop"></div>
 
-						
-						
-						
-						</section>
+					</section>
 
 
 
@@ -154,11 +150,7 @@
 							<div class="ipad"></div>
 							<div class="iphone"></div>
 
-						
-					
-									
-									
-							</div>
+								</div>
 									
 								</div>
 							</section>
@@ -208,15 +200,15 @@
 							in-mobile-class="navM">
 	<div class="tabs">
 		<div class="tab">
-			<a href="about.html">About Intention.js</a>		
+				<a href="about.html">About Intention.js</a>		
+		</div>
+		<div class="tab">
+			<a href="documentation.html">Documentation</a>	
 		</div>
 		<div class="tab">
 			<div class="onPage">
-				<a href="documentation.html">Documentation</a>	
+				<a href="examples.html">Examples</a>
 			</div>
-		</div>
-		<div class="tab">
-			<a href="examples.html">Examples</a>	
 		</div>		
 		<div class="tab">
 			<a href="sxsw.html">SXSW Syllabus</a>
@@ -238,27 +230,36 @@
 					in-tablet-class="col10wide" 
 					in-standard-class="col9wide" 
 					>
-					<div class="module white">
-						<div class="documentation" id="readme">
-	
-
+					
+						<div class="column1"
+							intent
+							in-tablet-class="column1"
+							in-standard-class="column1"
+							in-mobile-class="column1M" id="examples">
+							
+						
+						</div>
 					</div>
 					</div>
 				</section>
 				
 						
+					
+							
+					
+				
 			</div>
 		</div>
-        <script type="text/javascript">
+    <script type="text/javascript">
 
-        
-        	$(document).ready(function(){
-        		$.get("http://intentionjs.com/pages/README.md.html", function(response){
-        			$('#readme').append(response);        
-        		});
-        	});
+    
+    	$(document).ready(function(){
+    		$.get("http://intentionjs.com/pages/EXAMPLES.md.html", function(response){
+    			$('#examples').append(response);        
+    		});
+    	});
 
-        </script>		
+    </script>			
 		<script data-main="main" src="../test/vendor/require.js"></script>		
 		<script type="text/javascript">
 
