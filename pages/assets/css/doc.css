@@ -62,7 +62,7 @@
 	height: 25px;
 	background-image: url(img/Tblack.jpg);
 	background-repeat: no-repeat;
-	float: left;
+	float: right;
 	padding-left: 20px;
 }
 
@@ -71,7 +71,7 @@
 	height: 25px;
 	background-image: url(img/Thov.jpg);
 	background-repeat: no-repeat;
-	float: left;
+	float: right;
 	padding-left: 20px;
 }
 
