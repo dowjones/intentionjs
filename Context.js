@@ -1,7 +1,7 @@
 (function () {
 
   'use strict';
-  var context = function($, tn){
+  var context = function($, intent){
 
     function throttle(callback, interval){
       var lastExec = new Date(),
@@ -26,7 +26,7 @@
       };
     }
 
-    var tn = new tn,
+    var intent = new intent,
       // horizontal resize contexts
       resizeContexts = [
         // {name:'luxury', min:900},
@@ -34,7 +34,7 @@
         {name:'tablet', min:321},
         {name:'mobile', min:0}],
       // horizontal responsive function
-      hResponder = tn.responsive(resizeContexts,
+      hResponder = intent.responsive(resizeContexts,
         // compare the return value of the callback to each context
         // return true for a match
         function(test, context){
@@ -51,7 +51,7 @@
       .on('orientationchange', hResponder);
 
     // catchall, false as the second arg suppresses the event being fired
-    tn.responsive([{name:'base'}])('base')
+    intent.responsive([{name:'base'}])('base')
       // touch device?
       .responsive([{name:'touch'}], function() {
         return "ontouchstart" in window;
@@ -69,7 +69,7 @@
     hResponder()
       .elements(document);
 
-    return tn;
+    return intent;
   };
 
   (function (root, factory) {
@@ -78,9 +78,9 @@
       define(['jquery', 'Intention'], factory);
     } else {
       // Browser globals
-      root.tn = factory(root.jQuery, root.Intention);
+      root.intent = factory(root.jQuery, root.Intention);
     }
-  }(this, function ($, tn) {
-    return context($, tn);
+  }(this, function ($, intent) {
+    return context($, intent);
   }));
 }).call(this);
