@@ -3,7 +3,7 @@
 * [Grid Demo](/examples/grid) 
 * [Performance](/examples/performance) 
 * [Scroll Depth](/examples/scrolldepth) 
-* [WSJ Example](/examples/WSJ) 
+* [WSJ Example](/examples/wsj) 
 * [CSS Asset Loader](/examples/css_loader) 
 * [Media Query Optimizer](/examples/mediaquery_link) 
 * [Tests](/test/) 
@@ -14,6 +14,7 @@
 
 ### [Animation](/examples/animation)
 Animation illustrates non-traditional uses of contexts. An animated character walks back and forth with the scroll position, cycling through 4 possibilities.
+
 ```javascript
 		var intent = new Intention;
 		var walking = intent.responsive([
@@ -95,3 +96,26 @@ Image-loading as speed test, illustrating how early in the page-load the browser
 ```
 
 ------
+
+
+### [Scroll Depth](/examples/scrolldepth)
+Building upon the animation demo, showing how to cycle through numerous possibilities as a result of scroll depth.
+```javascript
+var depthTracker = tn.responsive([
+  	{name: 'shallow', depth:25},
+  	{name:'beyond', depth:Infinity}],
+  	// matcher
+  	function(measure, ctx){
+  		if(measure < ctx.depth) return true;
+  		return false;
+  	},
+  	// measure
+  	function(){
+  		return window.pageYOffset;
+  });
+
+$(window).on('scroll', depthTracker);
+```
+
+------
+

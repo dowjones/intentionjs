@@ -4,7 +4,7 @@
 <li><a href="/examples/grid">Grid Demo</a> </li>
 <li><a href="/examples/performance">Performance</a> </li>
 <li><a href="/examples/scrolldepth">Scroll Depth</a> </li>
-<li><a href="/examples/WSJ">WSJ Example</a> </li>
+<li><a href="/examples/wsj">WSJ Example</a> </li>
 <li><a href="/examples/css_loader">CSS Asset Loader</a> </li>
 <li><a href="/examples/mediaquery_link">Media Query Optimizer</a> </li>
 <li><a href="/test/">Tests</a> </li>
@@ -78,4 +78,21 @@
 <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">img</span> <span class="attribute" style="color:#008080;">intent</span> <span class="attribute" style="color:#008080;">in-base-src</span>=<span class="value" style="color:#d14;">"img/tn-src.jpg"</span> /></span>
 <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">img</span> <span class="attribute" style="color:#008080;">intent</span> <span class="attribute" style="color:#008080;">in-base-src</span>=<span class="value" style="color:#d14;">"img/tn-src2.jpg"</span> /></span>
 <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">img</span> <span class="attribute" style="color:#008080;">intent</span> <span class="attribute" style="color:#008080;">in-base-src</span>=<span class="value" style="color:#d14;">"img/tn-src3.jpg"</span> /></span></code></pre>
+<hr>
+<h3><a href="/examples/scrolldepth">Scroll Depth</a></h3>
+<p>Building upon the animation demo, showing how to cycle through numerous possibilities as a result of scroll depth.</p>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript"><span class="keyword" style="color:#333;font-weight:bold;">var</span> depthTracker = tn.responsive([
+      {name: <span class="string" style="color:#d14;">'shallow'</span>, depth:<span class="number" style="color:#099;">25</span>},
+      {name:<span class="string" style="color:#d14;">'beyond'</span>, depth:<span class="literal">Infinity</span>}],
+      <span class="comment" style="color:#998;font-style:italic;">// matcher</span>
+      <span class="keyword" style="color:#333;font-weight:bold;">function</span>(measure, ctx){
+          <span class="keyword" style="color:#333;font-weight:bold;">if</span>(measure &lt; ctx.depth) <span class="keyword" style="color:#333;font-weight:bold;">return</span> <span class="literal">true</span>;
+          <span class="keyword" style="color:#333;font-weight:bold;">return</span> <span class="literal">false</span>;
+      },
+      <span class="comment" style="color:#998;font-style:italic;">// measure</span>
+      <span class="keyword" style="color:#333;font-weight:bold;">function</span>(){
+          <span class="keyword" style="color:#333;font-weight:bold;">return</span> window.pageYOffset;
+  });
+
+$(window).on(<span class="string" style="color:#d14;">'scroll'</span>, depthTracker);</code></pre>
 <hr>
