@@ -1,5 +1,5 @@
-<h1>intention.js examples</h1>
-<h2>Example Quick Links</h2>
+<h2>intention.js examples</h2>
+<h3>Example Quick Links</h3>
 <ul>
 <li><a href="/examples/animation">Animation</a> </li>
 <li><a href="/examples/grid">Grid Demo</a> </li>
@@ -10,3 +10,57 @@
 <li><a href="/examples/mediaquery_link">Media Query Optimizer</a> </li>
 <li><a href="/test/">Tests</a> </li>
 </ul>
+<h3>Descriptions</h3>
+<h4><a href="/examples/animation">Animation</a></h4>
+<p>Animation illustrates non-traditional uses of contexts. An animated character walks back and forth with the scroll position, cycling through 4 possibilities.</p>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">        <span class="keyword" style="color:#333;font-weight:bold;">var</span> intent = <span class="keyword" style="color:#333;font-weight:bold;">new</span> Intention;
+        <span class="keyword" style="color:#333;font-weight:bold;">var</span> walking = intent.responsive([
+            {name: <span class="string" style="color:#d14;">'step1'</span>, div:<span class="number" style="color:#099;">0</span>},
+            {name:<span class="string" style="color:#d14;">'step2'</span>, div:<span class="number" style="color:#099;">1</span>},
+            {name:<span class="string" style="color:#d14;">'step3'</span>, div:<span class="number" style="color:#099;">2</span>},
+            {name:<span class="string" style="color:#d14;">'step4'</span>, div:<span class="number" style="color:#099;">3</span>}],
+            <span class="comment" style="color:#998;font-style:italic;">// matcher</span>
+            <span class="keyword" style="color:#333;font-weight:bold;">function</span>(measure, ctx){
+                <span class="keyword" style="color:#333;font-weight:bold;">return</span> (Math.floor(measure/<span class="number" style="color:#099;">100</span>) % <span class="number" style="color:#099;">4</span>) === ctx.div ? <span class="literal">true</span> : <span class="literal">false</span>;
+            },
+            <span class="comment" style="color:#998;font-style:italic;">// measure</span>
+            <span class="keyword" style="color:#333;font-weight:bold;">function</span>(){
+                <span class="keyword" style="color:#333;font-weight:bold;">return</span> window.pageXOffset ? window.pageXOffset : window.document.documentElement.scrollLeft;
+            });
+
+        <span class="keyword" style="color:#333;font-weight:bold;">var</span> lastXOffset = <span class="number" style="color:#099;">0</span>,
+            flip = intent.responsive([{name:<span class="string" style="color:#d14;">'back'</span>, val:<span class="number" style="color:#099;">0</span>}, 
+                    {name:<span class="string" style="color:#d14;">'forth'</span>, val:<span class="number" style="color:#099;">1</span>/<span class="number" style="color:#099;">0</span>}], 
+                    <span class="keyword" style="color:#333;font-weight:bold;">function</span>(measure, ctx){
+                        <span class="keyword" style="color:#333;font-weight:bold;">if</span>((measure - lastXOffset) &lt; ctx.val) {
+                            lastXOffset = measure;
+                            <span class="keyword" style="color:#333;font-weight:bold;">return</span> <span class="literal">true</span>;
+                        }
+                        lastXOffset = measure;
+                        <span class="keyword" style="color:#333;font-weight:bold;">return</span> <span class="literal">false</span>;
+                    }, <span class="keyword" style="color:#333;font-weight:bold;">function</span>(){
+                        <span class="keyword" style="color:#333;font-weight:bold;">return</span> window.pageXOffset ? window.pageXOffset : window.document.documentElement.scrollLeft;
+                    });
+
+        walking();
+        flip();
+
+        intent.elements(document);
+
+        $(window).on(<span class="string" style="color:#d14;">'scroll'</span>, walking);
+        $(window).on(<span class="string" style="color:#d14;">'scroll'</span>, flip);</code></pre>
+<h4><a href="/examples/grid">Grid Demo</a></h4>
+<p>Core grid manipulation functionality. Illustrates context-variable class modifications and move functionality.</p>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html">                    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">section</span> <span class="attribute" style="color:#008080;">class</span>=<span class="value" style="color:#d14;">"col10wide column"</span>
+                        <span class="attribute" style="color:#008080;">in</span> <span class="attribute" style="color:#008080;">data-in-base-class</span>=<span class="value" style="color:#d14;">"column"</span> 
+                             <span class="attribute" style="color:#008080;">data-in-mobile-class</span>=<span class="value" style="color:#d14;">"col3wide"</span> 
+                             <span class="attribute" style="color:#008080;">data-in-tablet-class</span>=<span class="value" style="color:#d14;">"col6wide"</span> 
+                             <span class="attribute" style="color:#008080;">data-in-standard-class</span>=<span class="value" style="color:#d14;">"col10wide"</span>></span>
+                        ...
+                    <span class="tag" style="color:#000080;font-weight:normal;">&lt;/<span class="title" style="color:#000080;font-weight:normal;">section</span>></span>
+
+                    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">div</span> <span class="attribute" style="color:#008080;">in</span> <span class="attribute" style="color:#008080;">data-in-base-append</span>=<span class="value" style="color:#d14;">"#ad"</span>
+                                  <span class="attribute" style="color:#008080;">data-in-standard-append</span>=<span class="value" style="color:#d14;">"#ad"</span>
+                                  <span class="attribute" style="color:#008080;">data-in-mobile-append</span>=<span class="value" style="color:#d14;">"#mobile_ad"</span>
+                                  <span class="attribute" style="color:#008080;">data-in-tablet-append</span>=<span class="value" style="color:#d14;">"#tablet_ad"</span>></span>
+                    <span class="tag" style="color:#000080;font-weight:normal;">&lt;/<span class="title" style="color:#000080;font-weight:normal;">div</span>></span></code></pre>
