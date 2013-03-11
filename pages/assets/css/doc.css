@@ -1,3 +1,12 @@
+html, body {
+       margin:0;
+       padding:0;
+}
+
+.mobile .column {
+       margin-left:0; /* should be corrected in the grid */
+}
+
 .header {
 	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic ;
 	padding-left: 10px;
@@ -6,6 +15,9 @@
 	font-size: 1.2em;
 }
 
+.mobile .header {
+       padding:0;
+}
 
 .cursor{
 	width: 100%;
@@ -188,7 +200,7 @@
 
 .TinM {
 	background-image: url(img/tin.png);
-	width: 330px;
+	width: 320px;
 	height: 115px;
 	margin: auto !important;
 }
@@ -330,19 +342,15 @@
 
 
 .navM{
-	height: 30px;
 	width: auto;
 	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
 	background-color: #e9e9e9;
-	padding-top: 20px;
-
 }
 
 
 
 .navM a{
 	text-decoration: none;
-	padding-top: 20px;
 	margin-top: 20px;
 	padding-left: 20px;
 	font-size: 1em;
@@ -350,18 +358,12 @@
 	color: black;
 }
 
-.navM .tabs {
-	
+.navM .tabs {	
 	width: 100%;
-	height: 90px;
-	
-	
-
 }
 
 .navM .tab {
 	width: 100%;
-	height:30px;
 	border: 1px solid;
 	border-color: #e9e9e9;
 	background-color: white;	
@@ -380,8 +382,7 @@
 
 .navM .onPage a{
 	color: #23b6a6 !important;
-	padding-left: 20px !important; 
-
+	padding-top:0 !important;
 }
 
 

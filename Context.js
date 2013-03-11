@@ -33,8 +33,8 @@
     // horizontal resize contexts
     var resizeContexts = [
         // {name:'luxury', min:900},
-        {name:'standard', min:769}, 
-        {name:'tablet', min:321},
+        {name:'standard', min:840}, 
+        {name:'tablet', min:510},
         {name:'mobile', min:0}],
       // horizontal responsive function
       hResponder = intent.responsive(resizeContexts,
