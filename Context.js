@@ -1,7 +1,7 @@
 (function () {
 
   'use strict';
-  var context = function($, intent){
+  var context = function($, Intention){
 
     function throttle(callback, interval){
       var lastExec = new Date(),
@@ -27,14 +27,14 @@
     }
 
     if(window.intent === undefined) {
-      window.intent = new intent;
-    }
-
+      window.intent = new Intention;
+    }    
+    
     // horizontal resize contexts
     var resizeContexts = [
         // {name:'luxury', min:900},
-        {name:'standard', min:769}, 
-        {name:'tablet', min:321},
+        {name:'standard', min:840}, 
+        {name:'tablet', min:510},
         {name:'mobile', min:0}],
       // horizontal responsive function
       hResponder = intent.responsive(resizeContexts,
