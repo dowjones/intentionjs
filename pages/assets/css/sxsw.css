@@ -456,7 +456,7 @@ h6{
 	margin-right: 15px;
 }
 
- p{
+ p, ul, li{
 	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
 	
 	font-size: .9em;
