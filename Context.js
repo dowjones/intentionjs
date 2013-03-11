@@ -26,12 +26,9 @@
       };
     }
 
-    if(window.intent === undefined) {
-      window.intent = new Intention;
-    }    
-    
     // horizontal resize contexts
-    var resizeContexts = [
+    var intent=new Intention,
+      resizeContexts = [
         // {name:'luxury', min:900},
         {name:'standard', min:840}, 
         {name:'tablet', min:510},
@@ -83,7 +80,7 @@
       // Browser globals
       root.intent = factory(root.jQuery, root.Intention);
     }
-  }(this, function ($, intent) {
-    return context($, intent);
+  }(this, function ($, Intention) {
+    return context($, Intention);
   }));
 }).call(this);
