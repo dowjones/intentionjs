@@ -11,7 +11,6 @@ var intentionWrapper = function($, _){
   Intention.prototype = {
 
     // public methods
-    // TODO: break this function down a bit
     responsive:function(contexts, matcher, measure){
       var currentContext;
 
