@@ -394,7 +394,7 @@ describe("Intention", function() {
   describe("regex tests", function(){
     // TODO: update this regex
     var attrPattern = new RegExp(
-      '(^(data-)?(in|intent)-)?([_a-zA-Z0-9]+)-([A-Za-z:-]+)');
+      '(^(data-)?(in|intent)-)([_a-zA-Z0-9]+)-([A-Za-z:-]+)');
 
     it('should match on an abbreviated nonstandard prefix', function(){
         expect(
@@ -426,7 +426,13 @@ describe("Intention", function() {
     it('should match without a prefix', function(){
         expect(
           attrPattern
-            .test('mobile-class')).to.equal(true);
+            .test('mobile-class')).to.equal(false);
+    });
+    
+    it('should match a data attr', function(){
+        expect(
+          attrPattern
+            .test('in-standard-data-toggle')).to.equal(true);
     });
 
   });
