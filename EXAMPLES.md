@@ -7,6 +7,7 @@
 * [CSS Asset Loader](/examples/css_loader) 
 * [Media Query Optimizer](/examples/mediaquery_link) 
 * [Twitter Bootstrap Grid](/examples/bootstrap_grid) 
+* [960gs Fluid](/examples/960gs) 
 * [Tests](/test/) 
 
 ------
