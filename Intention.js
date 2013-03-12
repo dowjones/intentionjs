@@ -1,6 +1,6 @@
-'use strict';
 var intentionWrapper = function($, _){
-
+  'use strict';
+  
   var Intention = function(params){
     var intent = $.extend(this, params, 
         {_listeners:{}, contexts:[], elms:$()});
