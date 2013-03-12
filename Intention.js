@@ -1,6 +1,16 @@
-var intentionWrapper = function($, _){
+
+(function(root, factory) {
+  if (typeof exports === 'object') {
+    module.exports = factory(require('jquery'));
+  } else if (typeof define === 'function' && define.amd) {
+    define(['jquery', 'underscore'], factory);
+  } else {
+    root.Intention = factory(root.jQuery, root._);
+  }
+
+}(this, function($, _) {
   'use strict';
-  
+
   var Intention = function(params){
     var intent = $.extend(this, params, 
         {_listeners:{}, contexts:[], elms:$()});
@@ -31,9 +41,9 @@ var intentionWrapper = function($, _){
         this.on(ctx.name, _.bind(
             function(){this._respond(this.contexts, this.elms);}, this));
       }, this);
-      
+
       var responder = _.bind(function(){
-        
+
         var measurement = measure.apply(this, arguments);
 
         _.every(contexts, function(ctx){
@@ -47,7 +57,7 @@ var intentionWrapper = function($, _){
               // emit the context event
               this._emitter($.extend({}, {type:currentContext.name}, 
                 currentContext), this);
-              
+
               // done, break the loop
               return false;
             }
@@ -206,7 +216,7 @@ var intentionWrapper = function($, _){
         var specMatch = attr.name.match(pattern);
         if(specMatch !== null) {
           specMatch = specMatch.slice(-2);
-        
+
           $.extend(true, spec, addProp({}, specMatch[0],
             addProp({}, specMatch[1], attr.value)));
         }
@@ -269,7 +279,7 @@ var intentionWrapper = function($, _){
     },
 
     _makeChanges: function(elm, changes){
-      
+
       _.each(changes.inSpecs, function(change, func){
         if(func==='move'){
           if( (elm.data('intent.placement') !== change.placement)
@@ -284,10 +294,10 @@ var intentionWrapper = function($, _){
         } else if(func === 'class') {
 
           var classes = elm.attr('class') || '';
-          
+
           classes = _.union(change, 
             _.difference(classes.split(' '), changes.outSpecs['class']));
-          
+
           elm.attr('class', classes.join(' '));
 
         } else {
@@ -337,14 +347,4 @@ var intentionWrapper = function($, _){
     }
   };
   return Intention;
-};
-
-(function(root, factory) {
-  if (typeof exports === 'object') {
-    module.exports = factory(require('jquery'));
-  } else if (typeof define === 'function' && define.amd) {
-    define(['jquery', 'underscore'], factory);
-  } else {
-    root.Intention = factory(root.jQuery, root._);
-  }
-}(this, intentionWrapper));
+}));
