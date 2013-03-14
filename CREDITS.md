@@ -8,7 +8,7 @@ With a standard responsive design website, there are choices made very early on 
 Through the use of the intention.js library, developers are able to effectively code variables into their html, describing certain configurations that should exist, if a given context is achieved. By having a layout physically alter itself from a 12-unit grid to a 3-unit grid, significant time-savings are achieved in less re-writing of code, more consistent re-use, and an easier communication process between designers and developers, who can meaningfully talk about the same thing from both a conceptual and code perspective.
 
 ## Who
-Intention.js was created at the Dow Jones Design Studio, starting in the fall of 2011. Joe Kendall, as the lead of new platforms within the Design Technology team, was the author of the production version of intention.js, performing both a complete re-write of Erin Sparling's original prototype, and a total re-architecting of the entire implementation.
+Intention.js was created at the Dow Jones Design Studio, starting in the fall of 2011. Joe Kendall, as the lead of new platforms within the Design Technology team, was the key author of intention.js, performing both a complete re-write of Erin Sparling's original prototype, as well as completely re-thinking the relationship between the library and contexts, providing the generalized solution that we know of as intentions today, and the context-extension pattern found in context.js.
 
 The Design Studio is comprised of more than 60 designers, user experience and design technology-focused individuals, led by Brandon Whightsel, Sharon Denning and Erin Sparling respectively. Without the hard work of the complete team, this library wouldn't have existed in the way that it does today. 
 
