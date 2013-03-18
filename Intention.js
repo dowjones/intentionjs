@@ -11,7 +11,7 @@
 
   var Intention = function(params){
     var intent = $.extend(this, params, 
-        {_listeners:{}, contexts:[], elms:$()});
+        {_listeners:{}, contexts:[], elms:$(), axis:{}});
 
     return intent;
   };
@@ -19,7 +19,14 @@
   Intention.prototype = {
 
     // public methods
-    responsive:function(contexts, matcher, measure){
+    responsive:function(contexts, matcher, measure, axisID){
+
+      if((_.isArray(contexts) === false) && _.isObject(contexts)){
+        contexts = contexts.contexts;
+        if(matcher === undefined) matcher = contexts.matcher;
+        if(measure === undefined) measure = contexts.measure;
+      }
+
       var currentContext;
 
       // if no matcher function is specified expect to compare a 
@@ -40,7 +47,26 @@
             function(){this._respond(this.contexts, this.elms);}, this));
       }, this);
 
-      var responder = _.bind(function(){
+      var responder = _.bind(this._responder(contexts, matcher, measure), this);
+
+      // this makes the contexts accessible from the outside world
+      if(axisID){
+        this.axis[axisID]={
+          contexts:contexts,
+          respond:responder
+        };
+      } else {
+        responder.axis = contexts;
+      }
+
+      return responder;
+    },
+
+    _responder: function(contexts, matcher, measure){
+
+      var currentContext;
+
+      return function(){
 
         var measurement = measure.apply(this, arguments);
 
@@ -66,12 +92,7 @@
         }, this);
         // return the intention object for chaining
         return this;
-
-      }, this);
-      // this makes the contexts accessible from the outside world
-      responder.axis = contexts;
-
-      return responder;
+      };
     },
 
     elements: function(scope){
@@ -204,14 +225,16 @@
     _attrsToSpec: function(attrs){
 
       var spec={},
-        pattern = new RegExp(
+        fullPattern = new RegExp(
           '^(data-)?(in|intent)-([_a-zA-Z0-9]+)-([A-Za-z:-]+)'),
+        axisPattern =  new RegExp(
+          '^(data-)?(in|intent)-([_a-zA-Z0-9]+)$'),
         addProp=function(obj, name, value){
           obj[name] = value;
           return obj;
         };
       _.each(attrs, function(attr){
-        var specMatch = attr.name.match(pattern);
+        var specMatch = attr.name.match(fullPattern);
         if(specMatch !== null) {
           specMatch = specMatch.slice(-2);
 
@@ -261,6 +284,7 @@
           return;
         }
       });
+      // find the specs not applicable
       _.each(specs, function(spec, specName){
         var match;
         _.each(inSpecs, function(spec){
@@ -268,6 +292,7 @@
             match=true;
           }
         });
+
         if(!match) outSpecs.push(specName);
       }, this);
       return {
