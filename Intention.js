@@ -1,4 +1,3 @@
-
 (function(root, factory) {
   if (typeof exports === 'object') {
     module.exports = factory(require('jquery'));
@@ -7,7 +6,6 @@
   } else {
     root.Intention = factory(root.jQuery, root._);
   }
-
 }(this, function($, _) {
   'use strict';
 
@@ -207,7 +205,7 @@
 
       var spec={},
         pattern = new RegExp(
-          '(^(data-)?(in|intent)-)([_a-zA-Z0-9]+)-([A-Za-z:-]+)'),
+          '^(data-)?(in|intent)-([_a-zA-Z0-9]+)-([A-Za-z:-]+)'),
         addProp=function(obj, name, value){
           obj[name] = value;
           return obj;
