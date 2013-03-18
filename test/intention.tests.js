@@ -437,13 +437,24 @@ describe("Intention", function() {
       });
     });
 
-    describe('context only match', function(){
+    describe('context and axis only match', function(){
       var ctxOnlyPattern = new RegExp(
         '^(data-)?(in|intent)-([_a-zA-Z0-9]+)$');
 
       it('should match on the prefix and context', function(){
         expect(ctxOnlyPattern
           .test('in-standard')).to.equal(true);
+      });
+
+      
+      it('should not match on just the prefix', function(){
+        expect(ctxOnlyPattern
+          .test('in')).to.equal(false);
+      });
+      
+      it('should not match on the prefix plus a hiphen', function(){
+        expect(ctxOnlyPattern
+          .test('in-')).to.equal(false);
       });
 
       it('should not match when a func is specified', function(){
@@ -462,6 +473,8 @@ describe("Intention", function() {
       });
 
     });
+
+
 
 
   });
