@@ -392,52 +392,82 @@ describe("Intention", function() {
   })
   
   describe("regex tests", function(){
-    // TODO: update this regex
-    var attrPattern = new RegExp(
-      '(^(data-)?(in|intent)-)([_a-zA-Z0-9]+)-([A-Za-z:-]+)');
-
-    it('should match on an abbreviated nonstandard prefix', function(){
-        expect(
-          attrPattern
-            .test('in-mobile-class')).to.equal(true);
-
-    });
-
-    it('should match on an abbreviated standard prefix', function(){
-        expect(
-          attrPattern
-            .test('data-in-mobile-class')).to.equal(true);
-    });
-
-    it('should match on a nonstandard prefix', function(){
-        expect(
-          attrPattern
-            .test('intent-mobile-class')).to.equal(true);
-
-    });
-
-    it('should match on an standard prefix', function(){
-        expect(
-          attrPattern
-            .test('data-intent-mobile-class')).to.equal(true);
-
-    });
-
-    it('should match without a prefix', function(){
-        expect(
-          attrPattern
-            .test('mobile-class')).to.equal(false);
-    });
     
-    it('should match a data attr', function(){
-        expect(
-          attrPattern
-            .test('in-standard-data-toggle')).to.equal(true);
+    describe('full attr match', function(){
+      var attrPattern = new RegExp(
+        '^(data-)?(in|intent)-([_a-zA-Z0-9]+)-([A-Za-z:-]+)');
+
+      it('should match on an abbreviated nonstandard prefix', function(){
+          expect(
+            attrPattern
+              .test('in-mobile-class')).to.equal(true);
+
+      });
+
+      it('should match on an abbreviated standard prefix', function(){
+          expect(
+            attrPattern
+              .test('data-in-mobile-class')).to.equal(true);
+      });
+
+      it('should match on a nonstandard prefix', function(){
+          expect(
+            attrPattern
+              .test('intent-mobile-class')).to.equal(true);
+
+      });
+
+      it('should match on an standard prefix', function(){
+          expect(
+            attrPattern
+              .test('data-intent-mobile-class')).to.equal(true);
+
+      });
+
+      it('should match without a prefix', function(){
+          expect(
+            attrPattern
+              .test('mobile-class')).to.equal(false);
+      });
+      
+      it('should match a data attr', function(){
+          expect(
+            attrPattern
+              .test('in-standard-data-toggle')).to.equal(true);
+      });
     });
+
+    describe('context only match', function(){
+      var ctxOnlyPattern = new RegExp(
+        '^(data-)?(in|intent)-([_a-zA-Z0-9]+)$');
+
+      it('should match on the prefix and context', function(){
+        expect(ctxOnlyPattern
+          .test('in-standard')).to.equal(true);
+      });
+
+      it('should not match when a func is specified', function(){
+        expect(ctxOnlyPattern
+          .test('in-standard-class')).to.equal(false);
+      });
+
+      it('should not match when ending with a hyphen', function(){
+        expect(ctxOnlyPattern
+          .test('in-standard-')).to.equal(false);
+      });
+
+      it('should not match when the prefix is invalid', function(){
+        expect(ctxOnlyPattern
+          .test('tin-standard')).to.equal(false);
+      });
+
+    });
+
 
   });
 
   describe('underscore test', function(){
+    
     it('should be the relative complement', function(){
       expect(_.difference([1,2,3], [3,4,5])).to.eql([1,2]);
       expect(_.difference([1,2,3], [3,2])).to.eql([1]);
