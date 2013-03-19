@@ -62,11 +62,11 @@ describe("Intention", function() {
       small={name:'small', val:0},
       medium={name:'medium', val:200},
       sizeCtxs = [big, medium, small],
-      size = intent.responsive( 
-        sizeCtxs, 
-        function(response, context){
-          return response >= context.val;
-        });
+      size = intent.responsive({
+          contexts: sizeCtxs,
+          matcher: function(response, context){
+            return response >= context.val;
+          }});
 
     it("Should return a function", function(){
       expect(_.isFunction(size)).to.equal(true);
@@ -106,6 +106,20 @@ describe("Intention", function() {
       expect(callbackCount).to.equal(1);
     });
 
+    describe("recursive responsive axis creation", function(){
+      it("should create three axis by calling intent.responsive once", 
+        function(){
+          var intent = new Intention;
+
+          intent.responsive([
+              {contexts:[{name:'foo'}]},
+              {contexts:[{name:'bar'}]},
+              {contexts:[{name:'baz'}]}
+          ]);
+
+          expect(intent.responders.length).to.equal(3);
+        });
+    });
 
   });
 
