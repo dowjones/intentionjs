@@ -1,0 +1,9 @@
+{
+  "name": "docMaker",
+  "description": "simple script that produces project documentation page",
+  "author": "Joe Kendall and Camila Mercado",
+  "dependencies": {
+    "color-marked": ">= 0.2.0"
+    
+  }
+}
