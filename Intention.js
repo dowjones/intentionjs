@@ -11,7 +11,7 @@
 
   var Intention = function(params){
     var intent = $.extend(this, params, 
-        {_listeners:{}, contexts:[], elms:$(), axis:{}});
+        {_listeners:{}, contexts:[], elms:$(), axis:{}, responders:[]});
 
     return intent;
   };
@@ -19,80 +19,58 @@
   Intention.prototype = {
 
     // public methods
-    responsive:function(contexts, matcher, measure, axisID){
+    responsive:function responsive(contexts, options){
+
+      var defaults = {
+          // if no matcher function is specified expect to compare a 
+          // string to the ctx.name property
+          matcher: function(measure, ctx){
+            return measure === ctx.name;
+          },
+          // function takes one arg and returns it  
+          measure: _.identity
+        }, 
+        currentContext;
+
+      if(_.isObject(options) === false) options = {};
+
+      if((_.isArray(contexts)) && (_.isArray(contexts[0].contexts))){
+        _.each(contexts, function(axis){
+          responsive.apply(this, axis);
+        }, this);
+        return;
+      }
 
       if((_.isArray(contexts) === false) && _.isObject(contexts)){
-        contexts = contexts.contexts;
-        if(matcher === undefined) matcher = contexts.matcher;
-        if(measure === undefined) measure = contexts.measure;
+        options = contexts;
+      } else {
+        options.contexts = contexts;
       }
 
-      var currentContext;
+      options = _.extend({}, defaults, options);
 
-      // if no matcher function is specified expect to compare a 
-      // string to the ctx.name property
-      if(_.isFunction(matcher) === false) {
-        matcher = function(measure, ctx){
-          return measure === ctx.name;
-        };
-      }
-      //  check for measure and if not there 
-      // function takes one arg and returns it
-      if(_.isFunction(measure) === false) {
-        measure = _.identity;
-      }
+      contexts = options.contexts;
+      
       // bind an the respond function to each context name
       _.each(contexts, function(ctx){
         this.on(ctx.name, _.bind(
             function(){this._respond(this.contexts, this.elms);}, this));
       }, this);
 
-      var responder = _.bind(this._responder(contexts, matcher, measure), this);
+      var responder = _.bind(this._responder(
+        contexts, options.matcher, options.measure), this);
 
       // this makes the contexts accessible from the outside world
-      if(axisID){
-        this.axis[axisID]={
+      if(options.ID){
+        this.axis[options.ID]={
           contexts:contexts,
           respond:responder
         };
       } else {
-        responder.axis = contexts;
+        this.responders.push(responder);
       }
 
       return responder;
-    },
-
-    _responder: function(contexts, matcher, measure){
-
-      var currentContext;
-
-      return function(){
-
-        var measurement = measure.apply(this, arguments);
-
-        _.every(contexts, function(ctx){
-          if( matcher(measurement, ctx)) {
-            // first time, or different than last context
-            if( (currentContext===undefined) || 
-              (ctx.name !== currentContext.name)){
-              currentContext = ctx;
-              this.contexts = this._contextualize(ctx, contexts, 
-                  this.contexts);
-              // emit the context event
-              this._emitter($.extend({}, {type:currentContext.name}, 
-                currentContext), this);
-
-              // done, break the loop
-              return false;
-            }
-            // same context, break the loop
-            return false;
-          }
-          return true;
-        }, this);
-        // return the intention object for chaining
-        return this;
-      };
     },
 
     elements: function(scope){
@@ -180,6 +158,40 @@
           }
         }
       }
+    },
+
+    // privates
+    _responder: function(contexts, matcher, measure){
+
+      var currentContext;
+
+      return function(){
+
+        var measurement = measure.apply(this, arguments);
+
+        _.every(contexts, function(ctx){
+          if( matcher(measurement, ctx)) {
+            // first time, or different than last context
+            if( (currentContext===undefined) || 
+              (ctx.name !== currentContext.name)){
+              currentContext = ctx;
+              this.contexts = this._contextualize(ctx, contexts, 
+                  this.contexts);
+              // emit the context event
+              this._emitter($.extend({}, {type:currentContext.name}, 
+                currentContext), this);
+
+              // done, break the loop
+              return false;
+            }
+            // same context, break the loop
+            return false;
+          }
+          return true;
+        }, this);
+        // return the intention object for chaining
+        return this;
+      };
     },
 
     _emitter: function(event){
