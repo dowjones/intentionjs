@@ -11,7 +11,7 @@ body {
 }
 
 .module:not(:last-child) {
-	margin-bottom: 1rem;
+	/*margin-bottom: 1rem;*/
 }
 
 .module:before,
@@ -38,7 +38,7 @@ body {
 /* grid */
 .column {
 	float: left;
-	margin-left: 1.15%;
+	/*margin-left: 1.15%;*/
 	/* Margin in a 10-col  */
 }
 

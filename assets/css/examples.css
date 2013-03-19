@@ -1,10 +1,10 @@
 html, body {
-       margin:0;
-       padding:0;
+	margin:0;
+	padding:0;
 }
 
 .mobile .column {
-       margin-left:0; /* should be corrected in the grid */
+	margin-left:0; /* should be corrected in the grid */
 }
 
 .header {
@@ -16,7 +16,7 @@ html, body {
 }
 
 .mobile .header {
-       padding:0;
+	padding:0;
 }
 
 .cursor{
@@ -45,24 +45,23 @@ html, body {
 
 .media {
 	height: 40px;
-	width: 115px;
+	width: 50px;
 	float: left;
 	padding-top: 15px;
 	padding-left: 0px;
 	position: absolute;
-	right:190px;
+	right:157px;
 }
 
 .mediaT {
 	height: 40px;
-	width: 115px;
+	width: 50px;
 	float: left;
 	padding-top: 15px;
 	padding-left: 0px;
 	position: absolute;
 	left: 20px;
 }
-
 
 .icons {
 	height: 65px;
@@ -88,20 +87,21 @@ html, body {
 }
 
 
-.facebook{
+.twitter{
 	width: 25px;
 	height: 25px;
-	background-image: url(img/FBBlack.jpg);
+	background-image: url(img/Tblack.png);
 	background-repeat: no-repeat;
-	float: left;
+	float: right;
 	padding-left: 20px;
 }
-.facebook:hover{
+
+.twitter:hover{
 	width: 25px;
 	height: 25px;
-	background-image: url(img/FBhov.jpg);
+	background-image: url(img/Thov.png);
 	background-repeat: no-repeat;
-	float: left;
+	float: right;
 	padding-left: 20px;
 }
 
@@ -134,7 +134,7 @@ html, body {
 
 .forkongithub a:hover{
 	background:#505b68;
-	color:#fff;}
+	color:#fff !important;}
 
 .forkongithub a{
 		background:#000;
@@ -168,7 +168,7 @@ html, body {
 
 .forkM .forkongithub a:hover{
 	background:#e9e9e9;
-	color:#23b6b0;;}
+	color:#23b6b0 !important;}
 
 .forkM .forkongithub a{
 		background:#e9e9e9;
@@ -193,7 +193,7 @@ html, body {
 
 .Tin {
 	background-image: url(img/tin.png);
-	width: 330px;
+	width: 320px;
 	height: 115px;
 	
 }
@@ -201,7 +201,7 @@ html, body {
 .TinM {
 	background-image: url(img/tin.png);
 	width: 320px;
-	height: 115px;
+	height: auto;
 	margin: auto !important;
 }
 
@@ -221,8 +221,8 @@ html, body {
 }
 
 .background{
-	background-image: url(img/backbigD.jpg);
-	width: 100%;
+	background-image: url(img/backbigE.jpg);
+	width: 200%;
 	height: 500px;
 
 	
@@ -284,7 +284,7 @@ html, body {
 }
 
 .InfoM {
-	padding-right: 20px;
+	
 	background-color: #e9e9e9;
 	height: auto;
 }
@@ -306,11 +306,10 @@ html, body {
 
 .navT{
 	height: 50px;
-	width: 100%;
+	width: auto;
 	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
 	background-color: #e9e9e9;
 	padding-top: 20px;
-
 }
 
 .navT a{
@@ -329,25 +328,21 @@ html, body {
 	background-color: white;
 	height: 50px;
 	margin-left: 20px !important;
-
 }
 
 .navT .tabs {
-	
 	padding-left: 50px;
 	height: 60px;
-
 }
-
 
 
 .navM{
 	width: auto;
 	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
 	background-color: #e9e9e9;
+	padding-top: 20px;
+
 }
-
-
 
 .navM a{
 	text-decoration: none;
@@ -358,32 +353,27 @@ html, body {
 	color: black;
 }
 
-.navM .tabs {	
-	width: 100%;
-}
 
 .navM .tab {
 	width: 100%;
 	border: 1px solid;
 	border-color: #e9e9e9;
 	background-color: white;	
-
 }
 
 .navM .onPage {
-	
 	width: 100%;
 	background-color: white;
 	height: 30px;
 	margin-left: 0px !important;
 	background-color: #e9e9e9;
-	
 }
 
 .navM .onPage a{
 	color: #23b6a6 !important;
-	padding-top:0 !important;
+	padding-top:0 !important; 
 }
+
 
 
 
@@ -408,7 +398,7 @@ html, body {
 
 .onPage {
 	float: left;
-	width: 180px;
+	width: 130px;
 	background-color: white;
 	height: 50px;
 	margin-left: 20px !important;
@@ -432,7 +422,7 @@ html, body {
 }
 
 a:hover{
-	color: #a26a87 !important;
+	color: #ef5263 !important;
 }
 
 
@@ -443,16 +433,6 @@ a:hover{
 }
 
 
-.column1{
-	margin-left: 20px;
-	margin-top: 40px;
-	margin-right: 20px;
-	float: left;
-	height: auto;
-	width: auto;
-
-
-}
 
 h6{
 	font-size: 1.8em;
@@ -463,21 +443,22 @@ h6{
 
 }
 
-
-
-.column2 {
-	color: grey;
-	margin-left: 20px;
+.column1{
+	margin-left: 50px;
 	margin-top: 40px;
 	margin-right: 20px;
 	float: left;
 	height: auto;
 	width: auto;
+	padding-bottom: 200px;
+
+
 }
+
 
 .column1M {
 	
-	margin-left: 10px;
+	margin-left: 20px;
 	margin-top: 50px;
 	width: auto;
 	height: auto;
@@ -524,14 +505,13 @@ h1, h2, h3, h4 {
 	border: 2px solid #e0e0e0;
 	border-radius: 8px;
 	width: auto;
-	margin-right: 20px;
+	margin-right: 10px;
 	margin-top: 20px;
 	padding-top: 10px;
 	padding-left: 10px;
 	padding-bottom: 20px;
 	padding-right: 20px;
 }
-	
 
 
 

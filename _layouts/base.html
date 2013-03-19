@@ -1,9 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta charset="utf-8" /> 
+	<link href="/assets/css/responsivegrid.css" rel="stylesheet">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
+	<title>{{ title }}</title>
+
 </head>
 <body>
+	<section class="colgroup">
+	<section class="col7wide column" 
+	intent
+	in-base-class="column"
+	in-mobile-class="placeholder" 
+	in-tablet-class="placeholder" 
+	in-standard-class="col7wide" 
+	>
+	
+	<div class="cursor">
+		
+		<div class="tabs">
+			<a href="about.html">About Intention.js</a>	
+			<a href="documentation.html">Documentation</a>	
+			<a href="examples.html">Examples</a>	
+			<a href="sxsw.html">SXSW Workshop Syllabus</a>
+		</div>
+	</section>
+
+				
+
+	<section class="col3wide col10wide column"
+	intent
+	in-base-class="column" 
+	in-mobile-class="col10wide" 
+	in-tablet-class="col10wide" 
+	in-standard-class="col2wide" 
+	>
+		<div class="icons">	
+		<div class="media"
+		intent
+		in-tablet-class="mediaT"
+		in-standard-class="media"
+		in-mobile-class="mediaT">
+		<a href="http://twitter.com/intentionjs">
+		<div class="twitter"></div>
+		</a>
+		</div>
+		
+		<div class="fork"
+		intent
+		in-tablet-class="fork"
+		in-standard-class="fork"
+		in-mobile-class="forkM">
+		<span class="forkongithub">
+		<a href="https://github.com/wsjdesign/intentionjs">Fork me on GitHub</a>
+		</span>
+		</div>
+		</div>
+
+	</section>
+
+	</div>
+	</section>
+	</section>
+	
 	{{ content }}
+	
+	<script data-main="main" src="../test/vendor/require.js"></script>		
+	
+		<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-39164806-1']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+		</script>		
 </body>
 </html>

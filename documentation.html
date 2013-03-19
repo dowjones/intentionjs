@@ -1,0 +1,159 @@
+---
+layout: base
+title: Documentation
+---
+
+<head>
+	<link href="assets/css/doc.css" rel="stylesheet">
+</head>
+
+<!--HEADER CONTENT-->
+
+<section class="col10wide column"
+		intent
+		in-base-class="column" 
+		in-mobile-class="col10wide" 
+		in-tablet-class="col10wide" 
+		in-standard-class="col10wide" 
+		>
+			<div class="header">
+			
+			<div class="Tin"
+			intent
+			in-tablet-class="Tin"
+			in-standard-class="Tin"
+			in-mobile-class="Tin">
+		
+			<div class="subTin"
+			intent
+			in-tablet-class="subTnM"
+			in-standard-class="subTn"
+			in-mobile-class="subTnM"></div>
+			</div>
+						
+	</section>
+				
+<div class="background">
+					
+		<section class="col6wide column placeholder" 
+		intent
+		in-base-class="column"
+		in-mobile-class="placeholder" 
+		in-tablet-class="placeholder" 
+		in-standard-class="col6wide" 
+		>
+			<div class="desktop"></div>
+
+		</section>
+
+		<section class="colgroup">
+			<section class="col8wide column col10wide" 
+			intent
+			in-base-class="column"
+			in-mobile-class="col10wide" 
+			in-tablet-class="coll10wide" 
+			in-standard-class="col10wide" 
+			>
+				<div class="ipad"></div>
+				<div class="iphone"></div>
+
+			</section>
+		</section>
+</div>
+
+</section>
+				
+
+<!--END HEADER CONTENT-->
+
+<!--INFO AND MAIN NAVIGATION-->
+
+<section class="colgroup">
+		<div class="Info"
+		intent
+		in-tablet-class="InfoM"
+		in-standard-class="Info"
+		in-mobile-class="InfoM">
+		<div class="module grey">
+		
+		<div class="Information">
+		<h2>
+			Intention.js 
+		</h2>
+		</h1>- DOM manipulation based on an html attribute spec.</h1>
+			
+		<div class="SXSW"></div>
+		
+		</div>
+		</div>
+						
+							
+		<section id="content" class="col10wide column" 
+		intent
+		in-base-class="column"
+		in-mobile-class="col10wide" 
+		in-tablet-class="col10wide" 
+		in-standard-class="col10wide" 
+		>
+			<div class="module grey">
+				<div class="nav"
+				intent
+				in-tablet-class="navM"
+				in-standard-class="nav"
+				in-mobile-class="navM">
+				
+					<div class="tabs">
+					
+						
+						<div class="tab">
+						<div class="onPage">
+						<a name="content" href="documentation.html" intent in-mobile-href="documentation.html#content">Documentation</a>	
+						</div>
+						</div>
+
+						<div class="tab">
+						<a href="about.html" intent in-mobile-href="about.html#content">About Intention.js</a>	
+						</div>
+						
+						<div class="tab">
+						<a href="examples.html" intent in-mobile-href="examples.html#content">Examples</a>	
+						</div>		
+						
+						<div class="tab">
+						<a href="sxsw.html" intent in-mobile-href="sxsw.html#content">SXSW Syllabus</a>
+						</div>
+					
+					</div>	
+			</div>
+		</section>
+</section>
+						
+
+<!--END INFO AND MAIN NAVIGATION-->
+<!--BODY CONTENT-->
+
+
+<section class="column col10wide col9wide" 
+	intent
+	in-base-class="column"
+	in-mobile-class="col10wide" 
+	in-tablet-class="col10wide" 
+	in-standard-class="col9wide" 
+	>
+	<div class="module white">
+		<div class="documentation" id="readme"></div>
+	</div>
+
+</section>
+				
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		
+		$.get("http://intentionjs.com/pages/README.md.html", function(response){
+			$('#readme').append(response);        
+		});
+    });	
+</script>
+
+<!--END BODY CONTENT-->	

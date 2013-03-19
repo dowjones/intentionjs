@@ -1,31 +1,39 @@
 html, body {
-       margin:0;
-       padding:0;
+	margin:0;
+	padding:0;
 }
 
 .mobile .column {
-       margin-left:0; /* should be corrected in the grid */
+	margin-left:0; /* should be corrected in the grid */
+}
+
+.header {
+	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic ;
+	padding-left: 10px;
+	float: left;
+	padding-right: 20px;
+	font-size: 1.2em;
 }
 
 .mobile .header {
-       padding:0;
+	padding:0;
 }
- 
-.cursor {
+
+.cursor{
 	width: 100%;
 	height: 65px;
 	background-color: rgba(255,255,255,.8);
 	top: 0px;
 
 }
-.cursor a {
+.cursor a{
 	text-decoration: none;
 	padding-left: 50px;
 	padding-top: 20px;
 	font-size: .9em;
 	color: black;
 	float: left;
-	font-family:"Century Gothic";
+		font-family:"Century Gothic";
 }
 
 .cursor .tabs {
@@ -37,17 +45,17 @@ html, body {
 
 .media {
 	height: 40px;
-	width: 115px;
+	width: 50px;
 	float: left;
 	padding-top: 15px;
 	padding-left: 0px;
 	position: absolute;
-	right:190px;
+	right:157px;
 }
 
 .mediaT {
 	height: 40px;
-	width: 115px;
+	width: 50px;
 	float: left;
 	padding-top: 15px;
 	padding-left: 0px;
@@ -60,25 +68,26 @@ html, body {
 	background-color: rgba(255,255,255,.8);
 }
 
-.twitter {
+.twitter{
 	width: 25px;
 	height: 25px;
-	background-image: url(img/Tblack.jpg);
+	background-image: url(img/Tblack.png);
 	background-repeat: no-repeat;
 	float: right;
 	padding-left: 20px;
 }
 
-.twitter:hover {
+.twitter:hover{
 	width: 25px;
 	height: 25px;
-	background-image: url(img/Thov.jpg);
+	background-image: url(img/Thov.png);
 	background-repeat: no-repeat;
 	float: right;
 	padding-left: 20px;
 }
 
-.facebook {
+
+.facebook{
 	width: 25px;
 	height: 25px;
 	background-image: url(img/FBBlack.jpg);
@@ -86,7 +95,7 @@ html, body {
 	float: left;
 	padding-left: 20px;
 }
-.facebook:hover {
+.facebook:hover{
 	width: 25px;
 	height: 25px;
 	background-image: url(img/FBhov.jpg);
@@ -95,7 +104,7 @@ html, body {
 	padding-left: 20px;
 }
 
-.google {
+.google{
 	width: 25px;
 	height: 25px;
 	background-image: url(img/GBlack.jpg);
@@ -104,15 +113,16 @@ html, body {
 	
 }
 
-.google:hover {
+.google:hover{
 	width: 25px;
 	height: 25px;
 	background-image: url(img/Ghov.jpg);
 	background-repeat: no-repeat;
 	float: left;
+	
 }
 
-.forkongithub {
+.forkongithub{
 	position:absolute;
 	display:block;
 	top:0;
@@ -121,29 +131,30 @@ html, body {
 	overflow:hidden;
 	height:170px;}
 
-.forkongithub a:hover {
+.forkongithub a:hover{
 	background:#505b68;
-	color:#fff;
-}
+	color:#fff !important;}
 
-.forkongithub a {
-	background:#000;
-	color:#fff;
-	text-decoration:none;
-	font-family:"Century Gothic", sans-serif;
-	text-align:;
-	font-weight:bold;
-	padding:5px 40px;
-	font-size:1rem;
-	line-height:1.4rem;
-	width:170px;
-	position:absolute;
-	top:60px;
-	right:-70px; 
-	transform:rotate(45deg);
-	-webkit-transform:rotate(45deg);
-	box-shadow:4px 4px 10px rgba(0,0,0,0.8);
-}
+.forkongithub a{
+		background:#000;
+		color:#fff;
+		text-decoration:none;
+		font-family:"Century Gothic", sans-serif;
+		text-align:;
+		font-weight:bold;
+		padding:5px 40px;
+		font-size:1rem;
+		line-height:1.4rem;
+		width:170px;
+		position:absolute;
+		top:60px;
+		right:-70px; 
+		transform:rotate(45deg);
+		-webkit-transform:rotate(45deg);
+		box-shadow:4px 4px 10px rgba(0,0,0,0.8);
+	}
+
+
 
 .forkM	.forkongithub{
 	position:absolute;
@@ -152,15 +163,13 @@ html, body {
 	right:0;
 	width:212px;
 	overflow:hidden;
-	height:180px;
-}
+	height:180px;}
 
 .forkM .forkongithub a:hover{
 	background:#e9e9e9;
-	color:#23b6b0;
-}
+	color:#23b6b0 !important;}
 
-.forkM .forkongithub a {
+.forkM .forkongithub a{
 		background:#e9e9e9;
 		color:#000;
 		text-decoration:none;
@@ -180,10 +189,12 @@ html, body {
 	}
 
 
+
 .Tin {
 	background-image: url(img/tin.png);
 	width: 320px;
 	height: 115px;
+	
 }
 
 .TinM {
@@ -201,6 +212,7 @@ html, body {
 	height: 50px;
 	width: 675px;
 	background-repeat: no-repeat;
+
 }
 
 .subTnM {
@@ -208,10 +220,14 @@ html, body {
 }
 
 .background{
-	background-image: url(img/backbigS.jpg);
+	background-image: url(img/backbigA.jpg);
 	width: 100%;
 	height: 500px;
+
+	
+	
 }
+
 
 .desktop{
 	width: 534px;
@@ -223,6 +239,8 @@ html, body {
 	left: 30px;
 }
 
+
+
 .ipad {
 	background-image: url(img/ipad.png);
 	height: 292px;
@@ -230,8 +248,11 @@ html, body {
 	margin: auto;
 	position: absolute;
 	top:230px;
-	right: 90px;
+	right: 130px;
+
 }
+
+
 
 .iphone {
 	background-image: url(img/iphone.png);
@@ -240,14 +261,20 @@ html, body {
 	width: 55px;
 	margin: auto;
 	margin-right: 0px;
+
+	
+
 }
 
+
 .Info {
+	
 	width: 100%;
 	background-color: #e9e9e9;
 	height: 100%;
 	
 }
+
 
 .Information {
 	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
@@ -278,10 +305,11 @@ html, body {
 
 .navT{
 	height: 50px;
-	width: auto;
+	width: 100%;
 	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
 	background-color: #e9e9e9;
 	padding-top: 20px;
+
 }
 
 .navT a{
@@ -296,25 +324,29 @@ html, body {
 
 .navT .onPage {
 	float: left;
-	width: 163px;
+	width: 190px;
 	background-color: white;
 	height: 50px;
 	margin-left: 20px !important;
+
 }
 
 .navT .tabs {
+	
 	padding-left: 50px;
 	height: 60px;
+
 }
+
 
 
 .navM{
-	width: auto;
+	width: 100%;
 	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
 	background-color: #e9e9e9;
-	padding-top: 20px;
-
 }
+
+
 
 .navM a{
 	text-decoration: none;
@@ -325,49 +357,67 @@ html, body {
 	color: black;
 }
 
+.navM .tabs {
+	
+	width: 100%;
+
+}
 
 .navM .tab {
 	width: 100%;
+	height:30px;
 	border: 1px solid;
 	border-color: #e9e9e9;
 	background-color: white;	
+
 }
 
 .navM .onPage {
+	
 	width: 100%;
 	background-color: white;
 	height: 30px;
 	margin-left: 0px !important;
 	background-color: #e9e9e9;
+	
 }
 
-.navM .onPage a{
+.navM .tabs .onPage a{
 	color: #23b6a6 !important;
 	padding-top:0 !important; 
+
 }
+
 
 
 
 .nav {
 	height: 50px;
-	width: auto;
+	width: 100%;
 	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
 	background-color: #e9e9e9;
 	padding-top: 20px;
+
 }
 
 .nav .tabs {
+	
 	padding-left: 50px;
 	height: 60px;
+
 }
+
+
 
 .onPage {
 	float: left;
-	width: 170px;
+	width: 200px;
 	background-color: white;
 	height: 50px;
 	margin-left: 20px !important;
+
 }
+
 
 .onPage a{
 	color: #23b6a6 !important;
@@ -381,10 +431,29 @@ html, body {
 	font-size: 1.2em;
 	color: black;
 	float: left;
+
 }
 
 a:hover{
-	color: #e2514e;
+	color: #4b6095 !important;
+}
+
+
+
+.documentation {
+	margin-left: 20px;
+	width: auto;
+}
+
+
+
+h6{
+	font-size: 1.8em;
+	color: #23b6b0;
+	line-height: 1.3em;
+	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
+
+
 }
 
 .column1{
@@ -394,24 +463,11 @@ a:hover{
 	float: left;
 	height: auto;
 	width: auto;
+	padding-bottom: 200px;
+
+
 }
 
-h6{
-	font-size: 1.8em;
-	color: #23b6b0;
-	line-height: 1.3em;
-	font-family:"Century Gothic", sans-serif;
-}
-
-.column2 {
-	color: grey;
-	margin-left: 40px;
-	margin-top: 40px;
-	margin-right: 20px;
-	float: left;
-	height: auto;
-	width: auto;
-}
 
 .column1M {
 	
@@ -430,39 +486,57 @@ h6{
 	height: auto;
 }
 
-.erin {
-	float: left;
-	margin-bottom: 50px;
-}
 
-.joe {
-	float: left;
-	margin-bottom: 50px;
-}
 
-.erin-pic{
-	background-image: url(img/Erin.png);
-	width: 100px;
-	height:100px;
-	float: left;
-	margin-right: 15px;
-}
 
-.joe-pic{
-	background-image: url(img/Joe.png);
-	width: 100px;
-	height:100px;
-	float: left;
-	margin-right: 15px;
-}
 
- p, ul, li{
+
+ p{
 	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
-	
+	margin-right: 10px;
+	width: auto;
 	font-size: .9em;
 	line-height: 1.5em;
 }
 
 h1, h2, h3, h4 {
 	font-family:"Century Gothic", sans-serif;
+
+
 }
+
+.line {
+	width: auto;
+	height: 2px;
+	background-color: #e0e0e0;
+	margin-right: 20px;
+}
+
+.code {
+	background-color: #e9e9e9;
+	font-family: "Courier New", Courier, monospace;
+	border: 2px solid #e0e0e0;
+	border-radius: 8px;
+	width: auto;
+	margin-right: 10px;
+	margin-top: 20px;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-bottom: 20px;
+	padding-right: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
