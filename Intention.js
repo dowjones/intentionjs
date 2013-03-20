@@ -10,8 +10,8 @@
   'use strict';
 
   var Intention = function(params){
-    var intent = $.extend(this, params, 
-        {_listeners:{}, contexts:[], elms:$(), axis:{}, responders:[]});
+    var intent = _.extend(this, params, 
+        {_listeners:{}, contexts:[], elms:$(), axes:{}, priority:[]});
 
     return intent;
   };
@@ -21,6 +21,14 @@
     // public methods
     responsive:function responsive(contexts, options){
 
+      var idChars = 'abcdefghijklmnopqrstuvwxyz0123456789', 
+          id='', i;
+
+      // create a random id for the axis
+      for(i=0; i<5; i++){
+        id += idChars[Math.floor(Math.random() * idChars.length)]
+      }
+
       var defaults = {
           // if no matcher function is specified expect to compare a 
           // string to the ctx.name property
@@ -28,9 +36,9 @@
             return measure === ctx.name;
           },
           // function takes one arg and returns it  
-          measure: _.identity
-        }, 
-        currentContext;
+          measure: _.identity,
+          ID: id
+        };
 
       if(_.isObject(options) === false) options = {};
 
@@ -47,30 +55,33 @@
         options.contexts = contexts;
       }
 
+      // fill in the options
       options = _.extend({}, defaults, options);
 
-      contexts = options.contexts;
+      // bind an the respond function to the axis ID
+      this.on(options.ID, _.bind(
+          function(e){
+            this.axes = this._contextualize(
+              options.ID, e.context, this.axes);
+            this._respond(this.axes, this.elms);
+
+          }, this));
       
-      // bind an the respond function to each context name
-      _.each(contexts, function(ctx){
-        this.on(ctx.name, _.bind(
-            function(){this._respond(this.contexts, this.elms);}, this));
-      }, this);
+      var axis = {
+        ID:[options.ID],
+        current:null,
+        contexts:options.contexts,
+        respond:_.bind(this._responder(options.ID,
+          options.contexts, options.matcher, options.measure), this)
+      };
 
-      var responder = _.bind(this._responder(
-        contexts, options.matcher, options.measure), this);
+      this.axes[options.ID] = axis;
 
-      // this makes the contexts accessible from the outside world
-      if(options.ID){
-        this.axis[options.ID]={
-          contexts:contexts,
-          respond:responder
-        };
-      } else {
-        this.responders.push(responder);
-      }
+      this.axes.__keys__ = this.priority;
 
-      return responder;
+      this.priority.unshift(options.ID);
+
+      return axis;
     },
 
     elements: function(scope){
@@ -104,7 +115,7 @@
               $.extend(true, spec, this._attrsToSpec(elm.attributes))));
           // make any appropriate changes based on the current contexts
           this._makeChanges($(elm), this._changes(
-            $(elm).data('intent.spec'), this.contexts));
+            $(elm).data('intent.spec'), this.axes));
 
           this.elms.push(elm);
         }
@@ -132,8 +143,9 @@
     },
 
     is: function(ctxName){
-      return _.some(this.contexts, function(ctx){
-        return ctxName === ctx.name;
+      var axes = this.axes;
+      return _.some(axes.__keys__, function(key){
+        return ctxName === axes[key].current;
       });
     },
 
@@ -145,6 +157,8 @@
         this._listeners[type]=[];
       }
       this._listeners[type].push(listener);
+
+      return this;
     },
 
     off: function(type, listener){
@@ -158,28 +172,32 @@
           }
         }
       }
+      return this;
     },
 
     // privates
-    _responder: function(contexts, matcher, measure){
+    _responder: function(axisID, contexts, matcher, measure){
 
       var currentContext;
 
+      // called to perform a check
       return function(){
 
-        var measurement = measure.apply(this, arguments);
+        var measurement = measure.apply(this, arguments),
+          match=null;
 
         _.every(contexts, function(ctx){
           if( matcher(measurement, ctx)) {
             // first time, or different than last context
             if( (currentContext===undefined) || 
               (ctx.name !== currentContext.name)){
+
               currentContext = ctx;
-              this.contexts = this._contextualize(ctx, contexts, 
-                  this.contexts);
+              
               // emit the context event
-              this._emitter($.extend({}, {type:currentContext.name}, 
-                currentContext), this);
+              this._emitter(_.extend({}, {type:currentContext.name}, 
+                  currentContext), this)
+                ._emitter({type:axisID, context:currentContext.name}, this);
 
               // done, break the loop
               return false;
@@ -189,6 +207,7 @@
           }
           return true;
         }, this);
+
         // return the intention object for chaining
         return this;
       };
@@ -211,6 +230,8 @@
           listeners[i].call(this, event);
         }
       }
+
+      return this;
     },
 
     _fillSpec: function(spec){
@@ -238,9 +259,9 @@
 
       var spec={},
         fullPattern = new RegExp(
-          '^(data-)?(in|intent)-([_a-zA-Z0-9]+)-([A-Za-z:-]+)'),
+          '^(data-)?(in|intent)-([a-zA-Z0-9][_a-zA-Z0-9]*)-([A-Za-z:-]+)'),
         axisPattern =  new RegExp(
-          '^(data-)?(in|intent)-([_a-zA-Z0-9]+)$'),
+          '^(data-)?(in|intent)-([a-zA-Z0-9][_a-zA-Z0-9]*)$'),
         addProp=function(obj, name, value){
           obj[name] = value;
           return obj;
@@ -250,8 +271,14 @@
         if(specMatch !== null) {
           specMatch = specMatch.slice(-2);
 
-          $.extend(true, spec, addProp({}, specMatch[0],
-            addProp({}, specMatch[1], attr.value)));
+          var ctx = specMatch[0],
+            ctxSpec = spec[ctx] || {};
+
+          spec = addProp(spec, ctx,
+            addProp(ctxSpec, specMatch[1], attr.value));
+
+        } else if(axisPattern.test(attr.name)){
+          spec['_' + attr.name.match(axisPattern)[3]] = attr.value;
         }
       });
 
@@ -285,14 +312,13 @@
       return changes;
     },
 
-    _changes: function(specs, contexts){
+    _changes: function(specs, axes){
 
       var changes = {},
         inSpecs=[], outSpecs=[];
-
-      _.each(contexts, function(ctx){
-        if(specs[ctx.name] !== undefined) {
-          inSpecs.push(ctx.name);
+      _.each(axes.__keys__, function(ID){
+        if(axes[ID].current !== null) {
+          inSpecs.push(axes[ID].current);
           return;
         }
       });
@@ -343,42 +369,20 @@
       return elm;
     },
 
-    _respond: function(contexts, elms){
+    _respond: function(axes, elms){
       // go through all of the responsive elms
       elms.each(_.bind(function(i, elm){
         var $elm = $(elm);
         this._makeChanges($elm, this._changes(
-          $elm.data('intent.spec'), contexts));
+          $elm.data('intent.spec'), axes));
 
         $elm.trigger('intent', this);
       }, this));
     },
 
-    _contextualize: function(context, axis, currentContexts){
-
-      var index = -1;
-      // go through the axis first because the current context list 
-      // can be empty
-      _.every(axis, function(current){
-
-        if(index !== -1) return false;
-
-        _.every(currentContexts, function(ctx, i){
-          if(ctx===current){
-            index = i;
-            return false;
-          }
-          return true;
-        });
-        return true;
-      });
-
-      if(index !== -1) {
-        currentContexts.splice(index, 1, context);
-      } else {
-        currentContexts.unshift(context);
-      }
-      return currentContexts;
+    _contextualize: function(axisID, context, axes){
+      axes[axisID].current = context;
+      return axes;
     }
   };
   return Intention;

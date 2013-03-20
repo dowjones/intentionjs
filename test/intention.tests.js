@@ -15,7 +15,6 @@ describe("Intention", function() {
 
   // basic tn attrs
   responsiveElm1
-    .attr('in-class','base')
     .attr('in-mobile-class','mobile')
     .attr('in-tablet-class','tablet')
     .attr('in-touch-class','touch')
@@ -66,42 +65,63 @@ describe("Intention", function() {
           contexts: sizeCtxs,
           matcher: function(response, context){
             return response >= context.val;
-          }});
+          },
+          ID:'size'});
 
-    it("Should return a function", function(){
-      expect(_.isFunction(size)).to.equal(true);
+    it("Should return an object", function(){
+      expect(_.isObject(size)).to.equal(true);
     });
 
     // this is incorrect at < 400 screen sizes, fix
-    it("Should add the the appropriate context and remove all others", function(){
-      
+    it("Should set the the appropriate context", function(){
+      var respond = size.respond;
       // in the small context
-      expect(_.contains(size(0).contexts, small)).to.equal(true);
-      expect(_.contains(size(0).contexts, big)).to.equal(false);
-      expect(_.contains(size(0).contexts, medium)).to.equal(false);
+      respond(0);
+      expect(intent.axes.size.current).to.equal('small');
+      
       // in the medium context
-      expect(_.contains(size(200).contexts, medium)).to.equal(true);
-      expect(_.contains(size(200).contexts, big)).to.equal(false);
-      expect(_.contains(size(200).contexts, small)).to.equal(false);
+      respond(200);
+      expect(intent.axes.size.current).to.equal('medium');
+
       // in the big context
-      expect(_.contains(size(1000).contexts, big)).to.equal(true);
-      expect(_.contains(size(1000).contexts, small)).to.equal(false);
-      expect(_.contains(size(1000).contexts, medium)).to.equal(false);
+      respond(1000);
+      expect(intent.axes.size.current).to.equal('big');
+
+    });
+
+    it('Should confirm the contexts through "is"', function(){
+      var respond = size.respond;
+
+      expect(respond(0).is('small')).to.equal(true);
+      expect(respond(0).is('medium')).to.equal(false);
+      expect(respond(0).is('big')).to.equal(false);
+      
+      // in the medium context
+      expect(respond(200).is('medium')).to.equal(true);
+      expect(respond(200).is('small')).to.equal(false);
+      expect(respond(200).is('big')).to.equal(false);
+
+      // in the big context
+      expect(respond(1000).is('big')).to.equal(true);
+      expect(respond(1000).is('medium')).to.equal(false);
+      expect(respond(1000).is('small')).to.equal(false);
+
     });
 
     it("events should only fire when crossing a threshold", function(){
-      var callbackCount = 0;
+      var callbackCount = 0,
+        respond = size.respond;;
       // set the current context to small
-      size(0);
+      respond(0);
       // attach a callback to big
       intent.on('big', function(){
         callbackCount++;
       });
       // change to the big context
-      size(1000);
+      respond(1000);
       expect(callbackCount).to.equal(1);
       // resolve the responder to the big context again.
-      size(1000);
+      respond(1000);
       // the event should not have fired
       expect(callbackCount).to.equal(1);
     });
@@ -116,21 +136,21 @@ describe("Intention", function() {
               {contexts:[{name:'bar'}]},
               {contexts:[{name:'baz'}]}
           ]);
-
-          expect(intent.responders.length).to.equal(3);
+          // TODO: make this que off the contexts length
+          expect(intent.axes.__keys__.length).to.equal(3);
         });
     });
-
   });
 
   describe("is: test to see if a context name is in the .contexts property",
     function(){
       var intent = new Intention,
-        axis=intent.responsive([{name:'foo'}, {name:'bar'}]);
+        respond=intent.responsive([{name:'foo'}, {name:'bar'}]).respond;
+
       it('should confirm the applied context is current and others are not', 
         function(){
           // change the axis into the foo context
-          axis('foo');
+          respond('foo');
           expect(intent.is('foo')).to.equal(true);
           expect(intent.is('bar')).to.equal(false);
 
@@ -138,9 +158,9 @@ describe("Intention", function() {
 
       it('should change contexts and confirm the new context is \
         in the contexts list', function(){
-          axis('bar');
+          respond('bar');
           expect(intent.is('bar')).to.equal(true);
-          expect(intent.is('foo')).to.equal(false);  
+          expect(intent.is('foo')).to.equal(false);
         });
     });
 
@@ -189,66 +209,23 @@ describe("Intention", function() {
   describe("_contextualize: keeping track of the current contexts", function(){
     // takes a context object to add, the axis that context belongs 
     // (ofContexts) and the list of current contexts
-    var intent = new Intention;
+    var intent = new Intention,
+      axes = {
+            id1:{
+              current:'bar'
+            },
+            id2:{
+              current:null
+            },
+            __keys__:['id1', 'id2']
+          };
     
-    it('should return a list including the "foo" and the "baz" context', function(){
-      var inCtx = {name:'foo'},
-        expectedCtxs = [{ name:"baz"},{ name:"foo"}],
-        currentContexts = intent._contextualize(inCtx, 
-          [inCtx, {name:'bar'}], 
-          expectedCtxs);
-
-      _.each(expectedCtxs, function(ctx){
-        expect(_.contains(ctx, currentContexts)).to.equal(false);  
-      });
-    });
-
-    it('should add context from axis and remove any other from same context', 
+    it('should make a new axes object with the current context for id1 set to foo', 
       function(){
-        var intent = new Intention,
-          inCtx = {name:'foo'},
-          constantCtx = {name:'base'},
-          outCtx = {name:'bar'},
-          current = intent._contextualize(inCtx, 
-            [inCtx, outCtx], 
-            [constantCtx]);
-
-        expect(_.contains(current, inCtx)).to.equal(true);
-        expect(_.contains(current, constantCtx)).to.equal(true);
-        expect(_.contains(current, outCtx)).to.equal(false);
-      });
-
-    it('Should replace contexts of the same group at \
-      the same index of current contexts', function(){
-        var intent = new Intention,
-          inCtx = {name:'foo'},
-          outCtx = {name:'bar'},
-          ofCtxs = [inCtx, outCtx],
-          current=intent._contextualize(inCtx, ofCtxs, [{name:'base'}, outCtx]);
-        expect(_.indexOf(current, inCtx)).to.equal(1)
-      });
-
-    it('Should put new contexts at the beginning of current contexts', 
-      function(){
-        var intent = new Intention,
-          ctxA={name:'a'},
-          ctxB={name:'b'},
-          ctxAA={name:'aa'},
-          axisA = intent.responsive([ctxA, ctxAA]);;
-
-        axisA('a')
-
-        intent.responsive([ctxB])('b');
-
-        expect(_.indexOf(intent.contexts, ctxA)).to.equal(1);
-        expect(_.indexOf(intent.contexts, ctxB)).to.equal(0);
-
-        // switch axisA to ctx AA
-        axisA('aa');
-
-        // the index should be the same
-        expect(_.indexOf(intent.contexts, ctxAA)).to.equal(1);
-
+        var inCtx = 'foo',
+          // TODO: change the order of these args
+          newAxes = intent._contextualize('id1', inCtx, axes);
+          expect(newAxes.id1.current).to.equal('foo');
       });
   });
 
@@ -259,9 +236,11 @@ describe("Intention", function() {
           elm = $('<div>')
             .attr({'in-mobile-class':'foo',
               'in-tablet-class':'bar',
-              'in-standard-class':'baz'});
+              'in-standard-class':'baz',
+              'in-orientation':'qux'});
 
         expect(intent._attrsToSpec(elm[0].attributes)).to.eql({
+          _orientation:'qux',
           mobile:{
             'class':'foo'
           },
@@ -332,6 +311,15 @@ describe("Intention", function() {
     function(){
       it('should add the foo spec to in contexts and bar to out contexts', function(){
         var intent = new Intention,
+          axes = {
+            id1:{
+              current:'foo'
+            },
+            id2:{
+              current:null
+            },
+            __keys__:['id1', 'id2']
+          },
           changes = intent._changes({
             foo:{
               'class':'foo',
@@ -341,7 +329,7 @@ describe("Intention", function() {
               'class':'bar',
               append:'#bar'
             }
-          }, [{name:'foo'}]);
+          }, axes);
 
         expect(changes.inSpecs)
           .to.eql({
@@ -362,6 +350,15 @@ describe("Intention", function() {
 
         var intent = new Intention,
           elm=$('<div class="baz">'),
+          axes = {
+            id1:{
+              current:'foo'
+            },
+            id2:{
+              current:null
+            },
+            __keys__:['id1', 'id2']
+          },
           changes = intent._changes({
             foo:{
               'class':'foo',
@@ -371,7 +368,7 @@ describe("Intention", function() {
               'class':'bar',
               append:'#bar'
             }
-          }, [{name:'foo'}]);
+          }, axes);
 
         intent._makeChanges(elm, changes);
 
@@ -399,7 +396,7 @@ describe("Intention", function() {
         fire=true
       }));
 
-      intent.responsive([{name:'base'}])('base');
+      intent.responsive([{name:'base'}]).respond('base');
 
       expect(fire).to.equal(true);
     })
@@ -408,8 +405,9 @@ describe("Intention", function() {
   describe("regex tests", function(){
     
     describe('full attr match', function(){
+      // TODO update intention regex
       var attrPattern = new RegExp(
-        '^(data-)?(in|intent)-([_a-zA-Z0-9]+)-([A-Za-z:-]+)');
+        '^(data-)?(in|intent)-([a-zA-Z0-9][_a-zA-Z0-9]*)-([A-Za-z:-]+)');
 
       it('should match on an abbreviated nonstandard prefix', function(){
           expect(
@@ -422,6 +420,12 @@ describe("Intention", function() {
           expect(
             attrPattern
               .test('data-in-mobile-class')).to.equal(true);
+      });
+
+      it('should not match when context starts with an underscore', function(){
+          expect(
+            attrPattern
+              .test('data-in-_mobile-class')).to.equal(false);
       });
 
       it('should match on a nonstandard prefix', function(){
@@ -453,7 +457,7 @@ describe("Intention", function() {
 
     describe('context and axis only match', function(){
       var ctxOnlyPattern = new RegExp(
-        '^(data-)?(in|intent)-([_a-zA-Z0-9]+)$');
+        '^(data-)?(in|intent)-([a-zA-Z0-9][_a-zA-Z0-9]*)$');
 
       it('should match on the prefix and context', function(){
         expect(ctxOnlyPattern
