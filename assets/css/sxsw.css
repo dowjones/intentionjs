@@ -242,23 +242,27 @@ html, body {
 	margin-right: 0px;
 }
 
+
 .Info {
+	
 	width: 100%;
 	background-color: #e9e9e9;
 	height: 100%;
 	
 }
 
+
 .Information {
 	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
 	padding-left: 20px;
 	background-color: #e9e9e9;
+	padding-bottom: 20px;
 }
 
 .InfoM {
-	padding-right: 20px;
+	
 	background-color: #e9e9e9;
-	height: auto;
+	
 }
 
 .InfoM .SXSW {
@@ -312,8 +316,7 @@ html, body {
 	width: auto;
 	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
 	background-color: #e9e9e9;
-	padding-top: 20px;
-
+	
 }
 
 .navM a{
@@ -322,7 +325,7 @@ html, body {
 	padding-left: 20px;
 	font-size: 1em;
 	line-height: 1.8em;
-	color: black;
+	color: black;.5
 }
 
 
@@ -333,33 +336,41 @@ html, body {
 	background-color: white;	
 }
 
-.navM .onPage {
+.navM .SonPage {
 	width: 100%;
-	background-color: white;
-	height: 30px;
-	margin-left: 0px !important;
 	background-color: #e9e9e9;
+	height: 28px;
+	color: #23b6b0;
+	border-bottom: 3.3px solid;
+	border-color: white;
 }
 
-.navM .onPage a{
-	color: #23b6a6 !important;
+.navM .SonPage a{
+	color: #23b6b0 !important;
 	padding-top:0 !important; 
 }
 
 
 
+
+
 .nav {
 	height: 50px;
-	width: auto;
+	width: 100%;
 	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
 	background-color: #e9e9e9;
 	padding-top: 20px;
+
 }
 
 .nav .tabs {
+	
 	padding-left: 50px;
 	height: 60px;
+
 }
+
+
 
 .onPage {
 	float: left;
@@ -367,7 +378,9 @@ html, body {
 	background-color: white;
 	height: 50px;
 	margin-left: 20px !important;
+
 }
+
 
 .onPage a{
 	color: #23b6a6 !important;
@@ -381,11 +394,13 @@ html, body {
 	font-size: 1.2em;
 	color: black;
 	float: left;
+
 }
 
 a:hover{
-	color: #e2514e;
+	color: #ef5263 !important;
 }
+
 
 .column1{
 	margin-left: 50px;
