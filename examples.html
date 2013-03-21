@@ -148,12 +148,12 @@ title: Examples
 <!--BODY CONTENT-->
 
 
-<section class="column col10wide col9wide" 
+<section class="column col10wide " 
 		intent
 		in-base-class="column"
 		in-mobile-class="col10wide" 
 		in-tablet-class="col10wide" 
-		in-standard-class="col9wide" 
+		in-standard-class="col10wide" 
 		>
 					
 		<div class="column1"
@@ -162,6 +162,10 @@ title: Examples
 		in-standard-class="column1"
 		in-mobile-class="column1M" id="examples">
 		</div>
+
+		<div class="module white">
+		<div class="examples" id="examples"></div>
+		</div>
 					
 </section>
 
@@ -169,7 +173,7 @@ title: Examples
 
     $(document).ready(function(){
     	
-    	$.get("http://intentionjs.com/pages/EXAMPLES.md.html", function(response){
+    	$.get("EXAMPLES.md.html", function(response){
     		$('#examples').append(response);        
     		});
     	});

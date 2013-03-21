@@ -123,7 +123,7 @@ html, body {
 
 .forkongithub a:hover {
 	background:#505b68;
-	color:#fff;
+	color:#fff !important;
 }
 
 .forkongithub a {
@@ -372,17 +372,18 @@ html, body {
 
 
 
-.onPage {
-	float: left;
+.nav .SonPage {
 	width: 170px;
 	background-color: white;
 	height: 50px;
-	margin-left: 20px !important;
+	float: left;
+	margin-left: 20px;
+
 
 }
 
 
-.onPage a{
+.SonPage a{
 	color: #23b6a6 !important;
 	padding-left: 20px !important; 
 }
