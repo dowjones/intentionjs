@@ -4,28 +4,31 @@ title: something
 ---
 
 <head>
+	
 	<style type="text/css">
 
-.box1 {
+.squareAd, .wideAd{
 	width: 200px;
 	height: 200px;
 	float: left;
 	background-color: pink;
 }
 
-.box2 {
+.Lcolumn{
 	width: 200px;
 	height: 200px;
 	float: left;
 	background-color: red;
 }
 
-.box3 {
+.header {
 	width: 200px;
 	height: 200px;
 	float: left;
 	background-color: orange;
 }
+
+
 
 
 
@@ -38,37 +41,118 @@ title: something
 
 
 				
+	<!--
 	<div class="background">
 			
 			
-			<div class="box1"><h2>PLEASE</h2></div>
+			<div class="A"><div class="box1"><h2>PLEASE</h2></div></div>
 		
-			<div class="box2">
+			<div class="B"><div class="box2">
 			
-			<h1 intent
+			<!--<h1 intent
 			in-mobile-prepend="box1" 
 			in-tablet-prepend="box3" 
 			in-standard-prepend="box2" 
 			>
 
 			
-			<span intent in-base-class="c"
-			in-base-append='h1'
-			in-mobile-prepend='h2'
-			in-tablet-prepend='h3'>MOOOOVEEEE </span></h1>
+			<div intent in-base-class="box2"
+			in-base-prepend='B'
+			in-mobile-prepend='A'
+			in-tablet-prepend='A'>move </span></h1>
 
-			</div>
-			</div>
+			</div></div>
+			
+			
 
+
+			<div class="C">
 
 			<div intent 
 			in-base-class="box3"
 			in-mobile-before="box3"
 			in-tablet-after="box3"><h3>Around</h3></div>
 		
-		
+			</div>
 			
 
-	</div>		
+	</div>-->	
 
+
+<section class="colgroup">
+					<section class="col10wide column"
+					in
+					data-in-base-class="column" 
+					data-in-mobile-class="col3wide" 
+					data-in-tablet-class="col6wide" 
+					data-in-standard-class="col10wide" 
+					>
+						<div class="header">
+							<h2>
+								Header 
+							</h2>
+						</div>
+						<div id="tablet_ad"></div>
+					</section>
+				</section>
+	<section class="colgroup">
+					<section class="col6wide column" 
+					in
+					data-in-base-class="column"
+					data-in-mobile-class="col3wide" 
+					data-in-tablet-class="col3wide" 
+					data-in-standard-class="col6wide" 
+					>
+						<div  id="mobile_ad"></div>
+						<div class="Lcolumn">
+							<h2>
+								Left Column 
+							</h2>
+						</div>
+						<section class="" 
+						in
+						data-in-base-class=""
+						data-in-mobile-class="col3wide column" 
+						data-in-tablet-class="placeholder" 
+						data-in-standard-class="placeholder" 
+						>
+							<div id="mobile_mdm"></div>
+						</section>
+			
+						
+					</section>
+					<section class="col4wide column" 
+					in
+					data-in-base-class="column"
+					data-in-mobile-class="col3wide" 
+					data-in-tablet-class="col3wide" 
+					data-in-standard-class="col4wide" 
+					>
+						<div id="ad">
+							<div
+							in
+							data-in-base-append="#ad"
+							data-in-standard-append="#ad"
+							data-in-mobile-append="#mobile_ad"
+							data-in-tablet-append="#tablet_ad">
+								<div class="module blue" 
+								in
+								data-in-base-class="module blue"
+								data-in-mobile-class="slimAd" 
+								data-in-tablet-class="wideAd" 
+								data-in-standard-class="squareAd" 
+								>
+									<h2>
+										Right Column Ad 
+									</h2>
+								</div>
+							</div>
+						</div>
+					
+				
+					</section>
+				
+
+				
+				</section>
 
