@@ -69,39 +69,44 @@ title: Examples
 <!--INFO AND MAIN NAVIGATION-->
 
 <section class="colgroup">
+		
+		<div id="navSwitch"></div>
+		
 		<div class="Info"
 		intent
 		in-tablet-class="InfoM"
 		in-standard-class="Info"
 		in-mobile-class="InfoM">
 		<div class="module grey">
-		
-		<div class="Information">
-		<h2>
-			Intention.js 
-		</h2>
-		</h1>- DOM manipulation based on an html attribute spec.</h1>
-			
-		<div class="SXSW"></div>
-		
-		</div>
-		</div>
-		</div>
 						
-		<section
-		intent
-		in-mobile-before="Info" 
-		in-tablet-before="Info" 
-		in-standard-after="Info" 
-		>				
+			<div class="Information">
+			<h2>
+				Intention.js 
+			</h2>
+			</h1>- DOM manipulation based on an html attribute spec.</h1>
+			</div>
 		
-		<section id="content" class="col10wide column" 
+		<div class="SXSW"></div>
+
+		</div>
+		</div>
+
+	<section id="content" 
+		class="col10wide column" 
 		intent
 		in-base-class="column"
 		in-mobile-class="col10wide" 
 		in-tablet-class="col10wide" 
 		in-standard-class="col10wide" 
 		>
+			<div id="nav">
+			<div class="module grey">
+			
+			<div in
+			data-in-base-append="#nav"
+			data-in-standard-append="#nav"
+			data-in-mobile-append="#navSwitch"
+			data-in-tablet-append="#navSwitch">	
 
 			<div class="module grey">
 				<div class="nav"
