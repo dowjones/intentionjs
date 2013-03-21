@@ -33,7 +33,7 @@ html, body {
 	font-size: .9em;
 	color: black;
 	float: left;
-		font-family:"Century Gothic";
+		font-family: proxima-nova, sans-serif;
 }
 
 .cursor .tabs {
@@ -139,7 +139,7 @@ html, body {
 		background:#000;
 		color:#fff;
 		text-decoration:none;
-		font-family:"Century Gothic", sans-serif;
+		font-family: proxima-nova, sans-serif;
 		text-align:;
 		font-weight:bold;
 		padding:5px 40px;
@@ -173,7 +173,7 @@ html, body {
 		background:#e9e9e9;
 		color:#000;
 		text-decoration:none;
-		font-family:"Century Gothic", sans-serif;
+		font-family:proxima-nova, sans-serif;
 		margin-left: 40px;
 		font-weight:;
 		padding:5px 40px;
@@ -277,10 +277,13 @@ html, body {
 
 
 .Information {
-	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
+	font-family:proxima-nova, sans-serif;
+	font-style: italic;
+  	font-weight: 300;
 	padding-left: 20px;
 	background-color: #e9e9e9;
 	padding-bottom: 20px;
+	font-size: 1.5em;
 }
 
 .InfoM {
@@ -307,7 +310,7 @@ html, body {
 .navT{
 	height: 50px;
 	width: 100%;
-	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
+	font-family:proxima-nova, sans-serif;
 	background-color: #e9e9e9;
 	padding-top: 20px;
 
@@ -343,7 +346,7 @@ html, body {
 
 .navM{
 	width: 100%;
-	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
+	font-family:proxima-nova, sans-serif;
 	background-color: #e9e9e9;
 }
 
@@ -395,7 +398,7 @@ html, body {
 .nav {
 	height: 50px;
 	width: 100%;
-	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
+	font-family:proxima-nova, sans-serif;
 	background-color: #e9e9e9;
 	padding-top: 20px;
 
@@ -452,7 +455,7 @@ h6{
 	font-size: 1.8em;
 	color: #23b6b0;
 	line-height: 1.3em;
-	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
+	font-family:proxima-nova, sans-serif;
 
 
 }
@@ -493,7 +496,7 @@ h6{
 
 
  p{
-	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
+	font-family:proxima-nova, sans-serif;
 	margin-right: 10px;
 	width: auto;
 	font-size: .9em;
@@ -501,7 +504,7 @@ h6{
 }
 
 h1, h2, h3, h4 {
-	font-family:"Century Gothic", sans-serif;
+	font-family:proxima-nova, sans-serif;
 
 
 }

@@ -222,7 +222,7 @@ html, body {
 
 .background{
 	background-image: url(img/backbigE.jpg);
-	width: 200%;
+	width: 100%;
 	height: 500px;
 
 	
@@ -273,7 +273,7 @@ html, body {
 	width: 100%;
 	background-color: #e9e9e9;
 	height: 100%;
-
+	padding-bottom: 20px;
 	
 }
 
@@ -514,16 +514,25 @@ h1, h2, h3, h4 {
 	padding-right: 20px;
 }
 
-.column1 pre {
-	margin-right: 20px;
+
+.examples  {
+	margin-left: 20px;
+	margin-bottom: 50px;
 }
 
+.examples .language-javascript{
+	margin-right: 40px;
+	padding-top: 10px;
+}
 
+code p {
+	margin-right: 20px !important;
+}
 
-
-
-
-
+.examples pre {
+	
+	margin-right: 100px;
+}
 
 
 
