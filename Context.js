@@ -35,41 +35,53 @@
         {name:'mobile', min:0}];
 
     // catchall, false as the second arg suppresses the event being fired
-    intent.responsive([{name:'base'}])('base')
+    intent.responsive([{name:'base'}]).respond('base')
 
     // horizontal responsive function
-    var hResponder = intent.responsive(resizeContexts,
+    var hResponder = intent.responsive({
+      ID:'width',
+      contexts: resizeContexts,
       // compare the return value of the callback to each context
       // return true for a match
-      function(test, context){
+      matcher: function(test, context){
+        if(typeof test === 'string'){
+          
+          return test === context.name;
+        }
         return test>=context.min
       },
       // callback, return value is passed to matcher()
       // to compare against current context
-      function(e){
+      measure: function(arg){
+
+        if(typeof arg === 'string'){
+          return arg;
+        }
+
         return $(window).width();
-    });
+    }});
 
     // create a base context that is always on
-    $(window).on('resize', throttle(hResponder, 100))
-      .on('orientationchange', hResponder);
+    $(window).on('resize', hResponder.respond);
+      // .on('orientationchange', hResponder.respond);
 
     // touch device?
     intent.responsive([{name:'touch'}], function() {
         return "ontouchstart" in window;
-      })()
-      // retina display?
-      .responsive(
-        // contexts
-        [{name:'highres'}],
-        // matching:
-        function(measure, context){
-          return window.devicePixelRatio > 1;
-        })();
+      }).respond();
+
+    // retina display?
+    intent.responsive(
+      // contexts
+      [{name:'highres'}],
+      // matching:
+      function(measure, context){
+        return window.devicePixelRatio > 1;
+      }).respond();
 
     // width context
-    hResponder()
-      .elements(document);
+    hResponder.respond();
+    intent.elements(document);
 
     return intent;
   };

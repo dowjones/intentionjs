@@ -385,7 +385,7 @@
 
           classes = _.union(change, 
             _.difference(classes.split(' '), ctxConfig.outSpecs['class']));
-
+          
           elm.attr('class', classes.join(' '));
 
         } else {
