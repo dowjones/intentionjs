@@ -203,6 +203,38 @@ describe("Intention", function() {
         };
       expect(intent._fillSpec(spec)).to.eql(filled);
     });
+
+
+
+    it('should take a spec with a axis and return filled out with unfunky ctx vals', function(){
+
+      var spec = {
+          _orientation:'foo',
+          base:{
+            append:'#default'
+          },
+          mobile: {
+            'class': 'a',
+            src: 'a.png',
+            append: '#a'
+          }
+        },
+        filled = {
+          _orientation:'foo',
+          base:{
+            append:'#default',
+            'class':'',
+            src:''
+          },
+          mobile: {
+            'class': 'a',
+            src: 'a.png',
+            append: '#a'
+          }
+        };
+      expect(intent._fillSpec(spec)).to.eql(filled);
+    });
+
   });
   
 
@@ -304,9 +336,37 @@ describe("Intention", function() {
             href:'http://bar.bar'
           });
       });
+      
+      it('should understand axis specs', function(){
+        var intent= new Intention,
+          elm = $('<div>')
+            .attr({'in-mobile-class':'foo',
+              'in-tablet-class':'bar',
+              'in-standard-class':'baz',
+              'in-orientation':'qux'});
+        
+        intent.add(elm);
+        
+        var orientation = intent.responsive({ID:'orientation', contexts:[{name:'portrait'},{name:'landscape'}]});
+
+        orientation.respond('portrait');
+        
+        expect(elm.hasClass('portrait')).to.equal(true);
+        expect(elm.hasClass('qux')).to.equal(true);
+
+        // switch
+        orientation.respond('landscape');
+        
+        expect(elm.hasClass('landscape')).to.equal(true);
+        expect(elm.hasClass('qux')).to.equal(true);
+
+        expect(elm.hasClass('portrait')).to.equal(false);
+
+      });
+      
     });
 
-  describe('_changes: compiles a list of contexts to be applied and \
+  describe('_contextConfig: compiles a list of contexts to be applied and \
     those that are not applied', 
     function(){
       it('should add the foo spec to in contexts and bar to out contexts', function(){
@@ -320,7 +380,7 @@ describe("Intention", function() {
             },
             __keys__:['id1', 'id2']
           },
-          changes = intent._changes({
+          changes = intent._contextConfig({
             foo:{
               'class':'foo',
               append:'#foo'
@@ -359,7 +419,7 @@ describe("Intention", function() {
             },
             __keys__:['id1', 'id2']
           },
-          changes = intent._changes({
+          changes = {
             foo:{
               'class':'foo',
               href:'http://foo.foo'
@@ -368,9 +428,9 @@ describe("Intention", function() {
               'class':'bar',
               append:'#bar'
             }
-          }, axes);
+          };
 
-        intent._makeChanges(elm, changes);
+        intent._makeChanges(elm, changes, axes);
 
         it('should have classes of appropriate context', function(){
           expect(elm.hasClass('foo')).to.equal(true);
