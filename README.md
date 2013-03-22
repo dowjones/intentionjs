@@ -4,15 +4,18 @@ DOM Manipulation via html attribute specification
 
 ## Why Intention.js
 
-The technology for dealing with responsive design is all over the place. Media queries, often-hacky-javascript, and convoluted HTML. Intention.js allows you to make all of the changes to HTML in the HTML itself. Intention.js is a way to describe the differences of an HTML document from one context to another. 
+The technology for dealing with responsive design is all over the place. Media queries, often-hacky-javascript, and convoluted HTML. Intention.js allows you to make all of the changes to HTML in the HTML itself. Intention.js is a way to describe the necessary differences of an HTML document between one device and another. 
 
-What should the classes of an element be on mobile vs tablet? Where should your advertising code get placed when you're on a desktop? Does the page require an alternate slideshow widget on touch enabled devices? These are all changes that Intention.js can make to the page based on a user's device. Context.js creates a set of common page contexts for width thresholds, touch devices, highres displays and a fallback. And you can easily add your own contexts on top of these or create all your own custom contexts.
+What should the classes of an element be on mobile vs tablet? Where should your advertising code get placed when you're on a desktop? Does the page require an alternate slideshow widget on touch enabled devices? These are all changes that Intention.js can make to the page based on a user's device. Context.js creates a set of common page contexts for width thresholds, touch devices, highres displays and a fallback.
+
+
+And you can easily add your own contexts on top of these or create all your own custom contexts.
 
 ## What's included:
 	* Intention.js
 	* Context.js
 
-Intention.js is the script that manages the responsive axis, manipulates elements based on their specifications and emits events when contexts change.
+Intention.js is the library that manages the responsive axis, manipulates elements based on their specifications and emits events when contexts change.
 
 Context.js is an implementation of Intention.js that sets up common use patterns in responsive design.
 
@@ -21,6 +24,8 @@ Specifically it has the responsive contexts:
 	* mobile (triggered by width)
 	* tablet (triggered by width)
 	* standard (triggered by width)
+	* portrait (orientation axis)
+	* landscape (orientation axis)
 	* touch
 	* highres
 
@@ -33,8 +38,14 @@ include both scripts on your page or just Intention via require or just straight
 	<script 
 		data-main="assets/js/context" 
 		src="assets/js/require/require.js"></script>
-	<!-- OR -->
+```
+
+OR:
+
+```html
 	<!-- use only intention to build your own context -->
+	<script src="underscore.js"></script>
+	<script src="jquery.js"></script>
 	<script src="Intention.js"></script>
 	<script src="Context.js"></script>
 	<script>
@@ -45,7 +56,7 @@ include both scripts on your page or just Intention via require or just straight
 
 ## Usage
 
-By default context.js provides a number of threshold groups via intention.js: browser widths, touch, highres, and a base group
+By default Context.js provides a number of threshold groups via intention.js: browser widths, touch, highres, and a base group
 
 the default thresholds in each group are respectively: 
 mobile (320 and below), tablet (321 to 768) and standard (769 to Infinity)
@@ -57,30 +68,57 @@ There are three manipulation types: class names, attributes, placement on the pa
 
 ### Interface
 
+flag the element as "intentional"
+
 ```html
 	<!-- flag the element as responsive -->
 	<div intent>
-	<!-- or -->
+```
+
+Or for valid html:
+
+```html
 	<div data-intent>
-	<!-- For the purposes of the documentation the prefix "in-" will be 
-	used instead of "data-in-" to keep things concise -->
-	<!-- attribute structure: prefix-context-function 
-		ie in-mobile-class OR in-highres-src -->
+```
+
+
+An intentional attribute:
+
+For the purposes of the documentation the prefix "in-" will be used instead of "data-in-" to keep the code snippets concise
+
+Attribute structure: prefix-context-function="value"
+		
+i.e.
+
+```html
 	<div class="not interesting" intent in-mobile-class="more interesting">
 ```
 
+### Types of manipulation
+
 #### Attribute Manipulation
+
+mark an element as intention, set the base(default) attribute, specify which image to load in a given context
+
 ```html
-	<!-- mark an element as responsive, set the base(default) attr, specify which image to load in a given context -->
 	<img
 		intent 
 		in-base-src="small_img.png" 
 		in-highres-src="big_img.png" />
-	<!-- the above spec will produce the following in each context
-		default: <img src="small_img.png" />
-		highres: <img src="big_img.png" />
-	-->
 ```
+
+the specification above will produce the following in each context
+default: 
+
+```html
+<img src="small_img.png" />
+```
+
+highres: 
+
+```html
+<img src="big_img.png" />
+```	
 
 #### Class Manipulation
 
@@ -96,7 +134,6 @@ An element can have more than one class. intent's aim is to be as unobtrusive as
 		in-luxury-class="x-wide"
 		in-touch-class="swipe-nav"
 	>...</section>
-	<!--  -->
 ```
 
 #### Placement Manipulation
