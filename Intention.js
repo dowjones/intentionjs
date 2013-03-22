@@ -97,7 +97,7 @@
       return this;
     },
 
-    add: function(elms, spec){
+    add: function(elms, options){
       // is expecting a jquery object
       elms.each(_.bind(function(i, elm){
         var exists = false;
@@ -112,10 +112,9 @@
           // create the elements responsive data
           $(elm).data('intent.spec',
             this._fillSpec(
-              $.extend(true, spec, this._attrsToSpec(elm.attributes))));
+              $.extend(true, options, this._attrsToSpec(elm.attributes))));
           // make any appropriate changes based on the current contexts
-          this._makeChanges($(elm), this._changes(
-            $(elm).data('intent.spec'), this.axes));
+          this._makeChanges($(elm), $(elm).data('intent.spec'), this.axes);
 
           this.elms.push(elm);
         }
@@ -236,21 +235,24 @@
 
     _fillSpec: function(spec){
 
-      var applyToContext = function(func){
-        return function(funcName){
-          _.each(spec, function(ctx){
-            func(ctx, funcName);
+      var applySpec = function(fn){
+        _.each(spec, fn);
+      }, filler={};
+      
+      applySpec(function(options, ctx){
+        // check to see if the ctx val is an object, could be a string
+        if(_.isObject(options)){
+          _.each(options, function(val, func){
+            filler[func] = '';
           });
-        };
-      };
+        }
+      });
 
-      applyToContext(function(ctx){
-        _.each(ctx, function(val, funcName){
-          applyToContext(function(ctx, funcName){
-            if(ctx[funcName] === undefined) ctx[funcName] = '';
-          })(funcName)
-        });
-      })();
+      applySpec(function(options, ctx){
+        if(_.isObject(options)){
+          spec[ctx] = _.extend({}, filler, options);
+        }
+      });
 
       return spec;
     },
@@ -288,9 +290,10 @@
     _resolveSpecs: function(specList, specs){
       var changes={},
         moveFuncs=['append', 'prepend', 'before', 'after'];
-
+      
       _.each(specList, function(specName){
         _.each(specs[specName], function(val, func){
+
           if(func==='class'){
             if(!changes[func]) changes[func] = [];
 
@@ -312,16 +315,17 @@
       return changes;
     },
 
-    _changes: function(specs, axes){
+    _contextConfig: function(specs, axes){
+      
+      var inSpecs=[], outSpecs=[];
 
-      var changes = {},
-        inSpecs=[], outSpecs=[];
       _.each(axes.__keys__, function(ID){
         if(axes[ID].current !== null) {
           inSpecs.push(axes[ID].current);
           return;
         }
       });
+
       // find the specs not applicable
       _.each(specs, function(spec, specName){
         var match;
@@ -332,16 +336,39 @@
         });
 
         if(!match) outSpecs.push(specName);
-      }, this);
-      return {
-        inSpecs:this._resolveSpecs(inSpecs, specs),
-        outSpecs:this._resolveSpecs(outSpecs, specs)
+      });
+
+      var complements = {
+        inSpecs:this._resolveSpecs(inSpecs, specs, axes),
+        // TODO: this could really be a separate operation b/c it's only used for classes
+        outSpecs:this._resolveSpecs(outSpecs, specs, axes)
       };
+
+      var axisPattern = /^_([a-zA-Z0-9][_a-zA-Z0-9]*)/;
+      _.each(specs, function(spec, name){
+
+        var axisMatch = name.match(axisPattern);
+
+        if((axisMatch !== null) && axes[axisMatch[1]] ) {
+          if(axes[axisMatch[1]].current !== null ){
+            // TODO: sooooo dense
+            complements.outSpecs['class'] = _.union(complements.outSpecs['class'], 
+              _.compact(_.map(axes[axisMatch[1]].contexts, function(test){
+                if(test.name !== axes[axisMatch[1]].current) return test.name;
+              })));
+            complements.inSpecs['class'] = _.union(complements.inSpecs['class'], 
+              (axes[axisMatch[1]].current + ' ' + spec ).split(' '));
+          }
+        }
+      });
+      return complements;
     },
 
-    _makeChanges: function(elm, changes){
+    _makeChanges: function(elm, specs, axes){
 
-      _.each(changes.inSpecs, function(change, func){
+      var ctxConfig = this._contextConfig(specs, axes);
+
+      _.each(ctxConfig.inSpecs, function(change, func){
         if(func==='move'){
           if( (elm.data('intent.placement') !== change.placement)
             || (elm.data('intent.move') !== change.value)){
@@ -357,7 +384,7 @@
           var classes = elm.attr('class') || '';
 
           classes = _.union(change, 
-            _.difference(classes.split(' '), changes.outSpecs['class']));
+            _.difference(classes.split(' '), ctxConfig.outSpecs['class']));
 
           elm.attr('class', classes.join(' '));
 
@@ -373,9 +400,7 @@
       // go through all of the responsive elms
       elms.each(_.bind(function(i, elm){
         var $elm = $(elm);
-        this._makeChanges($elm, this._changes(
-          $elm.data('intent.spec'), axes));
-
+        this._makeChanges($elm, $elm.data('intent.spec'), axes);
         $elm.trigger('intent', this);
       }, this));
     },
