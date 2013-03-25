@@ -8,8 +8,8 @@ html, body {
 }
 
 .header {
-	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic ;
-	padding-left: 10px;
+	font-family:proxima-nova, sans-serif;
+    padding-left: 10px;
 	float: left;
 	padding-right: 20px;
 	font-size: 1.2em;
@@ -33,7 +33,7 @@ html, body {
 	font-size: .9em;
 	color: black;
 	float: left;
-		font-family:"Century Gothic";
+	font-family:proxima-nova, sans-serif;
 }
 
 .cursor .tabs {
@@ -140,7 +140,7 @@ html, body {
 		background:#000;
 		color:#fff;
 		text-decoration:none;
-		font-family:"Century Gothic", sans-serif;
+		font-family:proxima-nova, sans-serif;
 		text-align:;
 		font-weight:bold;
 		padding:5px 40px;
@@ -174,7 +174,7 @@ html, body {
 		background:#e9e9e9;
 		color:#000;
 		text-decoration:none;
-		font-family:"Century Gothic", sans-serif;
+		font-family:proxima-nova, sans-serif;
 		margin-left: 40px;
 		font-weight:;
 		padding:5px 40px;
@@ -279,10 +279,12 @@ html, body {
 
 
 .Information {
-	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
-	padding-left: 20px;
+	font-family:proxima-nova, sans-serif;
+	font-style: italic;
+  	font-weight: 300;padding-left: 20px;
 	background-color: #e9e9e9;
 	padding-bottom: 20px;
+	font-size: 1.5em;
 }
 
 .InfoM {
@@ -309,7 +311,7 @@ html, body {
 .navT{
 	height: 50px;
 	width: auto;
-	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
+	font-family:proxima-nova, sans-serif;
 	background-color: #e9e9e9;
 	padding-top: 20px;
 }
@@ -340,7 +342,7 @@ html, body {
 
 .navM{
 	width: auto;
-	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
+	font-family:proxima-nova, sans-serif;
 	background-color: #e9e9e9;
 	
 }
@@ -382,7 +384,7 @@ html, body {
 .nav {
 	height: 50px;
 	width: 100%;
-	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
+	font-family:proxima-nova, sans-serif;
 	background-color: #e9e9e9;
 	padding-top: 20px;
 
@@ -439,8 +441,7 @@ h6{
 	font-size: 1.8em;
 	color: #23b6b0;
 	line-height: 1.3em;
-	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
-
+	font-family:proxima-nova, sans-serif;
 
 }
 
@@ -480,15 +481,15 @@ h6{
 
 
  p{
-	font-family:Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic;
+	font-family:proxima-nova, sans-serif;
 	margin-right: 10px;
 	width: auto;
 	font-size: .9em;
 	line-height: 1.5em;
 }
 
-h1, h2, h3, h4 {
-	font-family:"Century Gothic", sans-serif;
+h1, h2, h3, h4, h5 {
+	font-family:proxima-nova, sans-serif;
 
 
 }
@@ -500,7 +501,7 @@ h1, h2, h3, h4 {
 	margin-right: 20px;
 }
 
-.code {
+/*.code {
 	background-color: #e9e9e9;
 	font-family: "Courier New", Courier, monospace;
 	border: 2px solid #e0e0e0;
@@ -512,7 +513,7 @@ h1, h2, h3, h4 {
 	padding-left: 10px;
 	padding-bottom: 20px;
 	padding-right: 20px;
-}
+}*/
 
 
 .examples  {
@@ -535,6 +536,11 @@ code p {
 }
 
 
+a, ul, li {
+  text-decoration: none;
+  color: black;
+  font-family:proxima-nova, sans-serif;
+}
 
 
 
