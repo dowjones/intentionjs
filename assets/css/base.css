@@ -324,8 +324,8 @@ background-position:-900px 0px;
 	width: 264px;
 	height: 154px;
 	position: absolute;
-	top:320px;
-	right: 1500px;
+	top:360px;
+	right: 500px;
 
 }
 
@@ -701,7 +701,9 @@ h1, h2, h3, h4, h5 {
   font-family:proxima-nova, sans-serif;
 }
 
-
+pre {
+	overflow: auto;
+}
 
 
 
