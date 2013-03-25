@@ -318,6 +318,17 @@ background-position:-900px 0px;
 
 }
 
+.InfoL .SXSW{
+	background-image: url(img/SXSW.png);
+	background-repeat: no-repeat;
+	width: 264px;
+	height: 154px;
+	position: absolute;
+	top:320px;
+	right: 1500px;
+
+}
+
 /*------------------------------ LOWER NAVIGATION BAR ------------------------------------------*/
 
 

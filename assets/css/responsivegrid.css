@@ -150,9 +150,14 @@ body {
 	width: 100%;
 }
 
+
 body>.grid {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA78AAAABCAMAAAAhFukwAAAABlBMVEXR0dH///9WxthCAAAAH0lEQVR42u3NIQEAAADCMOhfGkmCu6/AwugZGBhQwQC9YABkomSpkAAAAABJRU5ErkJggg==);
 	background-size: 100% 100%;
+}
+
+body.luxury>.grid {
+	background-size: 139% 139%;
 }
 
 body.tablet>.grid {
