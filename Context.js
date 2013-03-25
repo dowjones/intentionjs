@@ -29,7 +29,7 @@
     // horizontal resize contexts
     var intent=new Intention,
       resizeContexts = [
-        // {name:'luxury', min:900},
+        {name:'luxury', min:1500},
         {name:'standard', min:840}, 
         {name:'tablet', min:510},
         {name:'mobile', min:0}],

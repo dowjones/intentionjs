@@ -223,7 +223,9 @@ html, body {
 	background-image: url(img/BG.jpg);
 	width: 100%;
 	height: 500px;
+	z-index: 0;
 }
+
 
 .about .background{
 background-position:0px 0px;
@@ -249,6 +251,7 @@ background-position:-900px 0px;
 	position: absolute;
 	top:225px;
 	left: 30px;
+	z-index: 3;
 }
 
 
@@ -261,6 +264,7 @@ background-position:-900px 0px;
 	position: absolute;
 	top:230px;
 	right: 130px;
+	z-index: 3;
 
 }
 
@@ -273,6 +277,7 @@ background-position:-900px 0px;
 	width: 55px;
 	margin: auto;
 	margin-right: 0px;
+	z-index: 2;
 
 	
 
@@ -297,7 +302,7 @@ background-position:-900px 0px;
 	font-size: 1.5em;
 }
 
-.InfoM {
+.InfoM, .InfoL {
 	
 	background-color: #e9e9e9;
 	height: auto;
@@ -326,7 +331,24 @@ background-position:-900px 0px;
 	position: absolute;
 	top:360px;
 	right: 500px;
+	z-index: 4;
 
+}
+
+.InfoL .lines{
+	background-image: url(img/lines.png);
+	background-repeat: no-repeat;
+	width: 1584px;
+	height: 200px;
+	position: absolute;
+	top:350px;
+	right: -150px;
+	z-index: 1;
+
+}
+
+.InfoM .lines, .Info .lines{
+display: none;
 }
 
 /*------------------------------ LOWER NAVIGATION BAR ------------------------------------------*/
@@ -704,8 +726,6 @@ h1, h2, h3, h4, h5 {
 pre {
 	overflow: auto;
 }
-
-
 
 
 
