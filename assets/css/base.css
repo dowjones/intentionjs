@@ -7,17 +7,13 @@ html, body {
        margin-left:0; /* should be corrected in the grid */
 }
 
-.header {
-	font-family:proxima-nova, sans-serif;
-	padding-left: 10px;
-	float: left;
-	padding-right: 20px;
-	font-size: 1.2em;
-}
+
 
 .mobile .header {
        padding:0;
 }
+
+/*------------------------------ TOP NAVIGATION BAR -------------------------------*/
 
 .cursor{
 	width: 100%;
@@ -68,6 +64,8 @@ html, body {
 	height: 65px;
 	background-color: rgba(255,255,255,.8);
 }
+
+
 
 .twitter{
 	width: 25px;
@@ -189,6 +187,7 @@ html, body {
 		box-shadow:4px 4px 10px rgba(0,0,0,0.8);
 	}
 
+/*------------------------------- HEADER IMAGE & CONTENT ------------------------------------------*/
 
 
 .Tin {
@@ -307,6 +306,10 @@ html, body {
 
 }
 
+/*------------------------------ LOWER NAVIGATION BAR ------------------------------------------*/
+
+
+/*
 .navT{
 	height: 50px;
 	width: 100%;
@@ -341,7 +344,7 @@ html, body {
 	height: 60px;
 
 }
-
+*/
 
 
 .navM{
@@ -376,12 +379,13 @@ html, body {
 .navM .onPage {
 	
 	width: 100%;
-	background-color: white;
 	height: 30px;
 	margin-left: 0px !important;
 	background-color: #e9e9e9;
 	
 }
+
+
 
 .navM .onPage a{
 	color: #23b6a6 !important;
@@ -411,12 +415,15 @@ html, body {
 
 .onPage {
 	float: left;
-	width: 180px;
+	width: auto;
+	padding-right: 20px;
 	background-color: white;
 	height: 50px;
 	margin-left: 20px !important;
 
 }
+
+
 
 
 .onPage a{
@@ -434,11 +441,70 @@ html, body {
 
 }
 
+.navM .tab {
+	width: 100%;
+	border: 1px solid;
+	border-color: #e9e9e9;
+	background-color: white;	
+}
+
+.navM .SonPage {
+	width: 100%;
+	background-color: #e9e9e9;
+	height: 28px;
+	color: #23b6b0;
+	border-bottom: 3.3px solid;
+	border-color: white;
+}
+
+.navM .SonPage a{
+	color: #23b6b0 !important;
+	padding-top:0 !important; 
+}
+
+
+
+
+
+.nav {
+	height: 50px;
+	width: 100%;
+	font-family:proxima-nova, sans-serif;
+	background-color: #e9e9e9;
+	padding-top: 20px;
+
+}
+
+.nav .tabs {
+	
+	padding-left: 50px;
+	height: 60px;
+
+}
+
+
+
+.nav .SonPage {
+	width: 170px;
+	background-color: white;
+	height: 50px;
+	float: left;
+	margin-left: 20px;
+
+
+}
+
+
+.SonPage a{
+	color: #23b6a6 !important;
+	padding-left: 20px !important; 
+}
+
 a:hover{
 	color: #a26a87 !important;
 }
 
-
+/*------------------------------ BODY CONTENT ------------------------------------------*/
 
 .documentation {
 	margin-left: 20px;
@@ -450,6 +516,7 @@ a:hover{
 	margin-left: 20px;
 	margin-top: 40px;
 	margin-right: 20px;
+	margin-bottom: 50px;
 	float: left;
 	height: auto;
 	width: auto;
@@ -475,12 +542,14 @@ h6{
 	float: left;
 	height: auto;
 	width: auto;
+	margin-bottom: 50px;
 }
 
 .column1M {
 	
-	margin-left: 10px;
+	margin-left: 20px;
 	margin-top: 50px;
+	margin-bottom: 50px;
 	width: auto;
 	height: auto;
 
@@ -492,12 +561,51 @@ h6{
 	margin-top: 20px;
 	width: auto;
 	height: auto;
+	margin-bottom: 50px;
 }
 
+.erin {
+	float: left;
+	margin-bottom: 50px;
+}
 
+.joe {
+	float: left;
+	margin-bottom: 50px;
+}
 
+.erin-pic{
+	background-image: url(img/Erin.png);
+	width: 100px;
+	height:100px;
+	float: left;
+	margin-right: 15px;
+}
 
+.joe-pic{
+	background-image: url(img/Joe.png);
+	width: 100px;
+	height:100px;
+	float: left;
+	margin-right: 15px;
+}
 
+ p, ul, li{
+	font-family:proxima-nova, sans-serif;
+	text-decoration: none !important;
+	font-size: .9em;
+	line-height: 1.5em;
+}
+
+.useful a {
+	text-decoration: none !important;
+	color: black;
+}
+
+.useful a:hover {
+	text-decoration: none !important;
+	color: #e2514e;
+}
 
  p{
 	font-family:proxima-nova, sans-serif;
@@ -513,12 +621,14 @@ h1, h2, h3, h4, h5 {
 
 }
 
+/*
 .line {
 	width: auto;
 	height: 2px;
 	background-color: #e0e0e0;
 	margin-right: 20px;
 }
+
 
 .code {
 	background-color: #e9e9e9;
@@ -534,10 +644,34 @@ h1, h2, h3, h4, h5 {
 	padding-right: 20px;
 }
 	
+*/
 
 
+.examples  {
+	margin-left: 20px;
+	margin-bottom: 50px;
+}
+
+.examples .language-javascript{
+	margin-right: 40px;
+	padding-top: 10px;
+}
+
+.examples code p {
+	margin-right: 20px !important;
+}
+
+.examples pre {
+	
+	margin-right: 100px;
+}
 
 
+.examples a, ul, li {
+  text-decoration: none;
+  color: black;
+  font-family:proxima-nova, sans-serif;
+}
 
 
 
