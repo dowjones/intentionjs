@@ -1,6 +1,6 @@
 require.config({
   appDir: './',
-  baseUrl: '../',
+  baseUrl: './',
   paths: {
       jquery: 'test/vendor/jquery',
       underscore: 'test/vendor/underscore'      
