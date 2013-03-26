@@ -338,11 +338,11 @@ background-position:-750px 0px;
 .InfoL .lines{
 	background-image: url(img/lines.png);
 	background-repeat: no-repeat;
-	width: 1584px;
+	width: 1152px;
 	height: 200px;
 	position: absolute;
 	top:350px;
-	right: -150px;
+	right: 0px;
 	z-index: 1;
 
 }
