@@ -307,7 +307,7 @@
 	    	{name: 'touchStart',   type: 'mousedown'},
 	    	{name: 'touchMove',    type: 'mousemove'},
 	    	{name: 'touchEnd',     type: 'mouseup'},
-	    	{name: 'touchCancel',  type: 'mousebreak?'}], 
+	    	{name: 'touchCancel',  type: 'mousebreak/null?'}], 
 	    	//touchCancel refers to a broken touch (recive call or text) doesn't exactly match any mouse funtions
 	    	
 
@@ -370,7 +370,7 @@
 		  
 
 		   // matcher
-		   //if the context is equal to the type (corresponding mouse function) enter touch context
+		   	//if the context is equal to the type (corresponding mouse function) enter touch context
 
 			function(measure, ctx){
 	    		if(measure === ctx.type) return true;
@@ -386,6 +386,7 @@
 //-------------------------------------------------------------------------------------------
 
 	// gestures
+		//context
 
 	   	var touchMin = event.touches[]; //two fingertips (touches) needed to be a gesture
 
@@ -408,7 +409,7 @@
 			
 
 //-------------------------------------------------------------------------------------------
-
+		//extra touch junk
 			// context
 		  
 		  var touch = tn.responsive([
