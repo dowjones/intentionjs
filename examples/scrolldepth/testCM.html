@@ -300,9 +300,7 @@
 //-------------------------------------------------------------------------------------------
 		//touch
 			//context
-
-
-		  
+ 
 		  var touch = tn.responsive([
 	    	{name: 'touchstart',   type: 'mousedown'},
 	    	{name: 'touchmove',    type: 'mousemove'},
@@ -312,10 +310,16 @@
 	    	
 
 
-	      var touches = event.changedTouches,
-       		 first = touches[0], 
-        	 type = "";
-        	 switch(event.type)
+	      var touches = event.(change touch?),
+       		  first = touches[0], 
+        	  type = "";
+        	 
+          switch(event.type)
+          
+          var initX; 
+          var initY;
+
+        
 
           //addEventListener function should be performed before contexts are set
 	      function  (startup / init ?)() {
@@ -323,20 +327,39 @@
 			document.addEventListener('touchstart', function(event) {
 			   
 			    alert(event.touches.length);
+			    initX = touch.pageX;
+				initY = touch.pageY;
 			
 			}, false);
 
+		
 			document.addEventListener('touchmove', function(event) {
 			   
 			    event.preventDefault();
+			    if (initX - e.pageX < 3 && initX - e.pageX > -3) {
+				
+				return;
+			} // if the touch coordinates are 3px (or -3) different from the initial X coordinate establish touch point as moved.
+			
+			if (initY - e.pageY < 3 && initY - e.pageY > -3) {
+				
+				return;
+			}// if the touch coordinates are 3px (or -3) different from the initial Y coordinate establish touch point as moved.
+			   
 			    var touch = event.touches[0];
 			    
+			    initX = touch.pageX;
+				initY = touch.pageY;
+			    //re-set init coordinates
+			  
 			    console.log("Touch x:" + touch.pageX + ", y:" + touch.pageY);
 			
 			}, false);
 
+		
 			document.addEventListener('touchend', function(event){}, false);
 
+			
 			document.addEventListener('touchcancel', function(event){}, false);
 
 
@@ -407,46 +430,9 @@
 		  //measure 
 			//matcher
 
+
 //-------------------------------------------------------------------------------------------		
-	//touch
-
-
-		var touch = tn.responsive([
-	    	{name: 'touchstart', type: 'mousedown'},
-	    	{name: 'touchmove',  type: 'mousemove'},
-	    	{name: 'touchend',   type: 'mouseup'}],
-	    	// matcher
-
-	    function touchHandler(event){
-   
-   		 var touches = event.changedTouches,
-       		 first = touches[0],
-        	 type = "";
-        	 switch(event.type)
-
-        });
-
-        intent.on('touchstart', function(){
-			console.log('touch started');
-			
-			document.addEventListener('touchstart', touchHandler, true);
-		});
-
-		 intent.on('touchmove', function(){
-			console.log('moving touch');
-			
-			document.addEventListener('touchmove', touchHandler, true);
-		});
-
-		  intent.on('touchend', function(){
-			console.log('touch ended');
-			
-			document.addEventListener('touchend', touchHandler, true);
-		});
-
-
-//----------------------------------------------------------------------------------------------
-
+	
    // scrolldepth
 		
 		
