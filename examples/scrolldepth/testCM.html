@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="../../test/vendor/underscore.js"></script>
+	<script type="text/javascript" src="../../Intention.js"></script>
+ 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes"><meta name="format-detection" content="telephone=no">
+	<style type="text/css">
+
+		body {
+			height:5000px;
+			font-family: monospace;
+			margin:0;
+			background:lavender;
+		}
+
+		#intro {
+			height:25px;
+			background:darkseagreen;
+		}
+
+		.fix #intro {
+			margin-top:25px;
+		}
+
+		nav {
+			height:25px;
+			background:seagreen;
+		}
+
+		.fix nav{
+			position: fixed;
+			top:0;
+			left:0;
+			z-index: 10;
+			width: 100%;
+		}
+
+		.fix-o #intro {
+			height:25px;
+			background:orange;
+		}
+
+		.fix-o #intro {
+			margin-top:25px;
+		}
+
+		.fix-o nav {
+			height:25px;
+			background:darkorange;
+		}
+
+		.fix-o nav{
+			position: fixed;
+			top:0;
+			left:0;
+			z-index: 10;
+			width: 100%;
+		}
+
+		.fix-r #intro {
+			height:25px;
+			background:LightCoral;
+		}
+
+		.fix-r #intro {
+			margin-top:25px;
+		}
+
+		.fix-r nav {
+			height:25px;
+			background:IndianRed;
+		}
+
+		.fix-r nav{
+			position: fixed;
+			top:0;
+			left:0;
+			z-index: 10;
+			width: 100%;
+		}
+
+		h1 {
+			white-space: nowrap;
+			font-weight: normal;
+			text-transform: uppercase;
+			text-align: center;
+			width: 300px;
+			margin:0 auto;
+		}
+
+
+		h2 {
+			position: fixed;
+			text-align: center;
+			top:50px;
+			right:50px;
+			font-size: 25px;
+			height:50px;
+			line-height: 50px;
+			width:50px;
+			background: yellow;
+			border-radius: 50%;
+		}
+
+		h2.one:after {
+			content:'|';
+		}
+
+		h2.two:after {
+			content:'/';
+		}
+
+		h2.three:after {
+			content:'-';
+		}
+
+		h2.four:after {
+			content:'\\';
+		}
+
+		h1:after {
+			content:'.';
+			clear:both;
+			height:0;
+			visibility: hidden;
+			display: block;
+		}
+
+		h1 span {
+			height:100px;
+			width:100px;
+			float:left;
+			line-height: 100px;
+		}
+
+		.a {
+			background:lime;
+		}
+		.b {
+			background:skyblue;
+		}
+		.c {
+			background: tomato;
+		}
+
+		.s {
+			width: 183px;
+			height: 600px;
+			margin: auto;
+			background-image: url(standard.jpg);
+		}
+		.m {
+			width: 183px;
+			height: 359px;
+			margin: auto;
+			background-image: url(mobile.jpg);
+		}
+		.t {
+			width: 183px;
+			height: 509px;
+			margin: auto;
+			background-image: url(tablet.jpg);
+		}
+
+	</style>
+</head>
+<body>
+	<header intent in-beyond-class="fix"
+			in-shallow-class=""
+			in-tablet-class="fix-o"
+			in-mobile-class="fix-r"
+			in-standard-class="fix">
+		<div id="intro"></div>
+		<nav></nav>
+	</header>
+
+	<h1 intent in-mobile-class="mobile"
+		in-tablet-class="tablet"
+		in-standard-class="standard"
+		in-frequenter-class="frequenter"
+		in-returning-class="returning"
+		in-first-class="first"
+	>
+		<span intent in-base-class="a"
+			in-base-append='h1'
+			in-base-append='h1'>a</span>
+		<span intent in-base-class="b"
+			in-base-append='h1'
+			in-tablet-after='.c'>b</span>
+		<span intent in-base-class="c"
+			in-base-append='h1'
+			in-tablet-prepend='h1'>c</span>
+
+	</h1>
+
+	<h2 intent
+		in-f1-class="one"
+		in-f2-class="two"
+		in-f3-class="three"
+		in-f4-class="four"></h2>
+
+		<div intent
+			in-tablet-class="t"
+			in-mobile-class="m"
+			in-standard-class="s"></div>
+
+	
+</body>
+<script>
+	(function($){
+		
+		if(!window.localStorage.getItem('visits')){
+			window.localStorage.setItem('visits', 0);
+		}
+
+		var visits = parseInt(window.localStorage.getItem('visits'), 10) + 1;
+		window.localStorage.setItem('visits', visits);
+
+		
+		var tn = new Intention,
+			resizeContexts = [
+				{name:'standard', Xmin:0, Ymin:660}, 
+		        {name:'tablet', Xmin:0, Ymin:500},
+		        {name:'mobile', Xmin:0, Ymin:0}
+		        ],
+
+		    hResponder = tn.responsive(resizeContexts,
+		        // compare the return value of the callback to each context
+		        // return true for a match
+		        function(test, context){
+		          if(test>=context.Xmin){
+		            return true;
+		
+		          }
+		        },
+		        // callback, return value is passed to matcher()
+		        // to compare against current context
+		        function(e){
+		          return $(window).width();
+		    
+		    	});
+
+		        hResponder = tn.responsive(resizeContexts,
+		        // compare the return value of the callback to each context
+		        // return true for a match
+		        function(test, context){
+		          if(test>=context.Ymin){
+		            return true;
+		
+		          }
+		        },
+		        // callback, return value is passed to matcher()
+		        // to compare against current context
+		        function(e){
+		          return $(window).height();
+		    
+		    	});
+
+
+
+
+		baseResponder = tn.responsive([{name:'base'}])('base');
+		hResponder();
+		$(window).on('resize', hResponder);
+
+		var visitTracker = tn.responsive([
+	    	{name: 'frequenter', visits:5},
+	    	{name:'returning', visits:2},
+	    	{name:'first', visits:1}],
+	    	// matcher
+	    	function(measure, ctx){
+	    		if(measure >= ctx.visits) return true;
+	    		return false;
+	    	},
+	    	// measure
+	    	function(){
+	    		return parseInt(window.localStorage.getItem('visits'));
+	    	});
+
+		// visitTracker();
+
+		var depthTracker = tn.responsive([
+	    	{name: 'shallow', depth:25},
+	    	{name: 'beyond', depth:Infinity}],
+	    	// matcher
+	    	function(measure, ctx){
+	    		if(measure < ctx.depth) return true;
+	    		return false;
+	    	},
+	    	// measure
+	    	function(){
+	    		return window.pageYOffset;
+	    });
+
+		
+
+
+//-------------------------------------------------------------------------------------------
+		//touch
+			//context
+
+
+		  
+		  var touch = tn.responsive([
+	    	{name: 'touchstart', type: 'mousedown'},
+	    	{name: 'touchmove',  type: 'mousemove'},
+	    	{name: 'touchend',   type: 'mouseup'},
+	    	{name: 'touchcancel',  type: ''}],
+	    	
+
+	    	// matcher
+
+	      var touches = event.changedTouches,
+       		 first = touches[0],
+        	 type = "";
+        	 switch(event.type)
+
+
+	      function  (startup / init ?)() {
+			  
+			document.addEventListener('touchstart', function(event) {
+			   
+			    alert(event.touches.length);
+			
+			}, false);
+
+			document.addEventListener('touchmove', function(event) {
+			   
+			    event.preventDefault();
+			    var touch = event.touches[0];
+			    
+			    console.log("Touch x:" + touch.pageX + ", y:" + touch.pageY);
+			
+			}, false);
+
+			document.addEventListener('touchend', function(event){}, false);
+
+			document.addEventListener('touchcancel', function(event){}, false);
+
+
+		   };
+
+		   // measure
+
+			function(measure, ctx){
+	    		if(measure === ctx.type) return true;
+	    		return false;
+	    	},
+	    	
+	    	function(){
+	    		return window.type;
+	    	});
+
+//-------------------------------------------------------------------------------------------
+
+			//context
+		  
+		  var touch = tn.responsive([
+	    	{name: 'touchstart', type: 'mousedown'},
+	    	{name: 'touchmove',  type: 'mousemove'},
+	    	{name: 'touchend',   type: 'mouseup'}],
+	    	
+
+	    	// matcher
+
+	    	var handleStart = intent.responsive(contexts)
+
+	      function  (startup / init ?)() {
+			 
+			  touch.addEventListener('touchstart', handleStart, false);
+			  touch.addEventListener('touchmove', handleMove, false);
+			  touch.addEventListener('touchend', handleEnd, false);
+			  
+			}
+
+
+
+	    function touchHandler(event){
+   
+   		 var touches = event.changedTouches,
+       		 first = touches[0],
+        	 type = "";
+        	 switch(event.type)
+
+        });
+
+		  $(window).on('touchstart mousedown',function (e){
+    		 e.preventDefault(); 
+		    // caching the current x
+		    cachedX = e.pageX;
+		    // caching the current y
+		    cachedY = e.pageY;
+		    // a touch event is detected      
+		    touchStarted = true;
+		    console.log('Touchstarted');
+		   
+		});
+     
+		//look for 
+		  //measure 
+			//matcher
+
+//-------------------------------------------------------------------------------------------		
+	//touch
+
+
+		var touch = tn.responsive([
+	    	{name: 'touchstart', type: 'mousedown'},
+	    	{name: 'touchmove',  type: 'mousemove'},
+	    	{name: 'touchend',   type: 'mouseup'}],
+	    	// matcher
+
+	    function touchHandler(event){
+   
+   		 var touches = event.changedTouches,
+       		 first = touches[0],
+        	 type = "";
+        	 switch(event.type)
+
+        });
+
+        intent.on('touchstart', function(){
+			console.log('touch started');
+			
+			document.addEventListener('touchstart', touchHandler, true);
+		});
+
+		 intent.on('touchmove', function(){
+			console.log('moving touch');
+			
+			document.addEventListener('touchmove', touchHandler, true);
+		});
+
+		  intent.on('touchend', function(){
+			console.log('touch ended');
+			
+			document.addEventListener('touchend', touchHandler, true);
+		});
+
+
+//----------------------------------------------------------------------------------------------
+
+   // scrolldepth
+		
+		
+
+		$(window).on('scroll', depthTracker);
+		//  | / - \
+		var flipper = tn.responsive([
+	    	{name: 'f1', div:0},
+	    	{name:'f2', div:1},
+	    	{name:'f3', div:2},
+	    	{name:'f4', div:3}],
+	    	// matcher
+	    	function(measure, ctx){
+	    		if((Math.floor(measure/100) % 4) === ctx.div) return true;
+	    		return false;
+	    	},
+	    	// measure
+	    	function(){
+	    		return window.pageYOffset;
+	    	});
+
+		flipper();
+		$(window).on('scroll', flipper);
+
+		tn.elements();
+	})(jQuery)
+</script>
+</html>	
