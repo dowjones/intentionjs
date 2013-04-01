@@ -300,6 +300,8 @@
 //-------------------------------------------------------------------------------------------
 		//touch
 			//context
+
+	$(window).on('tablet', 'mobile', resizeContexts);		
  
 		  var touch = tn.responsive([
 	    	{name: 'touchstart',   type: 'mousedown'},
@@ -378,7 +380,7 @@
 	       //unsure
 
 	    	function(){
-	    		return window.type;
+	    		$(window).on('mobile', 'tablet', touch);
 	    	});
 
 //-------------------------------------------------------------------------------------------
