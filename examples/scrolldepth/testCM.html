@@ -346,7 +346,7 @@
 			if (initY - e.pageY < 3 && initY - e.pageY > -3) {
 				
 				return;
-			}// if the touch coordinates are 3px (or -3) different from the initial Y coordinate establish touch point as moved.
+			} // if the touch coordinates are 3px (or -3) different from the initial Y coordinate establish touch point as moved.
 			   
 			    var touch = event.touches[0];
 			    
@@ -385,7 +385,31 @@
 
 //-------------------------------------------------------------------------------------------
 
-			//context
+	// gestures
+
+	   	var touchMin = event.touches[2];
+
+	 	  $(window).on('touchstart', 'touchmove', 'touchend' touch);		
+	 
+				var gesture = tn.responsive([
+		    	{name: 'gestureStart',  touchMin : 2},
+		    	{name: 'gestureStart',  touchMin : 2},
+		    	{name: 'gestureEnd',    touchMin : 2}], 
+
+
+		    function(measure, ctx){
+	    		if(measure >= ctx.touchMin) return true;
+	    		return false;
+	    	},
+
+	    	function(){
+	    		$(window).on('touchstart', 'touchmove', 'touchend', gesture);
+	    	});
+			
+
+//-------------------------------------------------------------------------------------------
+
+			// context
 		  
 		  var touch = tn.responsive([
 	    	{name: 'touchstart', type: 'mousedown'},
@@ -431,6 +455,8 @@
 		//look for 
 		  //measure 
 			//matcher
+
+//-------------------------------------------------------------------------------------------	
 
 
 //-------------------------------------------------------------------------------------------		
