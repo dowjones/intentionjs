@@ -304,11 +304,11 @@
 	$(window).on('tablet', 'mobile', resizeContexts);		
  
 		  var touch = tn.responsive([
-	    	{name: 'touchstart',   type: 'mousedown'},
-	    	{name: 'touchmove',    type: 'mousemove'},
-	    	{name: 'touchend',     type: 'mouseup'},
-	    	{name: 'touchcancel',  type: 'null?'}], 
-	    	//touchcancel refers to a broken touch (recive call or text) doesn't exactly match any mouse funtions
+	    	{name: 'touchStart',   type: 'mousedown'},
+	    	{name: 'touchMove',    type: 'mousemove'},
+	    	{name: 'touchEnd',     type: 'mouseup'},
+	    	{name: 'touchCancel',  type: 'mousebreak?'}], 
+	    	//touchCancel refers to a broken touch (recive call or text) doesn't exactly match any mouse funtions
 	    	
 
 
@@ -316,7 +316,7 @@
        		  first = touches[0], 
         	  type = "";
         	 
-          switch(event.type)
+          switch(event.type) //only for case?
           
           var initX; 
           var initY;
@@ -326,7 +326,7 @@
           //addEventListener function should be performed before contexts are set
 	      function  (startup / init ?)() {
 			  
-			document.addEventListener('touchstart', function(event) {
+			document.addEventListener('touchStart', function(event) {
 			   
 			    alert(event.touches.length);
 			    initX = touch.pageX;
@@ -335,7 +335,7 @@
 			}, false);
 
 		
-			document.addEventListener('touchmove', function(event) {
+			document.addEventListener('touchMove', function(event) {
 			   
 			    event.preventDefault();
 			    if (initX - e.pageX < 3 && initX - e.pageX > -3) {
@@ -359,10 +359,10 @@
 			}, false);
 
 		
-			document.addEventListener('touchend', function(event){}, false);
+			document.addEventListener('touchEnd', function(event){}, false);
 
 			
-			document.addEventListener('touchcancel', function(event){}, false);
+			document.addEventListener('touchCancel', function(event){}, false);
 
 
 		   };
@@ -387,14 +387,14 @@
 
 	// gestures
 
-	   	var touchMin = event.touches[2];
+	   	var touchMin = event.touches[]; //two fingertips (touches) needed to be a gesture
 
-	 	  $(window).on('touchstart', 'touchmove', 'touchend' touch);		
+	 	  $(window).on('touchStart', 'touchMove', 'touchEnd' touch);		
 	 
 				var gesture = tn.responsive([
-		    	{name: 'gestureStart',  touchMin : 2},
-		    	{name: 'gestureStart',  touchMin : 2},
-		    	{name: 'gestureEnd',    touchMin : 2}], 
+		    	{name: 'gestureStart',  touchMin : 2}, //second finger joins first on screen
+		    	{name: 'gestureStart',  touchMin : 2}, //two finger drag
+		    	{name: 'gestureEnd',    touchMin : 2}], //one or two fingers leave screen
 
 
 		    function(measure, ctx){
@@ -403,7 +403,7 @@
 	    	},
 
 	    	function(){
-	    		$(window).on('touchstart', 'touchmove', 'touchend', gesture);
+	    		$(window).on('touchStart', 'touchMove', 'touchEnd', gesture);
 	    	});
 			
 
@@ -412,9 +412,9 @@
 			// context
 		  
 		  var touch = tn.responsive([
-	    	{name: 'touchstart', type: 'mousedown'},
-	    	{name: 'touchmove',  type: 'mousemove'},
-	    	{name: 'touchend',   type: 'mouseup'}],
+	    	{name: 'touchStart', type: 'mousedown'},
+	    	{name: 'touchMove',  type: 'mousemove'},
+	    	{name: 'touchEnd',   type: 'mouseup'}],
 	    	
 
 	    	// matcher
@@ -423,9 +423,9 @@
 
 	      function  (startup / init ?)() {
 			 
-			  touch.addEventListener('touchstart', handleStart, false);
-			  touch.addEventListener('touchmove', handleMove, false);
-			  touch.addEventListener('touchend', handleEnd, false);
+			  touch.addEventListener('touchStart', handleStart, false);
+			  touch.addEventListener('touchMove', handleMove, false);
+			  touch.addEventListener('touchEnd', handleEnd, false);
 			  
 			}
 
@@ -440,7 +440,7 @@
 
         });
 
-		  $(window).on('touchstart mousedown',function (e){
+		  $(window).on('touchStart mousedown',function (e){
     		 e.preventDefault(); 
 		    // caching the current x
 		    cachedX = e.pageX;
@@ -448,7 +448,7 @@
 		    cachedY = e.pageY;
 		    // a touch event is detected      
 		    touchStarted = true;
-		    console.log('Touchstarted');
+		    console.log('touchStarted');
 		   
 		});
      
@@ -458,9 +458,6 @@
 
 //-------------------------------------------------------------------------------------------	
 
-
-//-------------------------------------------------------------------------------------------		
-	
    // scrolldepth
 		
 		
