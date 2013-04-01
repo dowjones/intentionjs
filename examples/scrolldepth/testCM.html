@@ -304,20 +304,20 @@
 
 		  
 		  var touch = tn.responsive([
-	    	{name: 'touchstart', type: 'mousedown'},
-	    	{name: 'touchmove',  type: 'mousemove'},
-	    	{name: 'touchend',   type: 'mouseup'},
-	    	{name: 'touchcancel',  type: ''}],
+	    	{name: 'touchstart',   type: 'mousedown'},
+	    	{name: 'touchmove',    type: 'mousemove'},
+	    	{name: 'touchend',     type: 'mouseup'},
+	    	{name: 'touchcancel',  type: 'null?'}], 
+	    	//touchcancel refers to a broken touch (recive call or text) doesn't exactly match any mouse funtions
 	    	
 
-	    	// matcher
 
 	      var touches = event.changedTouches,
-       		 first = touches[0],
+       		 first = touches[0], 
         	 type = "";
         	 switch(event.type)
 
-
+          //addEventListener function should be performed before contexts are set
 	      function  (startup / init ?)() {
 			  
 			document.addEventListener('touchstart', function(event) {
@@ -342,13 +342,18 @@
 
 		   };
 
-		   // measure
+		  
+
+		   // matcher
+		   //if the context is equal to the type (corresponding mouse function) enter touch context
 
 			function(measure, ctx){
 	    		if(measure === ctx.type) return true;
 	    		return false;
 	    	},
 	    	
+	       //unsure
+
 	    	function(){
 	    		return window.type;
 	    	});
