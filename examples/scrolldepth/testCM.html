@@ -301,30 +301,29 @@
 		//touch
 			//context
 
-	$(window).on('tablet', 'mobile', resizeContexts);		
+	$(window).on('tablet', 'mobile', resizeContexts);	
+
+
+		  var touches = event.changedTouches,
+   		  first = touches[0],
+    	  type = "";
+      	  var initX; 
+          var initY;
+         // switch(event.type); //only for case?
+	
  
 		  var touch = tn.responsive([
 	    	{name: 'touchStart',   type: 'mousedown'},
 	    	{name: 'touchMove',    type: 'mousemove'},
 	    	{name: 'touchEnd',     type: 'mouseup'},
-	    	{name: 'touchCancel',  type: 'mousebreak/null?'}], 
-	    	//touchCancel refers to a broken touch (recive call or text) doesn't exactly match any mouse funtions
+	    	{name: 'touchCancel',  type: 'mousebreak/null?'}
+
+	      ], //touchCancel refers to a broken touch (recive call or text) doesn't exactly match any mouse funtions
 	    	
-
-
-	      var touches = event.(change touch?),
-       		  first = touches[0], 
-        	  type = "";
-        	 
-          switch(event.type) //only for case?
-          
-          var initX; 
-          var initY;
-
-        
+ 
 
           //addEventListener function should be performed before contexts are set
-	      function  (startup / init ?)() {
+	      function(startup){
 			  
 			document.addEventListener('touchStart', function(event) {
 			   
@@ -365,7 +364,7 @@
 			document.addEventListener('touchCancel', function(event){}, false);
 
 
-		   };
+		   },
 
 		  
 
@@ -408,7 +407,7 @@
 	    	});
 			
 
-//-------------------------------------------------------------------------------------------
+/*-----------------------------------------------------------------------------------------
 		//extra touch junk
 			// context
 		  
@@ -457,7 +456,7 @@
 		  //measure 
 			//matcher
 
-//-------------------------------------------------------------------------------------------	
+-------------------------------------------------------------------------------------------*/
 
    // scrolldepth
 		
