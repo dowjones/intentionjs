@@ -350,11 +350,15 @@
 				return;
 			} // if the touch coordinates are 3px (or -3) different from the initial X coordinate establish touch point as moved.
 			
+			
+
 			if (initY - e.pageY < 3 && initY - e.pageY > -3) {
 				
 				return;
 			} // if the touch coordinates are 3px (or -3) different from the initial Y coordinate establish touch point as moved.
 			   
+			   
+
 			    var touch = event.touches[0];
 			    
 			    initX = touch.pageX;
@@ -366,6 +370,8 @@
 			}, false);
 
 		
+			
+
 			document.addEventListener('touchEnd', function(event){
 
 				console.log("touch ended");
@@ -373,6 +379,8 @@
 			}, false);
 
 			
+			
+
 			document.addEventListener('touchCancel', function(event){
 
 				console.log("touch canceled");
