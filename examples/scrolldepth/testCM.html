@@ -164,6 +164,31 @@
 			background-image: url(tablet.jpg);
 		}
 
+
+		.touchbox {
+			width: 50px;
+			height: 50px;
+			background-color: orange;
+		}
+
+		.touchStart {
+			width: 70px;
+			height: 70px;
+			background-color: orange;
+		}
+
+		.touchMove {
+			width: 70px;
+			height: 70px;
+			background-color: darkorange;
+		}
+
+		.touchEnd {
+			width: 50px;
+			height: 50px;
+			background-color: darkorange;
+		}
+
 	</style>
 </head>
 <body>
@@ -205,6 +230,13 @@
 			in-tablet-class="t"
 			in-mobile-class="m"
 			in-standard-class="s"></div>
+
+		<div intent
+			in-base-class="touchbox"
+			in-touchStart-class="start"
+			in-touchMove-class="move"
+			in-touchEnd-class="end"></div>
+
 
 	
 </body>
