@@ -251,6 +251,7 @@
 		
 		          }
 		        },
+
 		        // callback, return value is passed to matcher()
 		        // to compare against current context
 		        function(e){
@@ -259,7 +260,9 @@
 		    	});
 
 
+//-------------------------------------------------------------------------------------------
 
+	// visitTracker();
 
 		baseResponder = tn.responsive([{name:'base'}])('base');
 		hResponder();
@@ -279,7 +282,10 @@
 	    		return parseInt(window.localStorage.getItem('visits'));
 	    	});
 
-		// visitTracker();
+
+//-------------------------------------------------------------------------------------------
+		
+	// depthTracker();
 
 		var depthTracker = tn.responsive([
 	    	{name: 'shallow', depth:25},
@@ -298,18 +304,20 @@
 
 
 //-------------------------------------------------------------------------------------------
-		//touch
-			//context
-
+		
+	//touch
+			
 	$(window).on('tablet', 'mobile', resizeContexts);	
 
 
-		  var touches = event.changedTouches,
-   		  first = touches[0],
+		  //var touches = event.changedTouches,
+   		  fin = touches[0],
     	  type = "";
+    	  //switch(event.type), //only for case?
+      	 
       	  var initX; 
           var initY;
-         // switch(event.type); //only for case?
+         
 	
  
 		  var touch = tn.responsive([
@@ -327,6 +335,8 @@
 			  
 			document.addEventListener('touchStart', function(event) {
 			   
+			    console.log("touch started");
+			    debug.log("touch started");
 			    alert(event.touches.length);
 			    initX = touch.pageX;
 				initY = touch.pageY;
@@ -358,10 +368,18 @@
 			}, false);
 
 		
-			document.addEventListener('touchEnd', function(event){}, false);
+			document.addEventListener('touchEnd', function(event){
+
+				console.log("touch ended");
+
+			}, false);
 
 			
-			document.addEventListener('touchCancel', function(event){}, false);
+			document.addEventListener('touchCancel', function(event){
+
+				console.log("touch canceled");
+
+			}, false);
 
 
 		   },
@@ -385,16 +403,16 @@
 //-------------------------------------------------------------------------------------------
 
 	// gestures
-		//context
+		
 
-	   	var touchMin = event.touches[]; //two fingertips (touches) needed to be a gesture
+	   	var touchMin = event.touches[2]; //two fingertips (touches) needed to be a gesture
 
 	 	  $(window).on('touchStart', 'touchMove', 'touchEnd' touch);		
 	 
 				var gesture = tn.responsive([
-		    	{name: 'gestureStart',  touchMin : 2}, //second finger joins first on screen
-		    	{name: 'gestureStart',  touchMin : 2}, //two finger drag
-		    	{name: 'gestureEnd',    touchMin : 2}], //one or two fingers leave screen
+		    	{name: 'gestureStart',  touchMin :2}, //second finger joins first on screen
+		    	{name: 'gestureStart',  touchMin :2}, //two finger drag
+		    	{name: 'gestureEnd',    touchMin :2}], //one or two fingers leave screen
 
 
 		    function(measure, ctx){
