@@ -310,24 +310,22 @@
 	$(window).on('tablet', 'mobile', resizeContexts);	
 
 
-		  //var touches = event.changedTouches,
-   		  fin = touches[0],
-    	  type = "";
-    	  //switch(event.type), //only for case?
+		  //var touches = event.changedTouches,				
+   		  fin = touches[0],                           // number of fingers on screen
+    	  type = "";								  // correspondance to mouse event
+    	  //switch(event.type),                       //(only for case?)
       	 
-      	  var initX; 
-          var initY;
+      	  var initX; 								  //Set up X variable
+          var initY;								  //Set up Y variable	
          
 	
  
-		  var touch = tn.responsive([
-	    	{name: 'touchStart',   type: 'mousedown'},
-	    	{name: 'touchMove',    type: 'mousemove'},
-	    	{name: 'touchEnd',     type: 'mouseup'},
-	    	{name: 'touchCancel',  type: 'mousebreak/null?'}
-
-	      ], //touchCancel refers to a broken touch (recive call or text) doesn't exactly match any mouse funtions
-	    	
+	  var touch = tn.responsive([
+    	{name: 'touchStart',   type: 'mousedown'},
+    	{name: 'touchMove',    type: 'mousemove'},
+    	{name: 'touchEnd',     type: 'mouseup'},
+    	{name: 'touchCancel',  type: 'mousebreak?'}   //touchCancel refers to a broken touch (recive call or text) 
+      ], 
  
 
           //addEventListener function should be performed before contexts are set
@@ -336,10 +334,10 @@
 			document.addEventListener('touchStart', function(event) {
 			   
 			    console.log("touch started");
-			    debug.log("touch started");
-			    alert(event.touches.length);
-			    initX = touch.pageX;
-				initY = touch.pageY;
+			    debug.log("touch started");         //for XCode simulator console (not working)
+			    alert(event.touches.length);        //how many fingers on screen (2+ = gesture)
+			    initX = touch.pageX; 				//Where touch X coordinate
+				initY = touch.pageY;				//Where touch Y coordinate
 			
 			}, false);
 
@@ -386,7 +384,7 @@
 
 		  
 
-		   // matcher
+		    // matcher
 		   	//if the context is equal to the type (corresponding mouse function) enter touch context
 
 			function(measure, ctx){
@@ -394,7 +392,7 @@
 	    		return false;
 	    	},
 	    	
-	       //unsure
+	       //unsure- check for touch ctx in mobile and tablet 
 
 	    	function(){
 	    		$(window).on('mobile', 'tablet', touch);
@@ -418,7 +416,7 @@
 		    function(measure, ctx){
 	    		if(measure >= ctx.touchMin) return true;
 	    		return false;
-	    	},
+	    	}, // if(touchMin >= [2]) return true; 
 
 	    	function(){
 	    		$(window).on('touchStart', 'touchMove', 'touchEnd', gesture);
