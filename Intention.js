@@ -194,9 +194,9 @@
               currentContext = ctx;
               
               // emit the context event
-              this._emitter(_.extend({}, {type:currentContext.name}, 
+              this._emitter(_.extend({}, {_type:currentContext.name}, 
                   currentContext), this)
-                ._emitter({type:axisID, context:currentContext.name}, this);
+                ._emitter({_type:axisID, context:currentContext.name}, this);
 
               // done, break the loop
               return false;
@@ -214,16 +214,16 @@
 
     _emitter: function(event){
       if(typeof event === 'string') {
-        event={type:event};
+        event={_type:event};
       }
       if(!event.target){
         event.target=this;
       }
-      if(!event.type){
-        throw new Error(event.type + ' is not a supported event.');
+      if(!event._type){
+        throw new Error(event._type + ' is not a supported event.');
       }
-      if(_.isArray(this._listeners[event.type])){
-        var listeners = this._listeners[event.type],
+      if(_.isArray(this._listeners[event._type])){
+        var listeners = this._listeners[event._type],
           i;
         for(i=0; i<listeners.length; i++){
           listeners[i].call(this, event);
