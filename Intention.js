@@ -98,6 +98,11 @@
     },
 
     add: function(elms, options){
+
+      var spec;
+
+      if(!options) options = {};
+
       // is expecting a jquery object
       elms.each(_.bind(function(i, elm){
         var exists = false;
@@ -110,13 +115,15 @@
 
         if(exists === false){
           // create the elements responsive data
-          $(elm).data('intent.spec',
-            this._fillSpec(
-              $.extend(true, options, this._attrsToSpec(elm.attributes))));
+          spec = this._fillSpec(
+              _.extend(options, this._attrsToSpec(elm.attributes)));
           // make any appropriate changes based on the current contexts
-          this._makeChanges($(elm), $(elm).data('intent.spec'), this.axes);
+          this._makeChanges($(elm), spec, this.axes);
 
-          this.elms.push(elm);
+          this.elms.push({
+            elm: elm,
+            spec: spec,
+          });
         }
 
       }, this));
@@ -131,7 +138,7 @@
       elms.each(function(i, elm){
         // elms to check against
         respElms.each(function(i, candidate){
-          if(elm === candidate){
+          if(elm === candidate.elm){
             respElms.splice(i, 1);
             // found the match, break the loop
             return false;
@@ -370,14 +377,15 @@
 
       _.each(ctxConfig.inSpecs, function(change, func){
         if(func==='move'){
-          if( (elm.data('intent.placement') !== change.placement)
-            || (elm.data('intent.move') !== change.value)){
+          if( (specs.__placement__ !== change.placement)
+            || (specs.__move__ !== change.value)){
 
             $(change.value)[change.placement](elm);
+
             // save the last placement of the element so 
             // we're not moving it around for no good reason
-            elm.data('intent.placement', change.placement);
-            elm.data('intent.move', change.value);
+            specs.__placement__ = change.placement;
+            specs.__move__ = change.value;
           }
         } else if(func === 'class') {
 
@@ -399,8 +407,8 @@
     _respond: function(axes, elms){
       // go through all of the responsive elms
       elms.each(_.bind(function(i, elm){
-        var $elm = $(elm);
-        this._makeChanges($elm, $elm.data('intent.spec'), axes);
+        var $elm = $(elm.elm);
+        this._makeChanges($elm, elm.spec, axes);
         $elm.trigger('intent', this);
       }, this));
     },
