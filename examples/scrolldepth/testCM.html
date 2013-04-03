@@ -164,349 +164,115 @@
 			background-image: url(tablet.jpg);
 		}
 
+
+/*    .touchdiv {
+      width:50px;
+      height:50px;
+      background: orange;
+    }*/
+
+    .start {
+      width:70px;
+      height:70px;
+      background:orange;
+    }
+
+    .move {
+      width:70px;
+      height:70px;
+      background:darkorange;
+    }
+
+    .end {
+      width:50px;
+      height:50px;
+      background: darkorange;
+    }
 	</style>
 </head>
 <body>
-	<header intent in-beyond-class="fix"
-			in-shallow-class=""
-			in-tablet-class="fix-o"
-			in-mobile-class="fix-r"
-			in-standard-class="fix">
-		<div id="intro"></div>
-		<nav></nav>
-	</header>
 
-	<h1 intent in-mobile-class="mobile"
-		in-tablet-class="tablet"
-		in-standard-class="standard"
-		in-frequenter-class="frequenter"
-		in-returning-class="returning"
-		in-first-class="first"
-	>
-		<span intent in-base-class="a"
-			in-base-append='h1'
-			in-base-append='h1'>a</span>
-		<span intent in-base-class="b"
-			in-base-append='h1'
-			in-tablet-after='.c'>b</span>
-		<span intent in-base-class="c"
-			in-base-append='h1'
-			in-tablet-prepend='h1'>c</span>
+  <div id="a" intent
+    in-touchstart-class="start"
+    in-touchmove-class="move"
+    in-touchend-class="end">
+    </div>
 
-	</h1>
 
-	<h2 intent
-		in-f1-class="one"
-		in-f2-class="two"
-		in-f3-class="three"
-		in-f4-class="four"></h2>
 
-		<div intent
-			in-tablet-class="t"
-			in-mobile-class="m"
-			in-standard-class="s"></div>
+  <div id="b" intent
+    in-touchstart-class="start"
+    in-touchmove-class="move"
+    in-touchend-class="end">
+    </div>
+  <script>
+    (function($){
+
+      $(function(){
+        
+        var intent = new Intention;
+
+        var intentB = new Intention;
+              
+        //touch
+        var touchCtxs = [
+            {name: 'touchstart',   _type: 'mousedown'},
+            {name: 'touchmove',    _type: 'mousemove'},
+            {name: 'touchend',     _type: 'mouseup'},
+            {name: 'touchcancel',  _type: 'mousebreak?'}
+          ],
+          touch = intent.responsive(touchCtxs, function(measure, ctx){
+            return measure === ctx.name;
+          }), 
+          touchB = intentB.responsive(touchCtxs, function(measure, ctx){
+            return measure === ctx.name;
+          });
+
+          var box = $('#a');
+
+          box.on('mousedown', function(){
+
+            box.on('mousemove', function(){
+               touch('touchmove') 
+            });
+
+            touch('touchstart')
+          });
+
+          box.on('mouseup mouseout', function(){
+            box.off('mousemove');
+            touch('touchend')
+          });
+
+          touch('touchmove')
+
+          var boxB = $('#b');
+
+          boxB.on('mousedown', function(){
+
+            boxB.on('mousemove', function(){
+               touchB('touchmove') 
+            });
+
+            touchB('touchstart')
+          });
+
+          boxB.on('mouseup mouseout', function(){
+            boxB.off('mousemove');
+            touchB('touchend')
+          });
+
+          intent.add(box);
+          intentB.add(boxB);
+
+          touchB('touchmove')
+
+      })  
+      
+    })(jQuery)
+  </script>
 
 	
 </body>
-<script>
-	(function($){
-		
-		if(!window.localStorage.getItem('visits')){
-			window.localStorage.setItem('visits', 0);
-		}
 
-		var visits = parseInt(window.localStorage.getItem('visits'), 10) + 1;
-		window.localStorage.setItem('visits', visits);
-
-		
-		var tn = new Intention,
-			resizeContexts = [
-				{name:'standard', Xmin:0, Ymin:660}, 
-		        {name:'tablet', Xmin:0, Ymin:500},
-		        {name:'mobile', Xmin:0, Ymin:0}
-		        ],
-
-		    hResponder = tn.responsive(resizeContexts,
-		        // compare the return value of the callback to each context
-		        // return true for a match
-		        function(test, context){
-		          if(test>=context.Xmin){
-		            return true;
-		
-		          }
-		        },
-		        // callback, return value is passed to matcher()
-		        // to compare against current context
-		        function(e){
-		          return $(window).width();
-		    
-		    	});
-
-		        hResponder = tn.responsive(resizeContexts,
-		        // compare the return value of the callback to each context
-		        // return true for a match
-		        function(test, context){
-		          if(test>=context.Ymin){
-		            return true;
-		
-		          }
-		        },
-
-		        // callback, return value is passed to matcher()
-		        // to compare against current context
-		        function(e){
-		          return $(window).height();
-		    
-		    	});
-
-
-//-------------------------------------------------------------------------------------------
-
-	// visitTracker();
-
-		baseResponder = tn.responsive([{name:'base'}])('base');
-		hResponder();
-		$(window).on('resize', hResponder);
-
-		var visitTracker = tn.responsive([
-	    	{name: 'frequenter', visits:5},
-	    	{name:'returning', visits:2},
-	    	{name:'first', visits:1}],
-	    	// matcher
-	    	function(measure, ctx){
-	    		if(measure >= ctx.visits) return true;
-	    		return false;
-	    	},
-	    	// measure
-	    	function(){
-	    		return parseInt(window.localStorage.getItem('visits'));
-	    	});
-
-
-//-------------------------------------------------------------------------------------------
-		
-	// depthTracker();
-
-		var depthTracker = tn.responsive([
-	    	{name: 'shallow', depth:25},
-	    	{name: 'beyond', depth:Infinity}],
-	    	// matcher
-	    	function(measure, ctx){
-	    		if(measure < ctx.depth) return true;
-	    		return false;
-	    	},
-	    	// measure
-	    	function(){
-	    		return window.pageYOffset;
-	    });
-
-		
-
-
-//-------------------------------------------------------------------------------------------
-		
-	//touch
-			
-	$(window).on('tablet', 'mobile', resizeContexts);	
-
-
-		  //var touches = event.changedTouches,				
-   		  fin = touches[0],                           // number of fingers on screen
-    	  type = "";								  // correspondance to mouse event
-    	  //switch(event.type),                       //(only for case?)
-      	 
-      	  var initX; 								  //Set up X variable
-          var initY;								  //Set up Y variable	
-         
-	
- 
-	  var touch = tn.responsive([
-    	{name: 'touchStart',   type: 'mousedown'},
-    	{name: 'touchMove',    type: 'mousemove'},
-    	{name: 'touchEnd',     type: 'mouseup'},
-    	{name: 'touchCancel',  type: 'mousebreak?'}   //touchCancel refers to a broken touch (recive call or text) 
-      ], 
- 
-
-          //addEventListener function should be performed before contexts are set
-	      function(startup){
-			  
-			document.addEventListener('touchStart', function(event) {
-			   
-			    console.log("touch started");
-			    debug.log("touch started");         //for XCode simulator console (not working)
-			    alert(event.touches.length);        //how many fingers on screen (2+ = gesture)
-			    initX = touch.pageX; 				//Where touch X coordinate
-				initY = touch.pageY;				//Where touch Y coordinate
-			
-			}, false);
-
-		
-			document.addEventListener('touchMove', function(event) {
-			   
-			    event.preventDefault();
-			    if (initX - e.pageX < 3 && initX - e.pageX > -3) {
-				
-				return;
-			} // if the touch coordinates are 3px (or -3) different from the initial X coordinate establish touch point as moved.
-			
-			
-
-			if (initY - e.pageY < 3 && initY - e.pageY > -3) {
-				
-				return;
-			} // if the touch coordinates are 3px (or -3) different from the initial Y coordinate establish touch point as moved.
-			   
-			   
-
-			    var touch = event.touches[0];
-			    
-			    initX = touch.pageX;
-				initY = touch.pageY;
-			    //re-set init coordinates
-			  
-			    console.log("Touch x:" + touch.pageX + ", y:" + touch.pageY);
-			
-			}, false);
-
-		
-			
-
-			document.addEventListener('touchEnd', function(event){
-
-				console.log("touch ended");
-
-			}, false);
-
-			
-			
-
-			document.addEventListener('touchCancel', function(event){
-
-				console.log("touch canceled");
-
-			}, false);
-
-
-		   },
-
-		  
-
-		    // matcher
-		   	//if the context is equal to the type (corresponding mouse function) enter touch context
-
-			function(measure, ctx){
-	    		if(measure === ctx.type) return true;
-	    		return false;
-	    	},
-	    	
-	       //unsure- check for touch ctx in mobile and tablet 
-
-	    	function(){
-	    		$(window).on('mobile', 'tablet', touch);
-	    	});
-
-//-------------------------------------------------------------------------------------------
-
-	// gestures
-		
-
-	   	var touchMin = event.touches[2]; //two fingertips (touches) needed to be a gesture
-
-	 	  $(window).on('touchStart', 'touchMove', 'touchEnd' touch);		
-	 
-				var gesture = tn.responsive([
-		    	{name: 'gestureStart',  touchMin :2}, //second finger joins first on screen
-		    	{name: 'gestureStart',  touchMin :2}, //two finger drag
-		    	{name: 'gestureEnd',    touchMin :2}], //one or two fingers leave screen
-
-
-		    function(measure, ctx){
-	    		if(measure >= ctx.touchMin) return true;
-	    		return false;
-	    	}, // if(touchMin >= [2]) return true; 
-
-	    	function(){
-	    		$(window).on('touchStart', 'touchMove', 'touchEnd', gesture);
-	    	});
-			
-
-/*-----------------------------------------------------------------------------------------
-		//extra touch junk
-			// context
-		  
-		  var touch = tn.responsive([
-	    	{name: 'touchStart', type: 'mousedown'},
-	    	{name: 'touchMove',  type: 'mousemove'},
-	    	{name: 'touchEnd',   type: 'mouseup'}],
-	    	
-
-	    	// matcher
-
-	    	var handleStart = intent.responsive(contexts)
-
-	      function  (startup / init ?)() {
-			 
-			  touch.addEventListener('touchStart', handleStart, false);
-			  touch.addEventListener('touchMove', handleMove, false);
-			  touch.addEventListener('touchEnd', handleEnd, false);
-			  
-			}
-
-
-
-	    function touchHandler(event){
-   
-   		 var touches = event.changedTouches,
-       		 first = touches[0],
-        	 type = "";
-        	 switch(event.type)
-
-        });
-
-		  $(window).on('touchStart mousedown',function (e){
-    		 e.preventDefault(); 
-		    // caching the current x
-		    cachedX = e.pageX;
-		    // caching the current y
-		    cachedY = e.pageY;
-		    // a touch event is detected      
-		    touchStarted = true;
-		    console.log('touchStarted');
-		   
-		});
-     
-		//look for 
-		  //measure 
-			//matcher
-
--------------------------------------------------------------------------------------------*/
-
-   // scrolldepth
-		
-		
-
-		$(window).on('scroll', depthTracker);
-		//  | / - \
-		var flipper = tn.responsive([
-	    	{name: 'f1', div:0},
-	    	{name:'f2', div:1},
-	    	{name:'f3', div:2},
-	    	{name:'f4', div:3}],
-	    	// matcher
-	    	function(measure, ctx){
-	    		if((Math.floor(measure/100) % 4) === ctx.div) return true;
-	    		return false;
-	    	},
-	    	// measure
-	    	function(){
-	    		return window.pageYOffset;
-	    	});
-
-		flipper();
-		$(window).on('scroll', flipper);
-
-		tn.elements();
-	})(jQuery)
-</script>
 </html>	
