@@ -140,68 +140,94 @@
   <script>
     (function($){
 
-      $(function(){
+      // $(function(){
         
-        var intent = new Intention;
+      //   var intent = new Intention;
 
-        var intentB = new Intention;
+      //   var intentB = new Intention;
               
-        //touch
-        var touchCtxs = [
-            {name: 'f1',  },
-            {name: 'f2',  },
-            {name: 'f3',  },
-            {name: 'f4',  },
-            {name: 'f5',  }
-          ],
+      //   //touch
+      //   var touchCtxs = [
+      //       {name: 'touchstart',   _type: 'mousedown'},
+      //       {name: 'touchmove',    _type: 'mousemove'},
+      //       {name: 'touchend',     _type: 'mouseup'},
+      //       {name: 'touchcancel',  _type: 'mousebreak?'}
+      //     ],
 
-          touch = intent.responsive(touchCtxs, function(measure, ctx){
-            return measure === ctx.name;
-          }), 
-          touchB = intentB.responsive(touchCtxs, function(measure, ctx){
-            return measure === ctx.name;
-          });
+      //     touch = intent.responsive(touchCtxs, function(measure, ctx){
+      //       return measure === ctx.name;
+      //     }), 
+      //     touchB = intentB.responsive(touchCtxs, function(measure, ctx){
+      //       return measure === ctx.name;
+      //     });
 
-          var box = $('#a');
+      //     var box = $('#a');
 
-          box.on('mousedown', function(){
+      //     box.on('mousedown', function(){
 
-            box.on('mousemove', function(){
-               touch('touchmove') 
-            });
+      //       box.on('mousemove', function(){
+      //          touch('touchmove') 
+      //       });
 
-            touch('touchstart')
-          });
+      //       touch('touchstart')
+      //     });
 
-          box.on('mouseup mouseout', function(){
-            box.off('mousemove');
-            touch('touchend')
-          });
+      //     box.on('mouseup mouseout', function(){
+      //       box.off('mousemove');
+      //       touch('touchend')
+      //     });
 
-          touch('touchmove')
+      //     touch('touchmove')
 
-          var boxB = $('#b');
+      //     var boxB = $('#b');
 
-          boxB.on('mousedown', function(){
+      //     boxB.on('mousedown', function(){
 
-            boxB.on('mousemove', function(){
-               touchB('touchmove') 
-            });
+      //       boxB.on('mousemove', function(){
+      //          touchB('touchmove') 
+      //       });
 
-            touchB('touchstart')
-          });
+      //       touchB('touchstart')
+      //     });
 
-          boxB.on('mouseup mouseout', function(){
-            boxB.off('mousemove');
-            touchB('touchend')
-          });
+      //     boxB.on('mouseup mouseout', function(){
+      //       boxB.off('mousemove');
+      //       touchB('touchend')
+      //     });
 
-          intent.add(box);
-          intentB.add(boxB);
+      //     intent.add(box);
+      //     intentB.add(boxB);
 
-          touchB('touchmove')
+      //     touchB('touchmove')
 
-      })  
+      // })  
+
+	
+	var intent = new Intention;
+      
+    //touch
+    var contact = [
+        {name: 'f1', points: 1},
+        {name: 'f2', points: 2},
+        {name: 'f3', points: 3},
+        {name: 'f4', points: 4},
+        {name: 'f5', points: 5}
+      ],
+
+      	// matcher
+	    	function(measure, ctx){
+	    		if(measure === ctx.points) return true;
+	    		return false;
+	    	},
+	    
+	    // measure
+	    	function(){
+	    		return (window.('contact'));
+	    	});
+
+
+
+
       
     })(jQuery)
   </script>
