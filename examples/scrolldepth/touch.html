@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="../../test/vendor/underscore.js"></script>
+	<script type="text/javascript" src="../../Intention.js"></script>
+ 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes"><meta name="format-detection" content="telephone=no">
+	<style type="text/css">
+
+		.a {
+			background-color:lavender;
+			color: tomato;
+			
+		}
+
+		.b {
+			background-color:steelblue;
+			color: gold;
+			
+		}
+
+		.c {
+			background-color:indianred;
+			color: palegreen;
+			
+		}
+
+		 .d{
+			background-color:darkslategray;
+			color: bisque;
+			
+		}
+
+		.e{
+			background-color:midnightblue;
+			color: red;
+			
+		}
+
+		#block {
+
+			width: 100%;
+			height:320px;
+			font-family: monospace;
+			font-size: 10em;
+
+		}
+
+		.blocks span {
+			float: left;
+		}
+
+		.circle1{
+			position: absolute;
+			top:200px;
+			left:40px;
+			color:lavender;
+			 }
+
+		.circle2{
+			position: absolute;
+			top:100px;
+			left:100px;
+			color:steelblue;
+			 }
+		
+		.circle3{
+			position: absolute;
+			top:40px;
+			left:190px;
+			color:indianred;
+			 }
+
+		.circle4{
+			position: absolute;
+			top:70px;
+			left:290px;
+			color:darkslategrey;
+			}
+
+		.circle5{
+			position: absolute;
+			top:110px;
+			left:390px;
+			color:midnightblue;
+			}	
+		
+		#circle{
+
+			width:70px;
+			height:70px;
+			border-radius:50px;
+			line-height:100px;
+			background:yellow;
+			float:left;
+			line-height:100px;
+			text-align:center;
+			font-family: monospace;
+			font-size:3em;
+		}
+
+		#circle span{
+			margin: auto;
+		}
+
+
+	</style>
+</head>
+<body>
+
+  <div id="contact" intent
+    in-f1-class="f1"
+    in-f2-class="f2"
+    in-f3-class="f3"
+    in-f4-class="f4"
+    in-f5-class="f5">
+
+	    <div id="prints">
+		    <div id="circle" class="circle1">1</div>
+			<div id="circle" class="circle2">2</div>
+			<div id="circle" class="circle3">3</div>
+			<div id="circle" class="circle4">4</div>
+			<div id="circle" class="circle5">5</div>
+		</div>
+
+    </div>
+
+    <div class="blocks">
+
+		<div id="block" class="a">1</div>
+		<div id="block" class="b">2</div>
+		<div id="block" class="c">3</div>
+		<div id="block" class="d">4</div>
+		<div id="block" class="e">5</div>
+
+	</div>
+
+
+  <script>
+    (function($){
+
+      $(function(){
+        
+        var intent = new Intention;
+
+        var intentB = new Intention;
+              
+        //touch
+        var touchCtxs = [
+            {name: 'f1',  },
+            {name: 'f2',  },
+            {name: 'f3',  },
+            {name: 'f4',  },
+            {name: 'f5',  }
+          ],
+
+          touch = intent.responsive(touchCtxs, function(measure, ctx){
+            return measure === ctx.name;
+          }), 
+          touchB = intentB.responsive(touchCtxs, function(measure, ctx){
+            return measure === ctx.name;
+          });
+
+          var box = $('#a');
+
+          box.on('mousedown', function(){
+
+            box.on('mousemove', function(){
+               touch('touchmove') 
+            });
+
+            touch('touchstart')
+          });
+
+          box.on('mouseup mouseout', function(){
+            box.off('mousemove');
+            touch('touchend')
+          });
+
+          touch('touchmove')
+
+          var boxB = $('#b');
+
+          boxB.on('mousedown', function(){
+
+            boxB.on('mousemove', function(){
+               touchB('touchmove') 
+            });
+
+            touchB('touchstart')
+          });
+
+          boxB.on('mouseup mouseout', function(){
+            boxB.off('mousemove');
+            touchB('touchend')
+          });
+
+          intent.add(box);
+          intentB.add(boxB);
+
+          touchB('touchmove')
+
+      })  
+      
+    })(jQuery)
+  </script>
+
+		<div intent
+			in-base-class="touchbox"
+			in-touchStart-class="start"
+			in-touchMove-class="move"
+			in-touchEnd-class="end"></div>
+
+
+	
+</body>
+
+</html>	
