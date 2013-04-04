@@ -5,8 +5,13 @@
 	<script type="text/javascript" src="../../test/vendor/underscore.js"></script>
 	<script type="text/javascript" src="../../Intention.js"></script>
  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-	<meta name="apple-mobile-web-app-capable" content="yes"><meta name="format-detection" content="telephone=no">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+
 	<style type="text/css">
+		body {
+			margin:0;
+		}
 
 		.a {
 			background-color:lavender;
@@ -38,17 +43,85 @@
 			
 		}
 
-		#block {
-
-			width: 100%;
-			height:320px;
-			font-family: monospace;
-			font-size: 10em;
-
+		#blocks_wrapper {
+			position: absolute;
+			top:0;
+			left:0;
+			height:100%;
+			width:100%;
+			overflow: hidden;
 		}
 
-		.blocks span {
-			float: left;
+		#blocks {
+			position:absolute;
+			top:0;
+			left:0;
+			height:100%;
+			width:100%;
+			/*overflow: hidden;*/
+		}
+
+
+		#blocks.f1 {
+			transform:translate3d(0, 0, 0);
+			-moz-transform:translate3d(0, 0, 0);
+			-webkit-transform:translate3d(0, 0, 0);
+
+			transition:all 300ms ease-in-out;
+			-moz-transition: all 300ms ease-in-out;
+			-webkit-transition: all 300ms ease-in-out;
+		}
+
+		#blocks.f2 {
+			transform:translate3d(0, -100%, 0);
+			-moz-transform:translate3d(0, -100%, 0);
+			-webkit-transform:translate3d(0, -100%, 0);
+
+			transition:all 300ms ease-in-out;
+			-moz-transition: all 300ms ease-in-out;
+			-webkit-transition: all 300ms ease-in-out;
+		}
+		#blocks.f3 {
+			transform:translate3d(0, -200%, 0);
+			-moz-transform:translate3d(0, -200%, 0);
+			-webkit-transform:translate3d(0, -200%, 0);
+
+			transition:all 300ms ease-in-out;
+			-moz-transition: all 300ms ease-in-out;
+			-webkit-transition: all 300ms ease-in-out;
+		}
+		#blocks.f4 {
+			transform:translate3d(0, -300%, 0);
+			-moz-transform:translate3d(0, -300%, 0);
+			-webkit-transform:translate3d(0, -300%, 0);
+
+			transition:all 300ms ease-in-out;
+			-moz-transition: all 300ms ease-in-out;
+			-webkit-transition: all 300ms ease-in-out;
+		}
+		#blocks.f5 {
+			transform:translate3d(0, -400%, 0);
+			-moz-transform:translate3d(0, -400%, 0);
+			-webkit-transform:translate3d(0, -400%, 0);
+
+			transition:all 300ms ease-in-out;
+			-moz-transition: all 300ms ease-in-out;
+			-webkit-transition: all 300ms ease-in-out;
+		}
+
+
+
+		.block {
+			width: 100%;
+			height:100%;
+			position: relative;
+			font-family: monospace;
+			font-size: 10em;
+		}
+
+		#circles {
+			position: relative;
+			z-index: 3;
 		}
 
 		.circle1{
@@ -86,7 +159,7 @@
 			color:midnightblue;
 			}	
 		
-		#circle{
+		.circle{
 
 			width:70px;
 			height:70px;
@@ -99,9 +172,8 @@
 			font-size:3em;
 		}
 
-		#circle p{
+		.circle p{
 			margin: auto;
-
 		}
 
 
@@ -109,134 +181,77 @@
 </head>
 <body>
 
-  <div id=" " intent
-    in-f1-class=" "
-    in-f2-class=" "
-    in-f3-class=" "
-    in-f4-class=" "
-    in-f5-class=" ">
 
-	    <div id="prints">
-		    <div id="circle" class="circle1"><p>1</p></div>
-			<div id="circle" class="circle2"><p>2</p></div>
-			<div id="circle" class="circle3"><p>3</p></div>
-			<div id="circle" class="circle4"><p>4</p></div>
-			<div id="circle" class="circle5"><p>5</p></div>
-		</div>
 
-    </div>
+    <div id="circles">
 
-    <div class="blocks">
-
-		<div id="block" class="a">1</div>
-		<div id="block" class="b">2</div>
-		<div id="block" class="c">3</div>
-		<div id="block" class="d">4</div>
-		<div id="block" class="e">5</div>
-
+	    <div class="circle circle1"><p>1</p></div>
+		<div class="circle circle2"><p>2</p></div>
+		<div class="circle circle3"><p>3</p></div>
+		<div class="circle circle4"><p>4</p></div>
+		<div class="circle circle5"><p>5</p></div>
 	</div>
 
+	<div id="blocks_wrapper">
+		<div id="blocks" class=""
+			intent
+		    in-f1-class="f1"
+		    in-f2-class="f2"
+		    in-f3-class="f3"
+		    in-f4-class="f4"
+		    in-f5-class="f5">
+
+			<div class="block a">1</div>
+			<div class="block b">2</div>
+			<div class="block c">3</div>
+			<div class="block d">4</div>
+			<div class="block e">5</div>
+
+		</div>
+	</div>
 
   <script>
     (function($){
 
-      // $(function(){
-        
-      //   var intent = new Intention;
-
-      //   var intentB = new Intention;
-              
-      //   //touch
-      //   var touchCtxs = [
-      //       {name: 'touchstart',   _type: 'mousedown'},
-      //       {name: 'touchmove',    _type: 'mousemove'},
-      //       {name: 'touchend',     _type: 'mouseup'},
-      //       {name: 'touchcancel',  _type: 'mousebreak?'}
-      //     ],
-
-      //     touch = intent.responsive(touchCtxs, function(measure, ctx){
-      //       return measure === ctx.name;
-      //     }), 
-      //     touchB = intentB.responsive(touchCtxs, function(measure, ctx){
-      //       return measure === ctx.name;
-      //     });
-
-      //     var box = $('#a');
-
-      //     box.on('mousedown', function(){
-
-      //       box.on('mousemove', function(){
-      //          touch('touchmove') 
-      //       });
-
-      //       touch('touchstart')
-      //     });
-
-      //     box.on('mouseup mouseout', function(){
-      //       box.off('mousemove');
-      //       touch('touchend')
-      //     });
-
-      //     touch('touchmove')
-
-      //     var boxB = $('#b');
-
-      //     boxB.on('mousedown', function(){
-
-      //       boxB.on('mousemove', function(){
-      //          touchB('touchmove') 
-      //       });
-
-      //       touchB('touchstart')
-      //     });
-
-      //     boxB.on('mouseup mouseout', function(){
-      //       boxB.off('mousemove');
-      //       touchB('touchend')
-      //     });
-
-      //     intent.add(box);
-      //     intentB.add(boxB);
-
-      //     touchB('touchmove')
-
-      // })  
-
 	
-	var intent = new Intention;
-      
-    //touch
-    var contact = [
-        {name: 'f1', points: 1},
-        {name: 'f2', points: 2},
-        {name: 'f3', points: 3},
-        {name: 'f4', points: 4},
-        {name: 'f5', points: 5}
-      ],
+		var intent = new Intention,
+			contact_axis = [
+		        {name: 'f1', points: 1},
+		        {name: 'f2', points: 2},
+		        {name: 'f3', points: 3},
+		        {name: 'f4', points: 4},
+		        {name: 'f5', points: 5}
+		    ];
 
-      	// matcher
-	    	function(measure, ctx){
-	    		if(measure === ctx.points) return true;
-	    		return false;
-	    	},
-	    
-	    // measure
-	    	function(){
-	    		return (window.('contact'));
-	    	});
+		var touch = intent.responsive(contact_axis,
+			function(measure, ctx){
+				return measure === ctx.points;
+		    });
+
+		// touch(4)
+		intent.elements();
+
+		$(window).on('touchstart touchmove', function(e){
+			touch(e.originalEvent.touches.length);
+			e.preventDefault();
+		});
+		$(window).on('touchcancel touchend', function(e){
+			var touches = e.originalEvent.touches.length;
+			if(touches === 0) touches =1;
+			touch(touches);
+		});
+
+		$(function(){
+			setTimeout(function(){
+				window.scrollTo(0, 1);
+			}, 0);
+		});
 
 
-
-
-      
+	      
     })(jQuery)
   </script>
 
-		<div intent
-			in-base-class="touchbox"
-			in-touchStart-class="start"
-			in-touchMove-class="move"
-			in-touchEnd-class="end"></div>
 
 
 	
