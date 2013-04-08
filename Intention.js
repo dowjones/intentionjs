@@ -20,7 +20,7 @@
 
     // public methods
     responsive:function responsive(contexts, options){
-
+      // for generating random ids for axis when not specified
       var idChars = 'abcdefghijklmnopqrstuvwxyz0123456789', 
           id='', i;
 
@@ -294,12 +294,14 @@
       return spec;
     },
 
-    _resolveSpecs: function(specList, specs){
+    _resolveSpecs: function(currentContexts, specs, axes){
+
       var changes={},
         moveFuncs=['append', 'prepend', 'before', 'after'];
       
-      _.each(specList, function(specName){
-        _.each(specs[specName], function(val, func){
+      _.each(currentContexts, function(ctxName){
+
+        _.each(specs[ctxName], function(val, func){
 
           if(func==='class'){
             if(!changes[func]) changes[func] = [];
@@ -318,89 +320,120 @@
             }
           }
         }, this);
+
       }, this);
+
       return changes;
     },
 
-    _contextConfig: function(specs, axes){
-      
-      var inSpecs=[], outSpecs=[];
+    _currentContexts: function(axes) {
+      var contexts = [];
 
       _.each(axes.__keys__, function(ID){
         if(axes[ID].current !== null) {
-          inSpecs.push(axes[ID].current);
+          contexts.push(axes[ID].current);
           return;
         }
       });
 
-      // find the specs not applicable
-      _.each(specs, function(spec, specName){
-        var match;
-        _.each(inSpecs, function(spec){
-          if(specName===spec){
-            match=true;
-          }
-        });
+      return contexts;
+    },
 
-        if(!match) outSpecs.push(specName);
-      });
 
-      var complements = {
-        inSpecs:this._resolveSpecs(inSpecs, specs, axes),
-        // TODO: this could really be a separate operation b/c it's only used for classes
-        outSpecs:this._resolveSpecs(outSpecs, specs, axes)
-      };
+    _removeClasses: function(specs, axes) {
 
-      var axisPattern = /^_([a-zA-Z0-9][_a-zA-Z0-9]*)/;
-      _.each(specs, function(spec, name){
+      var toRemove = [];
 
-        var axisMatch = name.match(axisPattern);
+      _.each(axes.__keys__, function(key){
 
-        if((axisMatch !== null) && axes[axisMatch[1]] ) {
-          if(axes[axisMatch[1]].current !== null ){
-            // TODO: sooooo dense
-            complements.outSpecs['class'] = _.union(complements.outSpecs['class'], 
-              _.compact(_.map(axes[axisMatch[1]].contexts, function(test){
-                if(test.name !== axes[axisMatch[1]].current) return test.name;
-              })));
-            complements.inSpecs['class'] = _.union(complements.inSpecs['class'], 
-              (axes[axisMatch[1]].current + ' ' + spec ).split(' '));
-          }
+        var axis = axes[key],
+          axisSpec = false;
+
+        if(specs['_' + axis.ID] !== undefined){
+          axisSpec = true;
         }
-      });
-      return complements;
+
+        _.each(axis.contexts, function(ctx){
+
+          // ignore the current context, those classes SHOULD be applied
+          if(ctx.name === axis.current) {
+            return;
+          }
+
+          if(axisSpec) {
+            toRemove.push(ctx.name);
+          }
+
+          var contextSpec = specs[ctx.name],
+            classes;
+          if(contextSpec !== undefined) {
+            classes = contextSpec['class'];
+            if(classes !== undefined){
+              toRemove = _.union(toRemove, classes);
+            }
+          }
+        }, this);
+
+      }, this);
+
+      return toRemove;
+    },
+
+    _contextConfig: function(specs, axes){
+
+      var config = this._resolveSpecs(this._currentContexts(axes), specs, axes);
+
+      // add the axis specs:
+
+      _.each(specs, function(spec, specName){
+
+        var match;
+
+        if(this._axis_test_pattern.test(specName)) {
+          console.log(specName)
+          match = specName.match(this._axis_match_pattern)[1];
+
+          config['class'] = _.union(config['class'], 
+            [axes[match].current, spec]);
+        }
+      }, this);
+
+      return config;
     },
 
     _makeChanges: function(elm, specs, axes){
 
-      var ctxConfig = this._contextConfig(specs, axes);
+      if(_.isEmpty(axes)===false){
+        var ctxConfig = this._contextConfig(specs, axes);
+        
+        _.each(ctxConfig, function(change, func){
+          if(func==='move'){
+            if( (specs.__placement__ !== change.placement)
+              || (specs.__move__ !== change.value)){
 
-      _.each(ctxConfig.inSpecs, function(change, func){
-        if(func==='move'){
-          if( (specs.__placement__ !== change.placement)
-            || (specs.__move__ !== change.value)){
+              $(change.value)[change.placement](elm);
 
-            $(change.value)[change.placement](elm);
+              // save the last placement of the element so 
+              // we're not moving it around for no good reason
+              specs.__placement__ = change.placement;
+              specs.__move__ = change.value;
+            }
+          } else if(func === 'class') {
 
-            // save the last placement of the element so 
-            // we're not moving it around for no good reason
-            specs.__placement__ = change.placement;
-            specs.__move__ = change.value;
+            var classes = elm.attr('class') || '';
+
+            // the class add/remove formula
+            classes = _.union(change, 
+              _.difference(classes.split(' '), this._removeClasses(specs, axes)));
+            
+            elm.attr('class', classes.join(' '));
+
+          } else {
+            elm.attr(func, change);
           }
-        } else if(func === 'class') {
-
-          var classes = elm.attr('class') || '';
-
-          classes = _.union(change, 
-            _.difference(classes.split(' '), ctxConfig.outSpecs['class']));
-          
-          elm.attr('class', classes.join(' '));
-
-        } else {
-          elm.attr(func, change);
-        }
-      }, this);
-
+        }, this);
+        
+      }
       return elm;
     },
 
@@ -416,7 +449,14 @@
     _contextualize: function(axisID, context, axes){
       axes[axisID].current = context;
       return axes;
-    }
+    },
+
+    // private props
+    _axis_test_pattern: /^_[^_]/, // does it begin with an underscore
+    // match a group after the underscore:
+    _axis_match_pattern: /^_([a-zA-Z0-9][_a-zA-Z0-9]*)/
+
   };
+
   return Intention;
 }));
