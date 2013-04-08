@@ -14,30 +14,41 @@
 			margin:0;
 		}
 
+		.o {
+			background-image:url(img/fish_tank.jpg);
+			color: tomato;
+			width: 100%;
+			font-size: 3em !important;
+			/*Garibaldi Damselfish*/
+		}
+
 		.a {
-			background-image:url(S1.JPG);
+			background-image:url(img/S1.JPG);
 			color: tomato;
 			width: 100%;
 			/*Garibaldi Damselfish*/
 		}
 
+
+
 		.b {
-			background-image:url(S2.JPG);
-			color: palegreen;
+			background-image:url(img/S2.JPG);
+			color: springgreen;
 			width: 100%;
 			/*GloFish*/
 		}
 
+
 		.c {
-			background-image:url(S3.JPG);
-			color: gold;
-			width: 100%
+			background-image:url(img/S3.JPG);
+			color: yellow;
+			width: 100%;
 			/*Cherub Fish*/
 			
 		}
 
 		 .d{
-			background-image:url(S4.JPG);
+			background-image:url(img/S4.JPG);
 			color: bisque;
 			width: 100%;
 			/*Angel Fish*/
@@ -45,8 +56,8 @@
 		}
 
 		.e{
-			background-image:url(S5.JPG);
-			color: red;
+			background-image:url(img/S5.JPG);
+			color: salmon;
 			width: 100%;
 			/*Gold Fish*/
 			
@@ -71,7 +82,7 @@
 		}
 
 
-		#blocks.f1 {
+		#blocks.f0 {
 			transform:translate3d(0, 0, 0);
 			-moz-transform:translate3d(0, 0, 0);
 			-webkit-transform:translate3d(0, 0, 0);
@@ -81,7 +92,7 @@
 			-webkit-transition: all 300ms ease-in-out;
 		}
 
-		#blocks.f2 {
+		#blocks.f1 {
 			transform:translate3d(0, -100%, 0);
 			-moz-transform:translate3d(0, -100%, 0);
 			-webkit-transform:translate3d(0, -100%, 0);
@@ -90,7 +101,7 @@
 			-moz-transition: all 300ms ease-in-out;
 			-webkit-transition: all 300ms ease-in-out;
 		}
-		#blocks.f3 {
+		#blocks.f2 {
 			transform:translate3d(0, -200%, 0);
 			-moz-transform:translate3d(0, -200%, 0);
 			-webkit-transform:translate3d(0, -200%, 0);
@@ -99,7 +110,7 @@
 			-moz-transition: all 300ms ease-in-out;
 			-webkit-transition: all 300ms ease-in-out;
 		}
-		#blocks.f4 {
+		#blocks.f3 {
 			transform:translate3d(0, -300%, 0);
 			-moz-transform:translate3d(0, -300%, 0);
 			-webkit-transform:translate3d(0, -300%, 0);
@@ -108,10 +119,19 @@
 			-moz-transition: all 300ms ease-in-out;
 			-webkit-transition: all 300ms ease-in-out;
 		}
-		#blocks.f5 {
+		#blocks.f4 {
 			transform:translate3d(0, -400%, 0);
 			-moz-transform:translate3d(0, -400%, 0);
 			-webkit-transform:translate3d(0, -400%, 0);
+
+			transition:all 300ms ease-in-out;
+			-moz-transition: all 300ms ease-in-out;
+			-webkit-transition: all 300ms ease-in-out;
+		}
+		#blocks.f5 {
+			transform:translate3d(0, -500%, 0);
+			-moz-transform:translate3d(0, -500%, 0);
+			-webkit-transform:translate3d(0, -500%, 0);
 
 			transition:all 300ms ease-in-out;
 			-moz-transition: all 300ms ease-in-out;
@@ -210,18 +230,62 @@
 			width:40px;
 			height:40px;
 			border-radius:50px;
-			background:gainsboro;
 			float:left;
 			line-height: 40px;
 			text-align:center;
 			font-family: monospace;
 			font-size:1.5em;
+			background:gainsboro;
 			color: cornflowerblue;
 		}
 
 		.circle p{
 			margin: auto;
 		}
+
+		.fish1 {
+			position: absolute;
+			top:100px;
+			left:140px;
+			background-image: url(img/fish1.png);
+			width: 100px;
+			height: 61px;
+			}
+
+		.fish2 {
+			position: absolute;
+			top:110px;
+			left:10px;
+			background-image: url(img/fish2.png);
+			width: 100px;
+			height: 61px;}
+
+		.fish3 {
+			position: absolute;
+			top:160px;
+			right:90px;
+			background-image: url(img/fish3.png);
+			width: 100px;
+			height: 61px;
+			}
+			
+		.fish4 {
+			position: absolute;
+			top:250px;
+			right:50px;
+			background-image: url(img/fish4.png);
+			width: 100px;
+			height: 61px;
+			}
+			
+		.fish5 {
+			position: absolute;
+			bottom:40px;
+			left:60px;
+			background-image: url(img/fish5.png);
+			width: 100px;
+			height: 61px;
+			}				
 
 
 	</style>
@@ -270,17 +334,27 @@
 	<div id="blocks_wrapper">
 		<div id="blocks" class=""
 			intent
+			in-f0-class="f0"
 		    in-f1-class="f1"
 		    in-f2-class="f2"
 		    in-f3-class="f3"
 		    in-f4-class="f4"
 		    in-f5-class="f5">
 
-			<div class="block a">Slide 1</div>
-			<div class="block b">Slide 2</div>
-			<div class="block c">Slide 3</div>
-			<div class="block d">Slide 4</div>
-			<div class="block e">Slide 5</div>
+			<div class="block o">
+				How many fish can you tap at once?
+				<div class="fish1"></div>
+				<div class="fish2"></div>
+				<div class="fish3"></div>
+				<div class="fish4"></div>
+				<div class="fish5"></div>
+			</div>
+
+			<div class="block a">Garibaldi Damselfish</div>
+			<div class="block b">GloFish</div>
+			<div class="block c">Cherub Fish</div>
+			<div class="block d">Koi Fish</div>
+			<div class="block e">Gold Fish</div>
 
 		</div>
 	</div>
@@ -317,6 +391,7 @@
 		//touch
 		
 			 var contact_axis = [
+			 	{name: 'f0', points: 0},
 		        {name: 'f1', points: 1},
 		        {name: 'f2', points: 2},
 		        {name: 'f3', points: 3},
@@ -339,7 +414,7 @@
 		});
 		$(window).on('touchcancel touchend', function(e){
 			var touches = e.originalEvent.touches.length;
-			if(touches === 0) touches =1;
+			if(touches === 0) touches =0;
 			touch(touches);
 		});
 
