@@ -319,6 +319,7 @@ describe("Intention", function() {
     function(){
 
       it('should combine the classes and cascade to specified attr', function(){
+
         var intent = new Intention;
         expect(
           intent._resolveSpecs(['foo', 'bar'], {
@@ -338,6 +339,7 @@ describe("Intention", function() {
       });
       
       it('should understand axis specs', function(){
+
         var intent= new Intention,
           elm = $('<div>')
             .attr({'in-mobile-class':'foo',
@@ -346,11 +348,14 @@ describe("Intention", function() {
               'in-orientation':'qux'});
         
         intent.add(elm);
-        
-        var orientation = intent.responsive({ID:'orientation', contexts:[{name:'portrait'},{name:'landscape'}]});
+
+        var orientation = intent.responsive({ID:'orientation', contexts:[{name:'portrait'},{name:'landscape'}]}),
+          widths = intent.responsive({ID:'width', contexts:[{name:'mobile'}, {name:'tablet'}, {name:'standard'}]});
 
         orientation.respond('portrait');
-        
+        widths.respond('mobile');
+
+        expect(elm.hasClass('foo')).to.equal(true);
         expect(elm.hasClass('portrait')).to.equal(true);
         expect(elm.hasClass('qux')).to.equal(true);
 
@@ -365,6 +370,65 @@ describe("Intention", function() {
       });
       
     });
+  
+  describe('_removeClasses: takes the spec and axes, figures out what classes to remove', function(){
+
+    var makeFauxResponsive = function(intent){
+
+      intent.responsive({
+        contexts: [{name:'base'}],
+        ID: 'default'
+      })
+
+      intent.responsive({
+        contexts: [{name:'portrait'}, {name:'landscape'}],
+        ID:'orientation'
+      });
+
+      intent.responsive({
+        contexts: [{name:'mobile'}, {name:'tablet'}, {name:'standard'}],
+        ID:'width'
+      });
+
+      intent.responsive({
+        contexts:[{name:'dud'}]
+      });
+
+      return intent;
+    }
+
+
+    it('should return an array', function(){
+
+      var intent = new Intention;
+
+      intent = makeFauxResponsive(intent);
+
+      // engage a couple contexts
+      intent.axes.orientation.respond('portrait');
+      intent.axes.width.respond('tablet');
+      intent.axes['default'].respond('base');
+
+      var result = intent._removeClasses({
+        tablet: {
+          'class': ['foo']
+        },
+        mobile: {
+          'class': ['foo', 'bar']
+        },
+        base: {
+          'class': ['always']
+        },
+        dud: {
+          href:'qux'
+        },
+        _orientation: 'baz'
+      }, intent.axes);
+
+      expect(true).to.equal(true)
+
+    });
+  });
 
   describe('_contextConfig: compiles a list of contexts to be applied and \
     those that are not applied', 
@@ -391,16 +455,10 @@ describe("Intention", function() {
             }
           }, axes);
 
-        expect(changes.inSpecs)
+        expect(changes)
           .to.eql({
             'class':['foo'],
             move:{value:'#foo', placement:'append'}
-          });
-
-        expect(changes.outSpecs)
-          .to.eql({
-            'class':['bar'],
-            move:{value:'#bar', placement:'append'}
           });
       });
     });
