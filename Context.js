@@ -3,6 +3,13 @@
   'use strict';
   var context = function($, Intention){
 
+    // create a brand spankin new intention object
+    var intent=new Intention,
+      // placeholder for the horizontal axis
+      horizontal_axis;
+
+    // throttle funtion used for keeping calls to the resize responive 
+    // callback to a minimum
     function throttle(callback, interval){
       var lastExec = new Date(),
         timer = null;
@@ -26,21 +33,19 @@
       };
     }
 
-    // horizontal resize contexts
-    var intent=new Intention,
-      resizeContexts = [
-        // {name:'luxury', min:900},
-        {name:'standard', min:840}, 
-        {name:'tablet', min:510},
-        {name:'mobile', min:0}];
 
-    // catchall, false as the second arg suppresses the event being fired
+    // catchall
+    // =======================================================================
     intent.responsive([{name:'base'}]).respond('base')
 
-    // horizontal responsive function
-    var hResponder = intent.responsive({
+    // width context?
+    // =======================================================================
+    horizontal_axis = intent.responsive({
       ID:'width',
-      contexts: resizeContexts,
+      contexts: [
+        {name:'standard', min:840}, 
+        {name:'tablet', min:510},
+        {name:'mobile', min:0}],
       // compare the return value of the callback to each context
       // return true for a match
       matcher: function(test, context){
@@ -61,28 +66,38 @@
         return $(window).width();
     }});
 
-    // create a base context that is always on
-    $(window).on('resize', hResponder.respond);
-      // .on('orientationchange', hResponder.respond);
-
     // touch device?
-    intent.responsive([{name:'touch'}], function() {
+    // =======================================================================
+    intent.responsive({
+      ID:'touch',
+      contexts:[{name:'touch'}], 
+      matcher: function() {
         return "ontouchstart" in window;
-      }).respond();
+      }}).respond();
 
     // retina display?
-    intent.responsive(
+    // =======================================================================
+    intent.responsive({
+      ID: 'highres',
       // contexts
-      [{name:'highres'}],
+      contexts:[{name:'highres'}],
       // matching:
-      function(measure, context){
+      matcher: function(measure, context){
         return window.devicePixelRatio > 1;
-      }).respond();
+      }}).respond();
 
-    // width context
-    hResponder.respond();
-    intent.elements(document);
+    $(window).on('resize', horizontal_axis.respond);
+      .on('orientationchange', horizontal_axis.respond);
 
+    // register the current width without waiting for a window resize
+    horizontal_axis.respond();
+    
+    $(function(){
+      // at doc ready grab all of the elements in the doc
+      intent.elements(document);
+    });
+    
+    // return the intention object so that it can be extended by other plugins
     return intent;
   };
 
