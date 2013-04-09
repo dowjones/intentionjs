@@ -1,4 +1,7 @@
 (function(root, factory) {
+
+  'use strict';
+  
   if (typeof exports === 'object') {
     module.exports = factory(require('jquery'));
   } else if (typeof define === 'function' && define.amd) {
@@ -26,7 +29,7 @@
 
       // create a random id for the axis
       for(i=0; i<5; i++){
-        id += idChars[Math.floor(Math.random() * idChars.length)]
+        id += idChars[Math.floor(Math.random() * idChars.length)];
       }
 
       var defaults = {
@@ -40,7 +43,9 @@
           ID: id
         };
 
-      if(_.isObject(options) === false) options = {};
+      if(_.isObject(options) === false) {
+        options = {};
+      }
 
       if((_.isArray(contexts)) && (_.isArray(contexts[0].contexts))){
         _.each(contexts, function(axis){
@@ -87,7 +92,9 @@
     elements: function(scope){
 
       // find all responsive elms in a specific dom scope
-      if(!scope) scope = document;
+      if(!scope){
+        scope = document;
+      }
 
       $('[data-intent],[intent],[data-in],[in]', 
           scope).each(_.bind(function(i, elm){
@@ -101,7 +108,9 @@
 
       var spec;
 
-      if(!options) options = {};
+      if(!options) {
+        options = {};
+      }
 
       // is expecting a jquery object
       elms.each(_.bind(function(i, elm){
@@ -122,7 +131,7 @@
 
           this.elms.push({
             elm: elm,
-            spec: spec,
+            spec: spec
           });
         }
 
@@ -189,8 +198,7 @@
       // called to perform a check
       return function(){
 
-        var measurement = measure.apply(this, arguments),
-          match=null;
+        var measurement = measure.apply(this, arguments);
 
         _.every(contexts, function(ctx){
           if( matcher(measurement, ctx)) {
@@ -246,7 +254,7 @@
         _.each(spec, fn);
       }, filler={};
       
-      applySpec(function(options, ctx){
+      applySpec(function(options){
         // check to see if the ctx val is an object, could be a string
         if(_.isObject(options)){
           _.each(options, function(val, func){
@@ -294,7 +302,7 @@
       return spec;
     },
 
-    _resolveSpecs: function(currentContexts, specs, axes){
+    _resolveSpecs: function(currentContexts, specs){
 
       var changes={},
         moveFuncs=['append', 'prepend', 'before', 'after'];
@@ -304,7 +312,9 @@
         _.each(specs[ctxName], function(val, func){
 
           if(func==='class'){
-            if(!changes[func]) changes[func] = [];
+            if(!changes[func]){
+              changes[func] = [];
+            }
 
             changes[func] = _.union(changes[func], val.split(' '));
 
@@ -390,7 +400,6 @@
         var match;
 
         if(this._axis_test_pattern.test(specName)) {
-          console.log(specName)
           match = specName.match(this._axis_match_pattern)[1];
 
           config['class'] = _.union(config['class'], 
@@ -408,8 +417,8 @@
         
         _.each(ctxConfig, function(change, func){
           if(func==='move'){
-            if( (specs.__placement__ !== change.placement)
-              || (specs.__move__ !== change.value)){
+            if( (specs.__placement__ !== change.placement) || 
+              (specs.__move__ !== change.value)){
 
               $(change.value)[change.placement](elm);
 
