@@ -401,9 +401,10 @@
 
         if(this._axis_test_pattern.test(specName)) {
           match = specName.match(this._axis_match_pattern)[1];
-
-          config['class'] = _.union(config['class'], 
-            [axes[match].current, spec]);
+          if(axes[match]){
+            config['class'] = _.union(config['class'], 
+              [axes[match].current, spec]);
+          }
         }
       }, this);
 
