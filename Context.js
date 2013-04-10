@@ -4,9 +4,10 @@
   var context = function($, Intention){
 
     // create a brand spankin new intention object
-    var intent=new Intention,
+    var intent=new Intention(),
       // placeholder for the horizontal axis
-      horizontal_axis;
+      horizontal_axis,
+      orientation_axis;
 
     // throttle funtion used for keeping calls to the resize responive 
     // callback to a minimum
@@ -33,10 +34,9 @@
       };
     }
 
-
     // catchall
     // =======================================================================
-    intent.responsive([{name:'base'}]).respond('base')
+    intent.responsive([{name:'base'}]).respond('base');
 
     // width context?
     // =======================================================================
@@ -53,7 +53,7 @@
           
           return test === context.name;
         }
-        return test>=context.min
+        return test>=context.min;
       },
       // callback, return value is passed to matcher()
       // to compare against current context
@@ -66,6 +66,25 @@
         return $(window).width();
     }});
 
+    // orientation context?
+    // =======================================================================
+    orientation_axis = intent.responsive({
+      ID:'orientation',
+      contexts: [{name:'portrait', rotation: 0},
+        {name:'landscape', rotation:90}], 
+      matcher: function(measure, ctx){
+        return measure === ctx.rotation;
+      },
+      measure: function(){
+        var test = Math.abs(window.orientation);
+        if(test > 0) {
+          test = 180 - test;
+        }
+        return test;
+      }
+    });
+
+    // ONE TIME CHECK AXES:
     // touch device?
     // =======================================================================
     intent.responsive({
@@ -82,15 +101,19 @@
       // contexts
       contexts:[{name:'highres'}],
       // matching:
-      matcher: function(measure, context){
+      matcher: function(){
         return window.devicePixelRatio > 1;
       }}).respond();
 
-    $(window).on('resize', horizontal_axis.respond);
-      .on('orientationchange', horizontal_axis.respond);
+    // bind events to the window
+    $(window).on('resize', throttle(horizontal_axis.respond, 100))
+      .on('orientationchange', horizontal_axis.respond)
+      .on('orientationchange', orientation_axis.respond);
 
-    // register the current width without waiting for a window resize
+    // register the current width and orientation without waiting for a window
+    // resize
     horizontal_axis.respond();
+    orientation_axis.respond();
     
     $(function(){
       // at doc ready grab all of the elements in the doc
