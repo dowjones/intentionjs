@@ -15,5 +15,5 @@ require.config({
 define([
    'Context'
 ], function(intent){
-  intent.axes.width.respond('mobile');
+  intent.axes.width.respond('standard');
 });
