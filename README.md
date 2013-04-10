@@ -1,10 +1,12 @@
-# intention.js
+# Intention.js
 
 DOM Manipulation via html attribute specification
 
 ## Why Intention.js
 
-The technology for dealing with responsive design is all over the place. Media queries, often-hacky-javascript, and convoluted HTML. Intention.js allows you to make all of the changes to HTML in the HTML itself. Intention.js is a way to describe the necessary differences of an HTML document between one device and another. 
+It's like a super amped up version of media queries on a per element basis!
+
+The technology for dealing with responsive design is all over the place. Media queries, hacky javascript, and convoluted HTML. Intention.js allows you to make all of the changes to HTML in the HTML itself. It's is a way to describe the necessary differences of an HTML document between one device and another. 
 
 What should the classes of an element be on mobile vs tablet? Where should your advertising code get placed when you're on a desktop? Does the page require an alternate slideshow widget on touch enabled devices? These are all changes that Intention.js can make to the page based on a user's device. Context.js creates a set of common page contexts for width thresholds, touch devices, highres displays and a fallback.
 
@@ -31,7 +33,11 @@ Specifically it has the responsive contexts:
 
 ## Installation
 
-include both scripts on your page or just Intention via require or just straight up.
+### Dependencies of intention
+	* jquery
+	* underscore.js
+
+include scripts on your page or just Intention via require.
 
 ```html
 	<!-- use with context defaults -->
@@ -56,10 +62,11 @@ OR:
 
 ## Usage
 
-By default Context.js provides a number of threshold groups via intention.js: browser widths, touch, highres, and a base group
+By default Context.js provides a number of threshold groups via intention.js: browser widths, orientation, touch, highres, and a base group
 
 the default thresholds in each group are respectively: 
-mobile (320 and below), tablet (321 to 768) and standard (769 to Infinity)
+mobile (510 and below), tablet (510 to 840) and standard (840 to Infinity)
+portrait or landscape
 touch (are touch gestures available)
 highres (devicePixelRatio > 1)
 base (default, always on)
@@ -178,7 +185,7 @@ You can extend the functionality of context.js or scrap the whole thing entirely
 Here is an example for scroll depth thresholds:
 
 ```javascript
-	var responsiveDepths = intent.responsive(
+	var scroll_depth_axis = intent.responsive(
 		// contexts
 		[{name:'shallow', value:20}, {name:'deep', value:1/0}],
 		// matching:
@@ -189,18 +196,21 @@ Here is an example for scroll depth thresholds:
 		function(){
 			return window.pageYOffset;
 		});
-	$(window).on('scroll', responsiveDepths);
+	$(window).on('scroll', scroll_depth_axis.respond);
 ```
 
-responsiveDepths is just a function, whenever you want to evaluate which context is relevant call that function.
+intent.responsive returns an object with a bunch of useful properties.
+probably the most important is "respond"
+	when you want to evaluate which context is relevant call scroll_depth_axis.respond();
+	this will compare the measurement against each context and determine which context is relevant.
 
-NOTE: if you scrap context.js you will have to add your responsive elements manually via the elements method.
+other properties include: "ID", "current" (the current context) and "contexts" (the list of contexts you passed).
 
 in the above example you could do something like this:
 
 ```javascript
 	...
-	$(window).on('scroll', responsiveDepths);
+	$(window).on('scroll', scroll_depth_axis.respond);
 	intent.elements();
 ```
 
@@ -211,7 +221,7 @@ calling the elements function will change the elements' attributes to the specif
 
 #### The components intent.responsive
 
-##### Thresholds
+##### axis
 
 The thresholds are an array of context objects. the only requirement of these objects is that they have a name property. Specifying any other property is up to you.
 
@@ -223,7 +233,7 @@ The thresholds are an array of context objects. the only requirement of these ob
 		{name:'deep', value: Infinity}]
 ```
 
-##### Matching function
+##### "matcher" function
 
 The matching function is called for each item in the thresholds array until a match is made i.e. it returns true. it is totally optional. However if it is not specified a default will be used which matches based on the context name. have a look in the Default Compare Functions section for the specifics.
 
@@ -236,7 +246,7 @@ If a matching function is not specified this default is used:
     };
 ```
 
-##### Measure function
+##### "measure" function
 
 default measure function is a pass-through
 
@@ -316,35 +326,43 @@ in other words just one match per context group
 	* any arbitrary atribute that doesn't include a dash.
 
 
-## Authors
-
+## Author
 	* Joe Kendall
+
+## Contributors
 	* Erin Sparling
+	* Adrian Lafond
+	* Mike Stamm
+
+## Major Contributions to examples and documentation
+	* Camila Mercado
+	* Paul Pangrazzi 
+
 
 
 ## License
 ```javascript
-// MIT licesnse for everything
+	// MIT licesnse for everything
 
-// Copyright (c) 2012 The Wall Street Journal, 
-// http://wsj.com/
+	// Copyright (c) 2012 The Wall Street Journal, 
+	// http://wsj.com/
 
-// Permission is hereby granted, free of charge, to any person obtaining
-// a copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to
-// permit persons to whom the Software is furnished to do so, subject to
-// the following conditions:
+	// Permission is hereby granted, free of charge, to any person obtaining
+	// a copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to
+	// permit persons to whom the Software is furnished to do so, subject to
+	// the following conditions:
 
-// The above copyright notice and this permission notice shall be
-// included in all copies or substantial portions of the Software.
+	// The above copyright notice and this permission notice shall be
+	// included in all copies or substantial portions of the Software.
 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+	// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+	// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+	// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+	// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+	// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
