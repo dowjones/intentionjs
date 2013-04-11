@@ -48,12 +48,34 @@ base (default, always on)</p>
 <p>There are three manipulation types: class names, attributes, placement on the page</p>
 <h3>Interface</h3>
 <p>flag the element as &quot;intentional&quot;</p>
-<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html">    <span class="comment" style="color:#998;font-style:italic;">&lt;!-- flag the element as responsive --></span>
-    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">div</span> <span class="attribute" style="color:#008080;">intent</span>></span></code></pre>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html">    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">div</span> <span class="attribute" style="color:#008080;">intent</span>></span></code></pre>
 <p>Or for valid html:</p>
 <pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html">    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">div</span> <span class="attribute" style="color:#008080;">data-intent</span>></span></code></pre>
 <p>An intentional attribute:</p>
 <p>For the purposes of the documentation the prefix &quot;in-&quot; will be used instead of &quot;data-in-&quot; to keep the code snippets concise</p>
+<h4>Context aware elements</h4>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html">    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">img</span> <span class="attribute" style="color:#008080;">intent</span> <span class="attribute" style="color:#008080;">in-orientation</span> <span class="attribute" style="color:#008080;">src</span>=<span class="value" style="color:#d14;">"cat.jpg"</span> /></span></code></pre>
+<p>In the &quot;portrait&quot; orientation the above implementation will produce:</p>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html">    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">img</span> <span class="attribute" style="color:#008080;">class</span>=<span class="value" style="color:#d14;">"portrait"</span> <span class="attribute" style="color:#008080;">src</span>=<span class="value" style="color:#d14;">"cat.jpg"</span> /></span></code></pre>
+<p>And in &quot;landscape&quot; orientation:</p>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html">    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">img</span> <span class="attribute" style="color:#008080;">class</span>=<span class="value" style="color:#d14;">"landscape"</span> <span class="attribute" style="color:#008080;">src</span>=<span class="value" style="color:#d14;">"cat.jpg"</span> /></span></code></pre>
+<p>Context.js includes four context groups or &quot;axes&quot;</p>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code><span class="bullet">* </span>width
+<span class="bullet">* </span>orientation
+<span class="bullet">* </span>touch
+<span class="bullet">* </span>highres</code></pre>
+<p>They are associated with the following classes</p>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code><span class="bullet">* </span>width
+<span class="code">    * mobile</span>
+<span class="code">    * tablet</span>
+<span class="code">    * standard</span>
+<span class="bullet">* </span>orientation
+<span class="code">    * portrait</span>
+<span class="code">    * landscape</span>
+<span class="bullet">* </span>touch
+<span class="code">    * touch</span>
+<span class="bullet">* </span>highres
+<span class="code">    * highres</span></code></pre>
 <p>Attribute structure: prefix-context-function=&quot;value&quot;</p>
 <p>i.e.</p>
 <pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html">    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">div</span> <span class="attribute" style="color:#008080;">class</span>=<span class="value" style="color:#d14;">"not interesting"</span> <span class="attribute" style="color:#008080;">intent</span> <span class="attribute" style="color:#008080;">in-mobile-class</span>=<span class="value" style="color:#d14;">"more interesting"</span>></span></code></pre>
@@ -99,41 +121,44 @@ default: </p>
 <span class="bullet">* </span>after</code></pre>
 <h4>Why a base context?</h4>
 <p>In most scenarios you don&#39;t want to have to specify the way something will change in <em>every</em> context. Often times an element will be one of two things among many different contexts. take an img tag with two possible sources, it&#39;s either going to be highres or not. by specifying the in-highres-src attribute, you know that the source will be appropriately applied in that scenario. With a in-base-src attribute, you can rely on the source being set accordingly for all other contexts.</p>
-<h3>Making your own custom contexts</h3>
+<h3>Making your own custom contexts or Intentional plugins</h3>
 <p>In addition to what is provided as a set of useful page contexts in the context.js script. You can define your own contexts, for anything!</p>
 <p>You can extend the functionality of context.js or scrap the whole thing entirely.</p>
-<p>Here is an example for scroll depth thresholds:</p>
-<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">    <span class="keyword" style="color:#333;font-weight:bold;">var</span> scroll_depth_axis = intent.responsive(
+<p>Here is an example for scroll depth responsive axis:</p>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">    <span class="keyword" style="color:#333;font-weight:bold;">var</span> scrolldepth_axis = intent.responsive({
+        ID: <span class="string" style="color:#d14;">'scrolldepth'</span>,
         <span class="comment" style="color:#998;font-style:italic;">// contexts</span>
-        [{name:<span class="string" style="color:#d14;">'shallow'</span>, value:<span class="number" style="color:#099;">20</span>}, {name:<span class="string" style="color:#d14;">'deep'</span>, value:<span class="number" style="color:#099;">1</span>/<span class="number" style="color:#099;">0</span>}],
+        contexts: [{name:<span class="string" style="color:#d14;">'shallow'</span>, value:<span class="number" style="color:#099;">20</span>}, {name:<span class="string" style="color:#d14;">'deep'</span>, value:<span class="number" style="color:#099;">1</span>/<span class="number" style="color:#099;">0</span>}],
         <span class="comment" style="color:#998;font-style:italic;">// matching:</span>
-        <span class="keyword" style="color:#333;font-weight:bold;">function</span>(measure, context){
+        matcher: <span class="keyword" style="color:#333;font-weight:bold;">function</span>(measure, context){
             <span class="keyword" style="color:#333;font-weight:bold;">return</span> measure &lt; context.value;
         },
         <span class="comment" style="color:#998;font-style:italic;">// measure</span>
-        <span class="keyword" style="color:#333;font-weight:bold;">function</span>(){
+        measure:<span class="keyword" style="color:#333;font-weight:bold;">function</span>(){
             <span class="keyword" style="color:#333;font-weight:bold;">return</span> window.pageYOffset;
-        });
-    $(window).on(<span class="string" style="color:#d14;">'scroll'</span>, scroll_depth_axis.respond);</code></pre>
+        }});</code></pre>
 <p>intent.responsive returns an object with a bunch of useful properties.
 probably the most important is &quot;respond&quot;
-    when you want to evaluate which context is relevant call scroll_depth_axis.respond();
-    this will compare the measurement against each context and determine which context is relevant.</p>
-<p>other properties include: &quot;ID&quot;, &quot;current&quot; (the current context) and &quot;contexts&quot; (the list of contexts you passed).</p>
-<p>in the above example you could do something like this:</p>
-<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">    ...
-    $(window).on(<span class="string" style="color:#d14;">'scroll'</span>, scroll_depth_axis.respond);
-    intent.elements();</code></pre>
+    when you want to evaluate which context is relevant call scrolldepth_axis.respond();</p>
+<p>for the above example you would want to call the respond function on window scroll</p>
+<p>like so:</p>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">    $(window).on(<span class="string" style="color:#d14;">'scroll'</span>, scrolldepth_axis.respond);</code></pre>
+<p>The optional &quot;ID&quot; property allows for context aware element feature for the axis outlined above.</p>
+<p>this will compare the measurement against each context and determine which context is relevant every time the window is scrolled.</p>
+<p>Other properties of intent.responsive include: </p>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code><span class="bullet">* </span>ID
+<span class="bullet">* </span>current (the current context)
+<span class="bullet">* </span>contexts (the list of contexts you passed)</code></pre>
 <p>this will add all elements matching the &quot;$(&#39;[data-intent],[intent],[data-in],[in]&#39;)&quot; selector. Optionally pass a scope argument to this function to specify where in the dom to start searching. The default is the document.</p>
 <p>calling the elements function will change the elements&#39; attributes to the specification provided in the html as it finds them. This way your responsive axis can all be defined <em>before</em> any changes are made to the DOM.</p>
 <h4>The components intent.responsive</h4>
-<h5>axis</h5>
-<p>The thresholds are an array of context objects. the only requirement of these objects is that they have a name property. Specifying any other property is up to you.</p>
-<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">    <span class="comment" style="color:#998;font-style:italic;">// required</span>
-    [{name:<span class="string" style="color:#d14;">'shallow'</span>}, {name:<span class="string" style="color:#d14;">'deep'</span>}]
-    <span class="comment" style="color:#998;font-style:italic;">// or with a little extra</span>
-    [{name:<span class="string" style="color:#d14;">'shallow'</span>, value:<span class="number" style="color:#099;">20</span>}, 
-        {name:<span class="string" style="color:#d14;">'deep'</span>, value: <span class="literal">Infinity</span>}]</code></pre>
+<h5>axis (contexts)</h5>
+<p>The thresholds are an array of context objects. the only requirement of these objects is that they have a name property. </p>
+<p>name is a required property of a context object</p>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">    [{name:<span class="string" style="color:#d14;">'shallow'</span>}, {name:<span class="string" style="color:#d14;">'deep'</span>}]</code></pre>
+<p>You can specify any other properties (such as scroll depth values)</p>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">    [{name:<span class="string" style="color:#d14;">'shallow'</span>, depth:<span class="number" style="color:#099;">20</span>}, 
+        {name:<span class="string" style="color:#d14;">'deep'</span>, depth: <span class="literal">Infinity</span>}]</code></pre>
 <h5>&quot;matcher&quot; function</h5>
 <p>The matching function is called for each item in the thresholds array until a match is made i.e. it returns true. it is totally optional. However if it is not specified a default will be used which matches based on the context name. have a look in the Default Compare Functions section for the specifics.</p>
 <p>The context that produces a match is then understood as the current context for the threshold group. In other words there will only every be ONE matched context for a threshold group.</p>
@@ -165,20 +190,18 @@ probably the most important is &quot;respond&quot;
 });</code></pre>
 <p>to specify changes to the html when in that threshold</p>
 <pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-html">    <span class="tag" style="color:#000080;font-weight:normal;">&lt;<span class="title" style="color:#000080;font-weight:normal;">img</span> <span class="attribute" style="color:#008080;">intent</span> <span class="attribute" style="color:#008080;">in-slow_page-src</span>=<span class="value" style="color:#d14;">"toobad.gif"</span> /></span></code></pre>
-<h4>Default Compare Functions</h4>
-<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">    <span class="comment" style="color:#998;font-style:italic;">// matching default              </span>
-    matcher = <span class="keyword" style="color:#333;font-weight:bold;">function</span>(measure, ctx){
+<h4>Default Matcher and Measure Functions</h4>
+<p>Matcher</p>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">    <span class="keyword" style="color:#333;font-weight:bold;">function</span>(measure, ctx){
       <span class="keyword" style="color:#333;font-weight:bold;">return</span> measure === ctx.name;
-    };
-      <span class="comment" style="color:#998;font-style:italic;">// measure default is just a pass through</span>
-    measure = <span class="keyword" style="color:#333;font-weight:bold;">function</span>(arg){
+    };</code></pre>
+<p>Measure</p>
+<pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code class="language-javascript">      <span class="comment" style="color:#998;font-style:italic;">// measure default is just a pass through</span>
+    <span class="keyword" style="color:#333;font-weight:bold;">function</span>(arg){
       <span class="keyword" style="color:#333;font-weight:bold;">return</span> arg;
     };</code></pre>
-<h4>About Matching</h4>
-<p>top down search, ends when a match is found
-in other words just one match per context group</p>
 <h3>Stuff to note:</h3>
-<h3>Master list of functions:</h3>
+<h3>Master list of document manipulation types:</h3>
 <h4>Multi-value attr (union of all current contexts)</h4>
 <pre style="background-color:#f8f8f8;border:1px solid #ccc;border-radius:3px;margin-right:15px;"><code>* <span class="class" style="color:#458;font-weight:bold;"><span class="keyword" style="color:#333;font-weight:bold;">class</span></span></code></pre>
 <h4>Move Functions</h4>
