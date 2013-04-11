@@ -1,18 +1,23 @@
-# intention.js
+# Intention.js
 
 DOM Manipulation via html attribute specification
 
 ## Why Intention.js
 
-The technology for dealing with responsive design is all over the place. Media queries, often-hacky-javascript, and convoluted HTML. Intention.js allows you to make all of the changes to HTML in the HTML itself. Intention.js is a way to describe the differences of an HTML document from one context to another. 
+It's like a super amped up version of media queries on a per element basis!
 
-What should the classes of an element be on mobile vs tablet? Where should your advertising code get placed when you're on a desktop? Does the page require an alternate slideshow widget on touch enabled devices? These are all changes that Intention.js can make to the page based on a user's device. Context.js creates a set of common page contexts for width thresholds, touch devices, highres displays and a fallback. And you can easily add your own contexts on top of these or create all your own custom contexts.
+The technology for dealing with responsive design is all over the place. Media queries, hacky javascript, and convoluted HTML. Intention.js allows you to make all of the changes to HTML in the HTML itself. It's is a way to describe the necessary differences of an HTML document between one device and another. 
+
+What should the classes of an element be on mobile vs tablet? Where should your advertising code get placed when you're on a desktop? Does the page require an alternate slideshow widget on touch enabled devices? These are all changes that Intention.js can make to the page based on a user's device. Context.js creates a set of common page contexts for width thresholds, touch devices, highres displays and a fallback.
+
+
+And you can easily add your own contexts on top of these or create all your own custom contexts.
 
 ## What's included:
 	* Intention.js
 	* Context.js
 
-Intention.js is the script that manages the responsive axis, manipulates elements based on their specifications and emits events when contexts change.
+Intention.js is the library that manages the responsive axis, manipulates elements based on their specifications and emits events when contexts change.
 
 Context.js is an implementation of Intention.js that sets up common use patterns in responsive design.
 
@@ -21,20 +26,32 @@ Specifically it has the responsive contexts:
 	* mobile (triggered by width)
 	* tablet (triggered by width)
 	* standard (triggered by width)
+	* portrait (orientation axis)
+	* landscape (orientation axis)
 	* touch
 	* highres
 
 ## Installation
 
-include both scripts on your page or just Intention via require or just straight up.
+### Dependencies of intention
+	* jquery
+	* underscore.js
+
+include scripts on your page or just Intention via require.
 
 ```html
 	<!-- use with context defaults -->
 	<script 
 		data-main="assets/js/context" 
 		src="assets/js/require/require.js"></script>
-	<!-- OR -->
+```
+
+OR:
+
+```html
 	<!-- use only intention to build your own context -->
+	<script src="underscore.js"></script>
+	<script src="jquery.js"></script>
 	<script src="Intention.js"></script>
 	<script src="Context.js"></script>
 	<script>
@@ -45,10 +62,11 @@ include both scripts on your page or just Intention via require or just straight
 
 ## Usage
 
-By default context.js provides a number of threshold groups via intention.js: browser widths, touch, highres, and a base group
+By default Context.js provides a number of threshold groups via intention.js: browser widths, orientation, touch, highres, and a base group
 
 the default thresholds in each group are respectively: 
-mobile (320 and below), tablet (321 to 768) and standard (769 to Infinity)
+mobile (510 and below), tablet (510 to 840) and standard (840 to Infinity)
+portrait or landscape
 touch (are touch gestures available)
 highres (devicePixelRatio > 1)
 base (default, always on)
@@ -57,30 +75,94 @@ There are three manipulation types: class names, attributes, placement on the pa
 
 ### Interface
 
+flag the element as "intentional"
+
 ```html
-	<!-- flag the element as responsive -->
 	<div intent>
-	<!-- or -->
+```
+
+Or for valid html:
+
+```html
 	<div data-intent>
-	<!-- For the purposes of the documentation the prefix "in-" will be 
-	used instead of "data-in-" to keep things concise -->
-	<!-- attribute structure: prefix-context-function 
-		ie in-mobile-class OR in-highres-src -->
+```
+
+An intentional attribute:
+
+For the purposes of the documentation the prefix "in-" will be used instead of "data-in-" to keep the code snippets concise
+
+#### Context aware elements
+
+```html
+	<img intent in-orientation src="cat.jpg" />
+```
+
+In the "portrait" orientation the above implementation will produce:
+
+```html
+	<img class="portrait" src="cat.jpg" />
+```
+
+And in "landscape" orientation:
+
+```html
+	<img class="landscape" src="cat.jpg" />
+```
+
+Context.js includes four context groups or "axes"
+
+	* width
+	* orientation
+	* touch
+	* highres
+
+They are associated with the following classes
+
+	* width
+		* mobile
+		* tablet
+		* standard
+	* orientation
+		* portrait
+		* landscape
+	* touch
+		* touch
+	* highres
+		* highres
+
+Attribute structure: prefix-context-function="value"
+		
+i.e.
+
+```html
 	<div class="not interesting" intent in-mobile-class="more interesting">
 ```
 
+### Types of manipulation
+
 #### Attribute Manipulation
+
+mark an element as intention, set the base(default) attribute, specify which image to load in a given context
+
 ```html
-	<!-- mark an element as responsive, set the base(default) attr, specify which image to load in a given context -->
 	<img
 		intent 
 		in-base-src="small_img.png" 
 		in-highres-src="big_img.png" />
-	<!-- the above spec will produce the following in each context
-		default: <img src="small_img.png" />
-		highres: <img src="big_img.png" />
-	-->
 ```
+
+the specification above will produce the following in each context
+default: 
+
+```html
+<img src="small_img.png" />
+```
+
+highres: 
+
+```html
+<img src="big_img.png" />
+```	
 
 #### Class Manipulation
 
@@ -96,7 +178,6 @@ An element can have more than one class. intent's aim is to be as unobtrusive as
 		in-luxury-class="x-wide"
 		in-touch-class="swipe-nav"
 	>...</section>
-	<!--  -->
 ```
 
 #### Placement Manipulation
@@ -132,40 +213,50 @@ when the device is 320px units or below the nav will appear at the top of the fo
 
 In most scenarios you don't want to have to specify the way something will change in *every* context. Often times an element will be one of two things among many different contexts. take an img tag with two possible sources, it's either going to be highres or not. by specifying the in-highres-src attribute, you know that the source will be appropriately applied in that scenario. With a in-base-src attribute, you can rely on the source being set accordingly for all other contexts.
 
-### Making your own custom contexts
+### Making your own custom contexts or Intentional plugins
 
 In addition to what is provided as a set of useful page contexts in the context.js script. You can define your own contexts, for anything!
 
 You can extend the functionality of context.js or scrap the whole thing entirely.
 
-Here is an example for scroll depth thresholds:
+Here is an example for scroll depth responsive axis:
 
 ```javascript
-	var responsiveDepths = intent.responsive(
+	var scrolldepth_axis = intent.responsive({
+		ID: 'scrolldepth',
 		// contexts
-		[{name:'shallow', value:20}, {name:'deep', value:1/0}],
+		contexts: [{name:'shallow', value:20}, {name:'deep', value:1/0}],
 		// matching:
-		function(measure, context){
+		matcher: function(measure, context){
 			return measure < context.value;
 		},
 		// measure
-		function(){
+		measure:function(){
 			return window.pageYOffset;
-		});
-	$(window).on('scroll', responsiveDepths);
+		}});
 ```
 
-responsiveDepths is just a function, whenever you want to evaluate which context is relevant call that function.
+intent.responsive returns an object with a bunch of useful properties.
+probably the most important is "respond"
+	when you want to evaluate which context is relevant call scrolldepth_axis.respond();
 
-NOTE: if you scrap context.js you will have to add your responsive elements manually via the elements method.
+for the above example you would want to call the respond function on window scroll
 
-in the above example you could do something like this:
+like so:
 
 ```javascript
-	...
-	$(window).on('scroll', responsiveDepths);
-	intent.elements();
+	$(window).on('scroll', scrolldepth_axis.respond);
 ```
+
+The optional "ID" property allows for context aware element feature for the axis outlined above.
+
+this will compare the measurement against each context and determine which context is relevant every time the window is scrolled.
+
+Other properties of intent.responsive include: 
+
+	* ID
+	* current (the current context)
+	* contexts (the list of contexts you passed)
 
 this will add all elements matching the "$('[data-intent],[intent],[data-in],[in]')" selector. Optionally pass a scope argument to this function to specify where in the dom to start searching. The default is the document.
 
@@ -174,19 +265,23 @@ calling the elements function will change the elements' attributes to the specif
 
 #### The components intent.responsive
 
-##### Thresholds
+##### axis (contexts)
 
-The thresholds are an array of context objects. the only requirement of these objects is that they have a name property. Specifying any other property is up to you.
+The thresholds are an array of context objects. the only requirement of these objects is that they have a name property. 
 
-```javascript 
-	// required
+name is a required property of a context object
+```javascript
 	[{name:'shallow'}, {name:'deep'}]
-	// or with a little extra
-	[{name:'shallow', value:20}, 
-		{name:'deep', value: Infinity}]
 ```
 
-##### Matching function
+You can specify any other properties (such as scroll depth values)
+
+```javascript
+	[{name:'shallow', depth:20}, 
+		{name:'deep', depth: Infinity}]
+```
+
+##### "matcher" function
 
 The matching function is called for each item in the thresholds array until a match is made i.e. it returns true. it is totally optional. However if it is not specified a default will be used which matches based on the context name. have a look in the Default Compare Functions section for the specifics.
 
@@ -199,7 +294,7 @@ If a matching function is not specified this default is used:
     };
 ```
 
-##### Measure function
+##### "measure" function
 
 default measure function is a pass-through
 
@@ -245,28 +340,29 @@ to specify changes to the html when in that threshold
 	<img intent in-slow_page-src="toobad.gif" />
 ```
 
-#### Default Compare Functions
+#### Default Matcher and Measure Functions
 
-```javascript
-	// matching default		      
-    matcher = function(measure, ctx){
+Matcher
+
+```javascript	      
+    function(measure, ctx){
       return measure === ctx.name;
     };
+```
+
+Measure
+
+```javascript
   	// measure default is just a pass through
-    measure = function(arg){
+    function(arg){
       return arg;
     };
 ```
 
-#### About Matching
-
-top down search, ends when a match is found
-in other words just one match per context group
 
 ### Stuff to note:
 
-
-### Master list of functions:
+### Master list of document manipulation types:
 
 #### Multi-value attr (union of all current contexts)
 	* class
@@ -279,35 +375,43 @@ in other words just one match per context group
 	* any arbitrary atribute that doesn't include a dash.
 
 
-## Authors
-
+## Author
 	* Joe Kendall
+
+## Contributors
 	* Erin Sparling
+	* Adrian Lafond
+	* Mike Stamm
+
+## Major Contributions to examples and documentation
+	* Camila Mercado
+	* Paul Pangrazzi 
+
 
 
 ## License
 ```javascript
-// MIT licesnse for everything
+	// MIT licesnse for everything
 
-// Copyright (c) 2012 The Wall Street Journal, 
-// http://wsj.com/
+	// Copyright (c) 2012 The Wall Street Journal, 
+	// http://wsj.com/
 
-// Permission is hereby granted, free of charge, to any person obtaining
-// a copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to
-// permit persons to whom the Software is furnished to do so, subject to
-// the following conditions:
+	// Permission is hereby granted, free of charge, to any person obtaining
+	// a copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to
+	// permit persons to whom the Software is furnished to do so, subject to
+	// the following conditions:
 
-// The above copyright notice and this permission notice shall be
-// included in all copies or substantial portions of the Software.
+	// The above copyright notice and this permission notice shall be
+	// included in all copies or substantial portions of the Software.
 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+	// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+	// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+	// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+	// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+	// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```

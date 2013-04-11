@@ -1,11 +1,18 @@
 require.config({
   appDir: './',
-  // baseUrl: './',
   paths: {
       jquery: 'test/vendor/jquery',
       underscore: 'test/vendor/underscore'      
   }
 });
-define([
+
+require	([
    'Context'
-]);
+], function(intent){
+
+	intent.axes.width.contexts.unshift({
+		name:'luxury',
+		min:1100
+	});
+
+});

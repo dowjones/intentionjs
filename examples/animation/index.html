@@ -94,33 +94,50 @@
 	</div>
 	<script>
 		var intent = new Intention;
-		var walking = intent.responsive([
+		
+		var walking = intent.responsive({
+     		ID:'walk',
+      		contexts:[
 	    	{name: 'step1', div:0},
 	    	{name:'step2', div:1},
 	    	{name:'step3', div:2},
 	    	{name:'step4', div:3}],
-	    	// matcher
-	    	function(measure, ctx){
+	    	
+	    	matcher: function(measure, ctx){
 	    		return (Math.floor(measure/100) % 4) === ctx.div ? true : false;
 	    	},
-	    	// measure
-	    	function(){
+	    	
+	    	measure: function(){
 	    		return window.pageXOffset ? window.pageXOffset : window.document.documentElement.scrollLeft;
-	    	});
+	    	}
+	    }).respond;
+
+		
 
 		var lastXOffset = 0,
-			flip = intent.responsive([{name:'back', val:0}, 
-					{name:'forth', val:1/0}], 
-					function(measure, ctx){
-						if((measure - lastXOffset) < ctx.val) {
-							lastXOffset = measure;
-							return true;
-						}
-						lastXOffset = measure;
-						return false;
-					}, function(){
-						return window.pageXOffset ? window.pageXOffset : window.document.documentElement.scrollLeft;
-					});
+			
+		flip = intent.responsive({
+	      	ID:'direction',
+	      	contexts:[
+			{name:'back', val:0}, 
+			{name:'forth', val:1/0}], 
+					
+			matcher: function(measure, ctx){
+			if((measure - lastXOffset) < ctx.val) {
+				lastXOffset = measure;
+				return true;
+			}
+
+			lastXOffset = measure;
+			return false;
+			
+			}, 
+			
+			measure: function(){
+			return window.pageXOffset ? window.pageXOffset : window.document.documentElement.scrollLeft;
+		  }
+		
+		}).respond;
 
 		walking();
 		flip();
