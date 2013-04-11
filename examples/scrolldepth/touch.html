@@ -281,22 +281,21 @@
 		        {name:'tablet', min:521},
 		        {name:'mobile', min:0}],
 
-		    hResponder = intent.responsive(resizeContexts,
-		        // compare the return value of the callback to each context
-		        // return true for a match
-		        function(test, context){
-		          if(test>=context.min){
-		            return true;
-		          }
-		        },
-		        // callback, return value is passed to matcher()
-		        // to compare against current context
-		        function(e){
-		          return $(window).width();
-		    	});
+		    hResponder = intent.responsive({
+		    	contexts:resizeContexts,
+		    	matcher:function(test, context){
+		    		return test>=context.min;
+		    	},
+		    	measure:function(){
+		    		return $(window).width();
+		    	}
+		    }).respond;
 
-		baseResponder = intent.responsive([{name:'base'}])('base');
+		baseResponder = intent.responsive([{name:'base'}])
+			.respond('base');
+
 		hResponder();
+
 		$(window).on('resize', hResponder);
 
 
@@ -311,13 +310,17 @@
 		        {name: 'f5', points: 5}
 		    ];
 
-		var touch = intent.responsive(contact_axis,
-			function(measure, ctx){
-				return measure === ctx.points;
-				 console.log("touch");
-		    });
+		var touch = intent.responsive(
+				{
+					ID:'slides',
+					contexts:contact_axis,
+					matcher: function(measure, ctx){
+						return measure === ctx.points;
+			    	}
+				}
 
-		// touch(4)
+		    ).respond;
+
 		intent.elements();
 
 		$(window).on('touchstart touchmove', function(e){
@@ -327,6 +330,7 @@
 		$(window).on('touchcancel touchend', function(e){
 			var touches = e.originalEvent.touches.length;
 			if(touches === 0) touches =1;
+
 			touch(touches);
 		});
 
