@@ -78,7 +78,6 @@ There are three manipulation types: class names, attributes, placement on the pa
 flag the element as "intentional"
 
 ```html
-	<!-- flag the element as responsive -->
 	<div intent>
 ```
 
@@ -88,10 +87,48 @@ Or for valid html:
 	<div data-intent>
 ```
 
-
 An intentional attribute:
 
 For the purposes of the documentation the prefix "in-" will be used instead of "data-in-" to keep the code snippets concise
+
+#### Context aware elements
+
+```html
+	<img intent in-orientation src="cat.jpg" />
+```
+
+In the "portrait" orientation the above implementation will produce:
+
+```html
+	<img class="portrait" src="cat.jpg" />
+```
+
+And in "landscape" orientation:
+
+```html
+	<img class="landscape" src="cat.jpg" />
+```
+
+Context.js includes four context groups or "axes"
+
+	* width
+	* orientation
+	* touch
+	* highres
+
+They are associated with the following classes
+
+	* width
+		* mobile
+		* tablet
+		* standard
+	* orientation
+		* portrait
+		* landscape
+	* touch
+		* touch
+	* highres
+		* highres
 
 Attribute structure: prefix-context-function="value"
 		
@@ -176,43 +213,50 @@ when the device is 320px units or below the nav will appear at the top of the fo
 
 In most scenarios you don't want to have to specify the way something will change in *every* context. Often times an element will be one of two things among many different contexts. take an img tag with two possible sources, it's either going to be highres or not. by specifying the in-highres-src attribute, you know that the source will be appropriately applied in that scenario. With a in-base-src attribute, you can rely on the source being set accordingly for all other contexts.
 
-### Making your own custom contexts
+### Making your own custom contexts or Intentional plugins
 
 In addition to what is provided as a set of useful page contexts in the context.js script. You can define your own contexts, for anything!
 
 You can extend the functionality of context.js or scrap the whole thing entirely.
 
-Here is an example for scroll depth thresholds:
+Here is an example for scroll depth responsive axis:
 
 ```javascript
-	var scroll_depth_axis = intent.responsive(
+	var scrolldepth_axis = intent.responsive({
+		ID: 'scrolldepth',
 		// contexts
-		[{name:'shallow', value:20}, {name:'deep', value:1/0}],
+		contexts: [{name:'shallow', value:20}, {name:'deep', value:1/0}],
 		// matching:
-		function(measure, context){
+		matcher: function(measure, context){
 			return measure < context.value;
 		},
 		// measure
-		function(){
+		measure:function(){
 			return window.pageYOffset;
-		});
-	$(window).on('scroll', scroll_depth_axis.respond);
+		}});
 ```
 
 intent.responsive returns an object with a bunch of useful properties.
 probably the most important is "respond"
-	when you want to evaluate which context is relevant call scroll_depth_axis.respond();
-	this will compare the measurement against each context and determine which context is relevant.
+	when you want to evaluate which context is relevant call scrolldepth_axis.respond();
 
-other properties include: "ID", "current" (the current context) and "contexts" (the list of contexts you passed).
+for the above example you would want to call the respond function on window scroll
 
-in the above example you could do something like this:
+like so:
 
 ```javascript
-	...
-	$(window).on('scroll', scroll_depth_axis.respond);
-	intent.elements();
+	$(window).on('scroll', scrolldepth_axis.respond);
 ```
+
+The optional "ID" property allows for context aware element feature for the axis outlined above.
+
+this will compare the measurement against each context and determine which context is relevant every time the window is scrolled.
+
+Other properties of intent.responsive include: 
+
+	* ID
+	* current (the current context)
+	* contexts (the list of contexts you passed)
 
 this will add all elements matching the "$('[data-intent],[intent],[data-in],[in]')" selector. Optionally pass a scope argument to this function to specify where in the dom to start searching. The default is the document.
 
@@ -221,16 +265,20 @@ calling the elements function will change the elements' attributes to the specif
 
 #### The components intent.responsive
 
-##### axis
+##### axis (contexts)
 
-The thresholds are an array of context objects. the only requirement of these objects is that they have a name property. Specifying any other property is up to you.
+The thresholds are an array of context objects. the only requirement of these objects is that they have a name property. 
 
-```javascript 
-	// required
+name is a required property of a context object
+```javascript
 	[{name:'shallow'}, {name:'deep'}]
-	// or with a little extra
-	[{name:'shallow', value:20}, 
-		{name:'deep', value: Infinity}]
+```
+
+You can specify any other properties (such as scroll depth values)
+
+```javascript
+	[{name:'shallow', depth:20}, 
+		{name:'deep', depth: Infinity}]
 ```
 
 ##### "matcher" function
@@ -292,28 +340,29 @@ to specify changes to the html when in that threshold
 	<img intent in-slow_page-src="toobad.gif" />
 ```
 
-#### Default Compare Functions
+#### Default Matcher and Measure Functions
 
-```javascript
-	// matching default		      
-    matcher = function(measure, ctx){
+Matcher
+
+```javascript	      
+    function(measure, ctx){
       return measure === ctx.name;
     };
+```
+
+Measure
+
+```javascript
   	// measure default is just a pass through
-    measure = function(arg){
+    function(arg){
       return arg;
     };
 ```
 
-#### About Matching
-
-top down search, ends when a match is found
-in other words just one match per context group
 
 ### Stuff to note:
 
-
-### Master list of functions:
+### Master list of document manipulation types:
 
 #### Multi-value attr (union of all current contexts)
 	* class

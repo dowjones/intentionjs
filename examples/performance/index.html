@@ -13,8 +13,10 @@
 	<script src="../../Intention.js"></script>
 	<script type="text/javascript">
 		var intent = new Intention;
-		intent.responsive([{name:'base'}])('base')
-		  .elements(document);
+		
+		intent.responsive([{name:'base'}]).respond('base');
+
+		intent.elements(document);
 
 	</script>
 </body>
