@@ -1,3 +1,12 @@
+/*!
+ * Intention.js Library v0.9.5.1
+ * http://intentionjs.com/
+ *
+ * Copyright 2011, 2013 Dowjones and other contributors
+ * Released under the MIT license
+ *
+ */
+
 (function(root, factory) {
 
   'use strict';
