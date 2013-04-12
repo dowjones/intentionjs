@@ -31,7 +31,7 @@
   Intention.prototype = {
 
     // public methods
-    responsive:function responsive(contexts, options){
+    responsive: function responsive(contexts, options){
       // for generating random ids for axis when not specified
       var idChars = 'abcdefghijklmnopqrstuvwxyz0123456789', 
           id='', i;

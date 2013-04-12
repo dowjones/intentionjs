@@ -610,9 +610,6 @@ describe("Intention", function() {
 
     });
 
-
-
-
   });
 
   describe('underscore test', function(){
