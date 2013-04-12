@@ -58,7 +58,7 @@
 
       if((_.isArray(contexts)) && (_.isArray(contexts[0].contexts))){
         _.each(contexts, function(axis){
-          responsive.apply(this, axis);
+          responsive.apply(this, [axis]);
         }, this);
         return;
       }
