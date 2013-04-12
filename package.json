@@ -4,6 +4,5 @@
   "author": "Joe Kendall and Camila Mercado",
   "dependencies": {
     "color-marked": ">= 0.2.0"
-    
   }
 }
