@@ -31,7 +31,7 @@
   Intention.prototype = {
 
     // public methods
-    responsive: function responsive(contexts, options){
+    responsive:function responsive(contexts, options){
       // for generating random ids for axis when not specified
       var idChars = 'abcdefghijklmnopqrstuvwxyz0123456789', 
           id='', i;
@@ -58,7 +58,7 @@
 
       if((_.isArray(contexts)) && (_.isArray(contexts[0].contexts))){
         _.each(contexts, function(axis){
-          responsive.apply(this, [axis]);
+          responsive.apply(this, axis);
         }, this);
         return;
       }
@@ -385,10 +385,13 @@
 
           var contextSpec = specs[ctx.name],
             classes;
+
           if(contextSpec !== undefined) {
-            classes = contextSpec['class'];
-            if(classes !== undefined){
-              toRemove = _.union(toRemove, classes);
+            if(contextSpec['class'] !== undefined) {
+              classes = contextSpec['class'].split(' ');
+              if(classes !== undefined){
+                toRemove = _.union(toRemove, classes);
+              }
             }
           }
         }, this);
