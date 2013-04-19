@@ -1,5 +1,5 @@
 /*!
- * Intention.js Library v0.9.5.1
+ * Intention.js Library v0.9.6
  * http://intentionjs.com/
  *
  * Copyright 2011, 2013 Dowjones and other contributors
@@ -385,10 +385,13 @@
 
           var contextSpec = specs[ctx.name],
             classes;
+
           if(contextSpec !== undefined) {
-            classes = contextSpec['class'];
-            if(classes !== undefined){
-              toRemove = _.union(toRemove, classes);
+            if(contextSpec['class'] !== undefined) {
+              classes = contextSpec['class'].split(' ');
+              if(classes !== undefined){
+                toRemove = _.union(toRemove, classes);
+              }
             }
           }
         }, this);
