@@ -1,0 +1,87 @@
+
+.header {
+	width: auto;
+	height: 90px;
+	margin: 40px 30px;
+	padding-bottom: 20px;
+
+	border-bottom: 1px solid;
+	border-color: gainsboro;
+
+}
+
+h1 {
+	font-family:proxima-nova-i1, proxima-nova, sans-serif;
+  	font-style: italic;
+  	font-weight: 100;
+  	font-size: 3em;
+	color: grey;
+	float: left;
+	
+}
+
+.caps {
+
+	font-family:proxima-nova-n1, proxima-nova, sans-serif;
+  	font-weight: 100;
+  	font-size: 3em;
+	color: gainsboro;
+	float: left;
+	margin: 33px 20px;
+
+}
+
+.nav {
+	position: absolute;
+	right: 100px;
+	top: 143px;
+}
+
+.nav a {
+	font-family:proxima-nova, sans-serif;
+	font-weight: 300;
+	font-size: .9em;
+	color: grey;
+	text-decoration: none;
+
+	padding:12px;
+	border: 1px solid;
+	border-color: gainsboro;
+	margin: 5px;
+	background: white;
+
+
+}
+
+.nav a:hover{
+	color: #23b6a6;
+}
+
+.content {
+	margin-top: 80px;
+	list-style: none;
+}
+
+
+
+.content a {
+	font-family:proxima-nova, sans-serif;
+	font-weight: 300;
+	font-size: 1.3em;
+	color: #23b6a6;
+	text-decoration: none;
+	margin: 20px 10px;
+
+}
+
+.content a:hover{
+	color: tomato;
+}
+
+.content span {
+	font-family:proxima-nova, sans-serif;
+	font-weight: 300;
+	font-size: 1em;
+	color: grey;
+
+}

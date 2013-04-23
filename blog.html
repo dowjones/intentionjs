@@ -6,12 +6,12 @@ title: "Welcome To My Sweet Blog"
     {% for post in site.posts %}
     <li>
         <h3>
-            <a href="{{ post.url }}">
-                {{ post.title }}
-            </a>
             <span class="post-date">
                 {{ post.date | date_to_string }}
             </span>
+            <a href="{{ post.url }}">
+                {{ post.title }}
+            </a>
         </h3>
     </li>
     {% endfor %}
