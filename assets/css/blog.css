@@ -1,3 +1,13 @@
+.Mheader {
+	width: auto;
+	height: 70px;
+	margin: 10px 10px;
+	padding-bottom: 10px;
+
+	border-bottom: 1px solid;
+	border-color: gainsboro;
+
+}
 
 .header {
 	width: auto;
@@ -37,6 +47,13 @@ h1 {
 	top: 143px;
 }
 
+.rad {
+	position: absolute;
+	right: 100px;
+	top: 143px;
+	background: tomato;
+}
+
 .nav a {
 	font-family:proxima-nova, sans-serif;
 	font-weight: 300;
@@ -57,13 +74,29 @@ h1 {
 	color: #23b6a6;
 }
 
-.content {
+.Mcontent {
+	font-family:proxima-nova, sans-serif;
+	font-weight: 300;
+	font-size: 1em;
+	color: black;
+	margin: 10px 10px;
 	margin-top: 80px;
+
 }
 
 
+.content {
+	font-family:proxima-nova, sans-serif;
+	font-weight: 300;
+	font-size: 1em;
+	color: black;
+	margin: 100px 100px;
+	margin-top: 80px;
 
-.content a {
+}
+
+.content a, 
+.Mcontent a {
 	font-family:proxima-nova, sans-serif;
 	font-weight: 300;
 	font-size: 1.3em;
@@ -73,11 +106,13 @@ h1 {
 
 }
 
-.content a:hover{
-	color: tomato;
+.content a:hover, 
+.Mcontent a:hover{
+	color: midnightblue;
 }
 
-.content span {
+.content span,
+.Mcontent span {
 	font-family:proxima-nova, sans-serif;
 	font-weight: 300;
 	font-size: 1em;
@@ -85,16 +120,9 @@ h1 {
 
 }
 
-.content {
-	font-family:proxima-nova, sans-serif;
-	font-weight: 300;
-	font-size: 1em;
-	color: black;
-	margin: 100px 100px;
 
-}
-
-.content h2 {
+.content h2,
+.Mcontent h2 {
 	color: dimgrey;
 	font-weight: 300;
 	font-size: 2em;
