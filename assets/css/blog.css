@@ -1,6 +1,6 @@
 .Mheader {
 	width: auto;
-	height: 70px;
+	height: 120px;
 	margin: 10px 10px;
 	padding-bottom: 10px;
 
@@ -20,7 +20,18 @@
 
 }
 
-h1 {
+.Mheader h1 {
+	font-family:proxima-nova-i1, proxima-nova, sans-serif;
+  	font-style: italic;
+  	font-weight: 100;
+  	font-size: 3.8em;
+	color: gainsboro;
+	float: left;
+	margin-top: 50px;
+	
+}
+
+.header h1 {
 	font-family:proxima-nova-i1, proxima-nova, sans-serif;
   	font-style: italic;
   	font-weight: 100;
@@ -29,6 +40,19 @@ h1 {
 	float: left;
 	
 }
+
+.Mcaps {
+	width: 100%;
+	position: absolute;
+	left: 310px;
+	top: 75px;
+	font-size: 2.5em;
+	font-family:proxima-nova-n1, proxima-nova, sans-serif;
+  	font-weight: 100;
+	margin-top: 0px;
+	color: grey;
+}
+
 
 .caps {
 
@@ -41,17 +65,33 @@ h1 {
 
 }
 
+.Mnav {
+	position: absolute;
+	left: 10px;
+	top: 140px;
+}
+
 .nav {
 	position: absolute;
 	right: 100px;
-	top: 143px;
+	top: 162px;
 }
 
-.rad {
-	position: absolute;
-	right: 100px;
-	top: 143px;
-	background: tomato;
+.Mnav a {
+	font-family:proxima-nova, sans-serif;
+	font-weight: 300;
+	font-size: .9em;
+	color: grey;
+	text-decoration: none;
+
+	padding:7px;
+	border: 1px solid;
+	border-color: gainsboro;
+	margin: 0px;
+	background: white;
+	float: left;
+
+
 }
 
 .nav a {
@@ -70,6 +110,7 @@ h1 {
 
 }
 
+.Mnav a:hover,
 .nav a:hover{
 	color: #23b6a6;
 }

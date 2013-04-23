@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Welcome To My Sweet Blog"
+title: "Flexible Responsive Axes Changing HTML Based on Orientation, Width, Touch and Resolution"
 ---
 
 ## Flexible Responsive Axes Changing HTML Based on Orientation, Width, Touch and Resolution
