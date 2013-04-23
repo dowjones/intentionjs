@@ -59,7 +59,6 @@ h1 {
 
 .content {
 	margin-top: 80px;
-	list-style: none;
 }
 
 
@@ -85,3 +84,30 @@ h1 {
 	color: grey;
 
 }
+
+.content {
+	font-family:proxima-nova, sans-serif;
+	font-weight: 300;
+	font-size: 1em;
+	color: black;
+	margin: 100px 100px;
+
+}
+
+.content h2 {
+	color: dimgrey;
+	font-weight: 300;
+	font-size: 2em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
