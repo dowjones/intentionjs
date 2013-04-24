@@ -1,6 +1,6 @@
 .Mheader {
 	width: auto;
-	height: 120px;
+	height: 110px;
 	margin: 10px 10px;
 	padding-bottom: 10px;
 
@@ -24,7 +24,7 @@
 	font-family:proxima-nova-i1, proxima-nova, sans-serif;
   	font-style: italic;
   	font-weight: 100;
-  	font-size: 3.8em;
+  	font-size: 3.5em;
 	color: gainsboro;
 	float: left;
 	margin-top: 50px;
@@ -44,8 +44,8 @@
 .Mcaps {
 	width: 100%;
 	position: absolute;
-	left: 310px;
-	top: 75px;
+	left: 280px;
+	top: 73px;
 	font-size: 2.5em;
 	font-family:proxima-nova-n1, proxima-nova, sans-serif;
   	font-weight: 100;
@@ -68,7 +68,7 @@
 .Mnav {
 	position: absolute;
 	left: 10px;
-	top: 140px;
+	top: 130px;
 }
 
 .nav {
@@ -80,7 +80,7 @@
 .Mnav a {
 	font-family:proxima-nova, sans-serif;
 	font-weight: 300;
-	font-size: .9em;
+	font-size: .8em;
 	color: grey;
 	text-decoration: none;
 
