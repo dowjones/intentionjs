@@ -67,7 +67,7 @@ var depth=intent.responsive({
 });
 {% endhighlight %}
 
-The above example is an axis that is designed to respond on the window scroll event. The most obvious use for this is probably sticking components at specific scroll depths.
+The above example is an axis that is designed to respond on the window scroll event. The most obvious use for this is sticking components at specific scroll depths.
 
 {% highlight javascript %}
 console.log(depth);
