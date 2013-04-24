@@ -9,31 +9,31 @@ This release makes the html attributes a lot more flexible. In addition to a few
 
 What I noticed was that users were making a lot of specifications in html that look like this:
 
-```html
+{% highlight html %}
 <nav intent in-portrait-class="portrait"></nav>
-```
+{% endhighlight %}
 
 This is unfortunate, but until now there was no way around it. The better way is to specify that an element should respond on a particular axis.
 
 for example:
 
-```html
+{% highlight html %}
 <nav intent in-orientation></nav>
-```
+{% endhighlight %}
 
 The above specification applies a class of the name of the current context to the element.
 
 That means in portrait mode the element looks like:
 
-```html
+{% highlight html %}
 <nav class="portrait"></nav>
-```
+{% endhighlight %}
 
 and in landscape mode:
 
-```html
+{% highlight html %}
 <nav class="landscape"></nav>
-```
+{% endhighlight %}
 
 With these new changes to Intention.js, Context.js has been given an overhaul as well. Now all of the axes have names and can be taken advantage of using the method outlined above. Here's the breakdown of the axes in Context.js:
 
@@ -51,7 +51,7 @@ To accomplish this a few changes have been made to the way axes are made.
 
 Consider the following:
 
-```javascript
+{% highlight javascript %}
 var depth=intent.responsive({
   // all possible options specified
   ID: 'depth',
@@ -65,11 +65,11 @@ var depth=intent.responsive({
 		return measure <= context.offset;
 	}
 });
-```
+{% endhighlight %}
 
 The above example is an axis that is designed to respond on the window scroll event. The most obvious use for this is probably sticking components at specific scroll depths.
 
-```javascript
+{% highlight javascript %}
 console.log(depth);
 // shows:
 // {
@@ -80,23 +80,23 @@ console.log(depth);
 //     {name:'reallyDeep', offset:Infinity}],
 //   respond: function
 // }
-```
+{% endhighlight %}
 
 Previously intent.responsive returned a function, now that function is a property of the object returned. This way all of the information about the axis is accessible by the implementor of the library at any time.
 
 Now I will attach the respond function to the window scroll event using jquery,call the same function to set the initial state of the axis and add a responsive element to intent.
 
-```javascript
+{% highlight javascript %}
 $(window).on('scroll', depth.respond);
 depth.respond();
 intent.add($('nav'))
-```
+{% endhighlight %}
 
 Assuming this exists in the DOM:
 
-```html
+{% highlight html %}
 <nav intent in-depth></nav>
-```
+{% endhighlight %}
 
 A class of either "shallow," "deep," or "reallyDeep" will be added to that element depending on the current scroll depth!
 
