@@ -11,9 +11,7 @@
 
   'use strict';
   
-  if (typeof exports === 'object') {
-    module.exports = factory(require('jquery'));
-  } else if (typeof define === 'function' && define.amd) {
+  if (typeof define === 'function' && define.amd) {
     define(['jquery', 'underscore'], factory);
   } else {
     root.Intention = factory(root.jQuery, root._);
