@@ -1,3 +1,12 @@
+/*!
+ * context.js Library associated with v0.9.6.1 of intention.js
+ * http://intentionjs.com/
+ *
+ * Copyright 2011, 2013 Dowjones and other contributors
+ * Released under the MIT license
+ *
+ */
+
 (function () {
 
   'use strict';
