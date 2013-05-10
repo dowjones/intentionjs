@@ -136,7 +136,7 @@
   (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
       // AMD. Register as an anonymous module.
-      define(['jquery', 'Intention'], factory);
+      define(['jquery', 'intention'], factory);
     } else {
       // Browser globals
       root.intent = factory(root.jQuery, root.Intention);
