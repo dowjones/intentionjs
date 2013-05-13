@@ -370,32 +370,32 @@ describe("Intention", function() {
       });
       
     });
-  
+
+  var makeFauxResponsive = function(intent){
+
+    intent.responsive({
+      contexts: [{name:'base'}],
+      ID: 'default'
+    })
+
+    intent.responsive({
+      contexts: [{name:'portrait'}, {name:'landscape'}],
+      ID:'orientation'
+    });
+
+    intent.responsive({
+      contexts: [{name:'mobile'}, {name:'tablet'}, {name:'standard'}],
+      ID:'width'
+    });
+
+    intent.responsive({
+      contexts:[{name:'dud'}]
+    });
+
+    return intent;
+  };
+
   describe('_removeClasses: takes the spec and axes, figures out what classes to remove', function(){
-
-    var makeFauxResponsive = function(intent){
-
-      intent.responsive({
-        contexts: [{name:'base'}],
-        ID: 'default'
-      })
-
-      intent.responsive({
-        contexts: [{name:'portrait'}, {name:'landscape'}],
-        ID:'orientation'
-      });
-
-      intent.responsive({
-        contexts: [{name:'mobile'}, {name:'tablet'}, {name:'standard'}],
-        ID:'width'
-      });
-
-      intent.responsive({
-        contexts:[{name:'dud'}]
-      });
-
-      return intent;
-    }
 
 
     it('should return an array', function(){
@@ -411,13 +411,13 @@ describe("Intention", function() {
 
       var result = intent._removeClasses({
         tablet: {
-          'class': ['foo']
+          'class': 'foo'
         },
         mobile: {
-          'class': ['foo', 'bar']
+          'class': 'foo bar'
         },
         base: {
-          'class': ['always']
+          'class': 'always'
         },
         dud: {
           href:'qux'
@@ -504,6 +504,48 @@ describe("Intention", function() {
             expect(elm.hasClass('baz')).to.equal(true);
           });
     });
+  
+
+  describe('switch multiple classes', function(){
+
+    var intent = makeFauxResponsive(new Intention);
+    // engage a couple contexts
+    intent.axes['width'].respond('standard');
+    intent.axes['default'].respond('base');
+
+    var elm = $('<div in-mobile-class="foo bar" in-base-class="base" in-standard-class="baz" class="baz"></div>');
+
+    intent.add(elm);
+    
+    // check 
+    it('should have the classes baz and base and nothing else', function(){
+      expect(elm.hasClass('baz')).to.equal(true);
+      expect(elm.hasClass('base')).to.equal(true);
+    });
+
+    
+    
+    // check 
+    it('should have the classes foo bar and base and not baz', function(){
+      intent.axes['width'].respond('mobile');
+      expect(elm.hasClass('baz')).to.equal(false);
+      expect(elm.hasClass('base')).to.equal(true);
+      expect(elm.hasClass('foo')).to.equal(true);
+      expect(elm.hasClass('bar')).to.equal(true);
+    });
+
+    // check 
+    it('should revert back to the original configuration', function(){
+      intent.axes['width'].respond('standard');
+      expect(elm.hasClass('baz')).to.equal(true);
+      expect(elm.hasClass('base')).to.equal(true);
+      expect(elm.hasClass('foo')).to.equal(false);
+      expect(elm.hasClass('bar')).to.equal(false);
+
+    });
+
+  });
+
 
   describe('jquery event', function(){
     it('should fire a jquery trigger event on every elm', function(){
@@ -609,9 +651,6 @@ describe("Intention", function() {
       });
 
     });
-
-
-
 
   });
 
