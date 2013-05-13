@@ -8,5 +8,5 @@ require.config({
 });
 
 define([
-   'Context'
+   'context'
 ]);
