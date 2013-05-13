@@ -1,5 +1,5 @@
 /*!
- * context.js Library associated with v0.9.6.1 of intention.js
+ * context.js Library associated with v0.9.6.2 of intention.js
  * http://intentionjs.com/
  *
  * Copyright 2011, 2013 Dowjones and other contributors
@@ -136,7 +136,7 @@
   (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
       // AMD. Register as an anonymous module.
-      define(['jquery', 'intention'], factory);
+      define('context', ['jquery', 'intention'], factory);
     } else {
       // Browser globals
       root.intent = factory(root.jQuery, root.Intention);

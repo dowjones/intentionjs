@@ -1,5 +1,5 @@
 /*!
- * Intention.js Library v0.9.6.1
+ * intention.js Library v0.9.6.2
  * http://intentionjs.com/
  *
  * Copyright 2011, 2013 Dowjones and other contributors
@@ -12,7 +12,7 @@
   'use strict';
   
   if (typeof define === 'function' && define.amd) {
-    define(['jquery', 'underscore'], factory);
+    define('intention', ['jquery', 'underscore'], factory);
   } else {
     root.Intention = factory(root.jQuery, root._);
   }
