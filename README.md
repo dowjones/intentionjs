@@ -1,25 +1,25 @@
-# Intention.js
+# intention.js
 
 DOM Manipulation via html attribute specification
 
-## Why Intention.js
+## Why intention.js
 
 It's like a super amped up version of media queries on a per element basis!
 
-The technology for dealing with responsive design is all over the place. Media queries, hacky javascript, and convoluted HTML. Intention.js allows you to make all of the changes to HTML in the HTML itself. It's is a way to describe the necessary differences of an HTML document between one device and another. 
+The technology for dealing with responsive design is all over the place. Media queries, hacky javascript, and convoluted HTML. intention.js allows you to make all of the changes to HTML in the HTML itself. It's is a way to describe the necessary differences of an HTML document between one device and another. 
 
-What should the classes of an element be on mobile vs tablet? Where should your advertising code get placed when you're on a desktop? Does the page require an alternate slideshow widget on touch enabled devices? These are all changes that Intention.js can make to the page based on a user's device. Context.js creates a set of common page contexts for width thresholds, touch devices, highres displays and a fallback.
+What should the classes of an element be on mobile vs tablet? Where should your advertising code get placed when you're on a desktop? Does the page require an alternate slideshow widget on touch enabled devices? These are all changes that intention.js can make to the page based on a user's device. context.js creates a set of common page contexts for width thresholds, touch devices, highres displays and a fallback.
 
 
 And you can easily add your own contexts on top of these or create all your own custom contexts.
 
 ## What's included:
-	* Intention.js
-	* Context.js
+	* intention.js
+	* context.js
 
-Intention.js is the library that manages the responsive axis, manipulates elements based on their specifications and emits events when contexts change.
+intention.js is the library that manages the responsive axis, manipulates elements based on their specifications and emits events when contexts change.
 
-Context.js is an implementation of Intention.js that sets up common use patterns in responsive design.
+context.js is an implementation of intention.js that sets up common use patterns in responsive design.
 
 Specifically it has the responsive contexts:
 	* base (a catch-all)
@@ -52,8 +52,8 @@ OR:
 	<!-- use only intention to build your own context -->
 	<script src="underscore.js"></script>
 	<script src="jquery.js"></script>
-	<script src="Intention.js"></script>
-	<script src="Context.js"></script>
+	<script src="intention.js"></script>
+	<script src="context.js"></script>
 	<script>
 		// your amazing contextual threshold specification here!
 	</script>
@@ -62,7 +62,7 @@ OR:
 
 ## Usage
 
-By default Context.js provides a number of threshold groups via intention.js: browser widths, orientation, touch, highres, and a base group
+By default context.js provides a number of threshold groups via intention.js: browser widths, orientation, touch, highres, and a base group
 
 the default thresholds in each group are respectively: 
 mobile (510 and below), tablet (510 to 840) and standard (840 to Infinity)
@@ -109,7 +109,7 @@ And in "landscape" orientation:
 	<img class="landscape" src="cat.jpg" />
 ```
 
-Context.js includes four context groups or "axes"
+context.js includes four context groups or "axes"
 
 	* width
 	* orientation
