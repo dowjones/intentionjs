@@ -108,7 +108,7 @@ describe("Intention", function() {
 
     });
 
-    it("events should only fire when crossing a threshold", function(){
+    it("should only fire events when crossing a threshold", function(){
       var callbackCount = 0,
         respond = size.respond;;
       // set the current context to small
@@ -124,6 +124,44 @@ describe("Intention", function() {
       respond(1000);
       // the event should not have fired
       expect(callbackCount).to.equal(1);
+    });
+
+    it("should fire the axis event before the context event", function(){
+
+      var intent = new Intention,
+        width = intent.responsive({
+          contexts: [{name:'mob'}, {name:'tab'}],
+          ID:'width'
+        }),
+        contextFirst;
+
+      intent.on('width', function(){
+        contextFirst = true;
+      });
+
+      intent.on('mob', function(){
+        contextFirst = false;
+      })
+
+      width.respond('mob');
+
+      expect(contextFirst).to.equal(false);
+
+      var elm = $('<div>').attr({
+        'in-width':true
+      });
+
+      intent.add(elm);
+
+      var domChanged = false;
+
+      intent.on('tab', function(){
+        expect(elm.hasClass('tab')).to.equal(true);
+      });
+
+      width.respond('tab');
+
+
     });
 
     describe("recursive responsive axis creation", function(){
