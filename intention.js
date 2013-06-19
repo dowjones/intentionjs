@@ -217,8 +217,8 @@
               
               // emit the context event
               this._emitter(_.extend({}, {_type:currentContext.name}, 
-                  currentContext), this)
-                ._emitter({_type:axisID, context:currentContext.name}, this);
+                  currentContext), currentContext, this)
+                ._emitter({_type:axisID, context:currentContext.name}, currentContext, this);
 
               // done, break the loop
               return false;
@@ -248,7 +248,7 @@
         var listeners = this._listeners[event._type],
           i;
         for(i=0; i<listeners.length; i++){
-          listeners[i].call(this, event);
+          listeners[i].apply(this, arguments);
         }
       }
 
