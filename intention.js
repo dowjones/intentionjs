@@ -1,5 +1,5 @@
 /*!
- * intention.js Library v0.9.6.2
+ * intention.js Library v0.9.6.3
  * http://intentionjs.com/
  *
  * Copyright 2011, 2013 Dowjones and other contributors
@@ -215,10 +215,15 @@
 
               currentContext = ctx;
               
-              // emit the context event
-              this._emitter(_.extend({}, {_type:currentContext.name}, 
-                  currentContext), currentContext, this)
-                ._emitter({_type:axisID, context:currentContext.name}, currentContext, this);
+              // emit the axis event
+              this._emitter({_type:axisID, context:currentContext.name}, 
+                  currentContext, this)
+              
+                // then emit the context event (second ensures the context
+                // changes happen after all dom manipulations)
+                ._emitter(_.extend({}, {_type:currentContext.name}, 
+                  currentContext), currentContext, this);
+                
 
               // done, break the loop
               return false;
