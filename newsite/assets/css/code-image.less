@@ -1,0 +1,180 @@
+@background:	rgb(73, 92, 99);
+@text:			rgb(186, 198, 204);
+@white:			rgb(244, 241, 234);
+@orangeDark:	rgb(226, 99, 69);
+@orangeLight:	rgb(234, 134, 90);
+@blueDark:		rgb(56, 116, 142); 
+@blueLight:		rgb(98, 189, 221);
+@greenDark:		rgb(88, 147, 88);  
+@greenLight:	rgb(127, 178, 127); 
+
+html{
+	font-size:62.5%;
+}
+#container{
+	width: 820px;
+	margin: auto;
+}
+.clear{ clear:both; }
+.selectable{ position:relative; z-index:999; }
+
+#codeImage.mobile, #codeImage.pseudomobile, #codeImage.smalltablet, #codeImage.pseudosmalltablet, #codeImage.tablet, #codeImage.pseudotablet{
+	display:none;
+}
+#codeImage{
+	background:@text;
+	.inner{
+		width:900px;
+		margin:auto;
+		background: @background;
+		border-top:6px @blueDark solid;
+		border-bottom:6px @blueDark solid;
+		color: @text;
+		font-family:'Courier', monospace;
+		font-size:1.2rem;
+		line-height:1.7rem;
+		position:relative;
+		pre{
+			white-space:pre;
+			h5{
+				font-size:1.5rem;
+				font-family:Helvetica, Arial, san-serif;
+				color:@white;
+				margin-bottom:-12px;
+			}
+		}
+	}
+	#rawCodeImage, #standardCodeImage, #mobileCodeImage{
+		float:right;
+		box-sizing:border-box;
+	}
+	#rawCodeImage{
+		width: 567px;
+		background:url('../../images/codeimage/left.png') repeat-y right;
+		float: left;
+		padding:15px 0 15px 25px
+	}
+	#standardCodeImage, #mobileCodeImage{
+		width: 333px;
+	}
+}
+/* Color styles */
+.white{	color: @white; }
+.orangeDark{	color: @orangeDark; }
+.orangeLight{	color: @orangeLight; }
+.greenDark{	color: @greenDark; }
+.greenLight{	color: @greenLight; }
+.blueDark{	color: @blueDark; }
+.blueLight{	color: @blueLight; }
+
+/* Backgrounds */
+#standardGreen, #standardBlue, #mobileRed, #mobileBlue {
+	margin-top:-17px;
+	box-sizing: border-box;
+}
+#standardRed, #standardGreen, #standardBlue, #mobileRed, #mobileGreen, #mobileBlue{ //all of them
+	padding:1px 0 1px 25px;
+	background-size:355px 1px;
+}
+#standardRed, #mobileGreen{
+	padding-top:15px;
+}
+#mobileBlue{
+	padding-bottom:15px;
+}
+#standardRed{ background:url('../../images/codeimage/standardred.png') repeat-y; }
+#standardGreen{ background:url('../../images/codeimage/standardgreen.png') repeat-y; }
+#standardBlue{ background:url('../../images/codeimage/standardblue.png') repeat-y; }
+#mobileRed{ background:url('../../images/codeimage/mobilered.png') repeat-y;}
+#mobileGreen{ background:url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/mobilegreen.png'); background-repeat: repeat-x, repeat-y;  }
+#mobileBlue{ background:url('../../images/codeimage/mobileblue.png') repeat-y; }
+.no-multiplebgs {
+	#standardBlue{ padding-bottom:3px; }
+	#mobileGreen{ background: url('../../images/codeimage/mobilegreen.png') repeat-y; }
+}
+
+/* line connectors */
+#connections{
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0;
+	left:0;
+}
+
+
+
+
+//Mobile code images
+#smallCode.standard, #smallCode.pseudostandard{
+	display:none;
+}
+#smallCode.mobile, #smallCode.standard.pseudomobile,
+#smallCode.smalltablet, #smallCode.standard.pseudosmalltablet,
+#smallCode.tablet, #smallCode.standard.pseudotablet{
+	display:block;
+}
+#smallCode{
+	border-top:3px @blueDark solid;
+	border-bottom:3px @blueDark solid;
+	display:block;
+	pre{
+		white-space:pre;
+		color:@text;
+		padding:6px;
+		h5{
+			font-size:1.5rem;
+			font-family:Helvetica, Arial, sans-serif;
+			color:@white;
+			text-align:right;
+		}
+	}
+	pre#input{
+		background:@background url('../../images/codeimage/left.png') repeat-y right;
+	}
+	pre#output{
+		padding:15px 6px 20px 6px;
+	}
+}
+#smallCode.smalltablet, #smallCode.pseudosmalltablet, #smallCode.tablet, #smallCode.pseudotablet {
+	pre{
+		float:left;
+		width:50%;
+		box-sizing:border-box;
+	}
+}
+
+//Change the output colors based on the current context
+#smallCode.mobile #output, #smallCode.pseudomobile #output{
+	background-image:url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/redfade.png');
+	background-repeat:repeat-x, repeat-y;
+	background-position:top, top right;
+	background-color:rgb(77, 62, 58);
+	color:@orangeDark;
+}
+#smallCode.smalltablet #output, #smallCode.pseudosmalltablet #output{
+	background-image:url('../../images/codeimage/shadow-vertical.png'), url('../../images/codeimage/greenfade.png');
+	background-repeat:repeat-y, repeat-y;
+	background-position:left, top right;
+	background-color:rgb(52, 54, 54);
+	color:@greenDark;
+}
+#smallCode.tablet #output, #smallCode.pseudotablet #output{
+	background-image:url('../../images/codeimage/shadow-vertical.png'), url('../../images/codeimage/bluefade.png');
+	background-repeat:repeat-y, repeat-y;
+	background-position:left, top right;
+	background-color:rgb(31, 66, 76);
+	color:@blueLight;
+}
+.no-multiplebgs{
+	#smallCode.mobile #output, #smallCode.pseudomobile #output{
+		background:rgb(77, 62, 58) url('../../images/codeimage/redfade.png') repeat-y top right;
+		border:5px solid red;
+	}
+	#smallCode.smalltablet #output, #smallCode.pseudosmalltablet #output{
+		background:rgb(52, 54, 54) url('../../images/codeimage/greenfade.png') repeat-y top right;
+	}
+	#smallCode.tablet #output, #smallCode.pseudotablet #output{
+		background:rgb(31, 66, 76) url('../../images/codeimage/bluefade.png') repeat-y top right;
+	}
+}

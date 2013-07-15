@@ -1,0 +1,149 @@
+//Widths
+@12col:	940px;
+@11col:	860px;
+@10col:	780px;
+@9col:	700px;
+@8col:	620px;
+@7col:	540px;
+@6col:	460px;
+@5col:	380px;
+@4col:	300px;
+@3col:	220px;
+@2col:	140px;
+@1col:	60px;
+@gutter:20px;
+
+//Colors
+@text:			rgb(53, 47, 41);
+@lightText:		rgb(249, 239, 212);
+@code:			rgb(186, 198, 204);
+@link:			#000;
+@linkVisited:	#000;
+@linkActive:	#000;
+@background:	rgb(32, 59, 68);
+@background2:	rgb(186, 198, 204);
+@headerbg:		rgb(215, 220, 219);
+@navbg:			rgb(244, 241, 234);
+@orange:		rgb(234, 134, 90);
+@orangeFade:	rgb(243, 201, 190);
+@orangeOverlay:	rgb(226, 99, 69);
+@green:			rgb(88, 147, 88); //download button
+@greenText:		rgb(202, 229, 202);
+@greenTextDark:	rgb(12, 48, 12);
+@blue:			rgb(56, 116, 142); //github button
+@blueText:		rgb(208, 224, 239);
+@blueDark:		rgb(12, 38, 45);
+@highlight:		rgb(127, 178, 127); //green bar
+@highlightBorder: rgb(145, 188, 145);
+@footer:		@blue;
+
+h1{	font-size:48px; font-weight:bold; }
+h2{ font-size:40px; }
+h3{ font-size:26px; font-weight:normal; line-height: 35px;}
+h4{ font-size:24px; }
+h5{ font-size:22px; }
+
+.mobile h1{	font-size:40px; font-weight:bold; }
+.mobile h2{ font-size:24px; }
+.mobile h3{ font-size:24px; font-weight:normal; line-height: 30px;}
+.mobile h4{ font-size:22px; }
+.mobile h5{ font-size:19px; }
+
+#content{
+	width:100%;
+	background: @background url('../../images/docubg.png') repeat-x top;
+	color: @lightText;
+	border-top:13px solid @footer;
+	position:relative;
+	.inner{
+		padding:@gutter 0 @gutter*2 0;
+	}
+	#posts{
+		float:left;
+		color:@lightText;
+		box-sizing:border-box;
+	}
+	#sidebar{
+		float:right;
+		box-sizing:border-box;
+		color:@code;
+	}
+	h3{
+		font-size:30px;
+		font-weight:normal;
+	}
+	h4{
+		font-size:20px;
+		font-weight:normal;
+	}
+	pre{
+		width:100%;
+		padding:6px;
+		border: 1px double @headerbg;
+		box-sizing:border-box;
+		background: darken(@background, 5%);
+	}
+	p+pre, pre+p{
+		margin-top:@gutter/2;
+	}
+}
+#content.standard, #content.pseudostandard, #content.tablet.landscape{
+	.inner{
+		width:@10col;
+		margin:auto;
+	}
+	#posts{
+		width:70%;
+		padding-right:@gutter;
+	}
+	#sidebar{
+		width:30%;
+	}
+}
+
+#posts{
+	article{
+		p.meta, ul.tags li{
+			font-size:12px;
+		}
+		ul.tags li{
+			list-style:none;
+			display:inline-block;
+			color:@code;
+		}
+		h3+h4{
+			margin-top:3px;
+		}
+		h3+p.meta{
+			margin-top:3px;
+		}
+		h4+p.meta{
+			margin-top:4px;
+		}
+		li+li{
+			margin-left:3px;
+		}
+		img{
+			width:100%;
+		}
+	}
+	article+article{
+		margin-top:@gutter;
+	}
+}
+#sidebar{
+	font-size:12px;
+	a{ color:@code; text-decoration:none; }
+	a:hover{ color:white; }
+	h4{ text-align:center; margin-bottom:10px;}
+	.pagination{
+		.prev{ float:left; }
+		.next{ float:right; text-align:right; margin-top:0px; }
+	} 
+	.tags{
+		ul{ list-style:disc; }
+	}
+	div+div{
+		margin-top:@gutter;
+	}
+}

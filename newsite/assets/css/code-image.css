@@ -1,0 +1,220 @@
+html {
+  font-size: 62.5%;
+}
+#container {
+  width: 820px;
+  margin: auto;
+}
+.clear {
+  clear: both;
+}
+.selectable {
+  position: relative;
+  z-index: 999;
+}
+#codeImage.mobile,
+#codeImage.pseudomobile,
+#codeImage.smalltablet,
+#codeImage.pseudosmalltablet,
+#codeImage.tablet,
+#codeImage.pseudotablet {
+  display: none;
+}
+#codeImage {
+  background: #bac6cc;
+}
+#codeImage .inner {
+  width: 900px;
+  margin: auto;
+  background: #495c63;
+  border-top: 6px #38748e solid;
+  border-bottom: 6px #38748e solid;
+  color: #bac6cc;
+  font-family: 'Courier', monospace;
+  font-size: 1.2rem;
+  line-height: 1.7rem;
+  position: relative;
+}
+#codeImage .inner pre {
+  white-space: pre;
+}
+#codeImage .inner pre h5 {
+  font-size: 1.5rem;
+  font-family: Helvetica, Arial, san-serif;
+  color: #f4f1ea;
+  margin-bottom: -12px;
+}
+#codeImage #rawCodeImage,
+#codeImage #standardCodeImage,
+#codeImage #mobileCodeImage {
+  float: right;
+  box-sizing: border-box;
+}
+#codeImage #rawCodeImage {
+  width: 567px;
+  background: url('../../images/codeimage/left.png') repeat-y right;
+  float: left;
+  padding: 15px 0 15px 25px;
+}
+#codeImage #standardCodeImage,
+#codeImage #mobileCodeImage {
+  width: 333px;
+}
+/* Color styles */
+.white {
+  color: #f4f1ea;
+}
+.orangeDark {
+  color: #e26345;
+}
+.orangeLight {
+  color: #ea865a;
+}
+.greenDark {
+  color: #589358;
+}
+.greenLight {
+  color: #7fb27f;
+}
+.blueDark {
+  color: #38748e;
+}
+.blueLight {
+  color: #62bddd;
+}
+/* Backgrounds */
+#standardGreen,
+#standardBlue,
+#mobileRed,
+#mobileBlue {
+  margin-top: -17px;
+  box-sizing: border-box;
+}
+#standardRed,
+#standardGreen,
+#standardBlue,
+#mobileRed,
+#mobileGreen,
+#mobileBlue {
+  padding: 1px 0 1px 25px;
+  background-size: 355px 1px;
+}
+#standardRed,
+#mobileGreen {
+  padding-top: 15px;
+}
+#mobileBlue {
+  padding-bottom: 15px;
+}
+#standardRed {
+  background: url('../../images/codeimage/standardred.png') repeat-y;
+}
+#standardGreen {
+  background: url('../../images/codeimage/standardgreen.png') repeat-y;
+}
+#standardBlue {
+  background: url('../../images/codeimage/standardblue.png') repeat-y;
+}
+#mobileRed {
+  background: url('../../images/codeimage/mobilered.png') repeat-y;
+}
+#mobileGreen {
+  background: url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/mobilegreen.png');
+  background-repeat: repeat-x, repeat-y;
+}
+#mobileBlue {
+  background: url('../../images/codeimage/mobileblue.png') repeat-y;
+}
+.no-multiplebgs #standardBlue {
+  padding-bottom: 3px;
+}
+.no-multiplebgs #mobileGreen {
+  background: url('../../images/codeimage/mobilegreen.png') repeat-y;
+}
+/* line connectors */
+#connections {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#smallCode.standard,
+#smallCode.pseudostandard {
+  display: none;
+}
+#smallCode.mobile,
+#smallCode.standard.pseudomobile,
+#smallCode.smalltablet,
+#smallCode.standard.pseudosmalltablet,
+#smallCode.tablet,
+#smallCode.standard.pseudotablet {
+  display: block;
+}
+#smallCode {
+  border-top: 3px #38748e solid;
+  border-bottom: 3px #38748e solid;
+  display: block;
+}
+#smallCode pre {
+  white-space: pre;
+  color: #bac6cc;
+  padding: 6px;
+}
+#smallCode pre h5 {
+  font-size: 1.5rem;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #f4f1ea;
+  text-align: right;
+}
+#smallCode pre#input {
+  background: #495c63 url('../../images/codeimage/left.png') repeat-y right;
+}
+#smallCode pre#output {
+  padding: 15px 6px 20px 6px;
+}
+#smallCode.smalltablet pre,
+#smallCode.pseudosmalltablet pre,
+#smallCode.tablet pre,
+#smallCode.pseudotablet pre {
+  float: left;
+  width: 50%;
+  box-sizing: border-box;
+}
+#smallCode.mobile #output,
+#smallCode.pseudomobile #output {
+  background-image: url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/redfade.png');
+  background-repeat: repeat-x, repeat-y;
+  background-position: top, top right;
+  background-color: #4d3e3a;
+  color: #e26345;
+}
+#smallCode.smalltablet #output,
+#smallCode.pseudosmalltablet #output {
+  background-image: url('../../images/codeimage/shadow-vertical.png'), url('../../images/codeimage/greenfade.png');
+  background-repeat: repeat-y, repeat-y;
+  background-position: left, top right;
+  background-color: #343636;
+  color: #589358;
+}
+#smallCode.tablet #output,
+#smallCode.pseudotablet #output {
+  background-image: url('../../images/codeimage/shadow-vertical.png'), url('../../images/codeimage/bluefade.png');
+  background-repeat: repeat-y, repeat-y;
+  background-position: left, top right;
+  background-color: #1f424c;
+  color: #62bddd;
+}
+.no-multiplebgs #smallCode.mobile #output,
+.no-multiplebgs #smallCode.pseudomobile #output {
+  background: #4d3e3a url('../../images/codeimage/redfade.png') repeat-y top right;
+  border: 5px solid red;
+}
+.no-multiplebgs #smallCode.smalltablet #output,
+.no-multiplebgs #smallCode.pseudosmalltablet #output {
+  background: #343636 url('../../images/codeimage/greenfade.png') repeat-y top right;
+}
+.no-multiplebgs #smallCode.tablet #output,
+.no-multiplebgs #smallCode.pseudotablet #output {
+  background: #1f424c url('../../images/codeimage/bluefade.png') repeat-y top right;
+}

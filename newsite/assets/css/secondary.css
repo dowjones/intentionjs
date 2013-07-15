@@ -1,0 +1,147 @@
+h1 {
+  font-size: 48px;
+  font-weight: bold;
+}
+h2 {
+  font-size: 40px;
+}
+h3 {
+  font-size: 26px;
+  font-weight: normal;
+  line-height: 35px;
+}
+h4 {
+  font-size: 24px;
+}
+h5 {
+  font-size: 22px;
+}
+.mobile h1 {
+  font-size: 40px;
+  font-weight: bold;
+}
+.mobile h2 {
+  font-size: 24px;
+}
+.mobile h3 {
+  font-size: 24px;
+  font-weight: normal;
+  line-height: 30px;
+}
+.mobile h4 {
+  font-size: 22px;
+}
+.mobile h5 {
+  font-size: 19px;
+}
+#content {
+  width: 100%;
+  background: #203b44 url('../../images/docubg.png') repeat-x top;
+  color: #f9efd4;
+  border-top: 13px solid #38748e;
+  position: relative;
+}
+#content .inner {
+  padding: 20px 0 40px 0;
+}
+#content #posts {
+  float: left;
+  color: #f9efd4;
+  box-sizing: border-box;
+}
+#content #sidebar {
+  float: right;
+  box-sizing: border-box;
+  color: #bac6cc;
+}
+#content h3 {
+  font-size: 30px;
+  font-weight: normal;
+}
+#content h4 {
+  font-size: 20px;
+  font-weight: normal;
+}
+#content pre {
+  width: 100%;
+  padding: 6px;
+  border: 1px double #d7dcdb;
+  box-sizing: border-box;
+  background: #182c33;
+}
+#content p + pre,
+#content pre + p {
+  margin-top: 10px;
+}
+#content.standard .inner,
+#content.pseudostandard .inner,
+#content.tablet.landscape .inner {
+  width: 780px;
+  margin: auto;
+}
+#content.standard #posts,
+#content.pseudostandard #posts,
+#content.tablet.landscape #posts {
+  width: 70%;
+  padding-right: 20px;
+}
+#content.standard #sidebar,
+#content.pseudostandard #sidebar,
+#content.tablet.landscape #sidebar {
+  width: 30%;
+}
+#posts article p.meta,
+#posts article ul.tags li {
+  font-size: 12px;
+}
+#posts article ul.tags li {
+  list-style: none;
+  display: inline-block;
+  color: #bac6cc;
+}
+#posts article h3 + h4 {
+  margin-top: 3px;
+}
+#posts article h3 + p.meta {
+  margin-top: 3px;
+}
+#posts article h4 + p.meta {
+  margin-top: 4px;
+}
+#posts article li + li {
+  margin-left: 3px;
+}
+#posts article img {
+  width: 100%;
+}
+#posts article + article {
+  margin-top: 20px;
+}
+#sidebar {
+  font-size: 12px;
+}
+#sidebar a {
+  color: #bac6cc;
+  text-decoration: none;
+}
+#sidebar a:hover {
+  color: white;
+}
+#sidebar h4 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+#sidebar .pagination .prev {
+  float: left;
+}
+#sidebar .pagination .next {
+  float: right;
+  text-align: right;
+  margin-top: 0px;
+}
+#sidebar .tags ul {
+  list-style: disc;
+}
+#sidebar div + div {
+  margin-top: 20px;
+}
