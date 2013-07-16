@@ -45,12 +45,17 @@ h5 {
   padding: 20px 0 40px 0;
 }
 #content #posts {
-  float: left;
   color: #f9efd4;
   box-sizing: border-box;
 }
+#content #posts nav li {
+  position: absolute;
+  right: 0;
+}
+#content #posts li + li {
+  margin-top: 0px;
+}
 #content #sidebar {
-  float: right;
   box-sizing: border-box;
   color: #bac6cc;
 }
@@ -84,11 +89,76 @@ h5 {
 #content.tablet.landscape #posts {
   width: 70%;
   padding-right: 20px;
+  float: left;
 }
 #content.standard #sidebar,
 #content.pseudostandard #sidebar,
 #content.tablet.landscape #sidebar {
   width: 30%;
+  float: right;
+}
+#content.tablet .inner,
+#content.standard.pseudotablet .inner {
+  width: auto;
+}
+#content.tablet #posts,
+#content.standard.pseudotablet #posts {
+  width: 70%;
+  padding-right: 20px;
+  float: left;
+}
+#content.tablet #sidebar,
+#content.standard.pseudotablet #sidebar {
+  width: 30%;
+  float: right;
+}
+#content.mobile .inner,
+#content.smalltablet .inner,
+#content.standard.pseudosmalltablet .inner,
+#content.standard.pseudomobile .inner {
+  width: auto;
+}
+#content.mobile #posts,
+#content.smalltablet #posts,
+#content.standard.pseudosmalltablet #posts,
+#content.standard.pseudomobile #posts {
+  width: auto;
+}
+#content.mobile #sidebar,
+#content.smalltablet #sidebar,
+#content.standard.pseudosmalltablet #sidebar,
+#content.standard.pseudomobile #sidebar {
+  width: auto;
+  margin-top: 20px;
+}
+#content.mobile #sidebar .pagination,
+#content.smalltablet #sidebar .pagination,
+#content.standard.pseudosmalltablet #sidebar .pagination,
+#content.standard.pseudomobile #sidebar .pagination,
+#content.mobile #sidebar .tags,
+#content.smalltablet #sidebar .tags,
+#content.standard.pseudosmalltablet #sidebar .tags,
+#content.standard.pseudomobile #sidebar .tags {
+  width: 50%;
+  margin: auto;
+}
+#content.mobile #sidebar .pagination,
+#content.smalltablet #sidebar .pagination,
+#content.standard.pseudosmalltablet #sidebar .pagination,
+#content.standard.pseudomobile #sidebar .pagination {
+  text-align: center;
+}
+#content.mobile #sidebar .tags,
+#content.smalltablet #sidebar .tags,
+#content.standard.pseudosmalltablet #sidebar .tags,
+#content.standard.pseudomobile #sidebar .tags {
+  margin-top: 40px;
+}
+#docsNav.standard li + li {
+  margin-top: 0px;
+}
+#posts article {
+  padding: 0;
 }
 #posts article p.meta,
 #posts article ul.tags li {
@@ -115,7 +185,7 @@ h5 {
   width: 100%;
 }
 #posts article + article {
-  margin-top: 20px;
+  padding-top: 20px;
 }
 #sidebar {
   font-size: 12px;
@@ -138,6 +208,9 @@ h5 {
   float: right;
   text-align: right;
   margin-top: 0px;
+}
+#sidebar .tags {
+  margin-top: 20px;
 }
 #sidebar .tags ul {
   list-style: disc;

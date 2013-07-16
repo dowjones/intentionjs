@@ -59,12 +59,17 @@ h5{ font-size:22px; }
 		padding:@gutter 0 @gutter*2 0;
 	}
 	#posts{
-		float:left;
 		color:@lightText;
 		box-sizing:border-box;
+		nav li{ 
+			position:absolute;
+			right:0;
+		}
+		li + li {
+			margin-top:0px;
+		}
 	}
 	#sidebar{
-		float:right;
 		box-sizing:border-box;
 		color:@code;
 	}
@@ -95,14 +100,53 @@ h5{ font-size:22px; }
 	#posts{
 		width:70%;
 		padding-right:@gutter;
+		float:left;
 	}
 	#sidebar{
 		width:30%;
+		float:right;
 	}
+}
+#content.tablet, #content.standard.pseudotablet{
+	.inner{
+		width:auto;
+	}
+	#posts{
+		width:70%;
+		padding-right:@gutter;
+		float:left;
+	}
+	#sidebar{
+		width:30%;
+		float:right;
+	}
+}
+
+#content.mobile, #content.smalltablet, #content.standard.pseudosmalltablet, #content.standard.pseudomobile{
+	.inner{
+		width:auto;
+	}
+	#posts{
+		width:auto;
+	}
+	#sidebar{
+		width:auto;
+		margin-top:@gutter;
+		.pagination, .tags{
+			width:50%;
+			margin:auto;
+		}
+		.pagination{ text-align:center; }
+		.tags{ margin-top:2*@gutter; }
+	}
+}
+#docsNav.standard{
+	li+li{ margin-top:0px; }
 }
 
 #posts{
 	article{
+		padding:0;
 		p.meta, ul.tags li{
 			font-size:12px;
 		}
@@ -128,7 +172,7 @@ h5{ font-size:22px; }
 		}
 	}
 	article+article{
-		margin-top:@gutter;
+		padding-top:@gutter;
 	}
 }
 #sidebar{
@@ -141,6 +185,7 @@ h5{ font-size:22px; }
 		.next{ float:right; text-align:right; margin-top:0px; }
 	} 
 	.tags{
+		margin-top:@gutter;
 		ul{ list-style:disc; }
 	}
 	div+div{

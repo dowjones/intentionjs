@@ -121,18 +121,32 @@
       .on('resize', throttle(horizontal_axis.respond, 100))
       .on('orientationchange', horizontal_axis.respond)
       .on('orientationchange', orientation_axis.respond);
-
-    
 	
-	// Resolve a deferred "firstStandard" when the standard context first passes true
-    var firstStandard = jQuery.Deferred();
-    intent.on('standard', function() {
-    	firstStandard.resolve();
-    });
-	firstStandard.done(function() {
-		console.log("standard only once");
-		equalizeAll('#smallCode', 'pre');
-		equalizeAll('#docsLite .equalize', 'section');
+	//First horizontal_Axis response functions. I wish this could go somewhere else.
+	var firstContext = jQuery.Deferred();
+	intent.on('width', function() { firstContext.resolve(); });
+	firstContext.done(function() {
+		var device = intent.axes.width.current;
+		if(device === 'mobile') {
+			unequalize('.docsLite .equalize', 'section');
+			unequalize('#typesOfManip', 'section');
+			unequalize('#smallCode', 'pre');
+			writeOutput(device);
+		} else if(device === 'smalltablet') {
+			equalizeAll('#smallCode', 'pre');
+			unequalize('.docsLite .equalize', 'section');
+			unequalize('#typesOfManip', 'section');
+			writeOutput(device);
+		} else if(device === 'tablet') {
+			equalizeAll('#smallCode', 'pre');
+			equalizeAll('.docsLite .equalize', 'section');
+			writeOutput(device);
+		} else {
+			equalizeAll('#smallCode', 'pre');
+			equalizeAll('.docsLite .equalize', 'section');
+			imageSetup();
+		}
+	
 	});	
 	
 	// register the current width and orientation without waiting for a window resize

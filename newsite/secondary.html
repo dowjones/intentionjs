@@ -43,17 +43,7 @@
 			</ul>
 		</nav>
 	</header>
-	<section id="splash" intent in-width in-container in-orientation>
-		<div class="inner">
-		</div>
-	</section>
-	
-	<section id="try" intent 
-		in-pseudomobile-prepend="body"-
-		in-pseudosmalltablet-prepend="body"
-		in-pseudotablet-prepend="body"
-		in-pseudohdtv-prepend="body"
-		in-pseudostandard-after="#codeImage"
+	<section id="heading" intent 
 		in-container
 		in-width> <!-- Hide this functionality on *real* mobile devices but not on faked ones-->
 		<div class="inner">
@@ -61,7 +51,7 @@
 		</div>
 	</section>
 	<section id="content" intent in-width in-container in-orientation>
-		<nav id="docsNav" intent in-width in-container in-orientation>
+		<nav intent in-width in-container in-orientation>
 			<h6>Hover or swipe over this to scrub posts by tag.</h6>
 			<ul></ul>
 		</nav>
@@ -86,8 +76,18 @@
 						<li>Tag</li>
 					</ul>
 				</article>
+				<article>
+					<h3>Second Title</h3>
+					<h4>Sometimes a subheading is good!</h4>
+					<p class="meta">July 15, 2013 — 12:00 PM</p>
+					<ul class="tags">
+						<li>Tag</li>
+						<li>Tag</li>
+						<li>Tag</li>
+					</ul>
+				</article>
 			</section>
-			<section id="sidebar">
+			<section id="sidebar" intent in-width in-container>
 				<div class="pagination">
 					<h4>Page 1 of 5</h4>
 					<div class="prev"><a href="#">&lt; Older</a></div>

@@ -454,12 +454,14 @@ body > #try .cancel {
   position: absolute;
   right: 13px;
 }
-#all #try.standard {
+#all #try.standard,
+#heading {
   width: 100%;
   background: #bac6cc;
   text-align: center;
 }
-#all #try.standard .inner {
+#all #try.standard .inner,
+#heading .inner {
   width: 780px;
   margin: auto;
   padding: 20px;
@@ -469,15 +471,17 @@ body > #try .cancel {
   background-position: top, top;
   border-top: 20px solid #e26345;
 }
-#all #try.standard .inner h2 {
+#all #try.standard .inner h2,
+#heading .inner h2 {
   text-align: center;
-  padding-bottom: 20px;
 }
-#all #try.standard .inner #devices {
+#all #try.standard .inner #devices,
+#heading .inner #devices {
   position: relative;
   z-index: 2;
 }
-#all #try.standard .inner #devices div {
+#all #try.standard .inner #devices div,
+#heading .inner #devices div {
   height: 75px;
   background: url('../../images/devices.svg');
   background-size: 258px 74px;
@@ -485,287 +489,334 @@ body > #try .cancel {
   cursor: pointer;
   font-size: 13px;
 }
-#all #try.standard .inner #devices div + div {
+#all #try.standard .inner #devices div + div,
+#heading .inner #devices div + div {
   margin-left: 20px;
 }
-#all #try.standard .inner #devices #pseudomobile {
+#all #try.standard .inner #devices #pseudomobile,
+#heading .inner #devices #pseudomobile {
   width: 24px;
   background-position: 0 0;
 }
-#all #try.standard .inner #devices #pseudosmalltablet {
+#all #try.standard .inner #devices #pseudosmalltablet,
+#heading .inner #devices #pseudosmalltablet {
   width: 42px;
   background-position: -26px 0px;
 }
-#all #try.standard .inner #devices #pseudotablet {
+#all #try.standard .inner #devices #pseudotablet,
+#heading .inner #devices #pseudotablet {
   width: 53px;
   background-position: -69px 1px;
 }
-#all #try.standard .inner #devices #pseudohdtv {
+#all #try.standard .inner #devices #pseudohdtv,
+#heading .inner #devices #pseudohdtv {
   width: 94px;
   background-position: -124px 1px;
 }
-#all #try.standard .inner #devices .cancel {
+#all #try.standard .inner #devices .cancel,
+#heading .inner #devices .cancel {
   display: none;
+}
+#heading h2 {
+  padding: 0;
+}
+#heading.mobile .inner,
+#heading.smalltablet .inner,
+#heading.tablet .inner,
+#heading.standard.pseudomobile .inner,
+#heading.standard.pseudosmalltablet .inner,
+#heading.standard.pseudotablet .inner {
+  width: auto;
+  margin: 0 10px 0 10px;
+  padding: 0 10px 0 10px;
+}
+#try h2 {
+  padding: 0 0 20px 0;
 }
 #try.mobile,
 #try.smalltablet,
 #try.tablet {
   display: none;
 }
-#docsLite {
+#content {
   width: 100%;
   background: #203b44 url('../../images/docubg.png') repeat-x top;
   color: #f9efd4;
   border-top: 13px solid #38748e;
   position: relative;
 }
-#docsLite pre {
+#content pre {
   width: 100%;
   padding: 6px;
   border: 1px double #d7dcdb;
   box-sizing: border-box;
   background: #182c33;
 }
-#docsLite p + pre,
-#docsLite pre + p {
+#content p + pre,
+#content pre + p {
   margin-top: 10px;
 }
-#docsLite article article {
+#content article article {
   clear: both;
   padding: 0px;
 }
-#docsLite article.highlight {
+#content article.highlight {
   background: #7fb27f url('../../images/mezz.png') repeat;
   border-top: 13px solid #91bc91;
   color: #0c300c;
   z-index: 3;
 }
-#docsLite article.highlight pre {
+#content article.highlight pre {
   background: #afcfaf;
   color: #325332;
   border: 3px solid #589358;
 }
-#docsLite.standard article {
+.docsLite.standard article {
   width: 780px;
   margin: auto;
   padding: 20px;
   position: relative;
 }
-#docsLite.standard article h2 {
+.docsLite.standard article h2 {
   width: 100%;
   box-sizing: border-box;
   padding-right: 50%;
 }
-#docsLite.standard article section + h2 {
+.docsLite.standard article section + h2 {
   padding-right: 0;
   padding-left: 50%;
 }
-#docsLite.standard article section {
+.docsLite.standard article section {
   width: 50%;
   padding: 20px 13px 25px 0;
   float: left;
   box-sizing: border-box;
 }
-#docsLite.standard article section:nth-of-type(2n) {
+.docsLite.standard article section:nth-of-type(2n) {
   padding: 20px 0 20px 13px;
   float: right;
 }
-#docsLite.standard article article {
+.docsLite.standard article article {
   padding: 0px;
 }
-#docsLite.standard article.highlight {
+.docsLite.standard article.highlight {
   width: 100%;
   padding: 20px 0px 20px 0;
 }
-#docsLite.standard article.highlight .inner {
+.docsLite.standard article.highlight .inner {
   width: 780px;
   margin: auto;
   padding: 0 20px 0 20px;
 }
-#docsLite.standard article.thirds {
+.docsLite.standard article.thirds {
   padding: 0px;
 }
-#docsLite.standard article.thirds section {
+.docsLite.standard article.thirds section {
   width: 33%;
   float: left;
 }
-#docsLite.standard article.thirds section:nth-child(3n-2),
-#docsLite.standard article.thirds section:nth-child(3n-1) {
+.docsLite.standard article.thirds section:nth-child(3n-2),
+.docsLite.standard article.thirds section:nth-child(3n-1) {
   padding-right: 13px;
 }
-#docsLite.standard article.thirds section:nth-child(3n-1) {
+.docsLite.standard article.thirds section:nth-child(3n-1) {
   padding-left: 13px;
   padding-right: 13px;
 }
-#docsLite.standard article.thirds section:nth-child(3n) {
+.docsLite.standard article.thirds section:nth-child(3n) {
   padding-left: 13px;
   padding-right: 0px;
 }
-#docsLite.tablet article,
-#docsLite.pseudotablet article,
-#docsLite.standard.landscape article {
+#content.standard article {
+  width: 780px;
+  margin: auto;
+  position: relative;
+}
+#content.tablet article,
+#content.standard.pseudotablet article {
   width: auto;
   padding: 0 20px 0 20px;
   position: relative;
   box-sizing: border-box;
 }
-#docsLite.tablet article section,
-#docsLite.pseudotablet article section,
-#docsLite.standard.landscape article section {
+#content.tablet article section,
+#content.standard.pseudotablet article section {
   width: 50%;
   padding: 20px 13px 25px 0;
   float: left;
   box-sizing: border-box;
 }
-#docsLite.tablet article section:nth-of-type(2n),
-#docsLite.pseudotablet article section:nth-of-type(2n),
-#docsLite.standard.landscape article section:nth-of-type(2n) {
+#content.tablet article section:nth-of-type(2n),
+#content.standard.pseudotablet article section:nth-of-type(2n) {
   padding: 20px 0 20px 13px;
   float: right;
 }
-#docsLite.tablet article article,
-#docsLite.pseudotablet article article,
-#docsLite.standard.landscape article article {
+#content.tablet article article,
+#content.standard.pseudotablet article article {
   width: auto;
   padding: 0px;
 }
-#docsLite.tablet article.highlight,
-#docsLite.pseudotablet article.highlight,
-#docsLite.standard.landscape article.highlight {
+#content.tablet article.highlight,
+#content.standard.pseudotablet article.highlight {
   clear: both;
   padding: 20px 0px 0px 0px;
 }
-#docsLite.tablet article.highlight .inner,
-#docsLite.pseudotablet article.highlight .inner,
-#docsLite.standard.landscape article.highlight .inner {
+#content.tablet article.highlight .inner,
+#content.standard.pseudotablet article.highlight .inner {
   width: 100%;
   padding: 0 20px 0 20px;
   box-sizing: border-box;
 }
-#docsLite.tablet article.thirds section,
-#docsLite.pseudotablet article.thirds section,
-#docsLite.standard.landscape article.thirds section {
+#content.tablet article.thirds section,
+#content.standard.pseudotablet article.thirds section {
   width: 33%;
   float: left;
 }
-#docsLite.tablet article.thirds section:nth-child(3n-2),
-#docsLite.pseudotablet article.thirds section:nth-child(3n-2),
-#docsLite.standard.landscape article.thirds section:nth-child(3n-2),
-#docsLite.tablet article.thirds section:nth-child(3n-1),
-#docsLite.pseudotablet article.thirds section:nth-child(3n-1),
-#docsLite.standard.landscape article.thirds section:nth-child(3n-1) {
+#content.tablet article.thirds section:nth-child(3n-2),
+#content.standard.pseudotablet article.thirds section:nth-child(3n-2),
+#content.tablet article.thirds section:nth-child(3n-1),
+#content.standard.pseudotablet article.thirds section:nth-child(3n-1) {
   padding-right: 13px;
 }
-#docsLite.tablet article.thirds section:nth-child(3n-1),
-#docsLite.pseudotablet article.thirds section:nth-child(3n-1),
-#docsLite.standard.landscape article.thirds section:nth-child(3n-1) {
+#content.tablet article.thirds section:nth-child(3n-1),
+#content.standard.pseudotablet article.thirds section:nth-child(3n-1) {
   padding-left: 13px;
   padding-right: 13px;
 }
-#docsLite.tablet article.thirds section:nth-child(3n),
-#docsLite.pseudotablet article.thirds section:nth-child(3n),
-#docsLite.standard.landscape article.thirds section:nth-child(3n) {
+#content.tablet article.thirds section:nth-child(3n),
+#content.standard.pseudotablet article.thirds section:nth-child(3n) {
   padding-left: 13px;
   padding-right: 0px;
 }
-#docsLite.mobile article,
-#docsLite.pseudomobile article,
-#docsLite.smalltablet article,
-#docsLite.pseudosmalltablet article {
+#content.mobile article,
+#content.smalltablet article,
+#content.pseudomobile article,
+#content.pseudosmalltablet article {
   width: auto;
-  margin: 10px;
-  padding: 20px 10px 20px 10px;
+  padding: 0 20px 0 20px;
 }
-#docsLite.mobile article section,
-#docsLite.pseudomobile article section,
-#docsLite.smalltablet article section,
-#docsLite.pseudosmalltablet article section,
-#docsLite.mobile article section:nth-child(2n),
-#docsLite.pseudomobile article section:nth-child(2n),
-#docsLite.smalltablet article section:nth-child(2n),
-#docsLite.pseudosmalltablet article section:nth-child(2n) {
+#content.mobile article section,
+#content.smalltablet article section,
+#content.pseudomobile article section,
+#content.pseudosmalltablet article section,
+#content.mobile article section:nth-child(2n),
+#content.smalltablet article section:nth-child(2n),
+#content.pseudomobile article section:nth-child(2n),
+#content.pseudosmalltablet article section:nth-child(2n) {
   width: auto;
   padding: 0px;
   float: none;
 }
-#docsLite.mobile article section + section,
-#docsLite.pseudomobile article section + section,
-#docsLite.smalltablet article section + section,
-#docsLite.pseudosmalltablet article section + section {
+#content.mobile article section + section,
+#content.smalltablet article section + section,
+#content.pseudomobile article section + section,
+#content.pseudosmalltablet article section + section {
+  margin-top: 20px;
+}
+#content.mobile article + article,
+#content.smalltablet article + article,
+#content.pseudomobile article + article,
+#content.pseudosmalltablet article + article {
+  margin-top: 20px;
+}
+.docsLite.mobile article,
+.docsLite.pseudomobile article,
+.docsLite.smalltablet article,
+.docsLite.pseudosmalltablet article {
+  width: auto;
+  margin: 10px;
+  padding: 20px 10px 20px 10px;
+}
+.docsLite.mobile article section,
+.docsLite.pseudomobile article section,
+.docsLite.smalltablet article section,
+.docsLite.pseudosmalltablet article section,
+.docsLite.mobile article section:nth-child(2n),
+.docsLite.pseudomobile article section:nth-child(2n),
+.docsLite.smalltablet article section:nth-child(2n),
+.docsLite.pseudosmalltablet article section:nth-child(2n) {
+  width: auto;
+  padding: 0px;
+  float: none;
+}
+.docsLite.mobile article section + section,
+.docsLite.pseudomobile article section + section,
+.docsLite.smalltablet article section + section,
+.docsLite.pseudosmalltablet article section + section {
   margin-top: 15px;
 }
-#docsLite.mobile article article,
-#docsLite.pseudomobile article article,
-#docsLite.smalltablet article article,
-#docsLite.pseudosmalltablet article article {
+.docsLite.mobile article article,
+.docsLite.pseudomobile article article,
+.docsLite.smalltablet article article,
+.docsLite.pseudosmalltablet article article {
   padding: 0 !important;
   margin: 10px 0px 10px 0;
 }
-#docsLite.mobile article article section,
-#docsLite.pseudomobile article article section,
-#docsLite.smalltablet article article section,
-#docsLite.pseudosmalltablet article article section {
+.docsLite.mobile article article section,
+.docsLite.pseudomobile article article section,
+.docsLite.smalltablet article article section,
+.docsLite.pseudosmalltablet article article section {
   padding-left: 0;
   padding-right: 0;
 }
-#docsLite.mobile article article section + section,
-#docsLite.pseudomobile article article section + section,
-#docsLite.smalltablet article article section + section,
-#docsLite.pseudosmalltablet article article section + section {
+.docsLite.mobile article article section + section,
+.docsLite.pseudomobile article article section + section,
+.docsLite.smalltablet article article section + section,
+.docsLite.pseudosmalltablet article article section + section {
   margin-top: 5px;
 }
-#docsLite.mobile article h2,
-#docsLite.pseudomobile article h2,
-#docsLite.smalltablet article h2,
-#docsLite.pseudosmalltablet article h2 {
+.docsLite.mobile article h2,
+.docsLite.pseudomobile article h2,
+.docsLite.smalltablet article h2,
+.docsLite.pseudosmalltablet article h2 {
   width: auto;
   padding-right: 0;
 }
-#docsLite.mobile article pre,
-#docsLite.pseudomobile article pre,
-#docsLite.smalltablet article pre,
-#docsLite.pseudosmalltablet article pre {
+.docsLite.mobile article pre,
+.docsLite.pseudomobile article pre,
+.docsLite.smalltablet article pre,
+.docsLite.pseudosmalltablet article pre {
   width: auto;
 }
-#docsLite.mobile article.highlight,
-#docsLite.pseudomobile article.highlight,
-#docsLite.smalltablet article.highlight,
-#docsLite.pseudosmalltablet article.highlight {
+.docsLite.mobile article.highlight,
+.docsLite.pseudomobile article.highlight,
+.docsLite.smalltablet article.highlight,
+.docsLite.pseudosmalltablet article.highlight {
   margin: 0;
   margin-top: 20px;
   margin-bottom: 10px;
   padding-top: 0px;
 }
-#docsLite.mobile article.highlight .inner,
-#docsLite.pseudomobile article.highlight .inner,
-#docsLite.smalltablet article.highlight .inner,
-#docsLite.pseudosmalltablet article.highlight .inner {
+.docsLite.mobile article.highlight .inner,
+.docsLite.pseudomobile article.highlight .inner,
+.docsLite.smalltablet article.highlight .inner,
+.docsLite.pseudosmalltablet article.highlight .inner {
   width: auto;
   padding: 20px 10px 20px 10px;
 }
-#docsLite.mobile article.thirds section,
-#docsLite.pseudomobile article.thirds section,
-#docsLite.smalltablet article.thirds section,
-#docsLite.pseudosmalltablet article.thirds section,
-#docsLite.mobile article.thirds section:nth-child(3n-1),
-#docsLite.pseudomobile article.thirds section:nth-child(3n-1),
-#docsLite.smalltablet article.thirds section:nth-child(3n-1),
-#docsLite.pseudosmalltablet article.thirds section:nth-child(3n-1),
-#docsLite.mobile article.thirds section:nth-child(3n),
-#docsLite.pseudomobile article.thirds section:nth-child(3n),
-#docsLite.smalltablet article.thirds section:nth-child(3n),
-#docsLite.pseudosmalltablet article.thirds section:nth-child(3n) {
+.docsLite.mobile article.thirds section,
+.docsLite.pseudomobile article.thirds section,
+.docsLite.smalltablet article.thirds section,
+.docsLite.pseudosmalltablet article.thirds section,
+.docsLite.mobile article.thirds section:nth-child(3n-1),
+.docsLite.pseudomobile article.thirds section:nth-child(3n-1),
+.docsLite.smalltablet article.thirds section:nth-child(3n-1),
+.docsLite.pseudosmalltablet article.thirds section:nth-child(3n-1),
+.docsLite.mobile article.thirds section:nth-child(3n),
+.docsLite.pseudomobile article.thirds section:nth-child(3n),
+.docsLite.smalltablet article.thirds section:nth-child(3n),
+.docsLite.pseudosmalltablet article.thirds section:nth-child(3n) {
   width: auto;
   float: none;
   padding: 0px;
 }
-#docsLite.mobile article.thirds section + section,
-#docsLite.pseudomobile article.thirds section + section,
-#docsLite.smalltablet article.thirds section + section,
-#docsLite.pseudosmalltablet article.thirds section + section {
+.docsLite.mobile article.thirds section + section,
+.docsLite.pseudomobile article.thirds section + section,
+.docsLite.smalltablet article.thirds section + section,
+.docsLite.pseudosmalltablet article.thirds section + section {
   margin-top: 15px;
 }
-#docsNav {
+#content nav {
   height: 100%;
   padding-top: 20px;
   position: absolute;
@@ -779,7 +830,7 @@ body > #try .cancel {
   -ms-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
 }
-#docsNav h6 {
+#content nav h6 {
   width: 100%;
   padding: 6px 6px 6px 0;
   margin: 0 0 20px 0;
@@ -788,25 +839,26 @@ body > #try .cancel {
   position: absolute;
   left: 100%;
 }
-#docsNav li {
+#content nav li {
   margin-right: 3px;
   list-style: none;
   color: white;
-  position: relative;
+  position: absolute;
+  right: 0;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
   -ms-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
 }
-#docsNav li div {
+#content nav li div {
   display: inline-block;
 }
-#docsNav li .label {
+#content nav li .label {
   width: auto;
   padding-right: 7px;
 }
-#docsNav li .circle {
+#content nav li .circle {
   width: 5px;
   height: 5px;
   border-radius: 5px;
@@ -819,18 +871,49 @@ body > #try .cancel {
   top: 50%;
   margin-top: -5px;
 }
-#docsNav li .circle.active {
+#content nav li .circle.active {
   background: #ea865a;
 }
-#docsNav li a {
+#content nav li a {
   color: white;
   text-decoration: none;
 }
-#docsNav.active {
+#content nav.standard,
+#content nav.tablet.landscape {
+  width: 150px;
+  left: -140px;
+}
+#content nav.tablet,
+#content nav.standard.pseudotablet {
+  width: 25%;
+  left: -24.5%;
+  font-weight: bold;
+}
+#content nav.smalltablet,
+#content nav.mobile,
+#content nav.standard.pseudomobile,
+#content nav.standard.pseudosmalltablet {
+  width: 50%;
+  left: -49%;
+  font-weight: bold;
+}
+#content nav.active {
   left: 0 !important;
   background: #38748e;
   background: rgba(56, 116, 142, 0.75);
   border-right-color: #d0e0ef;
+}
+#content nav#docsNav li {
+  position: relative;
+}
+#content nav#docsNav li + li {
+  margin-top: 20px;
+}
+#docsNav.mobile li + li,
+#docsNav.standard.pseudomobile li + li,
+#docsNav.smalltablet li + li,
+#docsNav.standard.pseudosmalltablet li + li {
+  margin-top: 0;
 }
 #docsNav.fixed {
   position: fixed;
@@ -895,39 +978,6 @@ body > #try .cancel {
 }
 .circle + .circle {
   margin-left: 3px;
-}
-#docsNav.standard {
-  width: 150px;
-  left: -140px;
-}
-#docsNav.standard li + li {
-  margin-top: 20px;
-}
-#docsNav.tablet,
-#docsNav.standard.tablet,
-#docsNav.standard.tablet.landscape {
-  width: 25%;
-  left: -24.5%;
-  font-weight: bold;
-}
-#docsNav.tablet li + li,
-#docsNav.standard.tablet li + li,
-#docsNav.standard.tablet.landscape li + li {
-  margin-top: 20px;
-}
-#docsNav.mobile,
-#docsNav.standard.pseudomobile,
-#docsNav.smalltablet,
-#docsNav.standard.pseudosmalltablet {
-  width: 50%;
-  left: -49%;
-  font-weight: bold;
-}
-#docsNav.mobile li + li,
-#docsNav.standard.pseudomobile li + li,
-#docsNav.smalltablet li + li,
-#docsNav.standard.pseudosmalltablet li + li {
-  margin-top: 10px;
 }
 footer {
   width: 100%;

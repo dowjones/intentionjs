@@ -377,7 +377,7 @@ body > #try{
 		right:13px;
 	}
 }
-#all #try.standard{
+#all #try.standard, #heading{
 	width:100%;
 	background:@background2;
 	text-align:center;
@@ -392,7 +392,6 @@ body > #try{
 		border-top:20px solid @orangeOverlay;
 		h2{
 			text-align:center;
-			padding-bottom:@gutter;
 		}
 		#devices{
 			position:relative;
@@ -414,11 +413,24 @@ body > #try{
 		}
 	}
 }
+#heading{
+	h2{ padding:0; }
+}
+#heading.mobile, #heading.smalltablet, #heading.tablet, #heading.standard.pseudomobile, #heading.standard.pseudosmalltablet, #heading.standard.pseudotablet{
+	.inner{
+		width:auto;
+		margin:0 @gutter/2 0 @gutter/2;
+		padding:0 @gutter/2 0 @gutter/2;
+	}
+}
+#try{
+	h2{ padding:0 0 @gutter 0;}
+}
 #try.mobile, #try.smalltablet, #try.tablet{
 	display:none;
 }
 
-#docsLite{
+#content{
 	width:100%;
 	background: @background url('../../images/docubg.png') repeat-x top;
 	color: @lightText;
@@ -452,7 +464,7 @@ body > #try{
 		}
 	}
 }
-#docsLite.standard{
+.docsLite.standard{
 	article{
 		width:@10col;
 		margin:auto;
@@ -509,7 +521,14 @@ body > #try{
 		}
 	}
 }
-#docsLite.tablet, #docsLite.pseudotablet, #docsLite.standard.landscape{
+#content.standard{
+	article{
+		width:@10col;
+		margin:auto;
+		position:relative;
+	}
+}
+#content.tablet, #content.standard.pseudotablet{
 	article{
 		width:auto;
 		padding: 0 @gutter 0 @gutter;
@@ -557,7 +576,24 @@ body > #try{
 		}
 	}
 }
-#docsLite.mobile, #docsLite.pseudomobile, #docsLite.smalltablet, #docsLite.pseudosmalltablet{
+#content.mobile, #content.smalltablet, #content.pseudomobile, #content.pseudosmalltablet{
+	article{
+		width:auto;
+		padding: 0 @gutter 0 @gutter;
+		section, section:nth-child(2n){
+			width:auto;
+			padding:0px;
+			float:none;
+		}
+		section+section{
+			margin-top:20px;
+		}
+	}
+	article+article{
+		margin-top:@gutter;
+	}
+}
+.docsLite.mobile, .docsLite.pseudomobile, .docsLite.smalltablet, .docsLite.pseudosmalltablet{
 	article{
 		width:auto;
 		margin:10px;
@@ -610,7 +646,7 @@ body > #try{
 		}
 	}
 }
-#docsNav{
+#content nav{
 	height:100%;
 	padding-top:@gutter;
 	position:absolute;
@@ -632,7 +668,8 @@ body > #try{
 		margin-right:3px;
 		list-style:none;
 		color:white;
-		position:relative;
+		position:absolute;
+		right:0;
 		.transitions(.5s);
 		div{ display:inline-block }
 		.label{
@@ -659,16 +696,41 @@ body > #try{
 		}
 	}
 }
-#docsNav.active{
+#content nav.standard, #content nav.tablet.landscape{
+	width:150px;
+	left:-140px;
+}
+#content nav.tablet, #content nav.standard.pseudotablet{
+	width:25%;
+	left:-24.5%;
+	font-weight:bold;
+}
+#content nav.smalltablet, #content nav.mobile, #content nav.standard.pseudomobile, #content nav.standard.pseudosmalltablet{
+	width:50%;
+	left:-49%;
+	font-weight:bold;
+}
+#content nav.active{ //open docs
 	left:0 !important;
 	background:@footer;
 	background:fadeout(@footer, 25%);
 	border-right-color:@blueText;
 }
+
+//Docs Nav
+#content nav#docsNav{
+	li{	position:relative; }
+	li + li { margin-top:@gutter; }
+}
+#docsNav.mobile, #docsNav.standard.pseudomobile, #docsNav.smalltablet, #docsNav.standard.pseudosmalltablet{
+	li + li { margin-top:0; }
+}
 #docsNav.fixed{	position:fixed;	}
 #docsNav.pseudomobile.fixed, #docsNav.pseudosmalltablet.fixed, #docsNav.pseudotablet.fixed{
 	position:absolute;
 } 
+
+
 
 
 
@@ -720,33 +782,6 @@ body > #try{
 }
 .circle+.circle{
 	margin-left:3px;
-}
-
-//In pure standard
-#docsNav.standard{
-	width:150px;
-	left:-140px;
-	li + li {
-		margin-top:@gutter;
-	}
-}
-//In tablet
-#docsNav.tablet, #docsNav.standard.tablet, #docsNav.standard.tablet.landscape{
-	width:25%;
-	left:-24.5%;
-	font-weight:bold;
-	li + li {
-		margin-top:@gutter;
-	}
-}
-//In mobile, small tablet
-#docsNav.mobile, #docsNav.standard.pseudomobile, #docsNav.smalltablet, #docsNav.standard.pseudosmalltablet{
-	width:50%;
-	left:-49%;
-	font-weight:bold;
-	li + li{
-		margin-top:@gutter/2;
-	}
 }
 
 footer{
