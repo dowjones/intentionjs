@@ -67,6 +67,11 @@ h5 {
   font-size: 20px;
   font-weight: normal;
 }
+#content h3 a,
+#content h4 a {
+  color: #f9efd4;
+  text-decoration: none;
+}
 #content pre {
   width: 100%;
   padding: 6px;

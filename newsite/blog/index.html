@@ -1,0 +1,33 @@
+---
+layout: blog
+title: "Recent Things"
+---
+
+<!-- BODY CONTENT -->
+<section id="posts">
+    {% for post in site.posts %}
+    <article>
+        <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+        <p class="meta">{{ post.date | date_to_string }}</p>
+        <ul class="tags">
+
+        </ul>
+	</article>
+    {% endfor %}
+</section>
+<section id="sidebar">
+	<div class="pagination">
+		<h3>Page {{ paginator.page }} of {{ paginator.total_pages }}</h3>
+		{% if paginator.previous_page %}
+			<div class="prev"><a href="{{ paginator.previous_page_path }}">&lt; Older</a>
+		{% endif %}
+		{% if paginator.next.page %}
+			<div class="next"><a href="{{ paginator.next_page_path }}">Newer &gt;</a>
+		{% endif %}
+		<div class="clear"></div>
+	</div>
+</section>
+<div class="clear"></div>
+
+
+<!-- END BODY CONTENT -->

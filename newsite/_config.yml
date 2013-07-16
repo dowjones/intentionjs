@@ -1,0 +1,7 @@
+safe: true
+source: ./
+destination: ./_site/
+lsi: false
+pygments: true
+paginate: 5
+paginate_url: "blog/page:num"
