@@ -1,5 +1,5 @@
 ---
-layout: blog
+layout: base
 title: "Recent Things"
 ---
 
@@ -8,14 +8,14 @@ title: "Recent Things"
     {% for post in site.posts %}
     <article>
         <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-        <p class="meta">{{ post.date | date_to_string }}</p>
-        <ul class="tags">
-
-        </ul>
+        {% if post.sub %}<h4>{{ post.sub }}</h4>{% endif %}
+        <section class="header"><p class="meta">{{ post.date | date_to_string }}</p><p class="tags">{% for tags in post.tags %}<a href="tagged/{{ tags }}.html" class="{{ tags }}">{{ tags }}</a> {% endfor %}</p></section>
 	</article>
     {% endfor %}
 </section>
-<section id="sidebar">
+
+<!--If you want the sidebar back, you'll have to change the css so #posts is no longer 100% of the width in standard and tablet-->
+<!--<section id="sidebar">
 	<div class="pagination">
 		<h3>Page {{ paginator.page }} of {{ paginator.total_pages }}</h3>
 		{% if paginator.previous_page %}
@@ -26,7 +26,7 @@ title: "Recent Things"
 		{% endif %}
 		<div class="clear"></div>
 	</div>
-</section>
+</section>-->
 <div class="clear"></div>
 
 

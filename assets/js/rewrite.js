@@ -27,7 +27,7 @@ $(function() {
 			D = (D.clientHeight)? D: B;
 	}
 	
-	$(window).ready(function() { //Things that need the page to be done before running
+	$(document).ready(function() { //Things that need the page to be done before running
 		contentPos = $('#content').offset().top + 3;
 		if(docsTest == true) { buildHome(contentPos, D); }
 		else { buildBlog(); }

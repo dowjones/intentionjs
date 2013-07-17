@@ -53,6 +53,12 @@ code {
   background: #182c33;
   word-break: keep-all;
 }
+pre code {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
 .highlight .comment {
   color: #6fa86f;
 }
@@ -68,6 +74,9 @@ p + p {
 }
 p + p {
   text-indent: 16px;
+}
+p + div.highlight {
+  margin: 20px 0 20px 0;
 }
 .colPadding {
   padding-left: 80px;
@@ -98,7 +107,7 @@ body.landscape {
 }
 a,
 a:visited {
-  color: #ea865a;
+  color: #bac6cc;
 }
 #center.standard.pseudomobile,
 #center.standard.pseudosmalltablet,
@@ -459,6 +468,7 @@ body > #try .cancel {
   width: 100%;
   background: #bac6cc;
   text-align: center;
+  color: #352f29;
 }
 #all #try.standard .inner,
 #heading .inner {
@@ -528,7 +538,15 @@ body > #try .cancel {
 #heading.standard.pseudotablet .inner {
   width: auto;
   margin: 0 10px 0 10px;
-  padding: 0 10px 0 10px;
+  padding: 20px 10px 20px 10px;
+}
+#heading.mobile .inner h2,
+#heading.smalltablet .inner h2,
+#heading.tablet .inner h2,
+#heading.standard.pseudomobile .inner h2,
+#heading.standard.pseudosmalltablet .inner h2,
+#heading.standard.pseudotablet .inner h2 {
+  font-size: 28px;
 }
 #try h2 {
   padding: 0 0 20px 0;
@@ -631,6 +649,10 @@ body > #try .cancel {
   margin: auto;
   position: relative;
 }
+#content.tablet section,
+#content.standard.pseudotablet section {
+  padding: 0 20px 0 20px;
+}
 #content.tablet article,
 #content.standard.pseudotablet article {
   width: auto;
@@ -686,6 +708,12 @@ body > #try .cancel {
 #content.standard.pseudotablet article.thirds section:nth-child(3n) {
   padding-left: 13px;
   padding-right: 0px;
+}
+#content.mobile section,
+#content.smalltablet section,
+#content.pseudomobile section,
+#content.pseudosmalltablet section {
+  padding: 0 20px 0 20px;
 }
 #content.mobile article,
 #content.smalltablet article,
@@ -873,10 +901,6 @@ body > #try .cancel {
 #content nav li .circle.active {
   background: #ea865a;
 }
-#content nav li a {
-  color: white;
-  text-decoration: none;
-}
 #content nav.standard,
 #content nav.tablet.landscape {
   width: 150px;
@@ -902,6 +926,71 @@ body > #try .cancel {
   background: rgba(56, 116, 142, 0.75);
   border-right-color: #d0e0ef;
 }
+#content nav a {
+  color: white;
+  text-decoration: none;
+}
+#content nav a.release {
+  color: #ea865a;
+}
+#content nav a.example {
+  color: #63a263;
+}
+#content nav a.update {
+  color: #68a8c4;
+}
+#posts section.header .tags a {
+  color: #bac6cc;
+  text-decoration: none;
+}
+#posts section.header .tags a:hover {
+  color: white;
+}
+#posts section.header .tags a.release:hover {
+  color: #ea865a;
+}
+#posts section.header .tags a.example:hover {
+  color: #63a263;
+}
+#posts section.header .tags a.update:hover {
+  color: #68a8c4;
+}
+section#filter {
+  padding: 10px 20px 10px 20px;
+  color: #bac6cc;
+  border-bottom: #bac6cc 10px solid;
+}
+section#filter h4 {
+  margin-top: 6px;
+}
+section#filter h4 a {
+  color: #f9efd4;
+}
+section#filter.standard {
+  width: 780px;
+  margin: auto;
+  margin-top: 20px;
+}
+section#filter.tablet,
+section#filter.smalltablet,
+section#filter.mobile,
+section#filter.standard.pseudotablet,
+section#filter.standard.pseudosmalltablet,
+section#filter.standard.pseudomobile {
+  width: auto;
+}
+#filter.release {
+  border-bottom-color: #ea865a;
+  color: #ea865a;
+}
+#filter.example {
+  border-bottom-color: #63a263;
+  color: #63a263;
+}
+#filter.update {
+  border-bottom-color: #68a8c4;
+  color: #68a8c4;
+}
 #content nav#docsNav li {
   position: relative;
 }
@@ -921,6 +1010,65 @@ body > #try .cancel {
 #docsNav.pseudosmalltablet.fixed,
 #docsNav.pseudotablet.fixed {
   position: absolute;
+}
+#content.blog h4 {
+  font-size: 30px;
+}
+#content.blog section.header + article {
+  margin-top: 20px;
+}
+#content.blog article p + p {
+  text-indent: 0;
+}
+#content.blog article p + .highlight {
+  margin-top: 20px;
+}
+#content.blog article .highlight + p {
+  margin-top: 20px;
+}
+#content.blog article ul {
+  list-style: disc;
+}
+#content.blog article ul li {
+  margin-left: 20px;
+}
+#content.blog article p + ul,
+#content.blog article ul + p {
+  margin-top: 20px;
+}
+#content.blog article li p + ul {
+  margin-top: 0;
+}
+#content.blog section.footer {
+  width: auto;
+  background: #589358;
+}
+#content.blog section.footer .inner {
+  padding: 20px 0 20px 0;
+}
+#content.blog section.footer a {
+  color: #f9efd4;
+  text-decoration: none;
+}
+#content.blog.standard .inner,
+#content.blog.pseudostandard .inner {
+  width: 780px;
+}
+#content.blog.tablet h4,
+#content.blog.standard.pseudotablet h4 {
+  font-size: 24px;
+}
+#content.blog.smalltablet h4,
+#content.blog.mobile h4,
+#content.blog.standard.pseudosmalltablet h4,
+#content.blog.standard.pseudomobile h4 {
+  font-size: 24px;
+}
+#content.blog.smalltablet section.footer,
+#content.blog.mobile section.footer,
+#content.blog.standard.pseudosmalltablet section.footer,
+#content.blog.standard.pseudomobile section.footer {
+  text-align: center;
 }
 .swipe {
   width: 100%;

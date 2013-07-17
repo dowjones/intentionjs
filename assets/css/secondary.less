@@ -58,6 +58,9 @@ h5{ font-size:22px; }
 	.inner{
 		padding:@gutter 0 @gutter*2 0;
 	}
+	#filter+.inner{
+		padding-top:2*@gutter;
+	}
 	#posts{
 		color:@lightText;
 		box-sizing:border-box;
@@ -92,6 +95,25 @@ h5{ font-size:22px; }
 	p+pre, pre+p{
 		margin-top:@gutter/2;
 	}
+	p.meta, p.tags{
+		font-size:12px;
+		display:inline-block;
+	}
+	.tags a+a{
+		margin-left:3px;
+	}
+	h3+h4{
+		margin-top:3px;
+	}
+	h3+p.meta{
+		margin-top:3px;
+	}
+	h4+p.meta{
+		margin-top:4px;
+	}
+	li+li{
+		margin-left:3px;
+	}
 }
 #content.standard, #content.pseudostandard, #content.tablet.landscape{
 	.inner{
@@ -99,7 +121,7 @@ h5{ font-size:22px; }
 		margin:auto;
 	}
 	#posts{
-		width:70%;
+		width:100%;
 		padding-right:@gutter;
 		float:left;
 	}
@@ -113,7 +135,7 @@ h5{ font-size:22px; }
 		width:auto;
 	}
 	#posts{
-		width:70%;
+		width:100%;
 		padding-right:@gutter;
 		float:left;
 	}
@@ -148,26 +170,6 @@ h5{ font-size:22px; }
 #posts{
 	article{
 		padding:0;
-		p.meta, ul.tags li{
-			font-size:12px;
-		}
-		ul.tags li{
-			list-style:none;
-			display:inline-block;
-			color:@code;
-		}
-		h3+h4{
-			margin-top:3px;
-		}
-		h3+p.meta{
-			margin-top:3px;
-		}
-		h4+p.meta{
-			margin-top:4px;
-		}
-		li+li{
-			margin-left:3px;
-		}
 		img{
 			width:100%;
 		}

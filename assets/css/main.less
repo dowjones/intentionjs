@@ -17,9 +17,9 @@
 @text:			rgb(53, 47, 41);
 @lightText:		rgb(249, 239, 212);
 @code:			rgb(186, 198, 204);
-@link:			#000;
-@linkVisited:	#000;
-@linkActive:	#000;
+@link:			@code;
+@linkVisited:	@code;
+@linkActive:	white;
 @background:	rgb(32, 59, 68);
 @background2:	rgb(186, 198, 204);
 @headerbg:		rgb(215, 220, 219);
@@ -70,14 +70,17 @@ code{
 	background: darken(@background, 5%);
 	word-break:keep-all;
 }
+pre code{ //automated syntax highlight
+	border:none;
+	background:transparent;
+	padding:0;
+	margin:0;
+}
 .highlight .comment{ color: darken(multiply(white, @highlight), 5%); }
 p { line-height: 24px; }
-h1+p, h2+p, h3+p, h4+p, p+p{
-	margin-top:5px;
-}
-p+p{
-	text-indent:16px;
-}
+h1+p, h2+p, h3+p, h4+p, p+p{ margin-top:5px; }
+p+p{ text-indent:16px; }
+p+div.highlight{ margin: @gutter 0 @gutter 0; }
 .colPadding{
 	padding-left:@1col+@gutter;
 	padding-right:@1col+@gutter;
@@ -110,9 +113,7 @@ body{
 html.landscape, body.landscape{
 	font-size:25% !important;
 }
-a, a:visited{
-	color: @orange;
-}
+a, a:visited{ color: @link; }
 
 //Specific elements
 #center.standard.pseudomobile, #center.standard.pseudosmalltablet, #center.standard.pseudotablet{
@@ -381,6 +382,7 @@ body > #try{
 	width:100%;
 	background:@background2;
 	text-align:center;
+	color:@text;
 	.inner{
 		width:@10col;
 		margin:auto;
@@ -418,9 +420,10 @@ body > #try{
 }
 #heading.mobile, #heading.smalltablet, #heading.tablet, #heading.standard.pseudomobile, #heading.standard.pseudosmalltablet, #heading.standard.pseudotablet{
 	.inner{
+		h2{ font-size:28px; }
 		width:auto;
 		margin:0 @gutter/2 0 @gutter/2;
-		padding:0 @gutter/2 0 @gutter/2;
+		padding:@gutter @gutter/2 @gutter @gutter/2;
 	}
 }
 #try{
@@ -528,6 +531,9 @@ body > #try{
 	}
 }
 #content.tablet, #content.standard.pseudotablet{
+	section{ //For content that's not necessarily in an article (blog post headings)
+		padding:0 @gutter 0 @gutter;
+	}
 	article{
 		width:auto;
 		padding: 0 @gutter 0 @gutter;
@@ -576,6 +582,9 @@ body > #try{
 	}
 }
 #content.mobile, #content.smalltablet, #content.pseudomobile, #content.pseudosmalltablet{
+	section{ //For content that's not necessarily in an article (blog post headings)
+		padding:0 @gutter 0 @gutter;
+	}
 	article{
 		width:auto;
 		padding: 0 @gutter 0 @gutter;
@@ -645,7 +654,7 @@ body > #try{
 		}
 	}
 }
-#content nav{
+#content nav{ //docsNav, tagsNav
 	height:100%;
 	padding-top:@gutter;
 	position:absolute;
@@ -689,10 +698,6 @@ body > #try{
 		.circle.active{
 			background:@orange;
 		}
-		a{
-			color:white;
-			text-decoration:none;
-		}
 	}
 }
 #content nav.standard, #content nav.tablet.landscape{
@@ -716,6 +721,50 @@ body > #try{
 	border-right-color:@blueText;
 }
 
+//Blog Nav
+#content nav{
+	a{ //<--------------------Default, used for all, not just blog nav
+		color:white;
+		text-decoration:none;
+	}
+	a.release{ color:@orange; }
+	a.example{ color:lighten(@green, 5%); }
+	a.update{ color:lighten(@blue, 20%); }
+}
+#posts section.header .tags{ //<----------- Doesn't really belong here, but the colors need to be alignment with nav colors
+	a{ color:@code; text-decoration:none;}
+	a:hover{ color:white; }
+	a.release:hover{ color:@orange; }
+	a.example:hover{ color:lighten(@green, 5%); }
+	a.update:hover{ color:lighten(@blue, 20%); }
+}
+section#filter{
+	padding:@gutter/2 @gutter @gutter/2 @gutter;
+	color:@code;
+	border-bottom:@code 10px solid;
+	h4{
+		margin-top:6px;
+		a{ color:@lightText; }
+	}
+}
+section#filter.standard{ width:@10col; margin:auto; margin-top:@gutter; }
+section#filter.tablet, section#filter.smalltablet, section#filter.mobile, section#filter.standard.pseudotablet, section#filter.standard.pseudosmalltablet, section#filter.standard.pseudomobile{
+	width:auto;
+}
+#filter.release {
+	border-bottom-color:@orange;
+	color:@orange;
+}
+#filter.example {
+	border-bottom-color:lighten(@green, 5%);
+	color:lighten(@green, 5%);
+}
+#filter.update {
+	border-bottom-color:lighten(@blue, 20%);
+	color:lighten(@blue, 20%);
+}
+
+
 //Docs Nav
 #content nav#docsNav{
 	li{	position:relative; }
@@ -729,7 +778,43 @@ body > #try{
 	position:absolute;
 } 
 
-
+//Blog content
+#content.blog{
+	h4{ font-size:30px;  }
+	section.header + article{ margin-top: @gutter; }
+	section#filter{
+		
+	}
+	article{
+		p+p{ text-indent:0; }
+		p+.highlight{ margin-top:@gutter; }
+		.highlight+p{ margin-top:@gutter; }
+		ul{
+			list-style:disc;
+			li{ margin-left: @gutter;}
+		}
+		p+ul, ul+p{	margin-top:@gutter; }
+		li p+ul { margin-top:0; } //This takes care of a stupid thing jekyll does, embedding <p>s inside <li>s
+	}
+	section.footer{
+		width:auto;
+		background:@green;
+		.inner{ padding:@gutter 0 @gutter 0; }
+		a{ color:@lightText; text-decoration:none; }
+	}
+}
+#content.blog.standard, #content.blog.pseudostandard{
+	.inner{ width:@10col; }
+}
+#content.blog.tablet, #content.blog.standard.pseudotablet,{
+	h4{ font-size:24px; }
+}
+#content.blog.smalltablet, #content.blog.mobile, #content.blog.standard.pseudosmalltablet, #content.blog.standard.pseudomobile{
+	h4{ font-size:24px; }
+	section.footer{
+		text-align:center;
+	}
+}
 
 
 

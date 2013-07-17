@@ -44,6 +44,9 @@ h5 {
 #content .inner {
   padding: 20px 0 40px 0;
 }
+#content #filter + .inner {
+  padding-top: 40px;
+}
 #content #posts {
   color: #f9efd4;
   box-sizing: border-box;
@@ -83,6 +86,26 @@ h5 {
 #content pre + p {
   margin-top: 10px;
 }
+#content p.meta,
+#content p.tags {
+  font-size: 12px;
+  display: inline-block;
+}
+#content .tags a + a {
+  margin-left: 3px;
+}
+#content h3 + h4 {
+  margin-top: 3px;
+}
+#content h3 + p.meta {
+  margin-top: 3px;
+}
+#content h4 + p.meta {
+  margin-top: 4px;
+}
+#content li + li {
+  margin-left: 3px;
+}
 #content.standard .inner,
 #content.pseudostandard .inner,
 #content.tablet.landscape .inner {
@@ -92,7 +115,7 @@ h5 {
 #content.standard #posts,
 #content.pseudostandard #posts,
 #content.tablet.landscape #posts {
-  width: 70%;
+  width: 100%;
   padding-right: 20px;
   float: left;
 }
@@ -108,7 +131,7 @@ h5 {
 }
 #content.tablet #posts,
 #content.standard.pseudotablet #posts {
-  width: 70%;
+  width: 100%;
   padding-right: 20px;
   float: left;
 }
@@ -164,27 +187,6 @@ h5 {
 }
 #posts article {
   padding: 0;
-}
-#posts article p.meta,
-#posts article ul.tags li {
-  font-size: 12px;
-}
-#posts article ul.tags li {
-  list-style: none;
-  display: inline-block;
-  color: #bac6cc;
-}
-#posts article h3 + h4 {
-  margin-top: 3px;
-}
-#posts article h3 + p.meta {
-  margin-top: 3px;
-}
-#posts article h4 + p.meta {
-  margin-top: 4px;
-}
-#posts article li + li {
-  margin-left: 3px;
 }
 #posts article img {
   width: 100%;
