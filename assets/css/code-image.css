@@ -152,8 +152,7 @@ html {
   display: block;
 }
 #smallCode {
-  border-top: 3px #38748e solid;
-  border-bottom: 3px #38748e solid;
+  border-top: 13px #2a5669 solid;
   display: block;
 }
 #smallCode pre {
@@ -169,6 +168,10 @@ html {
 }
 #smallCode pre#input {
   background: #495c63 url('../../images/codeimage/left.png') repeat-y right;
+  background-color: #495c63;
+  background-image: url('../../images/codeimage/horizontal.png'), url('../../images/codeimage/left.png');
+  background-repeat: repeat-x, repeat-y;
+  background-position: top, right;
 }
 #smallCode pre#output {
   padding: 15px 6px 20px 6px;

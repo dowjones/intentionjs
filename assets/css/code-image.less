@@ -1,9 +1,31 @@
+@offBlack:			rgb(53, 47, 41); //@text
+@gray:				rgb(200, 200, 200);
+@offWhite:			rgb(244, 241, 234); //@navbg
+@lightYellow:		rgb(249, 239, 212);//@lightText
+@periwinkle:		rgb(186, 198, 204);//@code
+@lightBlue:			rgb(208, 224, 239); //@blueText
+@blue:				rgb(56, 116, 142); //@footer
+@mediumBlue:		rgb(32, 59, 68); //@background
+@darkBlue:			rgb(12, 38, 45); //@blueDark
+@lightBlueGray:		rgb(215, 220, 219); //@headerbg
+@blueGray:			rgb(186, 198, 204); //@background2
+@darkBlueGray:		rgb(81, 96, 101); //code comments
+@lightGreen:		rgb(202, 229, 202); //@greenText
+@green:				rgb(88, 147, 88);
+@darkGreen:			rgb(12, 48, 12);
+@seafoam:			rgb(127, 178, 127);
+@lightSeafoam:		rgb(145, 188, 145);
+@orange:			rgb(234, 134, 90);
+@lightOrange:		rgb(243, 201, 190);
+@darkOrange:		rgb(226, 99, 69);	
+
 @background:	rgb(73, 92, 99);
 @text:			rgb(186, 198, 204);
 @white:			rgb(244, 241, 234);
 @orangeDark:	rgb(226, 99, 69);
 @orangeLight:	rgb(234, 134, 90);
-@blueDark:		rgb(56, 116, 142); 
+@blueDark:		rgb(56, 116, 142);
+@blueBlack:		rgb(12, 38, 45); 
 @blueLight:		rgb(98, 189, 221);
 @greenDark:		rgb(88, 147, 88);  
 @greenLight:	rgb(127, 178, 127); 
@@ -115,8 +137,7 @@ html{
 	display:block;
 }
 #smallCode{
-	border-top:3px @blueDark solid;
-	border-bottom:3px @blueDark solid;
+	border-top:13px darken(@blue, 10%) solid;
 	display:block;
 	pre{
 		white-space:pre;
@@ -131,6 +152,10 @@ html{
 	}
 	pre#input{
 		background:@background url('../../images/codeimage/left.png') repeat-y right;
+		background-color:@background;
+		background-image:url('../../images/codeimage/horizontal.png'), url('../../images/codeimage/left.png');
+		background-repeat: repeat-x, repeat-y;
+		background-position:top, right;
 	}
 	pre#output{
 		padding:15px 6px 20px 6px;

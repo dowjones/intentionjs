@@ -285,10 +285,6 @@ header.mobile, header.pseudomobile, header.smalltablet, header.pseudosmalltablet
 		box-sizing:border-box;
 		margin:0 10px 0 10px;
 		padding:20px 10px 10px 10px;
-		section{
-			width:auto;
-			padding:0;
-		}
 		section+section{
 			margin-top:@gutter;
 		}
@@ -305,10 +301,14 @@ header.mobile, header.pseudomobile, header.smalltablet, header.pseudosmalltablet
 		}
 	}
 }
-#splash.pseudomobile section#buttons, #splash.pseudosmalltablet section#buttons{
-	width:100% !important;
-	div{
-		width:auto !important;
+#splash.standard.pseudomobile, #splash.standard.pseudosmalltablet{
+	section{
+		width:auto;
+		padding:0;
+	}
+	section#buttons{
+		width:100%;
+		div{ width:auto; }
 	}
 }
 
@@ -738,31 +738,6 @@ body > #try{
 	a.example:hover{ color:lighten(@green, 5%); }
 	a.update:hover{ color:lighten(@blue, 20%); }
 }
-section#filter{
-	padding:@gutter/2 @gutter @gutter/2 @gutter;
-	color:@code;
-	border-bottom:@code 10px solid;
-	h4{
-		margin-top:6px;
-		a{ color:@lightText; }
-	}
-}
-section#filter.standard{ width:@10col; margin:auto; margin-top:@gutter; }
-section#filter.tablet, section#filter.smalltablet, section#filter.mobile, section#filter.standard.pseudotablet, section#filter.standard.pseudosmalltablet, section#filter.standard.pseudomobile{
-	width:auto;
-}
-#filter.release {
-	border-bottom-color:@orange;
-	color:@orange;
-}
-#filter.example {
-	border-bottom-color:lighten(@green, 5%);
-	color:lighten(@green, 5%);
-}
-#filter.update {
-	border-bottom-color:lighten(@blue, 20%);
-	color:lighten(@blue, 20%);
-}
 
 
 //Docs Nav
@@ -783,7 +758,15 @@ section#filter.tablet, section#filter.smalltablet, section#filter.mobile, sectio
 	h4{ font-size:30px;  }
 	section.header + article{ margin-top: @gutter; }
 	section#filter{
-		
+		position:relative;
+		z-index:5;
+		padding:@gutter/2 @gutter @gutter/2 @gutter;
+		color:@code;
+		border-bottom:@code 10px solid;
+		h4{
+			margin-top:6px;
+			a{ color:@lightText; }
+		}
 	}
 	article{
 		p+p{ text-indent:0; }
@@ -805,15 +788,40 @@ section#filter.tablet, section#filter.smalltablet, section#filter.mobile, sectio
 }
 #content.blog.standard, #content.blog.pseudostandard{
 	.inner{ width:@10col; }
+	section#filter{
+		width:@10col;
+		margin:auto;
+		margin-top:@gutter;
+	}
 }
 #content.blog.tablet, #content.blog.standard.pseudotablet,{
 	h4{ font-size:24px; }
+	section#filter{ 
+		width:auto;
+		background:@blueDark;
+	}
 }
 #content.blog.smalltablet, #content.blog.mobile, #content.blog.standard.pseudosmalltablet, #content.blog.standard.pseudomobile{
 	h4{ font-size:24px; }
+	section#filter{ 
+		width:auto;
+		background:@blueDark;
+	}
 	section.footer{
 		text-align:center;
 	}
+}
+#content.blog #filter.release {
+	border-bottom-color:@orange;
+	color:@orange;
+}
+#content.blog #filter.example {
+	border-bottom-color:lighten(@green, 5%);
+	color:lighten(@green, 5%);
+}
+#content.blog #filter.update {
+	border-bottom-color:lighten(@blue, 20%);
+	color:lighten(@blue, 20%);
 }
 
 

@@ -1,0 +1,179 @@
+@12col:	940px;
+@11col:	860px;
+@10col:	780px;
+@9col:	700px;
+@8col:	620px;
+@7col:	540px;
+@6col:	460px;
+@5col:	380px;
+@4col:	300px;
+@3col:	220px;
+@2col:	140px;
+@1col:	60px;
+@gutter:20px;
+
+//Actual Colors
+@offBlack:			rgb(53, 47, 41); //@text
+@gray:				rgb(200, 200, 200);
+@offWhite:			rgb(244, 241, 234); //@navbg
+@lightYellow:		rgb(249, 239, 212);//@lightText
+@periwinkle:		rgb(186, 198, 204);//@code
+@lightBlue:			rgb(208, 224, 239); //@blueText
+@blue:				rgb(56, 116, 142); //@footer
+@mediumBlue:		rgb(32, 59, 68); //@background
+@darkBlue:			rgb(12, 38, 45); //@blueDark
+@lightBlueGray:		rgb(215, 220, 219); //@headerbg
+@blueGray:			rgb(186, 198, 204); //@background2
+@darkBlueGray:		rgb(81, 96, 101); //code comments
+@lightGreen:		rgb(202, 229, 202); //@greenText
+@green:				rgb(88, 147, 88);
+@darkGreen:			rgb(12, 48, 12);
+@seafoam:			rgb(127, 178, 127);
+@lightSeafoam:		rgb(145, 188, 145);
+@orange:			rgb(234, 134, 90);
+@lightOrange:		rgb(243, 201, 190);
+@darkOrange:		rgb(226, 99, 69);	
+
+//Application specific
+@link:	@periwinkle;
+@text:	@offBlack;
+
+//Timesavers
+.roundedCorners(@radius){
+	border-radius:@radius;
+	-webkit-border-radius:@radius;
+	-moz-border-radius:@radius;
+}
+.transitions(@duration){
+	-webkit-transition: all @duration ease-in-out;
+	-moz-transition: all @duration ease-in-out;
+	-o-transition: all @duration ease-in-out;
+	-ms-transition: all @duration ease-in-out;
+	transition: all @duration ease-in-out;
+}
+.colMargin{	margin:0 @gutter 0 @gutter; }
+.colPadding{ padding:0 @gutter 0 @gutter; }
+.halfMargin{ margin:0 @gutter/2 0 @gutter/2; }
+.halfPadding{ padding:0 @gutter/2 0 @gutter/2; }
+.mobileWrapping{
+	width:auto;
+	.halfMargin;
+	.halfPadding;
+	box-sizing:border-box;
+}
+.noMarginWrapping{
+	width:auto;
+	.colPadding;
+	box-sizing:border-box;
+}
+
+//---BLOG SPECIFIC STYLES
+
+#content.blog{
+	h3 a{ color:@lightYellow; }
+	h4{ font-size:30px; }
+	section#filter{
+		position:relative;
+		z-index:5;
+		padding: @gutter/2 @gutter @gutter/2 @gutter;
+		color:@periwinkle;
+		border-bottom:10px solid @periwinkle;
+		h4 a{
+			margin-top: 6px;
+			color:@lightYellow;
+		}
+	}
+	section.header{
+		p{ text-indent:0px; padding:0px; }
+		p.meta, p.tags{
+			font-size:12px;
+			display:inline-block;
+		}
+		p.tags{
+			margin-left:16px;
+			a.release:hover{ color:@orange; }
+			a.example:hover{ color:lighten(@green, 5%); }
+			a.update:hover{ color:lighten(@blue, 20%); }
+		}
+	}
+	section.footer{
+		width:auto;
+		background:@green;
+		.inner{ padding:@gutter 0 @gutter 0; }
+		a{ color:@lightYellow; }
+	}
+	article{
+		ul{ 
+			list-style:disc;
+			margin-left:@gutter;
+		}
+	}	
+	//Spacing stuff
+	article{ //post specific
+		p+p{ text-indent:0; } //<------- maybe this is better for just .standard
+		p+.highlight, .highlight+p,
+		p+ul, ul+p {
+			margin-top:@gutter;
+		}
+		li p+ul{ margin-top:0; } //takes care of jekyll's embedding <p>s inside <li>s
+	}
+	article+article{ margin-top:@gutter; }
+	section.header + article{ margin-top:@gutter; } //meta info for the post layout
+	h3+h4{ margin-top:3px; } //if it has a subheading
+	h4+p.meta{ margin-top:4px; }
+	h3+p.meta{ margin-top:3px; } //if not
+	.tags a+a{ margin-left:3px; }	
+}
+#content.blog.standard, #content.blog.standard.pseudostandard{
+	.inner{ width:@10col; margin:auto }
+	section#filter{
+		width:@10col;
+		margin:auto;
+		margin-top:@gutter;
+	}
+}
+#content.blog.tablet, #content.blog.standard.pseudotablet{
+//	.inner{ padding-left:5+@gutter; }
+	section#filter{
+		width:auto;
+		background:@darkBlue; //<------ Maybe try different colors for this. Dark blue looks good on bigger screens, but maybe not on smaller ones
+	}
+}
+#content.blog.smalltablet, #content.blog.mobile, #content.blog.standard.pseudosmalltablet, #content.blog.standard.pseudomobile{
+//	.inner{ padding-left:5+@gutter; }
+	h3{ font-size:26px; }
+	h4{ font-size:20px; font-weight:normal;}
+	section#filter{
+		width:auto;
+		background:@darkBlue;
+	}
+	section.footer{
+		text-align:Center;
+	}
+}
+//Specific filter styles for tag pages
+#content.blog #filter.release {
+	border-bottom-color:@orange;
+	color:@orange;
+}
+#content.blog #filter.example {
+	border-bottom-color:lighten(@green, 5%);
+	color:lighten(@green, 5%);
+}
+#content.blog #filter.update {
+	border-bottom-color:lighten(@blue, 20%);
+	color:lighten(@blue, 20%);
+}
+
+
+//left side nav
+#content.blog{
+	nav#blogNav{
+		li+li{ margin-top:0px; }
+		a{ color:white; }
+		a.release{ color:@orange; }
+		a.example{ color:lighten(@green, 5%); }
+		a.update{ color:lighten(@blue, 20%); }
+	}
+	
+}

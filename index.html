@@ -10,7 +10,8 @@
 	<![endif]-->
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
 <!--	<link rel="stylesheet/less" type="text/css" href="assets/css/main.less" />-->
-	<link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/base.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/index.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/mini-example.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/code-image.css" />
 	<script src="assets/js/jquery-1.10.2.min.js" type="text/javascript"></script>
@@ -160,7 +161,7 @@
 	</section>
 	<!-- End that too. Back to decently formatted code -->
 	
-	<section id="try" intent 
+	<section id="heading" class="try" intent 
 		in-pseudomobile-prepend="body"-
 		in-pseudosmalltablet-prepend="body"
 		in-pseudotablet-prepend="body"
@@ -175,8 +176,9 @@
 				<div id="pseudosmalltablet" intent in-pseudosmalltablet-class="toggleOrientation"  in-base-class="null"></div>
 				<div id="pseudotablet" intent in-pseudotablet-class="toggleOrientation"  in-base-class="null"></div>
 				<div id="pseudohdtv"></div>
-				<div class="cancel" intent in-pseudomobile-after="#devices" in-pseudosmalltablet-after="#devices" in-pseudotablet-after="#devices"></div>
 			</div>
+			<div class="cancel"></div>
+			<div class="clear"></div>
 		</div>
 	</section>
 	<section id="content" class="docsLite" intent in-width in-container in-orientation>
@@ -208,7 +210,7 @@ highres <span class="comment">(devicePixelRatio > 1)</span>
 				<section>
 					<pre id="intro"><span id="charTest">A</span> piffy example of Intention that shows multiple types of manipulations on multiple threshold groups. Something with really clear names and a creates an obvious result.</pre>
 				</section>
-				<section>&nbsp;</section>
+				<!--<section>&nbsp;</section>-->
 				<section>
 					<h4>Some type of pitch for the technical significance. A pull quote maybe.</h4>
 				</section>
@@ -285,7 +287,7 @@ time.respond('<select id="timeChange"><option></option><option value="night">nig
 					<pre id="input">code code code</pre>
 					<h3>becomes</h3>
 				</section>
-				<article id="typesOfManip" class="equalize thirds" data-pattern="3" intent in-width in-container in-touch in-touch-class="swipe">
+				<article id="typesOfManip" class="thirds" intent in-width in-container in-touch in-touch-class="swipe">
 					<section>
 						<pre id="mobileOut">One
 This code snippet will show
@@ -298,7 +300,22 @@ Or a rearranged element.</pre>
 					<section>
 						<pre id="tabletOut">two
 	Then how bout
-	This</pre>
+	This
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</pre>
 						<h5>on tablets</h5></section>
 					<section><pre id="stdOut">three</pre><h5>on desktops</h5></section>
 					<div class="clear"></div>

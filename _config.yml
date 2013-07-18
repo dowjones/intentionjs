@@ -4,3 +4,5 @@ lsi: false
 pygments: true
 tag_page_layout: tag
 tag_page_dir: blog/tagged
+prose:
+  media: 'blog/images'

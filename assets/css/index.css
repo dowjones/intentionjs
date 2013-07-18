@@ -1,0 +1,400 @@
+.colMargin {
+  margin: 0 20px 0 20px;
+}
+.colPadding {
+  padding: 0 20px 0 20px;
+}
+.halfMargin {
+  margin: 0 10px 0 10px;
+}
+.halfPadding {
+  padding: 0 10px 0 10px;
+}
+.mobileWrapping {
+  width: auto;
+  margin: 0 10px 0 10px;
+  padding: 0 10px 0 10px;
+  box-sizing: border-box;
+}
+#splash {
+  width: 100%;
+  background: #bac6cc url('../../images/headerbg.png') repeat-x top;
+}
+#splash .inner {
+  background-color: #ea865a;
+  background-image: url('../../images/splashbg.png');
+  background-repeat: repeat-x;
+  background-postion: top;
+  background-image: url('../../images/mezz.png'), url('../../images/splashbg.png'), url('../../images/splashbg-bottom.png');
+  background-repeat: repeat, repeat-x, repeat-x;
+  background-position: top, top, bottom;
+  color: #f9efd4;
+}
+#splash .inner section#buttons {
+  text-align: center;
+}
+#splash .inner section#buttons a,
+#splash .inner section#buttons a:visited {
+  color: #f9efd4;
+  color: rgba(255, 255, 255, 0.75);
+}
+#splash .inner section#buttons #download {
+  background: #589358;
+}
+#splash .inner section#buttons #github {
+  background: #38748e;
+}
+#splash.standard .inner {
+  width: 780px;
+  margin: auto;
+  padding: 0 20px 0 20px;
+}
+#splash.standard .inner section {
+  width: 50%;
+  float: left;
+  padding: 20px 0 25px 0;
+  box-sizing: border-box;
+}
+#splash.standard .inner section#buttons {
+  padding-top: 70px;
+}
+#splash.standard .inner section#buttons div {
+  width: 220px;
+  margin: auto;
+  padding: 10px;
+  text-align: center;
+}
+#splash.standard .inner section#buttons div + div {
+  margin-top: 20px;
+}
+#splash.tablet .inner,
+#splash.pseudotablet .inner,
+#splash.standard.landscape .inner {
+  width: auto;
+  margin: 0 10px 0 10px;
+  padding: 0 10px 0 10px;
+  box-sizing: border-box;
+}
+#splash.tablet .inner section,
+#splash.pseudotablet .inner section,
+#splash.standard.landscape .inner section {
+  width: 50%;
+  float: left;
+  padding: 20px 0 25px 0;
+  box-sizing: border-box;
+}
+#splash.tablet .inner section#buttons,
+#splash.pseudotablet .inner section#buttons,
+#splash.standard.landscape .inner section#buttons {
+  width: 50%;
+  padding-top: 70px;
+}
+#splash.tablet .inner section#buttons div,
+#splash.pseudotablet .inner section#buttons div,
+#splash.standard.landscape .inner section#buttons div {
+  width: 220px;
+  margin: auto;
+  padding: 10px;
+  text-align: center;
+}
+#splash.tablet .inner section#buttons div + div,
+#splash.pseudotablet .inner section#buttons div + div,
+#splash.standard.landscape .inner section#buttons div + div {
+  margin-top: 20px;
+}
+#splash.mobile .inner,
+#splash.pseudomobile .inner,
+#splash.smalltablet .inner,
+#splash.pseudosmalltablet .inner {
+  width: auto;
+  margin: 0 10px 0 10px;
+  padding: 0 10px 0 10px;
+  box-sizing: border-box;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+#splash.mobile .inner section + section,
+#splash.pseudomobile .inner section + section,
+#splash.smalltablet .inner section + section,
+#splash.pseudosmalltablet .inner section + section {
+  margin-top: 20px;
+}
+#splash.mobile .inner section#buttons,
+#splash.pseudomobile .inner section#buttons,
+#splash.smalltablet .inner section#buttons,
+#splash.pseudosmalltablet .inner section#buttons {
+  padding-top: 0px;
+  padding-bottom: 10px;
+}
+#splash.mobile .inner section#buttons div,
+#splash.pseudomobile .inner section#buttons div,
+#splash.smalltablet .inner section#buttons div,
+#splash.pseudosmalltablet .inner section#buttons div {
+  margin: 0 10px 0 10px;
+  padding: 10px;
+}
+#splash.mobile .inner section#buttons div + div,
+#splash.pseudomobile .inner section#buttons div + div,
+#splash.smalltablet .inner section#buttons div + div,
+#splash.pseudosmalltablet .inner section#buttons div + div {
+  margin-top: 10px;
+}
+#splash.standard.pseudomobile section,
+#splash.standard.pseudosmalltablet section {
+  width: auto;
+  padding: 0;
+}
+#splash.standard.pseudomobile section#buttons,
+#splash.standard.pseudosmalltablet section#buttons {
+  width: 100%;
+}
+#splash.standard.pseudomobile section#buttons div,
+#splash.standard.pseudosmalltablet section#buttons div {
+  width: auto;
+}
+#all.standard > .try #devices {
+  margin-top: 20px;
+  position: relative;
+  z-index: 2;
+}
+#all.standard > .try #devices div {
+  height: 75px;
+  background: url('../../images/devices.svg');
+  background-size: 258px 74px;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 13px;
+}
+#all.standard > .try #devices div + div {
+  margin-left: 20px;
+}
+#all.standard > .try #devices #pseudomobile {
+  width: 24px;
+  background-position: 0 0;
+}
+#all.standard > .try #devices #pseudosmalltablet {
+  width: 42px;
+  background-position: -26px 0px;
+}
+#all.standard > .try #devices #pseudotablet {
+  width: 53px;
+  background-position: -69px 1px;
+}
+#all.standard > .try #devices #pseudohdtv {
+  width: 94px;
+  background-position: -124px 1px;
+}
+#all.standard > .try .cancel {
+  display: none;
+}
+.try.tablet,
+.try.smalltablet,
+.try.mobile {
+  display: none;
+}
+body > .try.standard {
+  width: 100%;
+  height: 46px;
+  border-bottom: 3px solid #38748e;
+  background: #203b44 url('../../images/docubg.png') repeat-x top;
+  color: #f9efd4;
+  position: fixed;
+  z-index: 10;
+}
+body > .try.standard h2,
+body > .try.standard div#devices {
+  float: left;
+}
+body > .try.standard h2 {
+  font-size: 36px;
+  margin: 2px 0 0 13px;
+}
+body > .try.standard #devices {
+  margin: 5px 0 0 20px;
+}
+body > .try.standard #devices div {
+  width: 35px;
+  height: 35px;
+  float: left;
+  background: url('../../images/devices-dark.svg') no-repeat;
+  background-size: 148px 37px;
+  cursor: pointer;
+}
+body > .try.standard #devices div + div {
+  margin-left: 8px;
+}
+body > .try.standard #devices .toggleOrientation:hover {
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  /* IE 9 */
+
+  -webkit-transform: rotate(-90deg);
+  /* Safari and Chrome */
+
+}
+body > .try.standard #devices #pseudomobile {
+  width: 12px;
+  background-position: 0px;
+}
+body > .try.standard #devices #pseudosmalltablet {
+  width: 21px;
+  background-position: -13px 0px;
+}
+body > .try.standard #devices #pseudotablet {
+  width: 26px;
+  background-position: -35px 0px;
+}
+body > .try.standard #devices #pseudohdtv {
+  width: 47px;
+  background-position: -62px 0px;
+}
+body > .try.standard #devices #return {
+  width: 18px;
+  background-position: -110px 0px;
+}
+body > .try.standard .cancel {
+  width: 18px;
+  height: 35px;
+  background: url('../../images/devices-dark.svg') no-repeat;
+  background-position: -129px 5px;
+  background-size: 148px 37px;
+  position: absolute;
+  right: 13px;
+}
+#content.docsLite pre {
+  width: 100%;
+  padding: 6px;
+  border: 1px double #d7dcdb;
+  box-sizing: border-box;
+  background: #182c33;
+}
+#content.docsLite article.highlight {
+  background: #7fb27f url('../../images/mezz.png') repeat;
+  border-top: 13px solid #91bc91;
+  color: #0c300c;
+  z-index: 3;
+}
+#content.docsLite article.highlight pre {
+  background: #afcfaf;
+  color: #325332;
+  border: 3px solid #589358;
+}
+#content.docsLite article:not(.highlight) + article:not(.highlight) {
+  border-top: 1px dashed #38748e;
+}
+#content.docsLite.standard article:not(.thirds) > section:nth-of-type(3n):last-of-type {
+  width: 100%;
+  clear: both;
+}
+#content.docsLite.standard article,
+#content.docsLite.pseudostandard article {
+  padding: 20px;
+}
+#content.docsLite.standard article h2,
+#content.docsLite.pseudostandard article h2 {
+  box-sizing: border-box;
+  padding-right: 50%;
+}
+#content.docsLite.standard article section,
+#content.docsLite.pseudostandard article section {
+  width: 50%;
+  padding: 20px 13px 25px 0;
+  float: left;
+  box-sizing: border-box;
+}
+#content.docsLite.standard article section:nth-of-type(2n),
+#content.docsLite.pseudostandard article section:nth-of-type(2n) {
+  padding: 20px 0 20px 13px;
+  float: right;
+}
+#content.docsLite.standard article section + h2,
+#content.docsLite.pseudostandard article section + h2 {
+  padding-right: 0;
+  padding-left: 50%;
+}
+#content.docsLite.standard article article,
+#content.docsLite.pseudostandard article article {
+  padding: 0px;
+}
+#content.docsLite.standard article.highlight,
+#content.docsLite.pseudostandard article.highlight {
+  width: 100%;
+  margin: 20px 0 20px 0;
+}
+#content.docsLite.standard article.highlight .inner,
+#content.docsLite.pseudostandard article.highlight .inner {
+  width: 780px;
+  padding: 0;
+  margin: auto;
+}
+#content.docsLite.standard article.thirds,
+#content.docsLite.pseudostandard article.thirds {
+  padding: 0;
+}
+#content.docsLite.standard article.thirds section,
+#content.docsLite.pseudostandard article.thirds section {
+  width: 33%;
+  float: left;
+}
+#content.docsLite.standard article.thirds section:nth-child(3n-2),
+#content.docsLite.pseudostandard article.thirds section:nth-child(3n-2),
+#content.docsLite.standard article.thirds section:nth-child(3n-1),
+#content.docsLite.pseudostandard article.thirds section:nth-child(3n-1) {
+  padding-right: 13px;
+}
+#content.docsLite.standard article.thirds section:nth-child(3n-1),
+#content.docsLite.pseudostandard article.thirds section:nth-child(3n-1) {
+  padding-left: 13px;
+}
+#content.docsLite.standard article.thirds section:nth-child(3n),
+#content.docsLite.pseudostandard article.thirds section:nth-child(3n) {
+  padding-left: 13px;
+  padding-right: 0px;
+}
+#content.docsLite.tablet article,
+#content.docsLite.smalltablet article,
+#content.docsLite.mobile article,
+#content.docsLite.standard.pseudotablet article,
+#content.docsLite.standard.pseudosmalltablet article,
+#content.docsLite.standard.pseudomobile article {
+  padding: 20px 0 20px 0;
+}
+#content.docsLite.tablet article section + section,
+#content.docsLite.smalltablet article section + section,
+#content.docsLite.mobile article section + section,
+#content.docsLite.standard.pseudotablet article section + section,
+#content.docsLite.standard.pseudosmalltablet article section + section,
+#content.docsLite.standard.pseudomobile article section + section {
+  margin-top: 20px;
+}
+#content.docsLite.tablet article.highlight pre,
+#content.docsLite.smalltablet article.highlight pre,
+#content.docsLite.mobile article.highlight pre,
+#content.docsLite.standard.pseudotablet article.highlight pre,
+#content.docsLite.standard.pseudosmalltablet article.highlight pre,
+#content.docsLite.standard.pseudomobile article.highlight pre {
+  border-left: none;
+  border-right: none;
+}
+#content.docsLite.tablet article + article,
+#content.docsLite.smalltablet article + article,
+#content.docsLite.mobile article + article,
+#content.docsLite.standard.pseudotablet article + article,
+#content.docsLite.standard.pseudosmalltablet article + article,
+#content.docsLite.standard.pseudomobile article + article {
+  margin-top: 20px;
+}
+#content.docsLite nav#docsNav {
+  padding-top: 20px;
+}
+#content.docsLite nav#docsNav li {
+  position: relative;
+}
+#content.docsLite nav#docsNav li + li {
+  margin-top: 20px;
+}

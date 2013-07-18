@@ -1,0 +1,413 @@
+//Widths
+@12col:	940px;
+@11col:	860px;
+@10col:	780px;
+@9col:	700px;
+@8col:	620px;
+@7col:	540px;
+@6col:	460px;
+@5col:	380px;
+@4col:	300px;
+@3col:	220px;
+@2col:	140px;
+@1col:	60px;
+@gutter:20px;
+
+//Actual Colors
+@offBlack:			rgb(53, 47, 41); //@text
+@gray:				rgb(200, 200, 200);
+@offWhite:			rgb(244, 241, 234); //@navbg
+@lightYellow:		rgb(249, 239, 212);//@lightText
+@periwinkle:		rgb(186, 198, 204);//@code
+@lightBlue:			rgb(208, 224, 239); //@blueText
+@blue:				rgb(56, 116, 142); //@footer
+@mediumBlue:		rgb(32, 59, 68); //@background
+@darkBlue:			rgb(12, 38, 45); //@blueDark
+@lightBlueGray:		rgb(215, 220, 219); //@headerbg
+@blueGray:			rgb(186, 198, 204); //@background2
+@darkBlueGray:		rgb(81, 96, 101); //code comments
+@lightGreen:		rgb(202, 229, 202); //@greenText
+@green:				rgb(88, 147, 88);
+@darkGreen:			rgb(12, 48, 12);
+@seafoam:			rgb(127, 178, 127);
+@lightSeafoam:		rgb(145, 188, 145);
+@orange:			rgb(234, 134, 90);
+@lightOrange:		rgb(243, 201, 190);
+@darkOrange:		rgb(226, 99, 69);	
+
+//Application specific
+@link:	@periwinkle;
+@text:	@offBlack;
+
+//Timesavers
+.roundedCorners(@radius){
+	border-radius:@radius;
+	-webkit-border-radius:@radius;
+	-moz-border-radius:@radius;
+}
+.transitions(@duration){
+	-webkit-transition: all @duration ease-in-out;
+	-moz-transition: all @duration ease-in-out;
+	-o-transition: all @duration ease-in-out;
+	-ms-transition: all @duration ease-in-out;
+	transition: all @duration ease-in-out;
+}
+.colMargin{	margin:0 @gutter 0 @gutter; }
+.colPadding{ padding:0 @gutter 0 @gutter; }
+.halfMargin{ margin:0 @gutter/2 0 @gutter/2; }
+.halfPadding{ padding:0 @gutter/2 0 @gutter/2; }
+.mobileWrapping{
+	width:auto;
+	.halfMargin;
+	.halfPadding;
+	box-sizing:border-box;
+}
+.noMarginWrapping{
+	width:auto;
+	.colPadding;
+	box-sizing:border-box;
+}
+
+.hide{ display:none; }
+.show{ display:block; }
+.clear{ clear:both; }
+
+//General Rules
+h1{	font-size:48px; font-weight:bold; }
+h2{ font-size:40px; }
+h3{ font-size:26px; font-weight:normal; line-height: 35px;}
+h4{ font-size:24px; }
+h5{ font-size:22px; }
+p { line-height: 24px; }
+
+//Check these to see if they remain accurate
+.mobile h1{	font-size:40px; font-weight:bold; }
+.mobile h2{ font-size:24px; }
+.mobile h3{ font-size:24px; font-weight:normal; line-height: 30px;}
+.mobile h4{ font-size:22px; }
+.mobile h5{ font-size:19px; }
+
+
+//General spacing
+h1+p, h2+p, h3+p, h4+p, p+p{ margin-top:5px; }
+p+p{ text-indent:16px; }
+p+div.highlight, div.highlight+p{ margin-top: @gutter/2; }
+p+pre, pre+p{ margin-top: @gutter/2; }
+
+
+html, body{ font-size:62.5%; height:100%; }
+html.landscape, body.landscape{ font-size:25% !important; }
+body{
+	background:@gray url('../../images/pagebg.png');
+	font-family:Helvetica, Arial, sans-serif;
+}
+
+a, a:visited{ color: @link; text-decoration:none; }
+
+// Element specific stuff
+
+// Body wrapper
+#all{
+	height:100%;
+	margin:auto;
+	background:@mediumBlue;
+	color:@text;
+	font-size: 16px;	
+	box-shadow: 0px 0px 30px rgba(0,0,0,.25);	
+	.roundedCorners(10px);
+	border:1px transparent;
+	position:relative;
+}
+#all.pseudomobile, #all.pseudosmalltablet, #all.pseudotablet{
+	margin:auto;
+	overflow:auto;
+	top:81px;
+}
+#all.pseudomobile{ width:320px; height:480px; }
+#all.pseudosmalltablet { width:600px; height:800px; }
+#all.pseudotablet{ width:780px; height:1024px;}
+#all.pseudohdtv{ width:1920px; height:1080px; padding-top:46px; }
+
+//Header: logo, navigation
+header{
+	width:100%;
+	background:@blueGray;
+	nav{
+		background:@offWhite;
+		border-bottom: 13px solid @orange;
+		a, a:visited{ color:@text; }
+		li {
+			list-style:none;
+			display:inline-block;
+			padding:6px 0 6px 0;
+		}
+		li + li {
+			margin-left: @gutter;
+		}
+	}
+}
+header.standard, header.hdtv{
+	h1{
+		width: @10col;
+		padding: 10px @gutter 10px @gutter;
+		margin:auto;
+	}
+	nav{
+		width:@10col;
+		.colPadding;
+		margin:auto;
+		font-size: 19px;
+		li{	height:25px; }
+	}
+}
+header.tablet, header.pseudotablet, header.standard.landscape{
+	h1, nav{
+		.mobileWrapping;
+	}
+	h1{ padding:@gutter/2; }
+}
+header.mobile, header.pseudomobile, header.smalltablet, header.pseudosmalltablet{
+	box-sizing:border-box;
+	h1, nav{
+		.mobileWrapping;
+	}
+	h1{ font-size:40px; padding:@gutter/2; }
+	nav{ font-size:13px; }
+	li{ height:18px;}
+}
+
+//Heading: Usually a page's title. On index, it's the Try It bar.
+#heading{
+	width:100%;
+	background:@blueGray;
+	text-align:center;
+	.inner{
+		padding:@gutter;
+		border-top:20px solid @darkOrange;
+		background: @lightOrange;
+		background-image: url('../../images/tryitbg.png'); //IE8 fallback
+		background-repeat:repeat-x; //IE8 fallback
+		background-position:top; //IE8 fallback
+		background-image: url('../../images/mezz.png'), url('../../images/tryitbg.png');
+		background-repeat: repeat, repeat-x;
+		background-position: top, top;
+	}
+	h2{ padding:0; }
+}
+#heading.standard, #heading.pseudostandard, #heading.landscape{
+	.inner{
+		width:@10col;
+		margin:auto;
+	}
+}
+#heading.tablet, #heading.smalltablet, #heading.mobile, #heading.standard.pseudotablet, #heading.standard.pseudosmalltablet, #heading.standard.pseudomobile{
+	.inner{
+		.mobileWrapping;
+		padding:@gutter;
+		h2{ font-size: 28px; }
+	}
+}
+
+// Content: what's on a darkblue background
+#content{
+	width:100%;
+	background: @mediumBlue url('../../images/docubg.png') repeat-x top;
+	color: @lightYellow;
+	border-top:13px solid @blue;
+	position:relative;
+	a{ color:@periwinkle; }
+	a:hover{ color:white; }
+	.inner{
+		padding:@gutter 0 @gutter*2 0;
+	}
+	article{
+		box-sizing:border-box;
+		article{
+			clear:both;
+			padding:0px;
+		}
+	}
+	code{
+		color:@periwinkle;
+		padding:0 3px 0 3px;
+		margin:0 2px 0 2px;
+		.roundedCorners(5px);
+		border: 1px double @lightBlueGray;
+		box-sizing:border-box;
+		background: darken(@mediumBlue, 5%);
+		word-break:keep-all;
+	}
+	pre{ 
+		padding:6px;
+		border:1px double @lightBlueGray;
+		box-sizing:border-box;
+		color:@periwinkle;
+		background:darken(@mediumBlue, 5%);
+		white-space: pre;	
+		.comment{ color:@darkBlueGray; }
+		code{
+			border:none;
+			background:transparent;
+			padding:0;
+			margin:0;
+		}
+	}
+	.highlight .comment{ color: darken(multiply(white, @seafoam), 5%); }
+}
+#content.standard, #content.pseudostandard{
+	.inner{
+		width:@10col;
+		margin:auto;
+	}
+	article{
+		width:@10col;
+		margin:auto;
+		position:relative;
+		h2{	width:100%; }
+		h3{	font-size:30px; font-weight:normal; }
+		h4{ font-size:20px; font-weight:normal; }
+	}
+}
+#content.tablet, #content.standard.pseudosmalltablet{
+	.inner{
+		.noMarginWrapping;
+		padding:@gutter;
+	}
+}
+#content.smalltablet, #content.mobile, #content.standard.pseudotablet, #content.standard.pseudomobile{
+	.inner{
+		.noMarginWrapping;
+		padding:@gutter 0;
+		section.header, p, ul{ padding:0 @gutter 0 @gutter+5; }
+		pre{
+			border-left:none;
+			border-right:none;
+			padding:10px;
+			position:relative;
+			z-index:5;
+		}
+	}
+	article{ //<----------- Gets the index page working right. Maybe should go on index.less
+		h2, h3, h4, h5, h6, p, ul{
+			padding: 0 @gutter 0 @gutter+5;
+		}
+		pre{
+			border-left:none;
+			border-right:none;
+			padding:10px;
+			position:relative;
+			z-index:5;
+		}
+		li p{
+			padding:0px !important; //Sorry to use this, but I'm not willing to change the nested structure to accommodate this stupid code.
+		}
+	}
+}
+
+//Left-side navigation
+#content{
+	nav{
+		height:100%;
+		position:absolute;
+		top:0;
+		z-index:4;
+		border-right:3px solid @blue;
+		text-align:right;
+		.transitions(.5s);
+		h6{ //instructions
+			width:100%;
+			padding:6px 6px 6px 0;
+			margin: 0 0  @gutter 0;
+			background:@blue;
+			font-size:14px;
+			position:absolute;
+			left:100%;
+		}
+		li{ //a node on the line
+			margin-right:3px; //get it on the line
+			position:absolute;
+			right:0;
+			list-style:none;
+			color:white;
+			.transitions(.5s);
+			div{ display:inline-block }
+			.label{
+				width:auto;
+				padding-right:7px;
+			}
+			.circle{
+				width:5px;
+				height:5px;
+				.roundedCorners(5px);
+				border:3px solid @orange;
+				background:@mediumBlue;
+				position:absolute;
+				top:50%;
+				margin-top:-5px; //vertically center
+			}
+			.circle.active{
+				background:@orange;
+			}
+		}
+	}
+	nav.active.standard, nav.active.tablet, nav.active.smalltablet, nav.active.mobile{ //open state
+		left:0;
+		background:@blue; //IE8 fallback
+		background:fadeout(@blue, 10%);
+		border-right-color:@lightBlue;
+		z-index:6;
+	}
+	nav.standard, nav.tablet.landscape, nav.standard.pseudostandard.landscape{
+		width:150px;
+		left:-140px;
+	}
+	nav.tablet, nav.standard.pseudotablet{
+		width:25%;
+		left:-24.5%;
+		font-weight:bold;
+	}
+	nav.smalltablet, nav.mobile, nav.standard.pseudosmalltablet, nav.standard.pseudomobile{
+		width:50%;
+		left:-49%;
+		font-weight:bold;
+	}
+	nav.fixed.standard{ //fixed state
+		position:fixed;
+	}
+	nav.fixed.tablet, nav.fixed.smalltablet, nav.fixed.mobile,
+	nav.fixed.standard.pseudotablet, nav.fixed.standard.pseudosmalltablet, nav.fixed.standard.pseudomobile{
+		position:absolute;
+	}
+}
+
+footer{
+	width:100%;
+	background:@blue;
+	text-align:center;
+	color:@lightBlue;
+	z-index:4;
+	position:relative;
+	.inner{
+		width:50%;
+		margin:auto;
+		box-sizing:border-box;
+	}
+	h1{
+		font-size:60px;
+		font-weight:normal;
+		color:@orange;
+	}
+}
+footer.standard{
+	.inner{
+		width:@10col;
+		margin:auto;
+		padding:@gutter/2 @gutter @gutter @gutter;
+	}
+}
+footer.mobile, footer.pseudomobile, footer.smalltablet, footer.pseudosmalltablet, footer.tablet, footer.pseudotablet{
+	.inner{
+		width:auto;
+		padding:@gutter;
+	}
+}
