@@ -6,31 +6,11 @@ tag_page_layout: tag
 tag_page_dir: blog/tagged
 prose:
   media: 'blog/images'
-  metadata:
-      _posts:
-        - name: "categories"
-          field:
-            element: "hidden"
-            value:
-              - "post"
-        - name: "layout"
-          field:
-            element: "text"
-            label: "Layout"
-            value: "default"
-        - name: "order"
-          field:
-            element: "number"
-            label: "Order"
-            value: 0
-        - name: "item"
-          field:
-            element: "select"
-            label: "Item"
-            placeholder: "Select an Item"
-            options:
-              - name: "Item 1"
-                value: "item1"
-              - name: "Item 2"
-                value: "item2"
-            selected: "item2"
+  metadata: 
+    _posts:
+      layout: post
+      title: Post Title
+      sub: Subheading
+      tags: space separated (example, release, update are tag pages)
+      
+      
