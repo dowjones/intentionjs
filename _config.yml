@@ -6,3 +6,11 @@ tag_page_layout: tag
 tag_page_dir: blog/tagged
 prose:
   media: 'blog/images'
+  metadata: 
+    _posts:
+      layout: post
+      published: true
+      title: Post Title
+      tags: tags
+      filepath: _posts/filename.md
+      
