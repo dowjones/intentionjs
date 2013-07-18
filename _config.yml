@@ -4,6 +4,7 @@ lsi: false
 pygments: true
 tag_page_layout: tag
 tag_page_dir: blog/tagged
+images: ../../../blog/images
 prose:
   media: 'blog/images'
   metadata: 
@@ -12,5 +13,3 @@ prose:
       title: Post Title
       sub: Subheading
       tags: space separated (example, release, update are tag pages)
-      
-      
