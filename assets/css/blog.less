@@ -96,6 +96,34 @@
 			a.update:hover{ color:lighten(@blue, 20%); }
 		}
 	}
+	section.img{
+		.inner{
+			padding:0;
+			border-bottom:8px solid @blue;
+			overflow:hidden;
+			margin-top:6px;
+			img{
+				max-width:100%;
+				margin:auto;
+			}
+		}
+	}
+	article section.img{
+		.inner{ max-height:250px; }
+	}
+	
+	.inner{
+		section.header+section.img{
+			margin-bottom:@gutter*1.25;
+			.inner{
+				max-height:600px;
+				img{
+					max-height:600px;
+					margin:auto;
+				}
+			}		
+		}
+	}
 	section.footer{
 		width:auto;
 		background:@green;

@@ -205,6 +205,11 @@ body > .try.standard {
 	color: @lightYellow;
 	position:fixed;
 	z-index:10;
+	.inner{
+		background:transparent;
+		margin:0;
+		padding:0;
+	}
 	h2, div#devices{
 		float:left;
 	}
@@ -330,12 +335,22 @@ body > .try.standard {
 #content.docsLite.tablet, #content.docsLite.smalltablet, #content.docsLite.mobile,
 #content.docsLite.standard.pseudotablet, #content.docsLite.standard.pseudosmalltablet, #content.docsLite.standard.pseudomobile{
 	article{
+		width:auto;
 		padding:@gutter 0 @gutter 0;
+		section{ 
+			width:auto;
+			padding:0;
+			float:none;
+		}
 		section+section{
 			margin-top:@gutter;
+			padding-left:0;
 		}
 	}
 	article.highlight{
+		.inner{
+			width:auto;
+		}
 		pre{
 			border-left:none;
 			border-right:none;

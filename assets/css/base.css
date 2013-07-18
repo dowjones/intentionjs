@@ -233,12 +233,12 @@ header.smalltablet li,
 header.pseudosmalltablet li {
   height: 18px;
 }
-#heading {
+#all > #heading {
   width: 100%;
   background: #bac6cc;
   text-align: center;
 }
-#heading .inner {
+#all > #heading .inner {
   padding: 20px;
   border-top: 20px solid #e26345;
   background: #f3c9be;
@@ -249,33 +249,33 @@ header.pseudosmalltablet li {
   background-repeat: repeat, repeat-x;
   background-position: top, top;
 }
-#heading h2 {
+#all > #heading h2 {
   padding: 0;
 }
-#heading.standard .inner,
-#heading.pseudostandard .inner,
-#heading.landscape .inner {
+#all > #heading.standard .inner,
+#all > #heading.pseudostandard .inner,
+#all > #heading.landscape .inner {
   width: 780px;
   margin: auto;
 }
-#heading.tablet .inner,
-#heading.smalltablet .inner,
-#heading.mobile .inner,
-#heading.standard.pseudotablet .inner,
-#heading.standard.pseudosmalltablet .inner,
-#heading.standard.pseudomobile .inner {
+#all > #heading.tablet .inner,
+#all > #heading.smalltablet .inner,
+#all > #heading.mobile .inner,
+#all > #heading.standard.pseudotablet .inner,
+#all > #heading.standard.pseudosmalltablet .inner,
+#all > #heading.standard.pseudomobile .inner {
   width: auto;
   margin: 0 10px 0 10px;
   padding: 0 10px 0 10px;
   box-sizing: border-box;
   padding: 20px;
 }
-#heading.tablet .inner h2,
-#heading.smalltablet .inner h2,
-#heading.mobile .inner h2,
-#heading.standard.pseudotablet .inner h2,
-#heading.standard.pseudosmalltablet .inner h2,
-#heading.standard.pseudomobile .inner h2 {
+#all > #heading.tablet .inner h2,
+#all > #heading.smalltablet .inner h2,
+#all > #heading.mobile .inner h2,
+#all > #heading.standard.pseudotablet .inner h2,
+#all > #heading.standard.pseudosmalltablet .inner h2,
+#all > #heading.standard.pseudomobile .inner h2 {
   font-size: 28px;
 }
 #content {
@@ -374,10 +374,10 @@ header.pseudosmalltablet li {
   box-sizing: border-box;
   padding: 20px 0;
 }
-#content.smalltablet .inner section.header,
-#content.mobile .inner section.header,
-#content.standard.pseudotablet .inner section.header,
-#content.standard.pseudomobile .inner section.header,
+#content.smalltablet .inner section,
+#content.mobile .inner section,
+#content.standard.pseudotablet .inner section,
+#content.standard.pseudomobile .inner section,
 #content.smalltablet .inner p,
 #content.mobile .inner p,
 #content.standard.pseudotablet .inner p,

@@ -59,6 +59,29 @@
 #content.blog section.header p.tags a.update:hover {
   color: #68a8c4;
 }
+#content.blog section.img .inner {
+  padding: 0;
+  border-bottom: 8px solid #38748e;
+  overflow: hidden;
+  margin-top: 6px;
+}
+#content.blog section.img .inner img {
+  max-width: 100%;
+  margin: auto;
+}
+#content.blog article section.img .inner {
+  max-height: 250px;
+}
+#content.blog .inner section.header + section.img {
+  margin-bottom: 25px;
+}
+#content.blog .inner section.header + section.img .inner {
+  max-height: 600px;
+}
+#content.blog .inner section.header + section.img .inner img {
+  max-height: 600px;
+  margin: auto;
+}
 #content.blog section.footer {
   width: auto;
   background: #589358;

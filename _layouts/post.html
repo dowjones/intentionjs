@@ -57,6 +57,13 @@
 				{% if page.sub %}<h4>{{ page.sub }}</h4>{% endif %}
 				<p class="meta">{{ page.date | date_to_string }}</p><p class="tags">{% for tags in page.tags %}<a href="../../../blog/tagged/{{ tags }}.html" class="{{ tags }}">{{ tags }}</a> {% endfor %}</p>
 			</section>
+			{% if page.img %}
+				<section class="img">
+					<div class="inner">
+						<img src="{{ site.images }}/{{ page.img }}" />
+					</div>
+				</section>
+			{% endif %}
 			<article>{{ content }}</article>
 		</div>
 		<section class="footer">

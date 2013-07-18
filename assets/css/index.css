@@ -201,6 +201,11 @@ body > .try.standard {
   position: fixed;
   z-index: 10;
 }
+body > .try.standard .inner {
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
 body > .try.standard h2,
 body > .try.standard div#devices {
   float: left;
@@ -362,7 +367,18 @@ body > .try.standard .cancel {
 #content.docsLite.standard.pseudotablet article,
 #content.docsLite.standard.pseudosmalltablet article,
 #content.docsLite.standard.pseudomobile article {
+  width: auto;
   padding: 20px 0 20px 0;
+}
+#content.docsLite.tablet article section,
+#content.docsLite.smalltablet article section,
+#content.docsLite.mobile article section,
+#content.docsLite.standard.pseudotablet article section,
+#content.docsLite.standard.pseudosmalltablet article section,
+#content.docsLite.standard.pseudomobile article section {
+  width: auto;
+  padding: 0;
+  float: none;
 }
 #content.docsLite.tablet article section + section,
 #content.docsLite.smalltablet article section + section,
@@ -371,6 +387,15 @@ body > .try.standard .cancel {
 #content.docsLite.standard.pseudosmalltablet article section + section,
 #content.docsLite.standard.pseudomobile article section + section {
   margin-top: 20px;
+  padding-left: 0;
+}
+#content.docsLite.tablet article.highlight .inner,
+#content.docsLite.smalltablet article.highlight .inner,
+#content.docsLite.mobile article.highlight .inner,
+#content.docsLite.standard.pseudotablet article.highlight .inner,
+#content.docsLite.standard.pseudosmalltablet article.highlight .inner,
+#content.docsLite.standard.pseudomobile article.highlight .inner {
+  width: auto;
 }
 #content.docsLite.tablet article.highlight pre,
 #content.docsLite.smalltablet article.highlight pre,

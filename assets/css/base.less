@@ -177,7 +177,7 @@ header.mobile, header.pseudomobile, header.smalltablet, header.pseudosmalltablet
 }
 
 //Heading: Usually a page's title. On index, it's the Try It bar.
-#heading{
+#all>#heading{
 	width:100%;
 	background:@blueGray;
 	text-align:center;
@@ -194,13 +194,13 @@ header.mobile, header.pseudomobile, header.smalltablet, header.pseudosmalltablet
 	}
 	h2{ padding:0; }
 }
-#heading.standard, #heading.pseudostandard, #heading.landscape{
+#all>#heading.standard, #all>#heading.pseudostandard, #all>#heading.landscape{
 	.inner{
 		width:@10col;
 		margin:auto;
 	}
 }
-#heading.tablet, #heading.smalltablet, #heading.mobile, #heading.standard.pseudotablet, #heading.standard.pseudosmalltablet, #heading.standard.pseudomobile{
+#all>#heading.tablet, #all>#heading.smalltablet, #all>#heading.mobile, #all>#heading.standard.pseudotablet, #all>#heading.standard.pseudosmalltablet, #all>#heading.standard.pseudomobile{
 	.inner{
 		.mobileWrapping;
 		padding:@gutter;
@@ -278,7 +278,7 @@ header.mobile, header.pseudomobile, header.smalltablet, header.pseudosmalltablet
 	.inner{
 		.noMarginWrapping;
 		padding:@gutter 0;
-		section.header, p, ul{ padding:0 @gutter 0 @gutter+5; }
+		section, p, ul{ padding:0 @gutter 0 @gutter+5; }
 		pre{
 			border-left:none;
 			border-right:none;
