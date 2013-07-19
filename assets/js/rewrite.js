@@ -30,7 +30,7 @@ $(window).load(function() {
 	$(document).ready(function() { //Things that need the page to be done before running
 		contentPos = $('#content').offset().top + 3;
 		if(docsTest == true) { buildHome(contentPos, D); }
-		else { buildBlog(); }
+		else { buildBlog(contentPos); }
 	})
 	.on('scroll', function(){
 		if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }

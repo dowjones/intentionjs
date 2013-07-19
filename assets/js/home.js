@@ -82,8 +82,8 @@ var buildHome = function(contentPos, D) {
 		else { var scroll = pageYOffset; }
 		
 		//Fixing the docsNav position
-		if(scroll >= contentPos) { $('#docsNav').addClass('fixed'); }
-		else { $('#docsNav').removeClass('fixed'); }
+		if(scroll >= contentPos) { $('#content nav').addClass('fixed'); }
+		else { $('#content nav').removeClass('fixed'); }
 	});
 	$.each($('.docsLite h2'), function() { //then create the nav 
 		$(this).attr('id', 't'+i); //#targeti

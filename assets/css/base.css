@@ -146,6 +146,10 @@ header {
   width: 100%;
   background: #bac6cc;
 }
+header h1 a,
+header h1 a:visited {
+  color: #352f29;
+}
 header nav {
   background: #f4f1ea;
   border-bottom: 13px solid #ea865a;
@@ -174,10 +178,6 @@ header.hdtv nav {
   padding: 0 20px 0 20px;
   margin: auto;
   font-size: 19px;
-}
-header.standard nav li,
-header.hdtv nav li {
-  height: 25px;
 }
 header.tablet h1,
 header.pseudotablet h1,
@@ -494,7 +494,7 @@ header.standard.pseudosmalltablet li {
 }
 #content nav li {
   margin-right: 3px;
-  position: absolute;
+  position: relative;
   right: 0;
   list-style: none;
   color: white;
@@ -525,6 +525,9 @@ header.standard.pseudosmalltablet li {
 }
 #content nav li .circle.active {
   background: #ea865a;
+}
+#content nav li + li {
+  margin-top: 20px;
 }
 #content nav.active.standard,
 #content nav.active.tablet,

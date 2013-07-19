@@ -132,6 +132,7 @@ a, a:visited{ color: @link; text-decoration:none; }
 header{
 	width:100%;
 	background:@blueGray;
+	h1 a, h1 a:visited{ color:@text; }
 	nav{
 		background:@offWhite;
 		border-bottom: 13px solid @orange;
@@ -157,7 +158,6 @@ header.standard, header.hdtv{
 		.colPadding;
 		margin:auto;
 		font-size: 19px;
-		li{	height:25px; }
 	}
 }
 header.tablet, header.pseudotablet, header.standard.landscape{
@@ -318,7 +318,7 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 		}
 		li{ //a node on the line
 			margin-right:3px; //get it on the line
-			position:absolute;
+			position:relative;
 			right:0;
 			list-style:none;
 			color:white;
@@ -341,6 +341,9 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 			.circle.active{
 				background:@orange;
 			}
+		}
+		li+li{
+			margin-top:@gutter;
 		}
 	}
 	nav.active.standard, nav.active.tablet, nav.active.smalltablet, nav.active.mobile,

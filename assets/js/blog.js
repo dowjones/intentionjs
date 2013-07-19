@@ -1,14 +1,20 @@
-var buildBlog = function() {
+var buildBlog = function(contentPos) {
 		var posts = [],
-			titlePos = [],
 			i = 1;
+		$(window).on('scroll', function() { //first setup listeners
+			//Gotta reset these for IE8
+			if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
+			else { var scroll = pageYOffset; }
+			
+			//Fixing the docsNav position
+			if(scroll >= contentPos) { $('#content nav').addClass('fixed'); }
+			else { $('#content nav').removeClass('fixed'); }
+		});
 		$.each($('#content article'), function() { 
 			var list = $(this).children('section.header').children('.tags').children('a'),
-				tags = [],
-				pos = $(this).position().top + 10;
-			if(i != 1) { pos += (20); } //position() doesn't account for padding
-			console.log(i, pos);
-			var markup = '<li id="a'+i+'" style="top:'+pos+'px"><div class="label"></div><div class="circle"></div></li>';
+				tags = [];
+			$(this).attr('id', 't'+i);
+			var markup = '<li id="a'+i+'"><div class="label"></div><div class="circle"></div></li>';
 			$('#content nav ul').append(markup);
 			$.each(list, function() {
 				var tag = $(this).text(),
@@ -16,6 +22,7 @@ var buildBlog = function() {
 				tags.push(tag);
 				$('#a'+i+' .label').append(linkMarkup);
 			});
+			$('#a'+i+' .label').append('<br/><a class="jump" href="#t'+i+'">Jump</a>');
 			posts.push(tags);
 			i++;
 		});
