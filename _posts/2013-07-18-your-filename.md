@@ -4,7 +4,7 @@ published:
   - "true"
 layout: post
 title: I am posting from Prose.io
-tags: "update, release, example"
+tags: update release example
 filepath: _posts/filename.md
 ---
 

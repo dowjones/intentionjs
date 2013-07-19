@@ -89,6 +89,7 @@
 			font-size:12px;
 			display:inline-block;
 		}
+		p.meta a{ color:@lightYellow; }
 		p.tags{
 			margin-left:16px;
 			a.release:hover{ color:@orange; }
@@ -96,41 +97,32 @@
 			a.update:hover{ color:lighten(@blue, 20%); }
 		}
 	}
-	section.img{
-		.inner{
-			padding:0;
-			border-bottom:8px solid @blue;
-			overflow:hidden;
-			margin-top:6px;
-			img{
-				max-width:100%;
-				margin:auto;
-			}
-		}
+	//blog images
+	section.img{ //base style
+		padding:0;
+		border-bottom:8px solid @blue;
 	}
-	article section.img{
-		.inner{ max-height:250px; }
+	.inner section.img{ //in a blog post
+		margin-bottom:@gutter*1.25;
+		.inner{ padding:0; text-align:center; }
+		img{ max-height: 600px; }
 	}
-	
-	.inner{
-		section.header+section.img{
-			margin-bottom:@gutter*1.25;
-			.inner{
-				max-height:600px;
-				img{
-					max-height:600px;
-					margin:auto;
-				}
-			}		
-		}
+	.inner article section.img{ //on the blog index
+		max-height:250px;
+		overflow:hidden;
+		.inner{ text-align:left; }
+		img{ max-width:100%; margin:auto; }
 	}
+	//Green "go back" bar
 	section.footer{
 		width:auto;
 		background:@green;
 		.inner{ padding:@gutter 0 @gutter 0; }
 		a{ color:@lightYellow; }
 	}
+	//Basic article styling
 	article{
+		clear:both;
 		ul{ 
 			list-style:disc;
 			margin-left:@gutter;
@@ -162,6 +154,8 @@
 }
 #content.blog.tablet, #content.blog.standard.pseudotablet{
 //	.inner{ padding-left:5+@gutter; }
+	h3{ font-size:26px; }
+	h4{ font-size:20px; font-weight:normal; }
 	section#filter{
 		width:auto;
 		background:@darkBlue; //<------ Maybe try different colors for this. Dark blue looks good on bigger screens, but maybe not on smaller ones

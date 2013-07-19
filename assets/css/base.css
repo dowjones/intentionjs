@@ -190,48 +190,53 @@ header.standard.landscape nav {
   padding: 0 10px 0 10px;
   box-sizing: border-box;
 }
+header.tablet nav li,
+header.pseudotablet nav li,
+header.standard.landscape nav li {
+  height: auto;
+}
 header.tablet h1,
 header.pseudotablet h1,
 header.standard.landscape h1 {
   padding: 10px;
 }
 header.mobile,
-header.pseudomobile,
+header.standard.pseudomobile,
 header.smalltablet,
-header.pseudosmalltablet {
+header.standard.pseudosmalltablet {
   box-sizing: border-box;
 }
 header.mobile h1,
-header.pseudomobile h1,
+header.standard.pseudomobile h1,
 header.smalltablet h1,
-header.pseudosmalltablet h1,
+header.standard.pseudosmalltablet h1,
 header.mobile nav,
-header.pseudomobile nav,
+header.standard.pseudomobile nav,
 header.smalltablet nav,
-header.pseudosmalltablet nav {
+header.standard.pseudosmalltablet nav {
   width: auto;
   margin: 0 10px 0 10px;
   padding: 0 10px 0 10px;
   box-sizing: border-box;
 }
 header.mobile h1,
-header.pseudomobile h1,
+header.standard.pseudomobile h1,
 header.smalltablet h1,
-header.pseudosmalltablet h1 {
+header.standard.pseudosmalltablet h1 {
   font-size: 40px;
   padding: 10px;
 }
 header.mobile nav,
-header.pseudomobile nav,
+header.standard.pseudomobile nav,
 header.smalltablet nav,
-header.pseudosmalltablet nav {
+header.standard.pseudosmalltablet nav {
   font-size: 13px;
 }
 header.mobile li,
-header.pseudomobile li,
+header.standard.pseudomobile li,
 header.smalltablet li,
-header.pseudosmalltablet li {
-  height: 18px;
+header.standard.pseudosmalltablet li {
+  height: 15px;
 }
 #all > #heading {
   width: 100%;
@@ -251,6 +256,9 @@ header.pseudosmalltablet li {
 }
 #all > #heading h2 {
   padding: 0;
+}
+#all > #heading h2 a {
+  color: #352f29;
 }
 #all > #heading.standard .inner,
 #all > #heading.pseudostandard .inner,
@@ -359,38 +367,41 @@ header.pseudosmalltablet li {
   font-weight: normal;
 }
 #content.tablet .inner,
-#content.standard.pseudosmalltablet .inner {
-  width: auto;
-  padding: 0 20px 0 20px;
-  box-sizing: border-box;
-  padding: 20px;
-}
 #content.smalltablet .inner,
 #content.mobile .inner,
 #content.standard.pseudotablet .inner,
+#content.standard.pseudosmalltablet .inner,
 #content.standard.pseudomobile .inner {
   width: auto;
   padding: 0 20px 0 20px;
   box-sizing: border-box;
   padding: 20px 0;
 }
+#content.tablet .inner section,
 #content.smalltablet .inner section,
 #content.mobile .inner section,
 #content.standard.pseudotablet .inner section,
+#content.standard.pseudosmalltablet .inner section,
 #content.standard.pseudomobile .inner section,
+#content.tablet .inner p,
 #content.smalltablet .inner p,
 #content.mobile .inner p,
 #content.standard.pseudotablet .inner p,
+#content.standard.pseudosmalltablet .inner p,
 #content.standard.pseudomobile .inner p,
+#content.tablet .inner ul,
 #content.smalltablet .inner ul,
 #content.mobile .inner ul,
 #content.standard.pseudotablet .inner ul,
+#content.standard.pseudosmalltablet .inner ul,
 #content.standard.pseudomobile .inner ul {
   padding: 0 20px 0 25px;
 }
+#content.tablet .inner pre,
 #content.smalltablet .inner pre,
 #content.mobile .inner pre,
 #content.standard.pseudotablet .inner pre,
+#content.standard.pseudosmalltablet .inner pre,
 #content.standard.pseudomobile .inner pre {
   border-left: none;
   border-right: none;
@@ -398,39 +409,55 @@ header.pseudosmalltablet li {
   position: relative;
   z-index: 5;
 }
+#content.tablet article h2,
 #content.smalltablet article h2,
 #content.mobile article h2,
 #content.standard.pseudotablet article h2,
+#content.standard.pseudosmalltablet article h2,
 #content.standard.pseudomobile article h2,
+#content.tablet article h3,
 #content.smalltablet article h3,
 #content.mobile article h3,
 #content.standard.pseudotablet article h3,
+#content.standard.pseudosmalltablet article h3,
 #content.standard.pseudomobile article h3,
+#content.tablet article h4,
 #content.smalltablet article h4,
 #content.mobile article h4,
 #content.standard.pseudotablet article h4,
+#content.standard.pseudosmalltablet article h4,
 #content.standard.pseudomobile article h4,
+#content.tablet article h5,
 #content.smalltablet article h5,
 #content.mobile article h5,
 #content.standard.pseudotablet article h5,
+#content.standard.pseudosmalltablet article h5,
 #content.standard.pseudomobile article h5,
+#content.tablet article h6,
 #content.smalltablet article h6,
 #content.mobile article h6,
 #content.standard.pseudotablet article h6,
+#content.standard.pseudosmalltablet article h6,
 #content.standard.pseudomobile article h6,
+#content.tablet article p,
 #content.smalltablet article p,
 #content.mobile article p,
 #content.standard.pseudotablet article p,
+#content.standard.pseudosmalltablet article p,
 #content.standard.pseudomobile article p,
+#content.tablet article ul,
 #content.smalltablet article ul,
 #content.mobile article ul,
 #content.standard.pseudotablet article ul,
+#content.standard.pseudosmalltablet article ul,
 #content.standard.pseudomobile article ul {
   padding: 0 20px 0 25px;
 }
+#content.tablet article pre,
 #content.smalltablet article pre,
 #content.mobile article pre,
 #content.standard.pseudotablet article pre,
+#content.standard.pseudosmalltablet article pre,
 #content.standard.pseudomobile article pre {
   border-left: none;
   border-right: none;
@@ -438,9 +465,11 @@ header.pseudosmalltablet li {
   position: relative;
   z-index: 5;
 }
+#content.tablet article li p,
 #content.smalltablet article li p,
 #content.mobile article li p,
 #content.standard.pseudotablet article li p,
+#content.standard.pseudosmalltablet article li p,
 #content.standard.pseudomobile article li p {
   padding: 0px !important;
 }

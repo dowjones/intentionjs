@@ -164,16 +164,17 @@ header.tablet, header.pseudotablet, header.standard.landscape{
 	h1, nav{
 		.mobileWrapping;
 	}
+	nav li { height:auto; }
 	h1{ padding:@gutter/2; }
 }
-header.mobile, header.pseudomobile, header.smalltablet, header.pseudosmalltablet{
+header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard.pseudosmalltablet{
 	box-sizing:border-box;
 	h1, nav{
 		.mobileWrapping;
 	}
 	h1{ font-size:40px; padding:@gutter/2; }
 	nav{ font-size:13px; }
-	li{ height:18px;}
+	li{ height:15px;}
 }
 
 //Heading: Usually a page's title. On index, it's the Try It bar.
@@ -193,6 +194,7 @@ header.mobile, header.pseudomobile, header.smalltablet, header.pseudosmalltablet
 		background-position: top, top;
 	}
 	h2{ padding:0; }
+	h2 a{ color:@text; }
 }
 #all>#heading.standard, #all>#heading.pseudostandard, #all>#heading.landscape{
 	.inner{
@@ -268,13 +270,7 @@ header.mobile, header.pseudomobile, header.smalltablet, header.pseudosmalltablet
 		h4{ font-size:20px; font-weight:normal; }
 	}
 }
-#content.tablet, #content.standard.pseudosmalltablet{
-	.inner{
-		.noMarginWrapping;
-		padding:@gutter;
-	}
-}
-#content.smalltablet, #content.mobile, #content.standard.pseudotablet, #content.standard.pseudomobile{
+#content.tablet, #content.smalltablet, #content.mobile, #content.standard.pseudotablet, #content.standard.pseudosmalltablet, #content.standard.pseudomobile{
 	.inner{
 		.noMarginWrapping;
 		padding:@gutter 0;

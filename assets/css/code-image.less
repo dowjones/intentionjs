@@ -153,7 +153,7 @@ html{
 	pre#input{
 		background:@background url('../../images/codeimage/left.png') repeat-y right;
 		background-color:@background;
-		background-image:url('../../images/codeimage/horizontal.png'), url('../../images/codeimage/left.png');
+		background-image:url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/left.png');
 		background-repeat: repeat-x, repeat-y;
 		background-position:top, right;
 	}
@@ -178,16 +178,16 @@ html{
 	color:@orangeDark;
 }
 #smallCode.smalltablet #output, #smallCode.pseudosmalltablet #output{
-	background-image:url('../../images/codeimage/shadow-vertical.png'), url('../../images/codeimage/greenfade.png');
-	background-repeat:repeat-y, repeat-y;
-	background-position:left, top right;
+	background-image:url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/shadow-vertical.png'), url('../../images/codeimage/greenfade.png');
+	background-repeat:repeat-x, repeat-y, repeat-y;
+	background-position:top, left, top right;
 	background-color:rgb(52, 54, 54);
 	color:@greenDark;
 }
 #smallCode.tablet #output, #smallCode.pseudotablet #output{
-	background-image:url('../../images/codeimage/shadow-vertical.png'), url('../../images/codeimage/bluefade.png');
-	background-repeat:repeat-y, repeat-y;
-	background-position:left, top right;
+	background-image:url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/shadow-vertical.png'), url('../../images/codeimage/bluefade.png');
+	background-repeat:repeat-x, repeat-y, repeat-y;
+	background-position:top, left, top right;
 	background-color:rgb(31, 66, 76);
 	color:@blueLight;
 }

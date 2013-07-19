@@ -184,7 +184,7 @@
   width: 94px;
   background-position: -124px 1px;
 }
-#all.standard > .try .cancel {
+#all.standard > .try #devices .cancel {
   display: none;
 }
 .try.tablet,
@@ -262,12 +262,9 @@ body > .try.standard #devices #return {
   width: 18px;
   background-position: -110px 0px;
 }
-body > .try.standard .cancel {
+body > .try.standard #devices .cancel {
   width: 18px;
-  height: 35px;
-  background: url('../../images/devices-dark.svg') no-repeat;
-  background-position: -129px 5px;
-  background-size: 148px 37px;
+  background-position: -129px 0px;
   position: absolute;
   right: 13px;
 }
@@ -370,6 +367,14 @@ body > .try.standard .cancel {
   width: auto;
   padding: 20px 0 20px 0;
 }
+#content.docsLite.tablet article h2,
+#content.docsLite.smalltablet article h2,
+#content.docsLite.mobile article h2,
+#content.docsLite.standard.pseudotablet article h2,
+#content.docsLite.standard.pseudosmalltablet article h2,
+#content.docsLite.standard.pseudomobile article h2 {
+  padding-right: 0;
+}
 #content.docsLite.tablet article section,
 #content.docsLite.smalltablet article section,
 #content.docsLite.mobile article section,
@@ -379,6 +384,14 @@ body > .try.standard .cancel {
   width: auto;
   padding: 0;
   float: none;
+}
+#content.docsLite.tablet article h2 + section,
+#content.docsLite.smalltablet article h2 + section,
+#content.docsLite.mobile article h2 + section,
+#content.docsLite.standard.pseudotablet article h2 + section,
+#content.docsLite.standard.pseudosmalltablet article h2 + section,
+#content.docsLite.standard.pseudomobile article h2 + section {
+  margin-top: 20px;
 }
 #content.docsLite.tablet article section + section,
 #content.docsLite.smalltablet article section + section,

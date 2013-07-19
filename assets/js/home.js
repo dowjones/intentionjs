@@ -98,7 +98,7 @@ var buildHome = function(contentPos, D) {
 	//Consolidated context switch functions 
 	intent
 		.on('width', function() {
-			var device = intent.axes.container.current;
+			var device = intent.axes.width.current;
 			writeOutput(device);
 			//When the context switches, reset the targets
 			contentPos = $('#content').position().top + 3,
