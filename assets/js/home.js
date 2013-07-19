@@ -94,6 +94,19 @@ var buildHome = function(contentPos, D) {
 		$('#docsNav ul').append(markup);
 		i++;
 	});
+	$(window).on('scroll', function() { //Content nav scrolling acctions
+		if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
+		else { var scroll = pageYOffset; }
+		$.each(titlePos, function(index, value) { //test the scroll position against all recorded target positions
+			if(scroll >= value) { //If scrolled past the target
+				$('#a'+(index+1)).children('.circle').addClass('active');
+			} else if(scroll+$(window).height() >= $(document).height()) { //if reached the bottom of the page
+				$('#docsNav li').children('.circle').addClass('active');
+			} else {
+				$('#a'+(index+1)).children('.circle').removeClass('active'); //if none have been reached
+			}
+		});
+	});
 	
 	//Consolidated context switch functions 
 	intent

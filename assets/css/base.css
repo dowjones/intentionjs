@@ -542,8 +542,8 @@ header.standard.pseudosmalltablet li {
 #content nav.standard,
 #content nav.tablet.landscape,
 #content nav.standard.pseudostandard.landscape {
-  width: 150px;
-  left: -140px;
+  width: 200px;
+  left: -190px;
 }
 #content nav.tablet,
 #content nav.standard.pseudotablet {
@@ -568,15 +568,7 @@ header.standard.pseudosmalltablet li {
 #content nav.fixed.standard.pseudotablet,
 #content nav.fixed.standard.pseudosmalltablet,
 #content nav.fixed.standard.pseudomobile {
-  position: fixed;
-}
-#content nav.fixed.scroll.tablet,
-#content nav.fixed.scroll.smalltablet,
-#content nav.fixed.scroll.mobile,
-#content nav.fixed.scroll.standard.pseudotablet,
-#content nav.fixed.scroll.standard.pseudosmalltablet,
-#content nav.fixed.scroll.standard.pseudomobile {
-  position: absolute !important;
+  position: absolute;
 }
 footer {
   width: 100%;
