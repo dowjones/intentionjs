@@ -19,6 +19,17 @@ $(window).load(function() {
 					selection = $('pre').not('#rawCodeImage').not('#standardCodeImage').not('#mobileCodeImage');
 				$.each(selection, function() { $(this).css('font-size', newSize); });
 			}
+		},
+		toggleFix = function(){//Allows the user to scroll through nav if it extends beyond screen height
+								//Knowing in 90% of situations, it will
+			console.log("toggle");
+			if($('#content nav ul').height() > $(window).height()){
+				$('#content nav').addClass('scroll');
+				console.log("it's gotta scroll");
+			} else {
+				$('#content nav').removeClass('scroll');
+				console.log("it doesn't have to");
+			}
 		};
 		scaleFont();
 	if(typeof pageYOffset == 'undefined') { //scrolldepth for IE8
@@ -31,6 +42,7 @@ $(window).load(function() {
 		contentPos = $('#content').offset().top + 3;
 		if(docsTest == true) { buildHome(contentPos, D); }
 		else { buildBlog(); }
+		toggleFix();
 	})
 	.on('scroll', function() { //Content nav scrolling acctions
 		if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
@@ -49,6 +61,9 @@ $(window).load(function() {
 				$('#docsNav').children('h6').fadeOut(500);
 			}, 1000);
 		}
+	})
+	.on('resize', function() {
+		toggleFix();
 	});
 	//Functions for opening the documentation nav (.active is open)
 	$('#content nav')

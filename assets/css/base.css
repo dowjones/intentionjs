@@ -247,9 +247,6 @@ header.standard.pseudosmalltablet li {
   padding: 20px;
   border-top: 20px solid #e26345;
   background: #f3c9be;
-  background-image: url('../../images/tryitbg.png');
-  background-repeat: repeat-x;
-  background-position: top;
   background-image: url('../../images/mezz.png'), url('../../images/tryitbg.png');
   background-repeat: repeat, repeat-x;
   background-position: top, top;
@@ -532,7 +529,10 @@ header.standard.pseudosmalltablet li {
 #content nav.active.standard,
 #content nav.active.tablet,
 #content nav.active.smalltablet,
-#content nav.active.mobile {
+#content nav.active.mobile,
+#content nav.active.standard.pseudotablet,
+#content nav.active.standard.pseudosmalltablet,
+#content nav.active.standard.pseudomobile {
   left: 0;
   background: #38748e;
   background: rgba(56, 116, 142, 0.9);
@@ -568,7 +568,15 @@ header.standard.pseudosmalltablet li {
 #content nav.fixed.standard.pseudotablet,
 #content nav.fixed.standard.pseudosmalltablet,
 #content nav.fixed.standard.pseudomobile {
-  position: absolute;
+  position: fixed;
+}
+#content nav.fixed.scroll.tablet,
+#content nav.fixed.scroll.smalltablet,
+#content nav.fixed.scroll.mobile,
+#content nav.fixed.scroll.standard.pseudotablet,
+#content nav.fixed.scroll.standard.pseudosmalltablet,
+#content nav.fixed.scroll.standard.pseudomobile {
+  position: absolute !important;
 }
 footer {
   width: 100%;
@@ -601,4 +609,9 @@ footer.tablet .inner,
 footer.pseudotablet .inner {
   width: auto;
   padding: 20px;
+}
+.no-multiplebgs #all > #heading .inner {
+  background-image: url('../../images/tryitbg.png');
+  background-repeat: repeat-x;
+  background-position: top;
 }

@@ -34,7 +34,7 @@ var imageSetup = function() {
 },
 
 drawCodeImage = function(coordinates) {
-	var paper = new Raphael(document.getElementById('connections'), 900, 420);
+	var paper = new Raphael(document.getElementById('connections'), 900, 440);
 	$.each(coordinates, function(index, data) { //index: each span classname; data: all points in that classname
 		var total = data.length-1;
 		$.each(data, function(index, points) { //points: the x & y coordinates within a single classname

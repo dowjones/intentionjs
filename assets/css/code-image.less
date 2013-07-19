@@ -151,7 +151,6 @@ html{
 		}
 	}
 	pre#input{
-		background:@background url('../../images/codeimage/left.png') repeat-y right;
 		background-color:@background;
 		background-image:url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/left.png');
 		background-repeat: repeat-x, repeat-y;
@@ -159,6 +158,7 @@ html{
 	}
 	pre#output{
 		padding:15px 6px 20px 6px;
+		white-space:pre;
 	}
 }
 #smallCode.smalltablet, #smallCode.pseudosmalltablet, #smallCode.tablet, #smallCode.pseudotablet {
@@ -192,6 +192,9 @@ html{
 	color:@blueLight;
 }
 .no-multiplebgs{
+	#smallCode #input{
+		background:@background url('../../images/codeimage/left.png') repeat-y right;
+	}
 	#smallCode.mobile #output, #smallCode.pseudomobile #output{
 		background:rgb(77, 62, 58) url('../../images/codeimage/redfade.png') repeat-y top right;
 		border:5px solid red;

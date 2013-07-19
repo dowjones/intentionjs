@@ -186,9 +186,6 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 		padding:@gutter;
 		border-top:20px solid @darkOrange;
 		background: @lightOrange;
-		background-image: url('../../images/tryitbg.png'); //IE8 fallback
-		background-repeat:repeat-x; //IE8 fallback
-		background-position:top; //IE8 fallback
 		background-image: url('../../images/mezz.png'), url('../../images/tryitbg.png');
 		background-repeat: repeat, repeat-x;
 		background-position: top, top;
@@ -346,7 +343,9 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 			}
 		}
 	}
-	nav.active.standard, nav.active.tablet, nav.active.smalltablet, nav.active.mobile{ //open state
+	nav.active.standard, nav.active.tablet, nav.active.smalltablet, nav.active.mobile,
+	nav.active.standard.pseudotablet, nav.active.standard.pseudosmalltablet,
+	nav.active.standard.pseudomobile{ //open state
 		left:0;
 		background:@blue; //IE8 fallback
 		background:fadeout(@blue, 10%);
@@ -372,7 +371,12 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 	}
 	nav.fixed.tablet, nav.fixed.smalltablet, nav.fixed.mobile,
 	nav.fixed.standard.pseudotablet, nav.fixed.standard.pseudosmalltablet, nav.fixed.standard.pseudomobile{
-		position:absolute;
+		position:fixed; //this could be absolute if the nav gets longer than the screen height
+	}
+	nav.fixed.scroll.tablet, nav.fixed.scroll.smalltablet, nav.fixed.scroll.mobile,
+	nav.fixed.scroll.standard.pseudotablet, nav.fixed.scroll.standard.pseudosmalltablet,
+	nav.fixed.scroll.standard.pseudomobile{
+		position:absolute !important;
 	}
 }
 
@@ -405,5 +409,16 @@ footer.mobile, footer.pseudomobile, footer.smalltablet, footer.pseudosmalltablet
 	.inner{
 		width:auto;
 		padding:@gutter;
+	}
+}
+
+//ie8 fixes and fallbacks
+.no-multiplebgs{
+	#all>#heading{
+		.inner{
+			background-image: url('../../images/tryitbg.png'); //IE8 fallback
+			background-repeat:repeat-x; //IE8 fallback
+			background-position:top; //IE8 fallback
+		}
 	}
 }

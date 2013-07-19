@@ -22,9 +22,6 @@
 }
 #splash .inner {
   background-color: #ea865a;
-  background-image: url('../../images/splashbg.png');
-  background-repeat: repeat-x;
-  background-postion: top;
   background-image: url('../../images/mezz.png'), url('../../images/splashbg.png'), url('../../images/splashbg-bottom.png');
   background-repeat: repeat, repeat-x, repeat-x;
   background-position: top, top, bottom;
@@ -435,4 +432,18 @@ body > .try.standard #devices .cancel {
 }
 #content.docsLite nav#docsNav li + li {
   margin-top: 20px;
+}
+.no-multiplebgs #splash .inner {
+  background-image: url('../../images/splashbg.png');
+  background-repeat: repeat-x;
+  background-postion: top;
+}
+.no-multiplebgs #content.docsLite article + article {
+  border-top: 1px dashed #bac6cc;
+}
+.no-multiplebgs #content.docsLite article.highlight {
+  border-top: 13px solid #91bc91;
+}
+.no-multiplebgs #content.docsLite article.highlight + article {
+  border-top: none;
 }

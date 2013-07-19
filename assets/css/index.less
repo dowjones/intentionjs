@@ -70,9 +70,6 @@
 	background:@blueGray url('../../images/headerbg.png') repeat-x top;
 	.inner{
 		background-color: @orange;
-		background-image: url('../../images/splashbg.png'); //IE8 fallbacks
-		background-repeat:repeat-x; //IE8 fallbacks
-		background-postion:top; //IE8 fallbacks
 		background-image: url('../../images/mezz.png'), url('../../images/splashbg.png'), url('../../images/splashbg-bottom.png');
 		background-repeat: repeat, repeat-x, repeat-x;
 		background-position: top, top, bottom;
@@ -364,77 +361,6 @@ body > .try.standard {
 	}
 }
 
-
-
-
-
-
-//.docsLite.standard{
-//	article{
-//		width:@10col;
-//		margin:auto;
-//		padding:@gutter;
-//		position:relative;
-//		h2{
-//			width:100%;
-//			box-sizing:border-box;
-//			padding-right:50%;
-//		}
-//		section+h2{
-//			padding-right:0;
-//			padding-left:50%;
-//		}
-//		section{
-//			width:50%;
-//			padding:@gutter 13px (@gutter+5) 0;
-//			float:left;
-//			box-sizing:border-box;
-//		}
-//		section:nth-of-type(2n){
-//			padding:@gutter 0 @gutter 13px;
-//			float:right;
-//		}
-//		article{
-//			padding:0px;
-//		}
-//	}
-//	article.highlight{
-//		width:100%;
-//		padding:@gutter 0px @gutter 0;
-//		.inner{
-//			width:@10col;
-//			margin:auto;
-//			padding:0 @gutter 0 @gutter;
-//		}
-//	}
-//	article.thirds{
-//		padding:0px;
-//		section{
-//			width:33%;
-//			float:left;
-//		}
-//		section:nth-child(3n-2), section:nth-child(3n-1){
-//			padding-right:13px;
-//		}
-//		section:nth-child(3n-1){
-//			padding-left:13px;
-//			padding-right:13px;
-//		}
-//		section:nth-child(3n){
-//			padding-left:13px;
-//			padding-right:0px;
-//		}
-//	}
-//}
-
-
-
-
-
-
-
-
-
 //docsNav: extension of leftside navigation
 #content.docsLite{
 	nav#docsNav{
@@ -444,3 +370,22 @@ body > .try.standard {
 	}
 }
 
+//IE8 fixes and fallbacks
+.no-multiplebgs{
+	#splash .inner{
+		background-image: url('../../images/splashbg.png'); //IE8 fallbacks
+		background-repeat:repeat-x; //IE8 fallbacks
+		background-postion:top; //IE8 fallbacks
+	}
+	#content.docsLite {
+		article+article{
+			border-top:1px dashed @periwinkle;
+		}	
+		article.highlight{
+			border-top:13px solid @lightSeafoam;
+		}
+		article.highlight+article{
+			border-top:none;
+		}
+	}
+}
