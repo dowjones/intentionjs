@@ -31,15 +31,15 @@ html {
   border-bottom: 6px #38748e solid;
   color: #bac6cc;
   font-family: 'Courier', monospace;
-  font-size: 1.2rem;
-  line-height: 1.7rem;
+  font-size: 12px;
+  line-height: 17px;
   position: relative;
 }
 #codeImage .inner pre {
   white-space: pre;
 }
 #codeImage .inner pre h5 {
-  font-size: 1.5rem;
+  font-size: 15px;
   font-family: Helvetica, Arial, san-serif;
   color: #f4f1ea;
   margin-bottom: -12px;
@@ -161,7 +161,7 @@ html {
   padding: 6px;
 }
 #smallCode pre h5 {
-  font-size: 1.5rem;
+  font-size: 15px;
   font-family: Helvetica, Arial, sans-serif;
   color: #f4f1ea;
   text-align: right;
@@ -214,7 +214,6 @@ html {
 .no-multiplebgs #smallCode.mobile #output,
 .no-multiplebgs #smallCode.pseudomobile #output {
   background: #4d3e3a url('../../images/codeimage/redfade.png') repeat-y top right;
-  border: 5px solid red;
 }
 .no-multiplebgs #smallCode.smalltablet #output,
 .no-multiplebgs #smallCode.pseudosmalltablet #output {

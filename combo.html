@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title></title>
+	
+	<script src="assets/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+	<script src="assets/js/jquery.touchSwipe.min.js" type="text/javascript"></script>
+	<script>
+		$(function() {
+			$('.test')
+				.on('swipe', function() { console.log('swiped.') })
+				.on('tap', function () { $(this).addClass('tapped'); })
+		});
+	</script>
+<link rel="stylesheet" type="text/css" href="assets/css/base.css" />
+<style>
+	.test{
+		background: teal;
+		width: 200px;
+		height: 200px;
+		margin: auto;
+	}
+	.tapped{
+		background: orange;
+	}
+</style>
+</head>
+<body>
+		<div class="test"></div>
+</body>
+</html>
+
+

@@ -447,3 +447,30 @@ body > .try.standard #devices .cancel {
 .no-multiplebgs #content.docsLite article.highlight + article {
   border-top: none;
 }
+.no-backgroundsize #all > .try #devices #pseudomobile {
+  background: url('../../images/mobile-large.png') center no-repeat;
+}
+.no-backgroundsize #all > .try #devices #pseudosmalltablet {
+  background: url('../../images/smalltablet-large.png') center no-repeat;
+}
+.no-backgroundsize #all > .try #devices #pseudotablet {
+  background: url('../../images/tablet-large.png') center no-repeat;
+}
+.no-backgroundsize #all > .try #devices #pseudohdtv {
+  background: url('../../images/hdtv-large.png') center no-repeat;
+}
+.no-backgroundsize body > .try #devices #pseudomobile {
+  background: url('../../images/mobile-small.png') center no-repeat;
+}
+.no-backgroundsize body > .try #devices #pseudosmalltablet {
+  background: url('../../images/smalltablet-small.png') center no-repeat;
+}
+.no-backgroundsize body > .try #devices #pseudotablet {
+  background: url('../../images/tablet-small.png') center no-repeat;
+}
+.no-backgroundsize body > .try #devices #pseudohdtv {
+  background: url('../../images/hdtv-small.png') center no-repeat;
+}
+.no-backgroundsize body > .try #devices .cancel {
+  background: url('../../images/cancel-small.png') center no-repeat;
+}

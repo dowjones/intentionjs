@@ -83,34 +83,33 @@
 .orange{
 	min-height: 75px;
 	float: left;
-	font-size:3.4rem;
-	color:darken(@orange, 25%)
+	font-size:34px;
+	color:darken(@orange, 25%);
+	div{
+		background: @orange;
+		height: 50px;
+		padding:3px;
+	}
+	div+div{
+		height: 20px;
+		margin-top: 5px;
+		clear: both;
+	}
+	
 }
 .orange.small, .orange.tiny{
 	width: 100%;
-	font-size:2.0rem;
+	font-size:20px;
 }
-.orange.small{	font-size:2.0rem; }
-.orange.tiny{	font-size:1.2rem; overflow:hidden;}
+.orange.small{	font-size:20px; }
+.orange.tiny{	font-size:12px; overflow:hidden;}
 .orange.large{
 	width: 73%;
 	min-width: 60px;
 	max-width: 285px;
 }
-.orange div{
-	background: @orange;
-	height: 50px;
-	padding:3px;
-}
-.orange div+div{
-	height: 20px;
-	margin-top: 5px;
-	clear: both;
-}
 .blue{
 	background: @footer !important;
-}
-.blue.small{
 }
 .blue.large{
 	width: 25%;
@@ -121,13 +120,14 @@
 	margin-left: 6px;
 	position: relative;
 }
-.green{
-	text-align: center;
-}
 .green a, .green{
 	color: @greenText;
 	text-decoration: none;
 	font-family: Helvetica, Arial, sans-serif;
+	text-align:center;
+	div{
+		background: @green !important;
+	}
 }
 .green.tiny{
 	display: none;
@@ -136,37 +136,34 @@
 	width: 100%;
 	margin-top: 6px;
 	text-align: center;
-	font-size: 2.0rem;
-}
-.green.small div{
-	width: 20%;
-	height: 25px;
-	margin-top: 6px;
-	float: left;
-	display: inline-block;
-}
-.green.small div+div{
-	margin-left: 6px;
+	font-size: 20px;
+	div{
+		width: 20%;
+		height: 25px;
+		margin-top: 6px;
+		float: left;
+		display: inline-block;
+	}
+	div+div{
+		margin-left: 6px;
+	}
 }
 .green.large{
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	font-size: 2.0rem;
-}
-.green.large div{
-	width: 75%;
-	height: 25px;
-	margin: auto;
-}
-.green.large div+div{
-	margin-top: 6px;
-}
-.green.large div:last-child{
-	margin-bottom: 6px;
-}
-.green div{
-	background: @green !important;
+	font-size: 20px;
+	div{
+		width: 75%;
+		height: 25px;
+		margin: auto;
+	}
+	div+div{
+		margin-top: 6px;
+	}
+	div:last-child{
+		margin-bottom: 6px;
+	}
 }
 
 //Time-based
@@ -179,7 +176,7 @@
 	background-image:url('../../images/mezz.png');
 	box-sizing:border-box;
 	color:white;
-	font-size:3.6rem;
+	font-size:36px;
 	.transitions(.5s);
 	
 }

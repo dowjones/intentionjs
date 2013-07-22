@@ -56,19 +56,19 @@
 .orange {
   min-height: 75px;
   float: left;
-  font-size: 3.4rem;
+  font-size: 34px;
   color: #ae4516;
 }
 .orange.small,
 .orange.tiny {
   width: 100%;
-  font-size: 2.0rem;
+  font-size: 20px;
 }
 .orange.small {
-  font-size: 2.0rem;
+  font-size: 20px;
 }
 .orange.tiny {
-  font-size: 1.2rem;
+  font-size: 12px;
   overflow: hidden;
 }
 .orange.large {
@@ -114,7 +114,7 @@
   width: 100%;
   margin-top: 6px;
   text-align: center;
-  font-size: 2.0rem;
+  font-size: 20px;
 }
 .green.small div {
   width: 20%;
@@ -130,7 +130,7 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  font-size: 2.0rem;
+  font-size: 20px;
 }
 .green.large div {
   width: 75%;
@@ -155,7 +155,7 @@
   background-image: url('../../images/mezz.png');
   box-sizing: border-box;
   color: white;
-  font-size: 3.6rem;
+  font-size: 36px;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
