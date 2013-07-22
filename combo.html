@@ -6,12 +6,27 @@
 <title></title>
 	
 	<script src="assets/js/jquery-1.10.2.min.js" type="text/javascript"></script>
-	<script src="assets/js/jquery.touchSwipe.min.js" type="text/javascript"></script>
+	<script src="assets/js/underscore.js" type="text/javascript"></script>
+	<script src="assets/js/intention.js" type="text/javascript"></script>
+	
+	
 	<script>
 		$(function() {
-			$('.test')
-				.on('swipe', function() { console.log('swiped.') })
-				.on('tap', function () { $(this).addClass('tapped'); })
+			var ua = intent.responsive({
+			   ID: 'useragent',
+			   contexts: [
+			      {name: 'android',	exp: 'android'},
+			      {name: 'ios', exp: 'iphone|ipod|ipad'},
+			      {name: 'mac', exp: 'macintosh'}
+			   ],
+			   matcher: function(measure, ctx){
+			      var regex = '/' + ctx.exp + '/i';
+			      return regex.test(measure);
+			   },
+			   measure: function(){
+			      return navigator.userAgent;
+			   }
+			}).respond();
 		});
 	</script>
 <link rel="stylesheet" type="text/css" href="assets/css/base.css" />
@@ -26,9 +41,17 @@
 		background: orange;
 	}
 </style>
+<style>
+	#ua { width: 200px; height:200px; background:blanchedalmond; }
+	#ua:after { content:"something else"; }
+	#ua.android:after { content:"Android"; background:yellowGreen; }
+	#ua.ios:after { content:"Some type of iOs device"; background:skyblue; }
+	#ua.mac:after { content:"Macintosh"; background:silver; }
+</style>
+<div id="ua" intent in-userAgent>You are using </div>
 </head>
 <body>
-		<div class="test"></div>
+		<div id="ua"></div>
 </body>
 </html>
 

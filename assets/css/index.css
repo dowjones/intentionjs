@@ -149,6 +149,9 @@
 #splash.standard.pseudosmalltablet section#buttons div {
   width: auto;
 }
+#all.standard > .try {
+  text-align: center;
+}
 #all.standard > .try #devices {
   margin-top: 20px;
   position: relative;

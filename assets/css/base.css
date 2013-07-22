@@ -148,7 +148,9 @@ header {
 }
 header h1 a,
 header h1 a:visited {
-  color: #352f29;
+  font-size: 30px;
+  font-weight: normal;
+  color: #0c262d;
 }
 header nav {
   background: #f4f1ea;
@@ -161,10 +163,13 @@ header nav a:visited {
 header nav li {
   list-style: none;
   display: inline-block;
-  padding: 6px 0 6px 0;
+  padding: 6px 10px 6px 10px;
 }
-header nav li + li {
-  margin-left: 20px;
+header nav li:first-of-type {
+  padding-left: 0px;
+}
+header nav li.active {
+  background: rgba(243, 201, 190, 0.7);
 }
 header.standard h1,
 header.hdtv h1 {
@@ -241,7 +246,6 @@ header.standard.pseudosmalltablet li {
 #all > #heading {
   width: 100%;
   background: #bac6cc;
-  text-align: center;
 }
 #all > #heading .inner {
   padding: 20px;
@@ -316,7 +320,7 @@ header.standard.pseudosmalltablet li {
   border: 1px double #d7dcdb;
   box-sizing: border-box;
   background: #182c33;
-  word-break: keep-all;
+  white-space: nowrap;
 }
 #content pre {
   padding: 6px;
@@ -493,7 +497,7 @@ header.standard.pseudosmalltablet li {
   left: 100%;
 }
 #content nav li {
-  margin-right: 3px;
+  margin-right: 6px;
   position: relative;
   right: 0;
   list-style: none;
@@ -509,19 +513,20 @@ header.standard.pseudosmalltablet li {
 }
 #content nav li .label {
   width: auto;
-  padding-right: 7px;
+  padding-right: 14px;
 }
 #content nav li .circle {
-  width: 5px;
-  height: 5px;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
   border: 3px solid #ea865a;
   background: #203b44;
   position: absolute;
   top: 50%;
-  margin-top: -5px;
+  margin-top: -7px;
+  box-shadow: 0px 0px 15px #da4530;
 }
 #content nav li .circle.active {
   background: #ea865a;
@@ -546,7 +551,7 @@ header.standard.pseudosmalltablet li {
 #content nav.tablet.landscape,
 #content nav.standard.pseudostandard.landscape {
   width: 200px;
-  left: -190px;
+  left: -180px;
 }
 #content nav.tablet,
 #content nav.standard.pseudotablet {

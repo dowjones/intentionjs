@@ -101,6 +101,15 @@
 	section.img{ //base style
 		padding:0;
 		border-bottom:8px solid @blue;
+		position:relative;
+	}
+	.shadow{
+		width:100%;
+		position:absolute;
+		bottom:0;
+		z-index:6;
+		height:20px;
+		background:url('../../images/shadow-lr-up.png') bottom repeat-x;
 	}
 	.inner section.img{ //in a blog post
 		margin-bottom:@gutter*1.25;

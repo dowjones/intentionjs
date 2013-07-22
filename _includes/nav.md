@@ -1,4 +1,3 @@
-<li><a href="{{ include.dir }}/#">Documentation</a></li>
-<li><a href="{{ include.dir }}/blog/tagged/example.html">Examples</a></li>
-<li><a href="{{ include.dir }}/blog/">Blog</a></li>
-<li>{{ include.dir }}</li>
+<li {% if include.cur == 'docs' %} class="active" {% endif %}><a href="{{ include.dir }}#">Documentation</a></li>
+<li {% if include.cur == 'examples' %} class="active" {% endif %}><a href="{{ include.dir }}blog/tagged/example.html">Examples</a></li>
+<li {% if include.cur == 'blog' %} class="active" {% endif %}><a href="{{ include.dir }}blog/">Blog</a></li>

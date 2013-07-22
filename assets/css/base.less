@@ -80,6 +80,7 @@ h4{ font-size:24px; }
 h5{ font-size:22px; }
 p { line-height: 24px; }
 
+
 //Check these to see if they remain accurate
 .mobile h1{	font-size:40px; font-weight:bold; }
 .mobile h2{ font-size:24px; }
@@ -132,7 +133,7 @@ a, a:visited{ color: @link; text-decoration:none; }
 header{
 	width:100%;
 	background:@blueGray;
-	h1 a, h1 a:visited{ color:@text; }
+	h1 a, h1 a:visited{ font-size:30px; font-weight:normal; color:@darkBlue; }
 	nav{
 		background:@offWhite;
 		border-bottom: 13px solid @orange;
@@ -140,10 +141,14 @@ header{
 		li {
 			list-style:none;
 			display:inline-block;
-			padding:6px 0 6px 0;
+			padding:6px @gutter/2 6px @gutter/2;
 		}
-		li + li {
-			margin-left: @gutter;
+		li:first-of-type{
+			padding-left:0px;
+		}
+		li.active{
+//			background:overlay(@lightOrange, @offWhite);
+			background: fadeout(@lightOrange, 30%);
 		}
 	}
 }
@@ -181,7 +186,6 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 #all>#heading{
 	width:100%;
 	background:@blueGray;
-	text-align:center;
 	.inner{
 		padding:@gutter;
 		border-top:20px solid @darkOrange;
@@ -234,7 +238,7 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 		border: 1px double @lightBlueGray;
 		box-sizing:border-box;
 		background: darken(@mediumBlue, 5%);
-		word-break:keep-all;
+		white-space:nowrap;
 	}
 	pre{ 
 		padding:6px;
@@ -317,7 +321,7 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 			left:100%;
 		}
 		li{ //a node on the line
-			margin-right:3px; //get it on the line
+			margin-right:6px; //get it on the line
 			position:relative;
 			right:0;
 			list-style:none;
@@ -326,17 +330,18 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 			div{ display:inline-block }
 			.label{
 				width:auto;
-				padding-right:7px;
+				padding-right:14px;
 			}
 			.circle{
-				width:5px;
-				height:5px;
-				.roundedCorners(5px);
+				width:10px;
+				height:10px;
+				.roundedCorners(50%);
 				border:3px solid @orange;
 				background:@mediumBlue;
 				position:absolute;
 				top:50%;
-				margin-top:-5px; //vertically center
+				margin-top:-7px; //vertically center
+				box-shadow:0px 0px 15px overlay(@orange, @mediumBlue);
 			}
 			.circle.active{
 				background:@orange;
@@ -357,7 +362,7 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 	}
 	nav.standard, nav.tablet.landscape, nav.standard.pseudostandard.landscape{
 		width:200px;
-		left:-190px;
+		left:-180px;
 	}
 	nav.tablet, nav.standard.pseudotablet{
 		width:25%;
