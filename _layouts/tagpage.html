@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>intention.js — {{ title }}</title>
-	{% include assets.md dir="../../" cur="blog" %}
+	{% include assets.md dir="../../" %}
 	<link rel="stylesheet" type="text/css" href="../../assets/css/blog.css" />
 	<script src="../../assets/js/blog.js" type="text/javascript"></script>
 </head>
@@ -32,7 +32,8 @@
 	</section>
 	<section id="content" class="blog" intent in-width in-container in-orientation>
 		<nav id="blogNav" intent in-width in-container in-orientation>
-			<ul></ul>
+			<ol></ol>
+			<div class="prediction"></div>
 		</nav>
 		<section id="filter" class="{{ page.tag }}" intent in-width in-container in-orientation>Only showing <b>{{ page.tag }}</b> posts. <h4><a href="../index.html">&larr; Go back</a></h4></section>
 		<div class="inner">

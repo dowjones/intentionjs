@@ -1,6 +1,7 @@
 var buildHome = function(contentPos, D) {
 	//Basic var setup
-	var container_width = intent.responsive({
+	var currentPos = 0,
+	container_width = intent.responsive({
 		ID: 'container',
 		contexts: [
 			{name:"pseudohdtv",min:1800},
@@ -75,7 +76,12 @@ var buildHome = function(contentPos, D) {
 	
 	//For docs nav
 	var titlePos = [],
+		curentPos,
 		i = 1;
+	$.each($('#content article').not('.highlight'), function() { //Create back to top links
+		var markup = '<div class="clear"><a intent in-width in-container>&uarr; Back to top</a></div>';
+		$(this).append(markup);
+	});
 	$(window).on('scroll', function() { //first setup listeners
 		//Gotta reset these for IE8
 		if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
@@ -91,15 +97,16 @@ var buildHome = function(contentPos, D) {
 			markup = '<li id="a'+i+'"><div class="label"><a href="#t'+i+'">'+text+'</a></div><div class="circle"></div></li>', //#anchori
 			pos = $(this).offset().top;
 		titlePos.push(pos); //add these positions to an array to show the current location in the nav
-		$('#docsNav ul').append(markup);
+		$('#docsNav ol').append(markup);
 		i++;
 	});
 	$(window).on('scroll', function() { //Content nav scrolling acctions
 		if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
 		else { var scroll = pageYOffset; }
-		$.each(titlePos, function(index, value) { //test the scroll position against all recorded target positions
+		$.each(titlePos, function(index, value) { //This could be more efficient if the array went from largest to smallest
 			if(scroll >= value) { //If scrolled past the target
 				$('#a'+(index+1)).children('.circle').addClass('active');
+				currentPos = index+1;
 			} else if(scroll+$(window).height() >= $(document).height()) { //if reached the bottom of the page
 				$('#docsNav li').children('.circle').addClass('active');
 			} else {
@@ -107,12 +114,35 @@ var buildHome = function(contentPos, D) {
 			}
 		});
 	});
+	$('#prevnext div').click(function() {
+		var lastArt = $('#content article').not('.highlight').length,
+			dir = $(this).attr('class');
+		if( ($(this).attr('class') == 'next') && (currentPos < lastArt) ){ currentPos++ }
+		else if(($(this).attr('class') == 'prev') && (currentPos > 1)){ currentPos-- }
+		$('html, body').animate({ scrollTop: $('#t'+currentPos).offset().top - 27}, 1000); //minus 27 so you don't obscure the heading
+	});
+	$('article>.clear a').click(function() { //decide what "top" means depending on the device
+		var widthCtx = intent.axes.width.current,
+			conCtx = intent.axes.container.current;
+		if((widthCtx == 'standard') && (conCtx == 'pseudostandard' || conCtx == undefined)) { var target = '#content' }
+		else { var target = '#all>nav' }
+		$('html, body').animate({ scrollTop: $(target).offset().top}, 1000);
+	});
 	
 	//Consolidated context switch functions 
 	intent
 		.on('width', function() {
 			var device = intent.axes.width.current;
 			writeOutput(device);
+			if(device === 'mobile') {
+				unequalize('.docsLite .equalize', 'section');
+				unequalize('#smallCode', 'pre');
+			} else if(device === 'smalltablet' || device === 'tablet') {
+				unequalize('.docsLite .equalize', 'section');
+				equalizeAll('#smallCode', 'pre');
+			} else {
+				equalizeAll('.docsLite .equalize', 'section');
+			}
 			//When the context switches, reset the targets
 			contentPos = $('#content').position().top + 3,
 			titlePos = [];
@@ -127,14 +157,11 @@ var buildHome = function(contentPos, D) {
 			writeOutput(device);
 			if(device === 'mobile') {
 				unequalize('.docsLite .equalize', 'section');
-				unequalize('#typesOfManip', 'section');
 				unequalize('#smallCode', 'pre');
-			} else if(device === 'smalltablet') {
-				equalizeAll('#smallCode', 'pre');
+			} else if(device === 'smalltablet' || device === 'tablet') {
 				unequalize('.docsLite .equalize', 'section');
-				unequalize('#typesOfManip', 'section');
-			} else {
 				equalizeAll('#smallCode', 'pre');
+			} else {
 				equalizeAll('.docsLite .equalize', 'section');
 			}
 			//When the context switches, reset the targets

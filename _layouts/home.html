@@ -163,9 +163,19 @@
 		</div>
 	</section>
 	<section id="content" class="docsLite" intent in-width in-container in-orientation>
-		<nav id="docsNav" intent in-width in-container>
+		<nav id="docsNav" intent in-width in-container 
+			in-mobile-before="#content" in-smalltablet-before="#content" in-tablet-before="#content"
+			in-standard-prepend="#content">
 			<h6>Hover or swipe over this to see the documentation structure.</h6>
-			<ul></ul>
+			<ol></ol> <!-- don't forget to switch this! -->
+			<div class="prediction"></div>
+			<nav id="prevnext" intent 
+				in-mobile-prepend="#content" in-smalltablet-prepend="#content" in-tablet-prepend="#content"
+				in-standard-append="#docsNav">
+				<div class="prev">&lt;</div>
+				<div class="next">&gt;</div>
+				<div class="clear"></div>
+			</nav>
 		</nav>
 		{{ page.content }}
 	</section>

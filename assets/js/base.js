@@ -31,7 +31,7 @@ $(window).load(function() {
 		.ready(function() { //Things that need the page to be done before running
 			contentPos = $('#content').offset().top + 3;
 			if(docsTest == true) { buildHome(contentPos, D); }
-			else { buildBlog(contentPos); }
+			else { buildBlog(contentPos); }	
 		})
 		.on('scroll', function(){
 			if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
@@ -44,7 +44,6 @@ $(window).load(function() {
 		});
 	
 	//Functions for opening the documentation nav (.active is open)
-	var oddClick = true;
 	$('#content nav')
 		.one('mouseenter', function() { $(this).children('h6').fadeOut(500); })
 		.on('mouseenter', function() { $(this).addClass('active'); })
@@ -52,36 +51,6 @@ $(window).load(function() {
 			window.setTimeout(function() {
 				$('#content nav').removeClass('active');
 			}, 500);
-		})
-		.on('tap', function() { //for mobile browser with back/forth swipe features
-			if(oddClick == true) { $(this).addClass('active'); }
-			else { $(this).removeClass('active'); }
-			oddClick = !oddClick;
 		});
-	$('#content')
-		.one('swipe', function() { $(this).children('nav').children('h6').fadeOut(500); })
-		.on('swiperight', function() { $('#content nav').addClass('active'); })
-		.on('swipeleft', function() { $('#content nav').removeClass('active'); })
-		.not('#content nav').on('tap', function() { $('#content nav').removeClass('active'); });
-		
-	//Layout organizing
-	intent
-		.on('width', function() {
-			var device = intent.axes.width.current;
-			if(device === 'mobile') {
-				unequalize('.docsLite .equalize', 'section');
-				unequalize('#typesOfManip', 'section');
-				unequalize('#smallCode', 'pre');
-			} else if(device === 'smalltablet') {
-				equalizeAll('#smallCode', 'pre');
-				unequalize('.docsLite .equalize', 'section');
-				unequalize('#typesOfManip', 'section');
-			} else {
-				equalizeAll('#smallCode', 'pre');
-				equalizeAll('.docsLite .equalize', 'section');
-			}
-			//When the context switches, reset the targets
-			//I'm not sure if i need to include these in home.js..... 
-			contentPos = $('#content').position().top + 3;
-		});
+
 });

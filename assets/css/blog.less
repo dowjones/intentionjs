@@ -162,25 +162,31 @@
 	}
 }
 #content.blog.tablet, #content.blog.standard.pseudotablet{
-//	.inner{ padding-left:5+@gutter; }
 	h3{ font-size:26px; }
 	h4{ font-size:20px; font-weight:normal; }
+	section.header{
+		h4{ padding:0; }
+	}
 	section#filter{
 		width:auto;
 		background:@darkBlue; //<------ Maybe try different colors for this. Dark blue looks good on bigger screens, but maybe not on smaller ones
 	}
+	h2, h3, h4, h5, h6, section, p{ padding: 0 @gutter; }
 }
 #content.blog.smalltablet, #content.blog.mobile, #content.blog.standard.pseudosmalltablet, #content.blog.standard.pseudomobile{
-//	.inner{ padding-left:5+@gutter; }
 	h3{ font-size:26px; }
 	h4{ font-size:20px; font-weight:normal;}
 	section#filter{
 		width:auto;
 		background:@darkBlue;
 	}
+	section.header{
+		h4{ padding:0; }
+	}
 	section.footer{
 		text-align:Center;
 	}
+	h2, h3, h4, h5, h6, section, p{ padding: 0 @gutter; }
 }
 //Specific filter styles for tag pages
 #content.blog #filter.release {
@@ -196,6 +202,25 @@
 	color:lighten(@blue, 20%);
 }
 
+//top side nav
+nav#tagNav{
+	background:transparent;
+	border-bottom:6px solid @green;
+	a.example{ color:lighten(@green, 5%); }
+	a.release{ color:@orange; }
+	a.update{ color:lighten(@blue, 20%); }
+	a+a{ margin-left:6px; }
+}
+#tagNav.standard{
+	display:none;
+	.inner{
+		width:@10col;
+		margin:auto;
+	}
+}
+#tagNav.tablet, #tagNav.smalltablet, #tagNav.mobile{
+	.inner{ .noMarginWrapping; padding:0 @gutter/2; }
+}
 
 //left side nav
 #content.blog{
@@ -206,5 +231,8 @@
 		a.update{ color:lighten(@blue, 20%); }
 		a.jump{ font-size:12px; color:@lightBlue; }
 	}
-	
+	nav#blogNav.tablet, nav#blogNav.smalltablet, nav#blogNav.mobile,
+	nav#blogNav.standard.pseudotablet, nav#blogNav.standard.pseudosmalltablet, nav#blogNav.standard.pseudomobile{
+		display:none;	
+	}
 }

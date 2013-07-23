@@ -11,7 +11,6 @@
 //Currently the code only "equalizes" <section> elements, but it can be changed easily by adjusting line 15
 
 var equalize = function(parent, child, pattern){ 
-	console.log("equalizing");
 	var children = $(parent + ' > ' + child);
 		totalChildren = children.length; //how many sections within an article
 	for (var i=1; i <= totalChildren; i++) { //first clear all heights
@@ -45,6 +44,5 @@ var equalizeAll = function(grandparent, child){ //grandparent contains all the p
 };
 
 var unequalize = function(parent, child){
-	console.log("remove heihgts");
 	$(parent).children(child).css('height', '');
 };

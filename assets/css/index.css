@@ -334,27 +334,28 @@ body > .try.standard #devices .cancel {
   padding: 0;
   margin: auto;
 }
-#content.docsLite.standard article.thirds,
-#content.docsLite.pseudostandard article.thirds {
+#content.docsLite.standard section.thirds,
+#content.docsLite.pseudostandard section.thirds {
+  clear: both;
   padding: 0;
 }
-#content.docsLite.standard article.thirds section,
-#content.docsLite.pseudostandard article.thirds section {
+#content.docsLite.standard section.thirds section,
+#content.docsLite.pseudostandard section.thirds section {
   width: 33%;
   float: left;
 }
-#content.docsLite.standard article.thirds section:nth-child(3n-2),
-#content.docsLite.pseudostandard article.thirds section:nth-child(3n-2),
-#content.docsLite.standard article.thirds section:nth-child(3n-1),
-#content.docsLite.pseudostandard article.thirds section:nth-child(3n-1) {
+#content.docsLite.standard section.thirds section:nth-child(3n-2),
+#content.docsLite.pseudostandard section.thirds section:nth-child(3n-2),
+#content.docsLite.standard section.thirds section:nth-child(3n-1),
+#content.docsLite.pseudostandard section.thirds section:nth-child(3n-1) {
   padding-right: 13px;
 }
-#content.docsLite.standard article.thirds section:nth-child(3n-1),
-#content.docsLite.pseudostandard article.thirds section:nth-child(3n-1) {
+#content.docsLite.standard section.thirds section:nth-child(3n-1),
+#content.docsLite.pseudostandard section.thirds section:nth-child(3n-1) {
   padding-left: 13px;
 }
-#content.docsLite.standard article.thirds section:nth-child(3n),
-#content.docsLite.pseudostandard article.thirds section:nth-child(3n) {
+#content.docsLite.standard section.thirds section:nth-child(3n),
+#content.docsLite.pseudostandard section.thirds section:nth-child(3n) {
   padding-left: 13px;
   padding-right: 0px;
 }
@@ -419,6 +420,14 @@ body > .try.standard #devices .cancel {
   border-left: none;
   border-right: none;
 }
+#content.docsLite.tablet article:first-of-type,
+#content.docsLite.smalltablet article:first-of-type,
+#content.docsLite.mobile article:first-of-type,
+#content.docsLite.standard.pseudotablet article:first-of-type,
+#content.docsLite.standard.pseudosmalltablet article:first-of-type,
+#content.docsLite.standard.pseudomobile article:first-of-type {
+  padding-top: 25px;
+}
 #content.docsLite.tablet article + article,
 #content.docsLite.smalltablet article + article,
 #content.docsLite.mobile article + article,
@@ -426,6 +435,15 @@ body > .try.standard #devices .cancel {
 #content.docsLite.standard.pseudosmalltablet article + article,
 #content.docsLite.standard.pseudomobile article + article {
   margin-top: 20px;
+}
+#content.docsLite.tablet section.thirds section,
+#content.docsLite.smalltablet section.thirds section,
+#content.docsLite.mobile section.thirds section,
+#content.docsLite.standard.pseudotablet section.thirds section,
+#content.docsLite.standard.pseudosmalltablet section.thirds section,
+#content.docsLite.standard.pseudomobile section.thirds section {
+  width: auto;
+  padding: 0;
 }
 #content.docsLite nav#docsNav {
   padding-top: 20px;

@@ -15,7 +15,7 @@ var buildBlog = function(contentPos) {
 				tags = [];
 			$(this).attr('id', 't'+i);
 			var markup = '<li id="a'+i+'"><div class="label"></div><div class="circle"></div></li>';
-			$('#content nav ul').append(markup);
+			$('#content nav ol').append(markup);
 			$.each(list, function() {
 				var tag = $(this).text(),
 					linkMarkup = ' <a href="tagged/'+tag+'.html" class="'+tag+'">'+tag+'</a>';

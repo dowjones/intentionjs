@@ -147,8 +147,7 @@ header{
 			padding-left:0px;
 		}
 		li.active{
-//			background:overlay(@lightOrange, @offWhite);
-			background: fadeout(@lightOrange, 30%);
+			border-bottom: 8px solid fadeout(@lightOrange, 30%);
 		}
 	}
 }
@@ -206,7 +205,7 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 #all>#heading.tablet, #all>#heading.smalltablet, #all>#heading.mobile, #all>#heading.standard.pseudotablet, #all>#heading.standard.pseudosmalltablet, #all>#heading.standard.pseudomobile{
 	.inner{
 		.mobileWrapping;
-		padding:@gutter;
+		padding:@gutter @gutter/2;
 		h2{ font-size: 28px; }
 	}
 }
@@ -225,10 +224,7 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 	}
 	article{
 		box-sizing:border-box;
-		article{
-			clear:both;
-			padding:0px;
-		}
+		position:relative;
 	}
 	code{
 		color:@periwinkle;
@@ -253,9 +249,23 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 			background:transparent;
 			padding:0;
 			margin:0;
+			white-space:pre-wrap;
 		}
 	}
 	.highlight .comment{ color: darken(multiply(white, @seafoam), 5%); }
+	article>.clear{
+		padding:@gutter @gutter/2 0 @gutter/2;
+		box-sizing:border-box;
+		text-align:right;
+		cursor:pointer;
+		a{
+			.roundedCorners(18px);
+			background:@green;
+			padding:5px 9px;
+			color:@mediumBlue;
+			font-weight:bold;
+		}
+	}
 }
 #content.standard, #content.pseudostandard{
 	.inner{
@@ -266,6 +276,7 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 		width:@10col;
 		margin:auto;
 		position:relative;
+		z-index:5;
 		h2{	width:100%; }
 		h3{	font-size:30px; font-weight:normal; }
 		h4{ font-size:20px; font-weight:normal; }
@@ -275,23 +286,23 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 	.inner{
 		.noMarginWrapping;
 		padding:@gutter 0;
-		section, p, ul{ padding:0 @gutter 0 @gutter+5; }
+		section, p, ul{ padding:0 @gutter/2; }
 		pre{
 			border-left:none;
 			border-right:none;
-			padding:10px;
+			padding:@gutter/2;
 			position:relative;
 			z-index:5;
 		}
 	}
 	article{ //<----------- Gets the index page working right. Maybe should go on index.less
 		h2, h3, h4, h5, h6, p, ul{
-			padding: 0 @gutter 0 @gutter+5;
+			padding: 0 @gutter/2;
 		}
 		pre{
 			border-left:none;
 			border-right:none;
-			padding:10px;
+			padding:@gutter/2;
 			position:relative;
 			z-index:5;
 		}
@@ -299,6 +310,9 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 			padding:0px !important; //Sorry to use this, but I'm not willing to change the nested structure to accommodate this stupid code.
 		}
 	}
+}
+#content.standard.pseudotablet, #content.standard.pseudosmalltablet, #content.standard.pseudomobile{
+	.clear a{ display:none; } //Can't get the "Back to top" links to work, so I'll just hide them :o
 }
 
 //Left-side navigation
@@ -327,6 +341,7 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 			list-style:none;
 			color:white;
 			.transitions(.5s);
+			z-index:1;
 			div{ display:inline-block }
 			.label{
 				width:auto;
@@ -341,7 +356,6 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 				position:absolute;
 				top:50%;
 				margin-top:-7px; //vertically center
-				box-shadow:0px 0px 15px overlay(@orange, @mediumBlue);
 			}
 			.circle.active{
 				background:@orange;
@@ -350,6 +364,15 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 		li+li{
 			margin-top:@gutter;
 		}
+		.prediction{
+			position:absolute;
+			height:100%;
+			width:100%;
+			top:0;
+			right:-25%;
+			z-index:0;
+		}
+		nav{ display:none } //mobile, tablet nav shouldn't been visible in standard
 	}
 	nav.active.standard, nav.active.tablet, nav.active.smalltablet, nav.active.mobile,
 	nav.active.standard.pseudotablet, nav.active.standard.pseudosmalltablet,
@@ -364,22 +387,71 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 		width:200px;
 		left:-180px;
 	}
-	nav.tablet, nav.standard.pseudotablet{
-		width:25%;
-		left:-24.5%;
-		font-weight:bold;
-	}
-	nav.smalltablet, nav.mobile, nav.standard.pseudosmalltablet, nav.standard.pseudomobile{
-		width:50%;
-		left:-49%;
-		font-weight:bold;
+	nav.standard.pseudotablet, nav.standard.pseudosmalltablet, nav.standard.pseudomobile{ //don't show in pseudo states
+		display:none;
 	}
 	nav.fixed.standard{ //fixed state
 		position:fixed;
 	}
-	nav.fixed.tablet, nav.fixed.smalltablet, nav.fixed.mobile,
-	nav.fixed.standard.pseudotablet, nav.fixed.standard.pseudosmalltablet, nav.fixed.standard.pseudomobile{
+	nav.fixed.tablet, nav.fixed.smalltablet, nav.fixed.mobile{
 		position:absolute; 
+	}
+}
+
+//Content-top nav
+#all > nav{ //in mobile, smalltablet, and tablet, intention moves a <nav> to this selector
+	width:auto;
+	margin:auto;
+	padding:@gutter @gutter/2;
+	background-color: @green;
+	background-image: url('../../images/shadow-lr-down.png'), url('../../images/mezz.png');
+	background-repeat: repeat-x, repeat;
+	background-position: top, top;
+	border-top:13px solid @blue;
+	border-bottom:10px solid @green;
+	ol{
+		columns:2;
+		-webkit-columns:2;
+		-moz-columns:2;
+	}
+	h6{ display:none; }
+	a{ color:@lightYellow; }
+	li+li{ margin-top:@gutter; }
+}
+#all.tablet > nav, #all.smalltablet > nav, #all.mobile > nav{
+	.inner{ width:auto; padding:0 @gutter/2; margin:auto; }
+}
+nav+#content.tablet, nav+#content.smalltablet, nav+#content.mobile{
+	border-top:0px none;
+	#prevnext{
+		width:100%;
+		height:auto;
+		border:none;
+		padding:0;
+	}
+	.prev, .next{
+		width:10%;
+		background:@green;
+		color:@mediumBlue;
+		text-align:center;
+		font-weight:bold;
+		padding:3px;
+		box-padding:border-box;
+		cursor:pointer;
+	}
+	.prev{
+		float:left;
+		margin-left:@gutter/2;
+	}
+	.next{
+		float:right;
+		margin-right:@gutter/2;
+	}
+	#prevnext.fixed{
+		position:fixed;
+		top:0;
+		z-index:6;
+		border-top:5px solid @green;
 	}
 }
 
