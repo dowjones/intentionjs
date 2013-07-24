@@ -29,9 +29,13 @@ $(window).load(function() {
 	
 	$(document)
 		.ready(function() { //Things that need the page to be done before running
-			contentPos = $('#content').offset().top + 3;
-			if(docsTest == true) { buildHome(contentPos, D); }
-			else { buildBlog(contentPos); }	
+			if(docsTest == true) { 
+				contentPos = $('#docs').offset().top + 42;
+				buildHome(contentPos, D);
+			} else { 
+				$('#content .inner').offset().top + 3;
+				buildBlog(contentPos);
+			}
 		})
 		.on('scroll', function(){
 			if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
@@ -41,16 +45,6 @@ $(window).load(function() {
 					$('#content nav').children('h6').fadeOut(500);
 				}, 1000);
 			}
-		});
-	
-	//Functions for opening the documentation nav (.active is open)
-	$('#content nav')
-		.one('mouseenter', function() { $(this).children('h6').fadeOut(500); })
-		.on('mouseenter', function() { $(this).addClass('active'); })
-		.on('mouseleave', function() {
-			window.setTimeout(function() {
-				$('#content nav').removeClass('active');
-			}, 500);
 		});
 
 });

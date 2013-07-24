@@ -208,17 +208,26 @@ header.standard.landscape h1 {
 header.mobile,
 header.standard.pseudomobile,
 header.smalltablet,
-header.standard.pseudosmalltablet {
+header.standard.pseudosmalltablet,
+header.hdtv.pseudotablet,
+header.hdtv.pseudosmalltablet,
+header.hdtv.pseudomobile {
   box-sizing: border-box;
 }
 header.mobile h1,
 header.standard.pseudomobile h1,
 header.smalltablet h1,
 header.standard.pseudosmalltablet h1,
+header.hdtv.pseudotablet h1,
+header.hdtv.pseudosmalltablet h1,
+header.hdtv.pseudomobile h1,
 header.mobile nav,
 header.standard.pseudomobile nav,
 header.smalltablet nav,
-header.standard.pseudosmalltablet nav {
+header.standard.pseudosmalltablet nav,
+header.hdtv.pseudotablet nav,
+header.hdtv.pseudosmalltablet nav,
+header.hdtv.pseudomobile nav {
   width: auto;
   margin: 0 10px 0 10px;
   padding: 0 10px 0 10px;
@@ -227,20 +236,29 @@ header.standard.pseudosmalltablet nav {
 header.mobile h1,
 header.standard.pseudomobile h1,
 header.smalltablet h1,
-header.standard.pseudosmalltablet h1 {
+header.standard.pseudosmalltablet h1,
+header.hdtv.pseudotablet h1,
+header.hdtv.pseudosmalltablet h1,
+header.hdtv.pseudomobile h1 {
   font-size: 40px;
   padding: 10px;
 }
 header.mobile nav,
 header.standard.pseudomobile nav,
 header.smalltablet nav,
-header.standard.pseudosmalltablet nav {
+header.standard.pseudosmalltablet nav,
+header.hdtv.pseudotablet nav,
+header.hdtv.pseudosmalltablet nav,
+header.hdtv.pseudomobile nav {
   font-size: 13px;
 }
 header.mobile li,
 header.standard.pseudomobile li,
 header.smalltablet li,
-header.standard.pseudosmalltablet li {
+header.standard.pseudosmalltablet li,
+header.hdtv.pseudotablet li,
+header.hdtv.pseudosmalltablet li,
+header.hdtv.pseudomobile li {
   height: 15px;
 }
 #all > #heading {
@@ -262,8 +280,8 @@ header.standard.pseudosmalltablet li {
   color: #352f29;
 }
 #all > #heading.standard .inner,
-#all > #heading.pseudostandard .inner,
-#all > #heading.landscape .inner {
+#all > #heading.landscape .inner,
+#all > #heading.hdtv .inner {
   width: 780px;
   margin: auto;
 }
@@ -272,7 +290,10 @@ header.standard.pseudosmalltablet li {
 #all > #heading.mobile .inner,
 #all > #heading.standard.pseudotablet .inner,
 #all > #heading.standard.pseudosmalltablet .inner,
-#all > #heading.standard.pseudomobile .inner {
+#all > #heading.standard.pseudomobile .inner,
+#all > #heading.hdtv.pseudotablet .inner,
+#all > #heading.hdtv.pseudosmalltablet .inner,
+#all > #heading.hdtv.pseudomobile .inner {
   width: auto;
   margin: 0 10px 0 10px;
   padding: 0 10px 0 10px;
@@ -284,14 +305,16 @@ header.standard.pseudosmalltablet li {
 #all > #heading.mobile .inner h2,
 #all > #heading.standard.pseudotablet .inner h2,
 #all > #heading.standard.pseudosmalltablet .inner h2,
-#all > #heading.standard.pseudomobile .inner h2 {
+#all > #heading.standard.pseudomobile .inner h2,
+#all > #heading.hdtv.pseudotablet .inner h2,
+#all > #heading.hdtv.pseudosmalltablet .inner h2,
+#all > #heading.hdtv.pseudomobile .inner h2 {
   font-size: 28px;
 }
 #content {
   width: 100%;
   background: #203b44 url('../../images/docubg.png') repeat-x top;
   color: #f9efd4;
-  border-top: 13px solid #38748e;
   position: relative;
 }
 #content a {
@@ -356,28 +379,28 @@ header.standard.pseudosmalltablet li {
   font-weight: bold;
 }
 #content.standard .inner,
-#content.pseudostandard .inner {
+#content.hdtv .inner {
   width: 780px;
   margin: auto;
 }
 #content.standard article,
-#content.pseudostandard article {
+#content.hdtv article {
   width: 780px;
   margin: auto;
   position: relative;
   z-index: 5;
 }
 #content.standard article h2,
-#content.pseudostandard article h2 {
+#content.hdtv article h2 {
   width: 100%;
 }
 #content.standard article h3,
-#content.pseudostandard article h3 {
+#content.hdtv article h3 {
   font-size: 30px;
   font-weight: normal;
 }
 #content.standard article h4,
-#content.pseudostandard article h4 {
+#content.hdtv article h4 {
   font-size: 20px;
   font-weight: normal;
 }
@@ -386,7 +409,10 @@ header.standard.pseudosmalltablet li {
 #content.mobile .inner,
 #content.standard.pseudotablet .inner,
 #content.standard.pseudosmalltablet .inner,
-#content.standard.pseudomobile .inner {
+#content.standard.pseudomobile .inner,
+#content.hdtv.pseudotablet .inner,
+#content.hdtv.pseudosmalltablet .inner,
+#content.hdtv.pseudomobile .inner {
   width: auto;
   padding: 0 20px 0 20px;
   box-sizing: border-box;
@@ -398,18 +424,27 @@ header.standard.pseudosmalltablet li {
 #content.standard.pseudotablet .inner section,
 #content.standard.pseudosmalltablet .inner section,
 #content.standard.pseudomobile .inner section,
+#content.hdtv.pseudotablet .inner section,
+#content.hdtv.pseudosmalltablet .inner section,
+#content.hdtv.pseudomobile .inner section,
 #content.tablet .inner p,
 #content.smalltablet .inner p,
 #content.mobile .inner p,
 #content.standard.pseudotablet .inner p,
 #content.standard.pseudosmalltablet .inner p,
 #content.standard.pseudomobile .inner p,
+#content.hdtv.pseudotablet .inner p,
+#content.hdtv.pseudosmalltablet .inner p,
+#content.hdtv.pseudomobile .inner p,
 #content.tablet .inner ul,
 #content.smalltablet .inner ul,
 #content.mobile .inner ul,
 #content.standard.pseudotablet .inner ul,
 #content.standard.pseudosmalltablet .inner ul,
-#content.standard.pseudomobile .inner ul {
+#content.standard.pseudomobile .inner ul,
+#content.hdtv.pseudotablet .inner ul,
+#content.hdtv.pseudosmalltablet .inner ul,
+#content.hdtv.pseudomobile .inner ul {
   padding: 0 10px;
 }
 #content.tablet .inner pre,
@@ -417,7 +452,10 @@ header.standard.pseudosmalltablet li {
 #content.mobile .inner pre,
 #content.standard.pseudotablet .inner pre,
 #content.standard.pseudosmalltablet .inner pre,
-#content.standard.pseudomobile .inner pre {
+#content.standard.pseudomobile .inner pre,
+#content.hdtv.pseudotablet .inner pre,
+#content.hdtv.pseudosmalltablet .inner pre,
+#content.hdtv.pseudomobile .inner pre {
   border-left: none;
   border-right: none;
   padding: 10px;
@@ -430,42 +468,63 @@ header.standard.pseudosmalltablet li {
 #content.standard.pseudotablet article h2,
 #content.standard.pseudosmalltablet article h2,
 #content.standard.pseudomobile article h2,
+#content.hdtv.pseudotablet article h2,
+#content.hdtv.pseudosmalltablet article h2,
+#content.hdtv.pseudomobile article h2,
 #content.tablet article h3,
 #content.smalltablet article h3,
 #content.mobile article h3,
 #content.standard.pseudotablet article h3,
 #content.standard.pseudosmalltablet article h3,
 #content.standard.pseudomobile article h3,
+#content.hdtv.pseudotablet article h3,
+#content.hdtv.pseudosmalltablet article h3,
+#content.hdtv.pseudomobile article h3,
 #content.tablet article h4,
 #content.smalltablet article h4,
 #content.mobile article h4,
 #content.standard.pseudotablet article h4,
 #content.standard.pseudosmalltablet article h4,
 #content.standard.pseudomobile article h4,
+#content.hdtv.pseudotablet article h4,
+#content.hdtv.pseudosmalltablet article h4,
+#content.hdtv.pseudomobile article h4,
 #content.tablet article h5,
 #content.smalltablet article h5,
 #content.mobile article h5,
 #content.standard.pseudotablet article h5,
 #content.standard.pseudosmalltablet article h5,
 #content.standard.pseudomobile article h5,
+#content.hdtv.pseudotablet article h5,
+#content.hdtv.pseudosmalltablet article h5,
+#content.hdtv.pseudomobile article h5,
 #content.tablet article h6,
 #content.smalltablet article h6,
 #content.mobile article h6,
 #content.standard.pseudotablet article h6,
 #content.standard.pseudosmalltablet article h6,
 #content.standard.pseudomobile article h6,
+#content.hdtv.pseudotablet article h6,
+#content.hdtv.pseudosmalltablet article h6,
+#content.hdtv.pseudomobile article h6,
 #content.tablet article p,
 #content.smalltablet article p,
 #content.mobile article p,
 #content.standard.pseudotablet article p,
 #content.standard.pseudosmalltablet article p,
 #content.standard.pseudomobile article p,
+#content.hdtv.pseudotablet article p,
+#content.hdtv.pseudosmalltablet article p,
+#content.hdtv.pseudomobile article p,
 #content.tablet article ul,
 #content.smalltablet article ul,
 #content.mobile article ul,
 #content.standard.pseudotablet article ul,
 #content.standard.pseudosmalltablet article ul,
-#content.standard.pseudomobile article ul {
+#content.standard.pseudomobile article ul,
+#content.hdtv.pseudotablet article ul,
+#content.hdtv.pseudosmalltablet article ul,
+#content.hdtv.pseudomobile article ul {
   padding: 0 10px;
 }
 #content.tablet article pre,
@@ -473,7 +532,10 @@ header.standard.pseudosmalltablet li {
 #content.mobile article pre,
 #content.standard.pseudotablet article pre,
 #content.standard.pseudosmalltablet article pre,
-#content.standard.pseudomobile article pre {
+#content.standard.pseudomobile article pre,
+#content.hdtv.pseudotablet article pre,
+#content.hdtv.pseudosmalltablet article pre,
+#content.hdtv.pseudomobile article pre {
   border-left: none;
   border-right: none;
   padding: 10px;
@@ -485,28 +547,43 @@ header.standard.pseudosmalltablet li {
 #content.mobile article li p,
 #content.standard.pseudotablet article li p,
 #content.standard.pseudosmalltablet article li p,
-#content.standard.pseudomobile article li p {
+#content.standard.pseudomobile article li p,
+#content.hdtv.pseudotablet article li p,
+#content.hdtv.pseudosmalltablet article li p,
+#content.hdtv.pseudomobile article li p {
   padding: 0px !important;
 }
 #content.standard.pseudotablet .clear a,
 #content.standard.pseudosmalltablet .clear a,
-#content.standard.pseudomobile .clear a {
+#content.standard.pseudomobile .clear a,
+#content.hdtv.pseudotablet .clear a,
+#content.hdtv.pseudosmalltablet .clear a,
+#content.hdtv.pseudomobile .clear a {
   display: none;
 }
-#content nav {
+#heading + #content {
+  border-top: 13px solid #38748e;
+}
+#leftNav.hdtv {
+  width: 200px;
   height: 100%;
+  padding-top: 20px;
   position: absolute;
   top: 0;
-  z-index: 4;
-  border-right: 3px solid #38748e;
+  left: 0;
+  z-index: 6;
   text-align: right;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
   -ms-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
+  background: #38748e;
+  background: rgba(56, 116, 142, 0.9);
+  border-right: 3px solid #d0e0ef;
+  box-sizing: border-box;
 }
-#content nav h6 {
+#leftNav.hdtv h6 {
   width: 100%;
   padding: 6px 6px 6px 0;
   margin: 0 0 20px 0;
@@ -515,7 +592,7 @@ header.standard.pseudosmalltablet li {
   position: absolute;
   left: 100%;
 }
-#content nav li {
+#leftNav.hdtv li {
   margin-right: 6px;
   position: relative;
   right: 0;
@@ -528,14 +605,14 @@ header.standard.pseudosmalltablet li {
   transition: all 0.5s ease-in-out;
   z-index: 1;
 }
-#content nav li div {
+#leftNav.hdtv li div {
   display: inline-block;
 }
-#content nav li .label {
+#leftNav.hdtv li .label {
   width: auto;
   padding-right: 14px;
 }
-#content nav li .circle {
+#leftNav.hdtv li .circle {
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -546,57 +623,30 @@ header.standard.pseudosmalltablet li {
   position: absolute;
   top: 50%;
   margin-top: -7px;
+  box-shadow: 0 0 15px #da4530;
 }
-#content nav li .circle.active {
+#leftNav.hdtv li .circle.active {
   background: #ea865a;
 }
-#content nav li + li {
+#leftNav.hdtv li + li {
   margin-top: 20px;
 }
-#content nav .prediction {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  right: -25%;
-  z-index: 0;
-}
-#content nav nav {
+#leftNav.hdtv nav {
   display: none;
 }
-#content nav.active.standard,
-#content nav.active.tablet,
-#content nav.active.smalltablet,
-#content nav.active.mobile,
-#content nav.active.standard.pseudotablet,
-#content nav.active.standard.pseudosmalltablet,
-#content nav.active.standard.pseudomobile {
-  left: 0;
-  background: #38748e;
-  background: rgba(56, 116, 142, 0.9);
-  border-right-color: #d0e0ef;
-  z-index: 6;
-}
-#content nav.standard,
-#content nav.tablet.landscape,
-#content nav.standard.pseudostandard.landscape {
-  width: 200px;
-  left: -180px;
-}
-#content nav.standard.pseudotablet,
-#content nav.standard.pseudosmalltablet,
-#content nav.standard.pseudomobile {
-  display: none;
-}
-#content nav.fixed.standard {
+#leftNav.fixed {
   position: fixed;
 }
-#content nav.fixed.tablet,
-#content nav.fixed.smalltablet,
-#content nav.fixed.mobile {
-  position: absolute;
+#leftNav.hdtv.pseudotablet,
+#leftNav.hdtv.pseudosmalltablet,
+#leftNav.hdtv.pseudomobile,
+#leftNav.standard,
+#leftNav.tablet,
+#leftNav.smalltablet,
+#leftNav.mobile {
+  display: none;
 }
-#all > nav {
+#topNav {
   width: auto;
   margin: auto;
   padding: 20px 10px;
@@ -607,46 +657,69 @@ header.standard.pseudosmalltablet li {
   border-top: 13px solid #38748e;
   border-bottom: 10px solid #589358;
 }
-#all > nav ol {
+#topNav ol {
   columns: 2;
   -webkit-columns: 2;
   -moz-columns: 2;
 }
-#all > nav h6 {
+#topNav h6 {
   display: none;
 }
-#all > nav a {
+#topNav a {
   color: #f9efd4;
 }
-#all > nav li + li {
+#topNav li {
+  margin-left: 20px;
+  list-style-type: decimal;
+}
+#topNav li + li {
   margin-top: 20px;
 }
-#all.tablet > nav .inner,
-#all.smalltablet > nav .inner,
-#all.mobile > nav .inner {
+#topNav.standard .inner,
+#topNav.hdtv .inner {
+  width: 780px;
+  margin: auto;
+}
+#topNav.tablet .inner,
+#topNav.smalltablet .inner,
+#topNav.mobile .inner {
   width: auto;
   padding: 0 10px;
   margin: auto;
 }
-nav + #content.tablet,
-nav + #content.smalltablet,
-nav + #content.mobile {
-  border-top: 0px none;
+#topNav.pseudotablet,
+#topNav.pseudosmalltablet,
+#topNav.pseudomobile {
+  display: none;
 }
-nav + #content.tablet #prevnext,
-nav + #content.smalltablet #prevnext,
-nav + #content.mobile #prevnext {
+#topNav.hdtv ol {
+  columns: 6;
+  -webkit-columns: 6;
+  -moz-columns: 6;
+}
+#topNav.standard ol,
+#topNav.tablet ol {
+  columns: 3;
+  -webkit-columns: 3;
+  -moz-columns: 3;
+}
+#topNav.smalltablet ol,
+#topNav.mobile ol {
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+}
+#prevnext {
   width: 100%;
   height: auto;
   border: none;
   padding: 0;
 }
-nav + #content.tablet .prev,
-nav + #content.smalltablet .prev,
-nav + #content.mobile .prev,
-nav + #content.tablet .next,
-nav + #content.smalltablet .next,
-nav + #content.mobile .next {
+#prevnext .inner {
+  padding: 0;
+}
+#prevnext .prev,
+#prevnext .next {
   width: 10%;
   background: #589358;
   color: #203b44;
@@ -656,25 +729,36 @@ nav + #content.mobile .next {
   box-padding: border-box;
   cursor: pointer;
 }
-nav + #content.tablet .prev,
-nav + #content.smalltablet .prev,
-nav + #content.mobile .prev {
+#prevnext .prev {
   float: left;
   margin-left: 10px;
 }
-nav + #content.tablet .next,
-nav + #content.smalltablet .next,
-nav + #content.mobile .next {
+#prevnext .next {
   float: right;
   margin-right: 10px;
 }
-nav + #content.tablet #prevnext.fixed,
-nav + #content.smalltablet #prevnext.fixed,
-nav + #content.mobile #prevnext.fixed {
+#prevnext.fixed {
   position: fixed;
   top: 0;
-  z-index: 6;
+  z-index: 7;
   border-top: 5px solid #589358;
+}
+#prevnext.standard .inner,
+#prenext.hdtv .inner {
+  width: 780px;
+  margin: auto;
+  padding: 0;
+}
+#prevnext.tablet .inner,
+#prevnext.smalltablet .inner,
+#prevnext.mobile .inner {
+  width: 100%;
+  padding: 0;
+}
+#prevnext.pseudotablet,
+#prevnext.pseudosmalltablet,
+#prevnext.pseudomobile {
+  display: none;
 }
 footer {
   width: 100%;

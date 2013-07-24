@@ -1,4 +1,5 @@
 var buildHome = function(contentPos, D) {
+	console.log('when does this start running: HOME.JS');
 	//Basic var setup
 	var currentPos = 0,
 	container_width = intent.responsive({
@@ -77,19 +78,12 @@ var buildHome = function(contentPos, D) {
 	//For docs nav
 	var titlePos = [],
 		curentPos,
+		articleCt = $('#content article').not('.highlight').length,
 		i = 1;
-	$.each($('#content article').not('.highlight'), function() { //Create back to top links
-		var markup = '<div class="clear"><a intent in-width in-container>&uarr; Back to top</a></div>';
-		$(this).append(markup);
-	});
-	$(window).on('scroll', function() { //first setup listeners
-		//Gotta reset these for IE8
-		if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
-		else { var scroll = pageYOffset; }
 		
-		//Fixing the docsNav position
-		if(scroll >= contentPos) { $('#content nav').addClass('fixed'); }
-		else { $('#content nav').removeClass('fixed'); }
+	$.each($('#content article').not('.highlight'), function() { //Create back to top links
+		var markup = '<div class="clear"><a>&uarr; Back to top</a></div>';
+		$(this).append(markup);
 	});
 	$.each($('.docsLite h2'), function() { //then create the nav 
 		$(this).attr('id', 't'+i); //#targeti
@@ -97,16 +91,22 @@ var buildHome = function(contentPos, D) {
 			markup = '<li id="a'+i+'"><div class="label"><a href="#t'+i+'">'+text+'</a></div><div class="circle"></div></li>', //#anchori
 			pos = $(this).offset().top;
 		titlePos.push(pos); //add these positions to an array to show the current location in the nav
-		$('#docsNav ol').append(markup);
+		$('#leftNav ol, #topNav ol').append(markup);
 		i++;
 	});
 	$(window).on('scroll', function() { //Content nav scrolling acctions
 		if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
 		else { var scroll = pageYOffset; }
+		//Fixing the nav
+		if(scroll >= contentPos) { $('#content nav').addClass('fixed'); }
+		else { $('#content nav').removeClass('fixed'); }
+		//Current Position indicators
 		$.each(titlePos, function(index, value) { //This could be more efficient if the array went from largest to smallest
+			console.log('scroll', scroll, contentPos, currentPos, index, value);
 			if(scroll >= value) { //If scrolled past the target
 				$('#a'+(index+1)).children('.circle').addClass('active');
 				currentPos = index+1;
+				console.log('passed one');
 			} else if(scroll+$(window).height() >= $(document).height()) { //if reached the bottom of the page
 				$('#docsNav li').children('.circle').addClass('active');
 			} else {
@@ -114,20 +114,16 @@ var buildHome = function(contentPos, D) {
 			}
 		});
 	});
-	$('#prevnext div').click(function() {
-		var lastArt = $('#content article').not('.highlight').length,
-			dir = $(this).attr('class');
-		if( ($(this).attr('class') == 'next') && (currentPos < lastArt) ){ currentPos++ }
+	$('#prevnext .inner div').click(function() {
+		var dir = $(this).attr('class');
+		if( ($(this).attr('class') == 'next') && (currentPos < articleCt) ){ currentPos++ }
 		else if(($(this).attr('class') == 'prev') && (currentPos > 1)){ currentPos-- }
-		$('html, body').animate({ scrollTop: $('#t'+currentPos).offset().top - 27}, 1000); //minus 27 so you don't obscure the heading
+		$('html, body').animate({ scrollTop: $('#t'+currentPos).offset().top -30}, 1000); //minus 27 so you don't obscure the heading
 	});
 	$('article>.clear a').click(function() { //decide what "top" means depending on the device
-		var widthCtx = intent.axes.width.current,
-			conCtx = intent.axes.container.current;
-		if((widthCtx == 'standard') && (conCtx == 'pseudostandard' || conCtx == undefined)) { var target = '#content' }
-		else { var target = '#all>nav' }
-		$('html, body').animate({ scrollTop: $(target).offset().top}, 1000);
+		$('html, body').animate({ scrollTop: $('#topNav').offset().top}, 1000);
 	});
+	
 	
 	//Consolidated context switch functions 
 	intent
@@ -141,7 +137,7 @@ var buildHome = function(contentPos, D) {
 				unequalize('.docsLite .equalize', 'section');
 				equalizeAll('#smallCode', 'pre');
 			} else {
-				equalizeAll('.docsLite .equalize', 'section');
+				equalizeAll('#docs', '.equalize', 'section');
 			}
 			//When the context switches, reset the targets
 			contentPos = $('#content').position().top + 3,
@@ -162,7 +158,7 @@ var buildHome = function(contentPos, D) {
 				unequalize('.docsLite .equalize', 'section');
 				equalizeAll('#smallCode', 'pre');
 			} else {
-				equalizeAll('.docsLite .equalize', 'section');
+				equalizeAll('.docsLite', '.equalize', 'section');
 			}
 			//When the context switches, reset the targets
 			contentPos = $('#content').position().top + 3,

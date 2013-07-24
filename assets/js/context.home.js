@@ -10,6 +10,7 @@
 (function () {
 
   'use strict';
+  console.log('When does this start running? CONTEXT.JS');
   var context = function($, Intention){
 
     // create a brand spankin new intention object
@@ -52,7 +53,7 @@
     horizontal_axis = intent.responsive({
       ID:'width',
       contexts: [
-      	{name:'hdtv', min:1800},
+      	{name:'hdtv', min:1220},
         {name:'standard', min:840}, 
         {name:'tablet', min:768},
         {name:'smalltablet', min:510},
@@ -126,27 +127,20 @@
 	var firstContext = jQuery.Deferred();
 	intent.on('width', function() { firstContext.resolve(); });
 	firstContext.done(function() {
+		console.log('When does this start running? FIRST RESPONSE');
 		var device = intent.axes.width.current;
 		if(device === 'mobile') {
 			unequalize('.docsLite .equalize', 'section');
-			unequalize('#typesOfManip', 'section');
 			unequalize('#smallCode', 'pre');
 			writeOutput(device);
-		} else if(device === 'smalltablet') {
-			equalizeAll('#smallCode', 'pre');
+		} else if(device === 'smalltablet' || device === 'tablet') {
 			unequalize('.docsLite .equalize', 'section');
-			unequalize('#typesOfManip', 'section');
-			writeOutput(device);
-		} else if(device === 'tablet') {
 			equalizeAll('#smallCode', 'pre');
-			equalizeAll('.docsLite .equalize', 'section');
 			writeOutput(device);
 		} else {
-			equalizeAll('#smallCode', 'pre');
-			equalizeAll('.docsLite .equalize', 'section');
+			window.setTimeout(function() { equalizeAll('#docs', 'article.equalize', 'section'); }, 100);
 			imageSetup();
-		}
-	
+		}	
 	});	
 	
 	// register the current width and orientation without waiting for a window resize

@@ -162,20 +162,21 @@
 			<div class="clear"></div>
 		</div>
 	</section>
+	<nav id="topNav" intent in-width in-container in-orientation>
+		<div class="inner">
+			<ol></ol>
+		</div>
+	</nav>
 	<section id="content" class="docsLite" intent in-width in-container in-orientation>
-		<nav id="docsNav" intent in-width in-container 
-			in-mobile-before="#content" in-smalltablet-before="#content" in-tablet-before="#content"
-			in-standard-prepend="#content">
-			<h6>Hover or swipe over this to see the documentation structure.</h6>
-			<ol></ol> <!-- don't forget to switch this! -->
-			<div class="prediction"></div>
-			<nav id="prevnext" intent 
-				in-mobile-prepend="#content" in-smalltablet-prepend="#content" in-tablet-prepend="#content"
-				in-standard-append="#docsNav">
+		<nav id="prevnext" intent in-width in-container in-orientation>
+			<div class="inner">
 				<div class="prev">&lt;</div>
 				<div class="next">&gt;</div>
 				<div class="clear"></div>
-			</nav>
+			</div>
+		</nav>
+		<nav id="leftNav" class="docsNav" intent in-width in-container>
+			<ol></ol>
 		</nav>
 		{{ page.content }}
 	</section>

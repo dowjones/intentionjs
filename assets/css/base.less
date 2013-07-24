@@ -40,6 +40,11 @@
 @text:	@offBlack;
 
 //Timesavers
+.columns(@num){
+	columns:@num;
+	-webkit-columns:@num;
+	-moz-columns:@num;
+}
 .roundedCorners(@radius){
 	border-radius:@radius;
 	-webkit-border-radius:@radius;
@@ -171,7 +176,8 @@ header.tablet, header.pseudotablet, header.standard.landscape{
 	nav li { height:auto; }
 	h1{ padding:@gutter/2; }
 }
-header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard.pseudosmalltablet{
+header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard.pseudosmalltablet,
+header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobile{
 	box-sizing:border-box;
 	h1, nav{
 		.mobileWrapping;
@@ -196,13 +202,15 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 	h2{ padding:0; }
 	h2 a{ color:@text; }
 }
-#all>#heading.standard, #all>#heading.pseudostandard, #all>#heading.landscape{
+#all>#heading.standard, #all>#heading.landscape, #all>#heading.hdtv{
 	.inner{
 		width:@10col;
 		margin:auto;
 	}
 }
-#all>#heading.tablet, #all>#heading.smalltablet, #all>#heading.mobile, #all>#heading.standard.pseudotablet, #all>#heading.standard.pseudosmalltablet, #all>#heading.standard.pseudomobile{
+#all>#heading.tablet, #all>#heading.smalltablet, #all>#heading.mobile, 
+#all>#heading.standard.pseudotablet, #all>#heading.standard.pseudosmalltablet, #all>#heading.standard.pseudomobile,
+#all>#heading.hdtv.pseudotablet, #all>#heading.hdtv.pseudosmalltablet, #all>#heading.hdtv.pseudomobile{
 	.inner{
 		.mobileWrapping;
 		padding:@gutter @gutter/2;
@@ -215,7 +223,7 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 	width:100%;
 	background: @mediumBlue url('../../images/docubg.png') repeat-x top;
 	color: @lightYellow;
-	border-top:13px solid @blue;
+//	border-top:13px solid @blue;
 	position:relative;
 	a{ color:@periwinkle; }
 	a:hover{ color:white; }
@@ -267,7 +275,7 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 		}
 	}
 }
-#content.standard, #content.pseudostandard{
+#content.standard, #content.hdtv{
 	.inner{
 		width:@10col;
 		margin:auto;
@@ -282,7 +290,9 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 		h4{ font-size:20px; font-weight:normal; }
 	}
 }
-#content.tablet, #content.smalltablet, #content.mobile, #content.standard.pseudotablet, #content.standard.pseudosmalltablet, #content.standard.pseudomobile{
+#content.tablet, #content.smalltablet, #content.mobile,
+#content.standard.pseudotablet, #content.standard.pseudosmalltablet, #content.standard.pseudomobile,
+#content.hdtv.pseudotablet, #content.hdtv.pseudosmalltablet, #content.hdtv.pseudomobile{
 	.inner{
 		.noMarginWrapping;
 		padding:@gutter 0;
@@ -311,95 +321,81 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 		}
 	}
 }
-#content.standard.pseudotablet, #content.standard.pseudosmalltablet, #content.standard.pseudomobile{
+#content.standard.pseudotablet, #content.standard.pseudosmalltablet, #content.standard.pseudomobile,
+#content.hdtv.pseudotablet, #content.hdtv.pseudosmalltablet, #content.hdtv.pseudomobile{
 	.clear a{ display:none; } //Can't get the "Back to top" links to work, so I'll just hide them :o
+}
+#heading+#content{ //in case there's no topside nav (like on tag pages)
+	border-top:13px solid #38748e;
 }
 
 //Left-side navigation
-#content{
-	nav{
-		height:100%;
+#leftNav.hdtv{
+	width:200px;
+	height:100%;
+	padding-top:@gutter;
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:6;
+	text-align:right;
+	.transitions(.5s);
+	background:@blue; //IE8 fallback
+	background:fadeout(@blue, 10%);
+	border-right:3px solid @lightBlue;
+	box-sizing:border-box;
+	h6{ //instructions
+		width:100%;
+		padding:6px 6px 6px 0;
+		margin: 0 0  @gutter 0;
+		background:@blue;
+		font-size:14px;
 		position:absolute;
-		top:0;
-		z-index:4;
-		border-right:3px solid @blue;
-		text-align:right;
+		left:100%;
+	}
+	li{ //a node on the line
+		margin-right:6px; //get it on the line
+		position:relative;
+		right:0;
+		list-style:none;
+		color:white;
 		.transitions(.5s);
-		h6{ //instructions
-			width:100%;
-			padding:6px 6px 6px 0;
-			margin: 0 0  @gutter 0;
-			background:@blue;
-			font-size:14px;
+		z-index:1;
+		div{ display:inline-block }
+		.label{
+			width:auto;
+			padding-right:14px;
+		}
+		.circle{
+			width:10px;
+			height:10px;
+			.roundedCorners(50%);
+			border:3px solid @orange;
+			background:@mediumBlue;
 			position:absolute;
-			left:100%;
+			top:50%;
+			margin-top:-7px; //vertically center
+			box-shadow:0 0 15px overlay(@orange, @mediumBlue);
 		}
-		li{ //a node on the line
-			margin-right:6px; //get it on the line
-			position:relative;
-			right:0;
-			list-style:none;
-			color:white;
-			.transitions(.5s);
-			z-index:1;
-			div{ display:inline-block }
-			.label{
-				width:auto;
-				padding-right:14px;
-			}
-			.circle{
-				width:10px;
-				height:10px;
-				.roundedCorners(50%);
-				border:3px solid @orange;
-				background:@mediumBlue;
-				position:absolute;
-				top:50%;
-				margin-top:-7px; //vertically center
-			}
-			.circle.active{
-				background:@orange;
-			}
+		.circle.active{
+			background:@orange;
 		}
-		li+li{
-			margin-top:@gutter;
-		}
-		.prediction{
-			position:absolute;
-			height:100%;
-			width:100%;
-			top:0;
-			right:-25%;
-			z-index:0;
-		}
-		nav{ display:none } //mobile, tablet nav shouldn't been visible in standard
 	}
-	nav.active.standard, nav.active.tablet, nav.active.smalltablet, nav.active.mobile,
-	nav.active.standard.pseudotablet, nav.active.standard.pseudosmalltablet,
-	nav.active.standard.pseudomobile{ //open state
-		left:0;
-		background:@blue; //IE8 fallback
-		background:fadeout(@blue, 10%);
-		border-right-color:@lightBlue;
-		z-index:6;
+	li+li{
+		margin-top:@gutter;
 	}
-	nav.standard, nav.tablet.landscape, nav.standard.pseudostandard.landscape{
-		width:200px;
-		left:-180px;
-	}
-	nav.standard.pseudotablet, nav.standard.pseudosmalltablet, nav.standard.pseudomobile{ //don't show in pseudo states
-		display:none;
-	}
-	nav.fixed.standard{ //fixed state
-		position:fixed;
-	}
-	nav.fixed.tablet, nav.fixed.smalltablet, nav.fixed.mobile{
-		position:absolute; 
-	}
+	nav{ display:none } //mobile, tablet nav shouldn't been visible in standard
+}
+#leftNav.fixed{
+	position:fixed;
+}
+#leftNav.hdtv.pseudotablet, #leftNav.hdtv.pseudosmalltablet, #leftNav.hdtv.pseudomobile,
+#leftNav.standard, #leftNav.tablet, #leftNav.smalltablet, #leftNav.mobile{ 
+	display:none;
 }
 
 //Content-top nav
-#all > nav{ //in mobile, smalltablet, and tablet, intention moves a <nav> to this selector
+#topNav{ //in mobile, smalltablet, and tablet, intention moves a <nav> to this selector
 	width:auto;
 	margin:auto;
 	padding:@gutter @gutter/2;
@@ -409,26 +405,33 @@ header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard
 	background-position: top, top;
 	border-top:13px solid @blue;
 	border-bottom:10px solid @green;
-	ol{
-		columns:2;
-		-webkit-columns:2;
-		-moz-columns:2;
-	}
+	ol{ .columns(2); }
 	h6{ display:none; }
 	a{ color:@lightYellow; }
+	li{ margin-left:@gutter; list-style-type: decimal; }
 	li+li{ margin-top:@gutter; }
 }
-#all.tablet > nav, #all.smalltablet > nav, #all.mobile > nav{
+#topNav.standard, #topNav.hdtv{
+//	background-image: url('../../images/shadow-lr-up.png'), url('../../images/shadow-lr-down.png'), url('../../images/mezz.png');
+//	background-repeat: repeat-x, repeat-x, repeat;
+//	background-position: bottom, top, top;
+	.inner{ width:@10col; margin:auto; }
+}
+#topNav.tablet, #topNav.smalltablet, #topNav.mobile{
 	.inner{ width:auto; padding:0 @gutter/2; margin:auto; }
 }
-nav+#content.tablet, nav+#content.smalltablet, nav+#content.mobile{
-	border-top:0px none;
-	#prevnext{
-		width:100%;
-		height:auto;
-		border:none;
-		padding:0;
-	}
+#topNav.pseudotablet, #topNav.pseudosmalltablet, #topNav.pseudomobile{
+	display:none;
+}
+#topNav.hdtv ol{ .columns(6); }
+#topNav.standard ol, #topNav.tablet ol{ .columns(3) }
+#topNav.smalltablet ol, #topNav.mobile ol{ .columns(2) }
+#prevnext{
+	width:100%;
+	height:auto;
+	border:none;
+	padding:0;
+	.inner{ padding:0 }
 	.prev, .next{
 		width:10%;
 		background:@green;
@@ -447,12 +450,28 @@ nav+#content.tablet, nav+#content.smalltablet, nav+#content.mobile{
 		float:right;
 		margin-right:@gutter/2;
 	}
-	#prevnext.fixed{
-		position:fixed;
-		top:0;
-		z-index:6;
-		border-top:5px solid @green;
+}
+#prevnext.fixed{
+	position:fixed;
+	top:0;
+	z-index:7;
+	border-top:5px solid @green;
+}
+#prevnext.standard, #prenext.hdtv{
+	.inner{
+		width:@10col;
+		margin:auto;
+		padding:0;
 	}
+}
+#prevnext.tablet, #prevnext.smalltablet, #prevnext.mobile{
+	.inner{
+		width:100%;
+		padding:0;
+	}
+}
+#prevnext.pseudotablet, #prevnext.pseudosmalltablet, #prevnext.pseudomobile{
+	display:none;
 }
 
 footer{

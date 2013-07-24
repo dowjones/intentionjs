@@ -3,9 +3,10 @@ layout: home
 ---
 
 		<div id="docs">
-			<article id="thresholds" data-pattern="2" intent in-standard-class="equalize">
+			<article id="basics" class="equalize" data-pattern="2">
+				<h2 alt="The Basics">Let's start with the basics, though.</h2>
 				<section>
-					<h2 alt="Thresholds, Axes, Contexts">Thresholds, Axes, &amp; Contexts</h2>
+					<h3 alt="Thresholds, Axes, Contexts">Thresholds, Axes, &amp; Contexts</h3>
 					<p>Intention.js works by determining what are called “threshold groups”. These threshold groups define  the context in which a user is viewing your site. Threshold groups work by measuring an axis, like the browser’s width or the device’s pixel density (for high resolution screens).</p>
 					<p>A lot of these contexts are predictable, and a common pattern of them are included in Intention’s partner, Context.js. It includes:</p>
 					<pre><span class="comment"><i>Axis</i></span>
@@ -24,9 +25,16 @@ highres <span class="comment">(devicePixelRatio > 1)</span>
    - highres, true</pre>
 				</section>
 				<section>
+					<h3 alt="Manipulations">Methods</h3>
+					<p>Intention.js has three basic manipulations: attribution manipulations, class manipulations, and placement manipulations. With these three, you can change the value of any attribute, add or remove an element’s class, and adjust the position of an element within the structure of the document. </p>
+					
+					<p>Intention.js comes with Context.js, which provides you with some commonly used context groups (or <i>axes</i>). It includes:</p>
+					
+					 
+				</section>
+				<section>
 					<pre id="intro"><span id="charTest">A</span> piffy example of Intention that shows multiple types of manipulations on multiple threshold groups. Something with really clear names and a creates an obvious result.</pre>
 				</section>
-				<!--<section>&nbsp;</section>-->
 				<section>
 					<h4>Some type of pitch for the technical significance. A pull quote maybe.</h4>
 				</section>
@@ -70,24 +78,7 @@ time.respond('<select id="timeChange"><option></option><option value="night">nig
 				</div>
 				<div class="clear"></div>
 			</article>
-			<article id="basics" class="equalize" data-pattern="2">
-				<h2 alt="The Basics">Let's start with the basics, though.</h2>
-				<section>
-					<p>Intention.js has three basic manipulations: attribution manipulations, class manipulations, and placement manipulations. With these three, you can change the value of any attribute, add or remove an element’s class, and adjust the position of an element within the structure of the document. </p>
-					
-					<p>Intention.js comes with Context.js, which provides you with some commonly used context groups (or <i>axes</i>). It includes:</p>
-					
-					 
-				</section>
-				<section>
-					<h3>Dependencies</h3>
-					<p>Intention.js requires jQuery and Underscore.js to work. You can download and link to them manually, or you can include them via require.</p>
-					<pre>&lt;script
-   data-main="assets/js/context"
-   src="assets/js/require/require.js"&gt;&lt;/script&gt;</pre>
-				</section>
-			</article>
-			<article>
+			<article class="equalize" data-pattern="2">
 				<h2 alt="Usage">Usage</h2>
 				<section>
 					<p>Giving Intention.js instructions is as easy as flagging the element as "intentional" and giving it an intentional attribute.</p>
@@ -97,11 +88,18 @@ time.respond('<select id="timeChange"><option></option><option value="night">nig
 					<p><i>For the purposes of documentation, <code>in-</code> will be used instead of the proper HTML-valid <code>data-in-</code>.</i></p>
 				</section>
 				<section>
+					<h3>Dependencies</h3>
+					<p>Intention.js requires jQuery and Underscore.js to work. You can download and link to them manually, or you can include them via require.</p>
+					<pre>&lt;script
+data-main="assets/js/context"
+src="assets/js/require/require.js"&gt;&lt;/script&gt;</pre>
+				</section>
+				<section>
 					<h3>This</h3>
 					<pre id="input">code code code</pre>
 					<h3>becomes</h3>
 				</section>
-				<section id="typesOfManip" class="thirds" intent in-width in-container in-touch in-touch-class="swipe">
+				<div id="typesOfManip" class="thirds" intent in-width in-container in-touch in-touch-class="swipe">
 					<section>
 						<pre id="mobileOut">One
 This code snippet will show
@@ -133,7 +131,7 @@ Or a rearranged element.</pre>
 						<h5>on tablets</h5></section>
 					<section><pre id="stdOut">three</pre><h5>on desktops</h5></section>
 					<div class="clear"></div>
-				</section>
+				</div>
 			</article>
 			
 			<article>

@@ -30,7 +30,7 @@
 			<h2><a href="{{ page.url }}">{{ page.title }}</a></h2>
 		</div>
 	</section>
-	<nav id="tagNav" intent in-width>
+	<nav id="topNav" class="tagNav" intent in-width>
 		<div class="inner">
 			<a class="example" href="tagged/example.html">Examples</a>
 			<a class="release" href="tagged/release.html">Releases</a>
@@ -38,10 +38,8 @@
 		</div>
 	</nav>
 	<section id="content" class="blog" intent in-width in-container in-orientation>
-		<nav id="blogNav" intent in-width in-container in-orientation>
-			<h6>Click or swipe here to scrub through tags</h6>
+		<nav id="leftNav" class="blogNav" intent in-width in-container in-orientation>
 			<ol></ol>
-			<div class="prediction"></div>
 		</nav>
 		<div class="inner">
 			{{ content }}

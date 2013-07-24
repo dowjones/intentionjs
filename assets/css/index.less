@@ -86,7 +86,7 @@
 	}
 }
 
-#splash.standard{
+#splash.standard, #splash.hdtv{
 	.inner{
 		width:@10col;
 		margin:auto;
@@ -157,7 +157,8 @@
 		}
 	}
 }
-#splash.standard.pseudomobile, #splash.standard.pseudosmalltablet{
+#splash.standard.pseudomobile, #splash.standard.pseudosmalltablet,
+#splash.hdtv.pseudomobile, #splash.hdtv.pseudosmalltablet{
 	section{
 		width:auto;
 		padding:0;
@@ -170,7 +171,7 @@
 
 
 //.try: specification of regular #heading
-#all.standard > .try{ //on load in standard
+#all.standard > .try, #all.hdtv > .try{ //on load in standard
 	text-align:center;
 	#devices{
 		margin-top:@gutter;
@@ -196,14 +197,14 @@
 .try.tablet, .try.smalltablet, .try.mobile{ 
 	display:none;
 }
-body > .try.standard {
+body > .try.standard, body > .try.hdtv {
 	width:100%;
 	height:46px;
 	border-bottom: 3px solid @blue;
 	background: @mediumBlue url('../../images/docubg.png') repeat-x top;
 	color: @lightYellow;
 	position:fixed;
-	z-index:10;
+	z-index:20;
 	.inner{
 		background:transparent;
 		margin:0;
@@ -273,11 +274,12 @@ body > .try.standard {
 		border-top:1px dashed @blue;
 	}
 }
-#content.docsLite.standard article:not(.thirds)>section:nth-of-type(3n):last-of-type{
+#content.docsLite.standard article:not(.thirds)>section:nth-of-type(3n):last-of-type,
+#content.docsLite.hdtv article:not(.thirds)>section:nth-of-type(3n):last-of-type{
 	width:100%;
 	clear:both;
 }
-#content.docsLite.standard, #content.docsLite.pseudostandard{
+#content.docsLite.standard, #content.hdtv{
 	article{
 		padding:@gutter;
 		h2{
@@ -311,7 +313,11 @@ body > .try.standard {
 			margin:auto;
 		}
 	}
-	section.thirds{
+	article:first-of-type{
+		padding-top:27px;
+	}
+	div.thirds{
+		width:100%;
 		clear:both;
 		padding:0;
 		section{
@@ -329,9 +335,11 @@ body > .try.standard {
 			padding-right:0px;
 		}
 	}
+	div.thirds:nth-of-type(2n){ padding:0; }
 }
 #content.docsLite.tablet, #content.docsLite.smalltablet, #content.docsLite.mobile,
-#content.docsLite.standard.pseudotablet, #content.docsLite.standard.pseudosmalltablet, #content.docsLite.standard.pseudomobile{
+#content.docsLite.standard.pseudotablet, #content.docsLite.standard.pseudosmalltablet, #content.docsLite.standard.pseudomobile,
+#content.docsLite.hdtv.pseudotablet, #content.docsLite.hdtv.pseudosmalltablet, #content.docsLite.hdtv.pseudomobile{
 	article{
 		width:auto;
 		padding:@gutter 0 @gutter 0;
@@ -360,7 +368,7 @@ body > .try.standard {
 	}
 	article:first-of-type{ padding-top:@gutter+5; }
 	article+article{ margin-top:@gutter; }
-	section.thirds{
+	div.thirds{
 		section{
 			width:auto;
 			padding:0;
@@ -370,8 +378,7 @@ body > .try.standard {
 
 //docsNav: extension of leftside navigation
 #content.docsLite{
-	nav#docsNav{
-		padding-top:@gutter;
+	nav.docsNav{
 		li{	position:relative; }
 		li + li { margin-top:@gutter; }
 	}

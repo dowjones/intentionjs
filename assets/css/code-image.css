@@ -140,7 +140,8 @@ html {
   left: 0;
 }
 #smallCode.standard,
-#smallCode.pseudostandard {
+#smallCode.pseudostandard,
+#smallCode.hdtv {
   display: none;
 }
 #smallCode.mobile,

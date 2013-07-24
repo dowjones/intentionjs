@@ -144,12 +144,12 @@
   margin-left: 3px;
 }
 #content.blog.standard .inner,
-#content.blog.standard.pseudostandard .inner {
+#content.hdtv .inner {
   width: 780px;
   margin: auto;
 }
 #content.blog.standard section#filter,
-#content.blog.standard.pseudostandard section#filter {
+#content.hdtv section#filter {
   width: 780px;
   margin: auto;
   margin-top: 20px;
@@ -262,58 +262,59 @@
   border-bottom-color: #68a8c4;
   color: #68a8c4;
 }
-nav#tagNav {
+#topNav.tagNav {
   background: transparent;
   border-bottom: 6px solid #589358;
 }
-nav#tagNav a.example {
+#topNav.tagNav a.example {
   color: #63a263;
 }
-nav#tagNav a.release {
+#topNav.tagNav a.release {
   color: #ea865a;
 }
-nav#tagNav a.update {
+#topNav.tagNav a.update {
   color: #68a8c4;
 }
-nav#tagNav a + a {
+#topNav.tagNav a + a {
   margin-left: 6px;
 }
-#tagNav.standard {
-  display: none;
-}
-#tagNav.standard .inner {
+#topNav.tagNav.standard .inner,
+#topNav.tagNav.hdtv .inner {
   width: 780px;
   margin: auto;
 }
-#tagNav.tablet .inner,
-#tagNav.smalltablet .inner,
-#tagNav.mobile .inner {
+#topNav.tagNav.tablet .inner,
+#topNav.tagNav.smalltablet .inner,
+#topNav.tagNav.mobile .inner {
   width: auto;
   padding: 0 20px 0 20px;
   box-sizing: border-box;
   padding: 0 10px;
 }
-#content.blog nav#blogNav a {
+#content.blog #leftNav.blogNav a {
   color: white;
 }
-#content.blog nav#blogNav a.release {
+#content.blog #leftNav.blogNav a.release {
   color: #ea865a;
 }
-#content.blog nav#blogNav a.example {
+#content.blog #leftNav.blogNav a.example {
   color: #63a263;
 }
-#content.blog nav#blogNav a.update {
+#content.blog #leftNav.blogNav a.update {
   color: #68a8c4;
 }
-#content.blog nav#blogNav a.jump {
+#content.blog #leftNav.blogNav a.jump {
   font-size: 12px;
   color: #d0e0ef;
 }
-#content.blog nav#blogNav.tablet,
-#content.blog nav#blogNav.smalltablet,
-#content.blog nav#blogNav.mobile,
-#content.blog nav#blogNav.standard.pseudotablet,
-#content.blog nav#blogNav.standard.pseudosmalltablet,
-#content.blog nav#blogNav.standard.pseudomobile {
+#content.blog #leftNav.blogNav.fixed {
+  position: absolute;
+}
+#content.blog #leftNav.blogNav.tablet,
+#content.blog #leftNav.blogNav.smalltablet,
+#content.blog #leftNav.blogNav.mobile,
+#content.blog #leftNav.blogNav.standard.pseudotablet,
+#content.blog #leftNav.blogNav.standard.pseudosmalltablet,
+#content.blog #leftNav.blogNav.standard.pseudomobile {
   display: none;
 }

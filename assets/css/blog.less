@@ -153,7 +153,7 @@
 	h3+p.meta{ margin-top:3px; } //if not
 	.tags a+a{ margin-left:3px; }	
 }
-#content.blog.standard, #content.blog.standard.pseudostandard{
+#content.blog.standard, #content.hdtv{
 	.inner{ width:@10col; margin:auto }
 	section#filter{
 		width:@10col;
@@ -203,7 +203,7 @@
 }
 
 //top side nav
-nav#tagNav{
+#topNav.tagNav{
 	background:transparent;
 	border-bottom:6px solid @green;
 	a.example{ color:lighten(@green, 5%); }
@@ -211,28 +211,28 @@ nav#tagNav{
 	a.update{ color:lighten(@blue, 20%); }
 	a+a{ margin-left:6px; }
 }
-#tagNav.standard{
-	display:none;
+#topNav.tagNav.standard, #topNav.tagNav.hdtv{
 	.inner{
 		width:@10col;
 		margin:auto;
 	}
 }
-#tagNav.tablet, #tagNav.smalltablet, #tagNav.mobile{
+#topNav.tagNav.tablet, #topNav.tagNav.smalltablet, #topNav.tagNav.mobile{
 	.inner{ .noMarginWrapping; padding:0 @gutter/2; }
 }
 
 //left side nav
 #content.blog{
-	nav#blogNav{
+	#leftNav.blogNav{
 		a{ color:white; }
 		a.release{ color:@orange; }
 		a.example{ color:lighten(@green, 5%); }
 		a.update{ color:lighten(@blue, 20%); }
 		a.jump{ font-size:12px; color:@lightBlue; }
 	}
-	nav#blogNav.tablet, nav#blogNav.smalltablet, nav#blogNav.mobile,
-	nav#blogNav.standard.pseudotablet, nav#blogNav.standard.pseudosmalltablet, nav#blogNav.standard.pseudomobile{
+	#leftNav.blogNav.fixed{ position:absolute; } //reset back to absolute
+	#leftNav.blogNav.tablet, #leftNav.blogNav.smalltablet, #leftNav.blogNav.mobile,
+	#leftNav.blogNav.standard.pseudotablet, #leftNav.blogNav.standard.pseudosmalltablet, #leftNav.blogNav.standard.pseudomobile{
 		display:none;	
 	}
 }

@@ -41,27 +41,32 @@
 #splash .inner section#buttons #github {
   background: #38748e;
 }
-#splash.standard .inner {
+#splash.standard .inner,
+#splash.hdtv .inner {
   width: 780px;
   margin: auto;
   padding: 0 20px 0 20px;
 }
-#splash.standard .inner section {
+#splash.standard .inner section,
+#splash.hdtv .inner section {
   width: 50%;
   float: left;
   padding: 20px 0 25px 0;
   box-sizing: border-box;
 }
-#splash.standard .inner section#buttons {
+#splash.standard .inner section#buttons,
+#splash.hdtv .inner section#buttons {
   padding-top: 70px;
 }
-#splash.standard .inner section#buttons div {
+#splash.standard .inner section#buttons div,
+#splash.hdtv .inner section#buttons div {
   width: 220px;
   margin: auto;
   padding: 10px;
   text-align: center;
 }
-#splash.standard .inner section#buttons div + div {
+#splash.standard .inner section#buttons div + div,
+#splash.hdtv .inner section#buttons div + div {
   margin-top: 20px;
 }
 #splash.tablet .inner,
@@ -137,27 +142,36 @@
   margin-top: 10px;
 }
 #splash.standard.pseudomobile section,
-#splash.standard.pseudosmalltablet section {
+#splash.standard.pseudosmalltablet section,
+#splash.hdtv.pseudomobile section,
+#splash.hdtv.pseudosmalltablet section {
   width: auto;
   padding: 0;
 }
 #splash.standard.pseudomobile section#buttons,
-#splash.standard.pseudosmalltablet section#buttons {
+#splash.standard.pseudosmalltablet section#buttons,
+#splash.hdtv.pseudomobile section#buttons,
+#splash.hdtv.pseudosmalltablet section#buttons {
   width: 100%;
 }
 #splash.standard.pseudomobile section#buttons div,
-#splash.standard.pseudosmalltablet section#buttons div {
+#splash.standard.pseudosmalltablet section#buttons div,
+#splash.hdtv.pseudomobile section#buttons div,
+#splash.hdtv.pseudosmalltablet section#buttons div {
   width: auto;
 }
-#all.standard > .try {
+#all.standard > .try,
+#all.hdtv > .try {
   text-align: center;
 }
-#all.standard > .try #devices {
+#all.standard > .try #devices,
+#all.hdtv > .try #devices {
   margin-top: 20px;
   position: relative;
   z-index: 2;
 }
-#all.standard > .try #devices div {
+#all.standard > .try #devices div,
+#all.hdtv > .try #devices div {
   height: 75px;
   background: url('../../images/devices.svg');
   background-size: 258px 74px;
@@ -165,26 +179,32 @@
   cursor: pointer;
   font-size: 13px;
 }
-#all.standard > .try #devices div + div {
+#all.standard > .try #devices div + div,
+#all.hdtv > .try #devices div + div {
   margin-left: 20px;
 }
-#all.standard > .try #devices #pseudomobile {
+#all.standard > .try #devices #pseudomobile,
+#all.hdtv > .try #devices #pseudomobile {
   width: 24px;
   background-position: 0 0;
 }
-#all.standard > .try #devices #pseudosmalltablet {
+#all.standard > .try #devices #pseudosmalltablet,
+#all.hdtv > .try #devices #pseudosmalltablet {
   width: 42px;
   background-position: -26px 0px;
 }
-#all.standard > .try #devices #pseudotablet {
+#all.standard > .try #devices #pseudotablet,
+#all.hdtv > .try #devices #pseudotablet {
   width: 53px;
   background-position: -69px 1px;
 }
-#all.standard > .try #devices #pseudohdtv {
+#all.standard > .try #devices #pseudohdtv,
+#all.hdtv > .try #devices #pseudohdtv {
   width: 94px;
   background-position: -124px 1px;
 }
-#all.standard > .try #devices .cancel {
+#all.standard > .try #devices .cancel,
+#all.hdtv > .try #devices .cancel {
   display: none;
 }
 .try.tablet,
@@ -192,32 +212,39 @@
 .try.mobile {
   display: none;
 }
-body > .try.standard {
+body > .try.standard,
+body > .try.hdtv {
   width: 100%;
   height: 46px;
   border-bottom: 3px solid #38748e;
   background: #203b44 url('../../images/docubg.png') repeat-x top;
   color: #f9efd4;
   position: fixed;
-  z-index: 10;
+  z-index: 20;
 }
-body > .try.standard .inner {
+body > .try.standard .inner,
+body > .try.hdtv .inner {
   background: transparent;
   margin: 0;
   padding: 0;
 }
 body > .try.standard h2,
-body > .try.standard div#devices {
+body > .try.hdtv h2,
+body > .try.standard div#devices,
+body > .try.hdtv div#devices {
   float: left;
 }
-body > .try.standard h2 {
+body > .try.standard h2,
+body > .try.hdtv h2 {
   font-size: 36px;
   margin: 2px 0 0 13px;
 }
-body > .try.standard #devices {
+body > .try.standard #devices,
+body > .try.hdtv #devices {
   margin: 5px 0 0 20px;
 }
-body > .try.standard #devices div {
+body > .try.standard #devices div,
+body > .try.hdtv #devices div {
   width: 35px;
   height: 35px;
   float: left;
@@ -225,10 +252,12 @@ body > .try.standard #devices div {
   background-size: 148px 37px;
   cursor: pointer;
 }
-body > .try.standard #devices div + div {
+body > .try.standard #devices div + div,
+body > .try.hdtv #devices div + div {
   margin-left: 8px;
 }
-body > .try.standard #devices .toggleOrientation:hover {
+body > .try.standard #devices .toggleOrientation:hover,
+body > .try.hdtv #devices .toggleOrientation:hover {
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
@@ -242,27 +271,33 @@ body > .try.standard #devices .toggleOrientation:hover {
   /* Safari and Chrome */
 
 }
-body > .try.standard #devices #pseudomobile {
+body > .try.standard #devices #pseudomobile,
+body > .try.hdtv #devices #pseudomobile {
   width: 12px;
   background-position: 0px;
 }
-body > .try.standard #devices #pseudosmalltablet {
+body > .try.standard #devices #pseudosmalltablet,
+body > .try.hdtv #devices #pseudosmalltablet {
   width: 21px;
   background-position: -13px 0px;
 }
-body > .try.standard #devices #pseudotablet {
+body > .try.standard #devices #pseudotablet,
+body > .try.hdtv #devices #pseudotablet {
   width: 26px;
   background-position: -35px 0px;
 }
-body > .try.standard #devices #pseudohdtv {
+body > .try.standard #devices #pseudohdtv,
+body > .try.hdtv #devices #pseudohdtv {
   width: 47px;
   background-position: -62px 0px;
 }
-body > .try.standard #devices #return {
+body > .try.standard #devices #return,
+body > .try.hdtv #devices #return {
   width: 18px;
   background-position: -110px 0px;
 }
-body > .try.standard #devices .cancel {
+body > .try.standard #devices .cancel,
+body > .try.hdtv #devices .cancel {
   width: 18px;
   background-position: -129px 0px;
   position: absolute;
@@ -289,82 +324,95 @@ body > .try.standard #devices .cancel {
 #content.docsLite article:not(.highlight) + article:not(.highlight) {
   border-top: 1px dashed #38748e;
 }
-#content.docsLite.standard article:not(.thirds) > section:nth-of-type(3n):last-of-type {
+#content.docsLite.standard article:not(.thirds) > section:nth-of-type(3n):last-of-type,
+#content.docsLite.hdtv article:not(.thirds) > section:nth-of-type(3n):last-of-type {
   width: 100%;
   clear: both;
 }
 #content.docsLite.standard article,
-#content.docsLite.pseudostandard article {
+#content.hdtv article {
   padding: 20px;
 }
 #content.docsLite.standard article h2,
-#content.docsLite.pseudostandard article h2 {
+#content.hdtv article h2 {
   box-sizing: border-box;
   padding-right: 50%;
 }
 #content.docsLite.standard article section,
-#content.docsLite.pseudostandard article section {
+#content.hdtv article section {
   width: 50%;
   padding: 20px 13px 25px 0;
   float: left;
   box-sizing: border-box;
 }
 #content.docsLite.standard article section:nth-of-type(2n),
-#content.docsLite.pseudostandard article section:nth-of-type(2n) {
+#content.hdtv article section:nth-of-type(2n) {
   padding: 20px 0 20px 13px;
   float: right;
 }
 #content.docsLite.standard article section + h2,
-#content.docsLite.pseudostandard article section + h2 {
+#content.hdtv article section + h2 {
   padding-right: 0;
   padding-left: 50%;
 }
 #content.docsLite.standard article article,
-#content.docsLite.pseudostandard article article {
+#content.hdtv article article {
   padding: 0px;
 }
 #content.docsLite.standard article.highlight,
-#content.docsLite.pseudostandard article.highlight {
+#content.hdtv article.highlight {
   width: 100%;
   margin: 20px 0 20px 0;
 }
 #content.docsLite.standard article.highlight .inner,
-#content.docsLite.pseudostandard article.highlight .inner {
+#content.hdtv article.highlight .inner {
   width: 780px;
   padding: 0;
   margin: auto;
 }
-#content.docsLite.standard section.thirds,
-#content.docsLite.pseudostandard section.thirds {
+#content.docsLite.standard article:first-of-type,
+#content.hdtv article:first-of-type {
+  padding-top: 27px;
+}
+#content.docsLite.standard div.thirds,
+#content.hdtv div.thirds {
+  width: 100%;
   clear: both;
   padding: 0;
 }
-#content.docsLite.standard section.thirds section,
-#content.docsLite.pseudostandard section.thirds section {
+#content.docsLite.standard div.thirds section,
+#content.hdtv div.thirds section {
   width: 33%;
   float: left;
 }
-#content.docsLite.standard section.thirds section:nth-child(3n-2),
-#content.docsLite.pseudostandard section.thirds section:nth-child(3n-2),
-#content.docsLite.standard section.thirds section:nth-child(3n-1),
-#content.docsLite.pseudostandard section.thirds section:nth-child(3n-1) {
+#content.docsLite.standard div.thirds section:nth-child(3n-2),
+#content.hdtv div.thirds section:nth-child(3n-2),
+#content.docsLite.standard div.thirds section:nth-child(3n-1),
+#content.hdtv div.thirds section:nth-child(3n-1) {
   padding-right: 13px;
 }
-#content.docsLite.standard section.thirds section:nth-child(3n-1),
-#content.docsLite.pseudostandard section.thirds section:nth-child(3n-1) {
+#content.docsLite.standard div.thirds section:nth-child(3n-1),
+#content.hdtv div.thirds section:nth-child(3n-1) {
   padding-left: 13px;
 }
-#content.docsLite.standard section.thirds section:nth-child(3n),
-#content.docsLite.pseudostandard section.thirds section:nth-child(3n) {
+#content.docsLite.standard div.thirds section:nth-child(3n),
+#content.hdtv div.thirds section:nth-child(3n) {
   padding-left: 13px;
   padding-right: 0px;
+}
+#content.docsLite.standard div.thirds:nth-of-type(2n),
+#content.hdtv div.thirds:nth-of-type(2n) {
+  padding: 0;
 }
 #content.docsLite.tablet article,
 #content.docsLite.smalltablet article,
 #content.docsLite.mobile article,
 #content.docsLite.standard.pseudotablet article,
 #content.docsLite.standard.pseudosmalltablet article,
-#content.docsLite.standard.pseudomobile article {
+#content.docsLite.standard.pseudomobile article,
+#content.docsLite.hdtv.pseudotablet article,
+#content.docsLite.hdtv.pseudosmalltablet article,
+#content.docsLite.hdtv.pseudomobile article {
   width: auto;
   padding: 20px 0 20px 0;
 }
@@ -373,7 +421,10 @@ body > .try.standard #devices .cancel {
 #content.docsLite.mobile article h2,
 #content.docsLite.standard.pseudotablet article h2,
 #content.docsLite.standard.pseudosmalltablet article h2,
-#content.docsLite.standard.pseudomobile article h2 {
+#content.docsLite.standard.pseudomobile article h2,
+#content.docsLite.hdtv.pseudotablet article h2,
+#content.docsLite.hdtv.pseudosmalltablet article h2,
+#content.docsLite.hdtv.pseudomobile article h2 {
   padding-right: 0;
 }
 #content.docsLite.tablet article section,
@@ -381,7 +432,10 @@ body > .try.standard #devices .cancel {
 #content.docsLite.mobile article section,
 #content.docsLite.standard.pseudotablet article section,
 #content.docsLite.standard.pseudosmalltablet article section,
-#content.docsLite.standard.pseudomobile article section {
+#content.docsLite.standard.pseudomobile article section,
+#content.docsLite.hdtv.pseudotablet article section,
+#content.docsLite.hdtv.pseudosmalltablet article section,
+#content.docsLite.hdtv.pseudomobile article section {
   width: auto;
   padding: 0;
   float: none;
@@ -391,7 +445,10 @@ body > .try.standard #devices .cancel {
 #content.docsLite.mobile article h2 + section,
 #content.docsLite.standard.pseudotablet article h2 + section,
 #content.docsLite.standard.pseudosmalltablet article h2 + section,
-#content.docsLite.standard.pseudomobile article h2 + section {
+#content.docsLite.standard.pseudomobile article h2 + section,
+#content.docsLite.hdtv.pseudotablet article h2 + section,
+#content.docsLite.hdtv.pseudosmalltablet article h2 + section,
+#content.docsLite.hdtv.pseudomobile article h2 + section {
   margin-top: 20px;
 }
 #content.docsLite.tablet article section + section,
@@ -399,7 +456,10 @@ body > .try.standard #devices .cancel {
 #content.docsLite.mobile article section + section,
 #content.docsLite.standard.pseudotablet article section + section,
 #content.docsLite.standard.pseudosmalltablet article section + section,
-#content.docsLite.standard.pseudomobile article section + section {
+#content.docsLite.standard.pseudomobile article section + section,
+#content.docsLite.hdtv.pseudotablet article section + section,
+#content.docsLite.hdtv.pseudosmalltablet article section + section,
+#content.docsLite.hdtv.pseudomobile article section + section {
   margin-top: 20px;
   padding-left: 0;
 }
@@ -408,7 +468,10 @@ body > .try.standard #devices .cancel {
 #content.docsLite.mobile article.highlight .inner,
 #content.docsLite.standard.pseudotablet article.highlight .inner,
 #content.docsLite.standard.pseudosmalltablet article.highlight .inner,
-#content.docsLite.standard.pseudomobile article.highlight .inner {
+#content.docsLite.standard.pseudomobile article.highlight .inner,
+#content.docsLite.hdtv.pseudotablet article.highlight .inner,
+#content.docsLite.hdtv.pseudosmalltablet article.highlight .inner,
+#content.docsLite.hdtv.pseudomobile article.highlight .inner {
   width: auto;
 }
 #content.docsLite.tablet article.highlight pre,
@@ -416,7 +479,10 @@ body > .try.standard #devices .cancel {
 #content.docsLite.mobile article.highlight pre,
 #content.docsLite.standard.pseudotablet article.highlight pre,
 #content.docsLite.standard.pseudosmalltablet article.highlight pre,
-#content.docsLite.standard.pseudomobile article.highlight pre {
+#content.docsLite.standard.pseudomobile article.highlight pre,
+#content.docsLite.hdtv.pseudotablet article.highlight pre,
+#content.docsLite.hdtv.pseudosmalltablet article.highlight pre,
+#content.docsLite.hdtv.pseudomobile article.highlight pre {
   border-left: none;
   border-right: none;
 }
@@ -425,7 +491,10 @@ body > .try.standard #devices .cancel {
 #content.docsLite.mobile article:first-of-type,
 #content.docsLite.standard.pseudotablet article:first-of-type,
 #content.docsLite.standard.pseudosmalltablet article:first-of-type,
-#content.docsLite.standard.pseudomobile article:first-of-type {
+#content.docsLite.standard.pseudomobile article:first-of-type,
+#content.docsLite.hdtv.pseudotablet article:first-of-type,
+#content.docsLite.hdtv.pseudosmalltablet article:first-of-type,
+#content.docsLite.hdtv.pseudomobile article:first-of-type {
   padding-top: 25px;
 }
 #content.docsLite.tablet article + article,
@@ -433,25 +502,28 @@ body > .try.standard #devices .cancel {
 #content.docsLite.mobile article + article,
 #content.docsLite.standard.pseudotablet article + article,
 #content.docsLite.standard.pseudosmalltablet article + article,
-#content.docsLite.standard.pseudomobile article + article {
+#content.docsLite.standard.pseudomobile article + article,
+#content.docsLite.hdtv.pseudotablet article + article,
+#content.docsLite.hdtv.pseudosmalltablet article + article,
+#content.docsLite.hdtv.pseudomobile article + article {
   margin-top: 20px;
 }
-#content.docsLite.tablet section.thirds section,
-#content.docsLite.smalltablet section.thirds section,
-#content.docsLite.mobile section.thirds section,
-#content.docsLite.standard.pseudotablet section.thirds section,
-#content.docsLite.standard.pseudosmalltablet section.thirds section,
-#content.docsLite.standard.pseudomobile section.thirds section {
+#content.docsLite.tablet div.thirds section,
+#content.docsLite.smalltablet div.thirds section,
+#content.docsLite.mobile div.thirds section,
+#content.docsLite.standard.pseudotablet div.thirds section,
+#content.docsLite.standard.pseudosmalltablet div.thirds section,
+#content.docsLite.standard.pseudomobile div.thirds section,
+#content.docsLite.hdtv.pseudotablet div.thirds section,
+#content.docsLite.hdtv.pseudosmalltablet div.thirds section,
+#content.docsLite.hdtv.pseudomobile div.thirds section {
   width: auto;
   padding: 0;
 }
-#content.docsLite nav#docsNav {
-  padding-top: 20px;
-}
-#content.docsLite nav#docsNav li {
+#content.docsLite nav.docsNav li {
   position: relative;
 }
-#content.docsLite nav#docsNav li + li {
+#content.docsLite nav.docsNav li + li {
   margin-top: 20px;
 }
 .no-multiplebgs #splash .inner {
