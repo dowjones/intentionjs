@@ -259,6 +259,9 @@ body > .try.standard, body > .try.hdtv {
 		box-sizing:border-box;
 		background: darken(@mediumBlue, 5%);
 	}
+	article{
+		padding-top:@gutter*1.5;
+	}
 	article.highlight{
 		background:@seafoam url('../../images/mezz.png') repeat;
 		border-top:13px solid @lightSeafoam;
@@ -281,7 +284,7 @@ body > .try.standard, body > .try.hdtv {
 }
 #content.docsLite.standard, #content.hdtv{
 	article{
-		padding:@gutter;
+		padding:@gutter*1.5 @gutter @gutter @gutter;
 		h2{
 			box-sizing:border-box;
 			padding-right:50%;
