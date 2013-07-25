@@ -27,24 +27,12 @@ $(window).load(function() {
 			D = (D.clientHeight)? D: B;
 	}
 	
-	$(document)
-		.ready(function() { //Things that need the page to be done before running
-			if(docsTest == true) { 
-				contentPos = $('#docs').offset().top + 42;
-				buildHome(contentPos, D);
-			} else { 
-				$('#content .inner').offset().top + 3;
-				buildBlog(contentPos);
-			}
-		})
-		.on('scroll', function(){
-			if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
-			else { var scroll = pageYOffset; }
-			if(scroll >= contentPos){ //Get rid of nav instructions
-				window.setTimeout(function() {
-					$('#content nav').children('h6').fadeOut(500);
-				}, 1000);
-			}
-		});
-
+	//Look for what page it actually is: docs or the blog
+	if(docsTest == true) { 
+		contentPos = $('#docs').offset().top + 42;
+		buildHome(contentPos, D);
+	} else { 
+		$('#content .inner').offset().top + 3;
+		buildBlog(contentPos);
+	}
 });
