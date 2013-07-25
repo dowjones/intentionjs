@@ -9,8 +9,10 @@ module.exports = function(grunt){
     uglify:{
       intention : {
         options:{
-          banner:banner: '/*! <%= pkg.name %> v<%= pkg.version %>\
+          banner: '/*! <%= pkg.name %> v<%= pkg.version %>\
 \n* http://intentionjs.com/\
+\n*\
+\n*\ intention.js\
 \n*\
 \n* Copyright 2011, <%= grunt.template.today("yyyy") %>\ Dowjones and other contributors\
 \n* Released under the MIT license\
@@ -26,6 +28,8 @@ module.exports = function(grunt){
            banner: '/*! <%= pkg.name %> v<%= pkg.version %>\
 \n* http://intentionjs.com/\
 \n*\
+\n*\ context.js\
+\n*\
 \n* Copyright 2011, <%= grunt.template.today("yyyy") %>\ Dowjones and other contributors\
 \n* Released under the MIT license\
 \n*\
@@ -40,6 +44,8 @@ module.exports = function(grunt){
         options:{
           banner: '/*! <%= pkg.name %> v<%= pkg.version %>\
 \n* http://intentionjs.com/\
+\n*\
+\n*\ intention.js + context.js\
 \n*\
 \n* Copyright 2011, <%= grunt.template.today("yyyy") %>\ Dowjones and other contributors\
 \n* Released under the MIT license\
