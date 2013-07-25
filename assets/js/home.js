@@ -24,25 +24,12 @@ var buildHome = function(contentPos, D) {
         lastExec = d;
       };
     },
-    managePosition = function() {
+    makeSticky = function() {
     	if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
     	else { var scroll = pageYOffset; }
     	//Fixing the nav
     	if(scroll >= contentPos) { $('#content nav').addClass('fixed'); }
     	else { $('#content nav').removeClass('fixed'); }
-    	//Current Position indicators
-    	$.each(titlePos, function(index, value) { //This could be more efficient if the array went from largest to smallest
-    		var indicator = $('#leftNav #a'+(index+1)+' .circle');
-    		if(scroll >= value) { //If scrolled past the target
-    			indicator.addClass('active');
-    			currentPos = index+1;
-    			console.log('scroll-based currentPosition increment up', currentPos);
-    		} else if(scroll+$(window).height() >= $(document).height()) { //if reached the bottom of the page
-    			$('#leftNav li').children('.circle').addClass('active');
-    		} else {
-    			indicator.removeClass('active'); //if none have been reached
-    		}
-    	});
     },
 	container_width = intent.responsive({
 		ID: 'container',
@@ -80,7 +67,6 @@ var buildHome = function(contentPos, D) {
 		},
 		measure: function(arg) {
 			if($.type(arg) == 'string'){
-				console.log("string", arg);
 				return arg;
 			}
 			var time = new Date();
@@ -118,38 +104,60 @@ var buildHome = function(contentPos, D) {
 	});
 	
 	//For docs nav
-	var titlePos = [],
+	$.each($('#content article').not('.highlight'), function() { //Create back to top links ---- This must go before the title positions are found.
+		var markup = $('<div class="clear"><a>&uarr; Back to top</a></div>');
+		console.log(markup);
+		$(this).append(markup);
+		markup.click(function() {
+			$('html, body').animate({ scrollTop: $('#topNav').offset().top}, 1000);
+		});
+	});
+	
+	var titleCtx = [],
 		curentPos,
 		articleCt = $('#content article').not('.highlight').length,
 		i = 1;
-		
-	$.each($('#content article').not('.highlight'), function() { //Create back to top links
-		var markup = '<div class="clear"><a>&uarr; Back to top</a></div>';
-		$(this).append(markup);
-	});
 	$.each($('.docsLite h2'), function() { //then create the nav 
 		$(this).parent().attr('id', 't'+i); //#targeti
 		var text = $(this).attr('alt'),
-			markup = '<li id="a'+i+'"><div class="label"><a href="#t'+i+'">'+text+'</a></div><div class="circle"></div></li>', //#anchori
-			pos = $(this).offset().top;
-		titlePos.push(pos); //add these positions to an array to show the current location in the nav
+			markup = '<li id="a'+i+'"><div class="label"><a href="#t'+i+'">'+text+'</a></div><div class="circle" intent in-width in-t'+i+'-class="active"></div></li>', //#anchori
+			pos = $(this).parent().offset().top,
+			ctx = {name:'t'+i, val:pos};
+		titleCtx.push(ctx);
 		$('#leftNav ol, #topNav ol').append(markup);
+		intent.add($('#leftNav #a'+i+' .circle'));
 		i++;
 	});
-	$(window).on('scroll', throttle(managePosition, 100));
+	titleCtx.reverse(); //Maximum -> minimum
+	var scrolldepth = intent.responsive({
+		ID: 'scrolldepth',
+		contexts: titleCtx,
+		matcher: function(test, context){
+			if($.type(test) == 'string'){ return test == context.name; }
+			var pass = test >= context.val;
+			if(pass == true) { currentPos = context.name.slice(1) }
+			return pass;
+		},
+		measure: function(arg){
+			if($.type(arg) == 'string'){ return arg; }
+			if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
+			else { var scroll = pageYOffset; }
+			return scroll;
+		}
+	});
+	scrolldepth.respond();
+	$(window).on('scroll', function(){
+		throttle(scrolldepth.respond(), 100);
+		throttle(makeSticky(), 100);
+	});
 	
 	$('#prevnext .inner div').click(function() {
 		var dir = $(this).attr('class');
-		console.log('starting curPos', currentPos);
 		if( ($(this).attr('class') == 'next') && (currentPos < articleCt) ){ console.log('increment up'); currentPos++ }
 		else if(($(this).attr('class') == 'prev') && (currentPos > 1)){ console.log('decrement down'); currentPos-- }
-		console.log('after curPos', currentPos);
 		var target = $('#t'+currentPos).offset().top;
-		console.log('target:', target, $('#t'+currentPos));
+		console.log(currentPos, 'target', target);
 		$('html, body').animate({ scrollTop: target}, 1000); //minus 27 so you don't obscure the heading
-	});
-	$('article>.clear a').click(function() { //decide what "top" means depending on the device
-		$('html, body').animate({ scrollTop: $('#topNav').offset().top}, 1000);
 	});
 	
 	

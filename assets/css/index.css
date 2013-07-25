@@ -310,6 +310,9 @@ body > .try.hdtv #devices .cancel {
   box-sizing: border-box;
   background: #182c33;
 }
+#content.docsLite article {
+  padding-top: 30px;
+}
 #content.docsLite article.highlight {
   background: #7fb27f url('../../images/mezz.png') repeat;
   border-top: 13px solid #91bc91;
@@ -331,7 +334,7 @@ body > .try.hdtv #devices .cancel {
 }
 #content.docsLite.standard article,
 #content.hdtv article {
-  padding: 20px;
+  padding: 30px 20px 20px 20px;
 }
 #content.docsLite.standard article h2,
 #content.hdtv article h2 {
@@ -414,7 +417,7 @@ body > .try.hdtv #devices .cancel {
 #content.docsLite.hdtv.pseudosmalltablet article,
 #content.docsLite.hdtv.pseudomobile article {
   width: auto;
-  padding: 20px 0 20px 0;
+  padding: 30px 0 20px 0;
 }
 #content.docsLite.tablet article h2,
 #content.docsLite.smalltablet article h2,
@@ -485,17 +488,6 @@ body > .try.hdtv #devices .cancel {
 #content.docsLite.hdtv.pseudomobile article.highlight pre {
   border-left: none;
   border-right: none;
-}
-#content.docsLite.tablet article:first-of-type,
-#content.docsLite.smalltablet article:first-of-type,
-#content.docsLite.mobile article:first-of-type,
-#content.docsLite.standard.pseudotablet article:first-of-type,
-#content.docsLite.standard.pseudosmalltablet article:first-of-type,
-#content.docsLite.standard.pseudomobile article:first-of-type,
-#content.docsLite.hdtv.pseudotablet article:first-of-type,
-#content.docsLite.hdtv.pseudosmalltablet article:first-of-type,
-#content.docsLite.hdtv.pseudomobile article:first-of-type {
-  padding-top: 25px;
 }
 #content.docsLite.tablet article + article,
 #content.docsLite.smalltablet article + article,
