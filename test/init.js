@@ -14,13 +14,14 @@ function in_init(contexts, callback){
   });
 
   if((!contexts) || (contexts.length === 0)){
-    sheetWriter();
+    callback();
   }
-  $.when.apply(this, dfds).done(callback);
 
+  $.when
+    .apply(this, dfds)
+    .done(callback);
 };
 
-//usage:
 in_init(['standard'], function(){
   console.log('standard has been entered');
 });
