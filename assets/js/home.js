@@ -1,7 +1,6 @@
 var buildHome = function(contentPos, D) {
-	console.log('when does this start running: HOME.JS');
 	//Basic var setup
-	var currentPos = 0,
+	var curPos = 0,
 	throttle = function(callback, interval){
       var lastExec = new Date(),
         timer = null;
@@ -106,7 +105,6 @@ var buildHome = function(contentPos, D) {
 	//For docs nav
 	$.each($('#content article').not('.highlight'), function() { //Create back to top links ---- This must go before the title positions are found.
 		var markup = $('<div class="clear"><a>&uarr; Back to top</a></div>');
-		console.log(markup);
 		$(this).append(markup);
 		markup.click(function() {
 			$('html, body').animate({ scrollTop: $('#topNav').offset().top}, 1000);
@@ -135,7 +133,7 @@ var buildHome = function(contentPos, D) {
 		matcher: function(test, context){
 			if($.type(test) == 'string'){ return test == context.name; }
 			var pass = test >= context.val;
-			if(pass == true) { currentPos = context.name.slice(1) }
+			if(pass == true) { curPos = context.name.slice(1) }
 			return pass;
 		},
 		measure: function(arg){
@@ -147,17 +145,18 @@ var buildHome = function(contentPos, D) {
 	});
 	scrolldepth.respond();
 	$(window).on('scroll', function(){
-		throttle(scrolldepth.respond(), 100);
+		throttle(scrolldepth.respond(), 50);
 		throttle(makeSticky(), 100);
 	});
 	
 	$('#prevnext .inner div').click(function() {
 		var dir = $(this).attr('class');
-		if( ($(this).attr('class') == 'next') && (currentPos < articleCt) ){ console.log('increment up'); currentPos++ }
-		else if(($(this).attr('class') == 'prev') && (currentPos > 1)){ console.log('decrement down'); currentPos-- }
-		var target = $('#t'+currentPos).offset().top;
-		console.log(currentPos, 'target', target);
-		$('html, body').animate({ scrollTop: target}, 1000); //minus 27 so you don't obscure the heading
+		if( ($(this).attr('class') == 'next') && (curPos < articleCt) ){ curPos++; }
+		else if(($(this).attr('class') == 'prev') && (curPos > 1)){ curPos--; }
+		else { return false }
+		
+		var target = $('#t'+curPos).offset().top;
+		$('html, body').animate({ scrollTop: target}, 1000);
 	});
 	
 	
@@ -176,12 +175,7 @@ var buildHome = function(contentPos, D) {
 				equalizeAll('#docs', '.equalize', 'section');
 			}
 			//When the context switches, reset the targets
-			contentPos = $('#content').position().top + 3,
-			titlePos = [];
-			$.each($('.docsLite h2'), function() {
-				var pos = $(this).offset().top;
-				titlePos.push(pos);
-			});
+			contentPos = $('#content').position().top + 3;
 		})
 		.on('container', function() {
 			var device = intent.axes.container.current,
@@ -197,12 +191,6 @@ var buildHome = function(contentPos, D) {
 				equalizeAll('.docsLite', '.equalize', 'section');
 			}
 			//When the context switches, reset the targets
-			contentPos = $('#content').position().top + 3,
-			titlePos = [];
-			$.each($('.docsLite h2'), function() {
-				var pos = $(this).offset().top;
-				console.log($(this), pos);
-				titlePos.push(pos);
-			});
+			contentPos = $('#content').position().top + 3;
 		});
 };
