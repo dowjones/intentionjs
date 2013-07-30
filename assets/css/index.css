@@ -341,6 +341,14 @@ body > .try.hdtv #devices .cancel {
   box-sizing: border-box;
   padding-right: 50%;
 }
+#content.docsLite.standard article h3,
+#content.hdtv article h3 {
+  clear: both;
+}
+#content.docsLite.standard article section + h3,
+#content.hdtv article section + h3 {
+  margin-top: 40px;
+}
 #content.docsLite.standard article section,
 #content.hdtv article section {
   width: 50%;
@@ -360,7 +368,8 @@ body > .try.hdtv #devices .cancel {
 }
 #content.docsLite.standard article article,
 #content.hdtv article article {
-  padding: 0px;
+  padding: 30px 0 20px 0;
+  width: auto;
 }
 #content.docsLite.standard article.highlight,
 #content.hdtv article.highlight {
@@ -511,12 +520,6 @@ body > .try.hdtv #devices .cancel {
 #content.docsLite.hdtv.pseudomobile div.thirds section {
   width: auto;
   padding: 0;
-}
-#content.docsLite nav.docsNav li {
-  position: relative;
-}
-#content.docsLite nav.docsNav li + li {
-  margin-top: 20px;
 }
 .no-multiplebgs #splash .inner {
   background-image: url('../../images/splashbg.png');

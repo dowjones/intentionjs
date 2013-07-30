@@ -334,7 +334,6 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 	width:200px;
 	height:100%;
 	padding-top:@gutter;
-	padding-left:@gutter/2;
 	position:absolute;
 	top:0;
 	left:0;
@@ -355,7 +354,6 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 		left:100%;
 	}
 	li{ //a node on the line
-		margin-right:6px; //get it on the line
 		position:relative;
 		right:0;
 		list-style:none;
@@ -365,7 +363,7 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 		div{ display:inline-block }
 		.label{
 			width:auto;
-			padding-right:14px;
+			padding-right:19px;
 		}
 		.circle{
 			width:10px;
@@ -374,16 +372,34 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 			border:3px solid @orange;
 			background:@mediumBlue;
 			position:absolute;
-			top:50%;
-			margin-top:-7px; //vertically center
+			right:-9px;
+			top:2px;
 			box-shadow:0 0 15px overlay(@orange, @mediumBlue);
 		}
-		.circle.active{
-			background:@orange;
+		ul{ 
+			max-height:13px;
+			margin-top:0;
+			font-size:14px;
+			overflow:hidden;
+			.transitions(.5s);
+			li a{ padding-bottom:2px; color:lighten(@periwinkle, 15%); }
+			li.active a{ border-bottom:1px dashed lighten(@periwinkle, 15%); }
 		}
+		ul:before{ content:'...'; }
 	}
-	li+li{
-		margin-top:@gutter;
+	li.active{
+		.circle{ background:@orange; }
+		ul{
+			max-height:999px;
+			padding:10px 19px 15px 0;
+			margin-top:5px;
+			background:@green;
+		}
+		ul:before{ content:'' }
+	}
+	li+li{ margin-top:@gutter; }
+	ul {
+		li+li{ margin-top:@gutter/2; }
 	}
 	nav{ display:none } //mobile, tablet nav shouldn't been visible in standard
 }
@@ -424,8 +440,7 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 #topNav.pseudotablet, #topNav.pseudosmalltablet, #topNav.pseudomobile{
 	display:none;
 }
-#topNav.hdtv ol{ .columns(6); }
-#topNav.standard ol, #topNav.tablet ol{ .columns(3) }
+#topNav.hdtv ol, #topNav.standard ol, #topNav.tablet ol{ .columns(4); }
 #topNav.smalltablet ol, #topNav.mobile ol{ .columns(2) }
 #prevnext{
 	width:100%;

@@ -20,7 +20,7 @@
 - A section on manipulations: one that talks about how all manipulations happen via attributes, how that works, and the significance of it. (Manipulation will be its own article with the methods of manipulation as subsections). Probably good on examples here.
 - Custom contexts
 	- Firstly a callback to custom contexts' potential for awesome creative implementations
-	- Describe the four main properties:
+	- Describe the four main properties:	
 		- ID and how it is referenced later (`in-axisName`, `intent.axes.axisName.current`), naming rules
 		- Contexts: what they mean obviously, but conceptually how to order them. When to use maximum-value breakpoints, when to use minimum-value breakpoints. Naming rules
 		- Matcher: what passes it values, what to do to allow for forced context (if the measure is a string), how it goes through the array in order. Describe the default matcher function.

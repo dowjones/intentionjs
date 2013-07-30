@@ -103,7 +103,8 @@ var buildHome = function(contentPos, D) {
 	});
 	
 	//For docs nav
-	$.each($('#content article').not('.highlight'), function() { //Create back to top links ---- This must go before the title positions are found.
+	var articles = $('#content article').not('.highlight').not('article:has(article)');
+	$.each(articles, function() { //Create back to top links ---- This must go before the title positions are found.
 		var markup = $('<div class="clear"><a>&uarr; Back to top</a></div>');
 		$(this).append(markup);
 		markup.click(function() {
@@ -112,23 +113,45 @@ var buildHome = function(contentPos, D) {
 	});
 	
 	var titleCtx = [],
+		subCtx = [],
 		curentPos,
 		articleCt = $('#content article').not('.highlight').length,
 		i = 1;
 	$.each($('.docsLite h2'), function() { //then create the nav 
 		$(this).parent().attr('id', 't'+i); //#targeti
 		var text = $(this).attr('alt'),
-			markup = '<li id="a'+i+'"><div class="label"><a href="#t'+i+'">'+text+'</a></div><div class="circle" intent in-width in-t'+i+'-class="active"></div></li>', //#anchori
-			pos = $(this).parent().offset().top,
-			ctx = {name:'t'+i, val:pos};
+			markup = '<li id="a'+i+'" intent in-width in-t'+i+'-class="active"><div class="label"><a href="#t'+i+'">'+text+'</a></div><div class="circle"></div></li>', //#anchori
+			pos = $(this).parent().offset().top - 20, //minus 20 for padding
+			ctx = {name:'t'+i, val:pos},
+			sub = $(this).siblings('article'),
+			s = 1;
 		titleCtx.push(ctx);
 		$('#leftNav ol, #topNav ol').append(markup);
-		intent.add($('#leftNav #a'+i+' .circle'));
+		intent.add($('#leftNav #a'+i));
+		
+		if(sub.length>0) {
+			$('#leftNav li#a'+i).append('<ul/>');
+			$.each(sub, function() { 
+				var text = $(this).children('h3').attr('alt'),
+					pos = $(this).offset().top - 20, //minus 20 for padding
+					subTarget = 't'+i+'s'+s,
+					subAnchor = 'a'+i+'s'+s,
+					markup = '<li id="'+subAnchor+'" intent in-base-class="inactive" in-'+subTarget+'-class="active"><a href="#'+subTarget+'">'+text+'</a></li>',
+					ctx = {name:subTarget, val:pos};
+				subCtx.push(ctx);
+				$(this).attr('id', subTarget);
+				$('#leftNav li#a'+i+' ul').append(markup);
+				intent.add($('#'+subAnchor));
+				s++;
+			});
+		}
+		
 		i++;
 	});
-	titleCtx.reverse(); //Maximum -> minimum
-	var scrolldepth = intent.responsive({
-		ID: 'scrolldepth',
+	titleCtx.reverse();
+	subCtx.reverse(); //Maximum -> minimum
+	var titleDepth = intent.responsive({
+		ID: 'titleDepth',
 		contexts: titleCtx,
 		matcher: function(test, context){
 			if($.type(test) == 'string'){ return test == context.name; }
@@ -142,10 +165,24 @@ var buildHome = function(contentPos, D) {
 			else { var scroll = pageYOffset; }
 			return scroll;
 		}
+	}),
+	subDepth = intent.responsive({
+		ID: 'subdepth',
+		contexts: subCtx,
+		matcher: function(test, context){
+			return test >= context.val;
+		},
+		measure: function(arg){
+			if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
+			else { var scroll = pageYOffset; }
+			return scroll;
+		}
 	});
-	scrolldepth.respond();
+	titleDepth.respond();
+	subDepth.respond();
 	$(window).on('scroll', function(){
-		throttle(scrolldepth.respond(), 50);
+		throttle(titleDepth.respond(), 50);
+		subDepth.respond();
 		throttle(makeSticky(), 100);
 	});
 	
