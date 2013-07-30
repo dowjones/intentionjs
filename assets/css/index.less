@@ -289,6 +289,8 @@ body > .try.standard, body > .try.hdtv {
 			box-sizing:border-box;
 			padding-right:50%;
 		}
+		h3{ clear:both; }
+		section+h3{ margin-top:@gutter*2; }
 		section{
 			width:50%; //2col setup
 			padding:@gutter 13px (@gutter+5) 0;
@@ -304,7 +306,8 @@ body > .try.standard, body > .try.hdtv {
 			padding-left:50%;
 		}
 		article{ //article-within-article
-			padding:0px;
+			padding:30px 0 20px 0; //don't indent articles within articles
+			width:auto;
 		}
 	}
 	article.highlight{
@@ -378,13 +381,6 @@ body > .try.standard, body > .try.hdtv {
 	}
 }
 
-//docsNav: extension of leftside navigation
-#content.docsLite{
-	nav.docsNav{
-		li{	position:relative; }
-		li + li { margin-top:@gutter; }
-	}
-}
 
 //IE8 fixes and fallbacks
 .no-multiplebgs{
