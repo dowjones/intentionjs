@@ -12,6 +12,6 @@
 <script src="{{ include.dir }}/assets/js/base.js" type="text/javascript"></script>
 
 <link rel="stylesheet" type="text/css" href="{{ include.dir }}/assets/css/reset.css" />
-<link rel="stylesheet/less" type="text/css" href="{{ include.dir }}/assets/css/base.less" />
-<link rel="stylesheet/less" type="text/css" href="{{ include.dir }}/assets/css/markdown.less" />
+<link rel="stylesheet" type="text/css" href="{{ include.dir }}/assets/css/base.css" />
+<link rel="stylesheet" type="text/css" href="{{ include.dir }}/assets/css/markdown.css" />
 <script src="{{ include.dir }}/assets/js/less-1.3.3.min.js" type="text/javascript"></script>

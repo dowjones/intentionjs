@@ -22,7 +22,6 @@
   var Intention = function(params){
     var intent = _.extend(this, params, 
         {_listeners:{}, contexts:[], elms:$(), axes:{}, priority:[]});
-
     return intent;
   };
 

@@ -16,10 +16,10 @@
 	<header intent
 		in-container
 		in-width>
-		<h1><a href="../../">intention.js</a></h1>
+		<h1><a href="../../">intention.js</a> {{ page.sub }}</h1>
 		<nav>
 			<ul>
-				{% include nav.md dir="../../" cur="blog" %}
+				{% include nav.md dir="../../" cur="blog" tag="	{{ page.tag }}" %} <!-- ideally, this would pass through the current page tag, and if it's examples, the nav.md snippet will pick it up-->
 			</ul>
 		</nav>
 	</header>

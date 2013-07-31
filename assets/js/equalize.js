@@ -33,8 +33,6 @@ var equalizeAll = function(grandparent, parent, child){ //grandparent contains a
 		parent = grandparent,
 		grandparent = $(grandparent).parent();
 	}
-	console.log('equalize');
-	console.log('grandparent', $(grandparent), 'parent', $(grandparent).find(parent));
 	$(grandparent).find(parent).each(function() { 
 		var parent = $(this),
 			children = $(this).children(child),

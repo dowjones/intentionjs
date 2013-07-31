@@ -1,4 +1,6 @@
 var buildHome = function(contentPos, D) {
+
+	console.log('building home');
 	//Basic var setup
 	var curPos = 0,
 	throttle = function(callback, interval){
@@ -86,6 +88,7 @@ var buildHome = function(contentPos, D) {
 	$('#devices').children().click(function(){
 		var device = $(this).attr('id'),
 			current = intent.axes.container.current;
+		console.log('device clicked', device, current);
 		if(device == current) {
 			$('#all').css({
 				'width':$('#all').height() + 'px',

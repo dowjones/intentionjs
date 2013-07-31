@@ -1,4 +1,7 @@
+console.log('base.js loaded');
+
 $(window).load(function() {
+	console.log('base.js window loaded');
 	//initial variables
 	var charTest = $('#charTest').length > 0,
 		docsTest = $('.docsLite').length > 0,
@@ -35,4 +38,51 @@ $(window).load(function() {
 		$('#content .inner').offset().top + 3;
 		buildBlog(contentPos);
 	}
+	
+	function in_init(contexts, callback){
+	  var dfds = [];
+		console.log('context parameter:', contexts);
+		console.log('callback param', callback);
+		
+	  _.each(contexts, function(ctx){
+	    var dfd = $.Deferred();
+		
+	    dfds.push(dfd);
+	
+	    if(intent.is(ctx)) {
+	    	console.log('good to go, this is', ctx, 'time to resolve');
+	      dfd.resolve();
+	    } else {
+	    	console.log('wait to resolve. this is ', ctx);
+	      intent.on(ctx, dfd.resolve);
+	    }
+	  });
+		
+	  if((!contexts) || (contexts.length === 0)){ sheetWriter(); }
+	  
+	  $.when.apply(this, dfds).done(callback);
+	};
+			
+	
+	
+	in_init(['standard'], function(){
+	  imageSetup();
+	  equalizeAll('#docs', 'article.equalize', 'section');
+	});
+	in_init(['hdtv'], function(){
+	  imageSetup();
+	  equalizeAll('#docs', 'article.equalize', 'section');
+	});
+	in_init(['tablet'], function(){
+		equalizeAll('#smallCode', 'pre');
+		writeOutput(intent.axes.width.current);
+	});
+	in_init(['smalltablet'], function(){
+		equalizeAll('#smallCode', 'pre');
+		writeOutput(intent.axes.width.current);
+	});
+	in_init(['mobile'], function() {
+		writeOutput(intent.axes.width.current);
+	});
+	
 });
