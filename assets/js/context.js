@@ -6,10 +6,10 @@
  * Released under the MIT license
  *
  */
-
 (function () {
 
   'use strict';
+  
   var context = function($, Intention){
 
     // create a brand spankin new intention object
@@ -42,7 +42,7 @@
         lastExec = d;
       };
     }
-
+    
     // catchall
     // =======================================================================
     intent.responsive([{name:'base'}]).respond('base');
@@ -121,7 +121,6 @@
       .on('resize', throttle(horizontal_axis.respond, 100))
       .on('orientationchange', horizontal_axis.respond)
       .on('orientationchange', orientation_axis.respond);
-
 	
 	// register the current width and orientation without waiting for a window resize
     horizontal_axis.respond();
