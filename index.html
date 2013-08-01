@@ -39,10 +39,12 @@ highres <span class="comment">(devicePixelRatio > 1)</span>
 					<h4>Some type of pitch for the technical significance. A pull quote maybe.</h4>
 				</section>
 			</article>
-			<article id="concept" class="highlight" intent in-time>
-				<div class="inner" data-pattern="2">
-					<section intent in-pseudostandard-before="#customPitch" in-pseudomobile-after="#customPitch">
-						<div id="timeExample"> </div>
+			<article id="concept" class="highlight clearFix">
+				<div class="inner clearFix" data-pattern="2">
+					<section intent in-pseudostandard-before="#customPitch" in-pseudohdtv-before="#customPitch" 
+						in-pseudotablet-after="#customPitch" in-pseudosmalltablet-after="#customPitch" in-pseudomobile-after="#customPitch"
+						in-tablet-after="#customPitch" in-smalltablet-after="#customPitch" in-mobile-after="#customPitch" >
+						<div id="timeExample" intent in-time> </div>
 						<pre>&lt;div id="timeExample" intent in-time&gt;
 &lt;/div&gt;
 <span class="comment">...</span>
@@ -73,9 +75,7 @@ time.respond('<select id="timeChange"><option></option><option value="night">nig
 						<h3>Intention.js responds to a bunch of device contexts, but it’s open to any index. You can create custom contexts based on anything you can measure, and restructure your code in response!</h3>
 						<p>It’s not just changing a page based on the browser’s width: it’s noticing touch-capabilities, portrait/landscape orientation, high resolution contexts. Intention.js can be taught to restructure pages based on scroll depth, pageviews, time of day—basically anything!</p>
 					</section>
-					<div class="clear"></div>
 				</div>
-				<div class="clear"></div>
 			</article>
 			<article class="equalize" data-pattern="2">
 				<h2 alt="Usage">Usage</h2>
@@ -98,7 +98,7 @@ src="assets/js/require/require.js"&gt;&lt;/script&gt;</pre>
 					<pre id="input">code code code</pre>
 					<h3>becomes</h3>
 				</section>
-				<div id="typesOfManip" class="thirds" intent in-width in-container in-touch in-touch-class="swipe">
+				<div id="typesOfManip" class="thirds clearFix" intent in-width in-container in-touch in-touch-class="swipe">
 					<section>
 						<pre id="mobileOut">One
 This code snippet will show
@@ -129,7 +129,6 @@ Or a rearranged element.</pre>
 	</pre>
 						<h5>on tablets</h5></section>
 					<section><pre id="stdOut">three</pre><h5>on desktops</h5></section>
-					<div class="clear"></div>
 				</div>
 			</article>
 			
@@ -230,43 +229,43 @@ Or a rearranged element.</pre>
 							</div>
 						</div>
 						<pre id="resizeCode">&lt;div id="resizable"&gt;
-	   &lt;div class="orange" <span class="white">intent in-mini</span>&gt;
-	      &lt;div id="orange1"&gt; Play with me &lt;/div&gt;
-	      &lt;div id="orange2"&gt; &lt;/div&gt;
-	   &lt;/div&gt;
-	   &lt;div class="blue" <span class="white">intent in-mini</span> 
-	      <span class="greenLight">in-avg-before="#orange2"</span>
-	      <span class="orangeDark">in-large-after=".orange"&gt;</span> &lt;/div&gt;
-	   &lt;div class="green" <span class="white">intent in-mini</span>
-	      <span class="greenLight">in-avg-after=".orange"</span>
-	      <span class="orangeDark">in-large-append=".blue"&gt;</span>
-	      &lt;div id="green1"&gt;
-	         &lt;a <span class="white">intent</span>
-	            <span class="greenLight">in-avg-href="#average"</span>
-	            <span class="orangeDark">in-large-href="#large"&gt;</span> A &lt;/a&gt;
-	      &lt;/div&gt;
-	      &lt;div id="green2"&gt; B &lt;/div&gt;
-	      &lt;div id="green3"&gt; C &lt;/div&gt;
-	   &lt;/div&gt;
-	&lt;/div&gt;
-	
-	&lt;script&gt;
-	var mini = intent.responsive({
-	   <span class="white">ID: 'mini',</span>
-	   contexts: [
-	      <span class="orangeDark">{name:"large",min:300},</span>
-	      <span class="greenLight">{name:"avg",min:75}</span>
-	   ],
-	   matcher: function(test, context) {
-	      return test &gt;= context.min;
-	   },
-	   measure:function(arg) {
-	      return $("#resizable").width();
-	   }
-	}).respond();
-	<span class="comment">//'resize' is a jQueryUI event</span>
-	$('#resizable').on('resize', mini.respond);
-	&lt;/script&gt;</pre>
+   &lt;div class="orange" <span class="white">intent in-mini</span>&gt;
+      &lt;div id="orange1"&gt; Play with me &lt;/div&gt;
+      &lt;div id="orange2"&gt; &lt;/div&gt;
+   &lt;/div&gt;
+   &lt;div class="blue" <span class="white">intent in-mini</span> 
+      <span class="greenLight">in-avg-before="#orange2"</span>
+      <span class="orangeDark">in-large-after=".orange"&gt;</span> &lt;/div&gt;
+   &lt;div class="green" <span class="white">intent in-mini</span>
+      <span class="greenLight">in-avg-after=".orange"</span>
+      <span class="orangeDark">in-large-append=".blue"&gt;</span>
+      &lt;div id="green1"&gt;
+         &lt;a <span class="white">intent</span>
+            <span class="greenLight">in-avg-href="#average"</span>
+            <span class="orangeDark">in-large-href="#large"&gt;</span> A &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div id="green2"&gt; B &lt;/div&gt;
+      &lt;div id="green3"&gt; C &lt;/div&gt;
+   &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var mini = intent.responsive({
+   <span class="white">ID: 'mini',</span>
+   contexts: [
+      <span class="orangeDark">{name:"large",min:300},</span>
+      <span class="greenLight">{name:"avg",min:75}</span>
+   ],
+   matcher: function(test, context) {
+      return test &gt;= context.min;
+   },
+   measure:function(arg) {
+      return $("#resizable").width();
+   }
+}).respond();
+<span class="comment">//'resize' is a jQueryUI event</span>
+$('#resizable').on('resize', mini.respond);
+&lt;/script&gt;</pre>
 					</section>
 				</article>
 				

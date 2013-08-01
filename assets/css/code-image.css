@@ -10,7 +10,7 @@ html {
 }
 .selectable {
   position: relative;
-  z-index: 999;
+  z-index: 10;
 }
 #codeImage.mobile,
 #codeImage.pseudomobile,
@@ -146,10 +146,13 @@ html {
 }
 #smallCode.mobile,
 #smallCode.standard.pseudomobile,
+#smallCode.hdtv.pseudomobile,
 #smallCode.smalltablet,
 #smallCode.standard.pseudosmalltablet,
+#smallCode.hdtv.pseudosmalltablet,
 #smallCode.tablet,
-#smallCode.standard.pseudotablet {
+#smallCode.standard.pseudotablet,
+#smallCode.hdtv.pseudotablet {
   display: block;
 }
 #smallCode {
@@ -184,6 +187,11 @@ html {
   float: left;
   width: 50%;
   box-sizing: border-box;
+}
+#smallCode.hdtv.pseudotablet,
+#smallCode.hdtv.pseudosmalltablet,
+#smallCode.hdtv.pseudomobile {
+  border-bottom: 13px solid #38748e;
 }
 #smallCode.mobile #output,
 #smallCode.pseudomobile #output {

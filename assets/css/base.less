@@ -75,7 +75,6 @@
 
 .hide{ display:none; }
 .show{ display:block; }
-.clear{ clear:both; }
 
 //General Rules
 h1{	font-size:48px; font-weight:bold; }
@@ -109,6 +108,20 @@ body{
 }
 
 a, a:visited{ color: @link; text-decoration:none; }
+.clearFix:after {
+	height: 0;
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+}
+.clearFix {
+	display: inline-block;
+}
+/* Hides from IE-mac \*/
+* html .clearFix { height: 1%; }
+.clearFix { display: block; }
+/* End hide from IE-mac */
 
 // Element specific stuff
 
@@ -223,7 +236,6 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 	width:100%;
 	background: @mediumBlue url('../../images/docubg.png') repeat-x top;
 	color: @lightYellow;
-//	border-top:13px solid @blue;
 	position:relative;
 	a{ color:@periwinkle; }
 	a:hover{ color:white; }
@@ -261,7 +273,8 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 		}
 	}
 	.highlight .comment{ color: darken(multiply(white, @seafoam), 5%); }
-	article>.clear{
+	.jump{
+		width:100%;
 		padding:@gutter @gutter/2 0 @gutter/2;
 		box-sizing:border-box;
 		text-align:right;
@@ -274,6 +287,8 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 			font-weight:bold;
 		}
 	}
+	//Spacing stuff
+	h3+p{ margin-top:@gutter; }
 }
 #content.standard, #content.hdtv{
 	.inner{
@@ -323,7 +338,7 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 }
 #content.standard.pseudotablet, #content.standard.pseudosmalltablet, #content.standard.pseudomobile,
 #content.hdtv.pseudotablet, #content.hdtv.pseudosmalltablet, #content.hdtv.pseudomobile{
-	.clear a{ display:none; } //Can't get the "Back to top" links to work, so I'll just hide them :o
+	.jump{ display:none; } //Can't get the "Back to top" links to work, so I'll just hide them :o
 }
 #heading+#content{ //in case there's no topside nav (like on tag pages)
 	border-top:13px solid #38748e;
@@ -382,7 +397,7 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 			margin-top:0;
 			font-size:14px;
 			overflow:hidden;
-			-webkit-transition: max-height .5s ease-in-out, padding .5s ease-in-out, background 1s linear;
+			-webkit-transition: max-height .5s ease-in-out, padding .5s ease-in-out, background .75s linear;
 			li a{ padding-bottom:2px; color:lighten(@periwinkle, 15%); }
 			li.active a{ border-bottom:1px dashed lighten(@periwinkle, 15%); }
 			li+li { margin-top:@gutter/2; }
@@ -410,6 +425,13 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 }
 .no-cssanimations #leftNav.hdtv{ //IE8 css3 fallback
 	left:0;
+}
+#leftNav.pseudotablet, #leftNav.pseudosmalltablet, #leftNav.pseudomobile{
+	-webkit-transform: translateX(0px);
+	-moz-transform: translateX(0px);
+	-o-transform: translateX(0px);
+	-ms-transform: translateX(0px);
+	transform: translateX(0px);		
 }
 
 //Content-top nav

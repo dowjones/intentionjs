@@ -18,7 +18,7 @@ var buildBlog = function(contentPos) {
 			$('#content nav ol').append(markup);
 			$.each(list, function() {
 				var tag = $(this).text(),
-					linkMarkup = ' <a href="tagged/'+tag+'.html" class="'+tag+'">'+tag+'</a>';
+					linkMarkup = ' <a href="/blog/tagged/'+tag+'.html" class="'+tag+'">'+tag+'</a>';
 				tags.push(tag);
 				$('#a'+i+' .label').append(linkMarkup);
 			});
