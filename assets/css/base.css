@@ -27,9 +27,6 @@
 .show {
   display: block;
 }
-.clear {
-  clear: both;
-}
 h1 {
   font-size: 48px;
   font-weight: bold;
@@ -105,6 +102,24 @@ a:visited {
   color: #bac6cc;
   text-decoration: none;
 }
+.clearFix:after {
+  height: 0;
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+}
+.clearFix {
+  display: inline-block;
+}
+/* Hides from IE-mac \*/
+* html .clearFix {
+  height: 1%;
+}
+.clearFix {
+  display: block;
+}
+/* End hide from IE-mac */
 #all {
   height: 100%;
   margin: auto;
@@ -363,13 +378,14 @@ header.hdtv.pseudomobile li {
 #content .highlight .comment {
   color: #6fa86f;
 }
-#content article > .clear {
+#content .jump {
+  width: 100%;
   padding: 20px 10px 0 10px;
   box-sizing: border-box;
   text-align: right;
   cursor: pointer;
 }
-#content article > .clear a {
+#content .jump a {
   border-radius: 18px;
   -webkit-border-radius: 18px;
   -moz-border-radius: 18px;
@@ -377,6 +393,9 @@ header.hdtv.pseudomobile li {
   padding: 5px 9px;
   color: #203b44;
   font-weight: bold;
+}
+#content h3 + p {
+  margin-top: 20px;
 }
 #content.standard .inner,
 #content.hdtv .inner {
@@ -553,12 +572,12 @@ header.hdtv.pseudomobile li {
 #content.hdtv.pseudomobile article li p {
   padding: 0px !important;
 }
-#content.standard.pseudotablet .clear a,
-#content.standard.pseudosmalltablet .clear a,
-#content.standard.pseudomobile .clear a,
-#content.hdtv.pseudotablet .clear a,
-#content.hdtv.pseudosmalltablet .clear a,
-#content.hdtv.pseudomobile .clear a {
+#content.standard.pseudotablet .jump,
+#content.standard.pseudosmalltablet .jump,
+#content.standard.pseudomobile .jump,
+#content.hdtv.pseudotablet .jump,
+#content.hdtv.pseudosmalltablet .jump,
+#content.hdtv.pseudomobile .jump {
   display: none;
 }
 #heading + #content {
@@ -632,7 +651,7 @@ header.hdtv.pseudomobile li {
   margin-top: 0;
   font-size: 14px;
   overflow: hidden;
-  -webkit-transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out, background 1s linear;
+  -webkit-transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out, background 0.75s linear;
 }
 #leftNav li ul li a {
   padding-bottom: 2px;
@@ -671,6 +690,15 @@ header.hdtv.pseudomobile li {
 }
 .no-cssanimations #leftNav.hdtv {
   left: 0;
+}
+#leftNav.pseudotablet,
+#leftNav.pseudosmalltablet,
+#leftNav.pseudomobile {
+  -webkit-transform: translateX(0px);
+  -moz-transform: translateX(0px);
+  -o-transform: translateX(0px);
+  -ms-transform: translateX(0px);
+  transform: translateX(0px);
 }
 #topNav {
   width: auto;

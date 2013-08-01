@@ -1,6 +1,35 @@
 var buildHome = function(contentPos, D) {
-
-	console.log('building home');
+	//Initialization functions
+	function in_init(contexts, callback){
+	  var dfds = [];
+	  _.each(contexts, function(ctx){
+	    var dfd = $.Deferred();
+	    dfds.push(dfd);
+	    if(intent.is(ctx)) { dfd.resolve(); }
+	  });
+	  if((!contexts) || (contexts.length === 0)){ sheetWriter(); }
+	  $.when.apply(this, dfds).done(callback);
+	};
+	in_init(['standard'], function(){
+	  imageSetup();
+	  equalizeAll('#docs', 'article.equalize', 'section');
+	});
+	in_init(['hdtv'], function(){
+	  imageSetup();
+	  equalizeAll('#docs', 'article.equalize', 'section');
+	});
+	in_init(['tablet'], function(){
+		equalizeAll('#smallCode', 'pre');
+		writeOutput(intent.axes.width.current);
+	});
+	in_init(['smalltablet'], function(){
+		equalizeAll('#smallCode', 'pre');
+		writeOutput(intent.axes.width.current);
+	});
+	in_init(['mobile'], function() {
+		writeOutput(intent.axes.width.current);
+	});
+	
 	//Basic var setup
 	var curPos = 0,
 	throttle = function(callback, interval){
@@ -29,8 +58,8 @@ var buildHome = function(contentPos, D) {
     	if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
     	else { var scroll = pageYOffset; }
     	//Fixing the nav
-    	if(scroll >= contentPos) { $('#content nav').addClass('fixed'); }
-    	else { $('#content nav').removeClass('fixed'); }
+    	if(scroll >= contentPos) { $('#content nav').addClass('fixed').parent().css('padding-top', '30px'); }
+    	else { $('#content nav').removeClass('fixed').parent().css('padding-top', ''); }
     },
 	container_width = intent.responsive({
 		ID: 'container',
@@ -85,16 +114,18 @@ var buildHome = function(contentPos, D) {
 	
 	//Try it functions
 	$('#devices').children().click(function(){
-		var device = $(this).attr('id'),
-			current = intent.axes.container.current;
-		console.log('device clicked', device, current);
-		if(device == current) {
+		var device = $(this).attr('id');
+		if(device == intent.axes.container.current) {
 			$('#all').css({
 				'width':$('#all').height() + 'px',
 				'height':$('#all').width() + 'px'
 			});
 		} else if(device === undefined) {
 			intent.axes.container.respond('pseudostandard');
+			$('#all').css({
+				'width':'',
+				'height':''
+			}); //remove inline styles created by toggleOrientation
 		} else {
 			intent.axes.container.respond(device);
 			$('#all')
@@ -105,15 +136,16 @@ var buildHome = function(contentPos, D) {
 	});
 	
 	//For docs nav
-	var articles = $('#content article').not('.highlight').not('article:has(article)');
+	var articles = $('#content article').not('.highlight').not('article:has(article)'); //Do not select highlight articles, or container articules
 	$.each(articles, function() { //Create back to top links ---- This must go before the title positions are found.
-		var markup = $('<div class="clear"><a>&uarr; Back to top</a></div>');
-		$(this).append(markup);
+		var markup = $('<div class="jump"><a>&uarr; Back to top</a></div>');
+		$(this).append(markup).addClass('clearFix');
 		markup.click(function() {
 			$('html, body').animate({ scrollTop: $('#topNav').offset().top}, 1000);
 		});
 	});
 	
+	//For docs nav
 	var titleCtx = [],
 		subCtx = [],
 		curentPos,

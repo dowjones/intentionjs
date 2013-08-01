@@ -36,7 +36,7 @@
 	</header>
 	
 	<section id="splash" intent in-width in-container in-orientation>
-		<div class="inner">
+		<div class="inner clearFix">
 			<section>
 				<h3>Intention.js allows for dynamic HTML restructuring, so that the code for a given context transforms into an ideal state for that structure.</h3>
 				<p>Defining differences between documents should be written in HTML: manipulating attributes avoids media queries and their insufficient attempt to convey appropriate pages.</p>
@@ -45,14 +45,13 @@
 				<div id="download"><a href="#">Download the latest version<h5>intention.1.02.js</h5></a></div>
 				<div id="github"><a href="https://github.com/wsjdesign/intentionjs" target="_blank">Fork me on<h5>GitHub</h5></a></div>
 			</section>
-			<div class="clear"></div>
 		</div>
 	</section>
 	
 	
 	<!-- Start the ugly Code-as-Image section -->
 	
-	<section id="codeImage" intent in-width in-container><div class="inner">
+	<section id="codeImage" intent in-width in-container><div class="inner clearFix">
 		<div id="connections"></div>
 		<pre id="rawCodeImage"><span class="selectable">&lt;body&gt;
    &lt;header&gt;
@@ -103,13 +102,11 @@
       Hello, World!
    &lt;/section&gt;</span></span>
 <span class="selectable">&lt;/body&gt;</span></div></pre>
-			
-			<div class="clear"></div>
 		</div></section>
 		
 		<!-- End ugly Code-as-Image section -->
 		<!-- But start the slightly less ugly mobile version of that -->
-		<section id="smallCode" intent in-width in-container data-pattern="2">
+		<section id="smallCode" class="clearFix" intent in-width in-container data-pattern="2">
 			<pre id="output" intent
 				in-width
 				in-container 
@@ -148,11 +145,10 @@
    &lt;/pre&gt;
 &lt;/section&gt;	
 			</pre>
-		<div class="clear"></div>
 	</section>
 	<!-- End that too. Back to decently formatted code -->
 	
-	<section id="heading" class="try" intent 
+	<section id="heading" class="try clearFix" intent 
 		in-pseudomobile-prepend="body"-
 		in-pseudosmalltablet-prepend="body"
 		in-pseudotablet-prepend="body"
@@ -169,7 +165,6 @@
 				<div id="pseudohdtv"></div>
 				<div class="cancel"></div>
 			</div>
-			<div class="clear"></div>
 		</div>
 	</section>
 	<nav id="topNav" intent in-width in-container in-orientation>
@@ -179,10 +174,9 @@
 	</nav>
 	<section id="content" class="docsLite" intent in-width in-container in-orientation>
 		<nav id="prevnext" intent in-width in-container in-orientation>
-			<div class="inner">
+			<div class="inner" class="clearFix">
 				<div class="prev">&lt;</div>
 				<div class="next">&gt;</div>
-				<div class="clear"></div>
 			</div>
 		</nav>
 		<nav id="leftNav" class="docsNav" intent in-width in-container>

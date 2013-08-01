@@ -131,9 +131,9 @@ html{
 #smallCode.standard, #smallCode.pseudostandard, #smallCode.hdtv{
 	display:none;
 }
-#smallCode.mobile, #smallCode.standard.pseudomobile,
-#smallCode.smalltablet, #smallCode.standard.pseudosmalltablet,
-#smallCode.tablet, #smallCode.standard.pseudotablet{
+#smallCode.mobile, #smallCode.standard.pseudomobile, #smallCode.hdtv.pseudomobile,
+#smallCode.smalltablet, #smallCode.standard.pseudosmalltablet, #smallCode.hdtv.pseudosmalltablet,
+#smallCode.tablet, #smallCode.standard.pseudotablet, #smallCode.hdtv.pseudotablet{
 	display:block;
 }
 #smallCode{
@@ -167,6 +167,9 @@ html{
 		width:50%;
 		box-sizing:border-box;
 	}
+}
+#smallCode.hdtv.pseudotablet, #smallCode.hdtv.pseudosmalltablet, #smallCode.hdtv.pseudomobile{
+	border-bottom:13px solid @blue;
 }
 
 //Change the output colors based on the current context

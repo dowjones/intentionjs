@@ -151,8 +151,9 @@
   padding: 25px 10px 10px 10px;
   margin-bottom: 20px;
   text-align: center;
+  background-image: url('../../images/mezz.png');
   box-sizing: border-box;
-  color: #f9efd4;
+  color: white;
   font-size: 36px;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
@@ -160,62 +161,18 @@
   -ms-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
 }
-#content.docsLite #concept {
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  -ms-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-  -webkit-transition: background-color 0.5s linear, color 0.5s linear, border-top-color 0.5s linear;
+.night {
+  background: #0c262d;
 }
-#content.docsLite #concept pre {
-  color: #352f29;
+.evening {
+  background: #143a37;
 }
-#content.docsLite #concept .comment {
-  color: #52493f;
+.sunset {
+  background: #e58341;
 }
-#content.docsLite #concept.night {
-  background-color: #0c262d;
-  border-top-color: #174855;
-  color: #f9efd4;
+.day {
+  background: #96d2e2;
 }
-#content.docsLite #concept.night pre {
-  color: #f9efd4;
-  background: #277b92;
-  border-color: #174855;
-}
-#content.docsLite #concept.evening {
-  background-color: #143a37;
-  border-top-color: #21605b;
-  color: #f9efd4;
-}
-#content.docsLite #concept.evening pre {
-  color: #f9efd4;
-  background: #359991;
-  border-color: #21605b;
-}
-#content.docsLite #concept.sunset {
-  background-color: #e58341;
-  border-top-color: #eba06e;
-}
-#content.docsLite #concept.sunset pre {
-  background: #f4ccb1;
-  border-color: #eba06e;
-}
-#content.docsLite #concept.day {
-  background-color: #96d2e2;
-  border-top-color: #bee3ed;
-}
-#content.docsLite #concept.day pre {
-  background: #fafdfe;
-  border-color: #bee3ed;
-}
-#content.docsLite #concept.morning {
-  background-color: #bb5548;
-  border-top-color: #c9786d;
-  color: #f9efd4;
-}
-#content.docsLite #concept.morning pre {
-  background: #deaba5;
-  border-color: #c9786d;
+.dawn {
+  background: #af4168;
 }
