@@ -57,8 +57,7 @@ var buildHome = function(contentPos, D) {
 			{name:'evening',min:17},
 			{name:'sunset',min:16},
 			{name:'day',min:9},
-			{name:'dawn',min:7},
-			{name:'dusk',min:0}
+			{name:'morning',min:0},
 		],
 		matcher: function(test, context) {
 			if($.type(test) == 'string') {

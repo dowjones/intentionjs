@@ -330,20 +330,20 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 }
 
 //Left-side navigation
-#leftNav.hdtv{
+#leftNav{
 	width:200px;
 	height:100%;
 	padding-top:@gutter;
 	position:absolute;
 	top:0;
-	left:0;
+	left:-206px;
 	z-index:6;
 	text-align:right;
 	.transitions(.5s);
+	box-sizing:border-box;
 	background:@blue; //IE8 fallback
 	background:fadeout(@blue, 10%);
 	border-right:3px solid @lightBlue;
-	box-sizing:border-box;
 	h6{ //instructions
 		width:100%;
 		padding:6px 6px 6px 0;
@@ -353,6 +353,7 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 		position:absolute;
 		left:100%;
 	}
+	li+li{ margin-top:@gutter; }
 	li{ //a node on the line
 		position:relative;
 		right:0;
@@ -376,20 +377,21 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 			top:2px;
 			box-shadow:0 0 15px overlay(@orange, @mediumBlue);
 		}
-		ul{ 
+		ul{ //Base subTitle menu, hidden when not in the main article
 			max-height:13px;
 			margin-top:0;
 			font-size:14px;
 			overflow:hidden;
-			.transitions(.5s);
+			-webkit-transition: max-height .5s ease-in-out, padding .5s ease-in-out, background 1s linear;
 			li a{ padding-bottom:2px; color:lighten(@periwinkle, 15%); }
 			li.active a{ border-bottom:1px dashed lighten(@periwinkle, 15%); }
+			li+li { margin-top:@gutter/2; }
 		}
 		ul:before{ content:'...'; }
 	}
-	li.active{
+	li.active{ //When in that titleDepth context
 		.circle{ background:@orange; }
-		ul{
+		ul{ 
 			max-height:999px;
 			padding:10px 19px 15px 0;
 			margin-top:5px;
@@ -397,18 +399,17 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 		}
 		ul:before{ content:'' }
 	}
-	li+li{ margin-top:@gutter; }
-	ul {
-		li+li{ margin-top:@gutter/2; }
-	}
-	nav{ display:none } //mobile, tablet nav shouldn't been visible in standard
 }
-#leftNav.fixed{
-	position:fixed;
+#leftNav.fixed{ position:fixed; } //scrollDepth sticky
+#leftNav.hdtv{ //slide over in luxury displays
+	-webkit-transform: translateX(206px);
+	-moz-transform: translateX(206px);
+	-o-transform: translateX(206px);
+	-ms-transform: translateX(206px);
+	transform: translateX(206px);
 }
-#leftNav.hdtv.pseudotablet, #leftNav.hdtv.pseudosmalltablet, #leftNav.hdtv.pseudomobile,
-#leftNav.standard, #leftNav.tablet, #leftNav.smalltablet, #leftNav.mobile{ 
-	display:none;
+.no-cssanimations #leftNav.hdtv{ //IE8 css3 fallback
+	left:0;
 }
 
 //Content-top nav
