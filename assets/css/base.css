@@ -564,13 +564,13 @@ header.hdtv.pseudomobile li {
 #heading + #content {
   border-top: 13px solid #38748e;
 }
-#leftNav.hdtv {
+#leftNav {
   width: 200px;
   height: 100%;
   padding-top: 20px;
   position: absolute;
   top: 0;
-  left: 0;
+  left: -206px;
   z-index: 6;
   text-align: right;
   -webkit-transition: all 0.5s ease-in-out;
@@ -578,12 +578,12 @@ header.hdtv.pseudomobile li {
   -o-transition: all 0.5s ease-in-out;
   -ms-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
+  box-sizing: border-box;
   background: #38748e;
   background: rgba(56, 116, 142, 0.9);
   border-right: 3px solid #d0e0ef;
-  box-sizing: border-box;
 }
-#leftNav.hdtv h6 {
+#leftNav h6 {
   width: 100%;
   padding: 6px 6px 6px 0;
   margin: 0 0 20px 0;
@@ -592,7 +592,10 @@ header.hdtv.pseudomobile li {
   position: absolute;
   left: 100%;
 }
-#leftNav.hdtv li {
+#leftNav li + li {
+  margin-top: 20px;
+}
+#leftNav li {
   position: relative;
   right: 0;
   list-style: none;
@@ -604,14 +607,14 @@ header.hdtv.pseudomobile li {
   transition: all 0.5s ease-in-out;
   z-index: 1;
 }
-#leftNav.hdtv li div {
+#leftNav li div {
   display: inline-block;
 }
-#leftNav.hdtv li .label {
+#leftNav li .label {
   width: auto;
   padding-right: 19px;
 }
-#leftNav.hdtv li .circle {
+#leftNav li .circle {
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -624,59 +627,50 @@ header.hdtv.pseudomobile li {
   top: 2px;
   box-shadow: 0 0 15px #da4530;
 }
-#leftNav.hdtv li ul {
+#leftNav li ul {
   max-height: 13px;
   margin-top: 0;
   font-size: 14px;
   overflow: hidden;
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  -ms-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
+  -webkit-transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out, background 1s linear;
 }
-#leftNav.hdtv li ul li a {
+#leftNav li ul li a {
   padding-bottom: 2px;
   color: #e6eaed;
 }
-#leftNav.hdtv li ul li.active a {
+#leftNav li ul li.active a {
   border-bottom: 1px dashed #e6eaed;
 }
-#leftNav.hdtv li ul:before {
+#leftNav li ul li + li {
+  margin-top: 10px;
+}
+#leftNav li ul:before {
   content: '...';
 }
-#leftNav.hdtv li.active .circle {
+#leftNav li.active .circle {
   background: #ea865a;
 }
-#leftNav.hdtv li.active ul {
+#leftNav li.active ul {
   max-height: 999px;
   padding: 10px 19px 15px 0;
   margin-top: 5px;
   background: #589358;
 }
-#leftNav.hdtv li.active ul:before {
+#leftNav li.active ul:before {
   content: '';
-}
-#leftNav.hdtv li + li {
-  margin-top: 20px;
-}
-#leftNav.hdtv ul li + li {
-  margin-top: 10px;
-}
-#leftNav.hdtv nav {
-  display: none;
 }
 #leftNav.fixed {
   position: fixed;
 }
-#leftNav.hdtv.pseudotablet,
-#leftNav.hdtv.pseudosmalltablet,
-#leftNav.hdtv.pseudomobile,
-#leftNav.standard,
-#leftNav.tablet,
-#leftNav.smalltablet,
-#leftNav.mobile {
-  display: none;
+#leftNav.hdtv {
+  -webkit-transform: translateX(206px);
+  -moz-transform: translateX(206px);
+  -o-transform: translateX(206px);
+  -ms-transform: translateX(206px);
+  transform: translateX(206px);
+}
+.no-cssanimations #leftNav.hdtv {
+  left: 0;
 }
 #topNav {
   width: auto;

@@ -34,7 +34,7 @@
 	width: 175px;
 	height: 160px;
 	min-width:20px;
-	min-height:20px;
+	min-height:160px;
 	max-width: 100%;
 	max-height: 160px;
 	border: 6px solid @navbg;
@@ -173,16 +173,53 @@
 	padding:25px 10px 10px 10px;
 	margin-bottom:20px;
 	text-align:center;
-	background-image:url('../../images/mezz.png');
 	box-sizing:border-box;
-	color:white;
+	color:@lightText;
 	font-size:36px;
 	.transitions(.5s);
 	
 }
-.night{	background: rgb(12, 38, 45); }
-.evening{	background: rgb(20, 58, 55); }
-.sunset{	background: rgb(229, 131, 65); }
-.day{	background: rgb(150, 210, 226); }
-.dawn{	background: rgb(175, 65, 104); }
-.dusk{	background: rgb(14, 8, 43); }
+@night: rgb(12, 38, 45);
+@evening: rgb(20, 58, 55);
+@sunset: rgb(229, 131, 65);
+@day: rgb(150, 210, 226);
+@morning: rgb(187, 85, 72);
+
+#content.docsLite #concept{
+//	background-image:url('../../images/mezz.png');
+	.transitions(.5s);
+	-webkit-transition: background-color .5s linear, color .5s linear, border-top-color .5s linear;
+	//add in cross-browser support
+	pre{
+		color:@text;
+	}
+	.comment{ color:lighten(@text, 10%); }
+}
+#content.docsLite #concept.night{
+	background-color: @night;
+	border-top-color: lighten(@night, 10%);
+	color: @lightText;
+	pre{ color:@lightText; background:lighten(@night, 25%); border-color: lighten(@night, 10%); }
+}
+#content.docsLite #concept.evening{	
+	background-color: @evening;
+	border-top-color: lighten(@evening, 10%);
+	color:@lightText;
+	pre{ color:@lightText; background:lighten(@evening, 25%); border-color: lighten(@evening, 10%); }
+}
+#content.docsLite #concept.sunset{
+	background-color: @sunset;
+	border-top-color: lighten(@sunset, 10%);
+	pre{ background:lighten(@sunset, 25%); border-color: lighten(@sunset, 10%); }
+}
+#content.docsLite #concept.day{	
+	background-color: @day;
+	border-top-color: lighten(@day, 10%); 
+	pre{ background:lighten(@day, 25%); border-color: lighten(@day, 10%); }
+}
+#content.docsLite #concept.morning{
+	background-color: @morning;
+	border-top-color: lighten(@morning, 10%);
+	color:@lightText;
+	pre{ background:lighten(@morning, 25%); border-color: lighten(@morning, 10%); }
+}

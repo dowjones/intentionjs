@@ -8,7 +8,7 @@
   width: 175px;
   height: 160px;
   min-width: 20px;
-  min-height: 16px;
+  min-height: 160px;
   max-width: 100%;
   max-height: 160px;
   border: 6px solid #f4f1ea;
@@ -59,6 +59,16 @@
   font-size: 34px;
   color: #ae4516;
 }
+.orange div {
+  background: #ea865a;
+  height: 50px;
+  padding: 3px;
+}
+.orange div + div {
+  height: 20px;
+  margin-top: 5px;
+  clear: both;
+}
 .orange.small,
 .orange.tiny {
   width: 100%;
@@ -76,16 +86,6 @@
   min-width: 60px;
   max-width: 285px;
 }
-.orange div {
-  background: #ea865a;
-  height: 50px;
-  padding: 3px;
-}
-.orange div + div {
-  height: 20px;
-  margin-top: 5px;
-  clear: both;
-}
 .blue {
   background: #38748e !important;
 }
@@ -98,14 +98,16 @@
   margin-left: 6px;
   position: relative;
 }
-.green {
-  text-align: center;
-}
 .green a,
 .green {
   color: #cae5ca;
   text-decoration: none;
   font-family: Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+.green a div,
+.green div {
+  background: #589358 !important;
 }
 .green.tiny {
   display: none;
@@ -143,18 +145,14 @@
 .green.large div:last-child {
   margin-bottom: 6px;
 }
-.green div {
-  background: #589358 !important;
-}
 #timeExample {
   width: 100%;
   height: 100px;
   padding: 25px 10px 10px 10px;
   margin-bottom: 20px;
   text-align: center;
-  background-image: url('../../images/mezz.png');
   box-sizing: border-box;
-  color: white;
+  color: #f9efd4;
   font-size: 36px;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
@@ -162,21 +160,62 @@
   -ms-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
 }
-.night {
-  background: #0c262d;
+#content.docsLite #concept {
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-transition: background-color 0.5s linear, color 0.5s linear, border-top-color 0.5s linear;
 }
-.evening {
-  background: #143a37;
+#content.docsLite #concept pre {
+  color: #352f29;
 }
-.sunset {
-  background: #e58341;
+#content.docsLite #concept .comment {
+  color: #52493f;
 }
-.day {
-  background: #96d2e2;
+#content.docsLite #concept.night {
+  background-color: #0c262d;
+  border-top-color: #174855;
+  color: #f9efd4;
 }
-.dawn {
-  background: #af4168;
+#content.docsLite #concept.night pre {
+  color: #f9efd4;
+  background: #277b92;
+  border-color: #174855;
 }
-.dusk {
-  background: #0e082b;
+#content.docsLite #concept.evening {
+  background-color: #143a37;
+  border-top-color: #21605b;
+  color: #f9efd4;
+}
+#content.docsLite #concept.evening pre {
+  color: #f9efd4;
+  background: #359991;
+  border-color: #21605b;
+}
+#content.docsLite #concept.sunset {
+  background-color: #e58341;
+  border-top-color: #eba06e;
+}
+#content.docsLite #concept.sunset pre {
+  background: #f4ccb1;
+  border-color: #eba06e;
+}
+#content.docsLite #concept.day {
+  background-color: #96d2e2;
+  border-top-color: #bee3ed;
+}
+#content.docsLite #concept.day pre {
+  background: #fafdfe;
+  border-color: #bee3ed;
+}
+#content.docsLite #concept.morning {
+  background-color: #bb5548;
+  border-top-color: #c9786d;
+  color: #f9efd4;
+}
+#content.docsLite #concept.morning pre {
+  background: #deaba5;
+  border-color: #c9786d;
 }

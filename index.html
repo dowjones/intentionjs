@@ -39,10 +39,10 @@ highres <span class="comment">(devicePixelRatio > 1)</span>
 					<h4>Some type of pitch for the technical significance. A pull quote maybe.</h4>
 				</section>
 			</article>
-			<article id="concept" class="highlight" >
+			<article id="concept" class="highlight" intent in-time>
 				<div class="inner" data-pattern="2">
 					<section intent in-pseudostandard-before="#customPitch" in-pseudomobile-after="#customPitch">
-						<div id="timeExample" intent in-time> </div>
+						<div id="timeExample"> </div>
 						<pre>&lt;div id="timeExample" intent in-time&gt;
 &lt;/div&gt;
 <span class="comment">...</span>
@@ -54,8 +54,7 @@ var time = intent.responsive({
       {name:'evening',min:17},
       {name:'sunset',min:16},
       {name:'day',min:9},
-      {name:'dawn',min:7},
-      {name:'dusk',min:0}
+      {name:'morning',min:0}
    ],
    matcher: function(test, context) {
       return test &gt;= context.min;
@@ -67,7 +66,7 @@ var time = intent.responsive({
 });
 
 time.respond(); <span class="comment">//check the current context</span>
-time.respond('<select id="timeChange"><option></option><option value="night">night</option><option value="evening">evening</option><option value="sunset">sunset</option><option value="day">day</option><option value="dawn">dawn</option><option value="dusk">dusk</option></select>'); <span class="comment">//Force a context</span>
+time.respond('<select id="timeChange"><option></option><option value="night">night</option><option value="evening">evening</option><option value="sunset">sunset</option><option value="day">day</option><option value="morning">morning</option></select>'); <span class="comment">//Force a context</span>
 &lt;/script&gt;</pre>
 					</section>
 					<section id="customPitch">
