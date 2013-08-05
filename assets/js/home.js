@@ -10,14 +10,17 @@ var buildHome = function(contentPos, D) {
 	  if((!contexts) || (contexts.length === 0)){ sheetWriter(); }
 	  $.when.apply(this, dfds).done(callback);
 	};
-	in_init(['standard'], function(){
-	  imageSetup();
-	  equalizeAll('#docs', 'article.equalize', 'section');
+	
+	var stdInit = $.Deferred();
+	stdInit.done(function() {
+		imageSetup();
+		equalizeAll('#docs', 'article.equalize', 'section');
 	});
-	in_init(['hdtv'], function(){
-	  imageSetup();
-	  equalizeAll('#docs', 'article.equalize', 'section');
-	});
+	if(intent.is('standard') || intent.is('hdtv')) { stdInit.resolve(); }
+	else { 
+		intent.on('standard', function() { stdInit.resolve(); });
+		intent.on('hdtv', function() { stdInit.resolve(); });
+	}
 	in_init(['tablet'], function(){
 		equalizeAll('#smallCode', 'pre');
 		writeOutput(intent.axes.width.current);
@@ -64,7 +67,7 @@ var buildHome = function(contentPos, D) {
 	container_width = intent.responsive({
 		ID: 'container',
 		contexts: [
-			{name:"pseudohdtv",min:1800},
+			{name:"pseudohdtv",min:1220},
 			{name:"pseudostandard",min:840},
 			{name:"pseudotablet",min:768},
 			{name:"pseudosmalltablet",min:510},
@@ -129,9 +132,7 @@ var buildHome = function(contentPos, D) {
 		} else {
 			intent.axes.container.respond(device);
 			$('#all')
-				.css({'width':'', 'height': ''})
-				.removeClass()
-				.addClass(device);
+				.css({'width':'', 'height': ''});
 		}
 	});
 	
@@ -148,13 +149,14 @@ var buildHome = function(contentPos, D) {
 	//For docs nav
 	var titleCtx = [],
 		subCtx = [],
-		curentPos,
+		currentPos,
 		articleCt = $('#content article').not('.highlight').length,
 		i = 1;
 	$.each($('.docsLite h2'), function() { //then create the nav 
 		$(this).parent().attr('id', 't'+i); //#targeti
-		var text = $(this).attr('alt'),
-			markup = '<li id="a'+i+'" intent in-width in-t'+i+'-class="active"><div class="label"><a href="#t'+i+'">'+text+'</a></div><div class="circle"></div></li>', //#anchori
+		if($(this).attr('alt')) { var text = $(this).attr('alt'); }
+		else{ var text = $(this).text(); }
+		var markup = '<li id="a'+i+'" intent in-width in-t'+i+'-class="active"><div class="label"><a href="#t'+i+'">'+text+'</a></div><div class="circle"></div></li>', //#anchori
 			pos = $(this).parent().offset().top - 20, //minus 20 for padding
 			ctx = {name:'t'+i, val:pos},
 			sub = $(this).siblings('article'),
@@ -166,8 +168,9 @@ var buildHome = function(contentPos, D) {
 		if(sub.length>0) {
 			$('#leftNav li#a'+i).append('<ul/>');
 			$.each(sub, function() { 
-				var text = $(this).children('h3').attr('alt'),
-					pos = $(this).offset().top - 20, //minus 20 for padding
+				if($(this).children('h3').attr('alt')) { var text = $(this).children('h3').attr('alt'); }
+				else { var text = $(this).children('h3').text(); }
+				var pos = $(this).offset().top - 20, //minus 20 for padding
 					subTarget = 't'+i+'s'+s,
 					subAnchor = 'a'+i+'s'+s,
 					markup = '<li id="'+subAnchor+'" intent in-base-class="inactive" in-'+subTarget+'-class="active"><a href="#'+subTarget+'">'+text+'</a></li>',
@@ -184,6 +187,7 @@ var buildHome = function(contentPos, D) {
 	});
 	titleCtx.reverse();
 	subCtx.reverse(); //Maximum -> minimum
+	
 	var titleDepth = intent.responsive({
 		ID: 'titleDepth',
 		contexts: titleCtx,
@@ -208,7 +212,7 @@ var buildHome = function(contentPos, D) {
 		},
 		measure: function(arg){
 			if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
-			else { var scroll = pageYOffset; }
+			else { var scroll = window.pageYOffset; }
 			return scroll;
 		}
 	});

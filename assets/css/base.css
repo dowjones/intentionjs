@@ -1,24 +1,24 @@
 .colMargin {
-  margin: 0 20px 0 20px;
+  margin: 0 20px;
 }
 .colPadding {
-  padding: 0 20px 0 20px;
+  padding: 0 20px;
 }
 .halfMargin {
-  margin: 0 10px 0 10px;
+  margin: 0 10px;
 }
 .halfPadding {
-  padding: 0 10px 0 10px;
+  padding: 0 10px;
 }
 .mobileWrapping {
   width: auto;
-  margin: 0 10px 0 10px;
-  padding: 0 10px 0 10px;
+  margin: 0 10px;
+  padding: 0 10px;
   box-sizing: border-box;
 }
 .noMarginWrapping {
   width: auto;
-  padding: 0 20px 0 20px;
+  padding: 0 20px;
   box-sizing: border-box;
 }
 .hide {
@@ -69,12 +69,12 @@ p {
 h1 + p,
 h2 + p,
 h3 + p,
-h4 + p,
-p + p {
+h4 + p {
   margin-top: 5px;
 }
 p + p {
   text-indent: 16px;
+  margin-top: 20px;
 }
 p + div.highlight,
 div.highlight + p {
@@ -195,7 +195,7 @@ header.hdtv h1 {
 header.standard nav,
 header.hdtv nav {
   width: 780px;
-  padding: 0 20px 0 20px;
+  padding: 0 20px;
   margin: auto;
   font-size: 19px;
 }
@@ -206,8 +206,8 @@ header.tablet nav,
 header.pseudotablet nav,
 header.standard.landscape nav {
   width: auto;
-  margin: 0 10px 0 10px;
-  padding: 0 10px 0 10px;
+  margin: 0 10px;
+  padding: 0 10px;
   box-sizing: border-box;
 }
 header.tablet nav li,
@@ -244,8 +244,8 @@ header.hdtv.pseudotablet nav,
 header.hdtv.pseudosmalltablet nav,
 header.hdtv.pseudomobile nav {
   width: auto;
-  margin: 0 10px 0 10px;
-  padding: 0 10px 0 10px;
+  margin: 0 10px;
+  padding: 0 10px;
   box-sizing: border-box;
 }
 header.mobile h1,
@@ -310,8 +310,8 @@ header.hdtv.pseudomobile li {
 #all > #heading.hdtv.pseudosmalltablet .inner,
 #all > #heading.hdtv.pseudomobile .inner {
   width: auto;
-  margin: 0 10px 0 10px;
-  padding: 0 10px 0 10px;
+  margin: 0 10px;
+  padding: 0 10px;
   box-sizing: border-box;
   padding: 20px 10px;
 }
@@ -394,6 +394,7 @@ header.hdtv.pseudomobile li {
   color: #203b44;
   font-weight: bold;
 }
+#content p + h3,
 #content h3 + p {
   margin-top: 20px;
 }
@@ -433,7 +434,7 @@ header.hdtv.pseudomobile li {
 #content.hdtv.pseudosmalltablet .inner,
 #content.hdtv.pseudomobile .inner {
   width: auto;
-  padding: 0 20px 0 20px;
+  padding: 0 20px;
   box-sizing: border-box;
   padding: 20px 0;
 }

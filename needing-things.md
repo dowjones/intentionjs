@@ -16,6 +16,7 @@
 	* Thresholds/Threshold groups
 	* Contexts
 - A paragraph about how Intention works: talk about how axes get saved as objects in `intent.axes`. How Intention will go through a list of contexts and exit when one passes true. How it works with attributes. The absolute basics of the technical. (This will also go under the usage)
+- something about cross browser compatibility 
 - Base context example. The paragraph currently detailing it seems fine, but it could use a code sample. (This will go under usage)
 - A section on manipulations: one that talks about how all manipulations happen via attributes, how that works, and the significance of it. (Manipulation will be its own article with the methods of manipulation as subsections). Probably good on examples here.
 - Custom contexts

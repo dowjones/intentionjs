@@ -57,10 +57,10 @@
 	-ms-transition: all @duration ease-in-out;
 	transition: all @duration ease-in-out;
 }
-.colMargin{	margin:0 @gutter 0 @gutter; }
-.colPadding{ padding:0 @gutter 0 @gutter; }
-.halfMargin{ margin:0 @gutter/2 0 @gutter/2; }
-.halfPadding{ padding:0 @gutter/2 0 @gutter/2; }
+.colMargin{	margin:0 @gutter; }
+.colPadding{ padding:0 @gutter; }
+.halfMargin{ margin:0 @gutter/2; }
+.halfPadding{ padding:0 @gutter/2; }
 .mobileWrapping{
 	width:auto;
 	.halfMargin;
@@ -94,8 +94,8 @@ p { line-height: 24px; }
 
 
 //General spacing
-h1+p, h2+p, h3+p, h4+p, p+p{ margin-top:5px; }
-p+p{ text-indent:16px; }
+h1+p, h2+p, h3+p, h4+p{ margin-top:5px; }
+p+p{ text-indent:16px; margin-top:@gutter; }
 p+div.highlight, div.highlight+p{ margin-top: @gutter/2; }
 p+pre, pre+p{ margin-top: @gutter/2; }
 
@@ -288,7 +288,7 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 		}
 	}
 	//Spacing stuff
-	h3+p{ margin-top:@gutter; }
+	p+h3, h3+p{ margin-top:@gutter; }
 }
 #content.standard, #content.hdtv{
 	.inner{
