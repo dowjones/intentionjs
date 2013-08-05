@@ -43,7 +43,8 @@ highres <span class="comment">(devicePixelRatio > 1)</span>
 				<div class="inner clearFix" data-pattern="2">
 					<section intent in-pseudostandard-before="#customPitch" in-pseudohdtv-before="#customPitch" 
 						in-pseudotablet-after="#customPitch" in-pseudosmalltablet-after="#customPitch" in-pseudomobile-after="#customPitch"
-						in-tablet-after="#customPitch" in-smalltablet-after="#customPitch" in-mobile-after="#customPitch" >
+						in-standard-before="#customPitch" in-hdtv-before="#customPitch"
+						in-tablet-after="#customPitch" in-smalltablet-after="#customPitch" in-mobile-after="#customPitch">
 						<div id="timeExample" intent in-time> </div>
 						<pre>&lt;div id="timeExample" intent in-time&gt;
 &lt;/div&gt;
@@ -78,7 +79,7 @@ time.respond('<select id="timeChange"><option></option><option value="night">nig
 				</div>
 			</article>
 			<article class="equalize" data-pattern="2">
-				<h2 alt="Usage">Usage</h2>
+				<h2>Usage</h2>
 				<section>
 					<p>Giving Intention.js instructions is as easy as flagging the element as "intentional" and giving it an intentional attribute.</p>
 					
@@ -133,10 +134,10 @@ Or a rearranged element.</pre>
 			</article>
 			
 			<article>
-				<h2 alt="Manipulations">Manipulations</h2>
+				<h2>Manipulations</h2>
 				
 				<article class="equalize" data-pattern="2">
-					<h3 alt="Class Manipulation">Class Manipulations</h3>
+					<h3>Class Manipulations</h3>
 					<section>
 						<p>The simplest intentional attribute is a class manipulation. This manipulation adds the current context as a class to the element. Adding <code>in-axis_name</code> to a flagged element is enough to get it working.</p>
 					</section>
@@ -157,7 +158,7 @@ Or a rearranged element.</pre>
 				</article>
 				
 				<article class="equalize" data-pattern="2">
-					<h3 alt="Attribute Manipulation">Attribute Manipulation</h3>
+					<h3>Attribute Manipulation</h3>
 					<section>
 						<p>Intention.js can also manipulate an element's attributes with more specificity than just class manipulations. Set a base (default) attribute in case no contexts are met, then specify context-specific attribute values.</p>
 						<p>Attribute manipulation can used for more specific class manipulations, too.</p>										
@@ -188,7 +189,7 @@ Or a rearranged element.</pre>
 				</article>
 				
 				<article class="equalize" data-pattern="2">
-					<h3 alt="Placement Manipulation">Placement Manipulation</h3>
+					<h3>Placement Manipulation</h3>
 					<section>
 						<p>Intention.js makes it possible to rearrange elements about a page depending on the context. </p>	
 						<p>Suppose we want to demote the status of the navigation when the user is on smaller devices. The following specification on the navigation might do what we need:</p>
@@ -273,33 +274,33 @@ $('#resizable').on('resize', mini.respond);
 			</article>
 			
 			<article>
-				<h2 alt="Events">Events</h2>
+				<h2>Events</h2>
 				<article class="equalize" data-pattern="2">
-					<h3 alt="Axis Events">Axis Events</h3>
+					<h3>Axis Events</h3>
 					<section>Hello</section>
 					<section>Code sample</section>
 				</article>
 				<article class="equalize" data-pattern="2">
-					<h3 alt="Context Events">Context Events</h3>
+					<h3>Context Events</h3>
 					<section>Hello</section>
 					<section>Code sample</section>
 				</article>
 			</article>
 			
 			<article>
-				<h2 alt="Intent Objects">Intent Objects</h2>
+				<h2>Intent Objects</h2>
 				<article>
-					<h3 alt="Current Context">Current Context</h3>
+					<h3 alt="Current Context">Identifying the Current Context</h3>
 					<section>This section</section>
 					<section>This code sample</section>
 				</article>
 				<article>
-					<h3 alt="List of Axes">List of Axes</h3>
+					<h3 alt="List of Axes">Returning a List of Axes</h3>
 					<section>This section</section>
 					<section>This code sample</section>
 				</article>
 				<article>
-					<h3 alt="List of Contexts">List of Contexts</h3>
+					<h3 alt="List of Contexts">Returning a List of Contexts</h3>
 					<section>This section</section>
 					<section>This code sample</section>
 				</article>

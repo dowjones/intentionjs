@@ -71,7 +71,6 @@
 
 #content.blog{
 	h3 a{ color:@lightYellow; }
-	h4{ font-size:30px; }
 	section#filter{
 		position:relative;
 		z-index:5;
@@ -130,28 +129,57 @@
 		a{ color:@lightYellow; }
 	}
 	//Basic article styling
+	section.header{
+		h4{
+			font-size:25px;
+			line-height:35px;
+			font-weight:normal;
+		}
+	}
 	article{
 		clear:both;
+		h4{ font-size:25px; }
+		h5{ 
+			font-size:20px;
+			font-weight:normal;
+			border-bottom:1px dashed @lightYellow;
+			padding-bottom:3px;
+		}	
 		ul{ 
 			list-style:disc;
 			margin-left:@gutter;
 		}
+		
 	}	
 	//Spacing stuff
 	article{ //post specific
 		p+p{ text-indent:0; } //<------- maybe this is better for just .standard
 		p+.highlight, .highlight+p,
+		h1+p, h2+p, h3+p,
+		h4+p, h5+p, h6+p,
+		h1+.highlight,  h2+.highlight, 
+		h3+.highlight,  h4+.highlight, 
+		h5+.highlight,  h6+.highlight,
 		p+ul, ul+p {
 			margin-top:@gutter;
+		}
+		p+h1, p+h2, p+h3, p+h4, p+h5, p+h6,
+		.highlight+h1,.highlight+h3,.highlight+h5,
+		.highlight+h2,.highlight+h4,.highlight+h6
+		{
+			margin-top:2*@gutter;
 		}
 		li p+ul{ margin-top:0; } //takes care of jekyll's embedding <p>s inside <li>s
 	}
 	article+article{ margin-top:@gutter; }
 	section.header + article{ margin-top:@gutter; } //meta info for the post layout
-	h3+h4{ margin-top:3px; } //if it has a subheading
-	h4+p.meta{ margin-top:4px; }
-	h3+p.meta{ margin-top:3px; } //if not
+	h3+h4{ margin-top:8px; } //if it has a subheading
+	h4+.header{ margin-top:4px; }
+	h3+.header{ margin-top:3px; } //if not
 	.tags a+a{ margin-left:3px; }	
+	p.meta, p.tags{
+		margin-top:0px;
+	}
 }
 #content.blog.standard, #content.hdtv{
 	.inner{ width:@10col; margin:auto }

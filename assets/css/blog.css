@@ -24,9 +24,6 @@
 #content.blog h3 a {
   color: #f9efd4;
 }
-#content.blog h4 {
-  font-size: 30px;
-}
 #content.blog section#filter {
   position: relative;
   z-index: 5;
@@ -106,8 +103,22 @@
 #content.blog section.footer a {
   color: #f9efd4;
 }
+#content.blog section.header h4 {
+  font-size: 25px;
+  line-height: 35px;
+  font-weight: normal;
+}
 #content.blog article {
   clear: both;
+}
+#content.blog article h4 {
+  font-size: 25px;
+}
+#content.blog article h5 {
+  font-size: 20px;
+  font-weight: normal;
+  border-bottom: 1px dashed #f9efd4;
+  padding-bottom: 3px;
 }
 #content.blog article ul {
   list-style: disc;
@@ -118,9 +129,35 @@
 }
 #content.blog article p + .highlight,
 #content.blog article .highlight + p,
+#content.blog article h1 + p,
+#content.blog article h2 + p,
+#content.blog article h3 + p,
+#content.blog article h4 + p,
+#content.blog article h5 + p,
+#content.blog article h6 + p,
+#content.blog article h1 + .highlight,
+#content.blog article h2 + .highlight,
+#content.blog article h3 + .highlight,
+#content.blog article h4 + .highlight,
+#content.blog article h5 + .highlight,
+#content.blog article h6 + .highlight,
 #content.blog article p + ul,
 #content.blog article ul + p {
   margin-top: 20px;
+}
+#content.blog article p + h1,
+#content.blog article p + h2,
+#content.blog article p + h3,
+#content.blog article p + h4,
+#content.blog article p + h5,
+#content.blog article p + h6,
+#content.blog article .highlight + h1,
+#content.blog article .highlight + h3,
+#content.blog article .highlight + h5,
+#content.blog article .highlight + h2,
+#content.blog article .highlight + h4,
+#content.blog article .highlight + h6 {
+  margin-top: 40px;
 }
 #content.blog article li p + ul {
   margin-top: 0;
@@ -132,16 +169,20 @@
   margin-top: 20px;
 }
 #content.blog h3 + h4 {
-  margin-top: 3px;
+  margin-top: 8px;
 }
-#content.blog h4 + p.meta {
+#content.blog h4 + .header {
   margin-top: 4px;
 }
-#content.blog h3 + p.meta {
+#content.blog h3 + .header {
   margin-top: 3px;
 }
 #content.blog .tags a + a {
   margin-left: 3px;
+}
+#content.blog p.meta,
+#content.blog p.tags {
+  margin-top: 0px;
 }
 #content.blog.standard .inner,
 #content.hdtv .inner {

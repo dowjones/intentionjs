@@ -7,7 +7,7 @@
 #resizable {
   width: 175px;
   height: 160px;
-  min-width: 20px;
+  min-width: 45px;
   min-height: 160px;
   max-width: 100%;
   max-height: 160px;

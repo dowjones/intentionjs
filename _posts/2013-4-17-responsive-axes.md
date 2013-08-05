@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Flexible Responsive Axes Changing HTML Based on Orientation, Width, Touch and Resolution"
-sub: "Sometimes a subheading is useful"
+title: Flexible Responsive Axes Changing HTML Based on Orientation, Width, Touch and Resolution
 tags:
 - release
+- example
 ---
 
 This release makes the html attributes a lot more flexible. In addition to a few API updates and performance improvements, I've, worked with the contributors and created an all around better system for interacting with *contexts* and *axes*. What I noticed was that users were making a lot of specifications in html that look like this:

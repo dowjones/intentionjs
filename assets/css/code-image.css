@@ -197,25 +197,30 @@ html {
 #smallCode.pseudomobile #output {
   background-image: url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/redfade.png');
   background-repeat: repeat-x, repeat-y;
-  background-position: top, top right;
+  background-position: top, top left;
   background-color: #4d3e3a;
+  background-size: 1px 20px, 100% 100%;
   color: #e26345;
 }
 #smallCode.smalltablet #output,
 #smallCode.pseudosmalltablet #output {
   background-image: url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/shadow-vertical.png'), url('../../images/codeimage/greenfade.png');
   background-repeat: repeat-x, repeat-y, repeat-y;
-  background-position: top, left, top right;
+  background-position: top, left, top left;
   background-color: #343636;
+  background-size: 1px 20px, 20px 1px, 100% 100%;
   color: #589358;
+  padding-left: 40px;
 }
 #smallCode.tablet #output,
 #smallCode.pseudotablet #output {
   background-image: url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/shadow-vertical.png'), url('../../images/codeimage/bluefade.png');
   background-repeat: repeat-x, repeat-y, repeat-y;
-  background-position: top, left, top right;
+  background-position: top, left, top left;
   background-color: #1f424c;
+  background-size: 1px 20px, 20px 1px, 100% 100%;
   color: #62bddd;
+  padding-left: 30px;
 }
 .no-multiplebgs #smallCode #input {
   background: #495c63 url('../../images/codeimage/left.png') repeat-y right;
