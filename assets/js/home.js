@@ -26,7 +26,6 @@ var buildHome = function(contentPos, D) {
 		writeOutput(intent.axes.width.current);
 	});
 	in_init(['smalltablet'], function(){
-		equalizeAll('#smallCode', 'pre');
 		writeOutput(intent.axes.width.current);
 	});
 	in_init(['mobile'], function() {
@@ -152,14 +151,14 @@ var buildHome = function(contentPos, D) {
 		currentPos,
 		articleCt = $('#content article').not('.highlight').length,
 		i = 1;
-	$.each($('.docsLite h2'), function() { //then create the nav 
-		$(this).parent().attr('id', 't'+i); //#targeti
-		if($(this).attr('alt')) { var text = $(this).attr('alt'); }
-		else{ var text = $(this).text(); }
+	$.each($('#docs').children('article').not('.highlight'), function() { //then create the nav 
+		$(this).attr('id', 't'+i); //#targeti
+		if($(this).children('h2').attr('alt')) { var text = $(this).children('h2').attr('alt'); }
+		else{ var text = $(this).children('h2').text(); }
 		var markup = '<li id="a'+i+'" intent in-width in-t'+i+'-class="active"><div class="label"><a href="#t'+i+'">'+text+'</a></div><div class="circle"></div></li>', //#anchori
-			pos = $(this).parent().offset().top - 20, //minus 20 for padding
+			pos = $(this).offset().top - 20, //minus 20 for padding
 			ctx = {name:'t'+i, val:pos},
-			sub = $(this).siblings('article'),
+			sub = $(this).children('article'),
 			s = 1;
 		titleCtx.push(ctx);
 		$('#leftNav ol, #topNav ol').append(markup);
@@ -240,10 +239,10 @@ var buildHome = function(contentPos, D) {
 		.on('width', function() {
 			var device = intent.axes.width.current;
 			writeOutput(device);
-			if(device === 'mobile') {
+			if(device === 'mobile' || device === 'smalltablet') {
 				unequalize('.docsLite .equalize', 'section');
 				unequalize('#smallCode', 'pre');
-			} else if(device === 'smalltablet' || device === 'tablet') {
+			} else if(device === 'tablet') {
 				unequalize('.docsLite .equalize', 'section');
 				equalizeAll('#smallCode', 'pre');
 			} else {
@@ -256,10 +255,10 @@ var buildHome = function(contentPos, D) {
 			var device = intent.axes.container.current,
 				device = device.slice(6, device.length);
 			writeOutput(device);
-			if(device === 'mobile') {
+			if(device === 'mobile' || device === 'smalltablet' ) {
 				unequalize('.docsLite .equalize', 'section');
 				unequalize('#smallCode', 'pre');
-			} else if(device === 'smalltablet' || device === 'tablet') {
+			} else if(device === 'tablet') {
 				unequalize('.docsLite .equalize', 'section');
 				equalizeAll('#smallCode', 'pre');
 			} else {

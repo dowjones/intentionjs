@@ -110,7 +110,7 @@
 			<pre id="output" intent
 				in-width
 				in-container 
-				in-mobile-after"#input"
+				in-mobile-after="#input"
 				in-smalltablet-after="#input"
 				in-tablet-after="#input"
 				in-pseudomobile-after="#input"
@@ -121,13 +121,13 @@
 			<pre id="input"><h5>This input</h5>
 &lt;style&gt;
    <span class="orangeDark">#smallCode.mobile #output{</span>
-      background:@orangeDark;
+      background:url('orange.png');
    <span class="orangeDark">}</span>
    <span class="blueLight">#smallCode.smalltablet #output{</span>
-      background:@blueLight;
+      background:url('blue.png');
    <span class="blueLight">}</span>
    <span class="greenDark">#smallCode.tablet #output{</span>
-      background:@greenDark;
+      background:url('green.png');
    <span class="greenDark">}</span>
 &lt;/style&gt;
 	
@@ -138,10 +138,10 @@
       <span class="orangeDark">in-mobile-after"#input"</span>
       <span class="blueLight">in-smalltablet-after="#input"</span>
       <span class="greenDark">in-tablet-after="#input"&gt;</span>
-         //output
+         <span class="comment">//output</span>
    &lt;/pre&gt;
    &lt;pre id="input"&gt;
-         //input
+         <span class="comment">//input</span>
    &lt;/pre&gt;
 &lt;/section&gt;	
 			</pre>

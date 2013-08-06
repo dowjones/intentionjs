@@ -584,6 +584,14 @@ header.hdtv.pseudomobile li {
 #heading + #content {
   border-top: 13px solid #38748e;
 }
+#content.smalltablet pre,
+#content.standard.pseudosmalltablet pre,
+#content.hdtv.pseudosmalltablet pre,
+#content.mobile pre,
+#content.standard.pseudomobile pre,
+#content.hdtv.pseudomobile pre {
+  font-size: 13px;
+}
 #leftNav {
   width: 200px;
   height: 100%;

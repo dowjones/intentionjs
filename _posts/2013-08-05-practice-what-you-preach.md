@@ -5,7 +5,7 @@ sub: Forcing Contexts, Writing Nonconflicting CSS, Dynamically Generating Axes
 tags: example
 ---
 
-It's only fair that a site promoting a responsive web design tool should itself be… you know, responsive. So that's what we did. Hopefully you noticed on the [documentation overview](../../../index.html) that you can preview what the site looks like in different horizontal axis contexts. You can also manually resize your window to see how things shift around. The most interesting changes happen on that documentation page, so let's break them down.
+It's only fair that a site promoting a responsive web design tool should itself be… you know, responsive. So that's what we did. Hopefully you noticed on the [documentation overview](../../../index.html) that you can preview what the site looks like in different horizontal axis contexts (mobile, 7" tablets, tablets, etc.). You can also manually resize your window to see how things shift around. The most interesting changes happen on that documentation page, so let's break them down.
 
 ![A screenshot of the device emulation feature on the documentation overview]({{ site.images }}/emulation.png)
 
@@ -108,7 +108,7 @@ Back to the HTML, we see that the wrapper `#all` is flagged as responsive `in-co
 #### Structuring CSS
 A productive practice for writing non-conflict CSS is to start with the very general and move towards specificity. Take, for example, a responsive `header` element. 
 
-First, we begin with the general: mostly colors, but also some padding values.
+First, we begin with the general: mostly colors but also sizing properties.
 
 {% highlight css %}
 header{
@@ -160,8 +160,10 @@ header.hdtv.pseudosmalltablet, header.hdtv.pseudotablet{
 
 *Note: we are using the spectacular [LESS](http://lesscss.org), so if our syntax looks confusing, head to their documentation for a quick breakdown. We're also omitting some styles for the sake of brevity.*
 
-![A screenshot of the current position navigation]({{ site.images }}/leftNav.png)
 #### Current Position Navigation
+
+![A screenshot of the current position navigation]({{ site.images }}/leftNav.png)
+
 If you have the luxury of using a luxury display (window width > 1300), you've likely seen the document tree navigation that floats on the left the documentation. As you scroll, you see that the circle nodes "light up" to indicate your current position in the document. When they become active, a submenu will sometimes open and show subsection of an article. This is done with a custom scroll depth axis that has its contexts generated with Javascript.
 
 {% highlight html %}
@@ -190,11 +192,18 @@ var titleCtx = [],
 In Javascript, we first set up an empty array and set a variable `i` that will be used for keep tracking of iterations. 
 
 {% highlight javascript %}
-$.each($('#docs h2'), function() {
-   $(this).parent().attr('id', 't'+i);
-   var text = $(this).text(),
-      markup = '<li id="a'+i+'" intent in-width in-t'+i+'-class="active"><div class="label"><a href="#t'+i+'">'+text+'</a></div><div class="circle"></div></li>',
-      pos = $(this).parent().offset().top,
+$.each($('#docs').children('article'), function() {
+   $(this).attr('id', 't'+i);
+   var text = $(this).children('h2').text(),
+      markup = '<li id="a'+i+'" \
+         intent in-width \
+         in-t' + i + '-class="active"> \
+         <div class="label"> \
+            <a href="#t'+i+'">'+text+'</a>
+         </div>
+         <div class="circle"></div>
+      </li>',
+      pos = $(this).offset().top,
       ctx = {name:'t'+i, val:pos}; //an object that will be part of the 'contexts' property of the custom axis
 
    titleCtx.push(ctx);
@@ -207,15 +216,30 @@ $.each($('#docs h2'), function() {
 
 Okay, that was a huge chunk but let's get through it.
 
-Firstly, are going to get a bunch of information from each `article`. Knowing that each major section (Basics, Usage, Manipulations, etc) starts with an `h2`, we loop through with an iteration for each `h2` in `#docs`. (We will not just iterate over every article, because articles-within-articles are not major sections and do not to be a part of this navigation). Using information from that selection, we create the markup for a list item that will be part of the `nav`. Each article will be assigned an ID using `i`  that will increment with each article.
+Firstly, are going to get a bunch of information from each `article`. We get the title of each article as a string, and we create the markup for a list item that will be part of the `nav`. Each article will be assigned an ID using `i` (`#t1`, `#t2`, etc) that will increment with each article.
 
 {% highlight javascript %}
-var markup = '<li id="a'+i+'" intent in-width in-t'+i+'-class="active"><div class="label"><a href="#t'+i+'">'+text+'</a></div><div class="circle"></div></li>',
+var markup = '<li id="a'+i+'" \
+   intent in-width \
+   in-t'+i+'-class="active"> \
+      <div class="label"><a href="#t'+i+'">'+text+'</a></div> \
+      <div class="circle"></div> \
+   </li>',
 {% endhighlight %}
 
-Each `li` will have an ID that identifies it as an anchor, incremented for each article (a list item referencing the third article will have an ID of `#a3`). Within each `li` we will use the article's title as a link that points to the article's target ID (`#a3` links to `#t3`). These list items are then appended to a preexisting `<nav id="leftNav"></nav>`. 
+Each `li` will have an ID that identifies it as an anchor, incremented for each article (a list item referencing the third article `#t3` will have an ID of `#a3`). Within each `li` we will use the article's title as a link that points to the article's target ID (`#a3` links to `#t3`). These list items are then appended to a preexisting `<nav id="leftNav"></nav>`. 
 
-Each one of these list items will also be intentional. If we're within the threshold of the appropriate context's scroll depth values, the list item will be assigned the class "active". 
+Each one of these list items will also be intentional. If we're within the threshold of the appropriate context's scroll depth values, the list item will be assigned the class "active". More explicitly, when we create the custom axis, each context will have a name that corresponds to an article. The context list will end up looking like 
+
+{% highlight javascript %}
+contexts: [
+   {name:t1, val:100},
+   {name:t2, val:200},
+   {name:t3, val:300}
+]
+{% endhighlight %}
+
+So when we create the list items, we want each nth-child (kept count by `i`) to be linked the nth context. Hence, `in-t' + i + '-class="active"`.
 
 ##### Adding intentional element after the DOM is loaded
 
