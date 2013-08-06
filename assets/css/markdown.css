@@ -3,8 +3,7 @@
 }
 /* Comment */
 .highlight .err {
-  color: #a61717;
-  background-color: #e3d2d2;
+  color: #f26868;
 }
 /* Error */
 .highlight .k {
@@ -107,7 +106,7 @@
 }
 /* Keyword.Type */
 .highlight .m {
-  color: #009999;
+  color: #589358;
 }
 /* Literal.Number */
 .highlight .s {
@@ -166,11 +165,11 @@
 }
 /* Text.Whitespace */
 .highlight .mf {
-  color: #009999;
+  color: #589358;
 }
 /* Literal.Number.Float */
 .highlight .mh {
-  color: #009999;
+  color: #589358;
 }
 /* Literal.Number.Hex */
 .highlight .mi {
@@ -194,7 +193,7 @@
 }
 /* Literal.String.Doc */
 .highlight .s2 {
-  color: #dd1144;
+  color: #e26345;
 }
 /* Literal.String.Double */
 .highlight .se {
