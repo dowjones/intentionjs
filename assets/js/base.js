@@ -29,14 +29,8 @@ $(window).load(function() {
 			D = document.documentElement,
 			D = (D.clientHeight)? D: B;
 	}
-	
 	//Look for what page it actually is: docs or the blog
-	if(docsTest == true) {
-		contentPos = $('#docs').offset().top + 30;
-		buildHome(contentPos, D);
-	} else { 
-		$('#content .inner').offset().top + 3;
-		buildBlog(contentPos);
-	}
+	if(docsTest == true) { buildHome(D); }
+	else {buildBlog(); }
 	
 });

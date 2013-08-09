@@ -1,0 +1,35 @@
+/*
+  Plugin: nav_dev
+  Description: structural styles for a nav_deck
+*/
+
+.nav_deck{
+  position: relative;
+  display: inline-block;
+}
+
+.nav_deck li{
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  width: inherit;
+  height: inherit;
+  position: absolute;
+  top: 0;
+  -webkit-transition: top 300ms;
+  -moz-transition: top 300ms;
+  -o-transition: top 300ms;
+  transition: top 300ms;
+}
+
+.nav_deck .cover{
+  /* 
+    important is used because 
+    z-indexes have to be included inline 
+  */
+  z-index: 100 !important;
+}
+
+.nav_deck:hover{
+  cursor: pointer;
+}

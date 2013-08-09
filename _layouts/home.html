@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -7,23 +7,17 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/index.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/mini-example.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/code-image.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/nav.css"/>
 	{% include assets.md dir="./" %}
 	<script src="assets/js/home.js" type="text/javascript"></script>
 	<script src="assets/js/raphael.js" type="text/javascript"></script>
 	<script src="assets/js/mini-example.js" type="text/javascript"></script>
 	<script src="assets/js/codeimage.js" type="text/javascript"></script>
+	<script src="assets/js/nav.js" type="text/javascript"></script>
 </head>
 <body intent in-orientation>
 <div id="all" intent in-width in-container in-orientation>
-
-
-
-
-
-
-
-
-
+   <div id="scrollWrapper" intent in-width>
 		<header intent
 			in-container
 			in-width>
@@ -148,43 +142,39 @@
 	</section>
 	<!-- End that too. Back to decently formatted code -->
 	
-	<section id="heading" class="try clearFix" intent 
-		in-pseudomobile-prepend="body"-
-		in-pseudosmalltablet-prepend="body"
-		in-pseudotablet-prepend="body"
-		in-pseudohdtv-prepend="body"
-		in-pseudostandard-after="#codeImage"
-		in-container
-		in-width> <!-- Hide this functionality on *real* mobile devices but not on faked ones-->
-		<div class="inner">
-			<h2>Try it!</h2>
-			<div id="devices">
-				<div id="pseudomobile" intent in-pseudomobile-class="toggleOrientation" in-base-class="null"></div>
-				<div id="pseudosmalltablet" intent in-pseudosmalltablet-class="toggleOrientation"  in-base-class="null"></div>
-				<div id="pseudotablet" intent in-pseudotablet-class="toggleOrientation"  in-base-class="null"></div>
-				<div id="pseudohdtv"></div>
-				<div class="cancel"></div>
-			</div>
-		</div>
-	</section>
-	<nav id="topNav" intent in-width in-container in-orientation>
-		<div class="inner">
-			<ol></ol>
-		</div>
-	</nav>
-	<section id="content" class="docsLite" intent in-width in-container in-orientation>
-		<nav id="prevnext" class="clearFix" intent in-width in-container in-orientation>
-			<div class="inner">
-				<div class="prev">&lt;</div>
-				<div class="next">&gt;</div>
-			</div>
-		</nav>
-		<nav id="leftNav" class="docsNav" intent in-width in-container>
-			<ol></ol>
-		</nav>
-		{{ page.content }}
-	</section>
-	{% include footer.md %}
+   	<section id="heading" class="try clearFix" intent 
+   		in-pseudomobile-prepend="body"-
+   		in-pseudosmalltablet-prepend="body"
+   		in-pseudotablet-prepend="body"
+   		in-pseudohdtv-prepend="body"
+   		in-pseudostandard-after="#codeImage"
+   		in-container
+   		in-width> <!-- Hide this functionality on *real* mobile devices but not on faked ones-->
+   		<div class="inner">
+   			<h2>Try it!</h2>
+   			<div id="devices">
+   				<div id="pseudomobile" intent in-pseudomobile-class="toggleOrientation" in-base-class="null"></div>
+   				<div id="pseudosmalltablet" intent in-pseudosmalltablet-class="toggleOrientation"  in-base-class="null"></div>
+   				<div id="pseudotablet" intent in-pseudotablet-class="toggleOrientation"  in-base-class="null"></div>
+   				<div id="pseudohdtv"></div>
+   				<div class="cancel"></div>
+   			</div>
+   		</div>
+   	</section>
+   	<section id="content" class="docsLite" intent in-width in-container in-orientation in-stickdepth>
+   		<nav id="topNav" intent in-width in-container in-orientation in-stickdepth>
+   			<div class="inner">
+   				<ul class="nav_deck" id="sections"></ul>
+   				<ul id="prevnext">
+   					<li id="prev">&uarr;</li>
+   					<li id="next">&darr;</li>
+   				</ul>
+   			</div>
+   		</nav>
+   		{{ page.content }}
+   	</section>
+   	{% include footer.md %}
+	</div>
 </div>
 <!--<script src="assets/js/init.js" type="text/javascript"></script>-->
 <script src="assets/js/context.js" type="text/javascript"></script>
