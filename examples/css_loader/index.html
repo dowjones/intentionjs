@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+	<head>
+		<title>very simple stylesheet loader</title>
+	</head>
+	<body intent in-mobile-class="mobile" in-tablet-class="tablet" in-standard-class="standard">
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="../../test/vendor/underscore.js"></script>
+		<script src="../../intention.js"></script>
+		<script src="../../context.js"></script>
+
+		<script type="text/javascript">
+
+			var cssLoader = function(stylesheets, contexts){
+				var dfds = [],
+					sheetWriter = function(){
+					_.each(stylesheets, function(sheet){
+						$('head').append(
+							$('<link rel="stylesheet">').attr('href', sheet));
+					});
+				};
+
+				_.each(contexts, function(ctx){
+					var dfd = $.Deferred();
+
+					dfds.push(dfd);
+
+					if(intent.is(ctx)) {
+						dfd.resolve();
+					} else {
+						intent.on(ctx, dfd.resolve);
+					}
+				});
+
+				if((!contexts) || (contexts.length === 0)){
+					sheetWriter();
+				}
+
+				$.when.apply(this, dfds).done(sheetWriter);
+
+			};
+			
+			cssLoader(['css/mobile-base.css'], ['base', 'mobile', 'touch']);
+			cssLoader(['css/standard.css'], ['base', 'standard']);
+			cssLoader(['css/tablet.css'], ['base', 'tablet']);
+
+		</script>
+	</body>
+</html>

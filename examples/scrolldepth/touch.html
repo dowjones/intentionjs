@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="../../test/vendor/underscore.js"></script>
+	<script type="text/javascript" src="../../intention.js"></script>
+ 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes"><meta name="format-detection" content="telephone=no">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+
+	<style type="text/css">
+		body {
+			margin:0;
+		}
+
+		.a {
+			background-color:lavender;
+			color: tomato;
+			
+		}
+
+		.b {
+			background-color:steelblue;
+			color: gold;
+			
+		}
+
+		.c {
+			background-color:indianred;
+			color: palegreen;
+			
+		}
+
+		 .d{
+			background-color:darkslategray;
+			color: bisque;
+			
+		}
+
+		.e{
+			background-color:midnightblue;
+			color: red;
+			
+		}
+
+		#blocks_wrapper {
+			position: absolute;
+			top:0;
+			left:0;
+			height:100%;
+			width:100%;
+			overflow: hidden;
+		}
+
+		#blocks {
+			position:absolute;
+			top:0;
+			left:0;
+			height:100%;
+			width:100%;
+			/*overflow: hidden;*/
+		}
+
+
+		#blocks.f1 {
+			transform:translate3d(0, 0, 0);
+			-moz-transform:translate3d(0, 0, 0);
+			-webkit-transform:translate3d(0, 0, 0);
+
+			transition:all 300ms ease-in-out;
+			-moz-transition: all 300ms ease-in-out;
+			-webkit-transition: all 300ms ease-in-out;
+		}
+
+		#blocks.f2 {
+			transform:translate3d(0, -100%, 0);
+			-moz-transform:translate3d(0, -100%, 0);
+			-webkit-transform:translate3d(0, -100%, 0);
+
+			transition:all 300ms ease-in-out;
+			-moz-transition: all 300ms ease-in-out;
+			-webkit-transition: all 300ms ease-in-out;
+		}
+		#blocks.f3 {
+			transform:translate3d(0, -200%, 0);
+			-moz-transform:translate3d(0, -200%, 0);
+			-webkit-transform:translate3d(0, -200%, 0);
+
+			transition:all 300ms ease-in-out;
+			-moz-transition: all 300ms ease-in-out;
+			-webkit-transition: all 300ms ease-in-out;
+		}
+		#blocks.f4 {
+			transform:translate3d(0, -300%, 0);
+			-moz-transform:translate3d(0, -300%, 0);
+			-webkit-transform:translate3d(0, -300%, 0);
+
+			transition:all 300ms ease-in-out;
+			-moz-transition: all 300ms ease-in-out;
+			-webkit-transition: all 300ms ease-in-out;
+		}
+		#blocks.f5 {
+			transform:translate3d(0, -400%, 0);
+			-moz-transform:translate3d(0, -400%, 0);
+			-webkit-transform:translate3d(0, -400%, 0);
+
+			transition:all 300ms ease-in-out;
+			-moz-transition: all 300ms ease-in-out;
+			-webkit-transition: all 300ms ease-in-out;
+		}
+
+
+
+		.block {
+			width: 100%;
+			height:100%;
+			position: relative;
+			font-family: monospace;
+			font-size: 10em;
+		}
+
+		#circles {
+			position: relative;
+			z-index: 3;
+		}
+
+
+
+		.circle1{
+			position: absolute;
+			top:200px;
+			left:40px;
+			color:lavender;
+			 }
+
+		.Mcircle1{
+			position: absolute;
+			top:350px;
+			left:130px;
+			color:lavender;
+			 }	 
+
+		.circle2{
+			position: absolute;
+			top:110px;
+			left:100px;
+			color:steelblue;
+			 }
+
+		.Mcircle2{
+			position: absolute;
+			top:280px;
+			left:50px;
+			color:steelblue;
+			 }	 
+		
+		.circle3{
+			position: absolute;
+			top:40px;
+			left:190px;
+			color:indianred;
+			 }
+
+		.Mcircle3{
+			position: absolute;
+			top:170px;
+			left:70px;
+			color:indianred;
+			 }	 
+
+		.circle4{
+			position: absolute;
+			top:70px;
+			left:290px;
+			color:darkslategrey;
+			}
+
+		.Mcircle4{
+			position: absolute;
+			top:90px;
+			left:130px;
+			color:darkslategrey;
+			}
+
+		.circle5{
+			position: absolute;
+			top:110px;
+			left:390px;
+			color:midnightblue;
+			}
+
+		.Mcircle5{
+			position: absolute;
+			top:40px;
+			left:220px;
+			color:midnightblue;
+			}		
+		
+		.circle{
+
+			width:70px;
+			height:70px;
+			border-radius:50px;
+			background:yellow;
+			float:left;
+			line-height: 70px;
+			text-align:center;
+			font-family: monospace;
+			font-size:3em;
+		}
+
+		.circle p{
+			margin: auto;
+		}
+
+
+	</style>
+</head>
+<body>
+
+
+
+    <div id="circles">
+
+	    <div class="circle circle1"
+	    	intent
+		    in-standard-class="circle1"
+		    in-tablet-class="circle1"
+		    in-mobile-class="Mcircle1"><p>1</p></div>
+		
+		<div class="circle circle2"
+			intent
+		    in-standard-class="circle2"
+		    in-tablet-class="circle2"
+		    in-mobile-class="Mcircle2"><p>2</p></div>
+		
+		<div class="circle circle3"
+			intent
+		    in-standard-class="circle3"
+		    in-tablet-class="circle3"
+		    in-mobile-class="Mcircle3"><p>3</p></div>
+		
+		<div class="circle circle4"
+			intent
+		    in-standard-class="circle4"
+		    in-tablet-class="circle4"
+		    in-mobile-class="Mcircle4"><p>4</p></div>
+		
+		<div class="circle circle5"
+			intent
+		    in-standard-class="circle5"
+		    in-tablet-class="circle5"
+		    in-mobile-class="Mcircle5"><p>5</p></div>
+	</div>
+
+	<div id="blocks_wrapper">
+		<div id="blocks" class=""
+			intent
+		    in-f1-class="f1"
+		    in-f2-class="f2"
+		    in-f3-class="f3"
+		    in-f4-class="f4"
+		    in-f5-class="f5">
+
+			<div class="block a">1</div>
+			<div class="block b">2</div>
+			<div class="block c">3</div>
+			<div class="block d">4</div>
+			<div class="block e">5</div>
+
+		</div>
+	</div>
+
+  <script>
+    (function($){
+
+    	var intent = new Intention,
+			resizeContexts = [
+				{name:'standard', min:769}, 
+		        {name:'tablet', min:521},
+		        {name:'mobile', min:0}],
+
+		    hResponder = intent.responsive({
+		    	contexts:resizeContexts,
+		    	matcher:function(test, context){
+		    		return test>=context.min;
+		    	},
+		    	measure:function(){
+		    		return $(window).width();
+		    	}
+		    }).respond;
+
+		baseResponder = intent.responsive([{name:'base'}])
+			.respond('base');
+
+		hResponder();
+
+		$(window).on('resize', hResponder);
+
+
+
+		//touch
+		
+		 var contact_axis = [
+	        {name: 'f1', points: 1},
+	        {name: 'f2', points: 2},
+	        {name: 'f3', points: 3},
+	        {name: 'f4', points: 4},
+	        {name: 'f5', points: 5}
+	   	 ];
+
+		var touch = intent.responsive(
+				{
+					ID:'slides',
+					contexts:contact_axis,
+					matcher: function(measure, ctx){
+						return measure === ctx.points;
+			    	}
+				}
+
+		    ).respond;
+
+		intent.elements();
+
+		$(window).on('touchstart touchmove', function(e){
+			touch(e.originalEvent.touches.length);
+			e.preventDefault();
+		});
+		$(window).on('touchcancel touchend', function(e){
+			var touches = e.originalEvent.touches.length;
+			if(touches === 0) touches =1;
+
+			touch(touches);
+		});
+
+		$(function(){
+			setTimeout(function(){
+				window.scrollTo(0, 1);
+			}, 0);
+		});
+
+
+	      
+    })(jQuery)
+  </script>
+
+
+	
+</body>
+
+</html>	

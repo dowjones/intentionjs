@@ -1,0 +1,23 @@
+<html>
+<head>
+	<title>image loading performance test</title>
+
+</head>
+<body>
+	<img src="img/src.jpg" />
+	<img intent in-base-src="img/tn-src.jpg" />
+	<img intent in-base-src="img/tn-src2.jpg" />
+	<img intent in-base-src="img/tn-src3.jpg" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="../../test/vendor/underscore.js"></script>
+	<script src="../../intention.js"></script>
+	<script type="text/javascript">
+		var intent = new Intention;
+		
+		intent.responsive([{name:'base'}]).respond('base');
+
+		intent.elements(document);
+
+	</script>
+</body>
+</html>
