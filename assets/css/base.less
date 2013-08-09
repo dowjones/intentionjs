@@ -97,6 +97,7 @@ p { line-height: 24px; }
 h1+p, h2+p, h3+p, h4+p{ margin-top:5px; }
 p+p{ text-indent:16px; margin-top:@gutter; }
 p+div.highlight, div.highlight+p{ margin-top: @gutter/2; }
+.highlight+.highlight, .highlight+pre, pre+.highlight{ margin-top:@gutter; }
 p+pre, pre+p{ margin-top: @gutter/2; }
 
 
@@ -268,6 +269,7 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 		padding:6px;
 		border:1px double @lightBlueGray;
 		box-sizing:border-box;
+		font-size:14px;
 		color:@periwinkle;
 		background:darken(@mediumBlue, 5%);
 		white-space: pre;	
@@ -280,7 +282,12 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 			white-space:pre-wrap;
 		}
 	}
-	.highlight .comment{ color: darken(multiply(white, @seafoam), 5%); }
+	.special .highlight pre code{
+	   color: darken(@green, 20%);
+	   .comment{
+	      color: darken(multiply(white, @seafoam), 5%);
+	   }
+	}
 	.jump{
 		width:100%;
 		padding:@gutter @gutter/2 0 @gutter/2;
@@ -474,7 +481,7 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 		position:relative;
 		display:inline-block;
 		cursor:pointer;
-		a{
+		li{
 		   width:inherit;
 		   height:inherit;
 			padding:0 10px;
@@ -488,8 +495,9 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 			-moz-transition: top 300ms;
 			-o-transition: top 300ms;
 			transition: top 300ms;
+			a{ display:block; }
 		}
-		a:hover{
+		li:hover{
 			background:@blue;
 		}
 		.cover{

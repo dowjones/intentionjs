@@ -151,7 +151,7 @@ var buildHome = function(D) {
 	});
 	
 	//For docs nav
-	var articles = $('#content article').not('.highlight').not('article:has(article)'); //Do not select highlight articles, or container articules
+	var articles = $('#content article').not('.special').not('article:has(article)'); //Do not select special articles, or container articules
 	$.each(articles, function() { //Create back to top links ---- This must go before the title positions are found.
 		var markup = $('<div class="jump"><a>&uarr; Back to top</a></div>');
 		$(this).append(markup).addClass('clearFix');
@@ -163,13 +163,13 @@ var buildHome = function(D) {
 	//For docs nav
 	var titleCtx = [],
 		curPos,
-		articleCt = $('#docs').children('article').not('.highlight').length,
+		articleCt = $('#docs').children('article').not('.special').length,
 		i = 1;
-	$.each($('#docs').children('article').not('.highlight'), function() { //then create the nav 
+	$.each($('#docs').children('article').not('.special'), function() { //then create the nav 
 		$(this).attr('id', 't'+i); //#targeti
 		if($(this).children('h2').attr('alt')) { var text = $(this).children('h2').attr('alt'); }
 		else{ var text = $(this).children('h2').text(); }
-		var markup = '<a href="#t'+i+'" id="a'+i+'" >'+text+'</a>', //#anchori
+		var markup = '<li id="a'+i+'"><a href="#t'+i+'" >'+text+'</a></li>', //#anchori
 			pos = $(this).offset().top - 50, //minus 20 for padding
 			ctx = {name:'t'+i, val:pos},
 			sub = $(this).children('article'),

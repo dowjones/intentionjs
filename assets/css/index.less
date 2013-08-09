@@ -265,7 +265,7 @@ body > .try.standard, body > .try.hdtv {
 	article{
 		padding-top:@gutter*1.5;
 	}
-	article.highlight{
+	article.special{
 		background:@seafoam url('../../images/mezz.png') repeat;
 		border-top:13px solid @lightSeafoam;
 		color:@darkGreen;
@@ -275,8 +275,12 @@ body > .try.standard, body > .try.hdtv {
 			color: darken(@green, 20%);
 			border: 3px solid darken(@green, 0%);
 		}
+		.hightlight pre code{
+		   border:0 none;
+		   background:transparent;
+		}
 	}
-	article:not(.highlight)+article:not(.highlight){
+	article:not(.special)+article:not(.special){
 		border-top:1px dashed @blue;
 	}
 }
@@ -315,7 +319,7 @@ body > .try.standard, body > .try.hdtv {
 			width:auto;
 		}
 	}
-	article.highlight{
+	article.special{
 		width:100%;
 		margin:@gutter 0 @gutter 0;
 		.inner{
@@ -368,7 +372,7 @@ body > .try.standard, body > .try.hdtv {
 			padding-left:0;
 		}
 	}
-	article.highlight{
+	article.special{
 		.inner{
 			width:auto;
 		}
@@ -398,10 +402,10 @@ body > .try.standard, body > .try.hdtv {
 		article+article{
 			border-top:1px dashed @periwinkle;
 		}	
-		article.highlight{
+		article.special{
 			border-top:13px solid @lightSeafoam;
 		}
-		article.highlight+article{
+		article.special+article{
 			border-top:none;
 		}
 	}
