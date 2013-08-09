@@ -1,65 +1,64 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <!-- Used by /YYYY/MM/DD/ (3 sub directories) -->
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>intention.js — {{ title }}</title>
-	{% include assets.md dir="../../../" cur="blog" %}
-	<link rel="stylesheet" type="text/css" href="../../../assets/css/blog.css" />
-	<script src="../../../assets/js/blog.js" type="text/javascript"></script>
-	<script src="../../../assets/js/post.js" type="text/javascript"></script>
-</head>
-<body intent in-orientation>
-<div id="all" intent in-width in-container in-orientation>
-	<header intent
-		in-container
-		in-width>
-		<h1><a href="../../../">intention.js</a></h1>
-		<nav>
-			<ul>
-				{% include nav.md dir="../../../" cur="blog" %}
-			</ul>
-		</nav>
-	</header>
-	<section id="heading" intent 
-		in-container
-		in-width> <!-- Hide this functionality on *real* mobile devices but not on faked ones-->
-		<div class="inner">
-			<h2><a href="{{ page.url }}">{{ page.title }}</a></h2>
-		</div>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>intention.js — {{ title }}</title>
+    {% include assets.md dir="../../../" cur="blog" %}
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/blog.css" />
+    <script src="../../../assets/js/blog.js" type="text/javascript"></script>
+    <script src="../../../assets/js/post.js" type="text/javascript"></script>
+  </head>
+  <body intent in-orientation>
+    <div id="all" intent in-width in-container in-orientation>
+      <header intent
+	      in-container
+	      in-width>
+	<h1><a href="../../../">intention.js</a></h1>
+	<nav>
+	  <ul>
+	    {% include nav.md dir="../../../" cur="blog" %}
+	  </ul>
+	</nav>
+      </header>
+      <section id="heading" intent
+	       in-container
+	       in-width> <!-- Hide this functionality on *real* mobile devices but not on faked ones-->
+	<div class="inner">
+	  <h2><a href="{{ page.url }}">{{ page.title }}</a></h2>
+	</div>
+      </section>
+      <section id="content" class="blog" intent in-width in-container in-orientation>
+	<div class="inner">
+	  <section class="header">
+	    {% if page.sub %}<h4>{{ page.sub }}</h4>{% endif %}
+	    <p class="meta"><a href="{{ page.url }}">{{ page.date | date: "%B %d, %Y" }}</a></p><p class="tags">{% for tags in page.tags %}<a href="../../../blog/tagged/{{ tags }}.html" class="{{ tags }}">{{ tags }}</a> {% endfor %}</p>
+	  </section>
+	  {% if page.img %}
+	  <section class="img">
+	    <div class="inner">
+	      <img src="{{ site.images }}/{{ page.img }}" />
+	    </div>
+	  </section>
+	  {% endif %}
+	  <article>{{ content }}</article>
+	</div>
+	<section class="footer">
+	  <div class="inner">
+	    <h4><a href="../../../blog">&larr; Go back</a></h4>
+	  </div>
 	</section>
-	<section id="content" class="blog" intent in-width in-container in-orientation>
-		<div class="inner">
-			<section class="header">
-				{% if page.sub %}<h4>{{ page.sub }}</h4>{% endif %}
-				<p class="meta"><a href="{{ page.url }}">{{ page.date | date: "%B %d, %Y" }}</a></p><p class="tags">{% for tags in page.tags %}<a href="../../../blog/tagged/{{ tags }}.html" class="{{ tags }}">{{ tags }}</a> {% endfor %}</p>
-			</section>
-			{% if page.img %}
-				<section class="img">
-					<div class="inner">
-						<img src="{{ site.images }}/{{ page.img }}" />
-					</div>
-				</section>
-			{% endif %}
-			<article>{{ content }}</article>
-		</div>
-		<section class="footer">
-			<div class="inner">
-				<h4><a href="../../../blog">&larr; Go back</a></h4>
-			</div>
-		</section>
-		
-	</section>
-	<footer intent in-width in-container>
-		<div class="inner">
-			<h1>✌☺</h1>
-			<p>Intention.js is an open-source project by The Wall Street Journal's Design Team.<br/>Visit us on Github for more information and projects.</p>
-		</div>
-	</footer>
-</div>
-<script src="../../../assets/js/context.js" type="text/javascript"></script>
-</body>
+      </section>
+      <footer intent in-width in-container>
+	<div class="inner">
+	  <h1>✌☺</h1>
+	  <p>Intention.js is an open-source project by The Wall Street Journal's Design Team.<br/>Visit us on Github for more information and projects.</p>
+	</div>
+      </footer>
+    </div>
+    <script src="../../../assets/js/context.js" type="text/javascript"></script>
+  </body>
 </html>
