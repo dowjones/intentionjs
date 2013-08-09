@@ -56,11 +56,11 @@
 }
 #splash.standard .inner section#buttons,
 #splash.hdtv .inner section#buttons {
-  padding-top: 70px;
+  padding: 70px 20px;
 }
 #splash.standard .inner section#buttons div,
 #splash.hdtv .inner section#buttons div {
-  width: 220px;
+  width: 100%;
   margin: auto;
   padding: 10px;
   text-align: center;
