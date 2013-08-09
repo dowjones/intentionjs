@@ -16,14 +16,6 @@
     <body intent in-orientation>
       <div id="all" intent in-width in-container in-orientation>
 
-
-
-
-
-
-
-
-
 	<header intent
 		in-container
 		in-width>
@@ -38,12 +30,12 @@
 	<section id="splash" intent in-width in-container in-orientation>
 	  <div class="inner clearFix">
 	    <section>
-	      <h3>Intention.js allows for dynamic HTML restructuring, so that the code for a given context transforms into an ideal state for that structure.</h3>
-	      <p>Defining differences between documents should be written in HTML: manipulating attributes avoids media queries and their insufficient attempt to convey appropriate pages.</p>
+	      <h3>Intention.js offers a clear way to create dynamically restructured html through clean interface to a super light-weight library.</h3>
+	      <p>The goal is to increase layout options and flexibility, reducing development time and lessening the necessity of media-query-driven stylesheet overrides.</p>
 	    </section>
 	    <section id="buttons">
-	      <div id="download"><a href="#">Download the latest version<h5>intention.1.02.js</h5></a></div>
-	      <div id="github"><a href="https://github.com/wsjdesign/intentionjs" target="_blank">Fork me on<h5>GitHub</h5></a></div>
+	      <div id="download"><a href="intention.js">Download the latest version<h5> 0.9.6.3</h5></a></div>
+	      <div id="github"><a href="https://github.com/wsjdesign/intentionjs" target="_blank">Fork us on<h5>GitHub</h5></a></div>
 	    </section>
 	  </div>
 	</section>
@@ -191,36 +183,32 @@
               <section>
                 <h3 alt="Thresholds, Axes, Contexts">Thresholds, Axes, &amp; Contexts</h3>
                 <p>Intention.js works by determining what are called “threshold groups”. These threshold groups define  the context in which a user is viewing your site. Threshold groups work by measuring an axis, like the browser’s width or the device’s pixel density (for high resolution screens).</p>
-                <p>A lot of these contexts are predictable, and a common pattern of them are included in Intention’s partner, Context.js. It includes:</p>
+                <p>A lot of these contexts are predictable, and a common pattern of them are included in a handy implementation of intention.js called context.js</p>
                 <pre><span class="comment"><i>Axis</i></span>
-                  - <i>context_name, value</i></span>
+- <i>context_name, value</i></span>
 
-                width <span class="comment">(a window of at least <i>x</i> pixels wide)</span>
-                - mobile, 0
-                - tablet, 510
-                - standard, 840
-                orientation <span class="comment">(degree of window.rotation)</span>
-                - portrait, 0
-                - landscape, 90
-                touch <span class="comment">(window.ontouchstart boolean)</span>
-                - touch, true
-                highres <span class="comment">(devicePixelRatio > 1)</span>
-            - highres, true</pre>
+width <span class="comment">(a window of at least <i>x</i> pixels wide)</span>
+  - mobile, 0-510
+  - tablet, 510-839
+  - standard, 840-Infinity
+orientation <span class="comment">(degree of window.rotation)</span>
+  - portrait, 0
+  - landscape, 90
+touch <span class="comment">(window.ontouchstart boolean)</span>
+  - touch, true
+highres <span class="comment">(devicePixelRatio > 1)</span>
+  - highres, true
+</pre>
         </section>
         <section>
           <h3 alt="Manipulations">Methods</h3>
-          <p>Intention.js has three basic manipulations: attribution manipulations, class manipulations, and placement manipulations. With these three, you can change the value of any attribute, add or remove an element’s class, and adjust the position of an element within the structure of the document. </p>
+          <p>intention.js has three basic manipulations: attribution manipulations, class manipulations, and placement manipulations. With these three, you can change the value of any attribute, add or remove an element’s class, and adjust the position of an element within the structure of the document. </p>
 
           <p>Intention.js comes with Context.js, which provides you with some commonly used context groups (or <i>axes</i>). It includes:</p>
 
 
         </section>
-        <section>
-          <pre id="intro"><span id="charTest">A</span> piffy example of Intention that shows multiple types of manipulations on multiple threshold groups. Something with really clear names and a creates an obvious result.</pre>
-        </section>
-        <section>
-          <h4>Some type of pitch for the technical significance. A pull quote maybe.</h4>
-        </section>
+
       </article>
       <article id="concept" class="highlight clearFix">
         <div class="inner clearFix" data-pattern="2">
@@ -229,32 +217,39 @@
 	           in-standard-before="#customPitch" in-hdtv-before="#customPitch"
 	           in-tablet-after="#customPitch" in-smalltablet-after="#customPitch" in-mobile-after="#customPitch">
             <div id="timeExample" intent in-time> </div>
-            <pre>&lt;div id="timeExample" intent in-time&gt;
-              &lt;/div&gt;
-              <span class="comment">...</span>
-              &lt;script&gt;
-              var time = intent.responsive({
-              ID: 'time',
-              contexts: [
-              {name:'night',min:20},
-              {name:'evening',min:17},
-              {name:'sunset',min:16},
-              {name:'day',min:9},
-              {name:'morning',min:0}
-              ],
-              matcher: function(test, context) {
-              return test &gt;= context.min;
-              },
-              measure: function(arg) {
-              var time = new Date();
-              return time.getHours();
-              }
-              });
 
-              time.respond(); <span class="comment">//check the current context</span>
-              time.respond('<select id="timeChange"><option></option><option value="night">night</option><option value="evening">evening</option><option value="sunset">sunset</option><option value="day">day</option><option value="morning">morning</option></select>'); <span class="comment">//Force a context</span>
-              &lt;/script&gt;</pre>
+
+            {%highlight html%}
+            <div id="timeExample" intent in-time></div>
+            {%endhighlight%}
+            <span class="comment">...</span>
+            {%highlight js%}
+  var time = intent.responsive({
+    ID: 'time',
+    contexts: [
+      {name:'night',min:20},
+      {name:'evening',min:17},
+      {name:'sunset',min:16},
+      {name:'day',min:9},
+      {name:'morning',min:0}
+    ],
+    matcher: function(test, context) {
+      return test >= context.min;
+    },
+    measure: function(arg) {
+      var time = new Date();
+      return time.getHours();
+    }
+  });
+
+time.respond(); //check the current context
+              {%endhighlight%}
           </section>
+
+<p>Try it</p>
+time.respond('<select id="timeChange"><option></option><option value="night">night</option><option value="evening">evening</option><option value="sunset">sunset</option><option value="day">day</option><option value="morning">morning</option></select>');
+
+
           <section id="customPitch">
             <h3>Intention.js responds to a bunch of device contexts, but it’s open to any index. You can create custom contexts based on anything you can measure, and restructure your code in response!</h3>
             <p>It’s not just changing a page based on the browser’s width: it’s noticing touch-capabilities, portrait/landscape orientation, high resolution contexts. Intention.js can be taught to restructure pages based on scroll depth, pageviews, time of day—basically anything!</p>
