@@ -20,16 +20,16 @@ It's only fair that a site promoting a responsive web design tool should itself 
       …
    </section>
    <section id="codeImage" intent in-width in-container>
-      … 
+      …
    </section>
    <section id="smallCode" intent in-width in-container>
-      … 
+      …
    </section>
    <section id="heading">
-      … 
+      …
    </section>
    <nav id="topNav" intent in-width in-container in-orientation>
-      …    
+      …
    </nav>
    <section id="content" intent in-width in-container>
       <nav id="prevnext" intent in-width in-container>…</nav>
@@ -92,10 +92,10 @@ measure:function(arg) {
    }
    return $("#all").width();
 }
-… 
+…
 {% endhighlight %}
 
-Before the measure function begins to measure the wrapper's width, it first checks to see if it has been passed a string. In instances like this, that's likely true. 
+Before the measure function begins to measure the wrapper's width, it first checks to see if it has been passed a string. In instances like this, that's likely true.
 
 {% highlight javascript %}intent.axes.container_width.respond('pseudomobile')`
 {% endhighlight %}
@@ -106,7 +106,7 @@ Back to the HTML, we see that the wrapper `#all` is flagged as responsive `in-co
 
 
 #### Structuring CSS
-A productive practice for writing non-conflict CSS is to start with the very general and move towards specificity. Take, for example, a responsive `header` element. 
+A productive practice for writing non-conflict CSS is to start with the very general and move towards specificity. Take, for example, a responsive `header` element.
 
 First, we begin with the general: mostly colors but also sizing properties.
 
@@ -189,7 +189,7 @@ var titleCtx = [],
    i = 1;
 {% endhighlight %}
 
-In Javascript, we first set up an empty array and set a variable `i` that will be used for keep tracking of iterations. 
+In Javascript, we first set up an empty array and set a variable `i` that will be used for keep tracking of iterations.
 
 {% highlight javascript %}
 $.each($('#docs').children('article'), function() {
@@ -209,7 +209,7 @@ $.each($('#docs').children('article'), function() {
    titleCtx.push(ctx);
    $('#leftNav ol').append(markup);
    intent.add($('#leftNav #a'+i));
-   
+
    i++;
 });
 {% endhighlight %}
@@ -227,9 +227,9 @@ var markup = '<li id="a'+i+'" \
    </li>',
 {% endhighlight %}
 
-Each `li` will have an ID that identifies it as an anchor, incremented for each article (a list item referencing the third article `#t3` will have an ID of `#a3`). Within each `li` we will use the article's title as a link that points to the article's target ID (`#a3` links to `#t3`). These list items are then appended to a preexisting `<nav id="leftNav"></nav>`. 
+Each `li` will have an ID that identifies it as an anchor, incremented for each article (a list item referencing the third article `#t3` will have an ID of `#a3`). Within each `li` we will use the article's title as a link that points to the article's target ID (`#a3` links to `#t3`). These list items are then appended to a preexisting `<nav id="leftNav"></nav>`.
 
-Each one of these list items will also be intentional. If we're within the threshold of the appropriate context's scroll depth values, the list item will be assigned the class "active". More explicitly, when we create the custom axis, each context will have a name that corresponds to an article. The context list will end up looking like 
+Each one of these list items will also be intentional. If we're within the threshold of the appropriate context's scroll depth values, the list item will be assigned the class "active". More explicitly, when we create the custom axis, each context will have a name that corresponds to an article. The context list will end up looking like
 
 {% highlight javascript %}
 contexts: [
@@ -259,7 +259,7 @@ ctx = {name:'t'+i, val:pos},
 ...
 {% endhighlight %}
 
-We will also get the `article`'s position from the top, relative to the window. The target name and the target's position are then used to create an object that will be used in the array of contexts in the scroll depth axis. The `article`'s position will be the value against which the user's scroll depth will be compared. Each object is added to the array we declared earlier, `titleCtx`. 
+We will also get the `article`'s position from the top, relative to the window. The target name and the target's position are then used to create an object that will be used in the array of contexts in the scroll depth axis. The `article`'s position will be the value against which the user's scroll depth will be compared. Each object is added to the array we declared earlier, `titleCtx`.
 
 {% highlight javascript %}
 ...

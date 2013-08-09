@@ -1,0 +1,112 @@
+body {
+  background: #123;
+  color: #333;
+  font-size: 11px;
+  height: auto;
+  padding-bottom: 20px;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-family: Georgia, serif;
+  font-weight: normal;
+  padding-top: 20px;
+  text-align: center;
+}
+
+h2 {
+  padding-top: 20px;
+  text-align: center;
+}
+
+p {
+  border: 1px solid #666;
+  overflow: hidden;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.container_6,
+.container_12,
+.container_16,
+.container_24 {
+  background-color: #fff;
+  background-repeat: repeat-y;
+  margin-bottom: 20px;
+}
+
+.container_12 {
+/*  background-image: url(../img/12_col.gif);*/
+}
+
+.container_16 {
+/*  background-image: url(../img/16_col.gif);*/
+}
+
+.container_24 {
+/*  background-image: url(../img/24_col.gif);*/
+}
+
+.container_12 h2:before{
+  content:"Container 12";
+}
+
+.container_6 h2:before{
+  content:"Container 6";
+}
+
+.grid_12 p:before {
+  content:"Grid 12";
+}
+
+.grid_11 p:before {
+  content:"Grid 11";
+}
+
+.grid_10 p:before {
+  content:"Grid 10";
+}
+
+.grid_9 p:before {
+  content:"Grid 9";
+}
+
+.grid_8 p:before {
+  content:"Grid 8";
+}
+
+.grid_7 p:before {
+  content:"Grid 7";
+}
+
+.grid_6 p:before {
+  content:"Grid 6";
+}
+
+.grid_5 p:before {
+  content:"Grid 5";
+}
+
+.grid_4 p:before {
+  content:"Grid 4";
+}
+
+.grid_3 p:before {
+  content:"Grid 3";
+}
+
+.grid_2 p:before {
+  content:"Grid 2";
+}
+
+.grid_1 p:before {
+  content:"Grid 1";
+}

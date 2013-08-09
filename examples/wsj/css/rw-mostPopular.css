@@ -1,0 +1,53 @@
+.module.mostPopular > ul,
+.module.mostPopular > ol {
+	padding-left: 3.6rem;
+	position: relative;
+	margin: 0 .1rem 0 .1rem;
+}
+
+.module.mostPopular > ul li,
+.module.mostPopular > ol li {
+	font-family: Georgia, "Century Schoolbook", "Times New Roman", Times, serif;
+	color: #ca5700;
+	font-size: 2.1em; /* <- Font size specified here to control the size of the orange numbers */
+	position: relative;
+	z-index: 1;
+	padding: 1rem 0 1rem 0rem;
+	list-style-type: decimal;
+}
+
+.module.mostPopular > ul li:after,
+.module.mostPopular > ol li:after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: .15rem;
+	border-bottom: .15rem dotted #bdbdbd;
+	margin-left: -3.5rem;
+	padding-right: 3.5rem;
+}
+
+.module.mostPopular > ul li:first-child,
+.module.mostPopular > ol li:first-child {
+	padding-top: 0.5rem;
+	margin-top: 1rem;
+}
+
+.module.mostPopular > ul li h2,
+.module.mostPopular > ol li h2 {
+	font-size: 0.95em; /* <- equivalent to 2.0rem */
+	line-height: 1.1em;
+	font-weight: normal;
+}
+
+.module.mostPopular > ul li:first-child h2,
+.module.mostPopular > ol li:first-child h2 {
+	font-size: 1.143em; /* <- equivalent to 2.4rem */
+}
+
+.module.mostPopular > ul li > span,
+.module.mostPopular > ul li .tooltipBox {
+	display: none;
+}

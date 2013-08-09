@@ -1,0 +1,132 @@
+.setList > li.hedSumm + li.hedSumm,
+.setList > li.hedSumm + li.promotion,
+.setList > li.promotion + li.hedSumm,
+.setList > li.promotion + li.section,
+.setList > li.section + li.hedSumm {
+	border-top: 1px dotted #999;
+}
+
+.setList > li:first-child {
+	border: none;
+}
+
+.setList > li:after {
+	content: "";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+	font-size: 0;
+}
+
+.setList > li.pType-none.imgType-A,
+.setList > li.pType-none.imgType-B,
+.setList > li.pType-none.imgType-C {
+	display: -webkit-box;
+	-webkit-box-orient: horizontal;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+}
+
+.setList > li.pType-none h2 {
+	-webkit-box-flex: 1;
+	-webkit-box-ordinal-group: 1;
+}
+
+.setList > li.pType-none.imgType-A figure {
+	float: none;
+	-webkit-box-ordinal-group: 2;
+}
+
+.setList > li.section > .section {
+	border: none;
+}
+
+.setList.type-search .sourceStamp {
+	font-size: 1.2em;
+	color: #6b6b6b;
+	display: block;
+	margin-bottom: .4rem;
+	margin-top: .4rem;
+}
+
+.setList.type-search .sourceStamp .source {
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.noresults .setList.type-search {
+	padding: .5rem .8rem .6rem .8rem;
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.pageNotFound .setList.type-404 {
+	padding: .5rem 1.6rem .6rem 1.6rem;
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.noresults .setList.type-search h2 {
+	font-size: 1.8em;
+	font-weight: bold;
+	line-height: 1.25em;
+	margin-bottom: 1em;
+}
+
+.pageNotFound .setList.type-404 h2 {
+	font-size: 1.8em;
+	font-weight: bold;
+	line-height: 1.25em;
+	margin-bottom: 0.5em;
+}
+
+.noresults .setList.type-search h3 {
+	font-size: 1.4em;
+	line-height: 1.1em;
+	color: #333;
+	margin-bottom: 0.75em;
+}
+
+.pageNotFound .setList.type-404 p {
+	font-size: 1.4em;
+	line-height: 1.1em;
+	color: #333;
+	margin-bottom: 0.75em;
+}
+
+.noresults .setList.type-search .tips li {
+	font-size: 1.4rem;
+	line-height: 1.333em;
+	margin-top: .67rem;
+	color: #333;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAMAAADz0U65AAAABlBMVEWZmZkAAACDUBULAAAAFUlEQVR42q3BAQEAAACAkP6vdiKaAABIAAGDHiG2AAAAAElFTkSuQmCC);
+	background-repeat: no-repeat;
+	background-size: 0.4rem 0.4rem;
+	background-position: left 0.5em;
+	padding-left: 0.75em;
+}
+
+.module.set .listOps {
+	border-bottom: 1px dotted #999;
+	padding: 1.2rem .8rem;
+}
+
+.module.set .listOps > .listOp {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.module.set .listOps > .listOp > button {
+	border: .15rem solid #fff;
+	background-color: #fff;
+	font-weight: bold;
+	font-size: 1.2rem;
+	color: #004176;
+	padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+	text-transform: uppercase;
+}
+
+.module.set .listOps > .listOp.active > button {
+	border: .15rem solid #999;
+	color: #c64d0b;
+}
+

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../../test/vendor/underscore.js"></script>
+    <script type="text/javascript" src="../../intention.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes"><meta name="format-detection" content="telephone=no">
+    <style type="text/css">
+
+      body {
+      height:5000px;
+      font-family: monospace;
+      margin:0;
+      background:lavender;
+      }
+
+      #intro {
+      height:25px;
+      background:darkseagreen;
+      }
+
+      .fix #intro {
+      margin-top:25px;
+      }
+
+      nav {
+      height:25px;
+      background:seagreen;
+      }
+
+      .fix nav{
+      position: fixed;
+      top:0;
+      left:0;
+      z-index: 10;
+      width: 100%;
+      }
+
+      h1 {
+      white-space: nowrap;
+      font-weight: normal;
+      text-transform: uppercase;
+      text-align: center;
+      width: 300px;
+      margin:0 auto;
+      }
+
+
+      h2 {
+      position: fixed;
+      text-align: center;
+      top:50px;
+      right:50px;
+      font-size: 25px;
+      height:50px;
+      line-height: 50px;
+      width:50px;
+      background: yellow;
+      border-radius: 50%;
+      }
+
+      h2.one:after {
+      content:'|';
+      }
+
+      h2.two:after {
+      content:'/';
+      }
+
+      h2.three:after {
+      content:'-';
+      }
+
+      h2.four:after {
+      content:'\\';
+      }
+
+      h1:after {
+      content:'.';
+      clear:both;
+      height:0;
+      visibility: hidden;
+      display: block;
+      }
+
+      h1 span {
+      height:100px;
+      width:100px;
+      float:left;
+      line-height: 100px;
+      }
+
+      .a {
+      background:lime;
+      }
+      .b {
+      background:skyblue;
+      }
+      .c {
+      background: tomato;
+      }
+
+    </style>
+  </head>
+  <body>
+    <header intent in-beyond-class="fix"
+	    in-shallow-class="">
+      <div id="intro"></div>
+      <nav></nav>
+    </header>
+
+    <h1 intent in-mobile-class="mobile"
+	in-tablet-class="tablet"
+	in-standard-class="standard"
+	in-frequenter-class="frequenter"
+	in-returning-class="returning"
+	in-first-class="first"
+	>
+      <span intent in-base-class="a"
+	    in-base-append='h1'
+	    in-base-append='h1'>a</span>
+      <span intent in-base-class="b"
+	    in-base-append='h1'
+	    in-tablet-after='.c'>b</span>
+      <span intent in-base-class="c"
+	    in-base-append='h1'
+	    in-tablet-prepend='h1'>c</span>
+
+    </h1>
+
+    <h2 intent
+	in-f1-class="one"
+	in-f2-class="two"
+	in-f3-class="three"
+	in-f4-class="four"></h2>
+
+  </body>
+  <script src="scrolldepth.js">
+
+                     </script>
+</html>

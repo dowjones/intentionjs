@@ -1,0 +1,7 @@
+body {
+	background-color:yellow;
+}
+
+body:after{
+	content:"Tablet CSS Loaded";
+}
