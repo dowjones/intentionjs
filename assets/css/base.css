@@ -80,6 +80,11 @@ p + div.highlight,
 div.highlight + p {
   margin-top: 10px;
 }
+.highlight + .highlight,
+.highlight + pre,
+pre + .highlight {
+  margin-top: 20px;
+}
 p + pre,
 pre + p {
   margin-top: 10px;
@@ -387,6 +392,7 @@ header.hdtv.pseudomobile li {
   padding: 6px;
   border: 1px double #d7dcdb;
   box-sizing: border-box;
+  font-size: 14px;
   color: #bac6cc;
   background: #182c33;
   white-space: pre;
@@ -401,7 +407,10 @@ header.hdtv.pseudomobile li {
   margin: 0;
   white-space: pre-wrap;
 }
-#content .highlight .comment {
+#content .special .highlight pre code {
+  color: #325332;
+}
+#content .special .highlight pre code .comment {
   color: #6fa86f;
 }
 #content .jump {
@@ -766,8 +775,8 @@ header.hdtv.pseudomobile li {
   display: inline-block;
   cursor: pointer;
 }
-#content #topNav ul#sections a,
-#content #topNav ul#subsections a {
+#content #topNav ul#sections li,
+#content #topNav ul#subsections li {
   width: inherit;
   height: inherit;
   padding: 0 10px;
@@ -782,8 +791,12 @@ header.hdtv.pseudomobile li {
   -o-transition: top 300ms;
   transition: top 300ms;
 }
-#content #topNav ul#sections a:hover,
-#content #topNav ul#subsections a:hover {
+#content #topNav ul#sections li a,
+#content #topNav ul#subsections li a {
+  display: block;
+}
+#content #topNav ul#sections li:hover,
+#content #topNav ul#subsections li:hover {
   background: #38748e;
 }
 #content #topNav ul#sections .cover,

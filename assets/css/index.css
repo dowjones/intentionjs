@@ -316,18 +316,22 @@ body > .try.hdtv #devices .cancel {
 #content.docsLite article {
   padding-top: 30px;
 }
-#content.docsLite article.highlight {
+#content.docsLite article.special {
   background: #7fb27f url('../../images/mezz.png') repeat;
   border-top: 13px solid #91bc91;
   color: #0c300c;
   z-index: 3;
 }
-#content.docsLite article.highlight pre {
+#content.docsLite article.special pre {
   background: #afcfaf;
   color: #325332;
   border: 3px solid #589358;
 }
-#content.docsLite article:not(.highlight) + article:not(.highlight) {
+#content.docsLite article.special .hightlight pre code {
+  border: 0 none;
+  background: transparent;
+}
+#content.docsLite article:not(.special) + article:not(.special) {
   border-top: 1px dashed #38748e;
 }
 #content.docsLite.standard article:not(.thirds) > section:nth-of-type(3n):last-of-type,
@@ -376,13 +380,13 @@ body > .try.hdtv #devices .cancel {
   padding: 30px 0 20px 0;
   width: auto;
 }
-#content.docsLite.standard article.highlight,
-#content.hdtv article.highlight {
+#content.docsLite.standard article.special,
+#content.hdtv article.special {
   width: 100%;
   margin: 20px 0 20px 0;
 }
-#content.docsLite.standard article.highlight .inner,
-#content.hdtv article.highlight .inner {
+#content.docsLite.standard article.special .inner,
+#content.hdtv article.special .inner {
   width: 780px;
   padding: 0;
   margin: auto;
@@ -480,26 +484,26 @@ body > .try.hdtv #devices .cancel {
   margin-top: 20px;
   padding-left: 0;
 }
-#content.docsLite.tablet article.highlight .inner,
-#content.docsLite.smalltablet article.highlight .inner,
-#content.docsLite.mobile article.highlight .inner,
-#content.docsLite.standard.pseudotablet article.highlight .inner,
-#content.docsLite.standard.pseudosmalltablet article.highlight .inner,
-#content.docsLite.standard.pseudomobile article.highlight .inner,
-#content.docsLite.hdtv.pseudotablet article.highlight .inner,
-#content.docsLite.hdtv.pseudosmalltablet article.highlight .inner,
-#content.docsLite.hdtv.pseudomobile article.highlight .inner {
+#content.docsLite.tablet article.special .inner,
+#content.docsLite.smalltablet article.special .inner,
+#content.docsLite.mobile article.special .inner,
+#content.docsLite.standard.pseudotablet article.special .inner,
+#content.docsLite.standard.pseudosmalltablet article.special .inner,
+#content.docsLite.standard.pseudomobile article.special .inner,
+#content.docsLite.hdtv.pseudotablet article.special .inner,
+#content.docsLite.hdtv.pseudosmalltablet article.special .inner,
+#content.docsLite.hdtv.pseudomobile article.special .inner {
   width: auto;
 }
-#content.docsLite.tablet article.highlight pre,
-#content.docsLite.smalltablet article.highlight pre,
-#content.docsLite.mobile article.highlight pre,
-#content.docsLite.standard.pseudotablet article.highlight pre,
-#content.docsLite.standard.pseudosmalltablet article.highlight pre,
-#content.docsLite.standard.pseudomobile article.highlight pre,
-#content.docsLite.hdtv.pseudotablet article.highlight pre,
-#content.docsLite.hdtv.pseudosmalltablet article.highlight pre,
-#content.docsLite.hdtv.pseudomobile article.highlight pre {
+#content.docsLite.tablet article.special pre,
+#content.docsLite.smalltablet article.special pre,
+#content.docsLite.mobile article.special pre,
+#content.docsLite.standard.pseudotablet article.special pre,
+#content.docsLite.standard.pseudosmalltablet article.special pre,
+#content.docsLite.standard.pseudomobile article.special pre,
+#content.docsLite.hdtv.pseudotablet article.special pre,
+#content.docsLite.hdtv.pseudosmalltablet article.special pre,
+#content.docsLite.hdtv.pseudomobile article.special pre {
   border-left: none;
   border-right: none;
 }
@@ -534,10 +538,10 @@ body > .try.hdtv #devices .cancel {
 .no-multiplebgs #content.docsLite article + article {
   border-top: 1px dashed #bac6cc;
 }
-.no-multiplebgs #content.docsLite article.highlight {
+.no-multiplebgs #content.docsLite article.special {
   border-top: 13px solid #91bc91;
 }
-.no-multiplebgs #content.docsLite article.highlight + article {
+.no-multiplebgs #content.docsLite article.special + article {
   border-top: none;
 }
 .no-backgroundsize #all > .try #devices #pseudomobile {

@@ -9,6 +9,7 @@
 <script src="{{ include.dir }}/assets/js/underscore.js" type="text/javascript"></script>
 <script src="{{ include.dir }}/assets/js/intention.js" type="text/javascript"></script>
 <script src="{{ include.dir }}/assets/js/equalize.js" type="text/javascript"></script>
+<script src="assets/js/nav.js" type="text/javascript"></script>
 <script src="{{ include.dir }}/assets/js/base.js" type="text/javascript"></script>
 
 <link rel="stylesheet" type="text/css" href="{{ include.dir }}/assets/css/reset.css" />
