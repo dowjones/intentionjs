@@ -1,4 +1,4 @@
-var buildBlog = function(contentPos) {
+var buildBlog = function() {
 		var posts = [],
 			i = 1;
 		$(window).on('scroll', function() { //first setup listeners
@@ -7,8 +7,6 @@ var buildBlog = function(contentPos) {
 			else { var scroll = pageYOffset; }
 			
 			//Fixing the docsNav position
-			if(scroll >= contentPos) { $('#content nav').addClass('fixed'); }
-			else { $('#content nav').removeClass('fixed'); }
 		});
 		$.each($('#content article'), function() { 
 			var list = $(this).children('section.header').children('.tags').children('a'),

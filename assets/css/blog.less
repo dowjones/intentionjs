@@ -68,6 +68,9 @@
 }
 
 //---BLOG SPECIFIC STYLES
+#heading, #scrollWrapper>#heading, #all>#heading{
+   background:@blueGray url('../../images/headerbg.png') repeat-x top;
+}
 
 #content.blog{
 	h3 a{ color:@lightYellow; }
@@ -138,7 +141,7 @@
 	}
 	article{
 		clear:both;
-		h4{ font-size:25px; }
+		h4{ font-size:20px; }
 		h5{ 
 			font-size:20px;
 			font-weight:normal;
@@ -233,6 +236,7 @@
 //top side nav
 #topNav.tagNav{
 	background:transparent;
+	border-top:26px solid @blue;
 	border-bottom:6px solid @green;
 	a.example{ color:lighten(@green, 5%); }
 	a.release{ color:@orange; }
@@ -242,11 +246,12 @@
 #topNav.tagNav.standard, #topNav.tagNav.hdtv{
 	.inner{
 		width:@10col;
+		padding:@gutter 0;
 		margin:auto;
 	}
 }
 #topNav.tagNav.tablet, #topNav.tagNav.smalltablet, #topNav.tagNav.mobile{
-	.inner{ .noMarginWrapping; padding:0 @gutter/2; }
+	.inner{ .noMarginWrapping; padding:@gutter; }
 }
 
 //left side nav
