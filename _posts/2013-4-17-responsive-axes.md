@@ -3,7 +3,6 @@ layout: post
 title: Flexible Responsive Axes Changing HTML Based on Orientation, Width, Touch and Resolution
 tags:
 - release
-- example
 ---
 
 This release makes the html attributes a lot more flexible. In addition to a few API updates and performance improvements, I've, worked with the contributors and created an all around better system for interacting with *contexts* and *axes*. What I noticed was that users were making a lot of specifications in html that look like this:
@@ -50,8 +49,8 @@ Consider the following:
 var depth=intent.responsive({
   // all possible options specified
   ID: 'depth',
-	contexts:[{name:'shallow', offset:100}, 
-		{name:'deep', offset:1000}, 
+	contexts:[{name:'shallow', offset:100},
+		{name:'deep', offset:1000},
 		{name:'reallyDeep', offset:Infinity}],
 	measure: function(){
 		return document.pageYOffset;
@@ -68,10 +67,10 @@ The above example is an axis that is designed to respond on the window scroll ev
 console.log(depth);
 // shows:
 // {
-//   ID:'depth', 
+//   ID:'depth',
 //   current:null,
-//   contexts:[{name:'shallow', offset:100}, 
-//     {name:'deep', offset:1000}, 
+//   contexts:[{name:'shallow', offset:100},
+//     {name:'deep', offset:1000},
 //     {name:'reallyDeep', offset:Infinity}],
 //   respond: function
 // }
