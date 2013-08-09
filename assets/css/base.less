@@ -151,7 +151,11 @@ a, a:visited{ color: @link; text-decoration:none; }
 header{
 	width:100%;
 	background:@blueGray;
-	h1 a, h1 a:visited{ font-size:30px; font-weight:normal; color:@darkBlue; }
+	h1{
+	   font-size:30px;
+	   font-weight:normal;
+	   a, a:visited{ color:@darkBlue; }
+	}
 	nav{
 		background:@offWhite;
 		border-bottom: 13px solid @orange;
@@ -195,13 +199,13 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 	h1, nav{
 		.mobileWrapping;
 	}
-	h1{ font-size:40px; padding:@gutter/2; }
+	h1{ padding:@gutter/2; }
 	nav{ font-size:13px; }
 	li{ height:15px;}
 }
 
 //Heading: Usually a page's title. On index, it's the Try It bar.
-#all>#heading{
+#scrollWrapper>#heading, #all>#heading{
 	width:100%;
 	background:@blueGray;
 	.inner{
@@ -215,12 +219,16 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 	h2{ padding:0; }
 	h2 a{ color:@text; }
 }
+#scrollWrapper>#heading.standard, #scrollWrapper>#heading.landscape, #scrollWrapper>#heading.hdtv,
 #all>#heading.standard, #all>#heading.landscape, #all>#heading.hdtv{
 	.inner{
 		width:@10col;
 		margin:auto;
 	}
 }
+#scrollWrapper>#heading.tablet, #scrollWrapper>#heading.smalltablet, #scrollWrapper>#heading.mobile, 
+#scrollWrapper>#heading.standard.pseudotablet, #scrollWrapper>#heading.standard.pseudosmalltablet, #scrollWrapper>#heading.standard.pseudomobile,
+#scrollWrapper>#heading.hdtv.pseudotablet, #scrollWrapper>#heading.hdtv.pseudosmalltablet, #scrollWrapper>#heading.hdtv.pseudomobile,
 #all>#heading.tablet, #all>#heading.smalltablet, #all>#heading.mobile, 
 #all>#heading.standard.pseudotablet, #all>#heading.standard.pseudosmalltablet, #all>#heading.standard.pseudomobile,
 #all>#heading.hdtv.pseudotablet, #all>#heading.hdtv.pseudosmalltablet, #all>#heading.hdtv.pseudomobile{
@@ -350,6 +358,7 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 	}
 }
 
+
 //Left-side navigation
 #leftNav{
 	width:200px;
@@ -441,82 +450,99 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 }
 
 //Content-top nav
-#topNav{ //in mobile, smalltablet, and tablet, intention moves a <nav> to this selector
-	width:auto;
-	margin:auto;
-	padding:@gutter @gutter/2;
-	background-color: @green;
-	background-image: url('../../images/shadow-lr-down.png'), url('../../images/mezz.png');
-	background-repeat: repeat-x, repeat;
-	background-position: top, top;
-	border-top:13px solid @blue;
-	border-bottom:10px solid @green;
-	ol{ .columns(2); }
-	h6{ display:none; }
-	a{ color:@lightYellow; }
-	li{ margin-left:@gutter; list-style-type: decimal; }
-	li+li{ margin-top:@gutter; }
+#content #topNav{
+   width:100%;
+   margin:auto;
+   background-color: @green;
+   background-image: url('../../images/mezz.png');
+   border-top:13px solid @blue;
+   z-index:20;
+   h6{ display:none; }
+   a{ color:@lightYellow; }
+   .inner{ box-sizing:border-box; }
+   
+	// Section navigation
+	ul#sections, ul#subsections{
+		width:220px;
+		height:40px;
+		padding:0;
+		line-height:40px;
+		font-size:17px;
+		text-transform:uppercase;
+		letter-spacing:1px;
+		z-index:20;
+		position:relative;
+		display:inline-block;
+		cursor:pointer;
+		a{
+		   width:inherit;
+		   height:inherit;
+			padding:0 10px;
+			box-sizing:border-box;
+			-moz-box-sizing:border-box;
+			-ms-box-sizing:border-box;
+			position:absolute;
+			top:0;
+			background:@darkBlue;
+			-webkit-transition: top 300ms;
+			-moz-transition: top 300ms;
+			-o-transition: top 300ms;
+			transition: top 300ms;
+		}
+		a:hover{
+			background:@blue;
+		}
+		.cover{
+			z-index:100 !important;
+		}
+	}
+	ul#subsections{
+		margin-left:@gutter;
+	}
+	ul.moving{
+		li:hover{
+			background:@darkBlue;
+		}
+	}
+	// Up and Down nav
+	ul#prevnext{
+		width:124px;
+		height:40px;
+		padding:0;
+		float:right;
+		li{
+			width:60px;
+			height:inherit;
+			display:inline-block;
+			background:@darkBlue;
+			padding:0 10px;
+			box-sizing:border-box;
+			-moz-box-sizing:border-box;
+			-ms-box-sizing:border-box;
+			line-height:40px;
+			text-align:center;
+			cursor:pointer;
+		}
+		li:hover{
+		   background:@blue;
+		}
+	}
 }
 #topNav.standard, #topNav.hdtv{
-//	background-image: url('../../images/shadow-lr-up.png'), url('../../images/shadow-lr-down.png'), url('../../images/mezz.png');
-//	background-repeat: repeat-x, repeat-x, repeat;
-//	background-position: bottom, top, top;
-	.inner{ width:@10col; margin:auto; }
+	.inner{
+		width:@10col; margin:auto;
+		padding:5px @gutter/2 1px @gutter/2; //text in line with docstext
+	}
 }
 #topNav.tablet, #topNav.smalltablet, #topNav.mobile{
-	.inner{ width:auto; padding:0 @gutter/2; margin:auto; }
+	.inner{ width:auto; padding:5px 5px 1px 5px; margin:auto; }
 }
 #topNav.pseudotablet, #topNav.pseudosmalltablet, #topNav.pseudomobile{
 	display:none;
 }
-#topNav.hdtv ol, #topNav.standard ol, #topNav.tablet ol{ .columns(4); }
-#topNav.smalltablet ol, #topNav.mobile ol{ .columns(2) }
-#prevnext{
-	width:100%;
-	height:auto;
-	border:none;
-	padding:0;
-	.inner{ padding:0 }
-	.prev, .next{
-		width:10%;
-		background:@green;
-		color:@mediumBlue;
-		text-align:center;
-		font-weight:bold;
-		padding:3px;
-		box-padding:border-box;
-		cursor:pointer;
-	}
-	.prev{
-		float:left;
-		margin-left:@gutter/2;
-	}
-	.next{
-		float:right;
-		margin-right:@gutter/2;
-	}
-}
-#prevnext.fixed{
+#topNav.sticknav{
 	position:fixed;
 	top:0;
-	z-index:7;
-	border-top:5px solid @green;
-}
-#prevnext.standard, #prenext.hdtv{
-	.inner{
-		width:@10col;
-		margin:auto;
-		padding:0;
-	}
-}
-#prevnext.tablet, #prevnext.smalltablet, #prevnext.mobile{
-	.inner{
-		width:100%;
-		padding:0;
-	}
-}
-#prevnext.pseudotablet, #prevnext.pseudosmalltablet, #prevnext.pseudomobile{
-	display:none;
 }
 
 footer{
@@ -553,7 +579,7 @@ footer.mobile, footer.pseudomobile, footer.smalltablet, footer.pseudosmalltablet
 
 //ie8 fixes and fallbacks
 .no-multiplebgs{
-	#all>#heading{
+	#scrollWrapper>#heading{
 		.inner{
 			background-image: url('../../images/tryitbg.png'); //IE8 fallback
 			background-repeat:repeat-x; //IE8 fallback

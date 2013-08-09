@@ -1,4 +1,4 @@
-var buildHome = function(contentPos, D) {
+var buildHome = function(D) {
 	//Initialization functions
 	function in_init(contexts, callback){
 	  var dfds = [];
@@ -15,6 +15,7 @@ var buildHome = function(contentPos, D) {
 	stdInit.done(function() {
 		imageSetup();
 		equalizeAll('#docs', 'article.equalize', 'section');
+		contentPos = $('#content').offset().top + 12;
 	});
 	if(intent.is('standard') || intent.is('hdtv')) { stdInit.resolve(); }
 	else { 
@@ -24,12 +25,15 @@ var buildHome = function(contentPos, D) {
 	in_init(['tablet'], function(){
 		equalizeAll('#smallCode', 'pre');
 		writeOutput(intent.axes.width.current);
+		contentPos = $('#content').offset().top + 12;
 	});
 	in_init(['smalltablet'], function(){
 		writeOutput(intent.axes.width.current);
+		contentPos = $('#content').offset().top + 12;
 	});
 	in_init(['mobile'], function() {
 		writeOutput(intent.axes.width.current);
+		contentPos = $('#content').offset().top + 12;
 	});
 	
 	//Basic var setup
@@ -56,13 +60,21 @@ var buildHome = function(contentPos, D) {
         lastExec = d;
       };
     },
-    makeSticky = function() {
-    	if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
-    	else { var scroll = pageYOffset; }
-    	//Fixing the nav
-    	if(scroll >= contentPos) { $('#content nav').addClass('fixed').parent().css('padding-top', '30px'); }
-    	else { $('#content nav').removeClass('fixed').parent().css('padding-top', ''); }
-    },
+    stickdepth = intent.responsive({
+    	ID: 'stickdepth',
+    	contexts: [
+    		{name:'sticknav', min:contentPos},
+    		{name:'start', min:0}
+    	],
+    	matcher: function(test, context){
+	    	return test >= context.min;
+    	},
+    	measure: function(arg){
+    		if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
+    		else { var scroll = pageYOffset; }
+    		return scroll;
+    	}
+	}),
 	container_width = intent.responsive({
 		ID: 'container',
 		contexts: [
@@ -123,11 +135,14 @@ var buildHome = function(contentPos, D) {
 				'height':$('#all').width() + 'px'
 			});
 		} else if(device === undefined) {
+		   var percent = $('#all').scrollTop() / $('#heightWrapper').height();
 			intent.axes.container.respond('pseudostandard');
 			$('#all').css({
-				'width':'',
+            'width':'',
 				'height':''
 			}); //remove inline styles created by toggleOrientation
+			var docHeight = $('#heightWrapper').height();
+			$(window).scrollTop((percent*docHeight) - 100);
 		} else {
 			intent.axes.container.respond(device);
 			$('#all')
@@ -140,52 +155,30 @@ var buildHome = function(contentPos, D) {
 	$.each(articles, function() { //Create back to top links ---- This must go before the title positions are found.
 		var markup = $('<div class="jump"><a>&uarr; Back to top</a></div>');
 		$(this).append(markup).addClass('clearFix');
-		markup.click(function() {
-			$('html, body').animate({ scrollTop: $('#topNav').offset().top}, 1000);
+	 	  markup.click(function() {
+			$('html, body').animate({ scrollTop: contentPos+3}, 1000);
 		});
 	});
 	
 	//For docs nav
 	var titleCtx = [],
-		subCtx = [],
-		currentPos,
-		articleCt = $('#content article').not('.highlight').length,
+		curPos,
+		articleCt = $('#docs').children('article').not('.highlight').length,
 		i = 1;
 	$.each($('#docs').children('article').not('.highlight'), function() { //then create the nav 
 		$(this).attr('id', 't'+i); //#targeti
 		if($(this).children('h2').attr('alt')) { var text = $(this).children('h2').attr('alt'); }
 		else{ var text = $(this).children('h2').text(); }
-		var markup = '<li id="a'+i+'" intent in-width in-t'+i+'-class="active"><div class="label"><a href="#t'+i+'">'+text+'</a></div><div class="circle"></div></li>', //#anchori
-			pos = $(this).offset().top - 20, //minus 20 for padding
+		var markup = '<a href="#t'+i+'" id="a'+i+'" >'+text+'</a>', //#anchori
+			pos = $(this).offset().top - 50, //minus 20 for padding
 			ctx = {name:'t'+i, val:pos},
 			sub = $(this).children('article'),
 			s = 1;
 		titleCtx.push(ctx);
-		$('#leftNav ol, #topNav ol').append(markup);
-		intent.add($('#leftNav #a'+i));
-		
-		if(sub.length>0) {
-			$('#leftNav li#a'+i).append('<ul/>');
-			$.each(sub, function() { 
-				if($(this).children('h3').attr('alt')) { var text = $(this).children('h3').attr('alt'); }
-				else { var text = $(this).children('h3').text(); }
-				var pos = $(this).offset().top - 20, //minus 20 for padding
-					subTarget = 't'+i+'s'+s,
-					subAnchor = 'a'+i+'s'+s,
-					markup = '<li id="'+subAnchor+'" intent in-base-class="inactive" in-'+subTarget+'-class="active"><a href="#'+subTarget+'">'+text+'</a></li>',
-					ctx = {name:subTarget, val:pos};
-				subCtx.push(ctx);
-				$(this).attr('id', subTarget);
-				$('#leftNav li#a'+i+' ul').append(markup);
-				intent.add($('#'+subAnchor));
-				s++;
-			});
-		}
-		
+		$('ul#sections').append(markup);
 		i++;
 	});
 	titleCtx.reverse();
-	subCtx.reverse(); //Maximum -> minimum
 	
 	var titleDepth = intent.responsive({
 		ID: 'titleDepth',
@@ -202,40 +195,41 @@ var buildHome = function(contentPos, D) {
 			else { var scroll = pageYOffset; }
 			return scroll;
 		}
-	}),
-	subDepth = intent.responsive({
-		ID: 'subdepth',
-		contexts: subCtx,
-		matcher: function(test, context){
-			return test >= context.val;
-		},
-		measure: function(arg){
-			if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
-			else { var scroll = window.pageYOffset; }
-			return scroll;
-		}
 	});
 	titleDepth.respond();
-	subDepth.respond();
 	$(window).on('scroll', function(){
 		throttle(titleDepth.respond(), 50);
-		subDepth.respond();
-		throttle(makeSticky(), 100);
+		throttle(stickdepth.respond(), 50);
 	});
 	
-	$('#prevnext .inner div').click(function() {
-		var dir = $(this).attr('class');
-		if( ($(this).attr('class') == 'next') && (curPos < articleCt) ){ curPos++; }
-		else if(($(this).attr('class') == 'prev') && (curPos > 1)){ curPos--; }
+	$('#prevnext li').click(function() {
+		console.log('clicked. old curPos', curPos);
+		console.log('totalArticles', articleCt);
+		if( ($(this).attr('id') == 'next') && (curPos < articleCt) ){ curPos++; }
+		else if(($(this).attr('id') == 'prev') && (curPos > 1)){ curPos--; }
 		else { return false }
 		
-		var target = $('#t'+curPos).offset().top;
+		console.log('new curPos', curPos);
+		var target = $('#t'+curPos).offset().top - 49;
 		$('html, body').animate({ scrollTop: target}, 1000);
 	});
+	$('ul#sections').add('ul#subsections').menuDeck();
 	
-	
-	//Consolidated context switch functions 
 	intent
+		.on('titleDepth', function() {
+			curPos = intent.axes.titleDepth.current.slice(1);
+			console.log('curpos', curPos);
+			$('ul#sections')
+				.children('.cover').removeClass('cover')
+				.end() //in case no .cover is found
+				.children('a:nth-of-type('+curPos+')').addClass('cover');
+		})
+		.on('sticknav', function(){
+			$('#docs').css('padding-top', $('#topNav').outerHeight());
+		})
+		.on('start', function() {
+			$('#docs').css('padding-top', '');
+		})
 		.on('width', function() {
 			var device = intent.axes.width.current;
 			writeOutput(device);
@@ -246,10 +240,15 @@ var buildHome = function(contentPos, D) {
 				unequalize('.docsLite .equalize', 'section');
 				equalizeAll('#smallCode', 'pre');
 			} else {
-				equalizeAll('#docs', '.equalize', 'section');
+				equalizeAll('#docs', '.equalize', 'section');   
 			}
 			//When the context switches, reset the targets
-			contentPos = $('#content').position().top + 3;
+			window.setTimeout(function(){
+				contentPos = $('#content').offset().top;
+				intent.axes.stickdepth.contexts[0]['min'] = contentPos;
+				stickdepth.respond();
+				console.log('rewritten contentPos', contentPos);
+			}, 500);
 		})
 		.on('container', function() {
 			var device = intent.axes.container.current,
@@ -264,7 +263,5 @@ var buildHome = function(contentPos, D) {
 			} else {
 				equalizeAll('.docsLite', '.equalize', 'section');
 			}
-			//When the context switches, reset the targets
-			contentPos = $('#content').position().top + 3;
 		});
 };

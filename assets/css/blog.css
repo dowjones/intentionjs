@@ -21,6 +21,11 @@
   padding: 0 20px 0 20px;
   box-sizing: border-box;
 }
+#heading,
+#scrollWrapper > #heading,
+#all > #heading {
+  background: #bac6cc url('../../images/headerbg.png') repeat-x top;
+}
 #content.blog h3 a {
   color: #f9efd4;
 }
@@ -305,6 +310,7 @@
 }
 #topNav.tagNav {
   background: transparent;
+  border-top: 26px solid #38748e;
   border-bottom: 6px solid #589358;
 }
 #topNav.tagNav a.example {
@@ -322,6 +328,7 @@
 #topNav.tagNav.standard .inner,
 #topNav.tagNav.hdtv .inner {
   width: 780px;
+  padding: 20px 0;
   margin: auto;
 }
 #topNav.tagNav.tablet .inner,
@@ -330,7 +337,7 @@
   width: auto;
   padding: 0 20px 0 20px;
   box-sizing: border-box;
-  padding: 0 10px;
+  padding: 20px;
 }
 #content.blog #leftNav.blogNav a {
   color: white;

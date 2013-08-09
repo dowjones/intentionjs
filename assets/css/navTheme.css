@@ -1,0 +1,37 @@
+/*
+
+  Plugin: nav_dev
+  Theme: default
+  Default theme for nav_deck plugin
+
+*/
+
+.nav_deck{
+  width: 220px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 17px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: white;
+}
+
+.nav_deck li,
+.nav_deck.moving li:hover{
+  padding: 0 10px;
+  background-color: lightgray;
+}
+
+.nav_deck li:hover{
+  background: #bcbcbc;
+}
+
+.nav_deck .cover,
+.nav_deck.moving .cover:hover{
+  background-color: black;
+  color: gainsboro;
+}
+
+.nav_deck .cover:hover{
+  background: #444;
+}
