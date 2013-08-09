@@ -1,0 +1,24 @@
+body {
+	background-color:gainsboro;
+}
+
+div[class*="span"] {
+	background-color:white;
+	border:1px solid black;
+	border-radius: 5px 5px;
+	padding:10px;
+
+}
+
+
+.span12:before{
+	content:"Fluid 12";
+}
+
+.span6:before{
+	content:"Fluid 6";
+}
+
+.span12~.span12 {
+	margin:0;
+}

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="../../test/vendor/underscore.js"></script>
+	<script type="text/javascript" src="../../intention.js"></script>
+ 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes"><meta name="format-detection" content="telephone=no">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+
+	<style type="text/css">
+		body {
+			margin:0;
+		}
+
+		.o {
+			background-color:cadetblue;
+			color: gainsboro;
+			width: 100%;
+			font-size: 2em !important;
+			/*Garibaldi Damselfish*/
+		}
+
+		.a {
+			background-image:url(img/S1.JPG);
+			color: tomato;
+			width: 100%;
+			/*Garibaldi Damselfish*/
+		}
+
+
+
+		.b {
+			background-image:url(img/S2.JPG);
+			color: springgreen;
+			width: 100%;
+			/*GloFish*/
+		}
+
+
+		.c {
+			background-image:url(img/S3.JPG);
+			color: yellow;
+			width: 100%;
+			/*Cherub Fish*/
+			
+		}
+
+		 .d{
+			background-image:url(img/S4.JPG);
+			color: bisque;
+			width: 100%;
+			/*Angel Fish*/
+			
+		}
+
+		.e{
+			background-image:url(img/S5.JPG);
+			color: salmon;
+			width: 100%;
+			/*Gold Fish*/
+			
+		}
+
+		#blocks_wrapper {
+			position: absolute;
+			top:0;
+			left:0;
+			height:100%;
+			width:100%;
+			overflow: hidden;
+		}
+
+		#blocks {
+			position:absolute;
+			top:0;
+			left:0;
+			height:100%;
+			width:100%;
+			/*overflow: hidden;*/
+		}
+
+
+		#blocks.f0 {
+			transform:translate3d(0, 0, 0);
+			-moz-transform:translate3d(0, 0, 0);
+			-webkit-transform:translate3d(0, 0, 0);
+
+			transition:all 300ms ease-in-out;
+			-moz-transition: all 300ms ease-in-out;
+			-webkit-transition: all 300ms ease-in-out;
+		}
+
+		#blocks.f1 {
+			transform:translate3d(0, -100%, 0);
+			-moz-transform:translate3d(0, -100%, 0);
+			-webkit-transform:translate3d(0, -100%, 0);
+
+			transition:all 300ms ease-in-out;
+			-moz-transition: all 300ms ease-in-out;
+			-webkit-transition: all 300ms ease-in-out;
+		}
+		#blocks.f2 {
+			transform:translate3d(0, -200%, 0);
+			-moz-transform:translate3d(0, -200%, 0);
+			-webkit-transform:translate3d(0, -200%, 0);
+
+			transition:all 300ms ease-in-out;
+			-moz-transition: all 300ms ease-in-out;
+			-webkit-transition: all 300ms ease-in-out;
+		}
+		#blocks.f3 {
+			transform:translate3d(0, -300%, 0);
+			-moz-transform:translate3d(0, -300%, 0);
+			-webkit-transform:translate3d(0, -300%, 0);
+
+			transition:all 300ms ease-in-out;
+			-moz-transition: all 300ms ease-in-out;
+			-webkit-transition: all 300ms ease-in-out;
+		}
+		#blocks.f4 {
+			transform:translate3d(0, -400%, 0);
+			-moz-transform:translate3d(0, -400%, 0);
+			-webkit-transform:translate3d(0, -400%, 0);
+
+			transition:all 300ms ease-in-out;
+			-moz-transition: all 300ms ease-in-out;
+			-webkit-transition: all 300ms ease-in-out;
+		}
+		#blocks.f5 {
+			transform:translate3d(0, -500%, 0);
+			-moz-transform:translate3d(0, -500%, 0);
+			-webkit-transform:translate3d(0, -500%, 0);
+
+			transition:all 300ms ease-in-out;
+			-moz-transition: all 300ms ease-in-out;
+			-webkit-transition: all 300ms ease-in-out;
+		}
+
+
+
+		.block {
+			width: 100%;
+			height:100%;
+			position: relative;
+			font-family: monospace;
+			font-size: 3em;
+			font-style: italic;
+		}
+
+		.circlesM {
+			position: absolute;
+			z-index: 3;
+			width:100%;
+			bottom:20px;
+		}
+
+		.circlesT {
+			position: absolute;
+			z-index: 3;
+			width:100%;
+			top:11px;
+		}
+
+
+
+		.circle1{
+			z-index: 3;
+			position: absolute;
+			top: 20px;
+			right: 20px;
+			 }
+
+		.Mcircle1{
+			float: left;
+			margin-left: 20px;
+			 }
+
+		.circle2{
+			z-index: 3;
+			position: absolute;
+			top: 80px;
+			right: 20px;
+			 }
+
+		.Mcircle2{
+			float: left;
+			margin-left: 20px;
+			 }
+		
+		.circle3{
+			z-index: 3;
+			position: absolute;
+			top: 140px;
+			right: 20px;
+			 }
+
+		.Mcircle3{
+			float: left;
+			margin-left: 20px;
+			 }
+
+		.circle4{
+			z-index: 3;
+			position: absolute;
+			top: 200px;
+			right: 20px;
+			 }
+
+		.Mcircle4{
+			float: left;
+			margin-left: 20px;
+			 }
+
+		.circle5{
+			z-index: 3;
+			position: absolute;
+			top: 260px;
+			right: 20px;
+			 }
+
+		.Mcircle5{
+			float: left;
+			margin-left: 20px;
+			 }	
+		
+		.circle{
+
+			width:40px;
+			height:40px;
+			border-radius:50px;
+			float:left;
+			line-height: 40px;
+			text-align:center;
+			font-family: monospace;
+			font-size:1.5em;
+			background:gainsboro;
+			color: cornflowerblue;
+		}
+
+		.circle p{
+			margin: auto;
+		}
+
+		.fish1 {
+			position: absolute;
+			top:70px;
+			right:50px;
+			background-image: url(img/fish1.png);
+			width: 100px;
+			height: 61px;
+			}	
+
+		.fish2 {
+			position: absolute;
+			top:120px;
+			left:20px;
+			background-image: url(img/fish2.png);
+			width: 100px;
+			height: 61px;}
+
+		.fish3 {
+			position: absolute;
+			top:210px;
+			right:100px;
+			background-image: url(img/fish3.png);
+			width: 100px;
+			height: 61px;
+			}
+			
+		.fish4 {
+			position: absolute;
+			top:240px;
+			right:40px;
+			background-image: url(img/fish4.png);
+			width: 100px;
+			height: 61px;
+			}
+			
+		.fish5 {
+			position: absolute;
+			bottom:70px;
+			left:50px;
+			background-image: url(img/fish5.png);
+			width: 100px;
+			height: 61px;
+			}				
+
+
+	</style>
+</head>
+<body>
+
+
+
+    <div id="circles"
+    	intent
+	    in-standard-class="circlesT"
+	    in-tablet-class="circlesT"
+	    in-mobile-class="circlesM">
+
+	    <div class="circle circle1"
+	    	intent
+		    in-standard-class="circle1"
+		    in-tablet-class="circle1"
+		    in-mobile-class="Mcircle1"><p>1</p></div>
+		
+		<div class="circle circle2"
+			intent
+		    in-standard-class="circle2"
+		    in-tablet-class="circle2"
+		    in-mobile-class="Mcircle2"><p>2</p></div>
+		
+		<div class="circle circle3"
+			intent
+		    in-standard-class="circle3"
+		    in-tablet-class="circle3"
+		    in-mobile-class="Mcircle3"><p>3</p></div>
+		
+		<div class="circle circle4"
+			intent
+		    in-standard-class="circle4"
+		    in-tablet-class="circle4"
+		    in-mobile-class="Mcircle4"><p>4</p></div>
+		
+		<div class="circle circle5"
+			intent
+		    in-standard-class="circle5"
+		    in-tablet-class="circle5"
+		    in-mobile-class="Mcircle5"><p>5</p></div>
+	</div>
+
+	<div id="blocks_wrapper">
+		<div id="blocks" class=""
+			intent
+			in-f0-class="f0"
+		    in-f1-class="f1"
+		    in-f2-class="f2"
+		    in-f3-class="f3"
+		    in-f4-class="f4"
+		    in-f5-class="f5">
+
+			<div class="block o">
+				How many fish can you tap at once?
+				<div id="FS"></div>
+			
+				<div class="fish1"
+					intent
+					in-f0-append="#FS"
+				    in-f1-append="#FS1"
+				    in-f2-append="#FS2"
+				    in-f3-append="#FS3"
+				    in-f4-append="#FS4"
+				    in-f5-append="#FS5">
+				</div>
+
+
+				<div class="fish2"
+					intent
+					in-f0-append="#FS"
+				    in-f1-append="#FS"
+				    in-f2-append="#FS2"
+				    in-f3-append="#FS3"
+				    in-f4-append="#FS4"
+				    in-f5-append="#FS5">
+				</div>
+
+				<div class="fish3"
+					intent
+					in-f0-append="#FS"
+				    in-f1-append="#FS"
+				    in-f2-append="#FS"
+				    in-f3-append="#FS3"
+				    in-f4-append="#FS4"
+				    in-f5-append="#FS5">
+				</div>
+				
+				<div class="fish4"
+					intent
+					in-f0-append="#FS"
+				    in-f1-append="#FS"
+				    in-f2-append="#FS"
+				    in-f3-append="#FS"
+				    in-f4-append="#FS4"
+				    in-f5-append="#FS5">
+				</div>
+				
+				<div class="fish5"
+					intent
+					in-f0-append="#FS"
+				    in-f1-append="#FS"
+				    in-f2-append="#FS"
+				    in-f3-append="#FS"
+				    in-f4-append="#FS"
+				    in-f5-append="#FS5">
+				</div>
+			</div>
+
+
+			<div class="block a">Garibaldi Damselfish
+			<div id="FS1"></div></div>
+			
+			<div class="block b">GloFish
+			<div id="FS2"></div></div>
+			
+			<div class="block c">Cherub Fish
+			<div id="FS3"></div></div>
+
+			<div class="block d">Koi Fish
+			<div id="FS4"></div></div>
+
+			<div class="block e">Gold Fish
+			<div id="FS5"></div></div>
+
+		</div>
+	</div>
+
+  <script>
+    (function($){
+
+    	var intent = new Intention,
+			resizeContexts = [
+				{name:'standard', min:769}, 
+		        {name:'tablet', min:521},
+		        {name:'mobile', min:0}],
+
+		    hResponder = intent.responsive(resizeContexts,
+		        // compare the return value of the callback to each context
+		        // return true for a match
+		        function(test, context){
+		          if(test>=context.min){
+		            return true;
+		          }
+		        },
+		        // callback, return value is passed to matcher()
+		        // to compare against current context
+		        function(e){
+		          return $(window).width();
+		    	});
+
+		baseResponder = intent.responsive([{name:'base'}])('base');
+		hResponder();
+		$(window).on('resize', hResponder);
+
+
+
+		//touch
+		
+			 var contact_axis = [
+			 	{name: 'f0', points: 0},
+		        {name: 'f1', points: 1},
+		        {name: 'f2', points: 2},
+		        {name: 'f3', points: 3},
+		        {name: 'f4', points: 4},
+		        {name: 'f5', points: 5}
+		    ];
+
+		var touch = intent.responsive(contact_axis,
+			function(measure, ctx){
+				return measure === ctx.points;
+				 console.log("touch");
+		    });
+
+		// touch(4)
+		intent.elements();
+
+		$(window).on('touchstart touchmove', function(e){
+			touch(e.originalEvent.touches.length);
+			e.preventDefault();
+		});
+		$(window).on('touchcancel touchend', function(e){
+			var touches = e.originalEvent.touches.length;
+			if(touches === 0) touches =0;
+			touch(touches);
+		});
+
+		$(function(){
+			setTimeout(function(){
+				window.scrollTo(0, 1);
+			}, 0);
+		});
+
+
+	      
+    })(jQuery)
+  </script>
+
+
+	
+</body>
+
+</html>	

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		body {
+			position: absolute;
+			height:100%;
+			width: 100%;
+			top:0;
+			left:0;
+			margin:0;
+		}
+
+		.panorama {
+			height:100%;
+			/*background:red;*/
+			position: relative;
+		}
+
+		.panorama img {
+			height:100%;
+			display: block;
+		}
+
+		#guy {
+			height:200px;
+			width: 200px;
+			position: fixed;
+			bottom:0;
+			left:50%;
+			margin-left:-100px;
+			/*background: yellow;*/
+			z-index: 2;
+			background-image: url(img/walking.png);
+			background-repeat: no-repeat;
+			transform-origin:100% 100%;
+			-webkit-transform-origin:100% 100%;
+			-moz-transform-origin:100% 100%;
+
+			transform:scale3d(2,2,2);
+			-webkit-transform:scale3d(2,2,2);
+			-moz-transform:scale3d(2,2,2);
+		}
+
+		#guy.step1.forwards {
+			background-position:0 0;
+		}
+		#guy.step2.forwards {
+			background-position:-200px 0;
+		}
+		#guy.step3.forwards {
+			background-position:-400px 0;
+		}
+		#guy.step4.forwards {
+			background-position:-600px 0;
+		}
+
+		#guy.step1.backwards {
+			background-position:0px -200px;
+		}
+		#guy.step2.backwards {
+			background-position:-200px -200px;
+		}
+		#guy.step3.backwards {
+			background-position:-400px -200px;
+		}
+		#guy.step4.backwards {
+			background-position:-600px -200px;
+		}
+
+		.grey {
+			width: 50px;
+			height: 50px;
+			background-color: grey;
+			float: left;
+		}
+
+		.pink {
+			width: 50px;
+			height: 50px;
+			background-color: pink;
+			float: left;
+			
+		}
+
+		.blue {
+			width: 50px;
+			height: 50px;
+			background-color: blue;
+			float: left;
+			
+		}
+
+		.black {
+			width: 50px;
+			height: 50px;
+			background-color: black;
+			float: left;
+			
+		}
+
+	
+
+
+	</style>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+	<script src="../../test/vendor/underscore.js"></script>
+	<script src="../../intention.js"></script>
+
+	<title>animation</title>
+
+</head>
+<body>
+	<div class="panorama">
+		<div id="guy" class="right"
+			intent
+			in-step1-class="step1"
+			in-step2-class="step2"
+			in-step3-class="step3"
+			in-step4-class="step4"
+
+			in-back-class="backwards"
+			in-forth-class="forwards"
+			></div>
+
+			
+
+		<img src="img/Brooklyn_Panorama_2_small.jpg" />
+	</div>
+
+		
+	<script>
+		var intent = new Intention;
+		var walking = intent.responsive([
+	    	{name:'step1', div:0},
+	    	{name:'step2', div:1},
+	    	{name:'step3', div:2},
+	    	{name:'step4', div:3}],
+	    	// matcher
+	    	function(measure, ctx){
+	    		return (Math.floor(measure/100) % 4) === ctx.div ? true : false;
+	    	},
+	    	// measure
+	    	function(){
+	    		return window.pageXOffset ? window.pageXOffset : window.document.documentElement.scrollLeft;
+	    	});
+
+		var lastXOffset = 0,
+			flip = intent.responsive([{name:'back', val:0}, 
+					{name:'forth', val:1/0}], 
+					function(measure, ctx){
+						if((measure - lastXOffset) < ctx.val) {
+							lastXOffset = measure;
+							return true;
+						}
+						lastXOffset = measure;
+						return false;
+					}, function(){
+						return window.pageXOffset ? window.pageXOffset : window.document.documentElement.scrollLeft;
+					});
+
+		walking();
+		flip();
+		
+	intent.elements(document);
+
+		$(window).on('scroll', walking);
+		$(window).on('scroll', flip);
+
+	intent.on('step1', function(){
+			
+			console.log('step1');
+			
+			var $newdiv1 = $('<div class="grey"><div/>');
+			$('body').prepend($newdiv1);
+		});
+
+	intent.on('step2', function(){
+			console.log('step2');
+			
+			var $newdiv2 = $('<div class="pink"><div/>');
+			$('body').prepend($newdiv2);
+		});
+
+	intent.on('step3', function(){
+			console.log('step3');
+			
+			var $newdiv3 = $('<div class="blue"><div/>');
+			$('body').prepend($newdiv3);
+		});
+
+	intent.on('step4', function(){
+			console.log('step4');
+			
+			var $newdiv4 = $('<div class="black"><div/>');
+			$('body').prepend($newdiv4);
+		});
+		
+		
+	</script>
+</body>
+</html>

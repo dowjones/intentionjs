@@ -4,7 +4,7 @@ title: Weird Walking Man Animation
 tags: example
 ---
 
-### [Animation](/examples/animation)
+### [See demo](/examples/animation)
 
 Animation illustrates non-traditional uses of contexts. An animated character walks back and forth with the scroll position, cycling through 4 possibilities.
 
