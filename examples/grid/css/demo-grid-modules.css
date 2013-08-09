@@ -1,0 +1,32 @@
+.ux.theme .module > h2 {
+    font-size:2em;
+    font-weight:bold;
+}
+
+.ux.theme .module.orange {
+    background-color:rgba(255,142,0,.2);
+}
+
+.ux.theme .module.green {
+    background-color:rgba(49,142,0,.2);
+}
+
+.ux.theme .module.pink {
+    background-color:rgba(255,142,188,.2);
+}
+
+.ux.theme .module.blue {
+    background-color:rgba(0,142,188,.2);
+}
+
+.ux.theme .module.slimAd {
+	min-height:50px;
+}
+
+.ux.theme .module.wideAd {
+	min-height:100px;
+}
+
+.ux.theme .module.squareAd {
+	min-height:300px;
+}

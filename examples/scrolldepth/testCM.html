@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="../../test/vendor/underscore.js"></script>
+	<script type="text/javascript" src="../../intention.js"></script>
+ 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes"><meta name="format-detection" content="telephone=no">
+	<style type="text/css">
+
+		body {
+			height:5000px;
+			font-family: monospace;
+			margin:0;
+			background:url(moire.png);
+			width: 1668px;
+			height: 1445px;
+		}
+
+		#intro {
+			height:25px;
+			background:darkseagreen;
+		}
+
+		.fix #intro {
+			margin-top:25px;
+		}
+
+		nav {
+			height:25px;
+			background:seagreen;
+		}
+
+		.fix nav{
+			position: fixed;
+			top:0;
+			left:0;
+			z-index: 10;
+			width: 100%;
+		}
+
+		.fix-o #intro {
+			height:25px;
+			background:orange;
+		}
+
+		.fix-o #intro {
+			margin-top:25px;
+		}
+
+		.fix-o nav {
+			height:25px;
+			background:darkorange;
+		}
+
+		.fix-o nav{
+			position: fixed;
+			top:0;
+			left:0;
+			z-index: 10;
+			width: 100%;
+		}
+
+		.fix-r #intro {
+			height:25px;
+			background:LightCoral;
+		}
+
+		.fix-r #intro {
+			margin-top:25px;
+		}
+
+		.fix-r nav {
+			height:25px;
+			background:IndianRed;
+		}
+
+		.fix-r nav{
+			position: fixed;
+			top:0;
+			left:0;
+			z-index: 10;
+			width: 100%;
+		}
+
+		h1 {
+			white-space: nowrap;
+			font-weight: normal;
+			text-transform: uppercase;
+			text-align: center;
+			width: 300px;
+			margin:0 auto;
+		}
+
+
+		h2 {
+			position: fixed;
+			text-align: center;
+			top:50px;
+			right:50px;
+			font-size: 25px;
+			height:50px;
+			line-height: 50px;
+			width:50px;
+			background: yellow;
+			border-radius: 50%;
+		}
+
+		h2.one:after {
+			content:'|';
+		}
+
+		h2.two:after {
+			content:'/';
+		}
+
+		h2.three:after {
+			content:'-';
+		}
+
+		h2.four:after {
+			content:'\\';
+		}
+
+		h1:after {
+			content:'.';
+			clear:both;
+			height:0;
+			visibility: hidden;
+			display: block;
+		}
+
+		h1 span {
+			height:100px;
+			width:100px;
+			float:left;
+			line-height: 100px;
+		}
+
+		.a {
+			background:lime;
+		}
+		.b {
+			background:skyblue;
+		}
+		.c {
+			background: tomato;
+		}
+
+		.s {
+			width: 183px;
+			height: 600px;
+			margin: auto;
+			background-image: url(standard.jpg);
+		}
+		.m {
+			width: 183px;
+			height: 359px;
+			margin: auto;
+			background-image: url(mobile.jpg);
+		}
+		.t {
+			width: 183px;
+			height: 509px;
+			margin: auto;
+			background-image: url(tablet.jpg);
+		}
+
+
+/*    .touchdiv {
+      width:50px;
+      height:50px;
+      background: orange;
+    }*/
+
+     #a {
+      margin-top: 10px;	
+      margin-left: 700px;
+      width:406px;
+      height:384px;
+      background:url(ob.png);
+
+    }
+
+
+    .start {
+      -webkit-transform:rotate(180deg);
+      -webkit-transition-duration:6s;
+	  -webkit-transition-timing-function:linear; 
+
+      margin-top: 10px;
+      margin-left: 700px;
+      width:406px;
+      height:384px;
+      background:url(ob.png);
+
+    }
+    .move {
+
+      width:70px;
+      height:70px;
+      background:darkorange;
+    }
+
+    .end {
+      width:50px;
+      height:50px;
+      background: darkorange;
+    }
+		.touchbox {
+			width: 50px;
+			height: 50px;
+			background-color: orange;
+		}
+
+		.touchStart {
+			width: 70px;
+			height: 70px;
+			background-color: orange;
+		}
+
+		.touchMove {
+			width: 70px;
+			height: 70px;
+			background-color: darkorange;
+		}
+
+		.touchEnd {
+			width: 50px;
+			height: 50px;
+			background-color: darkorange;
+		}
+butts
+	</style>
+</head>
+<body>
+
+  <div id="a" intent
+    in-touchstart-class="start"
+    in-touchmove-class="move"
+    in-touchend-class="end">
+    </div>
+
+
+
+  <div id="b" intent
+    in-touchstart-class="start"
+    in-touchmove-class="move"
+    in-touchend-class="end">
+    </div>
+  <script>
+    (function($){
+
+      $(function(){
+        
+        var intent = new Intention;
+
+        var intentB = new Intention;
+              
+        //touch
+        var touchCtxs = [
+            {name: 'touchstart',   _type: 'mousedown'},
+            {name: 'touchmove',    _type: 'mousemove'},
+            {name: 'touchend',     _type: 'mouseup'},
+            {name: 'touchcancel',  _type: 'mousebreak?'}
+          ],
+          touch = intent.responsive(touchCtxs, function(measure, ctx){
+            return measure === ctx.name;
+          }), 
+          touchB = intentB.responsive(touchCtxs, function(measure, ctx){
+            return measure === ctx.name;
+          });
+
+          var box = $('#a');
+
+          box.on('mousedown', function(){
+
+            box.on('mousemove', function(){
+               touch('touchmove') 
+            });
+
+            touch('touchstart')
+          });
+
+          box.on('mouseup mouseout', function(){
+            box.off('mousemove');
+            touch('touchend')
+          });
+
+          touch('touchmove')
+
+          var boxB = $('#b');
+
+          boxB.on('mousedown', function(){
+
+            boxB.on('mousemove', function(){
+               touchB('touchmove') 
+            });
+
+            touchB('touchstart')
+          });
+
+          boxB.on('mouseup mouseout', function(){
+            boxB.off('mousemove');
+            touchB('touchend')
+          });
+
+          intent.add(box);
+          intentB.add(boxB);
+
+          touchB('touchmove')
+
+      })  
+      
+    })(jQuery)
+  </script>
+
+		<div intent
+			in-base-class="touchbox"
+			in-touchStart-class="start"
+			in-touchMove-class="move"
+			in-touchEnd-class="end"></div>
+
+
+	
+</body>
+
+</html>	
