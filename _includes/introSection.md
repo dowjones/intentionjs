@@ -1,70 +1,69 @@
 <section id="splash" intent in-width in-container in-orientation>
-  <div class="inner clearFix">
-    <section>
-      <h3>Intention.js offers a clear way to create dynamically restructured html through clean interface to a super light-weight library.</h3>
-      <p>The goal is to increase layout options and flexibility, reducing development time and lessening the necessity of media-query-driven stylesheet overrides.</p>
-    </section>
-    <section id="buttons">
-      <div id="download"><a href="intention.js">Download the latest version<h5> 0.9.6.3</h5></a></div>
-      <div id="github"><a href="https://github.com/wsjdesign/intentionjs" target="_blank">Fork us on<h5>GitHub</h5></a></div>
-    </section>
-  </div>
+   <div class="inner clearFix">
+      <section>
+         <h3>Intention.js offers a clear way to create dynamically restructured html through clean interface to a super light-weight library.</h3>
+         <p>The goal is to increase layout options and flexibility, reducing development time and lessening the necessity of media-query-driven stylesheet overrides.</p>
+      </section>
+      <section id="buttons">
+         <div id="download"><a href="intention.js">Download the latest version<h5> 0.9.6.3</h5></a></div>
+         <div id="github"><a href="https://github.com/wsjdesign/intentionjs" target="_blank">Fork us on<h5>GitHub</h5></a></div>
+      </section>
+   </div>
 </section>
 
 <!-- Start the ugly Code-as-Image section -->
 
-<section id="codeImage" intent in-width in-container><div class="inner clearFix">
-    <div id="connections"></div>
-    <pre id="rawCodeImage"><span class="selectable">&lt;body&gt;
-        &lt;header&gt;
-        &lt;img</span> <span class="white"><span class="selectable">intent</span></span>
-      <span class="orangeDark"><span class="selectable">in-standard-src="med.png"</span></span>
-      <span class="orangeLight"><span class="selectable">in-mobile-src="small.png" /&gt;</span></span>
-      <span class="selectable"> &lt;/header&gt;
-        &lt;nav</span> <span class="white"><span class="selectable">intent</span></span>
+<section id="codeImage" intent in-width in-container>
+   <div class="inner clearFix">
+      <div id="connections"></div>
+      <pre id="rawCodeImage"><span class="selectable">&lt;body&gt;
+   &lt;header&gt;
+      &lt;img</span> <span class="white"><span class="selectable">intent</span></span>
+         <span class="orangeDark"><span class="selectable">in-standard-src="med.png"</span></span>
+         <span class="orangeLight"><span class="selectable">in-mobile-src="small.png" /&gt;</span></span>
+   <span class="selectable">&lt;/header&gt;
+   &lt;nav</span> <span class="white"><span class="selectable">intent</span></span>
       <span class="greenDark"><span class="selectable">in-abovethefold-after="header"</span></span>
       <span class="greenLight"><span class="selectable">in-belowthefold-prepend="body"
-          in-belowthefold-class="sticky"&gt;</span></span>
-      <span class="selectable">&lt;/nav&gt;
-        &lt;section</span> <span class="white"><span class="selectable">intent</span></span>
+      in-belowthefold-class="sticky"&gt;</span></span>
+   <span class="selectable">&lt;/nav&gt;
+   &lt;section</span> <span class="white"><span class="selectable">intent</span></span>
       <span class="blueLight"><span class="selectable">in-daytime-class="light"</span></span>
       <span class="blueDark"><span class="selectable">in-nighttime-class="dark"&gt;</span></span>
-      <span class="selectable">Hello, World!
-        &lt;/section&gt;
+         <span class="selectable">Hello, World!
+   &lt;/section&gt;
 
-        &lt;script&gt;</span>
+   &lt;script&gt;</span>
       <span class="white"><span class="selectable">intent.on(</span><span class="blueDark ignore"><span class="selectable">'nighttime'</span></span><span class="selectable">, function() {</span></span>
-      <span class="blueDark"><span class="selectable">$('section').text("Goodnight, World!");</span></span>
+         <span class="blueDark"><span class="selectable">$('section').text("Goodnight, World!");</span></span>
       <span class="white"><span class="selectable">});</span></span>
-      <span class="selectable">&lt;/script&gt;
-        &lt;/body&gt;</span>
+   <span class="selectable">&lt;/script&gt;
+&lt;/body&gt;</span>
 
       <!--[if lt IE 9]>
           <![endif]--></pre>
 
     <pre id="standardCodeImage"><div id="standardRed"><h5>Outputs on desktops:</h5>
-        <span class="selectable">&lt;body&gt;</span>
-        <span class="orangeDark"><span class="selectable">&lt;header&gt;
-            &lt;img src="med.png" /&gt;
-            &lt;/header&gt;</span></span></div>
-      <div id="standardGreen"><span class="greenDark"><span class="selectable">   &lt;nav&gt;
-            &lt;/nav&gt;</span></span></div>
-      <div id="standardBlue"><span class="blueDark"><span class="selectable">   &lt;section class="dark"&gt;
-            Goodnight, World!
-            &lt;/section&gt;</span></span>
-        <span class="selectable">&lt;/body&gt;</span></div></pre>
+<span class="selectable">&lt;body&gt;</span>
+   <span class="orangeDark"><span class="selectable">&lt;header&gt;
+      &lt;img src="med.png" /&gt;
+   &lt;/header&gt;</span></span></div><div id="standardGreen"><span class="greenDark"><span class="selectable">   &lt;nav&gt;
+   &lt;/nav&gt;</span></span></div><div id="standardBlue"><span class="blueDark"><span class="selectable">   &lt;section class="dark"&gt;
+      Goodnight, World!
+   &lt;/section&gt;</span></span>
+<span class="selectable">&lt;/body&gt;</span></div></pre>
 
     <pre id="mobileCodeImage"><div id="mobileGreen"><h5>Outputs on mobile:</h5>
-        <span class="selectable">&lt;body&gt;</span>
-        <span class="greenLight"><span class="selectable">&lt;nav class="sticky"&gt;
-            &lt;/nav&gt;</span></span></div>
-      <div id="mobileRed">   <span class="orangeLight"><span class="selectable">&lt;header&gt;
-            &lt;img src="small.png" /&gt;
-            &lt;/header&gt;</span></span></div>
-      <div id="mobileBlue"> <span class="blueLight"><span class="selectable">  &lt;section class="light"&gt;
-            Hello, World!
-            &lt;/section&gt;</span></span>
-        <span class="selectable">&lt;/body&gt;</span></div></pre>
+<span class="selectable">&lt;body&gt;</span>
+   <span class="greenLight"><span class="selectable">&lt;nav class="sticky"&gt;
+   &lt;/nav&gt;</span></span></div><div id="mobileRed"><span class="orangeLight"><span class="selectable">   &lt;header&gt;
+      &lt;img src="small.png" /&gt;
+   &lt;/header&gt;</span></span></div><div id="mobileBlue"> <span class="blueLight"><span class="selectable">   &lt;section class="light"&gt;
+      Hello, World!
+   &lt;/section&gt;</span></span>
+<span class="selectable">&lt;/body&gt;
+
+</span></div></pre>
 </div></section>
 
 <!-- End ugly Code-as-Image section -->

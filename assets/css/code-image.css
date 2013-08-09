@@ -87,7 +87,6 @@ html {
 #standardBlue,
 #mobileRed,
 #mobileBlue {
-  margin-top: -34px;
   box-sizing: border-box;
 }
 #standardRed,
@@ -124,7 +123,6 @@ html {
 }
 #mobileBlue {
   background: url('../../images/codeimage/mobileblue.png') repeat-y;
-  margin-top: -17px;
 }
 .no-multiplebgs #standardBlue {
   padding-bottom: 3px;
