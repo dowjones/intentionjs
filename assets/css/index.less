@@ -98,9 +98,9 @@
 			box-sizing:border-box;
 		}
 		section#buttons{
-			padding-top:70px;
+			padding:70px 20px;
 			div{
-				width:@3col;
+				width:100%;
 				margin:auto;
 				padding:10px;
 				text-align:center;
@@ -171,7 +171,7 @@
 
 
 //.try: specification of regular #heading
-#all.standard > .try, #all.hdtv > .try{ //on load in standard
+#scrollWrapper.standard > .try, #scrollWrapper.hdtv > .try{ //on load in standard
 	text-align:center;
 	#devices{
 		margin-top:@gutter;
@@ -252,6 +252,9 @@ body > .try.standard, body > .try.hdtv {
 }
 
 #content.docsLite{
+	#docs{
+		background: @mediumBlue url('../../images/docubg.png') repeat-x top fixed;
+	}
 	pre{
 		width:100%;
 		padding:6px;

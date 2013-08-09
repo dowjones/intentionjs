@@ -56,11 +56,11 @@
 }
 #splash.standard .inner section#buttons,
 #splash.hdtv .inner section#buttons {
-  padding-top: 70px;
+  padding: 70px 20px;
 }
 #splash.standard .inner section#buttons div,
 #splash.hdtv .inner section#buttons div {
-  width: 220px;
+  width: 100%;
   margin: auto;
   padding: 10px;
   text-align: center;
@@ -160,18 +160,18 @@
 #splash.hdtv.pseudosmalltablet section#buttons div {
   width: auto;
 }
-#all.standard > .try,
-#all.hdtv > .try {
+#scrollWrapper.standard > .try,
+#scrollWrapper.hdtv > .try {
   text-align: center;
 }
-#all.standard > .try #devices,
-#all.hdtv > .try #devices {
+#scrollWrapper.standard > .try #devices,
+#scrollWrapper.hdtv > .try #devices {
   margin-top: 20px;
   position: relative;
   z-index: 2;
 }
-#all.standard > .try #devices div,
-#all.hdtv > .try #devices div {
+#scrollWrapper.standard > .try #devices div,
+#scrollWrapper.hdtv > .try #devices div {
   height: 75px;
   background: url('../../images/devices.svg');
   background-size: 258px 74px;
@@ -179,32 +179,32 @@
   cursor: pointer;
   font-size: 13px;
 }
-#all.standard > .try #devices div + div,
-#all.hdtv > .try #devices div + div {
+#scrollWrapper.standard > .try #devices div + div,
+#scrollWrapper.hdtv > .try #devices div + div {
   margin-left: 20px;
 }
-#all.standard > .try #devices #pseudomobile,
-#all.hdtv > .try #devices #pseudomobile {
+#scrollWrapper.standard > .try #devices #pseudomobile,
+#scrollWrapper.hdtv > .try #devices #pseudomobile {
   width: 24px;
   background-position: 0 0;
 }
-#all.standard > .try #devices #pseudosmalltablet,
-#all.hdtv > .try #devices #pseudosmalltablet {
+#scrollWrapper.standard > .try #devices #pseudosmalltablet,
+#scrollWrapper.hdtv > .try #devices #pseudosmalltablet {
   width: 42px;
   background-position: -26px 0px;
 }
-#all.standard > .try #devices #pseudotablet,
-#all.hdtv > .try #devices #pseudotablet {
+#scrollWrapper.standard > .try #devices #pseudotablet,
+#scrollWrapper.hdtv > .try #devices #pseudotablet {
   width: 53px;
   background-position: -69px 1px;
 }
-#all.standard > .try #devices #pseudohdtv,
-#all.hdtv > .try #devices #pseudohdtv {
+#scrollWrapper.standard > .try #devices #pseudohdtv,
+#scrollWrapper.hdtv > .try #devices #pseudohdtv {
   width: 94px;
   background-position: -124px 1px;
 }
-#all.standard > .try #devices .cancel,
-#all.hdtv > .try #devices .cancel {
+#scrollWrapper.standard > .try #devices .cancel,
+#scrollWrapper.hdtv > .try #devices .cancel {
   display: none;
 }
 .try.tablet,
@@ -302,6 +302,9 @@ body > .try.hdtv #devices .cancel {
   background-position: -129px 0px;
   position: absolute;
   right: 13px;
+}
+#content.docsLite #docs {
+  background: #203b44 url('../../images/docubg.png') repeat-x top fixed;
 }
 #content.docsLite pre {
   width: 100%;
