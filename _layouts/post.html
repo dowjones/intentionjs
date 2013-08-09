@@ -34,7 +34,7 @@
       <section id="content" class="blog" intent in-width in-container in-orientation>
 	<div class="inner">
 	  <section class="header">
-	    {% if page.sub %}<h4>{{ page.sub }}</h4>{% endif %}
+	    {% if page.sub %}<h3>{{ page.sub }}</h3>{% endif %}
 	    <p class="meta"><a href="{{ page.url }}">{{ page.date | date: "%B %d, %Y" }}</a></p><p class="tags">{% for tags in page.tags %}<a href="../../../blog/tagged/{{ tags }}.html" class="{{ tags }}">{{ tags }}</a> {% endfor %}</p>
 	  </section>
 	  {% if page.img %}
