@@ -71,7 +71,7 @@
       options = _.extend({}, defaults, options);
 
       // bind an the respond function to the axis ID
-      this.on(options.ID, _.bind(
+      this.on('_' + options.ID, _.bind(
           function(e){
             this.axes = this._contextualize(
               options.ID, e.context, this.axes);
@@ -171,6 +171,14 @@
       });
     },
 
+    current: function(axisName){
+      if(this.axes.hasOwnProperty(axisName)){
+        return this.axes[axisName].current;
+      } else {
+        return false;
+      }
+    },
+
     // code and concept taken from simple implementation of
     // observer pattern outlined here:
     // http://www.nczonline.net/blog/2010/03/09/custom-events-in-javascript/
@@ -216,7 +224,7 @@
               currentContext = ctx;
 
               // emit the axis event
-              this._emitter({_type:axisID, context:currentContext.name},
+              this._emitter({_type:'_' + axisID, context:currentContext.name},
                   currentContext, this)
 
                 // then emit the context event (second ensures the context
