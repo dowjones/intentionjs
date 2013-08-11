@@ -10,7 +10,7 @@
 (function(root, factory) {
 
   'use strict';
-  
+
   if (typeof define === 'function' && define.amd) {
     define('intention', ['jquery', 'underscore'], factory);
   } else {
@@ -20,7 +20,7 @@
   'use strict';
 
   var Intention = function(params){
-    var intent = _.extend(this, params, 
+    var intent = _.extend(this, params,
         {_listeners:{}, contexts:[], elms:$(), axes:{}, priority:[]});
 
     return intent;
@@ -31,7 +31,7 @@
     // public methods
     responsive:function responsive(contexts, options){
       // for generating random ids for axis when not specified
-      var idChars = 'abcdefghijklmnopqrstuvwxyz0123456789', 
+      var idChars = 'abcdefghijklmnopqrstuvwxyz0123456789',
           id='', i;
 
       // create a random id for the axis
@@ -40,12 +40,12 @@
       }
 
       var defaults = {
-          // if no matcher function is specified expect to compare a 
+          // if no matcher function is specified expect to compare a
           // string to the ctx.name property
           matcher: function(measure, ctx){
             return measure === ctx.name;
           },
-          // function takes one arg and returns it  
+          // function takes one arg and returns it
           measure: _.identity,
           ID: id
         };
@@ -78,7 +78,7 @@
             this._respond(this.axes, this.elms);
 
           }, this));
-      
+
       var axis = {
         ID:[options.ID],
         current:null,
@@ -103,7 +103,7 @@
         scope = document;
       }
 
-      $('[data-intent],[intent],[data-in],[in]', 
+      $('[data-intent],[intent],[data-in],[in]',
           scope).each(_.bind(function(i, elm){
             this.add($(elm));
           }, this));
@@ -171,7 +171,7 @@
       });
     },
 
-    // code and concept taken from simple implementation of 
+    // code and concept taken from simple implementation of
     // observer pattern outlined here:
     // http://www.nczonline.net/blog/2010/03/09/custom-events-in-javascript/
     on: function(type, listener){
@@ -210,20 +210,19 @@
         _.every(contexts, function(ctx){
           if( matcher(measurement, ctx)) {
             // first time, or different than last context
-            if( (currentContext===undefined) || 
+            if( (currentContext===undefined) ||
               (ctx.name !== currentContext.name)){
 
               currentContext = ctx;
-              
+
               // emit the axis event
-              this._emitter({_type:axisID, context:currentContext.name}, 
+              this._emitter({_type:axisID, context:currentContext.name},
                   currentContext, this)
-              
+
                 // then emit the context event (second ensures the context
                 // changes happen after all dom manipulations)
-                ._emitter(_.extend({}, {_type:currentContext.name}, 
+                ._emitter(_.extend({}, {_type:currentContext.name},
                   currentContext), currentContext, this);
-                
 
               // done, break the loop
               return false;
@@ -265,7 +264,7 @@
       var applySpec = function(fn){
         _.each(spec, fn);
       }, filler={};
-      
+
       applySpec(function(options){
         // check to see if the ctx val is an object, could be a string
         if(_.isObject(options)){
@@ -318,7 +317,7 @@
 
       var changes={},
         moveFuncs=['append', 'prepend', 'before', 'after'];
-      
+
       _.each(currentContexts, function(ctxName){
 
         _.each(specs[ctxName], function(val, func){
@@ -330,8 +329,8 @@
 
             changes[func] = _.union(changes[func], val.split(' '));
 
-          } else if(((changes.move === undefined) || 
-              (changes.move.value === '')) && 
+          } else if(((changes.move === undefined) ||
+              (changes.move.value === '')) &&
               ($.inArray(func, moveFuncs) !== -1)){
 
             changes.move = {value:val, placement:func};
@@ -417,7 +416,7 @@
         if(this._axis_test_pattern.test(specName)) {
           match = specName.match(this._axis_match_pattern)[1];
           if(axes[match]){
-            config['class'] = _.union(config['class'], 
+            config['class'] = _.union(config['class'],
               [axes[match].current, spec]);
           }
         }
@@ -430,15 +429,15 @@
 
       if(_.isEmpty(axes)===false){
         var ctxConfig = this._contextConfig(specs, axes);
-        
+
         _.each(ctxConfig, function(change, func){
           if(func==='move'){
-            if( (specs.__placement__ !== change.placement) || 
+            if( (specs.__placement__ !== change.placement) ||
               (specs.__move__ !== change.value)){
 
               $(change.value)[change.placement](elm);
 
-              // save the last placement of the element so 
+              // save the last placement of the element so
               // we're not moving it around for no good reason
               specs.__placement__ = change.placement;
               specs.__move__ = change.value;
@@ -448,16 +447,16 @@
             var classes = elm.attr('class') || '';
 
             // the class add/remove formula
-            classes = _.union(change, 
-              _.difference(classes.split(' '), this._removeClasses(specs, axes)));
-            
+            classes = _.union(change,
+              _.difference(classes.split(' '),
+                           this._removeClasses(specs, axes)));
+
             elm.attr('class', classes.join(' '));
 
           } else {
             elm.attr(func, change);
           }
         }, this);
-        
       }
       return elm;
     },
