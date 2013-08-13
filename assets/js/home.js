@@ -15,25 +15,25 @@ var buildHome = function(D) {
 	stdInit.done(function() {
 		imageSetup();
 		equalizeAll('#docs', 'article.equalize', 'section');
-		contentPos = $('#content').offset().top + 12;
+		contentPos = $('#content').offset().top;
 	});
 	if(intent.is('standard') || intent.is('hdtv')) { stdInit.resolve(); }
 	else { 
-		intent.on('standard', function() { stdInit.resolve(); });
-		intent.on('hdtv', function() { stdInit.resolve(); });
+		intent.on('standard', function() { stdInit.resolve(); })
+		   .on('hdtv', function() { stdInit.resolve(); });
 	}
 	in_init(['tablet'], function(){
 		equalizeAll('#smallCode', 'pre');
 		writeOutput(intent.axes.width.current);
-		contentPos = $('#content').offset().top + 12;
+		contentPos = $('#content').offset().top;
 	});
 	in_init(['smalltablet'], function(){
 		writeOutput(intent.axes.width.current);
-		contentPos = $('#content').offset().top + 12;
+		contentPos = $('#content').offset().top;
 	});
 	in_init(['mobile'], function() {
 		writeOutput(intent.axes.width.current);
-		contentPos = $('#content').offset().top + 12;
+		contentPos = $('#content').offset().top;
 	});
 	
 	//Basic var setup
@@ -64,6 +64,7 @@ var buildHome = function(D) {
     	ID: 'stickdepth',
     	contexts: [
     		{name:'sticknav', min:contentPos},
+    		{name:'movebrand', min:$('header').height()},
     		{name:'start', min:0}
     	],
     	matcher: function(test, context){
@@ -135,12 +136,9 @@ var buildHome = function(D) {
 				'height':$('#all').width() + 'px'
 			});
 		} else if(device === undefined) {
-		   var percent = $('#all').scrollTop() / $('#heightWrapper').height();
-			intent.axes.container.respond('pseudostandard');
-			$('#all').css({
-            'width':'',
-				'height':''
-			}); //remove inline styles created by toggleOrientation
+		   var percent = $('#all').scrollTop() / $('#heightWrapper').height(); //save percent scrolled
+			intent.axes.container.respond('pseudostandard');//lowest common denominator for contexts that have access to device emulation
+			$('#all').css({'width':'', 'height':'' }); //remove inline styles created by toggleOrientation
 			var docHeight = $('#heightWrapper').height();
 			$(window).scrollTop((percent*docHeight) - 100);
 		} else {
@@ -149,35 +147,35 @@ var buildHome = function(D) {
 				.css({'width':'', 'height': ''});
 		}
 	});
-	
 	//For docs nav
-	var articles = $('#content article').not('.special').not('article:has(article)'); //Do not select special articles, or container articules
-	$.each(articles, function() { //Create back to top links ---- This must go before the title positions are found.
-		var markup = $('<div class="jump"><a>&uarr; Back to top</a></div>');
-		$(this).append(markup).addClass('clearFix');
-	 	  markup.click(function() {
-			$('html, body').animate({ scrollTop: contentPos+3}, 1000);
-		});
-	});
-	
-	//For docs nav
-	var titleCtx = [],
+	var titleCtx = [{'name':'t0', 'val':0}],
 		curPos,
-		articleCt = $('#docs').children('article').not('.special').length,
-		i = 1;
-	$.each($('#docs').children('article').not('.special'), function() { //then create the nav 
+		articles = $('#docs').children('article').not('.special'),
+		articlect = articles.length,
+		i = 1,
+		manageTitlePos = function() {
+		   for(var i = 0; i <= intent.axes.titleDepth.contexts.length-2; i++){
+		      console.log(i, intent.axes.titleDepth.contexts[i]);
+		      var depth = $('#'+intent.axes.titleDepth.contexts[i]['name']).offset().top - 50;
+		      intent.axes.titleDepth.contexts[i]['val'] = depth;
+		   }
+		};
+	$.each(articles, function() { //then create the nav 
 		$(this).attr('id', 't'+i); //#targeti
 		if($(this).children('h2').attr('alt')) { var text = $(this).children('h2').attr('alt'); }
 		else{ var text = $(this).children('h2').text(); }
-		var markup = '<li id="a'+i+'"><a href="#t'+i+'" >'+text+'</a></li>', //#anchori
+		var markup = '<li id="a'+i+'"><a ref="#t'+i+'" >'+text+'</a></li>', //#anchori
 			pos = $(this).offset().top - 50, //minus 20 for padding
 			ctx = {name:'t'+i, val:pos},
 			sub = $(this).children('article'),
-			s = 1;
+			jumpMarkup = $('<div class="jump"><a>&uarr; Back to top</a></div>');
 		titleCtx.push(ctx);
 		$('ul#sections').append(markup);
+		if(sub.length<1){ $(this).append(jumpMarkup).addClass('clearFix'); }
+		else { sub.append(jumpMarkup).addClass('clearFix'); }
 		i++;
 	});
+	$('.jump').add('#topNav .inner p a').click(function() { $('html, body').animate({ scrollTop: $('#t1').offset().top - 49}, 1000); });
 	titleCtx.reverse();
 	
 	var titleDepth = intent.responsive({
@@ -193,6 +191,9 @@ var buildHome = function(D) {
 			if($.type(arg) == 'string'){ return arg; }
 			if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
 			else { var scroll = pageYOffset; }
+			if((scroll+$(window).height()) == $(document).height()) {
+			   return intent.axes.titleDepth.contexts[0]['name'];
+			}
 			return scroll;
 		}
 	});
@@ -203,32 +204,34 @@ var buildHome = function(D) {
 	});
 	
 	$('#prevnext li').click(function() {
-		console.log('clicked. old curPos', curPos);
-		console.log('totalArticles', articleCt);
-		if( ($(this).attr('id') == 'next') && (curPos < articleCt) ){ curPos++; }
+		if( ($(this).attr('id') == 'next') && (curPos < articlect) ){ curPos++; }
 		else if(($(this).attr('id') == 'prev') && (curPos > 1)){ curPos--; }
 		else { return false }
-		
-		console.log('new curPos', curPos);
 		var target = $('#t'+curPos).offset().top - 49;
 		$('html, body').animate({ scrollTop: target}, 1000);
 	});
 	$('ul#sections').add('ul#subsections').menuDeck();
+	$('#sections').children('li').children('a').click(function() {
+	   var target = $($(this).attr('ref')).offset().top - 49;
+	   $('html, body').animate({ scrollTop: target}, 1000);
+	});
 	
 	intent
 		.on('titleDepth', function() {
 			curPos = intent.axes.titleDepth.current.slice(1);
-			console.log('curpos', curPos);
 			$('ul#sections')
 				.children('.cover').removeClass('cover')
 				.end() //in case no .cover is found
-				.children('a:nth-of-type('+curPos+')').addClass('cover');
+				.children('li:nth-of-type('+curPos+')').addClass('cover');
 		})
 		.on('sticknav', function(){
-			$('#docs').css('padding-top', $('#topNav').outerHeight());
+		   //add padding so stickiness is applied without a jump
+		   //this is done here (as opposed to applying an intentional class to #docs
+		   //in case we decide the nav bar should be different sizes in different contexts
+			$('#docs').css('padding-top', $('#topNav').outerHeight()); 
 		})
-		.on('start', function() {
-			$('#docs').css('padding-top', '');
+		.on('movebrand', function() { //one context above the stickynav
+			$('#docs').css('padding-top', ''); //remove that smoothening padding
 		})
 		.on('width', function() {
 			var device = intent.axes.width.current;
@@ -247,7 +250,7 @@ var buildHome = function(D) {
 				contentPos = $('#content').offset().top;
 				intent.axes.stickdepth.contexts[0]['min'] = contentPos;
 				stickdepth.respond();
-				console.log('rewritten contentPos', contentPos);
+				manageTitlePos();
 			}, 500);
 		})
 		.on('container', function() {

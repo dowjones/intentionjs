@@ -99,7 +99,7 @@
     // touch device?
     // =======================================================================
     intent.responsive({
-      ID:'touch',
+      ID:'touchid',
       contexts:[{name:'touch'}], 
       matcher: function() {
         return "ontouchstart" in window;

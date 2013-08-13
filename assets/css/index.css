@@ -56,7 +56,7 @@
 }
 #splash.standard .inner section#buttons,
 #splash.hdtv .inner section#buttons {
-  padding: 70px 20px;
+  padding: 60px 20px;
 }
 #splash.standard .inner section#buttons div,
 #splash.hdtv .inner section#buttons div {
@@ -89,12 +89,12 @@
 #splash.pseudotablet .inner section#buttons,
 #splash.standard.landscape .inner section#buttons {
   width: 50%;
-  padding-top: 70px;
+  padding: 55px 20px 0 20px;
 }
 #splash.tablet .inner section#buttons div,
 #splash.pseudotablet .inner section#buttons div,
 #splash.standard.landscape .inner section#buttons div {
-  width: 220px;
+  width: auto;
   margin: auto;
   padding: 10px;
   text-align: center;
@@ -125,8 +125,7 @@
 #splash.pseudomobile .inner section#buttons,
 #splash.smalltablet .inner section#buttons,
 #splash.pseudosmalltablet .inner section#buttons {
-  padding-top: 0px;
-  padding-bottom: 10px;
+  padding: 0 0 10px 0;
 }
 #splash.mobile .inner section#buttons div,
 #splash.pseudomobile .inner section#buttons div,
@@ -164,44 +163,57 @@
 #scrollWrapper.hdtv > .try {
   text-align: center;
 }
+#scrollWrapper.standard > .try h2,
+#scrollWrapper.hdtv > .try h2,
 #scrollWrapper.standard > .try #devices,
 #scrollWrapper.hdtv > .try #devices {
-  margin-top: 20px;
+  display: inline-block;
+  height: 55px;
+}
+#scrollWrapper.standard > .try h2,
+#scrollWrapper.hdtv > .try h2 {
+  margin-right: 20px;
+  vertical-align: top;
+  line-height: 55px;
+}
+#scrollWrapper.standard > .try #devices,
+#scrollWrapper.hdtv > .try #devices {
+  vertical-align: middle;
   position: relative;
   z-index: 2;
 }
 #scrollWrapper.standard > .try #devices div,
 #scrollWrapper.hdtv > .try #devices div {
-  height: 75px;
+  height: 55px;
   background: url('../../images/devices.svg');
-  background-size: 258px 74px;
+  background-size: 193px 55px;
   display: inline-block;
   cursor: pointer;
   font-size: 13px;
 }
 #scrollWrapper.standard > .try #devices div + div,
 #scrollWrapper.hdtv > .try #devices div + div {
-  margin-left: 20px;
+  margin-left: 7px;
 }
 #scrollWrapper.standard > .try #devices #pseudomobile,
 #scrollWrapper.hdtv > .try #devices #pseudomobile {
-  width: 24px;
+  width: 18px;
   background-position: 0 0;
 }
 #scrollWrapper.standard > .try #devices #pseudosmalltablet,
 #scrollWrapper.hdtv > .try #devices #pseudosmalltablet {
-  width: 42px;
-  background-position: -26px 0px;
+  width: 33px;
+  background-position: -19px 0px;
 }
 #scrollWrapper.standard > .try #devices #pseudotablet,
 #scrollWrapper.hdtv > .try #devices #pseudotablet {
-  width: 53px;
-  background-position: -69px 1px;
+  width: 40px;
+  background-position: -52px 0px;
 }
 #scrollWrapper.standard > .try #devices #pseudohdtv,
 #scrollWrapper.hdtv > .try #devices #pseudohdtv {
-  width: 94px;
-  background-position: -124px 1px;
+  width: 71px;
+  background-position: -92px 1px;
 }
 #scrollWrapper.standard > .try #devices .cancel,
 #scrollWrapper.hdtv > .try #devices .cancel {
@@ -303,6 +315,106 @@ body > .try.hdtv #devices .cancel {
   position: absolute;
   right: 13px;
 }
+#content.docsLite #topNav {
+  background-color: #589358;
+  background-image: url('../../images/mezz.png');
+}
+#content.docsLite #topNav .inner p {
+  float: left;
+  opacity: 0;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 40px;
+}
+#content.docsLite #topNav .inner p a {
+  color: #0c262d;
+  cursor: pointer;
+}
+#content.docsLite #topNav .inner p.inactive {
+  opacity: 0;
+}
+#content.docsLite #topNav .inner p.active {
+  opacity: 1;
+}
+#content.docsLite #topNav ul {
+  position: absolute;
+}
+#content.docsLite #topNav ul#sections,
+#content.docsLite #topNav ul#subsections {
+  width: 220px;
+  height: 40px;
+  padding: 0;
+  line-height: 40px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 20;
+  display: inline-block;
+  cursor: pointer;
+  right: 135px;
+}
+#content.docsLite #topNav ul#sections li,
+#content.docsLite #topNav ul#subsections li {
+  width: 100%;
+  height: inherit;
+  padding: 0 10px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  background: #0c262d;
+  -webkit-transition: top 300ms;
+  -moz-transition: top 300ms;
+  -o-transition: top 300ms;
+  transition: top 300ms;
+  font-size: 17px;
+}
+#content.docsLite #topNav ul#sections li a,
+#content.docsLite #topNav ul#subsections li a {
+  display: block;
+}
+#content.docsLite #topNav ul#sections li:hover,
+#content.docsLite #topNav ul#subsections li:hover {
+  background: #38748e;
+}
+#content.docsLite #topNav ul#sections .cover,
+#content.docsLite #topNav ul#subsections .cover {
+  z-index: 100 !important;
+}
+#content.docsLite #topNav ul#subsections {
+  margin-left: 20px;
+}
+#content.docsLite #topNav ul.moving li:hover {
+  background: #0c262d;
+}
+#content.docsLite #topNav ul#prevnext {
+  width: 125px;
+  height: 40px;
+  padding: 0;
+  margin-left: 5px;
+  right: 5px;
+}
+#content.docsLite #topNav ul#prevnext li {
+  width: 60px;
+  height: inherit;
+  display: inline-block;
+  background: #0c262d;
+  padding: 0 10px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+#content.docsLite #topNav ul#prevnext li:hover {
+  background: #38748e;
+}
 #content.docsLite #docs {
   background: #203b44 url('../../images/docubg.png') repeat-x top fixed;
 }
@@ -317,17 +429,16 @@ body > .try.hdtv #devices .cancel {
   padding-top: 30px;
 }
 #content.docsLite article.special {
-  background: #7fb27f url('../../images/mezz.png') repeat;
-  border-top: 13px solid #91bc91;
-  color: #0c300c;
+  background: #0c262d;
+  border-top: 13px solid #274752;
+  color: #f9efd4;
   z-index: 3;
 }
 #content.docsLite article.special pre {
-  background: #afcfaf;
-  color: #325332;
-  border: 3px solid #589358;
+  background: #203b44;
+  border: 2px solid #417789;
 }
-#content.docsLite article.special .hightlight pre code {
+#content.docsLite article.special .highlight pre code {
   border: 0 none;
   background: transparent;
 }
@@ -343,7 +454,7 @@ body > .try.hdtv #devices .cancel {
 }
 #content.docsLite.standard article,
 #content.hdtv article {
-  padding: 30px 20px 20px 20px;
+  padding: 30px 0 20px 0;
 }
 #content.docsLite.standard article h2,
 #content.hdtv article h2 {
@@ -483,6 +594,17 @@ body > .try.hdtv #devices .cancel {
 #content.docsLite.hdtv.pseudomobile article section + section {
   margin-top: 20px;
   padding-left: 0;
+}
+#content.docsLite.tablet article.special,
+#content.docsLite.smalltablet article.special,
+#content.docsLite.mobile article.special,
+#content.docsLite.standard.pseudotablet article.special,
+#content.docsLite.standard.pseudosmalltablet article.special,
+#content.docsLite.standard.pseudomobile article.special,
+#content.docsLite.hdtv.pseudotablet article.special,
+#content.docsLite.hdtv.pseudosmalltablet article.special,
+#content.docsLite.hdtv.pseudomobile article.special {
+  padding: 20px;
 }
 #content.docsLite.tablet article.special .inner,
 #content.docsLite.smalltablet article.special .inner,

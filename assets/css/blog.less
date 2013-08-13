@@ -71,7 +71,6 @@
 #heading, #scrollWrapper>#heading, #all>#heading{
    background:@blueGray url('../../images/headerbg.png') repeat-x top;
 }
-
 #content.blog{
 	h3 a{ color:@lightYellow; }
 	section#filter{
@@ -86,6 +85,12 @@
 		}
 	}
 	section.header{
+	   h3{ padding:0; }
+	   h4{
+	   	font-size:25px;
+	   	line-height:35px;
+	   	font-weight:normal;
+	   }
 		p{ text-indent:0px; padding:0px; }
 		p.meta, p.tags{
 			font-size:12px;
@@ -97,6 +102,14 @@
 			a.release:hover{ color:@orange; }
 			a.example:hover{ color:lighten(@green, 5%); }
 			a.update:hover{ color:lighten(@blue, 20%); }
+		}
+		h4.seeDemo{
+		   margin-top:@gutter/2;
+		   padding:@gutter/4;
+		   border:1px dashed @darkOrange;
+		   line-height:inherit;
+		   text-align:center;
+		   a{ color:@lightOrange; }
 		}
 	}
 	//blog images
@@ -124,6 +137,19 @@
 		.inner{ text-align:left; }
 		img{ max-width:100%; margin:auto; }
 	}
+	// Top Navigation
+	#topNav.tagNav{
+		background:@mediumBlue;
+		border-top:13px solid @blue;
+		border-bottom:6px solid @green;
+		a.example{ color:lighten(@green, 5%); }
+		a.release{ color:@orange; }
+		a.update{ color:lighten(@blue, 20%); }
+		a+a{ margin-left:6px; }
+		.inner{
+		   line-height:40px;
+		}
+	}
 	//Green "go back" bar
 	section.footer{
 		width:auto;
@@ -132,13 +158,6 @@
 		a{ color:@lightYellow; }
 	}
 	//Basic article styling
-	section.header{
-		h4{
-			font-size:25px;
-			line-height:35px;
-			font-weight:normal;
-		}
-	}
 	article{
 		clear:both;
 		h4{ font-size:20px; }
@@ -153,25 +172,11 @@
 			margin-left:@gutter;
 		}
 		
-	}	
+	}
+	
 	//Spacing stuff
 	article{ //post specific
 		p+p{ text-indent:0; } //<------- maybe this is better for just .standard
-		p+.highlight, .highlight+p,
-		h1+p, h2+p, h3+p,
-		h4+p, h5+p, h6+p,
-		h1+.highlight,  h2+.highlight, 
-		h3+.highlight,  h4+.highlight, 
-		h5+.highlight,  h6+.highlight,
-		p+ul, ul+p {
-			margin-top:@gutter;
-		}
-		p+h1, p+h2, p+h3, p+h4, p+h5, p+h6,
-		.highlight+h1,.highlight+h3,.highlight+h5,
-		.highlight+h2,.highlight+h4,.highlight+h6
-		{
-			margin-top:2*@gutter;
-		}
 		li p+ul{ margin-top:0; } //takes care of jekyll's embedding <p>s inside <li>s
 	}
 	article+article{ margin-top:@gutter; }
@@ -180,9 +185,7 @@
 	h4+.header{ margin-top:4px; }
 	h3+.header{ margin-top:3px; } //if not
 	.tags a+a{ margin-left:3px; }	
-	p.meta, p.tags{
-		margin-top:0px;
-	}
+	p.meta, p.tags{ margin-top:0px; }
 }
 #content.blog.standard, #content.hdtv{
 	.inner{ width:@10col; margin:auto }
@@ -219,6 +222,11 @@
 	}
 	h2, h3, h4, h5, h6, section, p{ padding: 0 @gutter; }
 }
+//Specific to post pages
+#content.post{
+   border-top:13px solid @blue;
+}
+
 //Specific filter styles for tag pages
 #content.blog #filter.release {
 	border-bottom-color:@orange;
@@ -231,41 +239,4 @@
 #content.blog #filter.update {
 	border-bottom-color:lighten(@blue, 20%);
 	color:lighten(@blue, 20%);
-}
-
-//top side nav
-#topNav.tagNav{
-	background:transparent;
-	border-top:26px solid @blue;
-	border-bottom:6px solid @green;
-	a.example{ color:lighten(@green, 5%); }
-	a.release{ color:@orange; }
-	a.update{ color:lighten(@blue, 20%); }
-	a+a{ margin-left:6px; }
-}
-#topNav.tagNav.standard, #topNav.tagNav.hdtv{
-	.inner{
-		width:@10col;
-		padding:@gutter 0;
-		margin:auto;
-	}
-}
-#topNav.tagNav.tablet, #topNav.tagNav.smalltablet, #topNav.tagNav.mobile{
-	.inner{ .noMarginWrapping; padding:@gutter; }
-}
-
-//left side nav
-#content.blog{
-	#leftNav.blogNav{
-		a{ color:white; }
-		a.release{ color:@orange; }
-		a.example{ color:lighten(@green, 5%); }
-		a.update{ color:lighten(@blue, 20%); }
-		a.jump{ font-size:12px; color:@lightBlue; }
-	}
-	#leftNav.blogNav.fixed{ position:absolute; } //reset back to absolute
-	#leftNav.blogNav.tablet, #leftNav.blogNav.smalltablet, #leftNav.blogNav.mobile,
-	#leftNav.blogNav.standard.pseudotablet, #leftNav.blogNav.standard.pseudosmalltablet, #leftNav.blogNav.standard.pseudomobile{
-		display:none;	
-	}
 }

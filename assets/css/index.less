@@ -98,7 +98,7 @@
 			box-sizing:border-box;
 		}
 		section#buttons{
-			padding:70px 20px;
+			padding:60px 20px;
 			div{
 				width:100%;
 				margin:auto;
@@ -122,9 +122,9 @@
 		}
 		section#buttons{
 			width:50%;
-			padding-top:70px;
+			padding:55px 20px 0 20px;
 			div{
-				width:@3col;
+				width:auto;
 				margin:auto;
 				padding:10px;
 				text-align:center;
@@ -145,8 +145,7 @@
 			margin-top:@gutter;
 		}
 		section#buttons{
-			padding-top:0px;
-			padding-bottom: @gutter/2;
+		   padding: 0 0 @gutter/2 0;
 			div{
 				margin:0 10px 0 10px;
 				padding: 10px;
@@ -172,24 +171,33 @@
 
 //.try: specification of regular #heading
 #scrollWrapper.standard > .try, #scrollWrapper.hdtv > .try{ //on load in standard
-	text-align:center;
+   text-align:center;
+   h2, #devices{
+      display:inline-block;
+      height:55px;
+   }
+   h2{
+      margin-right:@gutter;
+      vertical-align:top;
+      line-height:55px;
+   }
 	#devices{
-		margin-top:@gutter;
+	   vertical-align:middle;
 		position:relative;
 		z-index:2;
 		div{
-			height:75px;
+			height:55px;
 			background:url('../../images/devices.svg');
-			background-size:258px 74px;
+			background-size:193px 55px;
 			display:inline-block;
 			cursor:pointer;
 			font-size:13px;
 		}
-		div+div{ margin-left: @gutter; }
-		#pseudomobile{ width:24px; background-position:0 0; }
-		#pseudosmalltablet{ width:42px; background-position:-26px 0px; }
-		#pseudotablet{ width:53px; background-position:-69px 1px; }
-		#pseudohdtv{ width:94px; background-position:-124px 1px; }
+		div+div{ margin-left: 7px; }
+		#pseudomobile{ width:18px; background-position:0 0; }
+		#pseudosmalltablet{ width:33px; background-position:-19px 0px; }
+		#pseudotablet{ width:40px; background-position:-52px 0px; }
+		#pseudohdtv{ width:71px; background-position:-92px 1px; }
 		.cancel{ display:none; }
 	}
 	
@@ -252,6 +260,95 @@ body > .try.standard, body > .try.hdtv {
 }
 
 #content.docsLite{
+   //Top Navigation
+   #topNav{
+      background-color: @green;
+      background-image: url('../../images/mezz.png');
+      .inner{
+         p{
+            float:left;
+            opacity:0;
+            .transitions(.5s);
+            font-weight:bold;
+            font-size:25px;
+            line-height:40px;
+            a{ color:@darkBlue; cursor:pointer; }
+         }
+         p.inactive{ opacity:0; }
+         p.active{ opacity:1; }
+      }
+      ul{
+         position:absolute;
+      }
+      // Section navigation
+      ul#sections, ul#subsections{
+      	width:220px;
+      	height:40px;
+      	padding:0;
+      	line-height:40px;
+      	text-transform:uppercase;
+      	letter-spacing:1px;
+      	z-index:20;
+      	display:inline-block;
+      	cursor:pointer;
+      	right:135px;
+      	li{
+      	   width:100%;
+      	   height:inherit;
+      		padding:0 10px;
+      		box-sizing:border-box;
+      		-moz-box-sizing:border-box;
+      		-ms-box-sizing:border-box;
+      		position:absolute;
+      		top:0;
+      		background:@darkBlue;
+      		-webkit-transition: top 300ms;
+      		-moz-transition: top 300ms;
+      		-o-transition: top 300ms;
+      		transition: top 300ms;
+      		font-size:17px;
+      		a{ display:block; }
+      	}
+      	li:hover{
+      		background:@blue;
+      	}
+      	.cover{
+      		z-index:100 !important;
+      	}
+      }
+      ul#subsections{
+      	margin-left:@gutter;
+      }
+      ul.moving{
+      	li:hover{
+      		background:@darkBlue;
+      	}
+      }
+      // Up and Down nav
+      ul#prevnext{
+      	width:125px;
+      	height:40px;
+      	padding:0;
+      	margin-left:5px;
+      	right:5px;
+      	li{
+      		width:60px;
+      		height:inherit;
+      		display:inline-block;
+      		background:@darkBlue;
+      		padding:0 10px;
+      		box-sizing:border-box;
+      		-moz-box-sizing:border-box;
+      		-ms-box-sizing:border-box;
+      		line-height:40px;
+      		text-align:center;
+      		cursor:pointer;
+      	}
+      	li:hover{
+      	   background:@blue;
+      	}
+      }
+   }
 	#docs{
 		background: @mediumBlue url('../../images/docubg.png') repeat-x top fixed;
 	}
@@ -266,16 +363,15 @@ body > .try.standard, body > .try.hdtv {
 		padding-top:@gutter*1.5;
 	}
 	article.special{
-		background:@seafoam url('../../images/mezz.png') repeat;
-		border-top:13px solid @lightSeafoam;
-		color:@darkGreen;
+		background:@darkBlue;
+		border-top:13px solid lighten(@mediumBlue, 4%);
+		color:@lightYellow;
 		z-index:3;
 		pre{
-			background: lighten(@seafoam, 15%);
-			color: darken(@green, 20%);
-			border: 3px solid darken(@green, 0%);
+			background: @mediumBlue;
+			border: 2px solid lighten(@mediumBlue, 20%);
 		}
-		.hightlight pre code{
+		.highlight pre code{
 		   border:0 none;
 		   background:transparent;
 		}
@@ -293,7 +389,7 @@ body > .try.standard, body > .try.hdtv {
 }
 #content.docsLite.standard, #content.hdtv{
 	article{
-		padding:@gutter*1.5 @gutter @gutter @gutter;
+		padding:@gutter*1.5 0 @gutter 0;
 		h2{
 			box-sizing:border-box;
 			padding-right:50%;
@@ -373,6 +469,7 @@ body > .try.standard, body > .try.hdtv {
 		}
 	}
 	article.special{
+	   padding:@gutter;
 		.inner{
 			width:auto;
 		}
