@@ -127,6 +127,7 @@
             exists=true;
             return false;
           }
+          return true;
         });
 
         if(exists === false){
@@ -159,6 +160,7 @@
             // found the match, break the loop
             return false;
           }
+          return true;
         });
       });
       return this;
@@ -183,10 +185,17 @@
     // observer pattern outlined here:
     // http://www.nczonline.net/blog/2010/03/09/custom-events-in-javascript/
     on: function(type, listener){
-      if(this._listeners[type] === undefined) {
-        this._listeners[type]=[];
+      var events = type.split(' '),
+          i=0;
+
+      for(i;i<events.length;i++){
+        if(this._listeners[events[i]] === undefined) {
+          this._listeners[events[i]]=[];
+        }
+        this._listeners[events[i]].push(listener);
       }
-      this._listeners[type].push(listener);
+
+
 
       return this;
     },
@@ -314,7 +323,7 @@
             addProp(ctxSpec, specMatch[1], attr.value));
 
         } else if(axisPattern.test(attr.name)){
-          spec['_' + attr.name.match(axisPattern)[3]] = attr.value;
+          spec['$' + attr.name.match(axisPattern)[3]] = attr.value;
         }
       });
 
@@ -484,10 +493,15 @@
     },
 
     // private props
-    _axis_test_pattern: /^_[^_]/, // does it begin with an underscore
-    // match a group after the underscore:
-    _axis_match_pattern: /^_([a-zA-Z0-9][_a-zA-Z0-9]*)/
 
+    // axis test, does it begin with an underscore?
+    _axis_test_pattern: new RegExp("^$[a-zA-Z0-9]"),
+
+    // match a group after the underscore:
+    _axis_match_pattern: new RegExp("^_([a-zA-Z0-9][_a-zA-Z0-9]*)"),
+
+    // simple trim
+    _trim_pattern:new RegExp( "^\s+|\s+$", "g" )
   };
 
   return Intention;
