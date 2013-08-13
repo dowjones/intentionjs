@@ -97,7 +97,7 @@ intent in-context_name-move_function="selector"
       
       <p>Selectors can be general element selections like above (<code>...prepend="footer"</code>), or specific (<code>...prepend="#intro"</code>).</p>
     </section>
-    <section intent in-standard-class="show" in-mobile-class="hide" in-smalltablet-class="hide" in-tablet-class="hide"> 
+    <section intent in-hdtv-class="show" in-standard-class="show" in-mobile-class="hide" in-smalltablet-class="hide" in-tablet-class="hide"> 
       <div id="resizeExample">
         <div id="resizable">
           <div id="miniFade"></div>
@@ -153,7 +153,8 @@ var mini = intent.responsive({
 });
 mini.respond();
 //'resize' is a jQueryUI event
-$('#resizable').on('resize', mini.respond);
+$('#resizable')
+   .on('resize', mini.respond);
       {% endhighlight %}
     </section>
   </article>

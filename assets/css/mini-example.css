@@ -162,7 +162,7 @@
   transition: all 0.5s ease-in-out;
 }
 .night {
-  background: #0c262d;
+  background: #062027;
 }
 .evening {
   background: #143a37;
@@ -173,6 +173,6 @@
 .day {
   background: #96d2e2;
 }
-.dawn {
+.morning {
   background: #af4168;
 }

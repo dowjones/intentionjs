@@ -23,7 +23,7 @@
 @blue:				rgb(56, 116, 142); //@footer
 @mediumBlue:		rgb(32, 59, 68); //@background
 @darkBlue:			rgb(12, 38, 45); //@blueDark
-@lightBlueGray:		rgb(215, 220, 219); //@headerbg
+@lightBlueGray:	rgb(215, 220, 219); //@headerbg
 @blueGray:			rgb(186, 198, 204); //@background2
 @darkBlueGray:		rgb(81, 96, 101); //code comments
 @lightGreen:		rgb(202, 229, 202); //@greenText
@@ -31,7 +31,7 @@
 @darkGreen:			rgb(12, 48, 12);
 @seafoam:			rgb(127, 178, 127);
 @lightSeafoam:		rgb(145, 188, 145);
-@orange:			rgb(234, 134, 90);
+@orange:			   rgb(234, 134, 90);
 @lightOrange:		rgb(243, 201, 190);
 @darkOrange:		rgb(226, 99, 69);	
 
@@ -94,7 +94,7 @@ p { line-height: 24px; }
 
 
 //General spacing
-h1+p, h2+p, h3+p, h4+p{ margin-top:5px; }
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p{ margin-top:5px; }
 p+p{ text-indent:16px; margin-top:@gutter; }
 p+div.highlight, div.highlight+p{ margin-top: @gutter/2; }
 .highlight+.highlight, .highlight+pre, pre+.highlight{ margin-top:@gutter; }
@@ -119,6 +119,8 @@ a, a:visited{ color: @link; text-decoration:none; }
 .clearFix {
 	display: inline-block;
 }
+.no-indent p+p{ text-indent:0; }
+.wrap{ white-space: wrap; }
 /* Hides from IE-mac \*/
 * html .clearFix { height: 1%; }
 .clearFix { display: block; }
@@ -200,8 +202,12 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 	h1, nav{
 		.mobileWrapping;
 	}
-	h1{ padding:@gutter/2; }
-	nav{ font-size:13px; }
+	h1{ 
+	   padding:@gutter/2;
+	   font-size:30px;
+	   font-weight:normal;
+	}
+	nav{ font-size:15px; }
 	li{ height:15px;}
 }
 
@@ -254,6 +260,38 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 	article{
 		box-sizing:border-box;
 		position:relative;
+		
+		//General elements
+		li{
+		   margin-left:@gutter/2;
+		   padding-left:@gutter/2;
+		}
+		
+		//Spacing stuff
+		section+.thirds, .thirds+section,
+		p+.highlight, .highlight+p,
+		h1+p, h2+p, h3+p,
+		h4+p, h5+p, h6+p,
+		h1+.highlight,  h2+.highlight, 
+		h3+.highlight,  h4+.highlight, 
+		h5+.highlight,  h6+.highlight,
+		h1+pre, h2+pre, h3+pre, h4+pre, h5+pre, h6+pre,
+		pre+h1, pre+h2, pre+h3, pre+h4, pre+h5, pre+h6,
+		p+ul, ul+p{
+			margin-top:@gutter;
+		}
+		p+h1, p+h2, p+h3, p+h4, p+h5, p+h6,
+		.highlight+h1,.highlight+h3,.highlight+h5,
+		.highlight+h2,.highlight+h4,.highlight+h6
+		{
+			margin-top:2*@gutter;
+		}
+		p+ol, ol+p{
+		   margin:@gutter/2;
+		}
+		li+li{
+		   margin-top:7px;
+		}
 	}
 	code{
 		color:@periwinkle;
@@ -282,16 +320,10 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 			white-space:pre-wrap;
 		}
 	}
-	.special .highlight pre code{
-	   color: darken(@green, 20%);
-	   .comment{
-	      color: darken(multiply(white, @seafoam), 5%);
-	   }
-	}
 	.jump{
-		width:100%;
 		padding:@gutter @gutter/2 0 @gutter/2;
 		box-sizing:border-box;
+		clear:both;
 		text-align:right;
 		cursor:pointer;
 		a{
@@ -315,8 +347,8 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 		margin:auto;
 		position:relative;
 		z-index:5;
-		h2{	width:100%; }
-		h3{	font-size:30px; font-weight:normal; }
+		h2{ width:100%; }
+		h3{ font-size:30px; font-weight:normal; }
 		h4{ font-size:20px; font-weight:normal; }
 	}
 }
@@ -336,6 +368,10 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 		}
 	}
 	article{ //<----------- Gets the index page working right. Maybe should go on index.less
+	   //General Elements
+	   ul, ol{
+   	   padding-left:@gutter/2;
+	   }
 		h2, h3, h4, h5, h6, p, ul{
 			padding: 0 @gutter/2;
 		}
@@ -354,9 +390,6 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 #content.standard.pseudotablet, #content.standard.pseudosmalltablet, #content.standard.pseudomobile,
 #content.hdtv.pseudotablet, #content.hdtv.pseudosmalltablet, #content.hdtv.pseudomobile{
 	.jump{ display:none; } //Can't get the "Back to top" links to work, so I'll just hide them :o
-}
-#heading+#content{ //in case there's no topside nav (like on tag pages)
-	border-top:13px solid #38748e;
 }
 #content.smalltablet, #content.standard.pseudosmalltablet, #content.hdtv.pseudosmalltablet,
 #content.mobile, #content.standard.pseudomobile, #content.hdtv.pseudomobile{
@@ -459,91 +492,41 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 //Content-top nav
 #content #topNav{
    width:100%;
-   margin:auto;
-   background-color: @green;
-   background-image: url('../../images/mezz.png');
+   padding:5px;
    border-top:13px solid @blue;
+   box-sizing:border-box;
    z-index:20;
    h6{ display:none; }
    a{ color:@lightYellow; }
-   .inner{ box-sizing:border-box; }
-   
-	// Section navigation
-	ul#sections, ul#subsections{
-		width:220px;
-		height:40px;
-		padding:0;
-		line-height:40px;
-		font-size:17px;
-		text-transform:uppercase;
-		letter-spacing:1px;
-		z-index:20;
-		position:relative;
-		display:inline-block;
-		cursor:pointer;
-		li{
-		   width:inherit;
-		   height:inherit;
-			padding:0 10px;
-			box-sizing:border-box;
-			-moz-box-sizing:border-box;
-			-ms-box-sizing:border-box;
-			position:absolute;
-			top:0;
-			background:@darkBlue;
-			-webkit-transition: top 300ms;
-			-moz-transition: top 300ms;
-			-o-transition: top 300ms;
-			transition: top 300ms;
-			a{ display:block; }
-		}
-		li:hover{
-			background:@blue;
-		}
-		.cover{
-			z-index:100 !important;
-		}
-	}
-	ul#subsections{
-		margin-left:@gutter;
-	}
-	ul.moving{
-		li:hover{
-			background:@darkBlue;
-		}
-	}
-	// Up and Down nav
-	ul#prevnext{
-		width:124px;
-		height:40px;
-		padding:0;
-		float:right;
-		li{
-			width:60px;
-			height:inherit;
-			display:inline-block;
-			background:@darkBlue;
-			padding:0 10px;
-			box-sizing:border-box;
-			-moz-box-sizing:border-box;
-			-ms-box-sizing:border-box;
-			line-height:40px;
-			text-align:center;
-			cursor:pointer;
-		}
-		li:hover{
-		   background:@blue;
-		}
-	}
+   .inner{
+      box-sizing:border-box;
+      height:40px;
+   }
 }
-#topNav.standard, #topNav.hdtv{
-	.inner{
-		width:@10col; margin:auto;
-		padding:5px @gutter/2 1px @gutter/2; //text in line with docstext
-	}
-}
-#topNav.tablet, #topNav.smalltablet, #topNav.mobile{
-	.inner{ width:auto; padding:5px 5px 1px 5px; margin:auto; }
+#content{
+   #topNav.hdtv, #topNav.standard{
+      .inner{
+         width:@10col;
+         padding:0;
+         margin:auto;
+      }
+   }
+   #topNav.tablet, #topNav.smalltablet, #topNav.mobile{
+      .inner{
+         width:auto;
+         padding:0;
+      }
+   }
+   #topNav.mobile{
+      .inner p{
+         opacity:0;
+      }
+      ul#sections{
+         width:auto;
+         left:5px;
+         
+      }
+   }
 }
 #topNav.pseudotablet, #topNav.pseudosmalltablet, #topNav.pseudomobile{
 	display:none;
@@ -571,9 +554,9 @@ footer{
 		color:@orange;
 	}
 }
-footer.standard{
+footer.standard, footer.hdtv{
 	.inner{
-		width:@10col;
+		width:@7col;
 		margin:auto;
 		padding:@gutter/2 @gutter @gutter @gutter;
 	}

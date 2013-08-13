@@ -30,14 +30,14 @@
 			<h2><a href="{{ page.url }}">{{ page.title }}</a></h2>
 		</div>
 	</section>
-	<nav id="topNav" class="tagNav" intent in-width>
-		<div class="inner">
-			<a class="example" href="tagged/example.html">Examples</a>
-			<a class="release" href="tagged/release.html">Releases</a>
-			<!--<a class="update" href="tagged/update.html">Updates</a>--> <!-- commented until we have an actual update post to warrant a link -->
-		</div>
-	</nav>
 	<section id="content" class="blog" intent in-width in-container in-orientation>
+	   <nav id="topNav" class="tagNav" intent in-width>
+	   	<div class="inner">
+	   		<a class="example" href="tagged/example.html">Examples</a>
+	   		<a class="release" href="tagged/release.html">Releases</a>
+	   		<!--<a class="update" href="tagged/update.html">Updates</a>--> <!-- commented until we have an actual update post to warrant a link -->
+	   	</div>
+	   </nav>
 		<div class="inner" class="clearFix">
 			{{ content }}
 		</div>

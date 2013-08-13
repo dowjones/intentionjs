@@ -69,7 +69,9 @@ p {
 h1 + p,
 h2 + p,
 h3 + p,
-h4 + p {
+h4 + p,
+h5 + p,
+h6 + p {
   margin-top: 5px;
 }
 p + p {
@@ -116,6 +118,12 @@ a:visited {
 }
 .clearFix {
   display: inline-block;
+}
+.no-indent p + p {
+  text-indent: 0;
+}
+.wrap {
+  white-space: wrap;
 }
 /* Hides from IE-mac \*/
 * html .clearFix {
@@ -263,6 +271,8 @@ header.hdtv.pseudotablet h1,
 header.hdtv.pseudosmalltablet h1,
 header.hdtv.pseudomobile h1 {
   padding: 10px;
+  font-size: 30px;
+  font-weight: normal;
 }
 header.mobile nav,
 header.standard.pseudomobile nav,
@@ -271,7 +281,7 @@ header.standard.pseudosmalltablet nav,
 header.hdtv.pseudotablet nav,
 header.hdtv.pseudosmalltablet nav,
 header.hdtv.pseudomobile nav {
-  font-size: 13px;
+  font-size: 15px;
 }
 header.mobile li,
 header.standard.pseudomobile li,
@@ -376,6 +386,63 @@ header.hdtv.pseudomobile li {
   box-sizing: border-box;
   position: relative;
 }
+#content article li {
+  margin-left: 10px;
+  padding-left: 10px;
+}
+#content article section + .thirds,
+#content article .thirds + section,
+#content article p + .highlight,
+#content article .highlight + p,
+#content article h1 + p,
+#content article h2 + p,
+#content article h3 + p,
+#content article h4 + p,
+#content article h5 + p,
+#content article h6 + p,
+#content article h1 + .highlight,
+#content article h2 + .highlight,
+#content article h3 + .highlight,
+#content article h4 + .highlight,
+#content article h5 + .highlight,
+#content article h6 + .highlight,
+#content article h1 + pre,
+#content article h2 + pre,
+#content article h3 + pre,
+#content article h4 + pre,
+#content article h5 + pre,
+#content article h6 + pre,
+#content article pre + h1,
+#content article pre + h2,
+#content article pre + h3,
+#content article pre + h4,
+#content article pre + h5,
+#content article pre + h6,
+#content article p + ul,
+#content article ul + p {
+  margin-top: 20px;
+}
+#content article p + h1,
+#content article p + h2,
+#content article p + h3,
+#content article p + h4,
+#content article p + h5,
+#content article p + h6,
+#content article .highlight + h1,
+#content article .highlight + h3,
+#content article .highlight + h5,
+#content article .highlight + h2,
+#content article .highlight + h4,
+#content article .highlight + h6 {
+  margin-top: 40px;
+}
+#content article p + ol,
+#content article ol + p {
+  margin: 10px;
+}
+#content article li + li {
+  margin-top: 7px;
+}
 #content code {
   color: #bac6cc;
   padding: 0 3px 0 3px;
@@ -407,16 +474,10 @@ header.hdtv.pseudomobile li {
   margin: 0;
   white-space: pre-wrap;
 }
-#content .special .highlight pre code {
-  color: #325332;
-}
-#content .special .highlight pre code .comment {
-  color: #6fa86f;
-}
 #content .jump {
-  width: 100%;
   padding: 20px 10px 0 10px;
   box-sizing: border-box;
+  clear: both;
   text-align: right;
   cursor: pointer;
 }
@@ -517,6 +578,26 @@ header.hdtv.pseudomobile li {
   position: relative;
   z-index: 5;
 }
+#content.tablet article ul,
+#content.smalltablet article ul,
+#content.mobile article ul,
+#content.standard.pseudotablet article ul,
+#content.standard.pseudosmalltablet article ul,
+#content.standard.pseudomobile article ul,
+#content.hdtv.pseudotablet article ul,
+#content.hdtv.pseudosmalltablet article ul,
+#content.hdtv.pseudomobile article ul,
+#content.tablet article ol,
+#content.smalltablet article ol,
+#content.mobile article ol,
+#content.standard.pseudotablet article ol,
+#content.standard.pseudosmalltablet article ol,
+#content.standard.pseudomobile article ol,
+#content.hdtv.pseudotablet article ol,
+#content.hdtv.pseudosmalltablet article ol,
+#content.hdtv.pseudomobile article ol {
+  padding-left: 10px;
+}
 #content.tablet article h2,
 #content.smalltablet article h2,
 #content.mobile article h2,
@@ -615,9 +696,6 @@ header.hdtv.pseudomobile li {
 #content.hdtv.pseudosmalltablet .jump,
 #content.hdtv.pseudomobile .jump {
   display: none;
-}
-#heading + #content {
-  border-top: 13px solid #38748e;
 }
 #content.smalltablet pre,
 #content.standard.pseudosmalltablet pre,
@@ -746,10 +824,9 @@ header.hdtv.pseudomobile li {
 }
 #content #topNav {
   width: 100%;
-  margin: auto;
-  background-color: #589358;
-  background-image: url('../../images/mezz.png');
+  padding: 5px;
   border-top: 13px solid #38748e;
+  box-sizing: border-box;
   z-index: 20;
 }
 #content #topNav h6 {
@@ -760,89 +837,26 @@ header.hdtv.pseudomobile li {
 }
 #content #topNav .inner {
   box-sizing: border-box;
-}
-#content #topNav ul#sections,
-#content #topNav ul#subsections {
-  width: 220px;
   height: 40px;
-  padding: 0;
-  line-height: 40px;
-  font-size: 17px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  z-index: 20;
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
 }
-#content #topNav ul#sections li,
-#content #topNav ul#subsections li {
-  width: inherit;
-  height: inherit;
-  padding: 0 10px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  position: absolute;
-  top: 0;
-  background: #0c262d;
-  -webkit-transition: top 300ms;
-  -moz-transition: top 300ms;
-  -o-transition: top 300ms;
-  transition: top 300ms;
-}
-#content #topNav ul#sections li a,
-#content #topNav ul#subsections li a {
-  display: block;
-}
-#content #topNav ul#sections li:hover,
-#content #topNav ul#subsections li:hover {
-  background: #38748e;
-}
-#content #topNav ul#sections .cover,
-#content #topNav ul#subsections .cover {
-  z-index: 100 !important;
-}
-#content #topNav ul#subsections {
-  margin-left: 20px;
-}
-#content #topNav ul.moving li:hover {
-  background: #0c262d;
-}
-#content #topNav ul#prevnext {
-  width: 124px;
-  height: 40px;
-  padding: 0;
-  float: right;
-}
-#content #topNav ul#prevnext li {
-  width: 60px;
-  height: inherit;
-  display: inline-block;
-  background: #0c262d;
-  padding: 0 10px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  line-height: 40px;
-  text-align: center;
-  cursor: pointer;
-}
-#content #topNav ul#prevnext li:hover {
-  background: #38748e;
-}
-#topNav.standard .inner,
-#topNav.hdtv .inner {
+#content #topNav.hdtv .inner,
+#content #topNav.standard .inner {
   width: 780px;
+  padding: 0;
   margin: auto;
-  padding: 5px 10px 1px 10px;
 }
-#topNav.tablet .inner,
-#topNav.smalltablet .inner,
-#topNav.mobile .inner {
+#content #topNav.tablet .inner,
+#content #topNav.smalltablet .inner,
+#content #topNav.mobile .inner {
   width: auto;
-  padding: 5px 5px 1px 5px;
-  margin: auto;
+  padding: 0;
+}
+#content #topNav.mobile .inner p {
+  opacity: 0;
+}
+#content #topNav.mobile ul#sections {
+  width: auto;
+  left: 5px;
 }
 #topNav.pseudotablet,
 #topNav.pseudosmalltablet,
@@ -871,8 +885,9 @@ footer h1 {
   font-weight: normal;
   color: #ea865a;
 }
-footer.standard .inner {
-  width: 780px;
+footer.standard .inner,
+footer.hdtv .inner {
+  width: 540px;
   margin: auto;
   padding: 10px 20px 20px 20px;
 }

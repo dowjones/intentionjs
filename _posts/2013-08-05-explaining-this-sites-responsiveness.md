@@ -108,7 +108,7 @@ Back to the HTML, we see that the wrapper `#all` is flagged as responsive `in-co
 #### Structuring CSS
 A productive practice for writing non-conflict CSS is to start with the very general and move towards specificity. Take, for example, a responsive `header` element.
 
-First, we begin with the general: mostly colors but also sizing properties.
+First, we begin with the general: mostly colors but also sizing properties. Then we get more and more specific,
 
 {% highlight css %}
 header{
@@ -138,8 +138,7 @@ header.standard, header.hdtv{
       font-size: 19px;
    }
 }
-header.tablet, header.standard.pseudotablet,
-header.hdtv.pseudotablet{
+header.tablet{
    h1, nav{
       width: auto;
       margin:0 10px;
@@ -148,9 +147,7 @@ header.hdtv.pseudotablet{
    }
    h1{ padding:10px; }
 }
-header.mobile, header.standard.pseudomobile, header.hdtv.pseudomobile
-header.smalltablet, header.standard.pseudosmalltablet,
-header.hdtv.pseudosmalltablet, header.hdtv.pseudotablet{
+header.mobile, header.smalltablet,{
    box-sizing:border-box;
    h1{ font-size:40px; padding:10px; }
    nav{ font-size:13px; }
@@ -158,7 +155,14 @@ header.hdtv.pseudosmalltablet, header.hdtv.pseudotablet{
 }
 {% endhighlight %}
 
-*Note: we are using the spectacular [LESS](http://lesscss.org), so if our syntax looks confusing, head to their documentation for a quick breakdown. We're also omitting some styles for the sake of brevity.*
+*Note: on this site we use a different `horizontal_axis` than the one included in context.js. Our custom axis includes contexts for 7" tablets and luxury displays. If you interested, we consider luxury displays to be greater than 1300 pixels wide, and small tablets to be between 510 and 768 pixels wide.*
+
+{name:'hdtv', min:1220},
+{name:'standard', min:840}, 
+{name:'tablet', min:768},
+{name:'smalltablet', min:510},
+{name:'mobile', min:0}],
+*Another note: we are using the spectacular [LESS](http://lesscss.org), so if our syntax looks confusing, head to their documentation for a quick breakdown. We're also omitting some styles for the sake of brevity.*
 
 #### Current Position Navigation
 

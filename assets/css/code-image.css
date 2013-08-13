@@ -161,6 +161,7 @@ html {
 #smallCode pre {
   white-space: pre;
   color: #bac6cc;
+  font-size: 14px;
   padding: 6px;
 }
 #smallCode pre h5 {
@@ -170,13 +171,19 @@ html {
   text-align: right;
 }
 #smallCode pre#input {
+  padding: 20px 6px 20px 6px;
   background-color: #495c63;
   background-image: url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/left.png');
   background-repeat: repeat-x, repeat-y;
   background-position: top, right;
 }
 #smallCode pre#output {
-  padding: 15px 6px 20px 6px;
+  padding: 20px 6px 20px 6px;
+  background-image: url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/shadow-lr-du.png'), url('../../images/codeimage/left-flipped.png');
+  background-repeat: repeat-x, repeat-x, repeat-y;
+  background-position: top, bottom, top left;
+  background-color: #343636;
+  background-size: 1px 20px, 1px 20px, 100% 100%;
   white-space: pre;
 }
 #smallCode.tablet pre,
@@ -192,32 +199,27 @@ html {
 }
 #smallCode.mobile #output,
 #smallCode.pseudomobile #output {
-  background-image: url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/redfade.png');
-  background-repeat: repeat-x, repeat-y;
-  background-position: top, top left;
-  background-color: #4d3e3a;
-  background-size: 1px 20px, 100% 100%;
   color: #e26345;
 }
 #smallCode.smalltablet #output,
 #smallCode.pseudosmalltablet #output {
-  background-image: url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/greenfade.png');
-  background-repeat: repeat-x, repeat-y;
-  background-position: top, top left;
-  background-color: #343636;
-  background-size: 1px 20px, 100% 100%;
-  color: #589358;
-  padding-left: 40px;
+  color: #62bddd;
 }
 #smallCode.tablet #output,
 #smallCode.pseudotablet #output {
-  background-image: url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/shadow-vertical.png'), url('../../images/codeimage/bluefade.png');
-  background-repeat: repeat-x, repeat-y, repeat-y;
-  background-position: top, left, top left;
+  background-image: url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/shadow-lr-du.png'), url('../../images/codeimage/shadow-vertical.png'), url('../../images/codeimage/left-flipped.png');
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-position: top, bottom, left, top left;
   background-color: #1f424c;
-  background-size: 1px 20px, 20px 1px, 100% 100%;
-  color: #62bddd;
+  background-size: 1px 20px, 1px 20px, 20px 1px, 100% 100%;
+  color: #589358;
   padding-left: 30px;
+}
+#smallCode.tablet #input,
+#smallCode.pseudotablet #input {
+  background-image: url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/shadow-lr-du.png'), url('../../images/codeimage/left.png');
+  background-repeat: repeat-x, repeat-x, repeat-y;
+  background-position: top, bottom, right;
 }
 .no-multiplebgs #smallCode #input {
   background: #495c63 url('../../images/codeimage/left.png') repeat-y right;

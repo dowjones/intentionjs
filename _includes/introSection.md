@@ -81,31 +81,31 @@
 
   </pre>
   <pre id="input"><h5>This input</h5>
-    &lt;style&gt;
-    <span class="orangeDark">#smallCode.mobile #output{</span>
-    background:url('orange.png');
-    <span class="orangeDark">}</span>
-    <span class="blueLight">#smallCode.smalltablet #output{</span>
-    background:url('blue.png');
-    <span class="blueLight">}</span>
-    <span class="greenDark">#smallCode.tablet #output{</span>
-    background:url('green.png');
-    <span class="greenDark">}</span>
-    &lt;/style&gt;
+&lt;style&gt;
+   <span class="orangeDark">#smallCode.mobile #output{</span>
+      color:orange
+   <span class="orangeDark">}</span>
+   <span class="blueLight">#smallCode.smalltablet #output{</span>
+      color:blue
+   <span class="blueLight">}</span>
+   <span class="greenDark">#smallCode.tablet #output{</span>
+      color:green
+   <span class="greenDark">}</span>
+&lt;/style&gt;
 
-    &lt;section id="smallCode"
-    <span class="white">intent in-width</span>&gt;
-    &lt;pre id="output"
-    <span class="white">intent in-width</span>
-    <span class="orangeDark">in-mobile-after"#input"</span>
-    <span class="blueLight">in-smalltablet-after="#input"</span>
-    <span class="greenDark">in-tablet-after="#input"&gt;</span>
-    <span class="comment">//output</span>
-    &lt;/pre&gt;
-    &lt;pre id="input"&gt;
-    <span class="comment">//input</span>
-    &lt;/pre&gt;
-    &lt;/section&gt;
+&lt;section id="smallCode"
+   <span class="white">intent in-width</span>&gt;
+   &lt;pre id="output"
+      <span class="white">intent in-width</span>
+      <span class="orangeDark">in-mobile-after"#input"</span>
+      <span class="blueLight">in-smalltablet-after="#input"</span>
+      <span class="greenDark">in-tablet-after="#input"&gt;</span>
+         <span class="comment">//output</span>
+   &lt;/pre&gt;
+   &lt;pre id="input"&gt;
+      <span class="comment">//input</span>
+   &lt;/pre&gt;
+&lt;/section&gt;
   </pre>
 </section>
 <!-- End that too. Back to decently formatted code -->

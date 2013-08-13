@@ -30,22 +30,24 @@
 	{%include introSection.md %}
 
    	<section id="content" class="docsLite" intent in-width in-container in-orientation in-stickdepth>
-   	  <nav id="topNav" intent in-width in-container in-orientation in-stickdepth>
-   	    <div class="inner">
-   	      <ul class="nav_deck" id="sections"></ul>
-   	      <ul id="prevnext">
-   		<li id="prev">&uarr;</li>
-   		<li id="next">&darr;</li>
-   	      </ul>
-   	    </div>
+   	  <nav id="topNav" class="clearFix" intent in-width in-container in-orientation in-stickdepth>
+            <ul id="prevnext">
+            	<li id="prev">&uarr;</li>
+            	<li id="next">&darr;</li>
+            </ul>
+            <ul class="nav_deck" id="sections"></ul>
+            <div class="inner">
+               <p intent in-start-class="inactive" in-mobile-class="inactive" in-pseudomobile-class="inactive"
+                  in-movebrand-class="active" in-sticknav-class="active"><a>intention.js</a></p>
+   	      </div>
    	  </nav>
           <div id="docs">
             {%include homeBasics.md %}
-            {%include daytimeConcept.md %}
             {%include usageIntro.md %}
+            {%include daytimeConcept.md %}
             {%include manipulationIntro.md %}
+            {%include events.md %}
             {%include aboutIntro.md %}
-
 
     </div>
 
