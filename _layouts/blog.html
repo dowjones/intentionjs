@@ -1,61 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- Used by blog/index.html -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta charset="utf-8" /> 
-
-	<link href="assets/css/blog.css" rel="stylesheet">
-	<link href="assets/css/responsivegrid.css" rel="stylesheet">
-
-   <script type="text/javascript" src="//use.typekit.net/wdy0odx.js"></script>
-	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-
-<title>{{ title }}</title>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>intention.js — {{ title }}</title>
+	{% include assets.md dir="../" %}
+	<link rel="stylesheet" type="text/css" href="../assets/css/blog.css" />
+	<script src="../assets/js/blog.js" type="text/javascript"></script>
 </head>
-<body>	
-
-<div class="header"
-intent
-in-mobile-class="Mheader"
-in-tablet-class="header"
-in-standard-class="header">
-	
-	<h1>Intentionjs</h1>
-	
-	
-	<div class="caps"
-	intent
-	in-mobile-class="Mcaps"
-	in-tablet-class="caps"
-	in-standard-class="caps">BLOG</div>
-
+<body intent in-orientation>
+<div id="all" intent in-width in-container in-orientation>
+	<header intent
+		in-container
+		in-width>
+		<h1><a href="../">intention.js</a></h1>
+		<nav>
+			<ul>
+				{% include nav.md dir="../" cur="blog" %}
+			</ul>
+		</nav>
+	</header>
+	<section id="heading" intent 
+		in-container
+		in-width> <!-- Hide this functionality on *real* mobile devices but not on faked ones-->
+		<div class="inner">
+			<h2><a href="{{ page.url }}">{{ page.title }}</a></h2>
+		</div>
+	</section>
+	<section id="content" class="blog" intent in-width in-container in-orientation>
+	   <nav id="topNav" class="tagNav" intent in-width>
+	   	<div class="inner">
+	   		<a class="example" href="tagged/example.html">Examples</a>
+	   		<a class="release" href="tagged/release.html">Releases</a>
+	   		<!--<a class="update" href="tagged/update.html">Updates</a>--> <!-- commented until we have an actual update post to warrant a link -->
+	   	</div>
+	   </nav>
+		<div class="inner" class="clearFix">
+			{{ content }}
+		</div>
+		
+	</section>
+	{% include footer.md %}
 </div>
-	
-
-<div class="nav"
-intent
-in-mobile-class="Mnav"
-in-tablet-class="nav"
-in-standard-class="nav">
-
-	
-	<a href="documentation.html" intent in-mobile-href="documentation.html#content">DOCUMENTATION</a>	
-	
-	<a href="examples.html" intent in-mobile-href="examples.html#content">EXAMPLES</a>
-	</div>
-
-
-<div class="content"
-intent
-in-mobile-class="Mcontent"
-in-tablet-class="content"
-in-standard-class="content">
-{{content}}
-</div>
-
-
-	<script data-main="main" src="test/vendor/require.js"></script>
-
-</body>	
+<script src="../assets/js/context.js" type="text/javascript"></script>
+</body>
 </html>

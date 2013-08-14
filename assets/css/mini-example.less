@@ -1,0 +1,187 @@
+@text:			rgb(53, 47, 41);
+@lightText:		rgb(249, 239, 212);
+@link:			#000;
+@linkVisited:	#000;
+@linkActive:	#000;
+@background:	rgb(32, 59, 68);
+@background2:	rgb(186, 198, 204);
+@headerbg:		rgb(215, 220, 219);
+@navbg:			rgb(244, 241, 234);
+@orange:		rgb(234, 134, 90);
+@green:			rgb(88, 147, 88); 
+@greenText:		rgb(202, 229, 202);
+@greenTextDark:	rgb(12, 48, 12);
+@blue:			rgb(56, 116, 142); 
+@blueText:		rgb(208, 224, 239); 
+@highlight:		rgb(127, 178, 127); 
+@highlightBorder: rgb(145, 188, 145);
+@footer:		@blue;
+.transitions(@duration){
+	-webkit-transition: all @duration ease-in-out;
+	-moz-transition: all @duration ease-in-out;
+	-o-transition: all @duration ease-in-out;
+	-ms-transition: all @duration ease-in-out;
+	transition: all @duration ease-in-out;
+}
+
+#resizeExample{
+	width:100%;
+	height:160px;
+	margin-bottom:20px;
+	background:url('../../images/resizeexamplebg.png') no-repeat center;
+}
+#resizable{
+	width: 175px;
+	height: 160px;
+	min-width:45px;
+	min-height:160px;
+	max-width: 100%;
+	max-height: 160px;
+	border: 6px solid @navbg;
+	background: @navbg;
+	overflow: hidden;
+	margin: auto;
+	position: relative;
+	box-sizing:border-box;
+}
+.ui-resizable-handle{
+	position:absolute;
+}
+.ui-icon-gripsmall-diagonal-se{
+	width:17px;
+	height:17px;
+	bottom:0;
+	right:0;
+	background:url('../../images/resize-icon.png') no-repeat bottom right;
+	cursor:nwse-resize;
+}
+.ui-resizable-s{
+	width:100%;
+	height:7px;
+	bottom:0;
+	cursor:s-resize;
+}
+.ui-resizable-e{
+	width:7px;
+	height:100%;
+	right:0;
+	cursor:e-resize;
+}
+
+#miniFade{
+	width:100%;
+	height:18px;
+	padding-bottom:3px;
+	background:url('../../images/minifade.png') repeat-x bottom;
+	display:none;
+	position:absolute;
+	bottom:0;
+	text-align:center;
+	color:darken(@navbg, 50%);
+	z-index:1;
+}
+.orange{
+	min-height: 75px;
+	float: left;
+	font-size:34px;
+	color:darken(@orange, 25%);
+	div{
+		background: @orange;
+		height: 50px;
+		padding:3px;
+	}
+	div+div{
+		height: 20px;
+		margin-top: 5px;
+		clear: both;
+	}
+	
+}
+.orange.small, .orange.tiny{
+	width: 100%;
+	font-size:20px;
+}
+.orange.small{	font-size:20px; }
+.orange.tiny{	font-size:12px; overflow:hidden;}
+.orange.large{
+	width: 73%;
+	min-width: 60px;
+	max-width: 285px;
+}
+.blue{
+	background: @footer !important;
+}
+.blue.large{
+	width: 25%;
+	min-width: 25px;
+	max-width: 90px;
+	float: left;
+	height: 100px;
+	margin-left: 6px;
+	position: relative;
+}
+.green a, .green{
+	color: @greenText;
+	text-decoration: none;
+	font-family: Helvetica, Arial, sans-serif;
+	text-align:center;
+	div{
+		background: @green !important;
+	}
+}
+.green.tiny{
+	display: none;
+}
+.green.small{
+	width: 100%;
+	margin-top: 6px;
+	text-align: center;
+	font-size: 20px;
+	div{
+		width: 20%;
+		height: 25px;
+		margin-top: 6px;
+		float: left;
+		display: inline-block;
+	}
+	div+div{
+		margin-left: 6px;
+	}
+}
+.green.large{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	font-size: 20px;
+	div{
+		width: 75%;
+		height: 25px;
+		margin: auto;
+	}
+	div+div{
+		margin-top: 6px;
+	}
+	div:last-child{
+		margin-bottom: 6px;
+	}
+}
+
+//Time-based
+#timeExample{
+	width:100%;
+	height:100px;
+	padding:25px 10px 10px 10px;
+	margin-bottom:20px;
+	text-align:center;
+	background-image:url('../../images/mezz.png');
+	box-sizing:border-box;
+	color:white;
+	font-size:36px;
+	.transitions(.5s);
+	
+}
+.night{	background: rgb(6, 32, 39); }
+.evening{	background: rgb(20, 58, 55); }
+.sunset{	background: rgb(229, 131, 65); }
+.day{	background: rgb(150, 210, 226); }
+.morning{	background: rgb(175, 65, 104); }

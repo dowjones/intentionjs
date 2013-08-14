@@ -1,0 +1,34 @@
+---
+layout: blog
+title: "Recent Things"
+---
+
+{% for post in site.posts %}
+<article>
+    <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+    {% if post.sub %}<h4>{{ post.sub }}</h4>{% endif %}
+    <section class="header"><p class="meta"><a href="{{ post.url }}">{{ post.date | date: "%B %d, %Y" }}</a></p><p class="tags">{% for tags in post.tags %}<a href="tagged/{{ tags }}.html" class="{{ tags }}">{{ tags }}</a> {% endfor %}</p></section>
+    {% if post.img %}
+    	<section class="img">
+    		<div class="inner">
+    			<div class="shadow"> </div>
+		    	<img src="../blog/images/{{ post.img }}" />
+		    </div>
+	    </section>
+    {% endif %}
+</article>
+{% endfor %}
+
+<!--If you want the sidebar back, you'll have to change the css so #posts is no longer 100% of the width in standard and tablet-->
+<!--<section id="sidebar">
+	<div class="pagination">
+		<h3>Page {{ paginator.page }} of {{ paginator.total_pages }}</h3>
+		{% if paginator.previous_page %}
+			<div class="prev"><a href="{{ paginator.previous_page_path }}">&lt; Older</a>
+		{% endif %}
+		{% if paginator.next.page %}
+			<div class="next"><a href="{{ paginator.next_page_path }}">Newer &gt;</a>
+		{% endif %}
+		<div class="clear"></div>
+	</div>
+</section>-->

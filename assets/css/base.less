@@ -1,0 +1,577 @@
+//Widths
+@12col:	940px;
+@11col:	860px;
+@10col:	780px;
+@9col:	700px;
+@8col:	620px;
+@7col:	540px;
+@6col:	460px;
+@5col:	380px;
+@4col:	300px;
+@3col:	220px;
+@2col:	140px;
+@1col:	60px;
+@gutter:20px;
+
+//Actual Colors
+@offBlack:			rgb(53, 47, 41); //@text
+@gray:				rgb(200, 200, 200);
+@offWhite:			rgb(244, 241, 234); //@navbg
+@lightYellow:		rgb(249, 239, 212);//@lightText
+@periwinkle:		rgb(186, 198, 204);//@code
+@lightBlue:			rgb(208, 224, 239); //@blueText
+@blue:				rgb(56, 116, 142); //@footer
+@mediumBlue:		rgb(32, 59, 68); //@background
+@darkBlue:			rgb(12, 38, 45); //@blueDark
+@lightBlueGray:	rgb(215, 220, 219); //@headerbg
+@blueGray:			rgb(186, 198, 204); //@background2
+@darkBlueGray:		rgb(81, 96, 101); //code comments
+@lightGreen:		rgb(202, 229, 202); //@greenText
+@green:				rgb(88, 147, 88);
+@darkGreen:			rgb(12, 48, 12);
+@seafoam:			rgb(127, 178, 127);
+@lightSeafoam:		rgb(145, 188, 145);
+@orange:			   rgb(234, 134, 90);
+@lightOrange:		rgb(243, 201, 190);
+@darkOrange:		rgb(226, 99, 69);	
+
+//Application specific
+@link:	@periwinkle;
+@text:	@offBlack;
+
+//Timesavers
+.columns(@num){
+	columns:@num;
+	-webkit-columns:@num;
+	-moz-columns:@num;
+}
+.roundedCorners(@radius){
+	border-radius:@radius;
+	-webkit-border-radius:@radius;
+	-moz-border-radius:@radius;
+}
+.transitions(@duration){
+	-webkit-transition: all @duration ease-in-out;
+	-moz-transition: all @duration ease-in-out;
+	-o-transition: all @duration ease-in-out;
+	-ms-transition: all @duration ease-in-out;
+	transition: all @duration ease-in-out;
+}
+.colMargin{	margin:0 @gutter; }
+.colPadding{ padding:0 @gutter; }
+.halfMargin{ margin:0 @gutter/2; }
+.halfPadding{ padding:0 @gutter/2; }
+.mobileWrapping{
+	width:auto;
+	.halfMargin;
+	.halfPadding;
+	box-sizing:border-box;
+}
+.noMarginWrapping{
+	width:auto;
+	.colPadding;
+	box-sizing:border-box;
+}
+
+.hide{ display:none; }
+.show{ display:block; }
+
+//General Rules
+h1{	font-size:48px; font-weight:bold; }
+h2{ font-size:40px; }
+h3{ font-size:26px; font-weight:normal; line-height: 35px;}
+h4{ font-size:24px; }
+h5{ font-size:22px; }
+p { line-height: 24px; }
+
+
+//Check these to see if they remain accurate
+.mobile h1{	font-size:40px; font-weight:bold; }
+.mobile h2{ font-size:24px; }
+.mobile h3{ font-size:24px; font-weight:normal; line-height: 30px;}
+.mobile h4{ font-size:22px; }
+.mobile h5{ font-size:19px; }
+
+
+//General spacing
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p{ margin-top:5px; }
+p+p{ text-indent:16px; margin-top:@gutter; }
+p+div.highlight, div.highlight+p{ margin-top: @gutter/2; }
+.highlight+.highlight, .highlight+pre, pre+.highlight{ margin-top:@gutter; }
+p+pre, pre+p{ margin-top: @gutter/2; }
+
+
+html, body{ font-size:62.5%; height:100%; }
+html.landscape, body.landscape{ font-size:25% !important; }
+body{
+	background:@gray url('../../images/pagebg.png');
+	font-family:Helvetica, Arial, sans-serif;
+}
+
+a, a:visited{ color: @link; text-decoration:none; }
+.clearFix:after {
+	height: 0;
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+}
+.clearFix {
+	display: inline-block;
+}
+.no-indent p+p{ text-indent:0; }
+.wrap{ white-space: wrap; }
+/* Hides from IE-mac \*/
+* html .clearFix { height: 1%; }
+.clearFix { display: block; }
+/* End hide from IE-mac */
+
+// Element specific stuff
+
+// Body wrapper
+#all{
+	height:100%;
+	margin:auto;
+	background:@mediumBlue;
+	color:@text;
+	font-size: 16px;	
+	box-shadow: 0px 0px 30px rgba(0,0,0,.25);	
+	.roundedCorners(10px);
+	border:1px transparent;
+	position:relative;
+}
+#all.pseudomobile, #all.pseudosmalltablet, #all.pseudotablet{
+	margin:auto;
+	overflow:auto;
+	top:81px;
+}
+#all.pseudomobile{ width:320px; height:480px; }
+#all.pseudosmalltablet { width:600px; height:800px; }
+#all.pseudotablet{ width:780px; height:1024px;}
+#all.pseudohdtv{ width:1920px; height:1080px; padding-top:46px; }
+
+//Header: logo, navigation
+header{
+	width:100%;
+	background:@blueGray;
+	h1{
+	   font-size:30px;
+	   font-weight:normal;
+	   a, a:visited{ color:@darkBlue; }
+	}
+	nav{
+		background:@offWhite;
+		border-bottom: 13px solid @orange;
+		a, a:visited{ color:@text; }
+		li {
+			list-style:none;
+			display:inline-block;
+			padding:6px @gutter/2 6px @gutter/2;
+		}
+		li:first-of-type{
+			padding-left:0px;
+		}
+		li.active{
+			border-bottom: 8px solid fadeout(@lightOrange, 30%);
+		}
+	}
+}
+header.standard, header.hdtv{
+	h1{
+		width: @10col;
+		padding: 10px @gutter 10px @gutter;
+		margin:auto;
+	}
+	nav{
+		width:@10col;
+		.colPadding;
+		margin:auto;
+		font-size: 19px;
+	}
+}
+header.tablet, header.pseudotablet, header.standard.landscape{
+	h1, nav{
+		.mobileWrapping;
+	}
+	nav li { height:auto; }
+	h1{ padding:@gutter/2; }
+}
+header.mobile, header.standard.pseudomobile, header.smalltablet, header.standard.pseudosmalltablet,
+header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobile{
+	box-sizing:border-box;
+	h1, nav{
+		.mobileWrapping;
+	}
+	h1{ 
+	   padding:@gutter/2;
+	   font-size:30px;
+	   font-weight:normal;
+	}
+	nav{ font-size:15px; }
+	li{ height:15px;}
+}
+
+//Heading: Usually a page's title. On index, it's the Try It bar.
+#scrollWrapper>#heading, #all>#heading{
+	width:100%;
+	background:@blueGray;
+	.inner{
+		padding:@gutter;
+		border-top:20px solid @darkOrange;
+		background: @lightOrange;
+		background-image: url('../../images/mezz.png'), url('../../images/tryitbg.png');
+		background-repeat: repeat, repeat-x;
+		background-position: top, top;
+	}
+	h2{ padding:0; }
+	h2 a{ color:@text; }
+}
+#scrollWrapper>#heading.standard, #scrollWrapper>#heading.landscape, #scrollWrapper>#heading.hdtv,
+#all>#heading.standard, #all>#heading.landscape, #all>#heading.hdtv{
+	.inner{
+		width:@10col;
+		margin:auto;
+	}
+}
+#scrollWrapper>#heading.tablet, #scrollWrapper>#heading.smalltablet, #scrollWrapper>#heading.mobile, 
+#scrollWrapper>#heading.standard.pseudotablet, #scrollWrapper>#heading.standard.pseudosmalltablet, #scrollWrapper>#heading.standard.pseudomobile,
+#scrollWrapper>#heading.hdtv.pseudotablet, #scrollWrapper>#heading.hdtv.pseudosmalltablet, #scrollWrapper>#heading.hdtv.pseudomobile,
+#all>#heading.tablet, #all>#heading.smalltablet, #all>#heading.mobile, 
+#all>#heading.standard.pseudotablet, #all>#heading.standard.pseudosmalltablet, #all>#heading.standard.pseudomobile,
+#all>#heading.hdtv.pseudotablet, #all>#heading.hdtv.pseudosmalltablet, #all>#heading.hdtv.pseudomobile{
+	.inner{
+		.mobileWrapping;
+		padding:@gutter @gutter/2;
+		h2{ font-size: 28px; }
+	}
+}
+
+// Content: what's on a darkblue background
+#content{
+	width:100%;
+	background: @mediumBlue url('../../images/docubg.png') repeat-x top;
+	color: @lightYellow;
+	position:relative;
+	a{ color:@periwinkle; }
+	a:hover{ color:white; }
+	.inner{
+		padding:@gutter 0 @gutter*2 0;
+	}
+	article{
+		box-sizing:border-box;
+		position:relative;
+		
+		//General elements
+		
+		
+		//Spacing stuff
+		section+.thirds, .thirds+section,
+		p+.highlight, .highlight+p,
+		h1+p, h2+p, h3+p,
+		h4+p, h5+p, h6+p,
+		h1+.highlight,  h2+.highlight, 
+		h3+.highlight,  h4+.highlight, 
+		h5+.highlight,  h6+.highlight,
+		h1+pre, h2+pre, h3+pre, h4+pre, h5+pre, h6+pre,
+		pre+h1, pre+h2, pre+h3, pre+h4, pre+h5, pre+h6,
+		p+ul, ul+p{
+			margin-top:@gutter;
+		}
+		p+h1, p+h2, p+h3, p+h4, p+h5, p+h6,
+		.highlight+h1,.highlight+h3,.highlight+h5,
+		.highlight+h2,.highlight+h4,.highlight+h6
+		{
+			margin-top:2*@gutter;
+		}
+		p+ol, ol+p{
+		   margin:@gutter/2;
+		}
+		li+li{
+		   margin-top:7px;
+		}
+	}
+	code{
+		color:@periwinkle;
+		padding:0 3px 0 3px;
+		margin:0 2px 0 2px;
+		.roundedCorners(5px);
+		border: 1px double @lightBlueGray;
+		box-sizing:border-box;
+		background: darken(@mediumBlue, 5%);
+		white-space:nowrap;
+	}
+	pre{ 
+		padding:6px;
+		border:1px double @lightBlueGray;
+		box-sizing:border-box;
+		font-size:14px;
+		color:@periwinkle;
+		background:darken(@mediumBlue, 5%);
+		white-space: pre;	
+		.comment{ color:@darkBlueGray; }
+		code{
+			border:none;
+			background:transparent;
+			padding:0;
+			margin:0;
+			white-space:pre-wrap;
+		}
+	}
+	.jump{
+		padding:@gutter @gutter/2 0 @gutter/2;
+		box-sizing:border-box;
+		clear:both;
+		text-align:right;
+		cursor:pointer;
+		a{
+			.roundedCorners(18px);
+			background:@green;
+			padding:5px 9px;
+			color:@mediumBlue;
+			font-weight:bold;
+		}
+	}
+	//Spacing stuff
+	p+h3, h3+p{ margin-top:@gutter; }
+}
+#content.standard, #content.hdtv{
+	.inner{
+		width:@10col;
+		margin:auto;
+	}
+	article{
+		width:@10col;
+		margin:auto;
+		position:relative;
+		z-index:5;
+		h2{ width:100%; }
+		h3{ font-size:30px; font-weight:normal; }
+		h4{ font-size:20px; font-weight:normal; }
+	}
+}
+#content.tablet, #content.smalltablet, #content.mobile,
+#content.standard.pseudotablet, #content.standard.pseudosmalltablet, #content.standard.pseudomobile,
+#content.hdtv.pseudotablet, #content.hdtv.pseudosmalltablet, #content.hdtv.pseudomobile{
+	.inner{
+		.noMarginWrapping;
+		padding:@gutter 0;
+		section, p, ul{ padding:0 @gutter/2; }
+		pre{
+			border-left:none;
+			border-right:none;
+			padding:@gutter/2;
+			position:relative;
+			z-index:5;
+		}
+	}
+	article{ //<----------- Gets the index page working right. Maybe should go on index.less
+	   //General Elements
+	   ul, ol{
+   	   padding-left:@gutter/2;
+	   }
+		h2, h3, h4, h5, h6, p, ul{
+			padding: 0 @gutter/2;
+		}
+		pre{
+			border-left:none;
+			border-right:none;
+			padding:@gutter/2;
+			position:relative;
+			z-index:5;
+		}
+		li p{
+			padding:0px !important; //Sorry to use this, but I'm not willing to change the nested structure to accommodate this stupid code.
+		}
+	}
+}
+#content.standard.pseudotablet, #content.standard.pseudosmalltablet, #content.standard.pseudomobile,
+#content.hdtv.pseudotablet, #content.hdtv.pseudosmalltablet, #content.hdtv.pseudomobile{
+	.jump{ display:none; } //Can't get the "Back to top" links to work, so I'll just hide them :o
+}
+#content.smalltablet, #content.standard.pseudosmalltablet, #content.hdtv.pseudosmalltablet,
+#content.mobile, #content.standard.pseudomobile, #content.hdtv.pseudomobile{
+	pre{
+		font-size:13px;
+	}
+}
+
+
+//Left-side navigation
+#leftNav{
+	width:200px;
+	height:100%;
+	padding-top:@gutter;
+	position:absolute;
+	top:0;
+	left:-206px;
+	z-index:6;
+	text-align:right;
+	.transitions(.5s);
+	box-sizing:border-box;
+	background:@blue; //IE8 fallback
+	background:fadeout(@blue, 10%);
+	border-right:3px solid @lightBlue;
+	h6{ //instructions
+		width:100%;
+		padding:6px 6px 6px 0;
+		margin: 0 0  @gutter 0;
+		background:@blue;
+		font-size:14px;
+		position:absolute;
+		left:100%;
+	}
+	li+li{ margin-top:@gutter; }
+	li{ //a node on the line
+		position:relative;
+		right:0;
+		list-style:none;
+		color:white;
+		.transitions(.5s);
+		z-index:1;
+		div{ display:inline-block }
+		.label{
+			width:auto;
+			padding-right:19px;
+		}
+		.circle{
+			width:10px;
+			height:10px;
+			.roundedCorners(50%);
+			border:3px solid @orange;
+			background:@mediumBlue;
+			position:absolute;
+			right:-9px;
+			top:2px;
+			box-shadow:0 0 15px overlay(@orange, @mediumBlue);
+		}
+		ul{ //Base subTitle menu, hidden when not in the main article
+			max-height:13px;
+			margin-top:0;
+			font-size:14px;
+			overflow:hidden;
+			-webkit-transition: max-height .5s ease-in-out, padding .5s ease-in-out, background .75s linear;
+			li a{ padding-bottom:2px; color:lighten(@periwinkle, 15%); }
+			li.active a{ border-bottom:1px dashed lighten(@periwinkle, 15%); }
+			li+li { margin-top:@gutter/2; }
+		}
+		ul:before{ content:'...'; }
+	}
+	li.active{ //When in that titleDepth context
+		.circle{ background:@orange; }
+		ul{ 
+			max-height:999px;
+			padding:10px 19px 15px 0;
+			margin-top:5px;
+			background:@green;
+		}
+		ul:before{ content:'' }
+	}
+}
+#leftNav.fixed{ position:fixed; } //scrollDepth sticky
+#leftNav.hdtv{ //slide over in luxury displays
+	-webkit-transform: translateX(206px);
+	-moz-transform: translateX(206px);
+	-o-transform: translateX(206px);
+	-ms-transform: translateX(206px);
+	transform: translateX(206px);
+}
+.no-cssanimations #leftNav.hdtv{ //IE8 css3 fallback
+	left:0;
+}
+#leftNav.pseudotablet, #leftNav.pseudosmalltablet, #leftNav.pseudomobile{
+	-webkit-transform: translateX(0px);
+	-moz-transform: translateX(0px);
+	-o-transform: translateX(0px);
+	-ms-transform: translateX(0px);
+	transform: translateX(0px);		
+}
+
+//Content-top nav
+#content #topNav{
+   width:100%;
+   padding:5px;
+   border-top:13px solid @blue;
+   box-sizing:border-box;
+   z-index:20;
+   h6{ display:none; }
+   a{ color:@lightYellow; }
+   .inner{
+      box-sizing:border-box;
+      height:40px;
+   }
+}
+#content{
+   #topNav.hdtv, #topNav.standard{
+      .inner{
+         width:@10col;
+         padding:0;
+         margin:auto;
+      }
+   }
+   #topNav.tablet, #topNav.smalltablet, #topNav.mobile{
+      .inner{
+         width:auto;
+         padding:0;
+      }
+   }
+   #topNav.mobile{
+      .inner p{
+         opacity:0;
+      }
+      ul#sections{
+         width:auto;
+         left:5px;
+         
+      }
+   }
+}
+#topNav.pseudotablet, #topNav.pseudosmalltablet, #topNav.pseudomobile{
+	display:none;
+}
+#topNav.sticknav{
+	position:fixed;
+	top:0;
+}
+
+footer{
+	width:100%;
+	background:@blue;
+	text-align:center;
+	color:@lightBlue;
+	z-index:4;
+	position:relative;
+	.inner{
+		width:50%;
+		margin:auto;
+		box-sizing:border-box;
+	}
+	h1{
+		font-size:60px;
+		font-weight:normal;
+		color:@orange;
+	}
+}
+footer.standard, footer.hdtv{
+	.inner{
+		width:@7col;
+		margin:auto;
+		padding:@gutter/2 @gutter @gutter @gutter;
+	}
+}
+footer.mobile, footer.pseudomobile, footer.smalltablet, footer.pseudosmalltablet, footer.tablet, footer.pseudotablet{
+	.inner{
+		width:auto;
+		padding:@gutter;
+	}
+}
+
+//ie8 fixes and fallbacks
+.no-multiplebgs{
+	#scrollWrapper>#heading{
+		.inner{
+			background-image: url('../../images/tryitbg.png'); //IE8 fallback
+			background-repeat:repeat-x; //IE8 fallback
+			background-position:top; //IE8 fallback
+		}
+	}
+}

@@ -1,15 +1,15 @@
 ## Example Quick Links
-* [Animation](/examples/animation) 
-* [Grid Demo](/examples/grid) 
-* [Performance](/examples/performance) 
-* [Scroll Depth](/examples/scrolldepth) 
-* [WSJ Example](/examples/wsj) 
-* [CSS Asset Loader](/examples/css_loader) 
-* [Media Query Optimizer](/examples/mediaquery_link) 
-* [Twitter Bootstrap Grid](/examples/bootstrap_grid) 
-* [960gs Fluid](/examples/960gs) 
+* [Animation](/examples/animation)
+* [Grid Demo](/examples/grid)
+* [Performance](/examples/performance)
+* [Scroll Depth](/examples/scrolldepth)
+* [WSJ Example](/examples/wsj)
+* [CSS Asset Loader](/examples/css_loader)
+* [Media Query Optimizer](/examples/mediaquery_link)
+* [Twitter Bootstrap Grid](/examples/bootstrap_grid)
+* [960gs Fluid](/examples/960gs)
 * [Touch Screen](/examples/touch)
-* [Tests](/test/) 
+* [Tests](/test/)
 
 ------
 
@@ -35,8 +35,8 @@ Animation illustrates non-traditional uses of contexts. An animated character wa
 	    	});
 
 		var lastXOffset = 0,
-			flip = intent.responsive([{name:'back', val:0}, 
-					{name:'forth', val:1/0}], 
+			flip = intent.responsive([{name:'back', val:0},
+					{name:'forth', val:1/0}],
 					function(measure, ctx){
 						if((measure - lastXOffset) < ctx.val) {
 							lastXOffset = measure;
@@ -50,7 +50,7 @@ Animation illustrates non-traditional uses of contexts. An animated character wa
 
 		walking();
 		flip();
-		
+
 		intent.elements(document);
 
 		$(window).on('scroll', walking);
@@ -58,15 +58,15 @@ Animation illustrates non-traditional uses of contexts. An animated character wa
 ```
 ------
 
-### [Grid Demo](/examples/grid) 
+### [Grid Demo](/examples/grid)
 Core grid manipulation functionality. Illustrates context-variable class modifications and move functionality.
 
 #### Context-specific re-classing
 ```html
 <section class="col10wide column"
-	in data-in-base-class="column" 
-		 data-in-mobile-class="col3wide" 
-		 data-in-tablet-class="col6wide" 
+	in data-in-base-class="column"
+		 data-in-mobile-class="col3wide"
+		 data-in-tablet-class="col6wide"
 		 data-in-standard-class="col10wide">
 	...
 </section>
@@ -88,7 +88,7 @@ Core grid manipulation functionality. Illustrates context-variable class modific
 
 ------
 
-### [Performance](/examples/performance) 
+### [Performance](/examples/performance)
 Image-loading as speed test, illustrating how early in the page-load the browser can respond to intentional deformations.
 
 ```html
@@ -121,4 +121,3 @@ $(window).on('scroll', depthTracker);
 ```
 
 ------
-

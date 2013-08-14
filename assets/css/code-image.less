@@ -1,0 +1,216 @@
+@offBlack:			rgb(53, 47, 41); //@text
+@gray:				rgb(200, 200, 200);
+@offWhite:			rgb(244, 241, 234); //@navbg
+@lightYellow:		rgb(249, 239, 212);//@lightText
+@periwinkle:		rgb(186, 198, 204);//@code
+@lightBlue:			rgb(208, 224, 239); //@blueText
+@blue:				rgb(56, 116, 142); //@footer
+@mediumBlue:		rgb(32, 59, 68); //@background
+@darkBlue:			rgb(12, 38, 45); //@blueDark
+@lightBlueGray:		rgb(215, 220, 219); //@headerbg
+@blueGray:			rgb(186, 198, 204); //@background2
+@darkBlueGray:		rgb(81, 96, 101); //code comments
+@lightGreen:		rgb(202, 229, 202); //@greenText
+@green:				rgb(88, 147, 88);
+@darkGreen:			rgb(12, 48, 12);
+@seafoam:			rgb(127, 178, 127);
+@lightSeafoam:		rgb(145, 188, 145);
+@orange:			rgb(234, 134, 90);
+@lightOrange:		rgb(243, 201, 190);
+@darkOrange:		rgb(226, 99, 69);	
+
+@background:	rgb(73, 92, 99);
+@text:			rgb(186, 198, 204);
+@white:			rgb(244, 241, 234);
+@orangeDark:	rgb(226, 99, 69);
+@orangeLight:	rgb(234, 134, 90);
+@blueDark:		rgb(56, 116, 142);
+@blueBlack:		rgb(12, 38, 45); 
+@blueLight:		rgb(98, 189, 221);
+@greenDark:		rgb(88, 147, 88);  
+@greenLight:	rgb(127, 178, 127); 
+
+html{
+	font-size:62.5%;
+}
+#container{
+	width: 820px;
+	margin: auto;
+}
+.clear{ clear:both; }
+.selectable{ position:relative; z-index:10; }
+
+#codeImage.mobile, #codeImage.pseudomobile, #codeImage.smalltablet, #codeImage.pseudosmalltablet, #codeImage.tablet, #codeImage.pseudotablet{
+	display:none;
+}
+#codeImage{
+	background:@text;
+	.inner{
+		width:900px;
+		margin:auto;
+		background: @background;
+		border-top:6px @blueDark solid;
+		border-bottom:6px @blueDark solid;
+		color: @text;
+		font-family:'Courier', monospace;
+		font-size:12px;
+		line-height:17px;
+		position:relative;
+		pre{
+			white-space:pre;
+			h5{
+				font-size:15px;
+				font-family:Helvetica, Arial, san-serif;
+				color:@white;
+				margin-bottom:-12px;
+			}
+		}
+	}
+	#rawCodeImage, #standardCodeImage, #mobileCodeImage{
+		float:right;
+		box-sizing:border-box;
+//		white-space:pre-wrap;
+	}
+	#rawCodeImage{
+		width: 567px;
+		background:url('../../images/codeimage/left.png') repeat-y right;
+		float: left;
+		padding:15px 0 15px 25px
+	}
+	#standardCodeImage, #mobileCodeImage{
+		width: 333px;
+	}
+}
+/* Color styles */
+.white{	color: @white; }
+.orangeDark{	color: @orangeDark; }
+.orangeLight{	color: @orangeLight; }
+.greenDark{	color: @greenDark; }
+.greenLight{	color: @greenLight; }
+.blueDark{	color: @blueDark; }
+.blueLight{	color: @blueLight; }
+
+/* Backgrounds */
+#standardGreen, #standardBlue, #mobileRed, #mobileBlue {
+	box-sizing: border-box;
+}
+#standardRed, #standardGreen, #standardBlue, #mobileRed, #mobileGreen, #mobileBlue{ //all of them
+	padding:1px 0 1px 25px;
+	background-size:355px 1px;
+}
+#standardRed, #mobileGreen{
+	padding-top:15px;
+}
+#mobileBlue{
+	padding-bottom:15px;
+}
+#standardRed{ background:url('../../images/codeimage/standardred.png') repeat-y; }
+#standardGreen{ background:url('../../images/codeimage/standardgreen.png') repeat-y; }
+#standardBlue{ background:url('../../images/codeimage/standardblue.png') repeat-y; }
+#mobileRed{ background:url('../../images/codeimage/mobilered.png') repeat-y;}
+#mobileGreen{ background:url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/mobilegreen.png'); background-repeat: repeat-x, repeat-y;  }
+#mobileBlue{ background:url('../../images/codeimage/mobileblue.png') repeat-y; }
+.no-multiplebgs {
+	#standardBlue{ padding-bottom:3px; }
+	#mobileGreen{ background: url('../../images/codeimage/mobilegreen.png') repeat-y; }
+}
+
+/* line connectors */
+#connections{
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0;
+	left:0;
+}
+
+
+
+
+//Mobile code images
+#smallCode.standard, #smallCode.pseudostandard, #smallCode.hdtv{
+	display:none;
+}
+#smallCode.mobile, #smallCode.standard.pseudomobile, #smallCode.hdtv.pseudomobile,
+#smallCode.smalltablet, #smallCode.standard.pseudosmalltablet, #smallCode.hdtv.pseudosmalltablet,
+#smallCode.tablet, #smallCode.standard.pseudotablet, #smallCode.hdtv.pseudotablet{
+	display:block;
+}
+#smallCode{
+	border-top:13px darken(@blue, 10%) solid;
+	display:block;
+	pre{
+		white-space:pre;
+		color:@text;
+		font-size:14px;
+		padding:6px;
+		h5{
+			font-size:15px;
+			font-family:Helvetica, Arial, sans-serif;
+			color:@white;
+			text-align:right;
+		}
+	}
+	pre#input{
+	   padding:20px 6px 20px 6px;
+		background-color:@background;
+		background-image:url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/left.png');
+		background-repeat: repeat-x,repeat-y;
+		background-position:top, right;
+	}
+	pre#output{
+   	padding:20px 6px 20px 6px;
+		background-image:url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/shadow-lr-du.png'), url('../../images/codeimage/left-flipped.png');
+		background-repeat:repeat-x, repeat-x, repeat-y;
+		background-position:top, bottom, top left;
+		background-color:rgb(52, 54, 54);
+		background-size:1px 20px, 1px 20px, 100% 100%;
+		white-space:pre;
+	}
+}
+#smallCode.tablet, #smallCode.pseudotablet {
+	pre{
+		float:left;
+		width:50%;
+		box-sizing:border-box;
+	}
+}
+#smallCode.hdtv.pseudotablet, #smallCode.hdtv.pseudosmalltablet, #smallCode.hdtv.pseudomobile{
+	border-bottom:13px solid @blue;
+}
+
+//Change the output colors based on the current context
+#smallCode.mobile #output, #smallCode.pseudomobile #output{  
+	color:@orangeDark;
+}
+#smallCode.smalltablet #output, #smallCode.pseudosmalltablet #output{
+	color:@blueLight;
+}
+#smallCode.tablet #output, #smallCode.pseudotablet #output{
+	background-image:url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/shadow-lr-du.png'), url('../../images/codeimage/shadow-vertical.png'), url('../../images/codeimage/left-flipped.png');
+	background-repeat:repeat-x, repeat-x, repeat-y, repeat-y;
+	background-position:top, bottom, left, top left;
+	background-color:rgb(31, 66, 76);
+	background-size:1px 20px, 1px 20px, 20px 1px, 100% 100%;
+	color:@greenDark;
+	padding-left:30px;
+}
+#smallCode.tablet #input, #smallCode.pseudotablet #input{
+   background-image:url('../../images/codeimage/shadow-horizontal.png'), url('../../images/codeimage/shadow-lr-du.png'), url('../../images/codeimage/left.png');
+   background-repeat: repeat-x, repeat-x, repeat-y;
+   background-position:top, bottom, right;
+}
+.no-multiplebgs{
+	#smallCode #input{
+		background:@background url('../../images/codeimage/left.png') repeat-y right;
+	}
+	#smallCode.mobile #output, #smallCode.pseudomobile #output{
+		background:rgb(77, 62, 58) url('../../images/codeimage/redfade.png') repeat-y top right;
+	}
+	#smallCode.smalltablet #output, #smallCode.pseudosmalltablet #output{
+		background:rgb(52, 54, 54) url('../../images/codeimage/greenfade.png') repeat-y top right;
+	}
+	#smallCode.tablet #output, #smallCode.pseudotablet #output{
+		background:rgb(31, 66, 76) url('../../images/codeimage/bluefade.png') repeat-y top right;
+	}
+}
