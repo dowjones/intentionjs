@@ -1,5 +1,5 @@
 /*!
- * intention.js Library v0.9.6.3
+ * intention.js Library v0.9.7
  * http://intentionjs.com/
  *
  * Copyright 2011, 2013 Dowjones and other contributors
@@ -21,7 +21,7 @@
 
   var Intention = function(params){
     var intent = _.extend(this, params,
-        {_listeners:{}, contexts:[], elms:$(), axes:{}, priority:[]});
+                          {_listeners:{}, contexts:[], elms:$(), axes:{}, priority:[]});
 
     return intent;
   };
@@ -38,17 +38,16 @@
       for(i=0; i<5; i++){
         id += idChars[Math.floor(Math.random() * idChars.length)];
       }
-
       var defaults = {
-          // if no matcher function is specified expect to compare a
-          // string to the ctx.name property
-          matcher: function(measure, ctx){
-            return measure === ctx.name;
-          },
-          // function takes one arg and returns it
-          measure: _.identity,
-          ID: id
-        };
+        // if no matcher function is specified expect to compare a
+        // string to the ctx.name property
+        matcher: function(measure, ctx){
+          return measure === ctx.name;
+        },
+        // function takes one arg and returns it
+        measure: _.identity,
+        ID: id
+      };
 
       if(_.isObject(options) === false) {
         options = {};
@@ -70,21 +69,22 @@
       // fill in the options
       options = _.extend({}, defaults, options);
 
-      // bind an the respond function to the axis ID
-      this.on('_' + options.ID, _.bind(
-          function(e){
-            this.axes = this._contextualize(
-              options.ID, e.context, this.axes);
-            this._respond(this.axes, this.elms);
+      // bind an the respond function to the axis ID and prefix it
+      // with an underscore so that it does not get whomped accidentally
+      this.on('_' + options.ID + ':', _.bind(
+        function(e){
+          this.axes = this._contextualize(
+            options.ID, e.context, this.axes);
+          this._respond(this.axes, this.elms);
 
-          }, this));
+        }, this));
 
       var axis = {
-        ID:[options.ID],
+        ID:options.ID,
         current:null,
         contexts:options.contexts,
-        respond:_.bind(this._responder(options.ID,
-          options.contexts, options.matcher, options.measure), this)
+        respond:_.bind(this._responder(options.ID, options.contexts,
+                                       options.matcher, options.measure), this)
       };
 
       this.axes[options.ID] = axis;
@@ -104,9 +104,9 @@
       }
 
       $('[data-intent],[intent],[data-in],[in]',
-          scope).each(_.bind(function(i, elm){
-            this.add($(elm));
-          }, this));
+        scope).each(_.bind(function(i, elm){
+          this.add($(elm));
+        }, this));
 
       return this;
     },
@@ -133,7 +133,7 @@
         if(exists === false){
           // create the elements responsive data
           spec = this._fillSpec(
-              _.extend(options, this._attrsToSpec(elm.attributes)));
+            _.extend(options, this._attrsToSpec(elm.attributes, this.axes)));
           // make any appropriate changes based on the current contexts
           this._makeChanges($(elm), spec, this.axes);
 
@@ -185,6 +185,7 @@
     // observer pattern outlined here:
     // http://www.nczonline.net/blog/2010/03/09/custom-events-in-javascript/
     on: function(type, listener){
+
       var events = type.split(' '),
           i=0;
 
@@ -195,15 +196,13 @@
         this._listeners[events[i]].push(listener);
       }
 
-
-
       return this;
     },
 
     off: function(type, listener){
       if(_.isArray(this._listeners[type])){
         var listeners = this._listeners[type],
-          i;
+            i;
         for(i=0;listeners.length; i++){
           if(listeners[i] === listener){
             listeners.splice(i,1);
@@ -228,18 +227,29 @@
           if( matcher(measurement, ctx)) {
             // first time, or different than last context
             if( (currentContext===undefined) ||
-              (ctx.name !== currentContext.name)){
+                (ctx.name !== currentContext.name)){
 
               currentContext = ctx;
 
-              // emit the axis event
-              this._emitter({_type:'_' + axisID, context:currentContext.name},
-                  currentContext, this)
+              // event emitting!
+              // emit the private axis event
+              this._emitter(
+                {_type: '_' + axisID + ':', context:currentContext.name},
+                currentContext, this)
 
-                // then emit the context event (second ensures the context
-                // changes happen after all dom manipulations)
+              // emit the public axis event
+                ._emitter({_type: axisID + ':', context:currentContext.name},
+                          currentContext, this)
+
+              // attempt to trigger the axis to context pair
+                ._emitter(_.extend({},
+                                   {_type: axisID + ':' + currentContext.name},
+                                   currentContext), currentContext, this)
+
+              // then emit the context event (second ensures the context
+              // changes happen after all dom manipulations)
                 ._emitter(_.extend({}, {_type:currentContext.name},
-                  currentContext), currentContext, this);
+                                   currentContext), currentContext, this);
 
               // done, break the loop
               return false;
@@ -267,7 +277,7 @@
       }
       if(_.isArray(this._listeners[event._type])){
         var listeners = this._listeners[event._type],
-          i;
+            i;
         for(i=0; i<listeners.length; i++){
           listeners[i].apply(this, arguments);
         }
@@ -279,7 +289,11 @@
     _fillSpec: function(spec){
 
       var applySpec = function(fn){
-        _.each(spec, fn);
+        _.each(spec, function(axisOptions, axis){
+          _.each(axisOptions, function(ctxOptions, ctx){
+            fn(ctxOptions, ctx, axis);
+          });
+        });
       }, filler={};
 
       applySpec(function(options){
@@ -291,41 +305,93 @@
         }
       });
 
-      applySpec(function(options, ctx){
+      applySpec(function(options, ctx, axis){
         if(_.isObject(options)){
-          spec[ctx] = _.extend({}, filler, options);
+          spec[axis][ctx] = _.extend({}, filler, options);
         }
       });
 
       return spec;
     },
 
-    _attrsToSpec: function(attrs){
+    _attrsToSpec: function(attrs, axes){
 
       var spec={},
-        fullPattern = new RegExp(
-          '^(data-)?(in|intent)-([a-zA-Z0-9][_a-zA-Z0-9]*)-([A-Za-z:-]+)'),
-        axisPattern =  new RegExp(
-          '^(data-)?(in|intent)-([a-zA-Z0-9][_a-zA-Z0-9]*)$'),
-        addProp=function(obj, name, value){
-          obj[name] = value;
-          return obj;
-        };
+          fullPattern = new RegExp(
+            '^(data-)?(in|intent)-(([a-zA-Z0-9][a-zA-Z0-9]*:)?([a-zA-Z0-9]*))-([A-Za-z:-]+)'),
+          axisPattern =  new RegExp(
+            '^(data-)?(in|intent)-([a-zA-Z0-9][_a-zA-Z0-9]*):$'),
+          assocAxis = _.bind(function(ctx){
+
+            var match=false;
+            _.every(axes.__keys__, function(axis){
+
+              if(match === false){
+                _.every(axes[axis].contexts, function(ctxCandidate){
+                  if(ctxCandidate.name === ctx){
+                    match = axis;
+                    return false;
+                  }
+                  return true;
+                });
+                return true;
+              }else {
+                return false;
+              }
+            });
+            return match;}, this),
+
+          makeSpec = function(axis, ctx, sAttr, value, spec){
+            var axisObj,
+                ctxObj;
+            if(spec[axis] !== undefined){
+              axisObj = spec[axis];
+
+              if(axisObj[ctx] === undefined) {
+                axisObj[ctx] = {};
+              }
+            } else {
+              axisObj = {};
+              axisObj[ctx] = {};
+              spec[axis] = axisObj;
+            }
+            axisObj[ctx][sAttr] = value;
+          };
+
       _.each(attrs, function(attr){
-        var specMatch = attr.name.match(fullPattern);
+
+        var specMatch = attr.name.match(fullPattern),
+            axisName;
+
         if(specMatch !== null) {
-          specMatch = specMatch.slice(-2);
 
-          var ctx = specMatch[0],
-            ctxSpec = spec[ctx] || {};
+          specMatch = specMatch.slice(-3);
+          axisName = specMatch[0];
 
-          spec = addProp(spec, ctx,
-            addProp(ctxSpec, specMatch[1], attr.value));
+          if(specMatch[0] === undefined){
+
+            // if there is no axis find one:
+            specMatch[0] = assocAxis(specMatch[1]);
+
+            if(specMatch[0] === false) {
+              // there is no context, so get outa here
+              // TODO: ??
+            }
+          } else {
+            specMatch[0] = specMatch[0].replace(/:$/, '');}
+
+          specMatch.push(attr.value);
+          specMatch.push(spec);
+
+          makeSpec.apply(this, specMatch);
 
         } else if(axisPattern.test(attr.name)){
-          spec['$' + attr.name.match(axisPattern)[3]] = attr.value;
-        }
-      });
+          axisName = attr.name.match(axisPattern)[3];
+          _.each(axes[axisName].contexts,
+                 function(context){
+                   makeSpec(axisName, context.name, 'class', context.name +
+                            ' ' + attr.value, spec);
+                 });}});
 
       return spec;
     },
@@ -333,11 +399,11 @@
     _resolveSpecs: function(currentContexts, specs){
 
       var changes={},
-        moveFuncs=['append', 'prepend', 'before', 'after'];
+          moveFuncs=['append', 'prepend', 'before', 'after'];
 
-      _.each(currentContexts, function(ctxName){
+      _.each(currentContexts, function(ctxObj){
 
-        _.each(specs[ctxName], function(val, func){
+        _.each(specs[ctxObj.axis][ctxObj.ctx], function(val, func){
 
           if(func==='class'){
             if(!changes[func]){
@@ -347,8 +413,8 @@
             changes[func] = _.union(changes[func], val.split(' '));
 
           } else if(((changes.move === undefined) ||
-              (changes.move.value === '')) &&
-              ($.inArray(func, moveFuncs) !== -1)){
+                     (changes.move.value === '')) &&
+                    ($.inArray(func, moveFuncs) !== -1)){
 
             changes.move = {value:val, placement:func};
 
@@ -358,9 +424,7 @@
             }
           }
         }, this);
-
       }, this);
-
       return changes;
     },
 
@@ -369,7 +433,7 @@
 
       _.each(axes.__keys__, function(ID){
         if(axes[ID].current !== null) {
-          contexts.push(axes[ID].current);
+          contexts.push({ctx:axes[ID].current, axis:ID});
           return;
         }
       });
@@ -377,19 +441,13 @@
       return contexts;
     },
 
-
     _removeClasses: function(specs, axes) {
 
       var toRemove = [];
 
       _.each(axes.__keys__, function(key){
 
-        var axis = axes[key],
-          axisSpec = false;
-
-        if(specs['_' + axis.ID] !== undefined){
-          axisSpec = true;
-        }
+        var axis = axes[key];
 
         _.each(axis.contexts, function(ctx){
 
@@ -397,13 +455,8 @@
           if(ctx.name === axis.current) {
             return;
           }
-
-          if(axisSpec) {
-            toRemove.push(ctx.name);
-          }
-
-          var contextSpec = specs[ctx.name],
-            classes;
+          var contextSpec = specs[axis.ID][ctx.name],
+              classes;
 
           if(contextSpec !== undefined) {
             if(contextSpec['class'] !== undefined) {
@@ -422,24 +475,7 @@
 
     _contextConfig: function(specs, axes){
 
-      var config = this._resolveSpecs(this._currentContexts(axes), specs, axes);
-
-      // add the axis specs:
-
-      _.each(specs, function(spec, specName){
-
-        var match;
-
-        if(this._axis_test_pattern.test(specName)) {
-          match = specName.match(this._axis_match_pattern)[1];
-          if(axes[match]){
-            config['class'] = _.union(config['class'],
-              [axes[match].current, spec]);
-          }
-        }
-      }, this);
-
-      return config;
+      return this._resolveSpecs(this._currentContexts(axes), specs, axes);
     },
 
     _makeChanges: function(elm, specs, axes){
@@ -450,7 +486,7 @@
         _.each(ctxConfig, function(change, func){
           if(func==='move'){
             if( (specs.__placement__ !== change.placement) ||
-              (specs.__move__ !== change.value)){
+                (specs.__move__ !== change.value)){
 
               $(change.value)[change.placement](elm);
 
@@ -465,8 +501,8 @@
 
             // the class add/remove formula
             classes = _.union(change,
-              _.difference(classes.split(' '),
-                           this._removeClasses(specs, axes)));
+                              _.difference(classes.split(' '),
+                                           this._removeClasses(specs, axes)));
 
             elm.attr('class', classes.join(' '));
 
@@ -494,8 +530,9 @@
 
     // private props
 
-    // axis test, does it begin with an underscore?
-    _axis_test_pattern: new RegExp("^$[a-zA-Z0-9]"),
+    // axis test, does it begin with an underscore? for testing inside
+    // spec objects
+    _axis_test_pattern: new RegExp("^_[a-zA-Z0-9]"),
 
     // match a group after the underscore:
     _axis_match_pattern: new RegExp("^_([a-zA-Z0-9][_a-zA-Z0-9]*)"),
