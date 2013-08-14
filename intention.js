@@ -1,5 +1,5 @@
 /*!
- * intention.js Library v0.9.7
+ * intention.js Library v0.9.7.2
  * http://intentionjs.com/
  *
  * Copyright 2011, 2013 Dowjones and other contributors
