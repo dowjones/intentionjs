@@ -1,29 +1,23 @@
 ---
 layout: post
-title: "Flexible Responsive Axes Changing HTML Based on Orientation, Width, Touch and Resolution"
+title: Flexible Responsive Axes Changing HTML Based on Orientation, Width, Touch and Resolution
+tags:
+- release
 ---
 
-## Flexible Responsive Axes Changing HTML Based on Orientation, Width, Touch and Resolution
-
-This release makes the html attributes a lot more flexible. In addition to a few API updates and performance improvements, I've, worked with the contributors and created an all around better system for interacting with *contexts* and *axes*.
-
-What I noticed was that users were making a lot of specifications in html that look like this:
+This release makes the html attributes a lot more flexible. In addition to a few API updates and performance improvements, I've, worked with the contributors and created an all around better system for interacting with *contexts* and *axes*. What I noticed was that users were making a lot of specifications in html that look like this:
 
 {% highlight html %}
 <nav intent in-portrait-class="portrait"></nav>
 {% endhighlight %}
 
-This is unfortunate, but until now there was no way around it. The better way is to specify that an element should respond on a particular axis.
-
-for example:
+This is unfortunate, but until now there was no way around it. The better way is to specify that an element should respond on a particular axis. For example:
 
 {% highlight html %}
 <nav intent in-orientation></nav>
 {% endhighlight %}
 
-The above specification applies a class of the name of the current context to the element.
-
-That means in portrait mode the element looks like:
+The above specification applies a class of the name of the current context to the element. That means in portrait mode the element looks like:
 
 {% highlight html %}
 <nav class="portrait"></nav>
@@ -55,8 +49,8 @@ Consider the following:
 var depth=intent.responsive({
   // all possible options specified
   ID: 'depth',
-	contexts:[{name:'shallow', offset:100}, 
-		{name:'deep', offset:1000}, 
+	contexts:[{name:'shallow', offset:100},
+		{name:'deep', offset:1000},
 		{name:'reallyDeep', offset:Infinity}],
 	measure: function(){
 		return document.pageYOffset;
@@ -73,10 +67,10 @@ The above example is an axis that is designed to respond on the window scroll ev
 console.log(depth);
 // shows:
 // {
-//   ID:'depth', 
+//   ID:'depth',
 //   current:null,
-//   contexts:[{name:'shallow', offset:100}, 
-//     {name:'deep', offset:1000}, 
+//   contexts:[{name:'shallow', offset:100},
+//     {name:'deep', offset:1000},
 //     {name:'reallyDeep', offset:Infinity}],
 //   respond: function
 // }

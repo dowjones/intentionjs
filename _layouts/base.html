@@ -1,83 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta charset="utf-8" /> 
-	<link href="assets/css/responsivegrid.css" rel="stylesheet">
-	<link href="assets/css/base.css" rel="stylesheet">
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-   <script type="text/javascript" src="//use.typekit.net/wdy0odx.js"></script>
-	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-
-
-	<title>{{ title }}</title>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Intention.js — {{ title }}</title>
+	{% include assets.md dir="../" cur="docs" %}
+	<link rel="stylesheet" type="text/css" href="../assets/css/blog.css" />
+	<script src="../assets/js/blog.js" type="text/javascript"></script>
 </head>
-<body>
-	<section class="colgroup">
-	<section class="col8wide column col10wide" 
-	intent
-	in-base-class="column"
-	in-mobile-class="placeholder" 
-	in-tablet-class="placeholder" 
-	in-standard-class="col8wide" 
-	in-luxury-class="col8wide"
-	>
-	
-	<div class="cursor">
-		
-		<div class="tabs">
-			<a href="index.html">Blog</a>	
-			<a href="about.html">About Intention.js</a>	
-			<a href="documentation.html">Documentation</a>	
-			<a href="examples.html">Examples</a>	
-			<a href="sxsw.html">SXSW Workshop Syllabus</a>
+<body intent in-orientation>
+<div id="all" intent in-width in-container in-orientation>
+	<header intent
+		in-container
+		in-width>
+		<h1><a href="../">intention.js</a></h1>
+		<nav>
+			<ul>
+				{% include nav.md param="../" %}
+			</ul>
+		</nav>
+	</header>
+	<section id="heading" intent 
+		in-container
+		in-width> <!-- Hide this functionality on *real* mobile devices but not on faked ones-->
+		<div class="inner" class="clearFix">
+			<h2><a href="{{ page.url }}">{{ page.title }}</a></h2>
 		</div>
 	</section>
-
-				
-
-	<section class="col3wide col10wide column"
-	intent
-	in-base-class="column" 
-	in-mobile-class="col10wide" 
-	in-tablet-class="col10wide" 
-	in-standard-class="col2wide" 
-	in-luxury-class="col3wide"
-	>
-		<div class="icons">	
-		<div class="media"
-		intent
-		in-tablet-class="mediaT"
-		in-standard-class="media"
-		in-luxury-class="media"
-		in-mobile-class="mediaT">
-		<a href="http://twitter.com/intentionjs">
-		<div class="twitter"></div>
-		</a>
+	<section id="content" intent in-width in-container in-orientation>
+		<nav intent in-width in-container in-orientation>
+			<ol></ol>
+			<div class="prediction"></div>
+		</nav>
+		<div class="inner">
+			{{ content }}
 		</div>
 		
-		<div class="fork"
-		intent
-		in-tablet-class="fork"
-		in-standard-class="fork"
-		in-mobile-class="forkM"
-		in-luxury-class="fork">
-		<span class="forkongithub">
-		<a href="https://github.com/wsjdesign/intentionjs">Fork me on GitHub</a>
-		</span>
-		</div>
-		</div>
-
 	</section>
-
-	</div>
-	</section>
-	</section>
-	
-	{{ content }}
-	
-	<script data-main="main" src="test/vendor/require.js"></script>		
-	
-	
+	{% include footer.md %}
+</div>
+<script src="../assets/js/context.js" type="text/javascript"></script>
 </body>
 </html>

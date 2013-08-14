@@ -1,8 +1,14 @@
 {
-  "name": "docMaker",
-  "description": "simple script that produces project documentation page",
-  "author": "Joe Kendall and Camila Mercado",
-  "dependencies": {
-    "color-marked": ">= 0.2.0"
+  "name": "intention.js",
+  "version": "0.9.7.2",
+  "description": "",
+  "repository": "http://github.com/wsjdesign/intentionjs",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt-contrib-uglify": "~0.2.2",
+    "chai": "*",
+    "mocha": "*"
   }
 }

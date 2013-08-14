@@ -1,5 +1,15 @@
-safe: true
 source: ./
 destination: ./_site/
 lsi: false
 pygments: true
+tag_page_layout: tag
+tag_page_dir: blog/tagged
+images: ../../../blog/images
+prose:
+  media: 'blog/images'
+  metadata: 
+    _posts:
+      layout: post
+      title: Post Title
+      sub: Subheading
+      tags: space separated (example, release, update are tag pages)

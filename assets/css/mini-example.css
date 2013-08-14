@@ -1,0 +1,178 @@
+#resizeExample {
+  width: 100%;
+  height: 160px;
+  margin-bottom: 20px;
+  background: url('../../images/resizeexamplebg.png') no-repeat center;
+}
+#resizable {
+  width: 175px;
+  height: 160px;
+  min-width: 45px;
+  min-height: 160px;
+  max-width: 100%;
+  max-height: 160px;
+  border: 6px solid #f4f1ea;
+  background: #f4f1ea;
+  overflow: hidden;
+  margin: auto;
+  position: relative;
+  box-sizing: border-box;
+}
+.ui-resizable-handle {
+  position: absolute;
+}
+.ui-icon-gripsmall-diagonal-se {
+  width: 17px;
+  height: 17px;
+  bottom: 0;
+  right: 0;
+  background: url('../../images/resize-icon.png') no-repeat bottom right;
+  cursor: nwse-resize;
+}
+.ui-resizable-s {
+  width: 100%;
+  height: 7px;
+  bottom: 0;
+  cursor: s-resize;
+}
+.ui-resizable-e {
+  width: 7px;
+  height: 100%;
+  right: 0;
+  cursor: e-resize;
+}
+#miniFade {
+  width: 100%;
+  height: 18px;
+  padding-bottom: 3px;
+  background: url('../../images/minifade.png') repeat-x bottom;
+  display: none;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  color: #927d4d;
+  z-index: 1;
+}
+.orange {
+  min-height: 75px;
+  float: left;
+  font-size: 34px;
+  color: #ae4516;
+}
+.orange div {
+  background: #ea865a;
+  height: 50px;
+  padding: 3px;
+}
+.orange div + div {
+  height: 20px;
+  margin-top: 5px;
+  clear: both;
+}
+.orange.small,
+.orange.tiny {
+  width: 100%;
+  font-size: 20px;
+}
+.orange.small {
+  font-size: 20px;
+}
+.orange.tiny {
+  font-size: 12px;
+  overflow: hidden;
+}
+.orange.large {
+  width: 73%;
+  min-width: 60px;
+  max-width: 285px;
+}
+.blue {
+  background: #38748e !important;
+}
+.blue.large {
+  width: 25%;
+  min-width: 25px;
+  max-width: 90px;
+  float: left;
+  height: 100px;
+  margin-left: 6px;
+  position: relative;
+}
+.green a,
+.green {
+  color: #cae5ca;
+  text-decoration: none;
+  font-family: Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+.green a div,
+.green div {
+  background: #589358 !important;
+}
+.green.tiny {
+  display: none;
+}
+.green.small {
+  width: 100%;
+  margin-top: 6px;
+  text-align: center;
+  font-size: 20px;
+}
+.green.small div {
+  width: 20%;
+  height: 25px;
+  margin-top: 6px;
+  float: left;
+  display: inline-block;
+}
+.green.small div + div {
+  margin-left: 6px;
+}
+.green.large {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  font-size: 20px;
+}
+.green.large div {
+  width: 75%;
+  height: 25px;
+  margin: auto;
+}
+.green.large div + div {
+  margin-top: 6px;
+}
+.green.large div:last-child {
+  margin-bottom: 6px;
+}
+#timeExample {
+  width: 100%;
+  height: 100px;
+  padding: 25px 10px 10px 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  background-image: url('../../images/mezz.png');
+  box-sizing: border-box;
+  color: white;
+  font-size: 36px;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+.night {
+  background: #062027;
+}
+.evening {
+  background: #143a37;
+}
+.sunset {
+  background: #e58341;
+}
+.day {
+  background: #96d2e2;
+}
+.morning {
+  background: #af4168;
+}

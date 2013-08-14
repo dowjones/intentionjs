@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>intention.js</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/mini-example.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/code-image.css" />
+    {% include assets.md dir="./" %}
+    <script src="assets/js/home.js" type="text/javascript"></script>
+    <script src="assets/js/raphael.js" type="text/javascript"></script>
+    <script src="assets/js/mini-example.js" type="text/javascript"></script>
+    <script src="assets/js/codeimage.js" type="text/javascript"></script>
+  </head>
+  <body intent in-orientation>
+    <div id="all" intent in-width in-container in-orientation>
+      <div id="scrollWrapper" intent in-width>
+	<header intent
+		in-container
+		in-width>
+	  <h1><a href="#">intention.js</a></h1>
+	  <nav>
+	    <ul>
+	      {% include nav.md dir="./" cur="docs" %}
+	    </ul>
+	  </nav>
+	</header>
+
+	{%include introSection.md %}
+
+   	<section id="content" class="docsLite" intent in-width in-container in-orientation in-stickdepth>
+   	  <nav id="topNav" class="clearFix" intent in-width in-container in-orientation in-stickdepth>
+            <ul id="prevnext">
+            	<li id="prev">&uarr;</li>
+            	<li id="next">&darr;</li>
+            </ul>
+            <ul class="nav_deck" id="sections"></ul>
+            <div class="inner">
+               <p intent in-start-class="inactive" in-mobile-class="inactive" in-pseudomobile-class="inactive"
+                  in-movebrand-class="active" in-sticknav-class="active"><a>intention.js</a></p>
+   	      </div>
+   	  </nav>
+          <div id="docs">
+            {% include pitchIntro.md %}
+            {%include basics.md %}
+            {%include usageIntro.md %}
+            {%include daytimeConcept.md %}
+            {%include manipulationIntro.md %}
+            {%include events.md %}
+            {%include aboutIntro.md %}
+
+    </div>
+
+
+
+
+  </section>
+  {% include footer.md %}
+</div>
+</div>
+<!--<script src="assets/js/init.js" type="text/javascript"></script>-->
+<script src="assets/js/context.js" type="text/javascript"></script>
+</body>
+</html>
