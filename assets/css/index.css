@@ -418,6 +418,10 @@ body > .try.hdtv #devices .cancel {
 #content.docsLite #docs {
   background: #203b44 url('../../images/docubg.png') repeat-x top fixed;
 }
+#content.docsLite h5,
+#content.docsLite h6 {
+  font-weight: normal;
+}
 #content.docsLite pre {
   width: 100%;
   padding: 6px;
@@ -427,6 +431,10 @@ body > .try.hdtv #devices .cancel {
 }
 #content.docsLite article {
   padding-top: 30px;
+}
+#content.docsLite article li {
+  margin-left: 10px;
+  padding-left: 10px;
 }
 #content.docsLite article.special {
   background: #0c262d;
@@ -604,7 +612,7 @@ body > .try.hdtv #devices .cancel {
 #content.docsLite.hdtv.pseudotablet article.special,
 #content.docsLite.hdtv.pseudosmalltablet article.special,
 #content.docsLite.hdtv.pseudomobile article.special {
-  padding: 20px;
+  padding: 20px 0;
 }
 #content.docsLite.tablet article.special .inner,
 #content.docsLite.smalltablet article.special .inner,
@@ -651,6 +659,16 @@ body > .try.hdtv #devices .cancel {
 #content.docsLite.hdtv.pseudomobile div.thirds section {
   width: auto;
   padding: 0;
+}
+#content.docsLite.mobile article.special,
+#content.docsLite.standard.pseudomobile article.special,
+#content.docsLite.hdtv.pseudomobile article.special {
+  padding: 20px;
+}
+#content.docsLite.mobile article.special pre,
+#content.docsLite.standard.pseudomobile article.special pre,
+#content.docsLite.hdtv.pseudomobile article.special pre {
+  border: 2px solid #38748e;
 }
 .no-multiplebgs #splash .inner {
   background-image: url('../../images/splashbg.png');

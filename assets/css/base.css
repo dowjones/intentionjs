@@ -386,10 +386,6 @@ header.hdtv.pseudomobile li {
   box-sizing: border-box;
   position: relative;
 }
-#content article li {
-  margin-left: 10px;
-  padding-left: 10px;
-}
 #content article section + .thirds,
 #content article .thirds + section,
 #content article p + .highlight,

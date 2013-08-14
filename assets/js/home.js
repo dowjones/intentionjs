@@ -155,7 +155,6 @@ var buildHome = function(D) {
 		i = 1,
 		manageTitlePos = function() {
 		   for(var i = 0; i <= intent.axes.titleDepth.contexts.length-2; i++){
-		      console.log(i, intent.axes.titleDepth.contexts[i]);
 		      var depth = $('#'+intent.axes.titleDepth.contexts[i]['name']).offset().top - 50;
 		      intent.axes.titleDepth.contexts[i]['val'] = depth;
 		   }

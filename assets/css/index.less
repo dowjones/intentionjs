@@ -352,6 +352,9 @@ body > .try.standard, body > .try.hdtv {
 	#docs{
 		background: @mediumBlue url('../../images/docubg.png') repeat-x top fixed;
 	}
+	h5, h6{
+	   font-weight:normal;
+	}
 	pre{
 		width:100%;
 		padding:6px;
@@ -361,6 +364,10 @@ body > .try.standard, body > .try.hdtv {
 	}
 	article{
 		padding-top:@gutter*1.5;
+		li{
+		   margin-left:@gutter/2;
+		   padding-left:@gutter/2;
+		}
 	}
 	article.special{
 		background:@darkBlue;
@@ -469,13 +476,13 @@ body > .try.standard, body > .try.hdtv {
 		}
 	}
 	article.special{
-	   padding:@gutter;
+	   padding:@gutter 0;
 		.inner{
 			width:auto;
 		}
 		pre{
-			border-left:none;
-			border-right:none;
+         border-left:none;
+         border-right:none;
 		}	
 	}
 	article+article{ margin-top:@gutter; }
@@ -485,6 +492,14 @@ body > .try.standard, body > .try.hdtv {
 			padding:0;
 		}
 	}
+}
+#content.docsLite.mobile, #content.docsLite.standard.pseudomobile, #content.docsLite.hdtv.pseudomobile{
+   article.special{
+      padding:@gutter;
+      pre{
+         border:2px solid @blue;
+      }
+   }
 }
 
 

@@ -82,13 +82,13 @@
   </pre>
   <pre id="input"><h5>This input</h5>
 &lt;style&gt;
-   <span class="orangeDark">#smallCode.mobile #output{</span>
+   <span class="orangeDark mobile">#smallCode.mobile #output{</span>
       color:orange
    <span class="orangeDark">}</span>
-   <span class="blueLight">#smallCode.smalltablet #output{</span>
+   <span class="blueLight smalltablet">#smallCode.smalltablet #output{</span>
       color:blue
    <span class="blueLight">}</span>
-   <span class="greenDark">#smallCode.tablet #output{</span>
+   <span class="greenDark tablet">#smallCode.tablet #output{</span>
       color:green
    <span class="greenDark">}</span>
 &lt;/style&gt;
@@ -97,9 +97,9 @@
    <span class="white">intent in-width</span>&gt;
    &lt;pre id="output"
       <span class="white">intent in-width</span>
-      <span class="orangeDark">in-mobile-after"#input"</span>
-      <span class="blueLight">in-smalltablet-after="#input"</span>
-      <span class="greenDark">in-tablet-after="#input"&gt;</span>
+      <span class="orangeDark mobile">in-mobile-after"#input"</span>
+      <span class="blueLight smalltablet">in-smalltablet-after="#input"</span>
+      <span class="greenDark tablet">in-tablet-after="#input"&gt;</span>
          <span class="comment">//output</span>
    &lt;/pre&gt;
    &lt;pre id="input"&gt;
