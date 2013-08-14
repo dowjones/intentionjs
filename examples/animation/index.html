@@ -81,20 +81,15 @@
 	<div class="panorama">
 		<div id="guy" class="right"
 			intent
-			in-step1-class="step1"
-			in-step2-class="step2"
-			in-step3-class="step3"
-			in-step4-class="step4"
-
-			in-back-class="backwards"
-			in-forth-class="forwards"
+                     in-walk:
+                     in-direction:
 			></div>
 
 		<img src="img/Brooklyn_Panorama_2_small.jpg" />
 	</div>
 	<script>
 		var intent = new Intention;
-		
+
 		var walking = intent.responsive({
      		ID:'walk',
       		contexts:[
@@ -102,26 +97,26 @@
 	    	{name:'step2', div:1},
 	    	{name:'step3', div:2},
 	    	{name:'step4', div:3}],
-	    	
+
 	    	matcher: function(measure, ctx){
 	    		return (Math.floor(measure/100) % 4) === ctx.div ? true : false;
 	    	},
-	    	
+
 	    	measure: function(){
 	    		return window.pageXOffset ? window.pageXOffset : window.document.documentElement.scrollLeft;
 	    	}
 	    }).respond;
 
-		
+
 
 		var lastXOffset = 0,
-			
+
 		flip = intent.responsive({
 	      	ID:'direction',
 	      	contexts:[
-			{name:'back', val:0}, 
-			{name:'forth', val:1/0}], 
-					
+			{name:'backwards', val:0},
+			{name:'forwards', val:1/0}],
+
 			matcher: function(measure, ctx){
 			if((measure - lastXOffset) < ctx.val) {
 				lastXOffset = measure;
@@ -130,23 +125,23 @@
 
 			lastXOffset = measure;
 			return false;
-			
-			}, 
-			
+
+			},
+
 			measure: function(){
 			return window.pageXOffset ? window.pageXOffset : window.document.documentElement.scrollLeft;
 		  }
-		
+
 		}).respond;
 
 		walking();
 		flip();
-		
+
 		intent.elements(document);
 
 		$(window).on('scroll', walking);
 		$(window).on('scroll', flip);
-		
+
 	</script>
 </body>
 </html>
