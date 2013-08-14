@@ -201,6 +201,10 @@
   margin: auto;
   margin-top: 20px;
 }
+#content.blog.tablet #topNav.tagNav .inner,
+#content.blog.standard.pseudotablet #topNav.tagNav .inner {
+  padding: 0 20px;
+}
 #content.blog.tablet h3,
 #content.blog.standard.pseudotablet h3 {
   font-size: 26px;
@@ -233,6 +237,12 @@
 #content.blog.standard.pseudotablet section,
 #content.blog.tablet p,
 #content.blog.standard.pseudotablet p {
+  padding: 0 20px;
+}
+#content.blog.smalltablet #topNav.tagNav .inner,
+#content.blog.mobile #topNav.tagNav .inner,
+#content.blog.standard.pseudosmalltablet #topNav.tagNav .inner,
+#content.blog.standard.pseudomobile #topNav.tagNav .inner {
   padding: 0 20px;
 }
 #content.blog.smalltablet h3,

@@ -1,7 +1,4 @@
-console.log('base.js loaded');
-
 $(window).load(function() {
-	console.log('base.js window loaded');
 	//initial variables
 	var charTest = $('#charTest').length > 0,
 		docsTest = $('.docsLite').length > 0,

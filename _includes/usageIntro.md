@@ -21,7 +21,7 @@
    {% endhighlight %}
   </section>
   <section>
-    <h3>This becomes</h3>
+    <h3>Intention Markup</h3>
     {% highlight html %}
 <header>
    <img src="logo.png" intent
