@@ -407,6 +407,13 @@
       return spec;
     },
 
+    _contextSpec: function(ctxObj, specs){
+      if(specs.hasOwnProperty(ctxObj.axis) &&
+         specs[ctxObj.axis].hasOwnProperty(ctxObj.ctx)){
+        return specs[ctxObj.axis][ctxObj.ctx];
+      }
+      return {};
+    },
     _resolveSpecs: function(currentContexts, specs){
 
       var changes={},
@@ -415,18 +422,12 @@
       _.each(currentContexts, function(ctxObj){
         // if the axis or the context to not exist in the specs object
         // skip to the next one
-        if((specs.hasOwnProperty(ctxObj.axis) === false) ||
-           (specs[ctxObj.axis].hasOwnProperty(ctxObj.ctx) === false)){
-          return;
-        }
-
-        _.each(specs[ctxObj.axis][ctxObj.ctx], function(val, func){
+        _.each(this._contextSpec(ctxObj, specs), function(val, func){
 
           if(func==='class'){
             if(!changes[func]){
               changes[func] = [];
             }
-
             changes[func] = _.union(changes[func], val.split(' '));
 
           } else if(((changes.move === undefined) ||
@@ -472,7 +473,8 @@
           if(ctx.name === axis.current) {
             return;
           }
-          var contextSpec = specs[axis.ID][ctx.name],
+          var contextSpec = this._contextSpec(
+            {axis:axis.ID, ctx:ctx.name}, specs),
               classes;
 
           if(contextSpec !== undefined) {
