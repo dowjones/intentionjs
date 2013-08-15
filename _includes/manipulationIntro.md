@@ -8,7 +8,7 @@
     </section>
     <section>
       {%highlight html%}
-<img intent in-orientation src="a.jpg" />
+<img intent in-orientation: src="a.jpg" />
       {%endhighlight%}
       <p>&darr; &darr; &darr;</p>
       {%highlight html%}
@@ -22,7 +22,7 @@
     <section>
       <p>Intention does not touch attributes that are assigned outside of <code>in-</code> commands — so</p>
       {%highlight html%}
-<div class="foo" intent in-width />
+<div class="foo" intent in-width: />
       {%endhighlight%}
       <p>will keep it's class <code>foo</code> regardless of what <code>horizontal_axis</code> context is passed.</p>
     </section>
@@ -39,9 +39,9 @@
    in-base-src="reg_img.png"
    in-highres-src="big_img.png" />
       {%endhighlight%}
-      
+
       <p>&darr; &darr; &darr;</p>
-      
+
       {%highlight html%}
 <!--On regular devices-->
 <img src="reg_img.png" />
@@ -89,42 +89,42 @@
 - before
 - after
       {%endhighlight%}
-      
+
       <p>These function just like jQuery DOM manipulations.</p>
       {%highlight html%}
 intent in-context_name-move_function="selector"
       {%endhighlight%}
-      
+
       <p>Selectors can be general element selections like above (<code>...prepend="footer"</code>), or specific (<code>...prepend="#intro"</code>).</p>
     </section>
-    <section intent in-hdtv-class="show" in-standard-class="show" in-mobile-class="hide" in-smalltablet-class="hide" in-tablet-class="hide"> 
+    <section intent in-hdtv-class="show" in-standard-class="show" in-mobile-class="hide" in-smalltablet-class="hide" in-tablet-class="hide">
       <div id="resizeExample">
         <div id="resizable">
           <div id="miniFade"></div>
-          <div class="orange" intent in-mini_example>
+          <div class="orange" intent in-mini_example:>
             <div id="orange1">Play with me</div>
             <div id="orange2"></div>
           </div>
-          <div class="blue" intent in-mini_example in-small-before="#orange2" in-large-after=".orange"></div>
-          <div class="green" intent in-mini_example in-small-after=".orange" in-large-append=".blue">
+          <div class="blue" intent in-mini_example: in-small-before="#orange2" in-large-after=".orange"></div>
+          <div class="green" intent in-mini_example: in-small-after=".orange" in-large-append=".blue">
             <div id="green1"><a intent in-small-href="http://thisissmall.gov" in-large-href="http://wowthisishuge.info">A</a></div>
             <div id="green2">B</div>
             <div id="green3">C</div>
           </div>
         </div>
       </div>
-      
+
       {% highlight html %}
 <div id="resizable">
-   <div class="orange" intent in-mini>
+   <div class="orange" intent in-mini:>
       Play with me
       <div id="orange1"> </div>
       <div id="orange2"> </div>
    </div>
-   <div class="blue" intent in-mini
+   <div class="blue" intent in-mini:
       in-avg-before="#orange2"
       in-large-after=".orange"> </div>
-   <div class="green" intent in-mini
+   <div class="green" intent in-mini:
       in-avg-after=".orange"
       in-large-append=".blue">
       <div id="green1">
