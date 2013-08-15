@@ -1,4 +1,4 @@
-<footer intent in-width in-container>
+<footer intent in-width: in-container:>
 	<div class="inner">
 		<h1>✌☺</h1>
 		<img src="/images/dj-logo.png" alt="Dow Jones logo"/>
