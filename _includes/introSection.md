@@ -1,4 +1,4 @@
-<section id="splash" intent in-width in-container in-orientation>
+<section id="splash" intent in-width: in-container: in-orientation:>
    <div class="inner clearFix">
       <section>
          <h3>Intention.js offers a clear way to create dynamically restructured html through clean interface to a super light-weight library.</h3>
@@ -13,7 +13,7 @@
 
 <!-- Start the ugly Code-as-Image section -->
 
-<section id="codeImage" intent in-width in-container>
+<section id="codeImage" intent in-width: in-container:>
    <div class="inner clearFix">
       <div id="connections"></div>
       <pre id="rawCodeImage"><span class="selectable">&lt;body&gt;
@@ -68,10 +68,10 @@
 
 <!-- End ugly Code-as-Image section -->
 <!-- But start the slightly less ugly mobile version of that -->
-<section id="smallCode" class="clearFix" intent in-width in-container data-pattern="2">
+<section id="smallCode" class="clearFix" intent in-width: in-container: data-pattern="2">
   <pre id="output" intent
-       in-width
-       in-container
+       in-width:
+       in-container:
        in-mobile-after="#input"
        in-smalltablet-after="#input"
        in-tablet-after="#input"
@@ -94,9 +94,9 @@
 &lt;/style&gt;
 
 &lt;section id="smallCode"
-   <span class="white">intent in-width</span>&gt;
+   <span class="white">intent in-width:</span>&gt;
    &lt;pre id="output"
-      <span class="white">intent in-width</span>
+      <span class="white">intent in-width:</span>
       <span class="orangeDark mobile">in-mobile-after"#input"</span>
       <span class="blueLight smalltablet">in-smalltablet-after="#input"</span>
       <span class="greenDark tablet">in-tablet-after="#input"&gt;</span>
@@ -116,8 +116,8 @@
    	 in-pseudotablet-prepend="body"
    	 in-pseudohdtv-prepend="body"
    	 in-pseudostandard-after="#codeImage"
-   	 in-container
-   	 in-width> <!-- Hide this functionality on *real* mobile devices but not on faked ones-->
+   	 in-container:
+   	 in-width:> <!-- Hide this functionality on *real* mobile devices but not on faked ones-->
   <div class="inner">
     <h2>Try it!</h2>
     <div id="devices">
