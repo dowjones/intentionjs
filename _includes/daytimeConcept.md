@@ -7,7 +7,7 @@
       <div id="timeExample" intent in-time> </div>
 
       {%highlight html%}
-<div id="timeExample" intent in-time></div>
+<div id="timeExample" intent in-time:></div>
       {%endhighlight%}
       {%highlight js%}
 var time = intent.responsive({
