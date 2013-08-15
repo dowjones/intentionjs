@@ -314,49 +314,56 @@
       return spec;
     },
 
+    _assocAxis: function(ctx, axes){
+
+      var match=false;
+
+      _.every(axes.__keys__, function(axis){
+
+        if(match === false){
+          _.every(axes[axis].contexts, function(ctxCandidate){
+            if(ctxCandidate.name === ctx){
+              match = axis;
+              return false;
+            }
+            return true;
+          });
+          return true;
+        }else {
+          return false;
+        }
+      });
+
+      return match;
+    },
+
+    _makeSpec: function(axis, ctx, sAttr, value, spec){
+      var axisObj,
+          ctxObj;
+
+      if(spec[axis] !== undefined){
+        axisObj = spec[axis];
+
+        if(axisObj[ctx] === undefined) {
+          axisObj[ctx] = {};
+        }
+      } else {
+        axisObj = {};
+        axisObj[ctx] = {};
+        spec[axis] = axisObj;
+      }
+      axisObj[ctx][sAttr] = value;
+
+      return spec;
+    },
+
     _attrsToSpec: function(attrs, axes){
 
       var spec={},
           fullPattern = new RegExp(
             '^(data-)?(in|intent)-(([a-zA-Z0-9][a-zA-Z0-9]*:)?([a-zA-Z0-9]*))-([A-Za-z:-]+)'),
           axisPattern =  new RegExp(
-            '^(data-)?(in|intent)-([a-zA-Z0-9][_a-zA-Z0-9]*):$'),
-          assocAxis = _.bind(function(ctx){
-
-            var match=false;
-            _.every(axes.__keys__, function(axis){
-
-              if(match === false){
-                _.every(axes[axis].contexts, function(ctxCandidate){
-                  if(ctxCandidate.name === ctx){
-                    match = axis;
-                    return false;
-                  }
-                  return true;
-                });
-                return true;
-              }else {
-                return false;
-              }
-            });
-            return match;}, this),
-
-          makeSpec = function(axis, ctx, sAttr, value, spec){
-            var axisObj,
-                ctxObj;
-            if(spec[axis] !== undefined){
-              axisObj = spec[axis];
-
-              if(axisObj[ctx] === undefined) {
-                axisObj[ctx] = {};
-              }
-            } else {
-              axisObj = {};
-              axisObj[ctx] = {};
-              spec[axis] = axisObj;
-            }
-            axisObj[ctx][sAttr] = value;
-          };
+            '^(data-)?(in|intent)-([a-zA-Z0-9][_a-zA-Z0-9]*):$');
 
       _.each(attrs, function(attr){
 
@@ -371,11 +378,11 @@
           if(specMatch[0] === undefined){
 
             // if there is no axis find one:
-            specMatch[0] = assocAxis(specMatch[1]);
+            specMatch[0] = this._assocAxis(specMatch[1], axes);
 
             if(specMatch[0] === false) {
               // there is no context, so get outa here
-              // TODO: ??
+              return; // skipt the attr
             }
           } else {
             specMatch[0] = specMatch[0].replace(/:$/, '');}
@@ -383,15 +390,19 @@
           specMatch.push(attr.value);
           specMatch.push(spec);
 
-          makeSpec.apply(this, specMatch);
+          spec = this._makeSpec.apply(this, specMatch);
 
         } else if(axisPattern.test(attr.name)){
+
           axisName = attr.name.match(axisPattern)[3];
+
           _.each(axes[axisName].contexts,
                  function(context){
-                   makeSpec(axisName, context.name, 'class', context.name +
+                   this._makeSpec(axisName, context.name, 'class', context.name +
                             ' ' + attr.value, spec);
-                 });}});
+                 },
+                 this);}},
+             this);
 
       return spec;
     },
@@ -402,6 +413,12 @@
           moveFuncs=['append', 'prepend', 'before', 'after'];
 
       _.each(currentContexts, function(ctxObj){
+        // if the axis or the context to not exist in the specs object
+        // skip to the next one
+        if((specs.hasOwnProperty(ctxObj.axis) === false) ||
+           (specs[ctxObj.axis].hasOwnProperty(ctxObj.ctx) === false)){
+          return;
+        }
 
         _.each(specs[ctxObj.axis][ctxObj.ctx], function(val, func){
 
