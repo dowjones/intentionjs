@@ -4,7 +4,7 @@
 	     in-pseudotablet-after="#customPitch" in-pseudosmalltablet-after="#customPitch" in-pseudomobile-after="#customPitch"
 	     in-standard-before="#customPitch" in-hdtv-before="#customPitch"
 	     in-tablet-after="#customPitch" in-smalltablet-after="#customPitch" in-mobile-after="#customPitch">
-      <div id="timeExample" intent in-time> </div>
+      <div id="timeExample" intent in-time:> </div>
 
       {%highlight html%}
 <div id="timeExample" intent in-time:></div>

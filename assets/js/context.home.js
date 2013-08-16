@@ -1,170 +1,135 @@
-/*!
- * context.js Library associated with > v0.9.6.2 of intention.js
- * http://intentionjs.com/
- *
- * Copyright 2011, 2013 Dowjones and other contributors
- * Released under the MIT license
- *
- */
+var container_width = intent.responsive({
+   ID: 'container',
+   contexts: [
+   	{name:"pseudohdtv",min:1220},
+   	{name:"pseudostandard",min:840},
+   	{name:"pseudotablet",min:768},
+   	{name:"pseudosmalltablet",min:510},
+   	{name:"pseudomobile",min:0}
+   ],
+   matcher: function(test, context) {
+   	if(typeof test === 'string'){ return test === context.name;	}
+   	return test >= context.min;
+   },
+   measure:function(arg) {
+   	if(typeof arg === 'string'){ return arg; }
+   	return $("#all").width();
+   }
+}),
+time = intent.responsive({
+   ID: 'time',
+   contexts: [
+   	{name:'night',min:20},
+   	{name:'evening',min:17},
+   	{name:'sunset',min:16},
+   	{name:'day',min:9},
+   	{name:'morning',min:0},
+   ],
+   matcher: function(test, context) {
+   	if($.type(test) == 'string') { return test == context.name; }
+   	return test >= context.min;
+   },
+   measure: function(arg) {
+   	if($.type(arg) == 'string'){ return arg; }
+   	var time = new Date();
+   	return time.getHours();
+   }
+}),
+mini_example = intent.responsive({ //set up a new context based on the container div#all
+   ID: 'mini_example',
+	contexts: [
+      {name:"large",min:300},
+      {name:"small",min:75},
+      {name:"tiny",min:0}
+	],
+	matcher: function(test, context) {
+      return test >= context.min;
+	},
+	measure:function(arg) {
+      return $("#resizable").width();
+	}
+}),
+manageTitlePos = function() {
+   for(var i = 0; i <= intent.axes.titleDepth.contexts.length-2; i++){
+   	var depth = $('#'+intent.axes.titleDepth.contexts[i]['name']).offset().top - 50;
+      intent.axes.titleDepth.contexts[i]['val'] = depth;
+   }
+}
 
-(function () {
+$('#resizable').resizable()
+   .on('resize', mini_example.respond);
+mini_example.respond();
 
-  'use strict';
-  console.log('When does this start running? CONTEXT.JS');
-  var context = function($, Intention){
+intent.on('time:', function() {
+   $('#timeExample').text(intent.axes.time.current);
+});
+$('#timeChange').change(function() {
+   if($(this).children('option:selected').val() == '') { time.respond(); }
+   else { time.respond($(this).children('option:selected').val()); }
+   //If the users on a small device, scroll to the change
+   if(intent.axes.width.current == 'mobile' || intent.axes.width.current=='smalltablet') {
+      $(document).scrollTop($('#timeExample').offset().top);
+   }
+});
+time.respond();
 
-    // create a brand spankin new intention object
-    var intent=new Intention(),
-      // placeholder for the horizontal axis
-      horizontal_axis,
-      orientation_axis;
+ //Try it functions
+$('#devices').children().click(function(){
+   var device = $(this).attr('id');
+   if(device == intent.axes.container.current) {
+      $('#all').css({
+         'width':$('#all').height() + 'px',
+         'height':$('#all').width() + 'px'
+      });
+   } else if(device === undefined) {
+      //save percent scrolled
+      var percent = $('#all').scrollTop() / $('#heightWrapper').height();
+      //lowest common denominator for contexts that have access to device emulation
+      intent.axes.container.respond('pseudostandard');
+      //remove inline styles created by toggleOrientation
+      $('#all').css({'width':'', 'height':'' });
+      var docHeight = $('#heightWrapper').height();
+      $(window).scrollTop((percent*docHeight) - 100);
+   } else {
+      intent.axes.container.respond(device);
+      $('#all')
+         .css({'width':'', 'height': ''});
+   }
+});
 
-    // throttle funtion used for keeping calls to the resize responive 
-    // callback to a minimum
-    function throttle(callback, interval){
-      var lastExec = new Date(),
-        timer = null;
 
-      return function(e){
-        var d = new Date();
-        if (d-lastExec < interval) {
-          if (timer) {
-            window.clearTimeout(timer);
-          }
-          var callbackWrapper = function(event){
-            return function(){
-              callback(event);
-            };
-          };
-          timer = window.setTimeout(callbackWrapper(e), interval);
-          return false;
-        }
-        callback(e);
-        lastExec = d;
-      };
-    }
-
-    // catchall
-    // =======================================================================
-    intent.responsive([{name:'base'}]).respond('base');
-
-    // width context?
-    // =======================================================================
-    horizontal_axis = intent.responsive({
-      ID:'width',
-      contexts: [
-      	{name:'hdtv', min:1220},
-        {name:'standard', min:840}, 
-        {name:'tablet', min:768},
-        {name:'smalltablet', min:510},
-        {name:'mobile', min:0}],
-      // compare the return value of the callback to each context
-      // return true for a match
-      matcher: function(test, context){
-        if(typeof test === 'string'){
-          
-          return test === context.name;
-        }
-        return test>=context.min;
-      },
-      // callback, return value is passed to matcher()
-      // to compare against current context
-      measure: function(arg){
-
-        if(typeof arg === 'string'){
-          return arg;
-        }
-
-        return $(window).width();
-    }});
-
-    // orientation context?
-    // =======================================================================
-    orientation_axis = intent.responsive({
-      ID:'orientation',
-      contexts: [{name:'portrait', rotation: 0},
-        {name:'landscape', rotation:90}], 
-      matcher: function(measure, ctx){
-        return measure === ctx.rotation;
-      },
-      measure: function(){
-        var test = Math.abs(window.orientation);
-        if(test > 0) {
-          test = 180 - test;
-        }
-        return test;
+intent
+   .on('width:', function() {
+      var device = intent.axes.width.current;
+      writeOutput(device);
+      if(device === 'mobile' || device === 'smalltablet') {
+         unequalize('.docsLite .equalize', 'section');
+         unequalize('#smallCode', 'pre');
+      } else if(device === 'tablet') {
+         unequalize('.docsLite .equalize', 'section');
+         equalizeAll('#smallCode', 'pre');
+      } else {
+         equalizeAll('#docs', '.equalize', 'section');
       }
-    });
-
-    // ONE TIME CHECK AXES:
-    // touch device?
-    // =======================================================================
-    intent.responsive({
-      ID:'touch',
-      contexts:[{name:'touch'}], 
-      matcher: function() {
-        return "ontouchstart" in window;
-      }}).respond();
-
-    // retina display?
-    // =======================================================================
-    intent.responsive({
-      ID: 'highres',
-      // contexts
-      contexts:[{name:'highres'}],
-      // matching:
-      matcher: function(){
-        return window.devicePixelRatio > 1;
-      }}).respond();
-
-    // bind events to the window
-    $(window)
-      .on('resize', throttle(horizontal_axis.respond, 100))
-      .on('orientationchange', horizontal_axis.respond)
-      .on('orientationchange', orientation_axis.respond);
-	
-	//First horizontal_Axis response functions. I wish this could go somewhere else.
-	var firstContext = jQuery.Deferred();
-	intent.on('width', function() { firstContext.resolve(); });
-	firstContext.done(function() {
-		console.log('When does this start running? FIRST RESPONSE');
-		var device = intent.axes.width.current;
-		if(device === 'mobile') {
-			unequalize('.docsLite .equalize', 'section');
-			unequalize('#smallCode', 'pre');
-			writeOutput(device);
-		} else if(device === 'smalltablet' || device === 'tablet') {
-			unequalize('.docsLite .equalize', 'section');
-			equalizeAll('#smallCode', 'pre');
-			writeOutput(device);
-		} else {
-			window.setTimeout(function() { equalizeAll('#docs', 'article.equalize', 'section'); }, 100);
-			imageSetup();
-		}	
-	});	
-	
-	// register the current width and orientation without waiting for a window resize
-    horizontal_axis.respond();
-    orientation_axis.respond();
-    
-    $(function(){
-      // at doc ready grab all of the elements in the doc
-      intent.elements(document);
-    });
-    
-    // return the intention object so that it can be extended by other plugins
-    return intent;
-  };
-
-  (function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
-      // AMD. Register as an anonymous module.
-      define('context', ['jquery', 'intention'], factory);
-    } else {
-      // Browser globals
-      root.intent = factory(root.jQuery, root.Intention);
-    }
-  }(this, function ($, Intention) {
-    return context($, Intention);
-  }));
-}).call(this);
+      //When the context switches, reset the targets
+      window.setTimeout(function(){ //This time out is not good!!!!!!!!!!!!!!!
+         contentPos = $('#content').offset().top;
+         intent.axes.stickdepth.contexts[0]['min'] = contentPos;
+         stickdepth.respond();
+         manageTitlePos();
+      }, 500);
+   })
+   .on('container:', function() {
+      var device = intent.axes.container.current,
+      device = device.slice(6, device.length);
+      writeOutput(device);
+      if(device === 'mobile' || device === 'smalltablet' ) {
+         unequalize('.docsLite .equalize', 'section');
+         unequalize('#smallCode', 'pre');
+      } else if(device === 'tablet') {
+         unequalize('.docsLite .equalize', 'section');
+         equalizeAll('#smallCode', 'pre');
+      } else {
+         equalizeAll('.docsLite', '.equalize', 'section');
+      }
+   });

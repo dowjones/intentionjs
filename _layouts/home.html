@@ -7,10 +7,10 @@
     <link rel="stylesheet" type="text/css" href="assets/css/index.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/mini-example.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/code-image.css" />
-    {% include assets.md dir="./" %}
-    <script src="assets/js/home.js" type="text/javascript"></script>
+    {% include assets.md %}
+    
+    
     <script src="assets/js/raphael.js" type="text/javascript"></script>
-    <script src="assets/js/mini-example.js" type="text/javascript"></script>
     <script src="assets/js/codeimage.js" type="text/javascript"></script>
   </head>
   <body intent in-orientation:>
@@ -37,11 +37,11 @@
             </ul>
             <ul class="nav_deck" id="sections"></ul>
             <div class="inner">
-               <p intent in-start-class="inactive" in-mobile-class="inactive" in-pseudomobile-class="inactive"
+               <p id="stickBrand" intent in-start-class="inactive" in-mobile-class="inactive" in-pseudomobile-class="inactive"
                   in-movebrand-class="active" in-sticknav-class="active"><a>intention.js</a></p>
    	      </div>
    	  </nav>
-          <div id="docs">
+      <div id="docs">
             {% include pitchIntro.md %}
             {%include basics.md %}
             {%include usageIntro.md %}
@@ -56,10 +56,15 @@
 
 
   </section>
-  {% include footer.md %}
+  <footer intent in-width: in-container:>
+     {% include footer.md %}
+  </footer>
 </div>
 </div>
-<!--<script src="assets/js/init.js" type="text/javascript"></script>-->
-<script src="assets/js/context.docs.js" type="text/javascript"></script>
+
+<script src="assets/js/context.setup.js" type="text/javascript"></script>
+<script src="assets/js/context.home.js" type="text/javascript"></script>
+<script src="assets/js/init.home.js" type="text/javascript"></script>
+
 </body>
 </html>

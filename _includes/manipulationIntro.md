@@ -61,6 +61,13 @@
       {%endhighlight%}
     </section>
   </article>
+  
+  
+  
+  
+  
+  
+  
 
   <article class="equalize" data-pattern="2">
     <h3>Placement Manipulation</h3>
@@ -97,7 +104,9 @@ intent in-context_name-move_function="selector"
 
       <p>Selectors can be general element selections like above (<code>...prepend="footer"</code>), or specific (<code>...prepend="#intro"</code>).</p>
     </section>
+    
     <section intent in-hdtv-class="show" in-standard-class="show" in-mobile-class="hide" in-smalltablet-class="hide" in-tablet-class="hide">
+    
       <div id="resizeExample">
         <div id="resizable">
           <div id="miniFade"></div>
