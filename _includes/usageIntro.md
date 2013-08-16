@@ -45,13 +45,13 @@
 </nav>
 
 <div id="content" intent
-   in-width in-orientation>
+   in-width: in-orientation:>
    This is all so easy!
 </div>
     {%endhighlight%}
   </section>
 
-  <div id="typesOfManip" class="thirds clearFix" intent in-width: in-container: in-touch:="swipe">
+  <div id="typesOfManip" class="thirds clearFix" intent in-width: in-container: in-touch-class="swipe">
 
     <section>
       <h5>On an iPhone 5</h5>
