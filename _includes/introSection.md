@@ -5,7 +5,7 @@
          <p>The goal is to increase layout options and flexibility, reducing development time and lessening the necessity of media-query-driven stylesheet overrides.</p>
       </section>
       <section id="buttons">
-         <div id="download"><a href="intention.js">Download the latest version<h5> 0.9.6.3</h5></a></div>
+         <div id="download"><a href="intention.js">Download the latest version<h5> v0.9.7.2</h5></a></div>
          <div id="github"><a href="https://github.com/wsjdesign/intentionjs" target="_blank">Fork us on<h5>GitHub</h5></a></div>
       </section>
    </div>
@@ -110,22 +110,4 @@
 </section>
 <!-- End that too. Back to decently formatted code -->
 
-<section id="heading" class="try clearFix" intent
-   	 in-pseudomobile-prepend="body"
-   	 in-pseudosmalltablet-prepend="body"
-   	 in-pseudotablet-prepend="body"
-   	 in-pseudohdtv-prepend="body"
-   	 in-pseudostandard-after="#codeImage"
-   	 in-container:
-   	 in-width:> <!-- Hide this functionality on *real* mobile devices but not on faked ones-->
-  <div class="inner">
-    <h2>Try it!</h2>
-    <div id="devices">
-      <div id="pseudomobile" intent in-pseudomobile-class="toggleOrientation" in-base-class="null"></div>
-      <div id="pseudosmalltablet" intent in-pseudosmalltablet-class="toggleOrientation"  in-base-class="null"></div>
-      <div id="pseudotablet" intent in-pseudotablet-class="toggleOrientation"  in-base-class="null"></div>
-      <div id="pseudohdtv"></div>
-      <div class="cancel"></div>
-    </div>
-  </div>
-</section>
+

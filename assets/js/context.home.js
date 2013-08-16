@@ -137,11 +137,14 @@ curPos,
 articles = $('#docs').children('article').not('.special'),
 articlect = articles.length,
 i = 1,
-manageTitlePos = function() {
+manageScrollDepth = function() {
    for(var i = 0; i <= intent.axes.titleDepth.contexts.length-2; i++){
    	var depth = $('#'+intent.axes.titleDepth.contexts[i]['name']).offset().top - 50;
       intent.axes.titleDepth.contexts[i]['val'] = depth;
    }
+   contentPos = $('#content').offset().top;
+   intent.axes.stickdepth.contexts[0]['min'] = contentPos;
+   stickdepth.respond();
 };
 $.each(articles, function() { //then create the nav
    $(this).attr('id', 't'+i); //#targeti
@@ -171,7 +174,6 @@ var titleDepth = intent.responsive({
    contexts: titleCtx,
    matcher: function(test, context){
       if($.type(test) == 'string'){ return test == context.name; }
-// LOOK AT CLEANING THIS UP. DO YOU REALLY NEED A VAR?????????????????????????????
       if(test >= context.val) {
          curPos = context.name.slice(1);
          return true;
@@ -190,10 +192,12 @@ var titleDepth = intent.responsive({
 });
 titleDepth.respond();
 
-$(window).on('scroll', function(){
-   throttle(titleDepth.respond(), 50);
-   throttle(stickdepth.respond(), 50);
-});
+$(window)
+   .on('scroll', function(){
+      throttle(titleDepth.respond(), 50);
+      throttle(stickdepth.respond(), 50);
+   })
+   .on('resize', throttle(manageScrollDepth, 100));
  
 $('.jump').add('#stickBrand').click(function() {
    $('html, body').animate({ scrollTop: $('#t1').offset().top - 49}, 1000);
@@ -247,13 +251,6 @@ intent
       } else {
          equalizeAll('#docs', '.equalize', 'section');
       }
-      //When the context switches, reset the targets
-      window.setTimeout(function(){ //This time out is not good!!!!!!!!!!!!!!!
-         contentPos = $('#content').offset().top;
-         intent.axes.stickdepth.contexts[0]['min'] = contentPos;
-         stickdepth.respond();
-         manageTitlePos();
-      }, 500);
    })
    .on('container:', function() {
       var device = intent.axes.container.current,
