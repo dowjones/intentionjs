@@ -1,8 +1,8 @@
 <section id="splash" intent in-width: in-container: in-orientation:>
    <div class="inner clearFix">
       <section>
-         <h3>Intention.js offers a clear way to create dynamically restructured html through clean interface to a super light-weight library.</h3>
-         <p>The goal is to increase layout options and flexibility, reducing development time and lessening the necessity of media-query-driven stylesheet overrides.</p>
+         <h3>Intention.js offers a light-weight and clear way to dynamically restructure HTML in a responsive manner.</h3>
+         <p>Easily increase layout options and flexibility, reducing development time and lessening the necessity of media-query-driven stylesheet overrides.</p>
       </section>
       <section id="buttons">
          <div id="download"><a href="intention.js">Download the latest version<h5> v0.9.7.2</h5></a></div>
@@ -97,7 +97,7 @@
    <span class="white">intent in-width:</span>&gt;
    &lt;pre id="output"
       <span class="white">intent in-width:</span>
-      <span class="orangeDark mobile">in-mobile-after"#input"</span>
+      <span class="orangeDark mobile">in-mobile-after="#input"</span>
       <span class="blueLight smalltablet">in-smalltablet-after="#input"</span>
       <span class="greenDark tablet">in-tablet-after="#input"&gt;</span>
          <span class="comment">//output</span>
@@ -111,3 +111,22 @@
 <!-- End that too. Back to decently formatted code -->
 
 
+<section id="heading" class="try clearFix" intent
+   	 in-pseudomobile-prepend="body"
+   	 in-pseudosmalltablet-prepend="body"
+   	 in-pseudotablet-prepend="body"
+   	 in-pseudohdtv-prepend="body"
+   	 in-pseudostandard-after="#codeImage"
+   	 in-container:
+   	 in-width:> <!-- Hide this functionality on *real* mobile devices but not on faked ones-->
+  <div class="inner">
+    <h2>Try it!</h2>
+    <div id="devices">
+      <div id="pseudomobile" intent in-pseudomobile-class="toggleOrientation" in-base-class="null"></div>
+      <div id="pseudosmalltablet" intent in-pseudosmalltablet-class="toggleOrientation"  in-base-class="null"></div>
+      <div id="pseudotablet" intent in-pseudotablet-class="toggleOrientation"  in-base-class="null"></div>
+      <div id="pseudohdtv"></div>
+      <div class="cancel"></div>
+    </div>
+  </div>
+</section>
