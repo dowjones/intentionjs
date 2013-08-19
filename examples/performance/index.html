@@ -1,23 +1,70 @@
 <html>
 <head>
-	<title>image loading performance test</title>
-
+	<title>performance test</title>
+   <style>
+   /* Basic setup stuff */
+   html, body{
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      text-align: center;
+      font-family: Georgia, serif;
+   }
+   h1, h2{
+      padding: 20px 0;
+      width: 75%;
+      margin: auto;
+      line-height: 1.5em;
+   }
+   div{
+      width: 100%;
+      min-height: 250px;
+      line-height: 250px;
+   }
+   div+div{
+      border-top: 1px dashed white;
+   }
+   
+   
+   /* Will be green from the start */
+   div#init{
+      background: seagreen;  
+   }
+   
+   /* Class assigned to all tests when intention responds */
+   div.loaded{
+      background: seagreen;
+   }
+   
+   /* When the base context (the catch-all context that's always on) is passed */
+   div.base::before{
+      content: "Base context passed. '.loaded' class assigned";
+   }
+   
+   /* Browser width axis*/
+   div.mobile, div.tablet, div.standard{
+      background: seagreen;
+   }
+   div.mobile::before, div.tablet::before, div.standard::before{
+      content: "Width axis responded. '.loaded' class assigned.";
+   }
+   div.mobile::after{ content: "Mobile viewport"; }
+   div.tablet::after{ content: "Tablet viewport"; }
+   div.standard::after{ content: "Standard viewport"; }
+   </style>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+   <script src="../../test/vendor/underscore.js"></script>
+   <script src="../../intention.js" type="text/javascript"></script>
 </head>
 <body>
-	<img src="img/src.jpg" />
-	<img intent in-base-src="img/tn-src.jpg" />
-	<img intent in-base-src="img/tn-src2.jpg" />
-	<img intent in-base-src="img/tn-src3.jpg" />
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script src="../../test/vendor/underscore.js"></script>
-	<script src="../../intention.js"></script>
-	<script type="text/javascript">
-		var intent = new Intention;
-		
-		intent.responsive([{name:'base'}]).respond('base');
-
-		intent.elements(document);
-
-	</script>
+	<h1>Intentional &lt;div&gt;s are only assigned valid class attributes when intent is determined</h1>
+	
+	<div id="init">Class assigned without intent in source.</div>
+	<div intent in-base-class="base loaded"></div>
+	<div intent in-width: > &nbsp;</div>
+	
+	<h2>When the intent is determined, they turn green (which happens as soon as the page loads)</h2>
+	
+	<script src="../../context.js" type="text/javascript"></script>
 </body>
 </html>

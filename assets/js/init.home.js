@@ -39,7 +39,6 @@ $(function(){
     
    var stdInit = $.Deferred();
    stdInit.done(function() {
-      console.log('loaded into standard or hdtv');
       imageSetup();
       equalizeAll('#docs', 'article.equalize', 'section');
       contentPos = $('#content').offset().top;
