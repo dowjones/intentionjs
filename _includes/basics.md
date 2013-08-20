@@ -22,7 +22,7 @@ highres <span class="comment">(devicePixelRatio > 1)</span>
 </section>
 <section>
   <h3 alt="Manipulations">Manipulations via HTML Attributes</h3>
-  <p>intention.js has three basic manipulations: attribution manipulations, class manipulations, and placement manipulations. With these three, you can change the value of any attribute, add or remove an element’s class, and adjust the position of an element within the structure of the document. </p>
+  <p>Intention.js has three basic manipulations: attribution manipulations, class manipulations, and placement manipulations. With these three, you can change the value of any attribute, add or remove an element’s class, and adjust the position of an element within the structure of the document. </p>
 </section>
 
 </article>
