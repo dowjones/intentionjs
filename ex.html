@@ -1,0 +1,120 @@
+---
+layout: ex
+title: About Intention.js
+---
+
+<div class="intro">
+	<a href="https://github.com/mojombo/jekyll">Jekyll</a> - a Ruby based site generator
+</div>
+
+<div class="install">
+	
+	<h1>Installation</h1>
+	<ul>
+	
+		<li>Installed as a Ruby gem using a package manager (such as Homebrew)</li>
+		
+		<li>(Install command line tools in Xcode)</li>
+
+		<li><div class="term">$ gem install jekyll</li></div>
+
+		<li><a href="https://github.com/mojombo/jekyll/wiki/install">Jekyll install instructions</a></li>
+	
+	</ul>
+</div>
+
+<div class="implement">
+
+	<h1>Implementation</h1>
+	<ul>
+	
+		<li>Jekyll is run through the command line</li>
+		
+		<li>Enter a directory</li>
+
+		<li><div class="term">$ cd Desktop/intentionjs</div></li>
+
+		<li><div class="term">intentionjs$ Jekyll --server</div></li>
+
+		<li>The site will be available on Localhost:4000</li>
+	
+	</ul>
+</div>
+
+
+<div class="organize">
+
+	<h1>Organization</h1>
+	<ul>
+	
+		<li>Jekyll suggests it be organized with specific <a href="https://github.com/mojombo/jekyll/wiki/Usage">organization model</a></li>
+
+		<li>However, depending on what the site is used for (blog or static) the configuation can be edited. These are the main layout tools:</li>
+		
+		<li>_includes</li>
+		
+		<li>_layouts</li>
+
+		<li>_posts (only if you are running as a blog)</li>
+
+		<li>_assets</li>
+
+		<li>_config.yml (essential for deploying to a url)</li>
+
+		
+	</ul>
+</div>
+
+<div class="templates">
+
+	<h1>Templating</h1>
+	<ul>
+	
+		<li>Jekyll runs using Liquid templating language</li>
+
+		<li>All layout templates go in the _layout folder (duh)</li>
+		
+		<li>Each file needs to call back to a layout using YAML front matter</li>
+		
+		<li><div class="term">
+			---<br>
+			Layout: post<br>
+			Title: Jekyll example<br>
+			---
+		</div></li>
+
+		<li>content is called by using tags such as {{ content }} in layout files</li>
+
+		<li><a href="https://github.com/shopify/liquid/wiki/liquid-for-designers">Liquid templating junk</a></li>
+
+		
+	</ul>
+</div>
+
+
+<div class="publishing">
+
+	<h1>Publishing</h1>
+	<ul>
+	
+		<li>Jekyll is an ideal mate for Github Pages</li>
+
+		<li>publishing to a github page is also done in the command line with git</li>
+		
+			
+		<li><div class="term">
+			$ git add . <br>
+			$ git commit -m "Add new content"<br>
+			$ git push origin master<br>
+		</div></li>
+
+		<li>A GitHub post-commit hook will automatically deploy your changes to your hosted blog.</li>
+
+		
+	</ul>
+</div>
+
+
+
+
+

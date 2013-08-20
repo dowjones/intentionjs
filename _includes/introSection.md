@@ -1,11 +1,11 @@
-<section id="splash" intent in-width in-container in-orientation>
+<section id="splash" intent in-width: in-container: in-orientation:>
    <div class="inner clearFix">
       <section>
-         <h3>Intention.js offers a clear way to create dynamically restructured html through clean interface to a super light-weight library.</h3>
-         <p>The goal is to increase layout options and flexibility, reducing development time and lessening the necessity of media-query-driven stylesheet overrides.</p>
+         <h3>Intention.js offers a light-weight and clear way to dynamically restructure HTML in a responsive manner.</h3>
+         <p>Easily increase layout options and flexibility, reducing development time and lessening the necessity of media-query-driven stylesheet overrides.</p>
       </section>
       <section id="buttons">
-         <div id="download"><a href="intention.js">Download the latest version<h5> 0.9.6.3</h5></a></div>
+         <div id="download"><a href="intention.js">Download the latest version<h5> v0.9.7.2</h5></a></div>
          <div id="github"><a href="https://github.com/wsjdesign/intentionjs" target="_blank">Fork us on<h5>GitHub</h5></a></div>
       </section>
    </div>
@@ -13,7 +13,7 @@
 
 <!-- Start the ugly Code-as-Image section -->
 
-<section id="codeImage" intent in-width in-container>
+<section id="codeImage" intent in-width: in-container:>
    <div class="inner clearFix">
       <div id="connections"></div>
       <pre id="rawCodeImage"><span class="selectable">&lt;body&gt;
@@ -68,10 +68,10 @@
 
 <!-- End ugly Code-as-Image section -->
 <!-- But start the slightly less ugly mobile version of that -->
-<section id="smallCode" class="clearFix" intent in-width in-container data-pattern="2">
+<section id="smallCode" class="clearFix" intent in-width: in-container: data-pattern="2">
   <pre id="output" intent
-       in-width
-       in-container
+       in-width:
+       in-container:
        in-mobile-after="#input"
        in-smalltablet-after="#input"
        in-tablet-after="#input"
@@ -94,10 +94,10 @@
 &lt;/style&gt;
 
 &lt;section id="smallCode"
-   <span class="white">intent in-width</span>&gt;
+   <span class="white">intent in-width:</span>&gt;
    &lt;pre id="output"
-      <span class="white">intent in-width</span>
-      <span class="orangeDark mobile">in-mobile-after"#input"</span>
+      <span class="white">intent in-width:</span>
+      <span class="orangeDark mobile">in-mobile-after="#input"</span>
       <span class="blueLight smalltablet">in-smalltablet-after="#input"</span>
       <span class="greenDark tablet">in-tablet-after="#input"&gt;</span>
          <span class="comment">//output</span>
@@ -110,14 +110,15 @@
 </section>
 <!-- End that too. Back to decently formatted code -->
 
+
 <section id="heading" class="try clearFix" intent
    	 in-pseudomobile-prepend="body"
    	 in-pseudosmalltablet-prepend="body"
    	 in-pseudotablet-prepend="body"
    	 in-pseudohdtv-prepend="body"
    	 in-pseudostandard-after="#codeImage"
-   	 in-container
-   	 in-width> <!-- Hide this functionality on *real* mobile devices but not on faked ones-->
+   	 in-container:
+   	 in-width:> <!-- Hide this functionality on *real* mobile devices but not on faked ones-->
   <div class="inner">
     <h2>Try it!</h2>
     <div id="devices">
