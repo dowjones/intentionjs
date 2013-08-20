@@ -5,14 +5,14 @@
     <p>Giving Intention.js instructions is as easy as flagging the element as "intentional" and giving it an intentional attribute.</p>
 
    {% highlight html %}
-<div intent in-mobile>
+<div intent in-width:>
    {% endhighlight %}
 
     <p><i>For the purposes of documentation, <code>in-</code> will be used instead of the proper HTML-valid <code>data-in-</code>.</i></p>
   </section>
   <section>
     <h3>Dependencies</h3>
-    <p>Intention.js requires <a href="http://jquery.com/">jQuery</a> and <a href="http://Underscore.js" target="_blank">Underscore.js</a> to work. You can download and link to them manually, or you can include them via require.</p>
+    <p>Intention.js requires <a href="http://jquery.com/">jQuery</a> and <a href="http://underscore.js" target="_blank">Underscore.js</a> to work. You can download and link to them manually, or you can include them via require.</p>
     {% highlight html %}
 <script
    data-main="assets/js/context"
@@ -41,18 +41,18 @@
    <a id="projects" href="/faq"
       intent
       in-mobile-before="#about">FAQ</a>
-      
+
 </nav>
 
 <div id="content" intent
-   in-width in-orientation>
+   in-width: in-orientation:>
    This is all so easy!
 </div>
     {%endhighlight%}
   </section>
-  
-  <div id="typesOfManip" class="thirds clearFix" intent in-width in-container in-touch in-touch-class="swipe">
-  
+
+  <div id="typesOfManip" class="thirds clearFix" intent in-width: in-container: in-touch-class="swipe">
+
     <section>
       <h5>On an iPhone 5</h5>
       {% highlight html %}
@@ -62,7 +62,7 @@
 
 <div id="content"
    class="mobile portrait">
-   
+
    <nav class="swipeDrawer">
       <a href="/faq">
          FAQ
@@ -71,14 +71,14 @@
          About
       </a>
    </nav>
-   
+
    This is all so easy!
-   
+
 </div>
 
       {% endhighlight %}
     </section>
-  
+
     <section>
       <h5>On Regular Tablets</h5>
       {% highlight html %}
@@ -88,7 +88,7 @@
 
 <div id="content"
    class="tablet portrait">
-   
+
    <nav
       class="swipeDrawer">
       <a href="about.html">
@@ -98,13 +98,13 @@
          FAQ
       </a>
    </nav>
-   
+
    This is all so easy!
-   
+
 </div>
       {% endhighlight %}
     </section>
-  
+
     <section>
       <h5>On Desktops</h5>
       {% highlight html %}
@@ -123,9 +123,9 @@
 
 <div id="content"
    class="standard">
-   
+
    This is all so easy!
-   
+
 </div>
 
       {% endhighlight %}

@@ -1,0 +1,47 @@
+html, body {
+      margin: 20px;
+      padding:0;
+      font-family: monospace;
+      font-size: 1.2em;
+}
+
+
+h1 {
+	font-size: 1.5em;
+}
+
+
+.header {
+	background-color: lavender;
+	color: lawngreen;
+	font-size: 3.5em;
+
+}
+
+.footer {
+	background-color: lavender;
+	color: lawngreen;
+	margin-top: 150px;
+}
+
+li {
+	padding-bottom: 20px;
+}
+
+.term {
+	color:lawngreen;
+	background-color: black;
+}
+
+a {
+	color: steelblue;
+}
+
+.cm {
+	background-image: url(img/cm.jpg);
+	width: 30px;
+	height: 30px;
+	float: left;
+	margin:20px; 
+}
+

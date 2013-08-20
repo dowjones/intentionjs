@@ -1,170 +1,268 @@
-/*!
- * context.js Library associated with > v0.9.6.2 of intention.js
- * http://intentionjs.com/
- *
- * Copyright 2011, 2013 Dowjones and other contributors
- * Released under the MIT license
- *
- */
+function throttle(callback, interval){
+   var lastExec = new Date(),
+     timer = null;
 
-(function () {
+   return function(e){
+     var d = new Date();
+     if (d-lastExec < interval) {
+       if (timer) {
+         window.clearTimeout(timer);
+       }
+       var callbackWrapper = function(event){
+         return function(){
+           callback(event);
+         };
+       };
+       timer = window.setTimeout(callbackWrapper(e), interval);
+       return false;
+     }
+     callback(e);
+     lastExec = d;
+   };
+ }
 
-  'use strict';
-  console.log('When does this start running? CONTEXT.JS');
-  var context = function($, Intention){
+var contentPos,
+curPos = 0,
+stickdepth = intent.responsive({
+   ID: 'stickdepth',
+   contexts: [
+      {name:'sticknav', min:contentPos},
+    	{name:'movebrand', min:$('header').height()},
+    	{name:'start', min:0}
+   ],
+   matcher: function(test, context){
+   	return test >= context.min;
+   },
+   measure: function(arg){
+    	if(typeof window.pageYOffset == 'undefined') { var scroll = D.scrollTop; }
+    	else { var scroll = window.pageYOffset; }
+    	return scroll;
+   }
+}),
+container_width = intent.responsive({
+   ID: 'container',
+   contexts: [
+   	{name:"pseudohdtv",min:1220},
+   	{name:"pseudostandard",min:840},
+   	{name:"pseudotablet",min:768},
+   	{name:"pseudosmalltablet",min:510},
+   	{name:"pseudomobile",min:0}
+   ],
+   matcher: function(test, context) {
+   	if(typeof test === 'string'){ return test === context.name;	}
+   	return test >= context.min;
+   },
+   measure:function(arg) {
+   	if(typeof arg === 'string'){ return arg; }
+   	return $("#all").width();
+   }
+}),
+time = intent.responsive({
+   ID: 'time',
+   contexts: [
+   	{name:'night',min:20},
+   	{name:'evening',min:17},
+   	{name:'sunset',min:16},
+   	{name:'day',min:9},
+   	{name:'morning',min:0},
+   ],
+   matcher: function(test, context) {
+   	if($.type(test) == 'string') { return test == context.name; }
+   	return test >= context.min;
+   },
+   measure: function(arg) {
+   	if($.type(arg) == 'string'){ return arg; }
+   	var time = new Date();
+   	return time.getHours();
+   }
+}),
+mini_example = intent.responsive({ //set up a new context based on the container div#all
+   ID: 'mini_example',
+	contexts: [
+      {name:"large",min:300},
+      {name:"small",min:75},
+      {name:"tiny",min:0}
+	],
+	matcher: function(test, context) {
+      return test >= context.min;
+	},
+	measure:function(arg) {
+      return $("#resizable").width();
+	}
+});
 
-    // create a brand spankin new intention object
-    var intent=new Intention(),
-      // placeholder for the horizontal axis
-      horizontal_axis,
-      orientation_axis;
+$('#resizable').resizable()
+   .on('resize', mini_example.respond);
+mini_example.respond();
 
-    // throttle funtion used for keeping calls to the resize responive 
-    // callback to a minimum
-    function throttle(callback, interval){
-      var lastExec = new Date(),
-        timer = null;
+intent.on('time:', function() {
+   $('#timeExample').text(intent.axes.time.current);
+});
+$('#timeChange').change(function() {
+   if($(this).children('option:selected').val() == '') { time.respond(); }
+   else { time.respond($(this).children('option:selected').val()); }
+   //If the users on a small device, scroll to the change
+   if(intent.axes.width.current == 'mobile' || intent.axes.width.current=='smalltablet') {
+      $(document).scrollTop($('#timeExample').offset().top);
+   }
+});
+time.respond();
 
-      return function(e){
-        var d = new Date();
-        if (d-lastExec < interval) {
-          if (timer) {
-            window.clearTimeout(timer);
-          }
-          var callbackWrapper = function(event){
-            return function(){
-              callback(event);
-            };
-          };
-          timer = window.setTimeout(callbackWrapper(e), interval);
-          return false;
-        }
-        callback(e);
-        lastExec = d;
-      };
-    }
+ //Try it functions
+$('#devices').children().click(function(){
+   var device = $(this).attr('id');
+   if(device == intent.axes.container.current) {
+      $('#all').css({
+         'width':$('#all').height() + 'px',
+         'height':$('#all').width() + 'px'
+      });
+   } else if(device === undefined) {
+      //save percent scrolled
+      var percent = $('#all').scrollTop() / $('#heightWrapper').height();
+      //lowest common denominator for contexts that have access to device emulation
+      intent.axes.container.respond('pseudostandard');
+      //remove inline styles created by toggleOrientation
+      $('#all').css({'width':'', 'height':'' });
+      var docHeight = $('#heightWrapper').height();
+      $(window).scrollTop((percent*docHeight) - 100);
+   } else {
+      intent.axes.container.respond(device);
+      $('#all')
+         .css({'width':'', 'height': ''});
+   }
+});
+//For docs nav
+var titleCtx = [{'name':'t0', 'val':0}],
+curPos,
+articles = $('#docs').children('article').not('.special'),
+articlect = articles.length,
+i = 1,
+manageScrollDepth = function() {
+   for(var i = 0; i <= intent.axes.titleDepth.contexts.length-2; i++){
+   	var depth = $('#'+intent.axes.titleDepth.contexts[i]['name']).offset().top - 50;
+      intent.axes.titleDepth.contexts[i]['val'] = depth;
+   }
+   contentPos = $('#content').offset().top;
+   intent.axes.stickdepth.contexts[0]['min'] = contentPos;
+   stickdepth.respond();
+};
+$.each(articles, function() { //then create the nav
+   $(this).attr('id', 't'+i); //#targeti
+   if($(this).children('h2').attr('alt')) { var text = $(this).children('h2').attr('alt'); }
+   else{ var text = $(this).children('h2').text(); }
 
-    // catchall
-    // =======================================================================
-    intent.responsive([{name:'base'}]).respond('base');
+   var markup = '<li id="a'+i+'"><a ref="#t'+i+'" >'+text+'</a></li>', //#anchori
+   pos = $(this).offset().top - 50, //minus 20 for padding
+   ctx = {name:'t'+i, val:pos},
+   sub = $(this).children('article'),
+   jumpMarkup = $('<div class="jump"><a>&uarr; Back to top</a></div>');
 
-    // width context?
-    // =======================================================================
-    horizontal_axis = intent.responsive({
-      ID:'width',
-      contexts: [
-      	{name:'hdtv', min:1220},
-        {name:'standard', min:840}, 
-        {name:'tablet', min:768},
-        {name:'smalltablet', min:510},
-        {name:'mobile', min:0}],
-      // compare the return value of the callback to each context
-      // return true for a match
-      matcher: function(test, context){
-        if(typeof test === 'string'){
-          
-          return test === context.name;
-        }
-        return test>=context.min;
-      },
-      // callback, return value is passed to matcher()
-      // to compare against current context
-      measure: function(arg){
+   titleCtx.push(ctx);
 
-        if(typeof arg === 'string'){
-          return arg;
-        }
+   $('ul#sections').append(markup);
 
-        return $(window).width();
-    }});
+   if(sub.length<1){ $(this).append(jumpMarkup).addClass('clearFix'); }
+   else { sub.append(jumpMarkup).addClass('clearFix'); }
 
-    // orientation context?
-    // =======================================================================
-    orientation_axis = intent.responsive({
-      ID:'orientation',
-      contexts: [{name:'portrait', rotation: 0},
-        {name:'landscape', rotation:90}], 
-      matcher: function(measure, ctx){
-        return measure === ctx.rotation;
-      },
-      measure: function(){
-        var test = Math.abs(window.orientation);
-        if(test > 0) {
-          test = 180 - test;
-        }
-        return test;
+   i++;
+});
+
+titleCtx.reverse();
+
+var titleDepth = intent.responsive({
+   ID: 'titleDepth',
+   contexts: titleCtx,
+   matcher: function(test, context){
+      if($.type(test) == 'string'){ return test == context.name; }
+      if(test >= context.val) {
+         curPos = context.name.slice(1);
+         return true;
       }
-    });
+      return false;
+   },
+   measure: function(arg){
+      if($.type(arg) == 'string'){ return arg; }
+      if(typeof pageYOffset == 'undefined') { var scroll = D.scrollTop; }
+      else { var scroll = pageYOffset; }
+      if((scroll+$(window).height()) == $(document).height()) {
+         return intent.axes.titleDepth.contexts[0]['name'];
+      }
+      return scroll;
+   }
+});
+titleDepth.respond();
 
-    // ONE TIME CHECK AXES:
-    // touch device?
-    // =======================================================================
-    intent.responsive({
-      ID:'touch',
-      contexts:[{name:'touch'}], 
-      matcher: function() {
-        return "ontouchstart" in window;
-      }}).respond();
+$(window)
+   .on('scroll', function(){
+      throttle(titleDepth.respond(), 50);
+      throttle(stickdepth.respond(), 50);
+   })
+   .on('resize', throttle(manageScrollDepth, 100));
+ 
+$('.jump').add('#stickBrand').click(function() {
+   $('html, body').animate({ scrollTop: $('#t1').offset().top - 49}, 1000);
+});
 
-    // retina display?
-    // =======================================================================
-    intent.responsive({
-      ID: 'highres',
-      // contexts
-      contexts:[{name:'highres'}],
-      // matching:
-      matcher: function(){
-        return window.devicePixelRatio > 1;
-      }}).respond();
+$('#prevnext li').click(function() {
+   console.log('clicked, old curPos', curPos);
+   if( ($(this).attr('id') == 'next') && (curPos < articlect) ){ console.log('moving up'); curPos++; }
+   else if(($(this).attr('id') == 'prev') && (curPos > 1)){ console.log('decrementing'); curPos--; }
+   else { return false }
+   console.log('new curPos:', curPos);
+   var target = $('#t'+curPos).offset().top - 49; //minus 49 to make sure the nav won't cover it
+   $('html, body').animate({ scrollTop: target}, 1000);
+   return false;
+});
 
-    // bind events to the window
-    $(window)
-      .on('resize', throttle(horizontal_axis.respond, 100))
-      .on('orientationchange', horizontal_axis.respond)
-      .on('orientationchange', orientation_axis.respond);
-	
-	//First horizontal_Axis response functions. I wish this could go somewhere else.
-	var firstContext = jQuery.Deferred();
-	intent.on('width', function() { firstContext.resolve(); });
-	firstContext.done(function() {
-		console.log('When does this start running? FIRST RESPONSE');
-		var device = intent.axes.width.current;
-		if(device === 'mobile') {
-			unequalize('.docsLite .equalize', 'section');
-			unequalize('#smallCode', 'pre');
-			writeOutput(device);
-		} else if(device === 'smalltablet' || device === 'tablet') {
-			unequalize('.docsLite .equalize', 'section');
-			equalizeAll('#smallCode', 'pre');
-			writeOutput(device);
-		} else {
-			window.setTimeout(function() { equalizeAll('#docs', 'article.equalize', 'section'); }, 100);
-			imageSetup();
-		}	
-	});	
-	
-	// register the current width and orientation without waiting for a window resize
-    horizontal_axis.respond();
-    orientation_axis.respond();
-    
-    $(function(){
-      // at doc ready grab all of the elements in the doc
-      intent.elements(document);
-    });
-    
-    // return the intention object so that it can be extended by other plugins
-    return intent;
-  };
+$('ul#sections')
+   .menuDeck()
+   .children('li').children('a')
+   .click(function() {
+      var target = $($(this).attr('ref')).offset().top - 49;
+      $('html, body').animate({ scrollTop: target}, 1000);
+});
 
-  (function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
-      // AMD. Register as an anonymous module.
-      define('context', ['jquery', 'intention'], factory);
-    } else {
-      // Browser globals
-      root.intent = factory(root.jQuery, root.Intention);
-    }
-  }(this, function ($, Intention) {
-    return context($, Intention);
-  }));
-}).call(this);
+intent
+   .on('titleDepth:', function() {
+      curPos = intent.axes.titleDepth.current.slice(1);
+      $('ul#sections')
+         .children('.cover').removeClass('cover')
+         .end() //in case no .cover is found
+         .children('li:nth-of-type('+curPos+')').addClass('cover');
+   })
+   .on('sticknav', function(){
+      //add padding so stickiness is applied without a jump
+      //this is done here (as opposed to applying an intentional class to #docs
+      //in case we decide the nav bar should be different sizes in different contexts
+      $('#docs').css('padding-top', $('#topNav').outerHeight());
+   })
+   .on('movebrand', function() { //one context above the stickynav
+      $('#docs').css('padding-top', ''); //remove that smoothening padding
+   })
+   .on('width:', function() {
+      var device = intent.axes.width.current;
+      writeOutput(device);
+      if(device === 'mobile' || device === 'smalltablet') {
+         unequalize('.docsLite .equalize', 'section');
+         unequalize('#smallCode', 'pre');
+      } else if(device === 'tablet') {
+         unequalize('.docsLite .equalize', 'section');
+         equalizeAll('#smallCode', 'pre');
+      } else {
+         equalizeAll('#docs', '.equalize', 'section');
+      }
+   })
+   .on('container:', function() {
+      var device = intent.axes.container.current,
+      device = device.slice(6, device.length);
+      writeOutput(device);
+      if(device === 'mobile' || device === 'smalltablet' ) {
+         unequalize('.docsLite .equalize', 'section');
+         unequalize('#smallCode', 'pre');
+      } else if(device === 'tablet') {
+         unequalize('.docsLite .equalize', 'section');
+         equalizeAll('#smallCode', 'pre');
+      } else {
+         equalizeAll('.docsLite', '.equalize', 'section');
+      }
+   });

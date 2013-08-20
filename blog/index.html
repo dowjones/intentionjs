@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "Recent Things"
+title: "Blog"
 ---
 
 {% for post in site.posts %}
@@ -18,17 +18,3 @@ title: "Recent Things"
     {% endif %}
 </article>
 {% endfor %}
-
-<!--If you want the sidebar back, you'll have to change the css so #posts is no longer 100% of the width in standard and tablet-->
-<!--<section id="sidebar">
-	<div class="pagination">
-		<h3>Page {{ paginator.page }} of {{ paginator.total_pages }}</h3>
-		{% if paginator.previous_page %}
-			<div class="prev"><a href="{{ paginator.previous_page_path }}">&lt; Older</a>
-		{% endif %}
-		{% if paginator.next.page %}
-			<div class="next"><a href="{{ paginator.next_page_path }}">Newer &gt;</a>
-		{% endif %}
-		<div class="clear"></div>
-	</div>
-</section>-->
