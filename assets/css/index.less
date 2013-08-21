@@ -74,14 +74,31 @@
 		background-repeat: repeat, repeat-x, repeat-x;
 		background-position: top, top, bottom;
 		color:@lightYellow;
+		h2{
+   		font-size:31px;
+   		font-weight:normal;
+		}
+		h3{
+		   font-size:19px;
+		   font-weight:normal;
+		   line-height:1.5em;
+		   margin-top:7px;
+		}
 		section#buttons{
 			text-align:center;
+			position:relative;
 			a, a:visited{
+   			padding:10px;
+   			box-sizing:border-box;
+   			display:block;
+			   background:@green;
+			   background:fadeout(@green, 10%);
 				color:@lightYellow; //IE8 fallbacks
 				color:rgba(255,255,255,.75);
 			}
-			#download{ background:@green; }
-			#github{ background:@blue; }
+			a#mini{
+   			background: darken(@green, 10%);
+			}
 		}
 	}
 }
@@ -90,23 +107,25 @@
 	.inner{
 		width:@10col;
 		margin:auto;
-		.colPadding;
+		padding:@gutter;
 		section{
-			width:50%;
-			float:left;
-			padding:20px 0 25px 0;
 			box-sizing:border-box;
 		}
 		section#buttons{
-			padding:60px 20px;
-			div{
-				width:100%;
-				margin:auto;
-				padding:10px;
-				text-align:center;
+   		height:64px;
+		   margin-top:30px;
+		   a, a:visited{
+		   	position:absolute;
+		   	top:0;
+		   	bottom:0;
+		   }
+			a#bundle{
+			   width:65%;
+			   left:0;
 			}
-			div + div {
-				margin-top: @gutter;
+			a#mini{
+				width:34%;
+				right:0;
 			}
 		}
 	}
@@ -114,24 +133,23 @@
 #splash.tablet, #splash.pseudotablet, #splash.standard.landscape{
 	.inner{
 		.mobileWrapping;
-		section{
-			width:50%;
-			float:left;
-			padding:20px 0 25px 0;
-			box-sizing:border-box;
-		}
+		padding:@gutter;
 		section#buttons{
-			width:50%;
-			padding:55px 20px 0 20px;
-			div{
-				width:auto;
-				margin:auto;
-				padding:10px;
-				text-align:center;
-			}
-			div + div {
-				margin-top: @gutter;
-			}
+   		height:64px;
+   		margin-top:30px;
+   		a, a:visited{
+   			position:absolute;
+   			top:0;
+   			bottom:0;
+   		}
+   		a#bundle{
+   		   width:65%;
+   		   left:0;
+   		}
+   		a#mini{
+   			width:34%;
+   			right:0;
+   		}
 		}
 	}
 }
@@ -145,14 +163,8 @@
 			margin-top:@gutter;
 		}
 		section#buttons{
-		   padding: 0 0 @gutter/2 0;
-			div{
-				margin:0 10px 0 10px;
-				padding: 10px;
-			}
-			div+div{
-				margin-top:@gutter/2;
-			}
+		   a{ width:100%; }
+		   a#mini{ margin-top:10px; }
 		}
 	}
 }

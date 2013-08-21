@@ -1,12 +1,12 @@
 <section id="splash" intent in-width: in-container: in-orientation:>
    <div class="inner clearFix">
       <section>
-         <h3>Intention.js offers a light-weight and clear way to dynamically restructure HTML in a responsive manner.</h3>
-         <p>Easily increase layout options and flexibility, reducing development time and lessening the necessity of media-query-driven stylesheet overrides.</p>
+         <h2>Intention.js offers a light-weight and clear way to dynamically restructure HTML in a responsive manner.</h2>
+         <h3>Easily increase layout options and flexibility, reducing development time and lessening the necessity of media-query-driven stylesheet overrides.</h3>
       </section>
-      <section id="buttons">
-         <div id="download"><a href="intention.js">Download the latest version<h5> v0.9.7.2</h5></a></div>
-         <div id="github"><a href="https://github.com/wsjdesign/intentionjs" target="_blank">Fork us on<h5>GitHub</h5></a></div>
+      <section id="buttons" class="clearFix">
+            <a id="bundle" href="intention-context.js.zip">Download the latest bundle (intention.js + context.js)<h5>v0.9.7.2</h5></a>
+            <a id="mini" href="intention.min.js">Build your own contexts<h5>intention.min.js</h5></a>
       </section>
    </div>
 </section>
