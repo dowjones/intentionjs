@@ -27,47 +27,65 @@
   background-position: top, top, bottom;
   color: #f9efd4;
 }
+#splash .inner h2 {
+  font-size: 31px;
+  font-weight: normal;
+}
+#splash .inner h3 {
+  font-size: 19px;
+  font-weight: normal;
+  line-height: 1.5em;
+  margin-top: 7px;
+}
 #splash .inner section#buttons {
   text-align: center;
+  position: relative;
 }
 #splash .inner section#buttons a,
 #splash .inner section#buttons a:visited {
+  padding: 10px;
+  box-sizing: border-box;
+  display: block;
+  background: #589358;
+  background: rgba(88, 147, 88, 0.9);
   color: #f9efd4;
   color: rgba(255, 255, 255, 0.75);
 }
-#splash .inner section#buttons #download {
-  background: #589358;
-}
-#splash .inner section#buttons #github {
-  background: #38748e;
+#splash .inner section#buttons a#mini {
+  background: #457345;
 }
 #splash.standard .inner,
 #splash.hdtv .inner {
   width: 780px;
   margin: auto;
-  padding: 0 20px 0 20px;
+  padding: 20px;
 }
 #splash.standard .inner section,
 #splash.hdtv .inner section {
-  width: 50%;
-  float: left;
-  padding: 20px 0 25px 0;
   box-sizing: border-box;
 }
 #splash.standard .inner section#buttons,
 #splash.hdtv .inner section#buttons {
-  padding: 60px 20px;
+  height: 64px;
+  margin-top: 30px;
 }
-#splash.standard .inner section#buttons div,
-#splash.hdtv .inner section#buttons div {
-  width: 100%;
-  margin: auto;
-  padding: 10px;
-  text-align: center;
+#splash.standard .inner section#buttons a,
+#splash.hdtv .inner section#buttons a,
+#splash.standard .inner section#buttons a:visited,
+#splash.hdtv .inner section#buttons a:visited {
+  position: absolute;
+  top: 0;
+  bottom: 0;
 }
-#splash.standard .inner section#buttons div + div,
-#splash.hdtv .inner section#buttons div + div {
-  margin-top: 20px;
+#splash.standard .inner section#buttons a#bundle,
+#splash.hdtv .inner section#buttons a#bundle {
+  width: 65%;
+  left: 0;
+}
+#splash.standard .inner section#buttons a#mini,
+#splash.hdtv .inner section#buttons a#mini {
+  width: 34%;
+  right: 0;
 }
 #splash.tablet .inner,
 #splash.pseudotablet .inner,
@@ -76,33 +94,35 @@
   margin: 0 10px 0 10px;
   padding: 0 10px 0 10px;
   box-sizing: border-box;
-}
-#splash.tablet .inner section,
-#splash.pseudotablet .inner section,
-#splash.standard.landscape .inner section {
-  width: 50%;
-  float: left;
-  padding: 20px 0 25px 0;
-  box-sizing: border-box;
+  padding: 20px;
 }
 #splash.tablet .inner section#buttons,
 #splash.pseudotablet .inner section#buttons,
 #splash.standard.landscape .inner section#buttons {
-  width: 50%;
-  padding: 55px 20px 0 20px;
+  height: 64px;
+  margin-top: 30px;
 }
-#splash.tablet .inner section#buttons div,
-#splash.pseudotablet .inner section#buttons div,
-#splash.standard.landscape .inner section#buttons div {
-  width: auto;
-  margin: auto;
-  padding: 10px;
-  text-align: center;
+#splash.tablet .inner section#buttons a,
+#splash.pseudotablet .inner section#buttons a,
+#splash.standard.landscape .inner section#buttons a,
+#splash.tablet .inner section#buttons a:visited,
+#splash.pseudotablet .inner section#buttons a:visited,
+#splash.standard.landscape .inner section#buttons a:visited {
+  position: absolute;
+  top: 0;
+  bottom: 0;
 }
-#splash.tablet .inner section#buttons div + div,
-#splash.pseudotablet .inner section#buttons div + div,
-#splash.standard.landscape .inner section#buttons div + div {
-  margin-top: 20px;
+#splash.tablet .inner section#buttons a#bundle,
+#splash.pseudotablet .inner section#buttons a#bundle,
+#splash.standard.landscape .inner section#buttons a#bundle {
+  width: 65%;
+  left: 0;
+}
+#splash.tablet .inner section#buttons a#mini,
+#splash.pseudotablet .inner section#buttons a#mini,
+#splash.standard.landscape .inner section#buttons a#mini {
+  width: 34%;
+  right: 0;
 }
 #splash.mobile .inner,
 #splash.pseudomobile .inner,
@@ -121,23 +141,16 @@
 #splash.pseudosmalltablet .inner section + section {
   margin-top: 20px;
 }
-#splash.mobile .inner section#buttons,
-#splash.pseudomobile .inner section#buttons,
-#splash.smalltablet .inner section#buttons,
-#splash.pseudosmalltablet .inner section#buttons {
-  padding: 0 0 10px 0;
+#splash.mobile .inner section#buttons a,
+#splash.pseudomobile .inner section#buttons a,
+#splash.smalltablet .inner section#buttons a,
+#splash.pseudosmalltablet .inner section#buttons a {
+  width: 100%;
 }
-#splash.mobile .inner section#buttons div,
-#splash.pseudomobile .inner section#buttons div,
-#splash.smalltablet .inner section#buttons div,
-#splash.pseudosmalltablet .inner section#buttons div {
-  margin: 0 10px 0 10px;
-  padding: 10px;
-}
-#splash.mobile .inner section#buttons div + div,
-#splash.pseudomobile .inner section#buttons div + div,
-#splash.smalltablet .inner section#buttons div + div,
-#splash.pseudosmalltablet .inner section#buttons div + div {
+#splash.mobile .inner section#buttons a#mini,
+#splash.pseudomobile .inner section#buttons a#mini,
+#splash.smalltablet .inner section#buttons a#mini,
+#splash.pseudosmalltablet .inner section#buttons a#mini {
   margin-top: 10px;
 }
 #splash.standard.pseudomobile section,
