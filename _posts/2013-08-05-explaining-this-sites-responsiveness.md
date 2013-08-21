@@ -166,7 +166,7 @@ header.mobile, header.smalltablet,{
 
 #### Current Position Navigation
 
-![A screenshot of the current position navigation]({{ site.images }}/leftNav.png)
+![A screenshot of the current position navigation]({{ site.images }}/leftnav.png)
 
 If you have the luxury of using a luxury display (window width > 1300), you've likely seen the document tree navigation that floats on the left the documentation. As you scroll, you see that the circle nodes "light up" to indicate your current position in the document. When they become active, a submenu will sometimes open and show subsection of an article. This is done with a custom scroll depth axis that has its contexts generated with Javascript.
 
