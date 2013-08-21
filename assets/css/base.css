@@ -201,6 +201,13 @@ header nav li:first-of-type {
 header nav li.active {
   border-bottom: 8px solid rgba(243, 201, 190, 0.7);
 }
+header nav li#github {
+  float: right;
+  border-bottom: 8px solid #d7dcdb;
+}
+header nav li#github a {
+  color: #38748e;
+}
 header.standard h1,
 header.hdtv h1 {
   width: 780px;
@@ -213,6 +220,10 @@ header.hdtv nav {
   padding: 0 20px;
   margin: auto;
   font-size: 19px;
+}
+header.standard nav li#github a::before,
+header.hdtv nav li#github a::before {
+  content: "Fork us on ";
 }
 header.tablet h1,
 header.pseudotablet h1,
@@ -229,6 +240,11 @@ header.tablet nav li,
 header.pseudotablet nav li,
 header.standard.landscape nav li {
   height: auto;
+}
+header.tablet nav li#github a::before,
+header.pseudotablet nav li#github a::before,
+header.standard.landscape nav li#github a::before {
+  content: "Fork us on ";
 }
 header.tablet h1,
 header.pseudotablet h1,
@@ -291,6 +307,11 @@ header.hdtv.pseudotablet li,
 header.hdtv.pseudosmalltablet li,
 header.hdtv.pseudomobile li {
   height: 15px;
+}
+header.mobile nav li#github,
+header.standard.pseudomobile nav #github,
+header.hdtv.pseudomobile nav #github {
+  float: none;
 }
 #scrollWrapper > #heading,
 #all > #heading {
