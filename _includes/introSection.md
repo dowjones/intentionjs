@@ -1,4 +1,4 @@
-<section id="splash" intent in-width: in-container: in-orientation:>
+<section id="splash" class="standard" intent in-width: in-container: in-orientation:>
    <div class="inner clearFix">
       <section>
          <h2>Intention.js offers a light-weight and clear way to dynamically restructure HTML in a responsive manner.</h2>
@@ -13,7 +13,7 @@
 
 <!-- Start the ugly Code-as-Image section -->
 
-<section id="codeImage" intent in-width: in-container:>
+<section id="codeImage" class="standard" intent in-width: in-container:>
    <div class="inner clearFix">
       <div id="connections"></div>
       <pre id="rawCodeImage"><span class="selectable">&lt;body&gt;
@@ -68,8 +68,8 @@
 
 <!-- End ugly Code-as-Image section -->
 <!-- But start the slightly less ugly mobile version of that -->
-<section id="smallCode" class="clearFix" intent in-width: in-container: data-pattern="2">
-  <pre id="output" intent
+<section id="smallCode" class="clearFix standard" intent in-width: in-container: data-pattern="2">
+  <pre id="output" class="standard" intent
        in-width:
        in-container:
        in-mobile-after="#input"
@@ -111,7 +111,7 @@
 <!-- End that too. Back to decently formatted code -->
 
 
-<section id="heading" class="try clearFix" intent
+<section id="heading" class="try clearFix standard" intent
    	 in-pseudomobile-prepend="body"
    	 in-pseudosmalltablet-prepend="body"
    	 in-pseudotablet-prepend="body"
