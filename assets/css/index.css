@@ -47,12 +47,9 @@
   box-sizing: border-box;
   display: block;
   background: #589358;
-  background: rgba(88, 147, 88, 0.9);
+  background: rgba(88, 147, 88, 0.85);
   color: #f9efd4;
   color: rgba(255, 255, 255, 0.75);
-}
-#splash .inner section#buttons a#mini {
-  background: #457345;
 }
 #splash.standard .inner,
 #splash.hdtv .inner {
@@ -79,12 +76,12 @@
 }
 #splash.standard .inner section#buttons a#bundle,
 #splash.hdtv .inner section#buttons a#bundle {
-  width: 65%;
+  width: 50%;
   left: 0;
 }
 #splash.standard .inner section#buttons a#mini,
 #splash.hdtv .inner section#buttons a#mini {
-  width: 34%;
+  width: 49%;
   right: 0;
 }
 #splash.tablet .inner,
