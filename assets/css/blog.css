@@ -45,7 +45,9 @@
 }
 #content.blog section.header h4 {
   font-size: 25px;
+  font-size: 2.5rem;
   line-height: 35px;
+  line-height: 3.5rem;
   font-weight: normal;
 }
 #content.blog section.header p {
@@ -55,6 +57,7 @@
 #content.blog section.header p.meta,
 #content.blog section.header p.tags {
   font-size: 12px;
+  font-size: 1.2rem;
   display: inline-block;
 }
 #content.blog section.header p.meta a {
@@ -135,6 +138,7 @@
 }
 #content.blog #topNav.tagNav .inner {
   line-height: 40px;
+  line-height: 4.0rem;
 }
 #content.blog section.footer {
   width: auto;
@@ -151,9 +155,11 @@
 }
 #content.blog article h4 {
   font-size: 20px;
+  font-size: 2.0rem;
 }
 #content.blog article h5 {
   font-size: 20px;
+  font-size: 2.0rem;
   font-weight: normal;
   border-bottom: 1px dashed #f9efd4;
   padding-bottom: 3px;
@@ -208,10 +214,12 @@
 #content.blog.tablet h3,
 #content.blog.standard.pseudotablet h3 {
   font-size: 26px;
+  font-size: 2.6rem;
 }
 #content.blog.tablet h4,
 #content.blog.standard.pseudotablet h4 {
   font-size: 20px;
+  font-size: 2.0rem;
   font-weight: normal;
 }
 #content.blog.tablet section.header h4,
@@ -250,12 +258,14 @@
 #content.blog.standard.pseudosmalltablet h3,
 #content.blog.standard.pseudomobile h3 {
   font-size: 26px;
+  font-size: 2.6rem;
 }
 #content.blog.smalltablet h4,
 #content.blog.mobile h4,
 #content.blog.standard.pseudosmalltablet h4,
 #content.blog.standard.pseudomobile h4 {
   font-size: 20px;
+  font-size: 2.0rem;
   font-weight: normal;
 }
 #content.blog.smalltablet section#filter,

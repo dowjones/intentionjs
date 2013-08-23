@@ -77,18 +77,18 @@
 .show{ display:block; }
 
 //General Rules
-h1{	font-size:48px; font-weight:bold; }
-h2{ font-size:40px; }
-h3{ font-size:26px; font-weight:normal; line-height: 35px;}
-h4{ font-size:24px; }
-h5{ font-size:22px; }
-p { line-height: 24px; }
+h1{	font-size:48px; font-size:4.8rem; font-weight:bold; }
+h2{ font-size:40px; font-size:4.0rem; }
+h3{ font-size:26px; font-size:2.6rem; font-weight:normal; line-height: 35px; line-height: 3.5rem;}
+h4{ font-size:24px; font-size: 2.4rem; }
+h5{ font-size:22px; font-size: 2.2rem; }
+p { line-height: 24px; line-height: 2.4rem; }
 
 
 //Check these to see if they remain accurate
-.mobile h1{	font-size:40px; font-weight:bold; }
-.mobile h2{ font-size:24px; }
-.mobile h3{ font-size:24px; font-weight:normal; line-height: 30px;}
+.mobile h1{	font-size:40px; font-size: 4.0rem; font-weight:bold; }
+.mobile h2{ font-size:24px; font-size: 2.4rem;}
+.mobile h3{ font-size:24px; font-weight:normal; line-height: 30px; line-height: 3.0rem;}
 .mobile h4{ font-size:22px; }
 .mobile h5{ font-size:19px; }
 
@@ -101,10 +101,12 @@ p+div.highlight, div.highlight+p{ margin-top: @gutter/2; }
 p+pre, pre+p{ margin-top: @gutter/2; }
 
 
-html, body{ font-size:62.5%; height:100%; }
-html.landscape, body.landscape{ font-size:25% !important; }
+html{ font-size:62.5%; height:100%; }
+html.landscape{ font-size:25% !important; }
 body{
+   height:100%;
 	background:@gray url('../../images/pagebg.png');
+	font-size:1.6rem;
 	font-family:Helvetica, Arial, sans-serif;
 }
 
@@ -134,21 +136,13 @@ a, a:visited{ color: @link; text-decoration:none; }
 	margin:auto;
 	background:@mediumBlue;
 	color:@text;
-	font-size: 16px;	
+	font-size: 16px;
+	font-size: 1.6rem;	
 	box-shadow: 0px 0px 30px rgba(0,0,0,.25);	
 	.roundedCorners(10px);
 	border:1px transparent;
 	position:relative;
 }
-#all.pseudomobile, #all.pseudosmalltablet, #all.pseudotablet{
-	margin:auto;
-	overflow:auto;
-	top:81px;
-}
-#all.pseudomobile{ width:320px; height:480px; }
-#all.pseudosmalltablet { width:600px; height:800px; }
-#all.pseudotablet{ width:780px; height:1024px;}
-#all.pseudohdtv{ width:1920px; height:1080px; padding-top:46px; }
 
 //Header: logo, navigation
 header{
@@ -156,6 +150,7 @@ header{
 	background:@blueGray;
 	h1{
 	   font-size:30px;
+	   font-size: 3.0rem;
 	   font-weight:normal;
 	   a, a:visited{ color:@darkBlue; }
 	}
@@ -192,6 +187,7 @@ header.standard, header.hdtv{
 		.colPadding;
 		margin:auto;
 		font-size: 19px;
+		font-size: 1.9rem;
 		li#github a::before{
    		content:"Fork us on ";
 		}
@@ -216,14 +212,20 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 	h1{ 
 	   padding:@gutter/2;
 	   font-size:30px;
+	   font-size: 3.0rem;
 	   font-weight:normal;
 	}
-	nav{ font-size:15px; }
+	nav{ font-size:15px; font-size: 1.5rem; }
 	li{ height:15px;}
 }
-header.mobile nav li#github, header.standard.pseudomobile nav #github, header.hdtv.pseudomobile nav #github{
-   float:none;
+header.mobile nav, header.standard.pseudomobile nav, header.hdtv.pseudomobile nav{
+   li#github{
+      float:none;
+      a::before{ content:'' }
+   }
+   li#examples{ display:none }
 }
+
 
 //Heading: Usually a page's title. On index, it's the Try It bar.
 #scrollWrapper>#heading, #all>#heading{
@@ -256,7 +258,7 @@ header.mobile nav li#github, header.standard.pseudomobile nav #github, header.hd
 	.inner{
 		.mobileWrapping;
 		padding:@gutter @gutter/2;
-		h2{ font-size: 28px; }
+		h2{ font-size: 28px; font-size: 2.8rem; }
 	}
 }
 
@@ -319,6 +321,7 @@ header.mobile nav li#github, header.standard.pseudomobile nav #github, header.hd
 		border:1px double @lightBlueGray;
 		box-sizing:border-box;
 		font-size:14px;
+		font-size: 1.4rem;
 		color:@periwinkle;
 		background:darken(@mediumBlue, 5%);
 		white-space: pre;	
@@ -359,8 +362,8 @@ header.mobile nav li#github, header.standard.pseudomobile nav #github, header.hd
 		position:relative;
 		z-index:5;
 		h2{ width:100%; }
-		h3{ font-size:30px; font-weight:normal; }
-		h4{ font-size:20px; font-weight:normal; }
+		h3{ font-size:30px; font-size: 3.0rem; font-weight:normal; }
+		h4{ font-size:20px; font-size: 2.0rem; font-weight:normal; }
 	}
 }
 #content.tablet, #content.smalltablet, #content.mobile,
@@ -406,6 +409,7 @@ header.mobile nav li#github, header.standard.pseudomobile nav #github, header.hd
 #content.mobile, #content.standard.pseudomobile, #content.hdtv.pseudomobile{
 	pre{
 		font-size:13px;
+		font-size: 1.3rem;
 	}
 }
 
@@ -431,6 +435,7 @@ header.mobile nav li#github, header.standard.pseudomobile nav #github, header.hd
 		margin: 0 0  @gutter 0;
 		background:@blue;
 		font-size:14px;
+		font-size: 1.4rem;
 		position:absolute;
 		left:100%;
 	}
@@ -462,6 +467,7 @@ header.mobile nav li#github, header.standard.pseudomobile nav #github, header.hd
 			max-height:13px;
 			margin-top:0;
 			font-size:14px;
+			font-size: 1.4rem;
 			overflow:hidden;
 			-webkit-transition: max-height .5s ease-in-out, padding .5s ease-in-out, background .75s linear;
 			li a{ padding-bottom:2px; color:lighten(@periwinkle, 15%); }
@@ -561,6 +567,7 @@ footer{
 	}
 	h1{
 		font-size:60px;
+		font-size: 6.0rem;
 		font-weight:normal;
 		color:@orange;
 	}

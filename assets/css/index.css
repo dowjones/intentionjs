@@ -16,6 +16,30 @@
   padding: 0 10px 0 10px;
   box-sizing: border-box;
 }
+#all.pseudomobile,
+#all.pseudosmalltablet,
+#all.pseudotablet {
+  margin: auto;
+  overflow: auto;
+  top: 81px;
+}
+#all.pseudomobile {
+  width: 320px;
+  height: 480px;
+}
+#all.pseudosmalltablet {
+  width: 600px;
+  height: 800px;
+}
+#all.pseudotablet {
+  width: 780px;
+  height: 1024px;
+}
+#all.pseudohdtv {
+  width: 1920px;
+  height: 1080px;
+  padding-top: 46px;
+}
 #splash {
   width: 100%;
   background: #bac6cc url('../../images/headerbg.png') repeat-x top;
@@ -29,10 +53,12 @@
 }
 #splash .inner h2 {
   font-size: 31px;
+  font-size: 3.1rem;
   font-weight: normal;
 }
 #splash .inner h3 {
   font-size: 19px;
+  font-size: 1.9rem;
   font-weight: normal;
   line-height: 1.5em;
   margin-top: 7px;
@@ -112,19 +138,21 @@
 #splash.tablet .inner section#buttons a#bundle,
 #splash.pseudotablet .inner section#buttons a#bundle,
 #splash.standard.landscape .inner section#buttons a#bundle {
-  width: 65%;
+  width: 50%;
   left: 0;
 }
 #splash.tablet .inner section#buttons a#mini,
 #splash.pseudotablet .inner section#buttons a#mini,
 #splash.standard.landscape .inner section#buttons a#mini {
-  width: 34%;
+  width: 49%;
   right: 0;
 }
 #splash.mobile .inner,
-#splash.pseudomobile .inner,
+#splash.standard.pseudomobile .inner,
+#splash.hdtv.pseudomobile .inner,
 #splash.smalltablet .inner,
-#splash.pseudosmalltablet .inner {
+#splash.standard.pseudosmalltablet .inner,
+#splash.hdtv.pseudosmalltablet .inner {
   width: auto;
   margin: 0 10px 0 10px;
   padding: 0 10px 0 10px;
@@ -132,42 +160,58 @@
   padding-top: 20px;
   padding-bottom: 10px;
 }
-#splash.mobile .inner section + section,
-#splash.pseudomobile .inner section + section,
-#splash.smalltablet .inner section + section,
-#splash.pseudosmalltablet .inner section + section {
+#splash.mobile .inner section#buttons,
+#splash.standard.pseudomobile .inner section#buttons,
+#splash.hdtv.pseudomobile .inner section#buttons,
+#splash.smalltablet .inner section#buttons,
+#splash.standard.pseudosmalltablet .inner section#buttons,
+#splash.hdtv.pseudosmalltablet .inner section#buttons {
   margin-top: 20px;
 }
 #splash.mobile .inner section#buttons a,
-#splash.pseudomobile .inner section#buttons a,
+#splash.standard.pseudomobile .inner section#buttons a,
+#splash.hdtv.pseudomobile .inner section#buttons a,
 #splash.smalltablet .inner section#buttons a,
-#splash.pseudosmalltablet .inner section#buttons a {
+#splash.standard.pseudosmalltablet .inner section#buttons a,
+#splash.hdtv.pseudosmalltablet .inner section#buttons a {
   width: 100%;
 }
 #splash.mobile .inner section#buttons a#mini,
-#splash.pseudomobile .inner section#buttons a#mini,
+#splash.standard.pseudomobile .inner section#buttons a#mini,
+#splash.hdtv.pseudomobile .inner section#buttons a#mini,
 #splash.smalltablet .inner section#buttons a#mini,
-#splash.pseudosmalltablet .inner section#buttons a#mini {
+#splash.standard.pseudosmalltablet .inner section#buttons a#mini,
+#splash.hdtv.pseudosmalltablet .inner section#buttons a#mini {
   margin-top: 10px;
 }
-#splash.standard.pseudomobile section,
-#splash.standard.pseudosmalltablet section,
-#splash.hdtv.pseudomobile section,
-#splash.hdtv.pseudosmalltablet section {
+#splash.standard.pseudomobile .inner section,
+#splash.standard.pseudosmalltablet .inner section,
+#splash.hdtv.pseudomobile .inner section,
+#splash.hdtv.pseudosmalltablet .inner section {
   width: auto;
   padding: 0;
 }
-#splash.standard.pseudomobile section#buttons,
-#splash.standard.pseudosmalltablet section#buttons,
-#splash.hdtv.pseudomobile section#buttons,
-#splash.hdtv.pseudosmalltablet section#buttons {
+#splash.standard.pseudomobile .inner section#buttons,
+#splash.standard.pseudosmalltablet .inner section#buttons,
+#splash.hdtv.pseudomobile .inner section#buttons,
+#splash.hdtv.pseudosmalltablet .inner section#buttons {
   width: 100%;
+  height: 136px;
 }
-#splash.standard.pseudomobile section#buttons div,
-#splash.standard.pseudosmalltablet section#buttons div,
-#splash.hdtv.pseudomobile section#buttons div,
-#splash.hdtv.pseudosmalltablet section#buttons div {
+#splash.standard.pseudomobile .inner section#buttons a,
+#splash.standard.pseudosmalltablet .inner section#buttons a,
+#splash.hdtv.pseudomobile .inner section#buttons a,
+#splash.hdtv.pseudosmalltablet .inner section#buttons a,
+#splash.standard.pseudomobile .inner section#buttons a#bundle,
+#splash.standard.pseudosmalltablet .inner section#buttons a#bundle,
+#splash.hdtv.pseudomobile .inner section#buttons a#bundle,
+#splash.hdtv.pseudosmalltablet .inner section#buttons a#bundle,
+#splash.standard.pseudomobile .inner section#buttons a#mini,
+#splash.standard.pseudosmalltablet .inner section#buttons a#mini,
+#splash.hdtv.pseudomobile .inner section#buttons a#mini,
+#splash.hdtv.pseudosmalltablet .inner section#buttons a#mini {
   width: auto;
+  position: relative;
 }
 #scrollWrapper.standard > .try,
 #scrollWrapper.hdtv > .try {
@@ -185,6 +229,7 @@
   margin-right: 20px;
   vertical-align: top;
   line-height: 55px;
+  line-height: 5.5rem;
 }
 #scrollWrapper.standard > .try #devices,
 #scrollWrapper.hdtv > .try #devices {
@@ -200,6 +245,7 @@
   display: inline-block;
   cursor: pointer;
   font-size: 13px;
+  font-size: 1.3rem;
 }
 #scrollWrapper.standard > .try #devices div + div,
 #scrollWrapper.hdtv > .try #devices div + div {
@@ -259,6 +305,7 @@ body > .try.hdtv div#devices {
 body > .try.standard h2,
 body > .try.hdtv h2 {
   font-size: 36px;
+  font-size: 3.6rem;
   margin: 2px 0 0 13px;
 }
 body > .try.standard #devices,
@@ -339,7 +386,9 @@ body > .try.hdtv #devices .cancel {
   transition: all 0.5s ease-in-out;
   font-weight: bold;
   font-size: 25px;
+  font-size: 2.5rem;
   line-height: 40px;
+  line-height: 4.0rem;
 }
 #content.docsLite #topNav .inner p a {
   color: #0c262d;
@@ -360,6 +409,7 @@ body > .try.hdtv #devices .cancel {
   height: 40px;
   padding: 0;
   line-height: 40px;
+  line-height: 4.0rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   z-index: 20;
@@ -383,6 +433,7 @@ body > .try.hdtv #devices .cancel {
   -o-transition: top 300ms;
   transition: top 300ms;
   font-size: 17px;
+  font-size: 1.7rem;
 }
 #content.docsLite #topNav ul#sections li a,
 #content.docsLite #topNav ul#subsections li a {
@@ -419,6 +470,7 @@ body > .try.hdtv #devices .cancel {
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   line-height: 40px;
+  line-height: 4.0rem;
   text-align: center;
   cursor: pointer;
 }
@@ -679,6 +731,9 @@ body > .try.hdtv #devices .cancel {
 #content.docsLite.standard.pseudomobile article.special pre,
 #content.docsLite.hdtv.pseudomobile article.special pre {
   border: 2px solid #38748e;
+}
+#topNav.pseudohdtv.sticknav {
+  top: 46px;
 }
 .no-multiplebgs #splash .inner {
   background-image: url('../../images/splashbg.png');
