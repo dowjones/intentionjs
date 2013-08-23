@@ -29,36 +29,46 @@
 }
 h1 {
   font-size: 48px;
+  font-size: 4.8rem;
   font-weight: bold;
 }
 h2 {
   font-size: 40px;
+  font-size: 4.0rem;
 }
 h3 {
   font-size: 26px;
+  font-size: 2.6rem;
   font-weight: normal;
   line-height: 35px;
+  line-height: 3.5rem;
 }
 h4 {
   font-size: 24px;
+  font-size: 2.4rem;
 }
 h5 {
   font-size: 22px;
+  font-size: 2.2rem;
 }
 p {
   line-height: 24px;
+  line-height: 2.4rem;
 }
 .mobile h1 {
   font-size: 40px;
+  font-size: 4.0rem;
   font-weight: bold;
 }
 .mobile h2 {
   font-size: 24px;
+  font-size: 2.4rem;
 }
 .mobile h3 {
   font-size: 24px;
   font-weight: normal;
   line-height: 30px;
+  line-height: 3.0rem;
 }
 .mobile h4 {
   font-size: 22px;
@@ -91,17 +101,17 @@ p + pre,
 pre + p {
   margin-top: 10px;
 }
-html,
-body {
+html {
   font-size: 62.5%;
   height: 100%;
 }
-html.landscape,
-body.landscape {
+html.landscape {
   font-size: 25% !important;
 }
 body {
+  height: 100%;
   background: #c8c8c8 url('../../images/pagebg.png');
+  font-size: 1.6rem;
   font-family: Helvetica, Arial, sans-serif;
 }
 a,
@@ -139,6 +149,7 @@ a:visited {
   background: #203b44;
   color: #352f29;
   font-size: 16px;
+  font-size: 1.6rem;
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   -webkit-border-radius: 10px;
@@ -146,36 +157,13 @@ a:visited {
   border: 1px transparent;
   position: relative;
 }
-#all.pseudomobile,
-#all.pseudosmalltablet,
-#all.pseudotablet {
-  margin: auto;
-  overflow: auto;
-  top: 81px;
-}
-#all.pseudomobile {
-  width: 320px;
-  height: 480px;
-}
-#all.pseudosmalltablet {
-  width: 600px;
-  height: 800px;
-}
-#all.pseudotablet {
-  width: 780px;
-  height: 1024px;
-}
-#all.pseudohdtv {
-  width: 1920px;
-  height: 1080px;
-  padding-top: 46px;
-}
 header {
   width: 100%;
   background: #bac6cc;
 }
 header h1 {
   font-size: 30px;
+  font-size: 3.0rem;
   font-weight: normal;
 }
 header h1 a,
@@ -220,6 +208,7 @@ header.hdtv nav {
   padding: 0 20px;
   margin: auto;
   font-size: 19px;
+  font-size: 1.9rem;
 }
 header.standard nav li#github a::before,
 header.hdtv nav li#github a::before {
@@ -288,6 +277,7 @@ header.hdtv.pseudosmalltablet h1,
 header.hdtv.pseudomobile h1 {
   padding: 10px;
   font-size: 30px;
+  font-size: 3.0rem;
   font-weight: normal;
 }
 header.mobile nav,
@@ -298,6 +288,7 @@ header.hdtv.pseudotablet nav,
 header.hdtv.pseudosmalltablet nav,
 header.hdtv.pseudomobile nav {
   font-size: 15px;
+  font-size: 1.5rem;
 }
 header.mobile li,
 header.standard.pseudomobile li,
@@ -309,9 +300,19 @@ header.hdtv.pseudomobile li {
   height: 15px;
 }
 header.mobile nav li#github,
-header.standard.pseudomobile nav #github,
-header.hdtv.pseudomobile nav #github {
+header.standard.pseudomobile nav li#github,
+header.hdtv.pseudomobile nav li#github {
   float: none;
+}
+header.mobile nav li#github a::before,
+header.standard.pseudomobile nav li#github a::before,
+header.hdtv.pseudomobile nav li#github a::before {
+  content: '';
+}
+header.mobile nav li#examples,
+header.standard.pseudomobile nav li#examples,
+header.hdtv.pseudomobile nav li#examples {
+  display: none;
 }
 #scrollWrapper > #heading,
 #all > #heading {
@@ -387,6 +388,7 @@ header.hdtv.pseudomobile nav #github {
 #all > #heading.hdtv.pseudosmalltablet .inner h2,
 #all > #heading.hdtv.pseudomobile .inner h2 {
   font-size: 28px;
+  font-size: 2.8rem;
 }
 #content {
   width: 100%;
@@ -477,6 +479,7 @@ header.hdtv.pseudomobile nav #github {
   border: 1px double #d7dcdb;
   box-sizing: border-box;
   font-size: 14px;
+  font-size: 1.4rem;
   color: #bac6cc;
   background: #182c33;
   white-space: pre;
@@ -530,11 +533,13 @@ header.hdtv.pseudomobile nav #github {
 #content.standard article h3,
 #content.hdtv article h3 {
   font-size: 30px;
+  font-size: 3.0rem;
   font-weight: normal;
 }
 #content.standard article h4,
 #content.hdtv article h4 {
   font-size: 20px;
+  font-size: 2.0rem;
   font-weight: normal;
 }
 #content.tablet .inner,
@@ -721,6 +726,7 @@ header.hdtv.pseudomobile nav #github {
 #content.standard.pseudomobile pre,
 #content.hdtv.pseudomobile pre {
   font-size: 13px;
+  font-size: 1.3rem;
 }
 #leftNav {
   width: 200px;
@@ -747,6 +753,7 @@ header.hdtv.pseudomobile nav #github {
   margin: 0 0 20px 0;
   background: #38748e;
   font-size: 14px;
+  font-size: 1.4rem;
   position: absolute;
   left: 100%;
 }
@@ -789,6 +796,7 @@ header.hdtv.pseudomobile nav #github {
   max-height: 13px;
   margin-top: 0;
   font-size: 14px;
+  font-size: 1.4rem;
   overflow: hidden;
   -webkit-transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out, background 0.75s linear;
 }
@@ -899,6 +907,7 @@ footer .inner {
 }
 footer h1 {
   font-size: 60px;
+  font-size: 6.0rem;
   font-weight: normal;
   color: #ea865a;
 }
