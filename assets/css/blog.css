@@ -36,8 +36,10 @@
   color: #bac6cc;
   border-bottom: 10px solid #bac6cc;
 }
+#content.blog section#filter h4 {
+  padding: 6px 0 0 0;
+}
 #content.blog section#filter h4 a {
-  margin-top: 6px;
   color: #f9efd4;
 }
 #content.blog section.header h3 {
@@ -207,6 +209,10 @@
   margin: auto;
   margin-top: 20px;
 }
+#content.blog.standard section#filter h4,
+#content.hdtv section#filter h4 {
+  padding: 6px 0 0 0;
+}
 #content.blog.tablet #topNav.tagNav .inner,
 #content.blog.standard.pseudotablet #topNav.tagNav .inner {
   padding: 0 20px;
@@ -230,6 +236,10 @@
 #content.blog.standard.pseudotablet section#filter {
   width: auto;
   background: #0c262d;
+}
+#content.blog.tablet section#filter h4,
+#content.blog.standard.pseudotablet section#filter h4 {
+  padding: 6px 0 0 0;
 }
 #content.blog.tablet h2,
 #content.blog.standard.pseudotablet h2,
@@ -274,6 +284,12 @@
 #content.blog.standard.pseudomobile section#filter {
   width: auto;
   background: #0c262d;
+}
+#content.blog.smalltablet section#filter h4,
+#content.blog.mobile section#filter h4,
+#content.blog.standard.pseudosmalltablet section#filter h4,
+#content.blog.standard.pseudomobile section#filter h4 {
+  padding: 6px 0 0 0;
 }
 #content.blog.smalltablet section.header h4,
 #content.blog.mobile section.header h4,

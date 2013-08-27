@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Explaining This Site's Responsiveness
-sub: Forcing Contexts, Writing Nonconflicting CSS, Dynamically Generating Axes
+sub: Forcing Contexts, Dynamically Generating Axes
 tags: example
 ---
 
@@ -12,42 +12,42 @@ It's only fair that a site promoting a responsive web design tool should itself 
 #### First of all, let's discuss how the page is structured
 
 {% highlight html %}
-<div id="all" intent in-width in-container>
-   <header intent in-width in-container>
+<div id="all" intent in-width: in-container:>
+   <header intent in-width: in-container:>
       …
    </header>
-   <section id="splash" intent in-width in-container>
+   <section id="splash" intent in-width: in-container:>
       …
    </section>
-   <section id="codeImage" intent in-width in-container>
+   <section id="codeImage" intent in-width: in-container:>
       …
    </section>
-   <section id="smallCode" intent in-width in-container>
+   <section id="smallCode" intent in-width: in-container:>
       …
    </section>
    <section id="heading">
       …
    </section>
-   <nav id="topNav" intent in-width in-container in-orientation>
+   <nav id="topNav" intent in-width: in-container: in-orientation>
       …
    </nav>
-   <section id="content" intent in-width in-container>
-      <nav id="prevnext" intent in-width in-container>…</nav>
-      <nav id="leftNav" intent in-width in-container>…</nav>
+   <section id="content" intent in-width: in-container:>
+      <nav id="prevnext" intent in-width: in-container:>…</nav>
+      <nav id="leftNav" intent in-width: in-container:>…</nav>
    </section>
 </div>
 {% endhighlight %}
 
-Right off the bat, you can see there are a lot of instances of `intent in-width in-container`. Of course, you could use `#all` as the main intentional element, and style all of its children according; but that's a matter of preference. Here, we are marking the flagging the major elements as intentional so that in our CSS we can be compact and succinct. (Rather than styling things `#all.standard header { … }` we will  use `header.standard`).
+Right off the bat, you can see there are a lot of instances of `intent in-width: in-container:`. Of course, you could use `#all` as the main intentional element, and style all of its children according; but that's a matter of preference. Here, we are marking the flagging the major elements as intentional so that in our CSS we can be compact and succinct. (Rather than styling things `#all.standard header { … }` we will  use `header.standard`).
 
 Let's start with the top and go down.
 {% highlight html %}
-<div id="all" intent in-width in-container>
+<div id="all" intent in-width: in-container:>
    …
 </div>
 {% endhighlight %}
 
-We are using a wrapper that basically is emulating the `body` tag. As an element we can control its size—and subsequently manipulate its children—without affecting the browser window's size. With this pseudo-body element, we can create a custom axis   `container_width` that serves the same function as the default window width `horizontal_axis` included in Context.js (hence the `in-container`).
+We are using a wrapper that basically is emulating the `body` tag. As an element we can control its size—and subsequently manipulate its children—without affecting the browser window's size. With this pseudo-body element, we can create a custom axis   `container_width` that serves the same function as the default window width `horizontal_axis` included in Context.js (hence the `in-container:`).
 
 {% highlight javascript %}
 var container_width = intent.responsive({
@@ -102,67 +102,8 @@ Before the measure function begins to measure the wrapper's width, it first chec
 
 The measure function then returns that value to the matcher function, which compares it against the values set up in the contexts array. It too, though, first checks to see if the value passed to it is a string instead of a number (which it would a width measurement would likely be). If that is the case, the matcher function will return the context that has a `name` value that matches the string passed in.
 
-Back to the HTML, we see that the wrapper `#all` is flagged as responsive `in-container`. Therefore, when a `container_width` context is passes, its name will be assigned to `#all` as a class. In general, those classes are a set of width and height values that "shrink" the viewport and have the layout adjust accordingly. In our CSS, we write the mobile stylings to also include "pseudo" contexts.
+Back to the HTML, we see that the wrapper `#all` is flagged as responsive `in-container:`. Therefore, when a `container_width` context is passes, its name will be assigned to `#all` as a class. In general, those classes are a set of width and height values that "shrink" the viewport and have the layout adjust accordingly. In our CSS, we write the mobile stylings to also include "pseudo" contexts.
 
-
-#### Structuring CSS
-A productive practice for writing non-conflict CSS is to start with the very general and move towards specificity. Take, for example, a responsive `header` element.
-
-First, we begin with the general: mostly colors but also sizing properties. Then we get more and more specific,
-
-{% highlight css %}
-header{
-   width:100%;
-   background:@blueGray;
-   nav{
-      background:@offWhite;
-      border-bottom: 13px solid @orange;
-      a, a:visited{ color:@text; }
-      li {
-         list-style:none;
-         display:inline-block;
-         padding:6px 10px;
-      }
-   }
-}
-header.standard, header.hdtv{
-   h1{
-      width: @10col;
-      padding: 10px 20px;
-      margin:auto;
-   }
-   nav{
-      width:@10col;
-      padding:0 20px;
-      margin:auto;
-      font-size: 19px;
-   }
-}
-header.tablet{
-   h1, nav{
-      width: auto;
-      margin:0 10px;
-      padding:0 10px;
-      box-sizing:border-box;
-   }
-   h1{ padding:10px; }
-}
-header.mobile, header.smalltablet,{
-   box-sizing:border-box;
-   h1{ font-size:40px; padding:10px; }
-   nav{ font-size:13px; }
-   li{ height:15px;}
-}
-{% endhighlight %}
-
-*Note: on this site we use a different `horizontal_axis` than the one included in context.js. Our custom axis includes contexts for 7" tablets and luxury displays. If you interested, we consider luxury displays to be greater than 1300 pixels wide, and small tablets to be between 510 and 768 pixels wide.*
-
-{name:'hdtv', min:1220},
-{name:'standard', min:840}, 
-{name:'tablet', min:768},
-{name:'smalltablet', min:510},
-{name:'mobile', min:0}],
-*Another note: we are using the spectacular [LESS](http://lesscss.org), so if our syntax looks confusing, head to their documentation for a quick breakdown. We're also omitting some styles for the sake of brevity.*
 
 #### Current Position Navigation
 
@@ -177,7 +118,7 @@ If you have the luxury of using a luxury display (window width > 1300), you've l
       <section><!-- Documentation content --></section>
    </article>
    <article>
-      <h2 alt="Types of Manipulation">Manipulations</h1>
+      <h2>Manipulations</h1>
       <article>
          <h3>Class Manipulations</h3>
          <section> <!-- Documentation info --></section>
@@ -200,7 +141,7 @@ $.each($('#docs').children('article'), function() {
    $(this).attr('id', 't'+i);
    var text = $(this).children('h2').text(),
       markup = '<li id="a'+i+'" \
-         intent in-width \
+         intent in-width: \
          in-t' + i + '-class="active"> \
          <div class="label"> \
             <a href="#t'+i+'">'+text+'</a>
@@ -224,7 +165,7 @@ Firstly, are going to get a bunch of information from each `article`. We get the
 
 {% highlight javascript %}
 var markup = '<li id="a'+i+'" \
-   intent in-width \
+   intent in-width: \
    in-t'+i+'-class="active"> \
       <div class="label"><a href="#t'+i+'">'+text+'</a></div> \
       <div class="circle"></div> \

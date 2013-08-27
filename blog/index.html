@@ -7,7 +7,7 @@ title: "Blog"
 <article>
     <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
     {% if post.sub %}<h4>{{ post.sub }}</h4>{% endif %}
-    <section class="header"><p class="meta"><a href="{{ post.url }}">{{ post.date | date: "%B %d, %Y" }}</a></p><p class="tags">{% for tags in post.tags %}<a href="tagged/{{ tags }}.html" class="{{ tags }}">{{ tags }}</a> {% endfor %}</p></section>
+    <section class="header"><p class="meta"><a href="{{ post.url }}">{{ post.date | date: "%B %d, %Y" }}</a></p><p class="tags">{% for tags in post.tags %}<a href="tagged/{{ tags }}.html" class="{{ tags }}">#{{ tags }}</a> {% endfor %}</p></section>
     {% if post.img %}
     	<section class="img">
     		<div class="inner">
