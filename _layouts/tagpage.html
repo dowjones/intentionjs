@@ -11,8 +11,8 @@
 	<link rel="stylesheet" type="text/css" href="/assets/css/blog.css" />
 </head>
 <body intent in-orientation:>
-<div id="all" intent in-width: in-orientation:>
-	<header intent
+<div id="all" class="standard" intent in-width: in-orientation:>
+	<header class="standard" intent
 		in-width:>
 		<h1><a href="../../">intention.js</a> {{ page.sub }}</h1>
 		<nav>
@@ -21,21 +21,20 @@
 			</ul>
 		</nav>
 	</header>
-	<section id="heading" intent 
-		
+	<section id="heading" class="standard" intent 
 		in-width:> <!-- Hide this functionality on *real* mobile devices but not on faked ones-->
 		<div class="inner">
 			<h2><a href="../index.html">{{ page.title }}</a></h2>
 		</div>
 	</section>
-	<section id="content" class="blog post" intent in-width:  in-orientation:>
-		<section id="filter" class="{{ page.tag }}" intent in-width:  in-orientation:>Only showing <b>{{ page.tag }}</b> posts. <h4><a href="../index.html">&larr; Go back</a></h4></section>
+	<section id="content" class="blog post standard" intent in-width:  in-orientation:>
+		<section id="filter" class="{{ page.tag }} standard" intent in-width:  in-orientation:>Only showing <b>{{ page.tag }}</b> posts. <h4><a href="../index.html">&larr; Go back</a></h4></section>
 		<div class="inner"  class="clearFix">
 			{{ content }}
 		</div>
 		
 	</section>
-	<footer intent in-width: in-orientation:>
+	<footer class="standard" intent in-width: in-orientation:>
    	{% include footer.md %}
 	</footer>
 </div>
