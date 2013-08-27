@@ -27,28 +27,27 @@
 	<link rel="stylesheet" type="text/css" href="/assets/css/blog.css" />
 </head>
 <body intent in-orientation:>
-<div id="all" intent in-width: in-orientation:>
-	<header intent
+<div id="all" class="standard" intent in-width: in-orientation:>
+	<header class="standard" intent
 		in-width:>
 		<h1><a href="../../">intention.js</a> </h1>
 		<nav>
 			<ul>
 				<li ><a href="/#">Documentation</a></li>
-<li  class="active" ><a href="/blog/tagged/example.html">Examples</a></li>
+<li id="examples"  class="active" ><a href="/blog/tagged/example.html">Examples</a></li>
 <li  class="active" ><a href="/blog/">Blog</a></li>
 <li id="github"><a href="https://github.com/wsjdesign/intentionjs" target="_blank">GitHub</a></li>
 			</ul>
 		</nav>
 	</header>
-	<section id="heading" intent 
-		
+	<section id="heading" class="standard" intent 
 		in-width:> <!-- Hide this functionality on *real* mobile devices but not on faked ones-->
 		<div class="inner">
 			<h2><a href="../index.html">Blog</a></h2>
 		</div>
 	</section>
-	<section id="content" class="blog post" intent in-width:  in-orientation:>
-		<section id="filter" class="example" intent in-width:  in-orientation:>Only showing <b>example</b> posts. <h4><a href="../index.html">&larr; Go back</a></h4></section>
+	<section id="content" class="blog post standard" intent in-width:  in-orientation:>
+		<section id="filter" class="example standard" intent in-width:  in-orientation:>Only showing <b>example</b> posts. <h4><a href="../index.html">&larr; Go back</a></h4></section>
 		<div class="inner"  class="clearFix">
 			<!--This is what gets interpolated into the blog layout. Think of this as a substitute for /blog/index.html. Unfortunately, it can't go in /blog-->
 <section id="posts">
@@ -121,7 +120,7 @@
 		</div>
 		
 	</section>
-	<footer intent in-width: in-orientation:>
+	<footer class="standard" intent in-width: in-orientation:>
    	<div class="inner">
 	<h1>✌☺</h1>
 	<img src="/images/dj-logo.png" alt="Dow Jones logo"/>
