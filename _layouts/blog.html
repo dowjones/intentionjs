@@ -11,8 +11,8 @@
 	<link rel="stylesheet" type="text/css" href="../assets/css/blog.css" />
 </head>
 <body intent in-orientation:>
-<div id="all" intent in-width: in-orientation:>
-	<header intent in-width:>
+<div id="all" class="standard" intent in-width: in-orientation:>
+	<header class="standard" intent in-width:>
 		<h1><a href="../">intention.js</a></h1>
 		<nav>
 			<ul>
@@ -20,13 +20,13 @@
 			</ul>
 		</nav>
 	</header>
-	<section id="heading" intent in-width:>
+	<section id="heading" class="standard" intent in-width:>
 		<div class="inner">
 			<h2><a href="{{ page.url }}">{{ page.title }}</a></h2>
 		</div>
 	</section>
-	<section id="content" class="blog" intent in-width: in-orientation:>
-	   <nav id="topNav" class="tagNav" intent in-width:>
+	<section id="content" class="blog standard" intent in-width: in-orientation:>
+	   <nav id="topNav" class="tagNav standard" intent in-width:>
 	   	<div class="inner">
 	   		<a class="example" href="tagged/example.html">Examples</a>
 	   		<a class="release" href="tagged/release.html">Releases</a>
@@ -37,7 +37,7 @@
 			{{ content }}
 		</div>
 	</section>
-	<footer intent in-width:>
+	<footer class="standard" intent in-width:>
    	{% include footer.md %}
 	</footer>
 </div>
