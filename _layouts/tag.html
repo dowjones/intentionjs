@@ -3,16 +3,15 @@ layout: tagpage
 title: Blog
 ---
 <!--This is what gets interpolated into the blog layout. Think of this as a substitute for /blog/index.html. Unfortunately, it can't go in /blog-->
-<section id="posts">
+
     {% for post in site.posts %}
     	{% for tag in post.tags %}
     		{% if tag == page.tag %}
 			    <article>
 			        <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
 			        {% if post.sub %}<h4>{{ post.sub }}</h4>{% endif %}
-			        <section class="header"><p class="meta"><a href="{{ post.url }}">{{ post.date | date: "%B %d, %Y" }}</a></p><p class="tags">{% for tags in post.tags %}<a href="{{ tags }}.html" class="{{ tags }}">{{ tags }}</a> {% endfor %}</p></section>
+			        <section class="header"><p class="meta"><a href="{{ post.url }}">{{ post.date | date: "%B %d, %Y" }}</a></p><p class="tags">{% for tags in post.tags %}<a href="{{ tags }}.html" class="{{ tags }}">#{{ tags }}</a> {% endfor %}</p></section>
 				</article>
 			{% endif %}
 		{% endfor %}
     {% endfor %}
-</section>

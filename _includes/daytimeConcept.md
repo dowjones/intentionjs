@@ -7,7 +7,9 @@
       <div id="timeExample" intent in-time:> </div>
 
       {%highlight html%}
-<div id="timeExample" intent in-time:></div>
+<div id="timeExample"
+   intent in-time:>
+</div>
       {%endhighlight%}
       {%highlight js%}
 var time = intent.responsive({
@@ -19,8 +21,8 @@ var time = intent.responsive({
       {name:'day',min:9},
       {name:'morning',min:0}
    ],
-   matcher: function(test, context) {
-      return test >= context.min;
+   matcher: function(test, ctx) {
+      return test >= ctx.min;
    },
    measure: function(arg) {
       var time = new Date();
