@@ -1,6 +1,7 @@
 (function($){
 
-  var intent = new Intention,
+var context = function($, Intention){
+  var intent = new Intention(),
       baseResponder = intent.responsive([{name:'base'}]).respond('base'),
 
 // Percent scrolled axis
@@ -13,7 +14,6 @@
      ID:'percent',
      contexts: percentCtx,
      matcher: function(measure, ctx) {
-        if(measure >= ctx.val){ console.log(ctx.name); }
         return measure >= ctx.val;
      },
      measure: function(){
@@ -41,10 +41,11 @@
   }).respond,
   
 //Sticky nav axis
+   depth = $('header').offset().top + $('header').outerHeight() - $('nav').outerHeight(),
   scrolldepth = intent.responsive({
      ID: 'scrolldepth',
      contexts: [
-        {name:'fix', val:$('nav').offset().top},
+        {name:'fix', val:depth},
         {name:'top', val:0}
      ],
      matcher: function(measure, ctx) {
@@ -53,7 +54,13 @@
      measure: function(){
         return window.pageYOffset;
      }
-  }).respond;
+  }).respond,
+  
+  // update the scrolldepth values in case elements change height on window resize
+  manageDepths = function() {
+     var newDepth = $('header').offset().top + $('header').outerHeight() - $('nav').outerHeight();
+     intent.axes.scrolldepth.contexts[0]['val'] = newDepth;
+  };
   
   intent.on('percent:', function() {
      var pos = this.axes.percent.current.slice(1) + '%';
@@ -66,8 +73,24 @@
   $(window)
      .on('scroll', scrolldepth)
      .on('scroll', percent)
-     .on('scroll', flipper);
+     .on('scroll', flipper)
+     .on('resize', manageDepths);
   
 
-  intent.elements();
-})(jQuery)
+  intent.elements(document);
+  
+  return intent;
+};
+
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+      // AMD. Register as an anonymous module.
+      define('context', ['jquery', 'intention'], factory);
+    } else {
+      // Browser globals
+      root.intent = factory(root.jQuery, root.Intention);
+    }
+  }(this, function ($, Intention) {
+    return context($, Intention);
+  }));
+}).call(this);

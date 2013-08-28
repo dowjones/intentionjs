@@ -6,7 +6,7 @@ DOM Manipulation via html attribute specification
 
 It's like a super amped up version of media queries on a per element basis!
 
-The technology for dealing with responsive design is all over the place. Media queries, hacky javascript, and convoluted HTML. intention.js allows you to make all of the changes to HTML in the HTML itself. It's is a way to describe the necessary differences of an HTML document between one device and another. 
+The technology for dealing with responsive design is all over the place. Media queries, hacky javascript, and convoluted HTML. intention.js allows you to make all of the changes to HTML in the HTML itself. It's a way to describe the necessary differences of an HTML document between one device and another. 
 
 What should the classes of an element be on mobile vs tablet? Where should your advertising code get placed when you're on a desktop? Does the page require an alternate slideshow widget on touch enabled devices? These are all changes that intention.js can make to the page based on a user's device. context.js creates a set of common page contexts for width thresholds, touch devices, highres displays and a fallback.
 
