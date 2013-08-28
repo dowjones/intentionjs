@@ -391,7 +391,7 @@ Measure
 
 ## License
 ```javascript
-	// MIT licesnse for everything
+	// MIT license for everything
 
 	// Copyright (c) 2012 The Wall Street Journal, 
 	// http://wsj.com/
