@@ -182,6 +182,8 @@ header nav li {
   list-style: none;
   display: inline-block;
   padding: 6px 10px 6px 10px;
+  font-size: 16px;
+  font-size: 1.6rem;
 }
 header nav li:first-of-type {
   padding-left: 0px;
@@ -189,12 +191,21 @@ header nav li:first-of-type {
 header nav li.active {
   border-bottom: 8px solid rgba(243, 201, 190, 0.7);
 }
-header nav li#github {
+header nav li#github,
+header nav li#twitter {
   float: right;
   border-bottom: 8px solid #d7dcdb;
 }
-header nav li#github a {
+header nav li#github a,
+header nav li#twitter a {
   color: #38748e;
+}
+header nav li#github {
+  margin-left: 10px;
+  border-color: #f3c9be;
+}
+header nav li#github a {
+  color: #e26345;
 }
 header.standard h1,
 header.hdtv h1 {
@@ -210,34 +221,45 @@ header.hdtv nav {
   font-size: 19px;
   font-size: 1.9rem;
 }
+header.standard nav li#documentation a::after,
+header.hdtv nav li#documentation a::after {
+  content: "umentation";
+}
 header.standard nav li#github a::before,
 header.hdtv nav li#github a::before {
   content: "Fork us on ";
 }
+header.standard nav li#twitter a::before,
+header.hdtv nav li#twitter a::before {
+  content: "Follows us on ";
+}
 header.tablet h1,
 header.pseudotablet h1,
-header.standard.landscape h1,
 header.tablet nav,
-header.pseudotablet nav,
-header.standard.landscape nav {
+header.pseudotablet nav {
   width: auto;
   margin: 0 10px;
   padding: 0 10px;
   box-sizing: border-box;
 }
 header.tablet nav li,
-header.pseudotablet nav li,
-header.standard.landscape nav li {
+header.pseudotablet nav li {
   height: auto;
 }
+header.tablet nav li#documentation a::after,
+header.pseudotablet nav li#documentation a::after {
+  content: "umentation";
+}
 header.tablet nav li#github a::before,
-header.pseudotablet nav li#github a::before,
-header.standard.landscape nav li#github a::before {
+header.pseudotablet nav li#github a::before {
   content: "Fork us on ";
 }
+header.tablet nav li#twitter a::before,
+header.pseudotablet nav li#twitter a::before {
+  content: "Follows us on ";
+}
 header.tablet h1,
-header.pseudotablet h1,
-header.standard.landscape h1 {
+header.pseudotablet h1 {
   padding: 10px;
 }
 header.mobile,
@@ -280,16 +302,6 @@ header.hdtv.pseudomobile h1 {
   font-size: 3.0rem;
   font-weight: normal;
 }
-header.mobile nav,
-header.standard.pseudomobile nav,
-header.smalltablet nav,
-header.standard.pseudosmalltablet nav,
-header.hdtv.pseudotablet nav,
-header.hdtv.pseudosmalltablet nav,
-header.hdtv.pseudomobile nav {
-  font-size: 15px;
-  font-size: 1.5rem;
-}
 header.mobile li,
 header.standard.pseudomobile li,
 header.smalltablet li,
@@ -299,20 +311,54 @@ header.hdtv.pseudosmalltablet li,
 header.hdtv.pseudomobile li {
   height: 15px;
 }
+header.mobile li#documentation a::after,
+header.standard.pseudomobile li#documentation a::after,
+header.smalltablet li#documentation a::after,
+header.standard.pseudosmalltablet li#documentation a::after,
+header.hdtv.pseudotablet li#documentation a::after,
+header.hdtv.pseudosmalltablet li#documentation a::after,
+header.hdtv.pseudomobile li#documentation a::after {
+  content: 's';
+}
+header.mobile nav li#twitter,
+header.standard.pseudomobile nav li#twitter,
+header.hdtv.pseudomobile nav li#twitter,
 header.mobile nav li#github,
 header.standard.pseudomobile nav li#github,
 header.hdtv.pseudomobile nav li#github {
   float: none;
+  border-bottom: 0px none;
 }
+header.mobile nav li#twitter a::before,
+header.standard.pseudomobile nav li#twitter a::before,
+header.hdtv.pseudomobile nav li#twitter a::before,
 header.mobile nav li#github a::before,
 header.standard.pseudomobile nav li#github a::before,
 header.hdtv.pseudomobile nav li#github a::before {
   content: '';
 }
+header.mobile nav li#documentation a::after,
+header.standard.pseudomobile nav li#documentation a::after,
+header.hdtv.pseudomobile nav li#documentation a::after {
+  content: 's';
+}
 header.mobile nav li#examples,
 header.standard.pseudomobile nav li#examples,
 header.hdtv.pseudomobile nav li#examples {
   display: none;
+}
+header.pseudotablet nav li#documentation a::after,
+header.pseudosmalltablet nav li#documentation a::after,
+header.pseudomobile nav li#documentation a::after {
+  content: 's';
+}
+header.pseudotablet nav li#twitter a::before,
+header.pseudosmalltablet nav li#twitter a::before,
+header.pseudomobile nav li#twitter a::before,
+header.pseudotablet nav li#github a::before,
+header.pseudosmalltablet nav li#github a::before,
+header.pseudomobile nav li#github a::before {
+  content: '';
 }
 #scrollWrapper > #heading,
 #all > #heading {
@@ -910,6 +956,10 @@ footer h1 {
   font-size: 6.0rem;
   font-weight: normal;
   color: #ea865a;
+}
+footer img#djlogo.highres {
+  width: 252px;
+  height: 40px;
 }
 footer.standard .inner,
 footer.hdtv .inner {

@@ -200,7 +200,7 @@ $(window)
    .on('resize', throttle(manageScrollDepth, 100));
  
 $('.jump').add('#stickBrand').click(function() {
-   $('html, body').animate({ scrollTop: $('#t1').offset().top - 49}, 1000);
+   $('html, body').animate({ scrollTop: $('#content').offset().top+15}, 1000);
 });
 
 $('#prevnext li').click(function() {
@@ -213,14 +213,20 @@ $('#prevnext li').click(function() {
    $('html, body').animate({ scrollTop: target}, 1000);
    return false;
 });
-
-$('ul#sections')
-   .menuDeck()
-   .children('li').children('a')
-   .click(function() {
-      var target = $($(this).attr('ref')).offset().top - 49;
+if (intent.is('touch')) { 
+   $('ul#sections li a').click(function() {
+      var target = $($(this).attr('ref')).offset().top;
       $('html, body').animate({ scrollTop: target}, 1000);
-});
+   });
+} else{
+   $('ul#sections')
+      .menuDeck()
+      .children('li').children('a')
+      .click(function() {
+         var target = $($(this).attr('ref')).offset().top - 49;
+         $('html, body').animate({ scrollTop: target}, 1000);
+   });
+}
 
 intent
    .on('titleDepth:', function() {
@@ -234,7 +240,9 @@ intent
       //add padding so stickiness is applied without a jump
       //this is done here (as opposed to applying an intentional class to #docs
       //in case we decide the nav bar should be different sizes in different contexts
-      $('#docs').css('padding-top', $('#topNav').outerHeight());
+      if(intent.is('touch') == false){
+         $('#docs').css('padding-top', $('#topNav').outerHeight());
+      }
    })
    .on('movebrand', function() { //one context above the stickynav
       $('#docs').css('padding-top', ''); //remove that smoothening padding

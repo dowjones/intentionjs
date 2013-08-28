@@ -162,6 +162,8 @@ header{
 			list-style:none;
 			display:inline-block;
 			padding:6px @gutter/2 6px @gutter/2;
+			font-size:16px;
+			font-size:1.6rem;
 		}
 		li:first-of-type{
 			padding-left:0px;
@@ -169,10 +171,15 @@ header{
 		li.active{
 			border-bottom: 8px solid fadeout(@lightOrange, 30%);
 		}
+		li#github, li#twitter{
+   		float:right;
+   		border-bottom:8px solid @lightBlueGray;
+   		a{ color:@blue; }
+		}
 		li#github{
-		   float:right;
-		   border-bottom:8px solid @lightBlueGray;
-		   a{  color: @blue; }
+   		margin-left:10px;
+   		border-color:@lightOrange;
+   		a{ color:@darkOrange; }
 		}
 	}
 }
@@ -188,18 +195,30 @@ header.standard, header.hdtv{
 		margin:auto;
 		font-size: 19px;
 		font-size: 1.9rem;
+		li#documentation a::after{
+   		content:"umentation"
+		}
 		li#github a::before{
    		content:"Fork us on ";
 		}
+		li#twitter a::before{
+   		content:"Follows us on "
+   	}
 	}
 }
-header.tablet, header.pseudotablet, header.standard.landscape{
+header.tablet, header.pseudotablet{
 	h1, nav{
 		.mobileWrapping;
 	}
 	nav li { height:auto; }
+	nav li#documentation a::after{
+		content:"umentation"
+	}
 	nav li#github a::before{
 		content:"Fork us on ";
+	}
+	nav li#twitter a::before{
+		content:"Follows us on "
 	}
 	h1{ padding:@gutter/2; }
 }
@@ -215,15 +234,34 @@ header.hdtv.pseudotablet, header.hdtv.pseudosmalltablet, header.hdtv.pseudomobil
 	   font-size: 3.0rem;
 	   font-weight:normal;
 	}
-	nav{ font-size:15px; font-size: 1.5rem; }
 	li{ height:15px;}
+	li#documentation a::after{
+	   content:'s'
+	}
 }
-header.mobile nav, header.standard.pseudomobile nav, header.hdtv.pseudomobile nav{
-   li#github{
-      float:none;
-      a::before{ content:'' }
+
+header.mobile, header.standard.pseudomobile, header.hdtv.pseudomobile{
+   nav{
+      li#twitter, li#github{
+         float:none;
+         border-bottom:0px none;
+         a::before{ content:'' }
+      }
+      li#documentation a::after{
+         content:'s'
+      }
+      li#examples{ display:none }
    }
-   li#examples{ display:none }
+}
+header.pseudotablet, header.pseudosmalltablet, header.pseudomobile{
+   nav{
+      li#documentation a::after{
+         content:'s'
+      }
+      li#twitter, li#github{
+         a::before{ content: '' }
+      }
+   }
 }
 
 
@@ -570,6 +608,10 @@ footer{
 		font-size: 6.0rem;
 		font-weight:normal;
 		color:@orange;
+	}
+	img#djlogo.highres{
+   	width:252px;
+   	height:40px;
 	}
 }
 footer.standard, footer.hdtv{

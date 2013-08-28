@@ -140,7 +140,7 @@
 		}
 	}
 }
-#splash.tablet, #splash.pseudotablet, #splash.standard.landscape{
+#splash.tablet, #splash.pseudotablet{
 	.inner{
 		.mobileWrapping;
 		padding:@gutter;
@@ -384,6 +384,28 @@ body > .try.standard, body > .try.hdtv {
       	}
       }
    }
+   #topNav.touch{
+      ul#sections{
+         width:100%;
+         height:auto;
+         position:relative;
+         left:0;
+         height:auto;
+         li{
+            height:40px;
+            position:relative;
+         }
+         li:hover{
+            background:@darkBlue;
+         }
+         li+li{
+            border-top:1px dashed @green;
+         }
+      }
+      ul#prevnext, .inner{ display:none; }
+   }
+   #topNav.touch.sticknav{ position:relative; }
+   
 	#docs{
 		background: @mediumBlue url('../../images/docubg.png') repeat-x top fixed;
 	}
