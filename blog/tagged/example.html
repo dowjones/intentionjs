@@ -33,10 +33,11 @@
 		<h1><a href="../../">intention.js</a> </h1>
 		<nav>
 			<ul>
-				<li ><a href="/#">Documentation</a></li>
+				<li id="documentation" ><a href="/#">Doc</a></li>
 <li id="examples"  class="active" ><a href="/blog/tagged/example.html">Examples</a></li>
 <li  class="active" ><a href="/blog/">Blog</a></li>
-<li id="github"><a href="https://github.com/wsjdesign/intentionjs" target="_blank">GitHub</a></li>
+<li id="github" intent in-mobile-after="#twitter" in-pseudomobile-after="#twitter"><a href="https://github.com/wsjdesign/intentionjs" target="_blank">GitHub</a></li>
+<li id="twitter"><a href="http://twitter.com/intentionjs" target="_blank">Twitter</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -50,14 +51,14 @@
 		<section id="filter" class="example standard" intent in-width:  in-orientation:>Only showing <b>example</b> posts. <h4><a href="../index.html">&larr; Go back</a></h4></section>
 		<div class="inner"  class="clearFix">
 			<!--This is what gets interpolated into the blog layout. Think of this as a substitute for /blog/index.html. Unfortunately, it can't go in /blog-->
-<section id="posts">
+
     
     	
     		
 			    <article>
 			        <h3><a href="/2013/08/19/Response-and-Performance.html">Response Times &amp; Performance Test</a></h3>
 			        
-			        <section class="header"><p class="meta"><a href="/2013/08/19/Response-and-Performance.html">August 19, 2013</a></p><p class="tags"><a href="example.html" class="example">example</a> </p></section>
+			        <section class="header"><p class="meta"><a href="/2013/08/19/Response-and-Performance.html">August 19, 2013</a></p><p class="tags"><a href="example.html" class="example">#example</a> </p></section>
 				</article>
 			
 		
@@ -67,7 +68,7 @@
 			    <article>
 			        <h3><a href="/2013/08/18/Stylesheet-Loader.html">Super Simple Intentional Stylesheet Loader</a></h3>
 			        <h4>And Other Initialization Tips</h4>
-			        <section class="header"><p class="meta"><a href="/2013/08/18/Stylesheet-Loader.html">August 18, 2013</a></p><p class="tags"><a href="example.html" class="example">example</a> </p></section>
+			        <section class="header"><p class="meta"><a href="/2013/08/18/Stylesheet-Loader.html">August 18, 2013</a></p><p class="tags"><a href="example.html" class="example">#example</a> </p></section>
 				</article>
 			
 		
@@ -76,8 +77,8 @@
     		
 			    <article>
 			        <h3><a href="/2013/08/05/explaining-this-sites-responsiveness.html">Explaining This Site's Responsiveness</a></h3>
-			        <h4>Forcing Contexts, Writing Nonconflicting CSS, Dynamically Generating Axes</h4>
-			        <section class="header"><p class="meta"><a href="/2013/08/05/explaining-this-sites-responsiveness.html">August 05, 2013</a></p><p class="tags"><a href="example.html" class="example">example</a> </p></section>
+			        <h4>Forcing Contexts, Dynamically Generating Axes</h4>
+			        <section class="header"><p class="meta"><a href="/2013/08/05/explaining-this-sites-responsiveness.html">August 05, 2013</a></p><p class="tags"><a href="example.html" class="example">#example</a> </p></section>
 				</article>
 			
 		
@@ -91,7 +92,7 @@
 			    <article>
 			        <h3><a href="/2013/03/12/walking-man.html">Weird Walking Man Animation</a></h3>
 			        
-			        <section class="header"><p class="meta"><a href="/2013/03/12/walking-man.html">March 12, 2013</a></p><p class="tags"><a href="example.html" class="example">example</a> </p></section>
+			        <section class="header"><p class="meta"><a href="/2013/03/12/walking-man.html">March 12, 2013</a></p><p class="tags"><a href="example.html" class="example">#example</a> </p></section>
 				</article>
 			
 		
@@ -100,8 +101,8 @@
     		
 			    <article>
 			        <h3><a href="/2013/03/11/scroll-depth-tracking.html">Testing the Scroll Depth</a></h3>
-			        
-			        <section class="header"><p class="meta"><a href="/2013/03/11/scroll-depth-tracking.html">March 11, 2013</a></p><p class="tags"><a href="example.html" class="example">example</a> </p></section>
+			        <h4>Sticky elements & changing the page based on scroll</h4>
+			        <section class="header"><p class="meta"><a href="/2013/03/11/scroll-depth-tracking.html">March 11, 2013</a></p><p class="tags"><a href="example.html" class="example">#example</a> </p></section>
 				</article>
 			
 		
@@ -111,19 +112,19 @@
 			    <article>
 			        <h3><a href="/2013/03/10/grid-demo.html">Responsive Grid Demo</a></h3>
 			        <h4>Using rearrangment techniques as well as dimension changes to accomodate different size devices.</h4>
-			        <section class="header"><p class="meta"><a href="/2013/03/10/grid-demo.html">March 10, 2013</a></p><p class="tags"><a href="example.html" class="example">example</a> </p></section>
+			        <section class="header"><p class="meta"><a href="/2013/03/10/grid-demo.html">March 10, 2013</a></p><p class="tags"><a href="example.html" class="example">#example</a> </p></section>
 				</article>
 			
 		
     
-</section>
+
 		</div>
 		
 	</section>
 	<footer class="standard" intent in-width: in-orientation:>
    	<div class="inner">
 	<h1>✌☺</h1>
-	<img src="/images/dj-logo.png" alt="Dow Jones logo"/>
+	<img id="djlogo" src="/images/dj-logo.png" intent in-highres: in-highres-src="images/dj-logo-retina.png" alt="Dow Jones logo"/>
 	<p>Intention.js is an open-source project by Dow Jones's open source initiative. <a href="https://github.com/dowjones" target="_blank">Visit us on Github</a> for more information and projects.</p>
 </div>
 
