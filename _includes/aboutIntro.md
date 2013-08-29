@@ -12,7 +12,7 @@
   <article>
     <h3>License</h3>
     <section>
-      <pre>MIT licesnse for everything
+      <pre>MIT license for everything
 
 Copyright (c) 2012 The Wall Street Journal,
 http://wsj.com/
