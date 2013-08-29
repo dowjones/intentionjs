@@ -33,10 +33,11 @@
 		<h1><a href="../../">intention.js</a> </h1>
 		<nav>
 			<ul>
-				<li ><a href="/#">Documentation</a></li>
+				<li id="documentation" ><a href="/#">Doc</a></li>
 <li id="examples" ><a href="/blog/tagged/example.html">Examples</a></li>
 <li  class="active" ><a href="/blog/">Blog</a></li>
-<li id="github"><a href="https://github.com/wsjdesign/intentionjs" target="_blank">GitHub</a></li>
+<li id="github" intent in-mobile-after="#twitter" in-pseudomobile-after="#twitter"><a href="https://github.com/wsjdesign/intentionjs" target="_blank">GitHub</a></li>
+<li id="twitter"><a href="http://twitter.com/intentionjs" target="_blank">Twitter</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -50,7 +51,7 @@
 		<section id="filter" class="release standard" intent in-width:  in-orientation:>Only showing <b>release</b> posts. <h4><a href="../index.html">&larr; Go back</a></h4></section>
 		<div class="inner"  class="clearFix">
 			<!--This is what gets interpolated into the blog layout. Think of this as a substitute for /blog/index.html. Unfortunately, it can't go in /blog-->
-<section id="posts">
+
     
     	
     		
@@ -69,7 +70,7 @@
 			    <article>
 			        <h3><a href="/2013/04/17/responsive-axes.html">Flexible Responsive Axes Changing HTML Based on Orientation, Width, Touch and Resolution</a></h3>
 			        
-			        <section class="header"><p class="meta"><a href="/2013/04/17/responsive-axes.html">April 17, 2013</a></p><p class="tags"><a href="release.html" class="release">release</a> </p></section>
+			        <section class="header"><p class="meta"><a href="/2013/04/17/responsive-axes.html">April 17, 2013</a></p><p class="tags"><a href="release.html" class="release">#release</a> </p></section>
 				</article>
 			
 		
@@ -86,14 +87,14 @@
     		
 		
     
-</section>
+
 		</div>
 		
 	</section>
 	<footer class="standard" intent in-width: in-orientation:>
    	<div class="inner">
 	<h1>✌☺</h1>
-	<img src="/images/dj-logo.png" alt="Dow Jones logo"/>
+	<img id="djlogo" src="/images/dj-logo.png" intent in-highres: in-highres-src="images/dj-logo-retina.png" alt="Dow Jones logo"/>
 	<p>Intention.js is an open-source project by Dow Jones's open source initiative. <a href="https://github.com/dowjones" target="_blank">Visit us on Github</a> for more information and projects.</p>
 </div>
 
