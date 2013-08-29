@@ -3,7 +3,7 @@
   <section>
     <h3 alt="Axes & Contexts">Thresholds, Axes, &amp; Contexts</h3>
     <p>Intention.js works by determining what are called “threshold groups”. These threshold groups define  the context in which a user is viewing your site. Threshold groups work by measuring an axis, like the browser’s width or the device’s pixel density (for high resolution screens).</p>
-    <p>A lot of these contexts are predictable, and a common pattern of them are included in a handy implementation of intention.js called context.js</p>
+    <p>A lot of these contexts are predictable, and some common patterns are included in a handy implementation of intention.js called context.js</p>
     <pre><span class="comment"><i>Axis</i></span>
    - <i>context_name, value</i></span>
 
