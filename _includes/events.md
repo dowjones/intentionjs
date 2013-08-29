@@ -1,7 +1,7 @@
 <article class="equalize" data-pattern="2">
    <h2>Intent Events</h2>
    <section>
-      <p>It's possible (and very easy) to set up event listeners for context changes. Intention.js allows for event binding for
+      <p>It's possible (and very easy) to set up event listeners for context changes. Intention.js supports event binding to scenarios such as:
          <ol>
             <li>When a specific context passes true</li>
             <li>When a specific context in a specific axis passes true</li>
