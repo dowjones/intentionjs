@@ -112,7 +112,7 @@
    <img src="logo.png" />
 </header>
 
-<nav class="swipeDrawer">
+<nav>
    <a href="about.html">
       About
    </a>

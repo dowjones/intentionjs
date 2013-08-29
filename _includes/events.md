@@ -4,7 +4,7 @@
       <p>It's possible (and very easy) to set up event listeners for context changes. Intention.js allows for event binding for
          <ol>
             <li>When a specific context passes true</li>
-            <li>When a specific context in an specific axis passes true</li>
+            <li>When a specific context in a specific axis passes true</li>
             <li>When a specific axis passes any context</li>
          </ol>
       </p>

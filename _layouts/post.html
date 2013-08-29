@@ -13,7 +13,7 @@
   </head>
   <body intent in-orientation:>
     <div id="all" class="standard" intent in-width: in-orientation:>
-      <header intent class="standard" in-width: in-orientation:>
+      <header class="standard" intent in-width: in-orientation:>
       	<h1><a href="/#">intention.js</a></h1>
          <nav>
             <ul>
@@ -30,7 +30,7 @@
       	<div class="inner">
             <section class="header">
                {% if page.sub %}<h3>{{ page.sub }}</h3>{% endif %}
-               <p class="meta"><a href="{{ page.url }}">{{ page.date | date: "%B %d, %Y" }}</a></p><p class="tags">{% for tags in page.tags %}<a href="../../../blog/tagged/{{ tags }}.html" class="{{ tags }}">{{ tags }}</a> {% endfor %}</p>
+               <p class="meta"><a href="{{ page.url }}">{{ page.date | date: "%B %d, %Y" }}</a></p><p class="tags">{% for tags in page.tags %}<a href="../../../blog/tagged/{{ tags }}.html" class="{{ tags }}">#{{ tags }}</a> {% endfor %}</p>
                {% if page.demo %}<h4 class="seeDemo"><a href="{{ page.demo }}" target="_blank">See Demo</a></h4>{% endif %}
             </section>
             {% if page.img %}

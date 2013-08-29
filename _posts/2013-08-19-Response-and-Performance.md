@@ -41,6 +41,6 @@ div.tablet::after{ content: "Tablet viewport"; }
 div.standard::after{ content: "Standard viewport"; }
 {% endhighlight %}
 
-At page load, the second and third `div`s are not assigned a class. When Intention responds, they are assigned a class `.loaded` that gives them a green background. They are also assigned `content` properties specific to the context that passed.
+At page load, the second and third `div`s do not yet have a class. When Intention responds, they are assigned a class `.loaded` that gives them a green background. They are also assigned content properties specific to the context that passed.
 
 All of these assignments, of course, should seamless with the page load, demonstrating how quick your page can dynamically restructure.

@@ -1,154 +1,151 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="../../test/vendor/underscore.js"></script>
-    <script type="text/javascript" src="../../intention.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes"><meta name="format-detection" content="telephone=no">
-    <style type="text/css">
-
-      body {
-      height:5000px;
-      font-family: monospace;
+<head>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+   <script type="text/javascript" src="../../test/vendor/underscore.js"></script>
+   <script type="text/javascript" src="../../intention.js"></script>
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+   <meta name="apple-mobile-web-app-capable" content="yes"><meta name="format-detection" content="telephone=no">
+   <title>Interesting things re: how far you scroll</title>
+   <style type="text/css">
+   html{
+      font-size: 62.5%;
+   }
+   body {
+      min-height: 5000px;
+      font-size: 16px;
+      font-size: 1.6rem;
       margin:0;
       background:lavender;
-      }
-
-      #intro {
-      height:25px;
+   }
+   /* basic coloring and layout styles */
+   #intro {
       background:darkseagreen;
-      }
-
-      .fix #intro {
-      margin-top:25px;
-      }
-
-      nav {
-      height:25px;
+      padding: 10px 0 ;
+   }  
+   h1, h3{
+      margin: 0;
+   }
+   #intro h1{
+      font-size: 72px;
+      font-size: 7.2rem;
+   }
+   #intro h3{
+      font-size: 40px;
+      font-size: 4.0rem;
+   }
+   
+   nav{
       background:seagreen;
-      }
-
-      .fix nav{
-      position: fixed;
-      top:0;
-      left:0;
-      z-index: 10;
-      width: 100%;
-      }
-
-      h1 {
-      white-space: nowrap;
-      font-weight: normal;
-      text-transform: uppercase;
-      text-align: center;
-      width: 300px;
-      margin:0 auto;
-      }
-
-
-      h2 {
+      padding: 10px 0;
+      height: 23px;
+   }
+   nav li{
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 2.0rem;
+      color: white;
+   }
+   nav li+li{
+      margin-left: 15px;
+   }
+   
+   h2 {
       position: fixed;
       text-align: center;
       top:50px;
       right:50px;
       font-size: 25px;
-      height:50px;
-      line-height: 50px;
-      width:50px;
+      height:75px;
+      line-height: 75px;
+      width:75px;
       background: yellow;
       border-radius: 50%;
-      }
-
-      h2.one:after {
+   }
+   h2#posPer{
+      top: 150px;
+      background: indigo;
+      color: white;
+      font-size: 20px;
+      font-size: 2.0rem;
+   }
+   
+   #content h3{
+      width: 100%;
+      padding: 50px 0;
+      text-align: center;
+      font-size: 120px;
+      font-size: 12.0rem;
+   }
+   h3#a{ background: lime; }
+   h3#b{ background: skyblue; }
+   h3#c{ background: tomato; }
+   
+   /* sticky nav */
+   header.fix{
+      padding-top: 43px;
+   }
+   header.fix nav{
+      width: 100%;
+      position: fixed;
+      top: 0;
+      z-index: 5;
+      box-shadow: 0px -7px 20px 10px rgba(0,0,0,.5);     
+   }
+   
+   /* Flipper Scroll */
+   h2.one:after {
       content:'|';
-      }
-
-      h2.two:after {
+   }
+   h2.two:after {
       content:'/';
-      }
+   }
 
-      h2.three:after {
+   h2.three:after {
       content:'-';
-      }
-
-      h2.four:after {
+   }
+   h2.four:after {
       content:'\\';
-      }
-
-      h1:after {
-      content:'.';
-      clear:both;
-      height:0;
-      visibility: hidden;
-      display: block;
-      }
-
-      h1 span {
-      height:100px;
-      width:100px;
-      float:left;
-      line-height: 100px;
-      }
-
-      .a {
-      background:lime;
-      }
-      .b {
-      background:skyblue;
-      }
-      .c {
-      background: tomato;
-      }
-
-    </style>
-  </head>
-  <body>
-    <header intent in-beyond-class="fix"
-	    in-shallow-class="">
-      <div id="intro"></div>
-      <nav></nav>
-    </header>
-
-    <h1 intent in-mobile-class="mobile"
-	in-tablet-class="tablet"
-	in-standard-class="standard"
-	in-frequenter-class="frequenter"
-	in-returning-class="returning"
-	in-first-class="first"
-	>
-      <span intent in-base-class="a"
-	    in-base-append='h1'
-	    in-base-append='h1'>a</span>
-      <span intent in-base-class="b"
-	    in-base-append='h1'
-	    in-tablet-after='.c'>b</span>
-      <span intent in-base-class="c"
-	    in-base-append='h1'
-	    in-tablet-prepend='h1'>c</span>
-
-    </h1>
-
-    <h2 intent
-	in-f1-class="one"
-	in-f2-class="two"
-	in-f3-class="three"
-	in-f4-class="four"></h2>
-
-  </body>
-  <script src="scrolldepth.js">
-
-                     </script>
-   <script type="text/javascript">
+   }
    
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-39164806-1']);
-    _gaq.push(['_trackPageview']);
    
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-   </script>
+   </style>
+</head>
+<body>
+   <header intent in-scrolldepth:>
+      <div id="intro">
+         <h1>Check out what happens when you scroll!</h1>
+         <h3>(A lot of things happen!)</h3>
+      </div>
+      <nav>
+         <li>Home</li>
+         <li>About</li>
+         <li>Projects</li>   
+      </nav>
+   </header>
+   <div id="content">
+      <h3 id="a">A</h3>
+      <h3 id="b">B</h3>
+      <h3 id="c">C</h3>
+   </div>
+   <h2 intent
+      in-f1-class="one"
+      in-f2-class="two"
+      in-f3-class="three"
+      in-f4-class="four"></h2>
+	<h2 id="posPer"><i>Go!</i></h2>
+</body>
+
+<script src="scrolldepth.js"> </script>
+<script type="text/javascript">
+ var _gaq = _gaq || [];
+ _gaq.push(['_setAccount', 'UA-39164806-1']);
+ _gaq.push(['_trackPageview']);
+
+ (function() {
+   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+ })();
+</script>
 </html>

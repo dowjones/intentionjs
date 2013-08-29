@@ -111,8 +111,7 @@
   right: 0;
 }
 #splash.tablet .inner,
-#splash.pseudotablet .inner,
-#splash.standard.landscape .inner {
+#splash.pseudotablet .inner {
   width: auto;
   margin: 0 10px 0 10px;
   padding: 0 10px 0 10px;
@@ -120,30 +119,25 @@
   padding: 20px;
 }
 #splash.tablet .inner section#buttons,
-#splash.pseudotablet .inner section#buttons,
-#splash.standard.landscape .inner section#buttons {
+#splash.pseudotablet .inner section#buttons {
   height: 64px;
   margin-top: 30px;
 }
 #splash.tablet .inner section#buttons a,
 #splash.pseudotablet .inner section#buttons a,
-#splash.standard.landscape .inner section#buttons a,
 #splash.tablet .inner section#buttons a:visited,
-#splash.pseudotablet .inner section#buttons a:visited,
-#splash.standard.landscape .inner section#buttons a:visited {
+#splash.pseudotablet .inner section#buttons a:visited {
   position: absolute;
   top: 0;
   bottom: 0;
 }
 #splash.tablet .inner section#buttons a#bundle,
-#splash.pseudotablet .inner section#buttons a#bundle,
-#splash.standard.landscape .inner section#buttons a#bundle {
+#splash.pseudotablet .inner section#buttons a#bundle {
   width: 50%;
   left: 0;
 }
 #splash.tablet .inner section#buttons a#mini,
-#splash.pseudotablet .inner section#buttons a#mini,
-#splash.standard.landscape .inner section#buttons a#mini {
+#splash.pseudotablet .inner section#buttons a#mini {
   width: 49%;
   right: 0;
 }
@@ -476,6 +470,29 @@ body > .try.hdtv #devices .cancel {
 }
 #content.docsLite #topNav ul#prevnext li:hover {
   background: #38748e;
+}
+#content.docsLite #topNav.touch ul#sections {
+  width: 100%;
+  position: relative;
+  left: 0;
+  height: auto;
+}
+#content.docsLite #topNav.touch ul#sections li {
+  height: 40px;
+  position: relative;
+}
+#content.docsLite #topNav.touch ul#sections li:hover {
+  background: #0c262d;
+}
+#content.docsLite #topNav.touch ul#sections li + li {
+  border-top: 1px dashed #589358;
+}
+#content.docsLite #topNav.touch ul#prevnext,
+#content.docsLite #topNav.touch .inner {
+  display: none;
+}
+#content.docsLite #topNav.touch.sticknav {
+  position: relative;
 }
 #content.docsLite #docs {
   background: #203b44 url('../../images/docubg.png') repeat-x top fixed;
