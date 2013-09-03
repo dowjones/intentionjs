@@ -6,7 +6,7 @@
       </section>
       <section id="buttons" class="clearFix">
             <a id="bundle" href="intention-context.js.zip">Download the latest bundle<h5>intention.js + context.js</h5></a>
-            <a id="mini" href="intention.js">Build your own contexts<h5>intention.js v0.9.7.2</h5></a>
+            <a id="mini" href="intention.js">Build your own contexts<h5>intention.js v0.9.9</h5></a>
       </section>
    </div>
 </section>
