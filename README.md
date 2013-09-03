@@ -6,7 +6,7 @@ DOM Manipulation via html attribute specification
 
 It's like a super amped up version of media queries on a per element basis!
 
-The technology for dealing with responsive design is all over the place. Media queries, hacky javascript, and convoluted HTML. intention.js allows you to make all of the changes to HTML in the HTML itself. It's a way to describe the necessary differences of an HTML document between one device and another. 
+The technology for dealing with responsive design is all over the place. Media queries, hacky javascript, and convoluted HTML. intention.js allows you to make all of the changes to HTML in the HTML itself. It's a way to describe the necessary differences of an HTML document between one device and another.
 
 What should the classes of an element be on mobile vs tablet? Where should your advertising code get placed when you're on a desktop? Does the page require an alternate slideshow widget on touch enabled devices? These are all changes that intention.js can make to the page based on a user's device. context.js creates a set of common page contexts for width thresholds, touch devices, highres displays and a fallback.
 
@@ -41,8 +41,8 @@ include scripts on your page or just Intention via require.
 
 ```html
 	<!-- use with context defaults -->
-	<script 
-		data-main="assets/js/context" 
+	<script
+		data-main="assets/js/context"
 		src="assets/js/require/require.js"></script>
 ```
 
@@ -64,7 +64,7 @@ OR:
 
 By default context.js provides a number of threshold groups via intention.js: browser widths, orientation, touch, highres, and a base group
 
-the default thresholds in each group are respectively: 
+the default thresholds in each group are respectively:
 mobile (510 and below), tablet (510 to 840) and standard (840 to Infinity)
 portrait or landscape
 touch (are touch gestures available)
@@ -94,7 +94,7 @@ For the purposes of the documentation the prefix "in-" will be used instead of "
 #### Context aware elements
 
 ```html
-	<img intent in-orientation src="cat.jpg" />
+	<img intent in-orientation: src="cat.jpg" />
 ```
 
 In the "portrait" orientation the above implementation will produce:
@@ -131,7 +131,7 @@ They are associated with the following classes
 		* highres
 
 Attribute structure: prefix-context-function="value"
-		
+
 i.e.
 
 ```html
@@ -146,23 +146,23 @@ mark an element as intention, set the base(default) attribute, specify which ima
 
 ```html
 	<img
-		intent 
-		in-base-src="small_img.png" 
+		intent
+		in-base-src="small_img.png"
 		in-highres-src="big_img.png" />
 ```
 
 the specification above will produce the following in each context
-default: 
+default:
 
 ```html
 <img src="small_img.png" />
 ```
 
-highres: 
+highres:
 
 ```html
 <img src="big_img.png" />
-```	
+```
 
 #### Class Manipulation
 
@@ -195,7 +195,7 @@ suppose we want to demote the status of the nav when the user is on smaller devi
 the following specification on the nav might do what we need
 
 ```html
-	<nav intent 
+	<nav intent
 		in-mobile-prepend="footer"
 		in-tablet-append="section"
 		in-standard-append="header">
@@ -252,7 +252,7 @@ The optional "ID" property allows for context aware element feature for the axis
 
 this will compare the measurement against each context and determine which context is relevant every time the window is scrolled.
 
-Other properties of intent.responsive include: 
+Other properties of intent.responsive include:
 
 	* ID
 	* current (the current context)
@@ -267,7 +267,7 @@ calling the elements function will change the elements' attributes to the specif
 
 ##### axis (contexts)
 
-The thresholds are an array of context objects. the only requirement of these objects is that they have a name property. 
+The thresholds are an array of context objects. the only requirement of these objects is that they have a name property.
 
 name is a required property of a context object
 ```javascript
@@ -277,7 +277,7 @@ name is a required property of a context object
 You can specify any other properties (such as scroll depth values)
 
 ```javascript
-	[{name:'shallow', depth:20}, 
+	[{name:'shallow', depth:20},
 		{name:'deep', depth: Infinity}]
 ```
 
@@ -344,7 +344,7 @@ to specify changes to the html when in that threshold
 
 Matcher
 
-```javascript	      
+```javascript
     function(measure, ctx){
       return measure === ctx.name;
     };
@@ -385,15 +385,15 @@ Measure
 
 ## Major Contributions to examples and documentation
 	* Camila Mercado
-	* Paul Pangrazzi 
+	* Paul Pangrazzi
 
 
 
 ## License
 ```javascript
-	// MIT licesnse for everything
+	// MIT license for everything
 
-	// Copyright (c) 2012 The Wall Street Journal, 
+	// Copyright (c) 2012 The Wall Street Journal,
 	// http://wsj.com/
 
 	// Permission is hereby granted, free of charge, to any person obtaining
