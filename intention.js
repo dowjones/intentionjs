@@ -1,5 +1,5 @@
 /*!
- * intention.js Library v0.9.7.2
+ * intention.js Library v0.9.9
  * http://intentionjs.com/
  *
  * Copyright 2011, 2013 Dowjones and other contributors
@@ -375,7 +375,7 @@
           specMatch = specMatch.slice(-3);
           axisName = specMatch[0];
 
-          if(specMatch[0] === undefined){
+          if((specMatch[0] === undefined) || (specMatch[0] === '')){
 
             // if there is no axis find one:
             specMatch[0] = this._assocAxis(specMatch[1], axes);
