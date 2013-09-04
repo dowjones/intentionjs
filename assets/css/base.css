@@ -14,11 +14,15 @@
   width: auto;
   margin: 0 10px;
   padding: 0 10px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 .noMarginWrapping {
   width: auto;
   padding: 0 20px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 .hide {
@@ -207,10 +211,15 @@ header nav li#github {
 header nav li#github a {
   color: #e26345;
 }
+header.standard .inner,
+header.hdtv .inner {
+  width: 820px;
+  margin: auto;
+}
 header.standard h1,
 header.hdtv h1 {
   width: 780px;
-  padding: 10px 20px 10px 20px;
+  padding: 10px 20px;
   margin: auto;
 }
 header.standard nav,
@@ -240,6 +249,8 @@ header.pseudotablet nav {
   width: auto;
   margin: 0 10px;
   padding: 0 10px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 header.tablet nav li,
@@ -288,6 +299,8 @@ header.hdtv.pseudomobile nav {
   width: auto;
   margin: 0 10px;
   padding: 0 10px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 header.mobile h1,
@@ -347,17 +360,26 @@ header.standard.pseudomobile nav li#examples,
 header.hdtv.pseudomobile nav li#examples {
   display: none;
 }
-header.pseudotablet nav li#documentation a::after,
-header.pseudosmalltablet nav li#documentation a::after,
-header.pseudomobile nav li#documentation a::after {
+header.standard.pseudotablet nav li#documentation a::after,
+header.hdtv.pseudotablet nav li#documentation a::after,
+header.standard.pseudosmalltablet nav li#documentation a::after,
+header.hdtv.pseudosmalltablet nav li#documentation a::after,
+header.standard.pseudomobile nav li#documentation a::after,
+header.hdtv.pseudomobile nav li#documentation a::after {
   content: 's';
 }
-header.pseudotablet nav li#twitter a::before,
-header.pseudosmalltablet nav li#twitter a::before,
-header.pseudomobile nav li#twitter a::before,
-header.pseudotablet nav li#github a::before,
-header.pseudosmalltablet nav li#github a::before,
-header.pseudomobile nav li#github a::before {
+header.standard.pseudotablet nav li#twitter a::before,
+header.hdtv.pseudotablet nav li#twitter a::before,
+header.standard.pseudosmalltablet nav li#twitter a::before,
+header.hdtv.pseudosmalltablet nav li#twitter a::before,
+header.standard.pseudomobile nav li#twitter a::before,
+header.hdtv.pseudomobile nav li#twitter a::before,
+header.standard.pseudotablet nav li#github a::before,
+header.hdtv.pseudotablet nav li#github a::before,
+header.standard.pseudosmalltablet nav li#github a::before,
+header.hdtv.pseudosmalltablet nav li#github a::before,
+header.standard.pseudomobile nav li#github a::before,
+header.hdtv.pseudomobile nav li#github a::before {
   content: '';
 }
 #scrollWrapper > #heading,
@@ -412,6 +434,8 @@ header.pseudomobile nav li#github a::before {
   width: auto;
   margin: 0 10px;
   padding: 0 10px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 20px 10px;
 }
@@ -452,6 +476,8 @@ header.pseudomobile nav li#github a::before {
   padding: 20px 0 40px 0;
 }
 #content article {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   position: relative;
 }
@@ -516,6 +542,8 @@ header.pseudomobile nav li#github a::before {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border: 1px double #d7dcdb;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   background: #182c33;
   white-space: nowrap;
@@ -523,12 +551,14 @@ header.pseudomobile nav li#github a::before {
 #content pre {
   padding: 6px;
   border: 1px double #d7dcdb;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-size: 14px;
   font-size: 1.4rem;
   color: #bac6cc;
   background: #182c33;
-  white-space: pre;
+  white-space: pre-wrap;
 }
 #content pre .comment {
   color: #516065;
@@ -542,6 +572,8 @@ header.pseudomobile nav li#github a::before {
 }
 #content .jump {
   padding: 20px 10px 0 10px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   clear: both;
   text-align: right;
@@ -599,6 +631,8 @@ header.pseudomobile nav li#github a::before {
 #content.hdtv.pseudomobile .inner {
   width: auto;
   padding: 0 20px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 20px 0;
 }
@@ -774,130 +808,13 @@ header.pseudomobile nav li#github a::before {
   font-size: 13px;
   font-size: 1.3rem;
 }
-#leftNav {
-  width: 200px;
-  height: 100%;
-  padding-top: 20px;
-  position: absolute;
-  top: 0;
-  left: -206px;
-  z-index: 6;
-  text-align: right;
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  -ms-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-  box-sizing: border-box;
-  background: #38748e;
-  background: rgba(56, 116, 142, 0.9);
-  border-right: 3px solid #d0e0ef;
-}
-#leftNav h6 {
-  width: 100%;
-  padding: 6px 6px 6px 0;
-  margin: 0 0 20px 0;
-  background: #38748e;
-  font-size: 14px;
-  font-size: 1.4rem;
-  position: absolute;
-  left: 100%;
-}
-#leftNav li + li {
-  margin-top: 20px;
-}
-#leftNav li {
-  position: relative;
-  right: 0;
-  list-style: none;
-  color: white;
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  -ms-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-  z-index: 1;
-}
-#leftNav li div {
-  display: inline-block;
-}
-#leftNav li .label {
-  width: auto;
-  padding-right: 19px;
-}
-#leftNav li .circle {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border: 3px solid #ea865a;
-  background: #203b44;
-  position: absolute;
-  right: -9px;
-  top: 2px;
-  box-shadow: 0 0 15px #da4530;
-}
-#leftNav li ul {
-  max-height: 13px;
-  margin-top: 0;
-  font-size: 14px;
-  font-size: 1.4rem;
-  overflow: hidden;
-  -webkit-transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out, background 0.75s linear;
-}
-#leftNav li ul li a {
-  padding-bottom: 2px;
-  color: #e6eaed;
-}
-#leftNav li ul li.active a {
-  border-bottom: 1px dashed #e6eaed;
-}
-#leftNav li ul li + li {
-  margin-top: 10px;
-}
-#leftNav li ul:before {
-  content: '...';
-}
-#leftNav li.active .circle {
-  background: #ea865a;
-}
-#leftNav li.active ul {
-  max-height: 999px;
-  padding: 10px 19px 15px 0;
-  margin-top: 5px;
-  background: #589358;
-}
-#leftNav li.active ul:before {
-  content: '';
-}
-#leftNav.fixed {
-  position: fixed;
-}
-#leftNav.hdtv {
-  -webkit-transform: translateX(206px);
-  -moz-transform: translateX(206px);
-  -o-transform: translateX(206px);
-  -ms-transform: translateX(206px);
-  transform: translateX(206px);
-}
-.no-cssanimations #leftNav.hdtv {
-  left: 0;
-}
-#leftNav.pseudotablet,
-#leftNav.pseudosmalltablet,
-#leftNav.pseudomobile {
-  -webkit-transform: translateX(0px);
-  -moz-transform: translateX(0px);
-  -o-transform: translateX(0px);
-  -ms-transform: translateX(0px);
-  transform: translateX(0px);
-}
 #content #topNav {
   width: 100%;
   padding: 5px;
   border-top: 13px solid #38748e;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   z-index: 20;
 }
 #content #topNav h6 {
@@ -908,6 +825,8 @@ header.pseudomobile nav li#github a::before {
 }
 #content #topNav .inner {
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   height: 40px;
 }
 #content #topNav.hdtv .inner,
@@ -950,6 +869,8 @@ footer .inner {
   width: 50%;
   margin: auto;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 footer h1 {
   font-size: 60px;

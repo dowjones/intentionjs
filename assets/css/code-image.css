@@ -36,7 +36,7 @@ html {
   position: relative;
 }
 #codeImage .inner pre {
-  white-space: pre;
+  white-space: pre-wrap;
 }
 #codeImage .inner pre h5 {
   font-size: 15px;
@@ -49,6 +49,7 @@ html {
 #codeImage #mobileCodeImage {
   float: right;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 #codeImage #rawCodeImage {
   width: 567px;
@@ -88,6 +89,7 @@ html {
 #mobileRed,
 #mobileBlue {
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 #standardRed,
 #standardGreen,
@@ -159,7 +161,7 @@ html {
   display: block;
 }
 #smallCode pre {
-  white-space: pre;
+  white-space: pre-wrap;
   color: #bac6cc;
   font-size: 14px;
   padding: 6px;
@@ -184,13 +186,14 @@ html {
   background-position: top, bottom, top left;
   background-color: #343636;
   background-size: 1px 20px, 1px 20px, 100% 100%;
-  white-space: pre;
+  white-space: pre-wrap;
 }
 #smallCode.tablet pre,
 #smallCode.pseudotablet pre {
   float: left;
   width: 50%;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 #smallCode.hdtv.pseudotablet,
 #smallCode.hdtv.pseudosmalltablet,

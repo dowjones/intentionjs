@@ -132,7 +132,6 @@
     // return the intention object so that it can be extended by other plugins
     return intent;
   };
-
   (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
       // AMD. Register as an anonymous module.
@@ -141,7 +140,5 @@
       // Browser globals
       root.intent = factory(root.jQuery, root.Intention);
     }
-  }(this, function ($, Intention) {
-    return context($, Intention);
-  }));
+  }(this, context));
 }).call(this);
