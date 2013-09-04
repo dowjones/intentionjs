@@ -57,7 +57,7 @@ html{
 		line-height:17px;
 		position:relative;
 		pre{
-			white-space:pre;
+			white-space:pre-wrap;
 			h5{
 				font-size:15px;
 				font-family:Helvetica, Arial, san-serif;
@@ -69,6 +69,7 @@ html{
 	#rawCodeImage, #standardCodeImage, #mobileCodeImage{
 		float:right;
 		box-sizing:border-box;
+		-moz-box-sizing:border-box;
 //		white-space:pre-wrap;
 	}
 	#rawCodeImage{
@@ -93,6 +94,7 @@ html{
 /* Backgrounds */
 #standardGreen, #standardBlue, #mobileRed, #mobileBlue {
 	box-sizing: border-box;
+	-moz-box-sizing:border-box;
 }
 #standardRed, #standardGreen, #standardBlue, #mobileRed, #mobileGreen, #mobileBlue{ //all of them
 	padding:1px 0 1px 25px;
@@ -140,7 +142,7 @@ html{
 	border-top:13px darken(@blue, 10%) solid;
 	display:block;
 	pre{
-		white-space:pre;
+		white-space:pre-wrap;
 		color:@text;
 		font-size:14px;
 		padding:6px;
@@ -165,7 +167,7 @@ html{
 		background-position:top, bottom, top left;
 		background-color:rgb(52, 54, 54);
 		background-size:1px 20px, 1px 20px, 100% 100%;
-		white-space:pre;
+		white-space:pre-wrap;
 	}
 }
 #smallCode.tablet, #smallCode.pseudotablet {
@@ -173,6 +175,7 @@ html{
 		float:left;
 		width:50%;
 		box-sizing:border-box;
+		-moz-box-sizing:border-box;
 	}
 }
 #smallCode.hdtv.pseudotablet, #smallCode.hdtv.pseudosmalltablet, #smallCode.hdtv.pseudomobile{

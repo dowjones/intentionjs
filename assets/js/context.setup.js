@@ -140,7 +140,5 @@
       // Browser globals
       root.intent = factory(root.jQuery, root.Intention);
     }
-  }(this, function ($, Intention) {
-    return context($, Intention);
-  }));
+  }(this, context));
 }).call(this);

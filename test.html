@@ -1,158 +1,70 @@
----
-layout: base
-title: something
----
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title></title>
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
+	<script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="assets/js/underscore.js" type="text/javascript"></script>	
+	<script src="assets/js/intention.js" type="text/javascript"></script>
+	<script>
+	(function() {
+		var intent = new Intention();
+		
+		
+		intent.on('widthid:', function() { console.log('okokok'); });
+		intent.on('mobile', function() { console.log('on mobile'); });
+		intent.on('widthid:mobile', function() { console.log('widthid:mobile'); });
+		
+		var width = intent.responsive({
+   		ID: 'widthid',
+   		contexts: [
+      		{name:'notmobile', val:800},
+      		{name:'mobile', val:500},
+      		{name:'bottom', val:0}
+      	],
+   		matcher: function(measure, ctx){
+      		return measure >= ctx.val;
+   		},
+   		measure: function(arg){
+      		return $(window).width();
+   		}
+   	});
+
+   	
+   	width.respond();
+   	
+   	$(window).on('resize', width.respond);
+   	
+   	$(function() {
+         	
+      	
+      	intent.elements(document);
+      });
+   	
+   	window.intent = intent; 
+	}).call(this);
+	</script>
 	
-	<style type="text/css">
-
-.squareAd, .wideAd{
-	width: 200px;
-	height: 200px;
-	float: left;
-	background-color: pink;
-}
-
-.Lcolumn{
-	width: 200px;
-	height: 200px;
-	float: left;
-	background-color: red;
-}
-
-.header {
-	width: 200px;
-	height: 200px;
-	float: left;
-	background-color: orange;
-}
-
-
-
-
-
+	<style>
+	   html, body, #container{
+	      width: 100%;
+	      height: 100%;
+	   }
+   	#container.notmobile{
+   	   background: yellowgreen;
+   	}
+   	#container.mobile{
+   	   background: indianred;
+   	}
 	</style>
 </head>
-
-
-
-<!--HEADER CONTENT-->
-
-
-				
-	<!--
-	<div class="background">
-			
-			
-			<div class="A"><div class="box1"><h2>PLEASE</h2></div></div>
+<body>
+	<div id="container" intent in-widthid: >
 		
-			<div class="B"><div class="box2">
-			
-			<!--<h1 intent
-			in-mobile-prepend="box1" 
-			in-tablet-prepend="box3" 
-			in-standard-prepend="box2" 
-			>
+	</div>
+</body>
+</html>
 
-			
-			<div intent in-base-class="box2"
-			in-base-prepend='B'
-			in-mobile-prepend='A'
-			in-tablet-prepend='A'>move </span></h1>
-
-			</div></div>
-			
-			
-
-
-			<div class="C">
-
-			<div intent 
-			in-base-class="box3"
-			in-mobile-before="box3"
-			in-tablet-after="box3"><h3>Around</h3></div>
-		
-			</div>
-			
-
-	</div>-->	
-
-
-<section class="colgroup">
-					<section class="col10wide column"
-					in
-					data-in-base-class="column" 
-					data-in-mobile-class="col3wide" 
-					data-in-tablet-class="col6wide" 
-					data-in-standard-class="col10wide" 
-					>
-						<div class="header">
-							<h2>
-								Header 
-							</h2>
-						</div>
-						<div id="tablet_ad"></div>
-					</section>
-				</section>
-	<section class="colgroup">
-					<section class="col6wide column" 
-					in
-					data-in-base-class="column"
-					data-in-mobile-class="col3wide" 
-					data-in-tablet-class="col3wide" 
-					data-in-standard-class="col6wide" 
-					>
-						<div  id="mobile_ad"></div>
-						<div class="Lcolumn">
-							<h2>
-								Left Column 
-							</h2>
-						</div>
-						<section class="" 
-						in
-						data-in-base-class=""
-						data-in-mobile-class="col3wide column" 
-						data-in-tablet-class="placeholder" 
-						data-in-standard-class="placeholder" 
-						>
-							<div id="mobile_mdm"></div>
-						</section>
-			
-						
-					</section>
-					<section class="col4wide column" 
-					in
-					data-in-base-class="column"
-					data-in-mobile-class="col3wide" 
-					data-in-tablet-class="col3wide" 
-					data-in-standard-class="col4wide" 
-					>
-						<div id="ad">
-							<div
-							in
-							data-in-base-append="#ad"
-							data-in-standard-append="#ad"
-							data-in-mobile-append="#mobile_ad"
-							data-in-tablet-append="#tablet_ad">
-								<div class="module blue" 
-								in
-								data-in-base-class="module blue"
-								data-in-mobile-class="slimAd" 
-								data-in-tablet-class="wideAd" 
-								data-in-standard-class="squareAd" 
-								>
-									<h2>
-										Right Column Ad 
-									</h2>
-								</div>
-							</div>
-						</div>
-					
-				
-					</section>
-				
-
-				
-				</section>
 

@@ -1,7 +1,7 @@
 <article class="equalize" data-pattern="2">
   <h2>About</h2>
   <section>
-    <p>Intention.js was developed by Joe Kendall at the Dow Jones Consumer Technology Group, with contributions from Erin Sparling, Adrian Lafond, and Mike Stamm. Major contributions to documentation and examples were provided by Tyler Paige, Camila Mercado and Paul Pangrazzi.</p>
+    <p>Intention.js was developed by Joe Kendall at the Dow Jones Consumer Technology Group, with contributions from Erin Sparling, Tyler Paige, Adrian Lafond, and Mike Stamm. Major contributions to documentation and examples were provided by Tyler Paige, Camila Mercado and Paul Pangrazzi.</p>
   </section>
   <article>
     <h3>Questions, Support</h3>

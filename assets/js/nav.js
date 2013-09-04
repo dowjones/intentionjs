@@ -38,6 +38,7 @@
       });
 
       this.menu.hover(function(){
+         
         self.applyState(self.open);
         self.menu.addClass('moving');
       },function(){
@@ -61,26 +62,31 @@
     }
 
     proto.makeState = function(type){
-
       var l = this.items.length,
           h = $(this.items[0]).outerHeight(),
-          self = this;
-
+          self = this,
+          int = .01; //animation delay interval
+      
       var states = {
-        open: function(i){
-          var top = h * i;
-          return {'top':top + "px"};
+         open: function(i){
+            var t = $(self.items).siblings('.scrollCover').index(), //find cover item
+                top = h * i;
+            if(i >= t){
+               var delay=0;
+            } else {
+               var delay = int*(t-i);
+            }
+            return {'top':top + "px", 'transition-delay':delay+'s'};   
         },
         close: function(i){
-          var t = self.cover;
           if(i <= t){
-            var top = h * (i - t);
+            var delay = int*(l-t-1);
           }
           else{
-            var top = h * (i + 1 - l);
+            var delay = int * (l-i-1);
           }
-          top = 0;
-          return {'top':top + "px"};
+          var t = self.cover;
+          return {'top':'0px', 'transition-delay':delay+'s'};
         }
       }
       
@@ -89,7 +95,6 @@
     };
 
     proto.applyState = function(shifter,target){
-
       this.items.each(function(i,elm){
         $(elm).css(shifter(i,target));
       });
