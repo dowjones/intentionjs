@@ -19,12 +19,14 @@
 	<header class="standard" intent
 		in-container:
 		in-width:>
-	  <h1><a href="#">intention.js</a></h1>
-	  <nav>
-	    <ul>
-	      {% include nav.md dir="./" cur="docs" %}
-	    </ul>
-	  </nav>
+		<div class="inner">
+   	  <h1><a href="#">intention.js</a></h1>
+   	  <nav>
+   	    <ul>
+   	      {% include nav.md dir="./" cur="docs" %}
+   	    </ul>
+   	  </nav>
+      </div>
 	</header>
 
 	{%include introSection.md %}
@@ -42,11 +44,12 @@
    	      </div>
    	  </nav>
       <div id="docs">
-            {% include pitchIntro.md %}
+            {%include pitchIntro.md %}
             {%include basics.md %}
             {%include usageIntro.md %}
             {%include daytimeConcept.md %}
             {%include manipulationIntro.md %}
+            {%include init.md %}
             {%include events.md %}
             {%include aboutIntro.md %}
 

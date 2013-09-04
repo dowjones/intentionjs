@@ -59,7 +59,11 @@
 	width:auto;
 	.halfMargin;
 	.halfPadding;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
 	box-sizing:border-box;
+	
+	
 }
 
 //--- HOME PAGE SPECIFIC STYLING --
@@ -102,7 +106,9 @@
 			position:relative;
 			a, a:visited{
    			padding:10px;
-   			box-sizing:border-box;
+   			-moz-box-sizing:border-box;
+         	-webkit-box-sizing:border-box;
+         	box-sizing:border-box;
    			display:block;
 			   background:@green;
 			   background:fadeout(@green, 15%);
@@ -119,7 +125,9 @@
 		margin:auto;
 		padding:@gutter;
 		section{
-			box-sizing:border-box;
+			-moz-box-sizing:border-box;
+      	-webkit-box-sizing:border-box;
+      	box-sizing:border-box;
 		}
 		section#buttons{
    		height:64px;
@@ -329,9 +337,9 @@ body > .try.standard, body > .try.hdtv {
       	   width:100%;
       	   height:inherit;
       		padding:0 10px;
-      		box-sizing:border-box;
       		-moz-box-sizing:border-box;
-      		-ms-box-sizing:border-box;
+         	-webkit-box-sizing:border-box;
+         	box-sizing:border-box;
       		position:absolute;
       		top:0;
       		background:@darkBlue;
@@ -344,11 +352,14 @@ body > .try.standard, body > .try.hdtv {
       		a{ display:block; }
       	}
       	li:hover{
-      		background:@blue;
+//      		background:@blue;
       	}
       	.cover{
-      		z-index:100 !important;
-      	}
+         	z-index:100 !important;
+         }
+         .scrollCover{
+            z-index:99 !important;
+         }
       }
       ul#subsections{
       	margin-left:@gutter;
@@ -371,9 +382,9 @@ body > .try.standard, body > .try.hdtv {
       		display:inline-block;
       		background:@darkBlue;
       		padding:0 10px;
-      		box-sizing:border-box;
       		-moz-box-sizing:border-box;
-      		-ms-box-sizing:border-box;
+         	-webkit-box-sizing:border-box;
+         	box-sizing:border-box;
       		line-height:40px;
       		line-height: 4.0rem;
       		text-align:center;
@@ -416,6 +427,8 @@ body > .try.standard, body > .try.hdtv {
 		width:100%;
 		padding:6px;
 		border: 1px double @lightBlueGray;
+		-moz-box-sizing:border-box;
+   	-webkit-box-sizing:border-box;
 		box-sizing:border-box;
 		background: darken(@mediumBlue, 5%);
 	}
@@ -455,7 +468,9 @@ body > .try.standard, body > .try.hdtv {
 	article{
 		padding:@gutter*1.5 0 @gutter 0;
 		h2{
-			box-sizing:border-box;
+			-moz-box-sizing:border-box;
+      	-webkit-box-sizing:border-box;
+      	box-sizing:border-box;
 			padding-right:50%;
 		}
 		h3{ clear:both; }
@@ -464,7 +479,9 @@ body > .try.standard, body > .try.hdtv {
 			width:50%; //2col setup
 			padding:@gutter 13px (@gutter+5) 0;
 			float:left;
-			box-sizing:border-box;
+			-moz-box-sizing:border-box;
+      	-webkit-box-sizing:border-box;
+      	box-sizing:border-box;
 		}
 		section:nth-of-type(2n){
 			padding:@gutter 0 @gutter 13px;
@@ -530,6 +547,13 @@ body > .try.standard, body > .try.hdtv {
 		section+section{
 			margin-top:@gutter;
 			padding-left:0;
+		}
+		//spacing stuff
+		h3+section, p+section{
+   		margin-top:20px;
+		}
+		h2+article{
+   		padding-top:20px;
 		}
 	}
 	article.special{
