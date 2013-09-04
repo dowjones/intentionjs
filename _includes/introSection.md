@@ -2,11 +2,11 @@
    <div class="inner clearFix">
       <section>
          <h2>Intention.js offers a light-weight and clear way to dynamically restructure HTML in a responsive manner.</h2>
-         <h3>Easily increase layout options and flexibility, reducing development time and lessening the necessity of media-query-driven stylesheet overrides.</h3>
+         <h3>Easily increase layout options and flexibility, reduce development time and lessen dependence on media-query-driven stylesheet overrides.</h3>
       </section>
       <section id="buttons" class="clearFix">
             <a id="bundle" href="intention-context.js.zip">Download the latest bundle<h5>intention.js + context.js</h5></a>
-            <a id="mini" href="intention.js">Build your own contexts<h5>intention.js v0.9.7.2</h5></a>
+            <a id="mini" href="intention.js">Build your own contexts<h5>intention.js v0.9.9</h5></a>
       </section>
    </div>
 </section>
