@@ -5,7 +5,11 @@
     <p>Giving Intention.js instructions is as easy as flagging the element as "intentional" and giving it an intentional attribute.</p>
 
    {% highlight html %}
-<div intent in-width:>
+<div intent in-width:></div>
+
+<img intent in-landscape-src="wide.png" />
+
+<nav intent in-touch-prepend="#content" />
    {% endhighlight %}
 
     <p><i>For the purposes of documentation, <code>in-</code> will be used instead of the proper HTML-valid <code>data-in-</code>.</i></p>

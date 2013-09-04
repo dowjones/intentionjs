@@ -14,6 +14,8 @@
   width: auto;
   margin: 0 10px 0 10px;
   padding: 0 10px 0 10px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 #all.pseudomobile,
@@ -70,6 +72,8 @@
 #splash .inner section#buttons a,
 #splash .inner section#buttons a:visited {
   padding: 10px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   display: block;
   background: #589358;
@@ -85,6 +89,8 @@
 }
 #splash.standard .inner section,
 #splash.hdtv .inner section {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 #splash.standard .inner section#buttons,
@@ -115,6 +121,8 @@
   width: auto;
   margin: 0 10px 0 10px;
   padding: 0 10px 0 10px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 20px;
 }
@@ -150,6 +158,8 @@
   width: auto;
   margin: 0 10px 0 10px;
   padding: 0 10px 0 10px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding-top: 20px;
   padding-bottom: 10px;
@@ -416,9 +426,9 @@ body > .try.hdtv #devices .cancel {
   width: 100%;
   height: inherit;
   padding: 0 10px;
-  box-sizing: border-box;
   -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
   position: absolute;
   top: 0;
   background: #0c262d;
@@ -433,13 +443,13 @@ body > .try.hdtv #devices .cancel {
 #content.docsLite #topNav ul#subsections li a {
   display: block;
 }
-#content.docsLite #topNav ul#sections li:hover,
-#content.docsLite #topNav ul#subsections li:hover {
-  background: #38748e;
-}
 #content.docsLite #topNav ul#sections .cover,
 #content.docsLite #topNav ul#subsections .cover {
   z-index: 100 !important;
+}
+#content.docsLite #topNav ul#sections .scrollCover,
+#content.docsLite #topNav ul#subsections .scrollCover {
+  z-index: 99 !important;
 }
 #content.docsLite #topNav ul#subsections {
   margin-left: 20px;
@@ -460,9 +470,9 @@ body > .try.hdtv #devices .cancel {
   display: inline-block;
   background: #0c262d;
   padding: 0 10px;
-  box-sizing: border-box;
   -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
   line-height: 40px;
   line-height: 4.0rem;
   text-align: center;
@@ -505,6 +515,8 @@ body > .try.hdtv #devices .cancel {
   width: 100%;
   padding: 6px;
   border: 1px double #d7dcdb;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   background: #182c33;
 }
@@ -545,6 +557,8 @@ body > .try.hdtv #devices .cancel {
 }
 #content.docsLite.standard article h2,
 #content.hdtv article h2 {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding-right: 50%;
 }
@@ -561,6 +575,8 @@ body > .try.hdtv #devices .cancel {
   width: 50%;
   padding: 20px 13px 25px 0;
   float: left;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 #content.docsLite.standard article section:nth-of-type(2n),
@@ -681,6 +697,37 @@ body > .try.hdtv #devices .cancel {
 #content.docsLite.hdtv.pseudomobile article section + section {
   margin-top: 20px;
   padding-left: 0;
+}
+#content.docsLite.tablet article h3 + section,
+#content.docsLite.smalltablet article h3 + section,
+#content.docsLite.mobile article h3 + section,
+#content.docsLite.standard.pseudotablet article h3 + section,
+#content.docsLite.standard.pseudosmalltablet article h3 + section,
+#content.docsLite.standard.pseudomobile article h3 + section,
+#content.docsLite.hdtv.pseudotablet article h3 + section,
+#content.docsLite.hdtv.pseudosmalltablet article h3 + section,
+#content.docsLite.hdtv.pseudomobile article h3 + section,
+#content.docsLite.tablet article p + section,
+#content.docsLite.smalltablet article p + section,
+#content.docsLite.mobile article p + section,
+#content.docsLite.standard.pseudotablet article p + section,
+#content.docsLite.standard.pseudosmalltablet article p + section,
+#content.docsLite.standard.pseudomobile article p + section,
+#content.docsLite.hdtv.pseudotablet article p + section,
+#content.docsLite.hdtv.pseudosmalltablet article p + section,
+#content.docsLite.hdtv.pseudomobile article p + section {
+  margin-top: 20px;
+}
+#content.docsLite.tablet article h2 + article,
+#content.docsLite.smalltablet article h2 + article,
+#content.docsLite.mobile article h2 + article,
+#content.docsLite.standard.pseudotablet article h2 + article,
+#content.docsLite.standard.pseudosmalltablet article h2 + article,
+#content.docsLite.standard.pseudomobile article h2 + article,
+#content.docsLite.hdtv.pseudotablet article h2 + article,
+#content.docsLite.hdtv.pseudosmalltablet article h2 + article,
+#content.docsLite.hdtv.pseudomobile article h2 + article {
+  padding-top: 20px;
 }
 #content.docsLite.tablet article.special,
 #content.docsLite.smalltablet article.special,

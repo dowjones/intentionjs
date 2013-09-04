@@ -199,14 +199,14 @@ $(window)
    })
    .on('resize', throttle(manageScrollDepth, 100));
  
-$('.jump').add('#stickBrand').click(function() {
+$('.jump').click(function() {
    $('html, body').animate({ scrollTop: $('#content').offset().top+15}, 1000);
 });
+$('#stickBrand').click(function() { $('html, body').animate({ scrollTop: 0}, 1000) });
 
 $('#prevnext li').click(function() {
-   console.log('clicked, old curPos', curPos);
-   if( ($(this).attr('id') == 'next') && (curPos < articlect) ){ console.log('moving up'); curPos++; }
-   else if(($(this).attr('id') == 'prev') && (curPos > 1)){ console.log('decrementing'); curPos--; }
+   if( ($(this).attr('id') == 'next') && (curPos < articlect) ){ curPos++; }
+   else if(($(this).attr('id') == 'prev') && (curPos > 1)){ curPos--; }
    else { return false }
    console.log('new curPos:', curPos);
    var target = $('#t'+curPos).offset().top - 49; //minus 49 to make sure the nav won't cover it
@@ -214,7 +214,8 @@ $('#prevnext li').click(function() {
    return false;
 });
 if (intent.is('touch')) { 
-   $('ul#sections li a').click(function() {
+   $('ul#sections li a').on('tap', function() {
+      console.log('tapped');
       var target = $($(this).attr('ref')).offset().top;
       $('html, body').animate({ scrollTop: target}, 1000);
    });
@@ -224,7 +225,10 @@ if (intent.is('touch')) {
       .children('li').children('a')
       .click(function() {
          var target = $($(this).attr('ref')).offset().top - 49;
-         $('html, body').animate({ scrollTop: target}, 1000);
+         $(this).addClass('cover'); //cover EVERYTHING
+         $('html, body').animate({ scrollTop: target}, 1000, function(){
+            $('ul#sections').removeClass('scrolling').children('.cover').removeClass('cover');
+         });
    });
 }
 
@@ -232,9 +236,9 @@ intent
    .on('titleDepth:', function() {
       curPos = intent.axes.titleDepth.current.slice(1);
       $('ul#sections')
-         .children('.cover').removeClass('cover')
+         .children('.scrollCover').removeClass('scrollCover')
          .end() //in case no .cover is found
-         .children('li:nth-of-type('+curPos+')').addClass('cover');
+         .children('li:nth-of-type('+curPos+')').addClass('scrollCover');
    })
    .on('sticknav', function(){
       //add padding so stickiness is applied without a jump
