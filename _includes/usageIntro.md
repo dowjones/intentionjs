@@ -26,9 +26,6 @@
   </section>
   <section>
     <h3>Intention Markup</h3>
-    <p>Although the details of the syntax depends on the manipulation used, the general 
-    
-    <p>&nbsp;</p>
     {% highlight html %}
 <header>
    <img src="logo.png" intent

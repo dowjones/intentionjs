@@ -2,8 +2,8 @@
    <h2 alt="The Basics">Let's start with the basics, though.</h2>
   <section>
     <h3 alt="Axes & Contexts">Thresholds, Axes, &amp; Contexts</h3>
-    <p>Intention.js works by determining what are called “threshold groups”. These threshold groups define the context in which a user is viewing your site. Threshold groups work by measuring an axis, like the browser’s width or the device’s pixel density (for high resolution screens). Measurements are matched against breakpoints, and when the measurement matches a threshold the corresponding context will pass true.</p>
-    <p>A lot of these axes and contexts are predictable, and a common pattern of them are included in a handy implementation of intention.js called context.js</p>
+    <p>Intention.js works by determining what are called “threshold groups”. These threshold groups define  the context in which a user is viewing your site. Threshold groups work by measuring an axis, like the browser’s width or the device’s pixel density (for high resolution screens).</p>
+    <p>A lot of these contexts are predictable, and some common patterns are included in a handy implementation of intention.js called context.js</p>
     <pre><span class="comment"><i>Axis</i></span>
    - <i>context_name, value</i></span>
 
@@ -23,13 +23,6 @@ highres <span class="comment">(devicePixelRatio > 1)</span>
 <section>
   <h3 alt="Manipulations">Manipulations via HTML Attributes</h3>
   <p>Intention.js has three basic manipulations: attribution manipulations, class manipulations, and placement manipulations. With these three, you can change the value of any attribute, add or remove an element’s class, and adjust the position of an element within the structure of the document. </p>
-  
-  <p>All manipulations in intention.js are controlled by HTML attributes and are meant to read like real language.</p>
-{%highlight html%}
-<section intent in-mobile-prepend="#content"> 
-↓
-<!-- "in mobile contexts, prepend the section to #content" -->
-{%endhighlight%}
 </section>
 
 </article>

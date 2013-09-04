@@ -24,14 +24,14 @@
       {%highlight html%}
 <div class="foo" intent in-width: />
       {%endhighlight%}
-      <p>will keep it's class <code>foo</code> regardless of what <code>horizontal_axis</code> context is passed.</p>
+      <p>will keep its class <code>foo</code> regardless of what <code>horizontal_axis</code> context is passed.</p>
     </section>
   </article>
 
   <article class="equalize" data-pattern="2">
     <h3>Attribute Manipulation</h3>
     <section>
-      <p>Intention.js can also manipulate an element's attributes with more specificity than just class manipulations. Set a base (default) attribute in case no contexts are met, then specify context-specific attribute values.</p>
+      <p>Intention.js can also manipulate an element's attributes with more specificity than can be achieved via class manipulations. To start, set a base (default) attribute in case no contexts are met, then specify context-specific attribute values.</p>
     </section>
     <section>
        {%highlight html%}
@@ -72,7 +72,7 @@
   <article class="equalize" data-pattern="2">
     <h3>Placement Manipulation</h3>
     <section>
-      <p>Intention.js makes it possible to rearrange elements about a page depending on the context. </p>
+      <p>Intention.js can rearrange elements within a page layout based on the context. </p>
       <p>Suppose we want to demote the status of the navigation when the user is on smaller devices. The following specification on the navigation might do what we need:</p>
       {%highlight html%}
 <header>
@@ -86,7 +86,7 @@
 </header>
       {%endhighlight%}
 
-      <p>When the device is 320px wide or less, the navigation will at the top of the footer. When the device is between 321px and 768px wide, it will appear right below the <code>section</code>. Obviously, in larger displays (wider than 769px) the navigation at the end of the <code>header</code>.</p>
+      <p>When the device is 320px wide or less, the navigation will sit at the top of the footer. When the device is between 321px and 768px wide, it will appear right below the <code>section</code>. Obviously, on larger displays (wider than 769px) the navigation will be at the end of the <code>header</code>.</p>
       <p> </p>
       <h3>Move functions</h3>
       <p>Intention.js provides four basic functions for rearranging elements. They include:</p>

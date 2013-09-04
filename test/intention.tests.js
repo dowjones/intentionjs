@@ -339,6 +339,7 @@ in the contexts list', function(){
              });
 
              it('should match when many funcs are specified', function(){
+
                var intent= new Intention,
                elm = $('<div>')
                  .attr({'in-mobile-class':'foo',
@@ -346,7 +347,12 @@ in the contexts list', function(){
                         'in-standard-class':'baz',
                         'in-mobile-append':'#foo',
                         'in-standard-href':'http://baz.baz',
-                        'in-width:standard-title': 'qux'
+                        'in-width:standard-title': 'qux',
+                        'data-in-width:standard-all': 'all',
+                        'title': 'ignore',
+                        'data-ignore':'ignore',
+                        'data-something-else': 'another thing to ignore',
+                        'data-in-standard-foo':'me too'
                        });
 
                expect(intent._fillSpec(intent._attrsToSpec(elm[0].attributes, mockAxes)))
@@ -356,19 +362,25 @@ in the contexts list', function(){
                        'class':'foo',
                        append:'#foo',
                        href:'',
-                       title:''
+                       title:'',
+                       all:'',
+                       foo:''
                      },
                      tablet:{
                        'class':'bar',
                        append:'',
                        href:'',
-                       title:''
+                       title:'',
+                       all:'',
+                       foo:''
                      },
                      standard:{
                        'class':'baz',
                        href:'http://baz.baz',
                        append:'',
-                       title:'qux'
+                       title:'qux',
+                       all:'all',
+                       foo:'me too'
                      }
                    }
                  });
