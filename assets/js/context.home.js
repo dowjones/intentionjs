@@ -1,3 +1,5 @@
+//Additional axes and event listeners specific to the homepage
+
 function throttle(callback, interval){
    var lastExec = new Date(),
      timer = null;
@@ -112,25 +114,42 @@ time.respond();
 $('#devices').children().click(function(){
    var device = $(this).attr('id');
    if(device == intent.axes.container.current) {
+      $(this).removeClass('toggleOrientation').toggleClass('landscape');
       $('#all').css({
          'width':$('#all').height() + 'px',
          'height':$('#all').width() + 'px'
       });
    } else if(device === undefined) {
       //save percent scrolled
-      var percent = $('#all').scrollTop() / $('#heightWrapper').height();
+      var percent = $('#all').scrollTop() / $('#scrollWrapper').height();
       //lowest common denominator for contexts that have access to device emulation
       intent.axes.container.respond('pseudostandard');
       //remove inline styles created by toggleOrientation
       $('#all').css({'width':'', 'height':'' });
-      var docHeight = $('#heightWrapper').height();
+      var docHeight = $('#scrollWrapper').height();
       $(window).scrollTop((percent*docHeight) - 100);
    } else {
+      $(this).siblings('.landscape').toggleClass('landscape');
+      if(intent.axes.container.current == 'pseudostandard' || intent.axes.container.current == undefined){
+         $('html, body').scrollTop(0);
+      }
       intent.axes.container.respond(device);
       $('#all')
          .css({'width':'', 'height': ''});
    }
-});
+}).hover(
+   function(){
+      if($(this).attr('id') == intent.axes.container.current) {
+         $(this).addClass('toggleOrientation');
+      }
+   },
+   function(){
+      if($(this).attr('id') == intent.axes.container.current) {
+         $(this).removeClass('toggleOrientation');
+      }
+   }
+);
+
 //For docs nav
 var titleCtx = [{'name':'t0', 'val':0}],
 curPos,

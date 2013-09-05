@@ -122,9 +122,9 @@
   <div class="inner">
     <h2>Try it!</h2>
     <div id="devices">
-      <div id="pseudomobile" intent in-pseudomobile-class="toggleOrientation" in-base-class="null"></div>
-      <div id="pseudosmalltablet" intent in-pseudosmalltablet-class="toggleOrientation"  in-base-class="null"></div>
-      <div id="pseudotablet" intent in-pseudotablet-class="toggleOrientation"  in-base-class="null"></div>
+      <div id="pseudomobile"></div>
+      <div id="pseudosmalltablet"></div>
+      <div id="pseudotablet"></div>
       <div id="pseudohdtv"></div>
       <div class="cancel"></div>
     </div>
