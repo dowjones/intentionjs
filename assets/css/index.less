@@ -69,6 +69,13 @@
 //--- HOME PAGE SPECIFIC STYLING --
 
 // Resizing #all
+#all{
+   -webkit-transition: width .25s ease-in-out, height .25s ease-in-out;
+   -moz-transition: width .25s ease-in-out, height .25s ease-in-out;
+   -o-transition: width .25s ease-in-out, height .25s ease-in-out;
+   -ms-transition: width .25s ease-in-out, height .25s ease-in-out;
+   transition: width .25s ease-in-out, height .25s ease-in-out;
+}
 #all.pseudomobile, #all.pseudosmalltablet, #all.pseudotablet{
 	margin:auto;
 	overflow:auto;
@@ -249,7 +256,7 @@ body > .try.standard, body > .try.hdtv {
 	background: @mediumBlue url('../../images/docubg.png') repeat-x top;
 	color: @lightYellow;
 	position:fixed;
-	z-index:20;
+	z-index:101; //has to be bigger than the navdeck's z-index
 	.inner{
 		background:transparent;
 		margin:0;
@@ -272,15 +279,29 @@ body > .try.standard, body > .try.hdtv {
 			background:url('../../images/devices-dark.svg') no-repeat;
 			background-size:148px 37px;
 			cursor:pointer;
+			.transitions(.5s);
+			-ms-transform:rotate(0deg);
+			-webkit-transform:rotate(0deg);
+			-moz-transform:rotate(0deg);
+			-o-transform:rotate(0deg);
+			transform:rotate(0deg);
 		}
 		div+div{
 			margin-left:8px;
 		}
-		.toggleOrientation:hover{
-			.transitions(.5s);
-			transform:rotate(-90deg);
+		.toggleOrientation, .landscape{
 			-ms-transform:rotate(-90deg); /* IE 9 */
 			-webkit-transform:rotate(-90deg); /* Safari and Chrome */
+			-moz-transform:rotate(-90deg);
+			-o-transform:rotate(-90deg);
+			transform:rotate(-90deg);
+		}
+		.landscape.toggleOrientation{
+   		-ms-transform:rotate(0deg); /* IE 9 */
+   		-webkit-transform:rotate(0deg); /* Safari and Chrome */
+   		-moz-transform:rotate(0deg);
+   		-o-transform:rotate(0deg);
+   		transform:rotate(0deg);
 		}
 		#pseudomobile{ width:12px; background-position:0px; }
 		#pseudosmalltablet{ width:21px; background-position:-13px 0px; }
@@ -346,6 +367,7 @@ body > .try.standard, body > .try.hdtv {
       		-webkit-transition: top 300ms;
       		-moz-transition: top 300ms;
       		-o-transition: top 300ms;
+      		-ms-transition: top 300ms;
       		transition: top 300ms;
       		font-size:17px;
       		font-size: 1.7rem;
@@ -434,9 +456,9 @@ body > .try.standard, body > .try.hdtv {
 	}
 	article{
 		padding-top:@gutter*1.5;
-		li{
-		   margin-left:@gutter/2;
-		   padding-left:@gutter/2;
+		ol, ul{
+		   margin:10px 0 10px 16px;
+		   list-style:disc;
 		}
 	}
 	article.special{
@@ -457,14 +479,17 @@ body > .try.standard, body > .try.hdtv {
 		border-top:1px dashed @blue;
 	}
 }
-#content.docsLite.standard article:not(.thirds)>section:nth-of-type(3n):last-of-type,
-#content.docsLite.hdtv article:not(.thirds)>section:nth-of-type(3n):last-of-type,
+#content.docsLite.standard article:not(.thirds)>section:nth-of-type(2n+1):last-of-type,
+#content.docsLite.hdtv article:not(.thirds)>section:nth-of-type(2n+1):last-of-type,
 #content.docsLite.standard article>section:nth-of-type(1):last-of-type,
 #content.docsLite.hdtv article>section:nth-of-type(1):last-of-type{
 	width:100%;
 	clear:both;
 }
 #content.docsLite.standard, #content.hdtv{
+   article:first-of-type{
+   	padding-top:27px;
+   }
 	article{
 		padding:@gutter*1.5 0 @gutter 0;
 		h2{
@@ -495,6 +520,9 @@ body > .try.standard, body > .try.hdtv {
 			padding:30px 0 20px 0; //don't indent articles within articles
 			width:auto;
 		}
+		h2+article{
+   		padding-top:0px; //don't pad if there's nothing between the main article title and the subarticle
+		}
 	}
 	article.special{
 		width:100%;
@@ -504,9 +532,6 @@ body > .try.standard, body > .try.hdtv {
 			padding:0;
 			margin:auto;
 		}
-	}
-	article:first-of-type{
-		padding-top:27px;
 	}
 	div.thirds{
 		width:100%;
@@ -528,6 +553,13 @@ body > .try.standard, body > .try.hdtv {
 		}
 	}
 	div.thirds:nth-of-type(2n){ padding:0; }
+	
+	//spacing stuff
+	article{
+   	h2+h3, h3+h4{
+      	margin-top:20px;
+   	}
+	}
 }
 #content.docsLite.tablet, #content.docsLite.smalltablet, #content.docsLite.mobile,
 #content.docsLite.standard.pseudotablet, #content.docsLite.standard.pseudosmalltablet, #content.docsLite.standard.pseudomobile,
@@ -549,6 +581,7 @@ body > .try.standard, body > .try.hdtv {
 			padding-left:0;
 		}
 		//spacing stuff
+		h2+h3,h3+h4,
 		h3+section, p+section{
    		margin-top:20px;
 		}
