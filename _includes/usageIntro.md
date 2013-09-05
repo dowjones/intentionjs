@@ -1,18 +1,33 @@
 <article class="equalize" data-pattern="2">
   <h2>Usage</h2>
+  <h3>Basic Syntax</h3>
   <section>
-      <h3>Basic Syntax</h3>
     <p>Giving Intention.js instructions is as easy as flagging the element as "intentional" and giving it an intentional attribute.</p>
-
-   {% highlight html %}
+    <br/>Intentional attributes can be specific to:
+    <ul>
+       <li>A change in contexts within an axis</li>
+       <li>A specific context passing true</li>
+       <li>A specific context within a specific axis passing true</li>
+    </ul>
+    <p><i>For the purposes of documentation, <code>in-</code> will be used instead of the proper HTML-valid <code>data-in-</code>.</i></p>
+  </section>
+  <section>
+{% highlight html %}
+<elm attr="val"
+   intent
+   in-axisID:
+   in-axisID:contextName-attr="val"
+   in-contextName-attr="val">
+</elm>
+{% endhighlight %}
+{%highlight html%}
 <div intent in-width:></div>
 
-<img intent in-landscape-src="wide.png" />
+<img intent
+   in-orientation:landscape-src="wide.png" />
 
 <nav intent in-touch-prepend="#content" />
-   {% endhighlight %}
-
-    <p><i>For the purposes of documentation, <code>in-</code> will be used instead of the proper HTML-valid <code>data-in-</code>.</i></p>
+{%endhighlight%}
   </section>
   <section>
     <h3>Dependencies</h3>
@@ -23,6 +38,12 @@
    src="assets/js/require/require.js">
 </script>
    {% endhighlight %}
+  </section>
+  <section>
+     <h3>Compatibility</h3>
+     <p>Intention.js is tested to work on all modern browsers, including Internet Explorer back to IE8! Woo-hoo!
+     <br/>
+     <br/><u>Note:</u> jQuery 2.x dropped support for IE8, so obviously using it in conjunction with Intention will not work in IE8. If you don't care about that, rest assured there is nothing Intention needs in jQuery 1.x that isn't available in jQuery 2.x. </p>
   </section>
   <section>
     <h3>Intention Markup</h3>
@@ -135,12 +156,4 @@
       {% endhighlight %}
     </section>
   </div>
-  <article>
-    <h3>Compatibility</h3>
-    <section>
-       <p>Intention.js is tested to work on all modern browsers, including Internet Explorer back to IE8! Woo-hoo!
-       <br/>
-       <br/><u>Note:</u> jQuery 2.x dropped support for IE8, so obviously using it in conjunction with Intention will not work in IE8. If you don't care about that, rest assured there is nothing Intention needs in jQuery 1.x that isn't available in jQuery 2.x. </p>
-    </section>
-  </article>
 </article>
