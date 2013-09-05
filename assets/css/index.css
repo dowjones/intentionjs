@@ -18,6 +18,13 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+#all {
+  -webkit-transition: width 0.25s ease-in-out, height 0.25s ease-in-out;
+  -moz-transition: width 0.25s ease-in-out, height 0.25s ease-in-out;
+  -o-transition: width 0.25s ease-in-out, height 0.25s ease-in-out;
+  -ms-transition: width 0.25s ease-in-out, height 0.25s ease-in-out;
+  transition: width 0.25s ease-in-out, height 0.25s ease-in-out;
+}
 #all.pseudomobile,
 #all.pseudosmalltablet,
 #all.pseudotablet {
@@ -292,7 +299,7 @@ body > .try.hdtv {
   background: #203b44 url('../../images/docubg.png') repeat-x top;
   color: #f9efd4;
   position: fixed;
-  z-index: 20;
+  z-index: 101;
 }
 body > .try.standard .inner,
 body > .try.hdtv .inner {
@@ -324,25 +331,46 @@ body > .try.hdtv #devices div {
   background: url('../../images/devices-dark.svg') no-repeat;
   background-size: 148px 37px;
   cursor: pointer;
-}
-body > .try.standard #devices div + div,
-body > .try.hdtv #devices div + div {
-  margin-left: 8px;
-}
-body > .try.standard #devices .toggleOrientation:hover,
-body > .try.hdtv #devices .toggleOrientation:hover {
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
   -ms-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
-  transform: rotate(-90deg);
+  -ms-transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+body > .try.standard #devices div + div,
+body > .try.hdtv #devices div + div {
+  margin-left: 8px;
+}
+body > .try.standard #devices .toggleOrientation,
+body > .try.hdtv #devices .toggleOrientation,
+body > .try.standard #devices .landscape,
+body > .try.hdtv #devices .landscape {
   -ms-transform: rotate(-90deg);
   /* IE 9 */
 
   -webkit-transform: rotate(-90deg);
   /* Safari and Chrome */
 
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+body > .try.standard #devices .landscape.toggleOrientation,
+body > .try.hdtv #devices .landscape.toggleOrientation {
+  -ms-transform: rotate(0deg);
+  /* IE 9 */
+
+  -webkit-transform: rotate(0deg);
+  /* Safari and Chrome */
+
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 body > .try.standard #devices #pseudomobile,
 body > .try.hdtv #devices #pseudomobile {
@@ -435,6 +463,7 @@ body > .try.hdtv #devices .cancel {
   -webkit-transition: top 300ms;
   -moz-transition: top 300ms;
   -o-transition: top 300ms;
+  -ms-transition: top 300ms;
   transition: top 300ms;
   font-size: 17px;
   font-size: 1.7rem;
@@ -523,9 +552,10 @@ body > .try.hdtv #devices .cancel {
 #content.docsLite article {
   padding-top: 30px;
 }
-#content.docsLite article li {
-  margin-left: 10px;
-  padding-left: 10px;
+#content.docsLite article ol,
+#content.docsLite article ul {
+  margin: 10px 0 10px 16px;
+  list-style: disc;
 }
 #content.docsLite article.special {
   background: #0c262d;
@@ -544,12 +574,16 @@ body > .try.hdtv #devices .cancel {
 #content.docsLite article:not(.special) + article:not(.special) {
   border-top: 1px dashed #38748e;
 }
-#content.docsLite.standard article:not(.thirds) > section:nth-of-type(3n):last-of-type,
-#content.docsLite.hdtv article:not(.thirds) > section:nth-of-type(3n):last-of-type,
+#content.docsLite.standard article:not(.thirds) > section:nth-of-type(2n+1):last-of-type,
+#content.docsLite.hdtv article:not(.thirds) > section:nth-of-type(2n+1):last-of-type,
 #content.docsLite.standard article > section:nth-of-type(1):last-of-type,
 #content.docsLite.hdtv article > section:nth-of-type(1):last-of-type {
   width: 100%;
   clear: both;
+}
+#content.docsLite.standard article:first-of-type,
+#content.hdtv article:first-of-type {
+  padding-top: 27px;
 }
 #content.docsLite.standard article,
 #content.hdtv article {
@@ -594,6 +628,10 @@ body > .try.hdtv #devices .cancel {
   padding: 30px 0 20px 0;
   width: auto;
 }
+#content.docsLite.standard article h2 + article,
+#content.hdtv article h2 + article {
+  padding-top: 0px;
+}
 #content.docsLite.standard article.special,
 #content.hdtv article.special {
   width: 100%;
@@ -604,10 +642,6 @@ body > .try.hdtv #devices .cancel {
   width: 780px;
   padding: 0;
   margin: auto;
-}
-#content.docsLite.standard article:first-of-type,
-#content.hdtv article:first-of-type {
-  padding-top: 27px;
 }
 #content.docsLite.standard div.thirds,
 #content.hdtv div.thirds {
@@ -638,6 +672,12 @@ body > .try.hdtv #devices .cancel {
 #content.docsLite.standard div.thirds:nth-of-type(2n),
 #content.hdtv div.thirds:nth-of-type(2n) {
   padding: 0;
+}
+#content.docsLite.standard article h2 + h3,
+#content.hdtv article h2 + h3,
+#content.docsLite.standard article h3 + h4,
+#content.hdtv article h3 + h4 {
+  margin-top: 20px;
 }
 #content.docsLite.tablet article,
 #content.docsLite.smalltablet article,
@@ -698,6 +738,24 @@ body > .try.hdtv #devices .cancel {
   margin-top: 20px;
   padding-left: 0;
 }
+#content.docsLite.tablet article h2 + h3,
+#content.docsLite.smalltablet article h2 + h3,
+#content.docsLite.mobile article h2 + h3,
+#content.docsLite.standard.pseudotablet article h2 + h3,
+#content.docsLite.standard.pseudosmalltablet article h2 + h3,
+#content.docsLite.standard.pseudomobile article h2 + h3,
+#content.docsLite.hdtv.pseudotablet article h2 + h3,
+#content.docsLite.hdtv.pseudosmalltablet article h2 + h3,
+#content.docsLite.hdtv.pseudomobile article h2 + h3,
+#content.docsLite.tablet article h3 + h4,
+#content.docsLite.smalltablet article h3 + h4,
+#content.docsLite.mobile article h3 + h4,
+#content.docsLite.standard.pseudotablet article h3 + h4,
+#content.docsLite.standard.pseudosmalltablet article h3 + h4,
+#content.docsLite.standard.pseudomobile article h3 + h4,
+#content.docsLite.hdtv.pseudotablet article h3 + h4,
+#content.docsLite.hdtv.pseudosmalltablet article h3 + h4,
+#content.docsLite.hdtv.pseudomobile article h3 + h4,
 #content.docsLite.tablet article h3 + section,
 #content.docsLite.smalltablet article h3 + section,
 #content.docsLite.mobile article h3 + section,
