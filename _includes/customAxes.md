@@ -3,7 +3,7 @@
    <p>One of intention.js's most exciting features is its scalability: you can use it to respond to almost anything! Any type of data that is quantifiable can be used to manipulate the page. Of course context.js comes with the most common patterns of responsive design, but let's take a look at how to create our own.</p>
    <h3>Markup</h3>
    <section>
-      <p>Each axis is made up of four basic properties: the axis ID (optional), the measure function, the context group, and the matcher function. As we know, an axis is a measurable object or set of information. This axis is optionally given an ID so it can be used in specific manipulations. A measure function finds the current measurement of that axis, and the matcher function finds where that measurement lies in a set of thresholds and breakpoints called contexts. Contexts are defined in an ordered array and help dictate how the DOM should be manipulated.</p>
+      <p>Each axis is made up of four basic properties: the axis ID (optional), the context group, the matcher function, and the measure function,. As we know, an axis is a measurable object or set of information. This axis is optionally given an ID so it can be used in specific manipulations. A measure function finds the current measurement of that axis, and the matcher function finds where that measurement lies in a set of thresholds and breakpoints called contexts. Contexts are defined in an ordered array and help dictate when the DOM should be manipulated.</p>
    </section>
    <section>
 {%highlight js%}
