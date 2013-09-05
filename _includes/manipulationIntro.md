@@ -99,7 +99,7 @@
 
       <p>These function just like jQuery DOM manipulations.</p>
       {%highlight html%}
-intent in-context_name-move_function="selector"
+intent in-ctxName-moveFx="selector"
       {%endhighlight%}
 
       <p>Selectors can be general element selections like above (<code>...prepend="footer"</code>), or specific (<code>...prepend="#intro"</code>).</p>
@@ -123,6 +123,25 @@ intent in-context_name-move_function="selector"
         </div>
       </div>
 
+   {% highlight javascript %}
+var mini = intent.responsive({
+   ID: 'mini',
+   contexts: [
+      {name:"large",min:300},
+      {name:"avg",min:75}
+   ],
+   matcher: function(test, context) {
+      return test >= context.min;
+   },
+   measure:function(arg) {
+      return $("#resizable").width();
+   }
+});
+mini.respond();
+//'resize' is a jQueryUI event
+$('#resizable')
+   .on('resize', mini.respond);
+      {% endhighlight %}
       {% highlight html %}
 <div id="resizable">
    <div class="orange" intent in-mini:>
@@ -146,25 +165,6 @@ intent in-context_name-move_function="selector"
    </div>
 </div>
    {% endhighlight %}
-   {% highlight javascript %}
-var mini = intent.responsive({
-   ID: 'mini',
-   contexts: [
-      {name:"large",min:300},
-      {name:"avg",min:75}
-   ],
-   matcher: function(test, context) {
-      return test >= context.min;
-   },
-   measure:function(arg) {
-      return $("#resizable").width();
-   }
-});
-mini.respond();
-//'resize' is a jQueryUI event
-$('#resizable')
-   .on('resize', mini.respond);
-      {% endhighlight %}
     </section>
   </article>
 
