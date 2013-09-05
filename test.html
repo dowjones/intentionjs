@@ -30,7 +30,8 @@
    		measure: function(arg){
       		return $(window).width();
    		}
-   	}).respond();
+   	});
+
    	
    	$(function() {
          	
@@ -40,6 +41,9 @@
    	
    	window.intent = intent; 
 	}).call(this);
+	</script>
+	<script type="text/javascript">
+   	intent.axes.widthid.respond();
 	</script>
 	
 	<style>

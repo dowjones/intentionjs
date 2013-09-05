@@ -44,21 +44,6 @@ window.intent = intent;
    <hr/>
    
    <article class="equalize" data-pattern="2">
-      <h3>Let's actually make a custom axis</h3>
-      <section>
-         <p>For demonstration, we will construct an axis that measures how often a visitor has been to our site.</p>
-         <p>To do that, we'll need to do a little set up. We need to keep track of those visits somehow, so we'll keep a counter in the visitor's localstorage as a property <code>visits</code>. If that property doesn't yet exist in localstorage, we'll assume this is their first visit. In that case, we'll set the counter to 1. On every subsequent visit, this value will be incremented by 1.</p>
-      </section>
-      <section>
-{%highlight js%}
-if(!window.localStorage.getItem('visits')){
-   window.localStorage.setItem('visits', 1);
-}
-
-var visits = parseInt(window.localStorage.getItem('visits'), 10) + 1;
-window.localStorage.setItem('visits', visits);
-{%endhighlight%}
-      </section>
       <h3>Contexts</h3>
       <section>
          <p>To work with whatever data we measure, we need to set up contexts that will act as thresholds. The <code>contexts</code> property is an ordered array of objects. Each context object represents a range of data. If a measurement falls in that range of data, the corresponding context passes true. Then that context is set as the current context.</p>
@@ -83,23 +68,6 @@ var axis = intent.responsive({
 });
 {%endhighlight%}
       </section>
-      <section>
-         <p>To make an axis measuring how many times a visitor has been to our page, we have to make some correlations between number of visits (the measurement) and the visitor's assumed character (the context).</p>
-         <p>In this example, we'll say that a minimum of 25 visits would qualify a visitor as a "frequenter", while less than 10 visits would qualify a "new" visitor. We order our contexts in descending value order, and construct them with minimum values.</p>
-      </section>
-      <section>
-{%highlight js%}
-var visit_axis = intent.responsive({
-// ...
-   contexts: [
-      {name:'frequenter', min:25},
-      {name:'casual', min:10},
-      {name:'new', min:0}
-   ],
-// ...
-});
-{%endhighlight%}
-      </section>
    </article>
    
    <article class="equalize" data-pattern="2">
@@ -117,28 +85,13 @@ measure: function(){
 });
 {%endhighlight%}
       </section>
-      <section>
-         <p>For our page view tracker, we obviously want to measure how many times the visitor has been to our page. For this axis <code>visit_axis</code> measure function, we want to grab the current value of the counter we saved in their local storage. We want to eventually compare this number against other numerical breakpoints, so its type needs to be an actual number. We need to parse it into an integer.</p>
-      </section>
-      <section>
-{%highlight js%}
-var visit_axis = intent.responsive({
-// ...
-measure: function() {
-   var count = window.localStorage.getItem('visits');
-   return parseInt(count);
-}
-});
-{%endhighlight%}
-      </section>
    </article>
    
    <article class="equalize" data-pattern="2">
       <h3>Matcher Function</h3>
       <section>
-         <p>The matcher function is called with the measure function's result and the context array as parameters. It tests the measurement against each context's value property. When a measurement fits in a context's data range, the context passes true. This is done with a comparative statement. For example, if a measurement does not exceed the maximum value of a context, then the context will pass true. If it does, then the matcher function will see if exceeds the next context's maximum value.</p>
+         <p>The matcher function uses the measure function's returned value and the context array as parameters. It tests the measurement against each context's value property. When a measurement fits in a context's data range, the context passes true. This is done with a comparative statement. For example, if a measurement does not exceed the maximum value of a context, then the context will pass true. If it does, then the matcher function will see if exceeds the next context's maximum value (which will be a higher value).</p>
          <p>The comparative statement must agree with the order of the contexts. If context values are listed in descending order, the matcher function must test if the measurement is <i>greater than or equal to the context minimum value</i>. If it is, then we know it definitely is greater than all of the other contexts' minimum values.</p>
-         <p>Conversely, if context values are listed in increasing order, the matcher function must test if the measure is <i>less than or equal to the context maximum value</i>. If it is, it doesn't exceed that context's maximum, so it definitely doesn't exceed the other context's maxima. Therefore, it falls within the initial context's data range.</p>
       </section>
       <section>
 {%highlight js%}
@@ -148,10 +101,14 @@ matcher: function(measure, context){
 
    // for contexts arranged in
    // greatest-to-least order
+   // (exits array when the measure
+   //  is greater than the minimum)
    return measure >= context.min;
    
    // for contexts arrange in
    // least-to-greatest order
+   // (exits array when the measure
+   //  is less than the maximum)
    return measure <= context.max;
    
    // the default matcher function
@@ -167,27 +124,12 @@ matcher: function(measure, context){
 });
 {%endhighlight%}
       </section>
-      <section>
-         <p>In our example, we ordered the contexts from greatest-to-least with minimum values as our breakpoints. Therefore, we want to test if the measure is greater than the minimum value necessary for to pass the context. If it's not, the function moves on to the next context.</p>
-      </section>
-      <section>
-{%highlight js%}
-var visit_axis = intent.responsive({
-// ...
-matcher: function(measure, ctx.min){
-   return measure >= ctx.min;
-},
-// ...
-});
-{%endhighlight%}
-      </section>
    </article>
    
    <article class="equalize" data-pattern="2">
-      <h3>Putting it all together</h3>
-      <h4>Axis IDs</h4>
+      <h3>Axis IDs</h3>
       <section>
-         <p>Now we can make measurements and figure out where they fall on an axis of contexts, we need something to make this data useful. The axis ID helps us do this. Although this property is optional, it is used in HTML attributes to command DOM manipulations. An axis ID lets you create manipulations for any change in contexts in a specified axis, or for any specific context within a specific axis.</p>
+         <p>An axis ID property allows for context-aware restructuring. Although this property is optional, it is used in HTML attributes to command DOM manipulations. An axis ID lets you create manipulations for any change in contexts in a specified axis, or for any specific context within a specific axis.</p>
          <p>Without an assigned ID, the axis is randomly given a hash as an ID that changes on every page load—not very helpful for making specific changes to the layout.</p>
       </section>
       <section>
@@ -212,9 +154,14 @@ var axis = intent.responsive({
 <img intent in-axisID:ctx3-src="..." />
 {%endhighlight%}
       </section>
+   </article>
+   
+   <article class="equalize" data-pattern="2">
+      <h3>Putting it all together</h3>
       <h4>Responding</h4>
       <section>
-         <p>Every <code>intent.responsive</code> axis returns some useful properties, of which <code>respond</code> is probably the most important. This property contains a function that sets off the <code>measure</code> and <code>matcher</code> functions. Calling <code>axisID.respond()</code> updates the current context within an axis <code>axisID</code>.</p>
+         <p>Every <code>intent.responsive</code> axis returns some useful properties, of which <code>respond</code> is probably the most important. This property contains a function that sets off the <code>measure</code> and <code>matcher</code> functions. Calling <code>axis.respond()</code> updates the current context within an axis.</p>
+         <p><i>Note that the <code>intent.responsive({...})</code>'s variable name is used to for responding, <u>not</u> the axis ID. Keep variable scope in mind! You can always use <code>intent.axes.axisID.respond()</code> if you are out of the axis variable's scope.</i></p>
       </section>
       <section>
 {%highlight js%}
@@ -222,9 +169,9 @@ var axis = intent.responsive({
 // ...
 });
 
-axisID.respond(); // respond once
+axis.respond(); // respond once
 
-$(window).on('event', axisID.respond);
+$(window).on('event', axis.respond);
 // respond on each instance of 'event'
 {%endhighlight%}
       </section>
@@ -243,42 +190,20 @@ var axis = intent.responsive({
 {%endhighlight%}
       </section>
       
-      <h4>Our finished visit tracker axis</h4>
+      <h4>Finding the Current Context</h4>
+      <section>
+         <p>Another useful property <code>intent.responsive</code> returns is <code>current</code>. Calling this property will return the name of the most recent context passed as a string.</p>
+      </section>
       <section>
 {%highlight js%}
-if(!window.localStorage.getItem('visits')){
-   window.localStorage.setItem('visits', 1);
-}
-var visits = parseInt(window.localStorage.getItem('visits'), 10) + 1;
-window.localStorage.setItem('visits', visits);
+// assuming your Intention() object
+// is saved as "intent"
 
-var visit_axis = intent.responsive({
-   ID: 'visits'
-   contexts: [
-      {name:'frequenter', min:25},
-      {name:'casual', min:10},
-      {name:'new', min:0}
-   ],
-   matcher: function(measure, ctx.min){
-      return measure >= ctx.min;
-   },   
-   measure: function() {
-      var count = window.localStorage.getItem('visits');
-      return parseInt(count);
-   }
-}).respond();
-// ↑ only need to run at page load because
-// a visit will not increment during
-// a session.
+intent.axes.axisID.current
 {%endhighlight%}
       </section>
+      
    </article>
-      
-      // construct an axis with an ID
-      // talk about why an ID is useful (actually manipulating the DOM)
-      
-      // response property
-      // response scope parameter
       
    </article>
 </article>
