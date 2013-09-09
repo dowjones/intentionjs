@@ -52,7 +52,7 @@ init(['standard', 'tablet'], function() {
 
 The above function takes two parameters: an array of context names and a callback function. With each context, it creates a deferred object and adds it to a master array. If the user is *already* in that context when the `init` function is called, the callback function parameter will fire. If the user is not already in that specific context,  `init` will create an event handler to wait for the context to pass true. 
 
-You can create advanced initialization functions by using an array of multiple context names as a parameter. This is where the master array of deferred objects is useful. Using `.apply()` to create a master deferred object that is only [resolved](http://api.jquery.com/deferred.done/) when all of its "child" deferred objects are resolved, we can create an event handler that waits for multiple contexts to be satisfied before firing.   In other words, `.apply()` allows us to say "when the user has been through both contextX and contextY, run this function."
+You can create advanced initialization functions by using an array of multiple context names as a parameter. This is where the master array of deferred objects is useful. Using `.apply()` to create a master deferred object that is only [resolved](http://api.jquery.com/deferred.done/) when all of its "child" deferred objects are resolved, we can create an event handler that waits for multiple contexts to be satisfied before firing. In other words, `.apply()` allows us to say "when the user has been through both contextX and contextY, run this function."
 
 #### Applying it back to CSS loaders
 

@@ -14,7 +14,7 @@ This release makes the html attributes a lot more flexible. In addition to a few
 This is unfortunate, but until now there was no way around it. The better way is to specify that an element should respond on a particular axis. For example:
 
 {% highlight html %}
-<nav intent in-orientation></nav>
+<nav intent in-orientation:></nav>
 {% endhighlight %}
 
 The above specification applies a class of the name of the current context to the element. That means in portrait mode the element looks like:
@@ -89,9 +89,12 @@ intent.add($('nav'))
 Assuming this exists in the DOM:
 
 {% highlight html %}
-<nav intent in-depth></nav>
+<nav intent in-depth:></nav>
 {% endhighlight %}
 
 A class of either "shallow," "deep," or "reallyDeep" will be added to that element depending on the current scroll depth!
 
 Enjoy!
+
+##### Important Notes
+This post was updated on September 9, 2013 to reflect a change in syntax. The appropriate syntax for axis-based Intentional attributes is now `intent in-axisID:`. A previous version of this post stated the syntax was `intent in-axisID`. 
