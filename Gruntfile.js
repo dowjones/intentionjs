@@ -1,6 +1,6 @@
 //
 module.exports = function(grunt){
-  //grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   //grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-release');
@@ -8,46 +8,34 @@ module.exports = function(grunt){
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     release: {
-      options:{
-        npm:false
+      options: {
+        npm: false
       }
     },
-    uglify:{
+    jshint: {
+      files: ['**.js'],
+        options: {
+          ignores: ['code/*', 'test/vendor/*']
+        }
+    },
+    uglify: {
       intention : {
-        options:{
-          banner: '/*! <%= pkg.name %> v<%= pkg.version %>\
-\n* http://intentionjs.com/\
-\n*\
-\n*\ intention.js\
-\n*\
-\n* Copyright 2011, <%= grunt.template.today("yyyy") %>\ Dowjones and other contributors\
-\n* Released under the MIT license\
-\n*\
-\n*/\n'
-         },
-         files: {
-           'code/intention.min.js': ['intention.js']
-         }
-       },
+        options: {
+          banner: '/*! <%= pkg.name %> v<%= pkg.version %> \n* <%= pkg.homepage %> \n* \n* intention.js \n* \n* <%=pkg.copyright %>, <%= grunt.template.today("yyyy") %>\n* <%=pkg.banner %>*/ '
+        },
+        files: {
+          'code/intention.min.js': ['intention.js']
+        },
+      },
        context: {
          options:{
-           banner: '/*! <%= pkg.name %> v<%= pkg.version %>\
-\n* http://intentionjs.com/\
-\n*\
-\n*\ context.js\
-\n*\
-\n* Copyright 2011, <%= grunt.template.today("yyyy") %>\ Dowjones and other contributors\
-\n* Released under the MIT license\
-\n*\
-\n*/\n'
+           banner: '/*! <%= pkg.name %> v<%= pkg.version %> \n* <%= pkg.homepage %> \n* \n* context.js \n* \n* <%=pkg.copyright %>, <%= grunt.template.today("yyyy") %>\n* <%=pkg.banner %>*/ '
          },
          files: {
-
            'code/context.min.js':['context.js']
         }
       }
     }
   });
-
-
-}
+  grunt.registerTask('default', ['jshint', 'uglify']);
+};

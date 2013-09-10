@@ -554,10 +554,11 @@
     _axis_match_pattern: new RegExp("^_([a-zA-Z0-9][_a-zA-Z0-9]*)"),
 
     // simple trim
-    _trim_pattern: new RegExp( "^\s+|\s+$", "g" )
+    _trim_pattern: new RegExp( "^\\s+|\\s+$", "g" )
   };
 
   return Intention;
-})();
+}));
+
 
 
