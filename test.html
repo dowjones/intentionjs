@@ -12,17 +12,12 @@
 	(function() {
 		var intent = new Intention();
 		
-		
-		intent.on('widthid:', function() { console.log('okokok'); });
-		intent.on('mobile', function() { console.log('on mobile'); });
-		intent.on('widthid:mobile', function() { console.log('widthid:mobile'); });
-		
 		var width = intent.responsive({
    		ID: 'widthid',
    		contexts: [
-      		{name:'notmobile', val:800},
-      		{name:'mobile', val:500},
-      		{name:'bottom', val:0}
+      		{name:'standard', val:800},
+      		{name:'tablet', val:600},
+      		{name:'mobile', val:0}
       	],
    		matcher: function(measure, ctx){
       		return measure >= ctx.val;
@@ -31,19 +26,9 @@
       		return $(window).width();
    		}
    	});
-
-   	
-   	$(function() {
-         	
-      	
-      	intent.elements(document);
-      });
    	
    	window.intent = intent; 
 	}).call(this);
-	</script>
-	<script type="text/javascript">
-   	intent.axes.widthid.respond();
 	</script>
 	
 	<style>
