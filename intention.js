@@ -16,7 +16,6 @@
     root.Intention = factory(root.jQuery, root._);
   }
 }(this, function ($, _) {
-  'use strict';
 
   var Intention = function (params) {
     var intent = _.extend(this, params, {
@@ -557,7 +556,7 @@
     _trim_pattern: new RegExp( "^\\s+|\\s+$", "g" )
   };
 
-  return Intention();
+  return Intention;
 }));
 
 
