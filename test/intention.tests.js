@@ -631,7 +631,7 @@ those that are not applied',
 
   describe('jquery event', function () {
     it('should fire a jquery trigger event on every elm', function () {
-      var intent = new Intention,
+      var intent = new Intention(),
       fire=false;
 
       intent.add($('<div>').on('intent', function () {
