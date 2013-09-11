@@ -3,8 +3,8 @@ describe("Intention", function () {
   describe("Constructor:", function () {
     var intent = new Intention();
     it("Should return an object", function () {
-      expect(intent).to.be.an('object')
-    })
+      expect(intent).to.be.an('object');
+    });
   });
 
   // create some elements to test with
@@ -179,7 +179,7 @@ describe("Intention", function () {
   });
 
   describe("is: test to see if a context name is in the .contexts property", function () {
-    var intent = new Intention,
+    var intent = new Intention(),
     respond = intent.responsive([{name:'foo'}, {name:'bar'}]).respond;
 
     it('should confirm the applied context is current and others are not',
@@ -276,7 +276,7 @@ describe("Intention", function () {
   describe("_contextualize: keeping track of the current contexts", function () {
     // takes a context object to add, the axis that context belongs
     // (ofContexts) and the list of current contexts
-    var intent = new Intention,
+    var intent = new Intention(),
     axes = {
       id1:{
         current:'bar'
@@ -306,7 +306,7 @@ describe("Intention", function () {
                             ID:"orientation"
                            }, __keys__:['width', 'orientation']};
              it('should match when only one func is specified (class)', function () {
-               var intent= new Intention,
+               var intent= new Intention(),
                elm = $('<div>')
                  .attr({'in-mobile-class':'foo',
                         'in-tablet-class':'bar',
@@ -335,7 +335,7 @@ describe("Intention", function () {
 
              it('should match when many funcs are specified', function () {
 
-               var intent= new Intention,
+               var intent = new Intention(),
                elm = $('<div>')
                  .attr({'in-mobile-class':'foo',
                         'in-tablet-class':'bar',
@@ -387,7 +387,7 @@ describe("Intention", function () {
 
              it('should combine the classes and cascade to specified attr', function () {
 
-               var intent = new Intention;
+               var intent = new Intention();
                expect(
                  intent._resolveSpecs([{ctx:'foo', axis:'id1'}, {ctx:'bar',axis:'id2'}], {
                    id1:{foo: {
@@ -407,7 +407,7 @@ describe("Intention", function () {
 
              it('should understand axis specs', function () {
 
-               var intent= new Intention,
+               var intent= new Intention(),
                elm = $('<div>')
                  .attr({'in-mobile-class':'foo',
                         'in-tablet-class':'bar',
@@ -470,7 +470,7 @@ describe("Intention", function () {
 
     it('should return an array', function () {
 
-      var intent = new Intention;
+      var intent = new Intention();
 
       intent = makeFauxResponsive(intent);
 
@@ -505,16 +505,15 @@ describe("Intention", function () {
         }
       }, intent.axes, true);
 
-      expect(result.length).to.equal(3)
+      expect(result.length).to.equal(3);
 
     });
   });
 
-  describe('_contextConfig: compiles a list of contexts to be applied and \
-those that are not applied',
+  describe('_contextConfig: compiles a list of contexts to be applied and those that are not applied',
            function () {
              it('should add the foo spec to in contexts and bar to out contexts', function () {
-               var intent = new Intention,
+               var intent = new Intention(),
                axes = {
                  id1:{
                    current:'foo'
@@ -547,7 +546,7 @@ those that are not applied',
   describe('_makeChanges: maniputate an element based on responsive specification',
            function () {
 
-             var intent = new Intention,
+             var intent = new Intention(),
              elm=$('<div class="baz">'),
              axes = {
                id1:{
@@ -590,9 +589,9 @@ those that are not applied',
 
   describe('switch multiple classes', function () {
 
-    var intent = makeFauxResponsive(new Intention);
+    var intent = makeFauxResponsive(new Intention());
     // engage a couple contexts
-    intent.axes['width'].respond('standard');
+    intent.axes.width.respond('standard');
     intent.axes['default'].respond('base');
 
     var elm = $('<div in-mobile-class="foo bar" in-base-class="base" in-standard-class="baz" class="baz"></div>');
@@ -609,7 +608,7 @@ those that are not applied',
 
     // check
     it('should have the classes foo bar and base and not baz', function () {
-      intent.axes['width'].respond('mobile');
+      intent.axes.width.respond('mobile');
       expect(elm.hasClass('baz')).to.equal(false);
       expect(elm.hasClass('base')).to.equal(true);
       expect(elm.hasClass('foo')).to.equal(true);
@@ -618,7 +617,7 @@ those that are not applied',
 
     // check
     it('should revert back to the original configuration', function () {
-      intent.axes['width'].respond('standard');
+      intent.axes.width.respond('standard');
       expect(elm.hasClass('baz')).to.equal(true);
       expect(elm.hasClass('base')).to.equal(true);
       expect(elm.hasClass('foo')).to.equal(false);
@@ -635,14 +634,14 @@ those that are not applied',
       fire=false;
 
       intent.add($('<div>').on('intent', function () {
-        fire=true
+        fire=true;
       }));
 
       intent.responsive([{name:'base'}]).respond('base');
 
       expect(fire).to.equal(true);
-    })
-  })
+    });
+  });
 
   describe("regex tests", function () {
 

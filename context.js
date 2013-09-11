@@ -13,7 +13,7 @@
   var context = function ($, Intention) {
 
     // create a brand spankin new intention object
-    var intent = new Intention,
+    var intent = new Intention(),
       // placeholder for the horizontal axis
       horizontal_axis,
       orientation_axis;

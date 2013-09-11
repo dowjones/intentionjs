@@ -9,7 +9,7 @@
 
 (function (root, factory) {
 
- 'use strict' 
+ 'use strict'; 
  
   if (typeof define === 'function' && define.amd) {
     define('intention', ['jquery', 'underscore'], factory);
@@ -17,7 +17,7 @@
     root.Intention = factory(root.jQuery, root._);
   }
 }(this, function ($, _) {
-'use strict'
+'use strict';
 
   var Intention = function (params) {
     var intent = _.extend(this, params, {
