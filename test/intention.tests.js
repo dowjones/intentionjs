@@ -1,19 +1,19 @@
-describe("Intention", function() {
+describe("Intention", function () {
 
-  describe("Constructor:", function(){
-    var intent = new Intention;
-    it("Should return an object", function(){
+  describe("Constructor:", function () {
+    var intent = new Intention();
+    it("Should return an object", function () {
       expect(intent).to.be.an('object')
     })
   });
 
   // create some elements to test with
   var container = $('<div>'),
-  // this container does not have tn attrs
+  // this container does not have data-intent attrs
   nonResponsiveElm = $('<div id="getRidOfMe">'),
   responsiveElm1 = $('<div data-intent>');
 
-  // basic tn attrs
+  // basic in-* attrs
   responsiveElm1
     .attr('in-mobile-class','mobile')
     .attr('in-tablet-class','tablet')
@@ -23,17 +23,17 @@ describe("Intention", function() {
   container.append(nonResponsiveElm, responsiveElm1, $('<div intent>'));
 
   describe("add and remove: add and remove responsive elements",
-           function(){
-             var intent = new Intention;
+           function () {
+             var intent = new Intention();
 
-             it("Should add three items to intent.elms", function(){
+             it("Should add three items to intent.elms", function () {
                expect(intent.elms.length).to.equal(0);
                // intent.add returns the intent object so i should be able access the elms prop
                var divs = container.find('div');
                expect(intent.add(divs).elms.length).to.equal(3);
              });
 
-             it("Should remove one item from intent.elms", function(){
+             it("Should remove one item from intent.elms", function() {
                // find the element that should be removed
                var rmElm = container.find('#getRidOfMe');
                expect(intent.remove(rmElm).elms.length).to.equal(2);
@@ -41,25 +41,25 @@ describe("Intention", function() {
            });
 
   describe("elements: set the responsive elements from a dom scope",
-           function(){
-             it("Should add all *reponsive* elms in the container div", function(){
-               var intent = new Intention;
+           function () {
+             it("Should add all *reponsive* elms in the container div", function () {
+               var intent = new Intention();
                expect(intent.elements(container).elms.length).to.equal(2);
              });
 
              it("Should query the dom for responsive elms, there are none.",
-                function(){
-                  var intent = new Intention;
+                function () {
+                  var intent = new Intention();
                   expect(intent.elements(document).elms.length).to.equal(0);
                 });
            });
 
   describe("responsive: creating responsive functions", function(){
 
-    var intent = new Intention,
-    big={name:'big', val:400},
-    small={name:'small', val:0},
-    medium={name:'medium', val:200},
+    var intent = new Intention(),
+    big = {name:'big', val:400},
+    small = {name:'small', val:0},
+    medium = {name:'medium', val:200},
     sizeCtxs = [big, medium, small],
     size = intent.responsive({
       contexts: sizeCtxs,
@@ -73,7 +73,7 @@ describe("Intention", function() {
     });
 
     // this is incorrect at < 400 screen sizes, fix
-    it("Should set the the appropriate context", function(){
+    it("Should set the the appropriate context", function () {
       var respond = size.respond;
       // in the small context
       respond(0);
@@ -89,7 +89,7 @@ describe("Intention", function() {
 
     });
 
-    it('Should confirm the contexts through "is"', function(){
+    it('Should confirm the contexts through "is"', function () {
       var respond = size.respond;
 
       expect(respond(0).is('small')).to.equal(true);
@@ -108,9 +108,8 @@ describe("Intention", function() {
 
     });
 
-    it("should only fire events when crossing a threshold", function(){
-      var callbackCount = 0,
-      respond = size.respond;;
+    it("should only fire events when crossing a threshold", function () {
+      var callbackCount = 0, respond = size.respond;
       // set the current context to small
       respond(0);
       // attach a callback to big
@@ -128,7 +127,7 @@ describe("Intention", function() {
 
     it("should fire the axis event before the context event", function(){
 
-      var intent = new Intention,
+      var intent = new Intention(),
       width = intent.responsive({
         contexts: [{name:'mob'}, {name:'tab'}],
         ID:'width'
@@ -153,7 +152,7 @@ describe("Intention", function() {
 
       intent.add(elm);
 
-      intent.on('tab', function(){
+      intent.on('tab', function () {
         contextFirst=false;
         expect(elm.hasClass('tab')).to.equal(true);
       });
@@ -163,15 +162,15 @@ describe("Intention", function() {
 
     });
 
-    describe("recursive responsive axis creation", function(){
+    describe("recursive responsive axis creation", function () {
       it("should create three axis by calling intent.responsive once",
-         function(){
-           var intent = new Intention;
+         function () {
+           var intent = new Intention();
 
            intent.responsive([
-             {contexts:[{name:'foo'}]},
-             {contexts:[{name:'bar'}]},
-             {contexts:[{name:'baz'}]}
+             {contexts: [{name:'foo'}]},
+             {contexts: [{name:'bar'}]},
+             {contexts: [{name:'baz'}]}
            ]);
            // TODO: make this que off the contexts length
            expect(intent.axes.__keys__.length).to.equal(3);
@@ -179,32 +178,30 @@ describe("Intention", function() {
     });
   });
 
-  describe("is: test to see if a context name is in the .contexts property",
-           function(){
-             var intent = new Intention,
-             respond=intent.responsive([{name:'foo'}, {name:'bar'}]).respond;
+  describe("is: test to see if a context name is in the .contexts property", function () {
+    var intent = new Intention,
+    respond = intent.responsive([{name:'foo'}, {name:'bar'}]).respond;
 
-             it('should confirm the applied context is current and others are not',
-                function(){
-                  // change the axis into the foo context
-                  respond('foo');
-                  expect(intent.is('foo')).to.equal(true);
-                  expect(intent.is('bar')).to.equal(false);
+    it('should confirm the applied context is current and others are not',
+    function(){
+      // change the axis into the foo context
+      respond('foo');
+      expect(intent.is('foo')).to.equal(true);
+      expect(intent.is('bar')).to.equal(false);
 
-                });
+    });
 
-             it('should change contexts and confirm the new context is \
-in the contexts list', function(){
-  respond('bar');
-  expect(intent.is('bar')).to.equal(true);
-  expect(intent.is('foo')).to.equal(false);
-});
-           });
+    it('should change contexts and confirm the new context is in the contexts list', function () {
+      respond('bar');
+      expect(intent.is('bar')).to.equal(true);
+      expect(intent.is('foo')).to.equal(false);
+    });
+  });
 
   describe("_fillSpec: takes a spec and fills in unspecified funcs", function(){
-    var intent = new Intention;
+    var intent = new Intention();
 
-    it('should take a spec and return a new one filled out', function(){
+    it('should take a spec and return a new one filled out', function () {
 
       var spec = {
         asdf:{
@@ -244,9 +241,7 @@ in the contexts list', function(){
       expect(intent._fillSpec(spec)).to.eql(filled);
     });
 
-
-
-    it('should take a spec with a axis and return filled out with unfunky ctx vals', function(){
+    it('should take a spec with a axis and return filled out with unfunky ctx vals', function () {
 
       var spec = {
         asdf:{

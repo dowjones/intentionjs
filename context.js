@@ -8,19 +8,19 @@
  */
 
 (function () {
-
   'use strict';
-  var context = function($, Intention){
+
+  var context = function ($, Intention) {
 
     // create a brand spankin new intention object
-    var intent=new Intention(),
+    var intent = new Intention(),
       // placeholder for the horizontal axis
       horizontal_axis,
       orientation_axis;
 
-    // throttle funtion used for keeping calls to the resize responive 
+    // throttle function used for keeping calls to the resize responsive
     // callback to a minimum
-    function throttle(callback, interval){
+    function throttle(callback, interval) {
       var lastExec = new Date(),
         timer = null;
 
@@ -52,14 +52,14 @@
     horizontal_axis = intent.responsive({
       ID:'width',
       contexts: [
-        {name:'standard', min:840}, 
+        {name:'standard', min:840},
         {name:'tablet', min:510},
         {name:'mobile', min:0}],
       // compare the return value of the callback to each context
       // return true for a match
       matcher: function(test, context){
         if(typeof test === 'string'){
-          
+
           return test === context.name;
         }
         return test>=context.min;
@@ -73,14 +73,15 @@
         }
 
         return $(window).width();
-    }});
+      }
+    });
 
     // orientation context?
     // =======================================================================
     orientation_axis = intent.responsive({
       ID:'orientation',
       contexts: [{name:'portrait', rotation: 0},
-        {name:'landscape', rotation:90}], 
+        {name:'landscape', rotation:90}],
       matcher: function(measure, ctx){
         return measure === ctx.rotation;
       },
@@ -98,7 +99,7 @@
     // =======================================================================
     intent.responsive({
       ID:'touch',
-      contexts:[{name:'touch'}], 
+      contexts:[{name:'touch'}],
       matcher: function() {
         return "ontouchstart" in window;
       }}).respond();
@@ -123,12 +124,12 @@
     // resize
     horizontal_axis.respond();
     orientation_axis.respond();
-    
+
     $(function(){
       // at doc ready grab all of the elements in the doc
       intent.elements(document);
     });
-    
+
     // return the intention object so that it can be extended by other plugins
     return intent;
   };

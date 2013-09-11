@@ -1,7 +1,7 @@
-function in_init(contexts, callback){
+function in_init(contexts, callback) {
   var dfds = [];
 
-  _.each(contexts, function(ctx){
+  _.each(contexts, function (ctx) {
     var dfd = $.Deferred();
 
     dfds.push(dfd);
@@ -13,15 +13,15 @@ function in_init(contexts, callback){
     }
   });
 
-  if((!contexts) || (contexts.length === 0)){
+  if ((!contexts) || (contexts.length === 0)) {
     callback();
   }
 
   $.when
     .apply(this, dfds)
     .done(callback);
-};
+}
 
-in_init(['standard'], function(){
+in_init(['standard'], function () {
   console.log('standard has been entered');
 });

@@ -13,7 +13,7 @@ module.exports = function(grunt){
       }
     },
     jshint: {
-      files: ['**.js'],
+      files: ['**.js','test/*.js'],
         options: {
           ignores: ['code/*', 'test/vendor/*']
         }
