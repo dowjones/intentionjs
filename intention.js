@@ -2,14 +2,14 @@
  * intention.js Library v0.9.9
  * http://intentionjs.com/
  *
- * Copyright 2011, 2013 Dowjones and other contributors
- * Released under the MIT license
+ * Copyright 2011, 2013 Dow Jones and other contributors.
+ * Released under the MIT license.
  *
- */
+**/
+
+'use strict'
 
 (function (root, factory) {
-  'use strict';
-
   if (typeof define === 'function' && define.amd) {
     define('intention', ['jquery', 'underscore'], factory);
   } else {
@@ -117,9 +117,9 @@
       }
 
       // is expecting a jquery object
-      elms.each(_.bind(function(i, elm) {
+      elms.each(_.bind(function (i, elm) {
         var exists = false;
-        this.elms.each(function(i, respElm) {
+        this.elms.each(function (i, respElm) {
           if (elm === respElm) {
             exists=true;
             return false;
@@ -165,7 +165,7 @@
 
     is: function (ctxName) {
       var axes = this.axes;
-      return _.some(axes.__keys__, function(key) {
+      return _.some(axes.__keys__, function (key) {
         return ctxName === axes[key].current;
       });
     },
@@ -285,24 +285,24 @@
 
     _fillSpec: function (spec) {
 
-      var applySpec = function(fn) {
-        _.each(spec, function(axisOptions, axis) {
-          _.each(axisOptions, function(ctxOptions, ctx) {
+      var applySpec = function (fn) {
+        _.each(spec, function (axisOptions, axis) {
+          _.each(axisOptions, function (ctxOptions, ctx) {
             fn(ctxOptions, ctx, axis);
           });
         });
       }, filler={};
 
-      applySpec(function(options) {
+      applySpec(function (options) {
         // check to see if the ctx val is an object, could be a string
         if (_.isObject(options)) {
-          _.each(options, function(val, func) {
+          _.each(options, function (val, func) {
             filler[func] = '';
           });
         }
       });
 
-      applySpec(function(options, ctx, axis) {
+      applySpec(function (options, ctx, axis) {
         if (_.isObject(options)) {
           spec[axis][ctx] = _.extend({}, filler, options);
         }
@@ -315,10 +315,10 @@
 
       var match=false;
 
-      _.every(axes.__keys__, function(axis) {
+      _.every(axes.__keys__, function (axis) {
 
         if (match === false) {
-          _.every(axes[axis].contexts, function(ctxCandidate) {
+          _.every(axes[axis].contexts, function (ctxCandidate) {
             if (ctxCandidate.name === ctx) {
               match = axis;
               return false;
@@ -362,7 +362,7 @@
           axisPattern =  new RegExp(
             '^(data-)?(in|intent)-([a-zA-Z0-9][_a-zA-Z0-9]*):$');
 
-      _.each(attrs, function(attr) {
+      _.each(attrs, function (attr) {
 
         var specMatch = attr.name.match(fullPattern),
             axisName;
@@ -394,7 +394,7 @@
           axisName = attr.name.match(axisPattern)[3];
 
           _.each(axes[axisName].contexts,
-                 function(context) {
+                 function (context) {
                    this._makeSpec(axisName, context.name, 'class', context.name +
                             ' ' + attr.value, spec);
                  },
@@ -416,10 +416,10 @@
       var changes={},
           moveFuncs=['append', 'prepend', 'before', 'after'];
 
-      _.each(currentContexts, function(ctxObj) {
+      _.each(currentContexts, function (ctxObj) {
         // if the axis or the context to not exist in the specs object
         // skip to the next one
-        _.each(this._contextSpec(ctxObj, specs), function(val, func) {
+        _.each(this._contextSpec(ctxObj, specs), function (val, func) {
 
           if (func==='class') {
             if (!changes[func]) {
@@ -446,7 +446,7 @@
     _currentContexts: function (axes) {
       var contexts = [];
 
-      _.each(axes.__keys__, function(ID) {
+      _.each(axes.__keys__, function (ID) {
         if (axes[ID].current !== null) {
           contexts.push({ctx:axes[ID].current, axis:ID});
           return;
@@ -460,11 +460,11 @@
 
       var toRemove = [];
 
-      _.each(axes.__keys__, function(key) {
+      _.each(axes.__keys__, function (key) {
 
         var axis = axes[key];
 
-        _.each(axis.contexts, function(ctx) {
+        _.each(axis.contexts, function (ctx) {
 
           // ignore the current context, those classes SHOULD be applied
           if (ctx.name === axis.current) {
@@ -532,7 +532,7 @@
 
     _respond: function (axes, elms) {
       // go through all of the responsive elms
-      elms.each(_.bind(function(i, elm) {
+      elms.each(_.bind(function (i, elm) {
         var $elm = $(elm.elm);
         this._makeChanges($elm, elm.spec, axes);
         $elm.trigger('intent', this);
@@ -557,7 +557,7 @@
     _trim_pattern: new RegExp( "^\\s+|\\s+$", "g" )
   };
 
-  return Intention;
+  return Intention();
 }));
 
 

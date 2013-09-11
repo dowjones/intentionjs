@@ -24,15 +24,15 @@
       var lastExec = new Date(),
         timer = null;
 
-      return function(e){
+      return function (e) {
         var d = new Date();
         if (d-lastExec < interval) {
           if (timer) {
             window.clearTimeout(timer);
           }
-          var callbackWrapper = function(event){
-            return function(){
-              callback(event);
+          var callbackWrapper = function (event) {
+            return function () {
+              callback (event);
             };
           };
           timer = window.setTimeout(callbackWrapper(e), interval);
@@ -57,8 +57,8 @@
         {name:'mobile', min:0}],
       // compare the return value of the callback to each context
       // return true for a match
-      matcher: function(test, context){
-        if(typeof test === 'string'){
+      matcher: function (test, context) {
+        if(typeof test === 'string') {
 
           return test === context.name;
         }
@@ -66,9 +66,9 @@
       },
       // callback, return value is passed to matcher()
       // to compare against current context
-      measure: function(arg){
+      measure: function (arg) {
 
-        if(typeof arg === 'string'){
+        if(typeof arg === 'string') {
           return arg;
         }
 
@@ -82,10 +82,10 @@
       ID:'orientation',
       contexts: [{name:'portrait', rotation: 0},
         {name:'landscape', rotation:90}],
-      matcher: function(measure, ctx){
+      matcher: function (measure, ctx) {
         return measure === ctx.rotation;
       },
-      measure: function(){
+      measure: function () {
         var test = Math.abs(window.orientation);
         if(test > 0) {
           test = 180 - test;
@@ -100,7 +100,7 @@
     intent.responsive({
       ID:'touch',
       contexts:[{name:'touch'}],
-      matcher: function() {
+      matcher: function () {
         return "ontouchstart" in window;
       }}).respond();
 
@@ -111,7 +111,7 @@
       // contexts
       contexts:[{name:'highres'}],
       // matching:
-      matcher: function(){
+      matcher: function () {
         return window.devicePixelRatio > 1;
       }}).respond();
 
@@ -125,7 +125,7 @@
     horizontal_axis.respond();
     orientation_axis.respond();
 
-    $(function(){
+    $(function () {
       // at doc ready grab all of the elements in the doc
       intent.elements(document);
     });

@@ -1,5 +1,5 @@
 //
-module.exports = function(grunt){
+module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   //grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -15,7 +15,7 @@ module.exports = function(grunt){
     jshint: {
       files: ['**.js','test/*.js'],
         options: {
-          ignores: ['code/*', 'test/vendor/*']
+          ignores: ['code/*', 'test/vendor/**/*']
         }
     },
     uglify: {

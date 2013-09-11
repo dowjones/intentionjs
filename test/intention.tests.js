@@ -33,7 +33,7 @@ describe("Intention", function () {
                expect(intent.add(divs).elms.length).to.equal(3);
              });
 
-             it("Should remove one item from intent.elms", function() {
+             it("Should remove one item from intent.elms", function () {
                // find the element that should be removed
                var rmElm = container.find('#getRidOfMe');
                expect(intent.remove(rmElm).elms.length).to.equal(2);
@@ -54,7 +54,7 @@ describe("Intention", function () {
                 });
            });
 
-  describe("responsive: creating responsive functions", function(){
+  describe("responsive: creating responsive functions", function () {
 
     var intent = new Intention(),
     big = {name:'big', val:400},
@@ -63,12 +63,12 @@ describe("Intention", function () {
     sizeCtxs = [big, medium, small],
     size = intent.responsive({
       contexts: sizeCtxs,
-      matcher: function(response, context){
+      matcher: function (response, context) {
         return response >= context.val;
       },
       ID:'size'});
 
-    it("Should return an object", function(){
+    it("Should return an object", function () {
       expect(_.isObject(size)).to.equal(true);
     });
 
@@ -113,7 +113,7 @@ describe("Intention", function () {
       // set the current context to small
       respond(0);
       // attach a callback to big
-      intent.on('big', function(){
+      intent.on('big', function () {
         callbackCount++;
       });
       // change to the big context
@@ -125,7 +125,7 @@ describe("Intention", function () {
       expect(callbackCount).to.equal(1);
     });
 
-    it("should fire the axis event before the context event", function(){
+    it("should fire the axis event before the context event", function () {
 
       var intent = new Intention(),
       width = intent.responsive({
@@ -134,11 +134,11 @@ describe("Intention", function () {
       }),
       contextFirst;
 
-      intent.on('width:', function(){
+      intent.on('width:', function () {
         contextFirst = true;
       });
 
-      intent.on('mob', function(){
+      intent.on('mob', function () {
         contextFirst = false;
       });
 
@@ -183,7 +183,7 @@ describe("Intention", function () {
     respond = intent.responsive([{name:'foo'}, {name:'bar'}]).respond;
 
     it('should confirm the applied context is current and others are not',
-    function(){
+    function () {
       // change the axis into the foo context
       respond('foo');
       expect(intent.is('foo')).to.equal(true);
@@ -198,7 +198,7 @@ describe("Intention", function () {
     });
   });
 
-  describe("_fillSpec: takes a spec and fills in unspecified funcs", function(){
+  describe("_fillSpec: takes a spec and fills in unspecified funcs", function () {
     var intent = new Intention();
 
     it('should take a spec and return a new one filled out', function () {
@@ -273,7 +273,7 @@ describe("Intention", function () {
   });
 
 
-  describe("_contextualize: keeping track of the current contexts", function(){
+  describe("_contextualize: keeping track of the current contexts", function () {
     // takes a context object to add, the axis that context belongs
     // (ofContexts) and the list of current contexts
     var intent = new Intention,
@@ -288,7 +288,7 @@ describe("Intention", function () {
     };
 
     it('should make a new axes object with the current context for id1 set to foo',
-       function(){
+       function () {
          var inCtx = 'foo',
          // TODO: change the order of these args
          newAxes = intent._contextualize('id1', inCtx, axes);
@@ -297,7 +297,7 @@ describe("Intention", function () {
   });
 
   describe("_attrsToSpec: convert element's attrs to a responsive specification",
-           function(){
+           function () {
              var mockAxes = {
                width:{contexts:[{name:'mobile'}, {name:'tablet'}, {name:'standard'}],
                       ID:"width"
@@ -305,7 +305,7 @@ describe("Intention", function () {
                orientation:{contexts:[{name:'portrait'}, {name:'landscape'}],
                             ID:"orientation"
                            }, __keys__:['width', 'orientation']};
-             it('should match when only one func is specified (class)', function(){
+             it('should match when only one func is specified (class)', function () {
                var intent= new Intention,
                elm = $('<div>')
                  .attr({'in-mobile-class':'foo',
@@ -333,7 +333,7 @@ describe("Intention", function () {
                });
              });
 
-             it('should match when many funcs are specified', function(){
+             it('should match when many funcs are specified', function () {
 
                var intent= new Intention,
                elm = $('<div>')
@@ -383,9 +383,9 @@ describe("Intention", function () {
            });
 
   describe('_resolveSpecs: from a list of names make object of changes',
-           function(){
+           function () {
 
-             it('should combine the classes and cascade to specified attr', function(){
+             it('should combine the classes and cascade to specified attr', function () {
 
                var intent = new Intention;
                expect(
@@ -405,7 +405,7 @@ describe("Intention", function () {
                  });
              });
 
-             it('should understand axis specs', function(){
+             it('should understand axis specs', function () {
 
                var intent= new Intention,
                elm = $('<div>')
@@ -440,7 +440,7 @@ describe("Intention", function () {
 
            });
 
-  var makeFauxResponsive = function(intent){
+  var makeFauxResponsive = function (intent) {
 
     intent.responsive({
       contexts: [{name:'base'}],
@@ -465,10 +465,10 @@ describe("Intention", function () {
     return intent;
   };
 
-  describe('_removeClasses: takes the spec and axes, figures out what classes to remove', function(){
+  describe('_removeClasses: takes the spec and axes, figures out what classes to remove', function () {
 
 
-    it('should return an array', function(){
+    it('should return an array', function () {
 
       var intent = new Intention;
 
@@ -512,8 +512,8 @@ describe("Intention", function () {
 
   describe('_contextConfig: compiles a list of contexts to be applied and \
 those that are not applied',
-           function(){
-             it('should add the foo spec to in contexts and bar to out contexts', function(){
+           function () {
+             it('should add the foo spec to in contexts and bar to out contexts', function () {
                var intent = new Intention,
                axes = {
                  id1:{
@@ -545,7 +545,7 @@ those that are not applied',
            });
 
   describe('_makeChanges: maniputate an element based on responsive specification',
-           function(){
+           function () {
 
              var intent = new Intention,
              elm=$('<div class="baz">'),
@@ -572,23 +572,23 @@ those that are not applied',
 
              intent._makeChanges(elm, changes, axes);
 
-             it('should have classes of appropriate context', function(){
+             it('should have classes of appropriate context', function () {
                expect(elm.hasClass('foo')).to.equal(true);
                expect(elm.hasClass('bar')).to.equal(false);
              });
 
-             it('should have attr of current context', function(){
+             it('should have attr of current context', function () {
                expect(elm.attr('href')).to.equal('http://foo.foo');
              });
 
              it('should not have deleted a class that is not specified in the out contexts',
-                function(){
+                function () {
                   expect(elm.hasClass('baz')).to.equal(true);
                 });
            });
 
 
-  describe('switch multiple classes', function(){
+  describe('switch multiple classes', function () {
 
     var intent = makeFauxResponsive(new Intention);
     // engage a couple contexts
@@ -600,7 +600,7 @@ those that are not applied',
     intent.add(elm);
 
     // check
-    it('should have the classes baz and base and nothing else', function(){
+    it('should have the classes baz and base and nothing else', function () {
       expect(elm.hasClass('baz')).to.equal(true);
       expect(elm.hasClass('base')).to.equal(true);
     });
@@ -608,7 +608,7 @@ those that are not applied',
 
 
     // check
-    it('should have the classes foo bar and base and not baz', function(){
+    it('should have the classes foo bar and base and not baz', function () {
       intent.axes['width'].respond('mobile');
       expect(elm.hasClass('baz')).to.equal(false);
       expect(elm.hasClass('base')).to.equal(true);
@@ -617,7 +617,7 @@ those that are not applied',
     });
 
     // check
-    it('should revert back to the original configuration', function(){
+    it('should revert back to the original configuration', function () {
       intent.axes['width'].respond('standard');
       expect(elm.hasClass('baz')).to.equal(true);
       expect(elm.hasClass('base')).to.equal(true);
@@ -629,12 +629,12 @@ those that are not applied',
   });
 
 
-  describe('jquery event', function(){
-    it('should fire a jquery trigger event on every elm', function(){
+  describe('jquery event', function () {
+    it('should fire a jquery trigger event on every elm', function () {
       var intent = new Intention,
       fire=false;
 
-      intent.add($('<div>').on('intent', function(){
+      intent.add($('<div>').on('intent', function () {
         fire=true
       }));
 
@@ -644,97 +644,97 @@ those that are not applied',
     })
   })
 
-  describe("regex tests", function(){
+  describe("regex tests", function () {
 
-    describe('full attr match', function(){
+    describe('full attr match', function () {
       // TODO update intention regex
       var attrPattern = new RegExp(
         '^(data-)?(in|intent)-([a-zA-Z0-9][_a-zA-Z0-9]*)-([A-Za-z:-]+)');
 
-      it('should match on an abbreviated nonstandard prefix', function(){
+      it('should match on an abbreviated nonstandard prefix', function () {
         expect(
           attrPattern
             .test('in-mobile-class')).to.equal(true);
 
       });
 
-      it('should match on an abbreviated standard prefix', function(){
+      it('should match on an abbreviated standard prefix', function () {
         expect(
           attrPattern
             .test('data-in-mobile-class')).to.equal(true);
       });
 
-      it('should not match when context starts with an underscore', function(){
+      it('should not match when context starts with an underscore', function () {
         expect(
           attrPattern
             .test('data-in-_mobile-class')).to.equal(false);
       });
 
-      it('should match on a nonstandard prefix', function(){
+      it('should match on a nonstandard prefix', function () {
         expect(
           attrPattern
             .test('intent-mobile-class')).to.equal(true);
 
       });
 
-      it('should match on an standard prefix', function(){
+      it('should match on an standard prefix', function () {
         expect(
           attrPattern
             .test('data-intent-mobile-class')).to.equal(true);
 
       });
 
-      it('should match without a prefix', function(){
+      it('should match without a prefix', function () {
         expect(
           attrPattern
             .test('mobile-class')).to.equal(false);
       });
 
-      it('should match a data attr', function(){
+      it('should match a data attr', function () {
         expect(
           attrPattern
             .test('in-standard-data-toggle')).to.equal(true);
       });
     });
 
-    describe('context only match', function(){
+    describe('context only match', function () {
       var ctxOnlyPattern = new RegExp(
         '^(data-)?(in|intent)-([a-zA-Z0-9][_a-zA-Z0-9]*)$');
 
-      it('should match on the prefix and context', function(){
+      it('should match on the prefix and context', function () {
         expect(ctxOnlyPattern
                .test('in-standard')).to.equal(true);
       });
 
 
-      it('should not match on just the prefix', function(){
+      it('should not match on just the prefix', function () {
         expect(ctxOnlyPattern
                .test('in')).to.equal(false);
       });
 
-      it('should not match on the prefix plus a hiphen', function(){
+      it('should not match on the prefix plus a hiphen', function () {
         expect(ctxOnlyPattern
                .test('in-')).to.equal(false);
       });
 
-      it('should not match when a func is specified', function(){
+      it('should not match when a func is specified', function () {
         expect(ctxOnlyPattern
                .test('in-standard-class')).to.equal(false);
       });
 
-      it('should not match when ending with a hyphen', function(){
+      it('should not match when ending with a hyphen', function () {
         expect(ctxOnlyPattern
                .test('in-standard-')).to.equal(false);
       });
 
-      it('should not match when the prefix is invalid', function(){
+      it('should not match when the prefix is invalid', function () {
         expect(ctxOnlyPattern
                .test('tin-standard')).to.equal(false);
       });
 
     });
 
-    describe('axis only match', function(){
+    describe('axis only match', function () {
       var ctxOnlyPattern = new RegExp(
         '^(data-)?(in|intent)-([a-zA-Z0-9][_a-zA-Z0-9]*):$');
 
@@ -742,9 +742,9 @@ those that are not applied',
 
   });
 
-  describe('underscore test', function(){
+  describe('underscore test', function () {
 
-    it('should be the relative complement', function(){
+    it('should be the relative complement', function () {
       expect(_.difference([1,2,3], [3,4,5])).to.eql([1,2]);
       expect(_.difference([1,2,3], [3,2])).to.eql([1]);
     });
