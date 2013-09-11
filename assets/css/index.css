@@ -426,7 +426,8 @@ body > .try.hdtv #devices .cancel {
   color: #0c262d;
   cursor: pointer;
 }
-#content.docsLite #topNav .inner p.inactive {
+#content.docsLite #topNav .inner p.inactive,
+#content.docsLite #topNav .inner p.active.inactive {
   opacity: 0;
 }
 #content.docsLite #topNav .inner p.active {
