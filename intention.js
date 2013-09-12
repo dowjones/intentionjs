@@ -29,8 +29,11 @@
     return intent;
   };
   Intention.prototype = {
-    // @public methods
-    responsive: function responsive(contexts, options) {
+    /*!
+      *
+      * @public methods
+      *
+    **/
       // for generating random ids for axis when not specified
       var idChars = 'abcdefghijklmnopqrstuvwxyz0123456789', id = '', i;
       // create a random id for the axis
@@ -167,7 +170,11 @@
       }
       return this;
     },
-    // @private methods
+      /*!
+        *
+        * @private methods
+        *
+      **/ 
     _responder: function (axisID, contexts, matcher, measure) {
       var currentContext;
       // called to perform a check
