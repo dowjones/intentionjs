@@ -8,5 +8,5 @@
     "underscore.js": "latest"
   },
   "license": "MIT",
-  "keywords": ["responsive", "touch", "contexts", "intentions"],
+  "keywords": ["responsive", "touch", "contexts", "intentions"]
 }

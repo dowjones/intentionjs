@@ -9,19 +9,23 @@
 
 (function (root, factory) {
 
- 'use strict'; 
- 
+  'use strict';
+
   if (typeof define === 'function' && define.amd) {
     define('intention', ['jquery', 'underscore'], factory);
   } else {
     root.Intention = factory(root.jQuery, root._);
   }
 }(this, function ($, _) {
-'use strict';
+  'use strict';
 
   var Intention = function (params) {
     var intent = _.extend(this, params, {
-      _listeners: {}, contexts: [], elms: $(), axes: {}, priority: []
+      _listeners: {},
+      contexts: [],
+      elms: $(),
+      axes: {},
+      priority: []
     });
     return intent;
   };
@@ -187,7 +191,7 @@
       var events = type.split(' '),
           i=0;
 
-      for(i;i<events.length;i++) {
+      for (i; i<events.length; i++) {
         if (this._listeners[events[i]] === undefined) {
           this._listeners[events[i]]=[];
         }
@@ -336,9 +340,7 @@
     },
 
     _makeSpec: function (axis, ctx, sAttr, value, spec) {
-      var axisObj,
-          ctxObj;
-
+      var axisObj; //ctxObj was initialized and never used.
       if (spec[axis] !== undefined) {
         axisObj = spec[axis];
 
@@ -383,24 +385,21 @@
               return; // skipt the attr
             }
           } else {
-            specMatch[0] = specMatch[0].replace(/:$/, '');}
+            specMatch[0] = specMatch[0].replace(/:$/, '');
+          }
 
           specMatch.push(attr.value);
           specMatch.push(spec);
 
           spec = this._makeSpec.apply(this, specMatch);
 
-        } else if (axisPattern.test(attr.name)) {
+        } else if (axisPattern.test(attr.name) ) {
 
           axisName = attr.name.match(axisPattern)[3];
 
-          _.each(axes[axisName].contexts,
-                 function (context) {
-                   this._makeSpec(axisName, context.name, 'class', context.name +
-                            ' ' + attr.value, spec);
-                 },
-                 this);}},
-             this);
+          _.each(axes[axisName].contexts, function (context) { this._makeSpec(axisName, context.name, 'class', context.name + ' ' + attr.value, spec); }, this);
+        }
+      }, this);
 
       return spec;
     },
@@ -497,13 +496,13 @@
 
     _makeChanges: function (elm, specs, axes) {
 
-      if (_.isEmpty(axes)===false) {
+      if (_.isEmpty(axes) === false) {
         var ctxConfig = this._contextConfig(specs, axes);
 
         _.each(ctxConfig, function (change, func) {
-          if (func==='move') {
+          if (func ==='move') {
             if ( (specs.__placement__ !== change.placement) ||
-                (specs.__move__ !== change.value)) {
+                (specs.__move__ !== change.value) ) {
 
               $(change.value)[change.placement](elm);
 
@@ -529,7 +528,7 @@
         }, this);
       }
       return elm;
-    } ,
+    },
 
     _respond: function (axes, elms) {
       // go through all of the responsive elms
@@ -549,17 +548,14 @@
 
     // axis test, does it begin with an underscore? for testing inside
     // spec objects
-    _axis_test_pattern: new RegExp("^_[a-zA-Z0-9]"),
+    _AXIS_TEST_PATTERN: new RegExp('^_[a-zA-Z0-9]'),
 
     // match a group after the underscore:
-    _axis_match_pattern: new RegExp("^_([a-zA-Z0-9][_a-zA-Z0-9]*)"),
+    _AXIS_MATCH_PATTERN: new RegExp('^_([a-zA-Z0-9][_a-zA-Z0-9]*)'),
 
     // simple trim
-    _trim_pattern: new RegExp( "^\\s+|\\s+$", "g" )
+    _TRIM_PATTERN: new RegExp('^\\s+|\\s+$', 'g')
   };
 
   return Intention;
 }));
-
-
-

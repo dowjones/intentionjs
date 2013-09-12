@@ -148,5 +148,5 @@
     }
   }(this, function ($, Intention) {
     return context($, Intention);
-  }));
+}));
 }).call(this);
