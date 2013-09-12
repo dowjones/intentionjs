@@ -1,6 +1,9 @@
-
-  //                              JSHint Configuration File for IntentionJS project.
-  //                              See http://jshint.com/docs/ for more details
+/*
+ *
+ *  JSHint Configuration File for IntentionJS project.
+ *  See http://jshint.com/docs/ for more details
+ *
+ */
 
 {
 
@@ -85,7 +88,7 @@
   "white"         : true,     //  true: Check against strict whitespace and indentation rules
 
   // Custom Globals
-  "globals"       : {   
+  "globals"       : {
     "_"         : false,
     "it"        : false,
     "underscore": false,
@@ -94,6 +97,6 @@
     "expect"    : false,
     "module"    : true,
     "Intention" : true
-  }       
+  }
 
-} 
+}

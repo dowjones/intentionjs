@@ -30,6 +30,11 @@
   };
   Intention.prototype = {
     responsive: function responsive(contexts, options) {
+      /**************************************************************
+      *
+      * @public methods
+      *
+      **************************************************************/
       // for generating random ids for axis when not specified
       var idChars = 'abcdefghijklmnopqrstuvwxyz0123456789', id = '', i;
       // create a random id for the axis
@@ -59,7 +64,7 @@
       }
       // fill in the options
       options = _.extend({}, defaults, options);
-      // bind an the respond function to the axis ID and prefix it
+      // bind the respond function to the axis ID and prefix it
       // with an underscore so that it does not get whomped accidentally
       this.on('_' + options.ID + ':', _.bind(function (e) {
         this.axes = this._contextualize(options.ID, e.context, this.axes);
@@ -166,6 +171,11 @@
       }
       return this;
     },
+      /************************************************************************
+      *
+      * @private methods
+      *
+      *************************************************************************/
     _responder: function (axisID, contexts, matcher, measure) {
       var currentContext;
       // called to perform a check
