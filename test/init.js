@@ -1,33 +1,22 @@
 /* global intent: false */
-
 'use strict';
-
 function in_init(contexts, callback) {
-/* jshint validthis: true */
-
+  /* jshint validthis: true */
   var dfds = [];
-
   _.each(contexts, function (ctx) {
     var dfd = $.Deferred();
-
     dfds.push(dfd);
-
-    if(intent.is(ctx)) {
+    if (intent.is(ctx)) {
       dfd.resolve();
     } else {
       intent.on(ctx, dfd.resolve);
     }
   });
-
-  if ((!contexts) || (contexts.length === 0)) {
+  if (!contexts || contexts.length === 0) {
     callback();
   }
-
-  $.when
-    .apply(this, dfds)
-    .done(callback);
+  $.when.apply(this, dfds).done(callback);
 }
-
 in_init(['standard'], function () {
   console.log('standard has been entered');
 });
