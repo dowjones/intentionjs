@@ -2,10 +2,10 @@
  * intention.js Library v0.9.9
  * http://intentionjs.com/
  *
- * Copyright 2011, 2013 Dow Jones and other contributors.
- * Released under the MIT license.
+ * Copyright 2011, 2013 Dowjones and other contributors
+ * Released under the MIT license
  *
-**/
+ */
 (function (root, factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
@@ -29,7 +29,6 @@
     return intent;
   };
   Intention.prototype = {
-    // @public methods
     responsive: function responsive(contexts, options) {
       // for generating random ids for axis when not specified
       var idChars = 'abcdefghijklmnopqrstuvwxyz0123456789', id = '', i;
@@ -60,7 +59,7 @@
       }
       // fill in the options
       options = _.extend({}, defaults, options);
-      // bind the respond function to the axis ID and prefix it
+      // bind an the respond function to the axis ID and prefix it
       // with an underscore so that it does not get whomped accidentally
       this.on('_' + options.ID + ':', _.bind(function (e) {
         this.axes = this._contextualize(options.ID, e.context, this.axes);
@@ -167,7 +166,6 @@
       }
       return this;
     },
-    // @private methods
     _responder: function (axisID, contexts, matcher, measure) {
       var currentContext;
       // called to perform a check
@@ -259,8 +257,7 @@
       return match;
     },
     _makeSpec: function (axis, ctx, sAttr, value, spec) {
-      var axisObj;
-      //ctxObj was initialized and never used.
+      var axisObj, ctxObj;
       if (spec[axis] !== undefined) {
         axisObj = spec[axis];
         if (axisObj[ctx] === undefined) {
@@ -416,9 +413,9 @@
       axes[axisID].current = context;
       return axes;
     },
-    _AXIS_TEST_PATTERN: new RegExp('^_[a-zA-Z0-9]'),
-    _AXIS_MATCH_PATTERN: new RegExp('^_([a-zA-Z0-9][_a-zA-Z0-9]*)'),
-    _TRIM_PATTERN: new RegExp('^\\s+|\\s+$', 'g')
+    _axis_test_pattern: new RegExp('^_[a-zA-Z0-9]'),
+    _axis_match_pattern: new RegExp('^_([a-zA-Z0-9][_a-zA-Z0-9]*)'),
+    _trim_pattern: new RegExp('^s+|s+$', 'g')
   };
   return Intention;
 }));
