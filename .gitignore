@@ -4,4 +4,4 @@ _site
 *.espressostorage
 .projectile
 *.sublime*
-*~.md
+*~*
