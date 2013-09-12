@@ -28,7 +28,7 @@ module.exports = function (grunt) {
         },
       },
        context: {
-         options:{
+         options: {
            banner: '/*! <%= pkg.name %> v<%= pkg.version %> \n* <%= pkg.homepage %> \n* \n* context.js \n* \n* <%=pkg.copyright %>, <%= grunt.template.today("yyyy") %>\n* <%=pkg.banner %>*/ '
          },
          files: {
