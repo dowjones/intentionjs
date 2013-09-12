@@ -15,7 +15,8 @@ module.exports = function (grunt) {
     jshint: {
       files: ['**.js', 'test/*.js'],
       options: {
-          ignores: ['code/*', 'test/vendor/**/*']
+          ignores: ['code/*', 'test/vendor/**/*'],
+          jshintrc: '.jshintrc'
         }
       },
       uglify: {

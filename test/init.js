@@ -1,4 +1,10 @@
+/* global intent: false */
+
+'use strict';
+
 function in_init(contexts, callback) {
+/* jshint validthis: true */
+
   var dfds = [];
 
   _.each(contexts, function (ctx) {

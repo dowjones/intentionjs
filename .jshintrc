@@ -21,7 +21,7 @@
   "noempty"       : true,     //  true: Prohibit use of empty blocks
   "nonew"         : false,    //  true: Prohibit use of constructors for side-effects (without assignment)
   "plusplus"      : false,    //  true: Prohibit use of `++` & `--`
-  "quotmark"      : true,     //   Quotation mark consistency:
+  "quotmark"      : "single",     //   Quotation mark consistency:
                               //    false    : do nothing (default)
                               //    true     : ensure whatever is used is consistent
                               //    "single" : require single quotes
@@ -29,7 +29,7 @@
   "undef"         : true,     //  true: Require all non-global variables to be declared (prevents global leaks)
   "unused"        : true,     //  true: Require all defined variables be used
   "strict"        : true,     //  true: Requires all functions run in ES5 Strict Mode
-  "trailing"      : false,    //  true: Prohibit trailing whitespaces
+  "trailing"      : true,    //  true: Prohibit trailing whitespaces
   "maxparams"     : false,    //  {int} Max number of formal params allowed per function
   "maxdepth"      : false,    //  {int} Max depth of nested blocks (within functions)
   "maxstatements" : false,    //  {int} Max number statements per function
@@ -49,7 +49,7 @@
   "funcscope"     : false,     // true: Tolerate defining variables inside control statements"
   "globalstrict"  : false,     // true: Allow global "use strict" (also enables 'strict')
   "iterator"      : false,     // true: Tolerate using the `__iterator__` property
-  "lastsemic"     : false,     // true: Tolerate omitting a semicolon for the last statement of a 1-line block
+  "lastsemic"     : true,      // true: Tolerate omitting a semicolon for the last statement of a 1-line block
   "laxbreak"      : false,     // true: Tolerate possibly unsafe line breakings
   "laxcomma"      : false,     // true: Tolerate comma-first style coding
   "loopfunc"      : false,     // true: Tolerate functions being defined in loops
@@ -61,14 +61,14 @@
   "sub"           : false,     // true: Tolerate using `[]` notation when it can still be expressed in dot notation
   "supernew"      : false,     // true: Tolerate `new function () { ... };` and `new Object;`
   "validthis"     : false,     // true: Tolerate using this in a non-constructor function
-  "regexp"        : false,     // true if . and [^...] should be allowed in RegExp literals. They match more material than might be expected, allowing attackers to confuse applications. These forms should not be used when validating in secure applications.
+  // "regexp"        : false,     // true if . and [^...] should be allowed in RegExp literals. They match more material than might be expected, allowing attackers to confuse applications. These forms should not be used when validating in secure applications.
 
   // Environments
   "browser"       : true,     //  Web Browser (window, document, etc)
   "couch"         : false,    //  CouchDB
   "devel"         : true,     //  Development/debugging (alert, confirm, etc)
   "dojo"          : false,    //  Dojo Toolkit
-  "jquery"        : false,    //  jQuery
+  "jquery"        : true,    //  jQuery
   "mootools"      : false,    //  MooTools
   "node"          : true,     //   Node.js
   "nonstandard"   : false,    //  Widely adopted globals (escape, unescape, etc)
@@ -82,12 +82,10 @@
   "nomen"         : false,    //  true: Prohibit dangling `_` in variables
   "onevar"        : false,    //  true: Allow only one `var` statement per function
   "passfail"      : false,    //  true: Stop on first error
-  "white"         : false,     //  true: Check against strict whitespace and indentation rules
+  "white"         : true,     //  true: Check against strict whitespace and indentation rules
 
   // Custom Globals
   "globals"       : {   
-    "jQuery"    : false,
-    "$"         : false,
     "_"         : false,
     "it"        : false,
     "underscore": false,
