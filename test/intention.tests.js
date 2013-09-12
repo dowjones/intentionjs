@@ -594,8 +594,6 @@ describe('Intention', function () {
       });
     });
     describe('axis only match', function () {
-      // changed from ctxOnlyPattern to axisOnlyPattern. Test needed.
-      // var axisOnlyPattern = new RegExp('^(data-)?(in|intent)-([a-zA-Z0-9][_a-zA-Z0-9]*):$'); 
     });
   });
   describe('underscore test', function () {
