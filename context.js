@@ -84,7 +84,7 @@
       contexts: [
         {name: 'portrait', rotation: 0},
         {name: 'landscape', rotation: 90}
-        ],
+      ],
       matcher: function (measure, ctx) {
         return measure === ctx.rotation;
       },
@@ -117,7 +117,8 @@
       // matching:
       matcher: function () {
         return window.devicePixelRatio > 1;
-      }}).respond();
+      }
+    }).respond();
 
     // bind events to the window
     $(window).on('resize', throttle(horizontal_axis.respond, 100))
@@ -148,5 +149,5 @@
     }
   }(this, function ($, Intention) {
     return context($, Intention);
-}));
+  }));
 }).call(this);

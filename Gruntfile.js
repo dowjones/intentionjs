@@ -1,5 +1,6 @@
 //
 module.exports = function (grunt) {
+  'use strict';
   grunt.loadNpmTasks('grunt-contrib-jshint');
   //grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -14,28 +15,28 @@ module.exports = function (grunt) {
     },
     jshint: {
       files: ['**.js','test/*.js'],
-        options: {
+      options: {
           ignores: ['code/*', 'test/vendor/**/*']
         }
-    },
-    uglify: {
-      intention : {
-        options: {
-          banner: '/*! <%= pkg.name %> v<%= pkg.version %> \n* <%= pkg.homepage %> \n* \n* intention.js \n* \n* <%=pkg.copyright %>, <%= grunt.template.today("yyyy") %>\n* <%=pkg.banner %>*/ '
-        },
-        files: {
-          'code/intention.min.js': ['intention.js']
-        },
       },
-       context: {
-         options: {
-           banner: '/*! <%= pkg.name %> v<%= pkg.version %> \n* <%= pkg.homepage %> \n* \n* context.js \n* \n* <%=pkg.copyright %>, <%= grunt.template.today("yyyy") %>\n* <%=pkg.banner %>*/ '
-         },
-         files: {
-           'code/context.min.js':['context.js']
+      uglify: {
+        intention : {
+          options: {
+            banner: '/*! <%= pkg.name %> v<%= pkg.version %> \n* <%= pkg.homepage %> \n* \n* intention.js \n* \n* <%=pkg.copyright %>, <%= grunt.template.today("yyyy") %>\n* <%=pkg.banner %>*/ '
+          },
+          files: {
+            'code/intention.min.js': ['intention.js']
+          },
+        },
+        context: {
+          options: {
+            banner: '/*! <%= pkg.name %> v<%= pkg.version %> \n* <%= pkg.homepage %> \n* \n* context.js \n* \n* <%=pkg.copyright %>, <%= grunt.template.today("yyyy") %>\n* <%=pkg.banner %>*/ '
+          },
+          files: {
+            'code/context.min.js':['context.js']
+          }
         }
       }
-    }
-  });
+    });
   grunt.registerTask('default', ['jshint', 'uglify']);
 };
