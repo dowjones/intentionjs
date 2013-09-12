@@ -45,20 +45,21 @@
 
     // catchall
     // =======================================================================
-    intent.responsive([{name:'base'}]).respond('base');
+    intent.responsive([{name: 'base'}]).respond('base');
 
     // width context?
     // =======================================================================
     horizontal_axis = intent.responsive({
-      ID:'width',
+      ID: 'width',
       contexts: [
-        {name:'standard', min:840},
-        {name:'tablet', min:510},
-        {name:'mobile', min:0}],
+        {name: 'standard', min: 840},
+        {name: 'tablet', min: 510},
+        {name: 'mobile', min: 0}
+      ],
       // compare the return value of the callback to each context
       // return true for a match
       matcher: function (test, context) {
-        if(typeof test === 'string') {
+        if (typeof test === 'string') {
 
           return test === context.name;
         }
@@ -68,7 +69,7 @@
       // to compare against current context
       measure: function (arg) {
 
-        if(typeof arg === 'string') {
+        if (typeof arg === 'string') {
           return arg;
         }
 
@@ -79,15 +80,17 @@
     // orientation context?
     // =======================================================================
     orientation_axis = intent.responsive({
-      ID:'orientation',
-      contexts: [{name:'portrait', rotation: 0},
-        {name:'landscape', rotation:90}],
+      ID: 'orientation',
+      contexts: [
+        {name: 'portrait', rotation: 0},
+        {name: 'landscape', rotation: 90}
+        ],
       matcher: function (measure, ctx) {
         return measure === ctx.rotation;
       },
       measure: function () {
         var test = Math.abs(window.orientation);
-        if(test > 0) {
+        if (test > 0) {
           test = 180 - test;
         }
         return test;
@@ -98,18 +101,19 @@
     // touch device?
     // =======================================================================
     intent.responsive({
-      ID:'touch',
-      contexts:[{name:'touch'}],
+      ID: 'touch',
+      contexts: [{name: 'touch'}],
       matcher: function () {
         return "ontouchstart" in window;
-      }}).respond();
+      }
+    }).respond();
 
     // retina display?
     // =======================================================================
     intent.responsive({
       ID: 'highres',
       // contexts
-      contexts:[{name:'highres'}],
+      contexts: [{name: 'highres'}],
       // matching:
       matcher: function () {
         return window.devicePixelRatio > 1;
