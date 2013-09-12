@@ -1,4 +1,3 @@
-//
 module.exports = function (grunt) {
   'use strict';
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -14,7 +13,7 @@ module.exports = function (grunt) {
       }
     },
     jshint: {
-      files: ['**.js','test/*.js'],
+      files: ['**.js', 'test/*.js'],
       options: {
           ignores: ['code/*', 'test/vendor/**/*']
         }
@@ -26,14 +25,14 @@ module.exports = function (grunt) {
           },
           files: {
             'code/intention.min.js': ['intention.js']
-          },
+          }
         },
         context: {
           options: {
             banner: '/*! <%= pkg.name %> v<%= pkg.version %> \n* <%= pkg.homepage %> \n* \n* context.js \n* \n* <%=pkg.copyright %>, <%= grunt.template.today("yyyy") %>\n* <%=pkg.banner %>*/ '
           },
           files: {
-            'code/context.min.js':['context.js']
+            'code/context.min.js': ['context.js']
           }
         }
       }

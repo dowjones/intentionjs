@@ -104,7 +104,7 @@
       ID: 'touch',
       contexts: [{name: 'touch'}],
       matcher: function () {
-        return "ontouchstart" in window;
+        return 'ontouchstart' in window;
       }
     }).respond();
 

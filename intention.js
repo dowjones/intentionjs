@@ -187,10 +187,8 @@
     // observer pattern outlined here:
     // http://www.nczonline.net/blog/2010/03/09/custom-events-in-javascript/
     on: function (type, listener) {
-
       var events = type.split(' '),
           i=0;
-
       for (i; i<events.length; i++) {
         if (this._listeners[events[i]] === undefined) {
           this._listeners[events[i]]=[];
