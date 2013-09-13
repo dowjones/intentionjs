@@ -1,15 +1,41 @@
 {
   "name": "intention.js",
   "version": "0.9.9",
-  "description": "",
-  "repository": "http://github.com/wsjdesign/intentionjs",
-  "author": "",
+  "description": "DOM Manipulation via html attribute specification",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/wsjdesign/intentionjs"
+  },
+  "homepage": "http://intentionjs.com/",
+  "author": "Joe Kendall",
   "license": "MIT",
-  "dependencies": {},
+  "copyright": "Copyright 2008",
+  "banner": "Dowjones and other contributors. \n* Released under the MIT license. \n*",
+  "main": "intention.js",
+  "keywords": [
+    "responsive",
+    "design",
+    "intention",
+    "ui"
+  ],
+  "dependencies": {
+    "jquery": "*",
+    "underscore": "*"
+  },
   "devDependencies": {
     "grunt-contrib-uglify": "~0.2.2",
     "chai": "*",
     "mocha": "*",
     "grunt-release": "~0.5.1"
+  },
+  "bugs": {
+    "url": "https://github.com/wsjdesign/intentionjs/issues"
+  },
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
   }
 }

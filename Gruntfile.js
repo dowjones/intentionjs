@@ -1,53 +1,38 @@
-//
-module.exports = function(grunt){
-  //grunt.loadNpmTasks('grunt-contrib-jshint');
+module.exports = function (grunt) {
+  'use strict';
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   //grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-release');
-
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    release: {
-      options:{
-        npm:false
+    release: { options: { npm: false } },
+    jshint: {
+      files: [
+        '**.js',
+        'test/*.js'
+      ],
+      options: {
+        ignores: [
+          'code/*',
+          'test/vendor/**/*'
+        ],
+        jshintrc: '.jshintrc'
       }
     },
-    uglify:{
-      intention : {
-        options:{
-          banner: '/*! <%= pkg.name %> v<%= pkg.version %>\
-\n* http://intentionjs.com/\
-\n*\
-\n*\ intention.js\
-\n*\
-\n* Copyright 2011, <%= grunt.template.today("yyyy") %>\ Dowjones and other contributors\
-\n* Released under the MIT license\
-\n*\
-\n*/\n'
-         },
-         files: {
-           'code/intention.min.js': ['intention.js']
-         }
-       },
-       context: {
-         options:{
-           banner: '/*! <%= pkg.name %> v<%= pkg.version %>\
-\n* http://intentionjs.com/\
-\n*\
-\n*\ context.js\
-\n*\
-\n* Copyright 2011, <%= grunt.template.today("yyyy") %>\ Dowjones and other contributors\
-\n* Released under the MIT license\
-\n*\
-\n*/\n'
-         },
-         files: {
-
-           'code/context.min.js':['context.js']
-        }
+    uglify: {
+      intention: {
+        options: { banner: '/*! <%= pkg.name %> v<%= pkg.version %> \n* <%= pkg.homepage %> \n* \n* intention.js \n* \n* <%=pkg.copyright %>, <%= grunt.template.today("yyyy") %>\n* <%=pkg.banner %>*/ ' },
+        files: { 'code/intention.min.js': ['intention.js'] }
+      },
+      context: {
+        options: { banner: '/*! <%= pkg.name %> v<%= pkg.version %> \n* <%= pkg.homepage %> \n* \n* context.js \n* \n* <%=pkg.copyright %>, <%= grunt.template.today("yyyy") %>\n* <%=pkg.banner %>*/ ' },
+        files: { 'code/context.min.js': ['context.js'] }
       }
     }
   });
-
-
-}
+  grunt.registerTask('default', [
+    'jshint',
+    'uglify'
+  ]);
+};
