@@ -4,7 +4,7 @@ title: Examples Are Working Once Again
 tags: update
 ---
 
-After a brief period of faultiness (which *of course* coincided with our announcement on Hacker News), all of our examples are working. We were linking to outdated version of intention.js, but using the latest version's syntax. As a result, the responsive grid demo only "shrunk" with a window resize... But now it's all operational! You should see a rearrangement of elements in addition to some shrinking.
+After a brief period of faultiness (which *of course* coincided with our announcement on Hacker News), all of our examples are working. We were linking to an outdated version of intention.js, but using the latest version's syntax. As a result, the responsive grid demo only "shrunk" with a window resize... But now it's all operational! You should see a rearrangement of elements in addition to some shrinking.
 
 For your convenience, here is a quick list of our current examples:
 - [Responsive Grid Demo](/2013/03/10/grid-demo.html)
