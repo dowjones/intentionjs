@@ -35,16 +35,11 @@
       * @public methods
       *
       **************************************************************/
-    /*!
-      *
-      * @public methods
-      *
-    **/
       // for generating random ids for axis when not specified
-      var idChars = 'abcdefghijklmnopqrstuvwxyz0123456789', id = '', i;
+      var idChars = 'abcdefghijklmnopqrstuvwxyz0123456789', len = idChars.length, id = '', i;
       // create a random id for the axis
       for (i = 0; i < 5; i++) {
-        id += idChars[Math.floor(Math.random() * idChars.length)];
+        id += idChars[Math.floor(Math.random() * len)];
       }
       var defaults = {
           matcher: function (measure, ctx) {
@@ -176,11 +171,11 @@
       }
       return this;
     },
-      /************************************************************************
+    /**************************************************************
       *
-      * @private methods
+      *@private methods
       *
-      *************************************************************************/
+      **************************************************************/
     _responder: function (axisID, contexts, matcher, measure) {
       var currentContext;
       // called to perform a check
