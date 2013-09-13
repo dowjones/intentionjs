@@ -42,9 +42,11 @@
     **/
       // for generating random ids for axis when not specified
       var idChars = 'abcdefghijklmnopqrstuvwxyz0123456789', id = '', i;
+	  // for caching the math functions to avoid calling them in a loop
+      var mathFloorRandomIdChars = Math.floor(Math.random() * idChars.length);
       // create a random id for the axis
       for (i = 0; i < 5; i++) {
-        id += idChars[Math.floor(Math.random() * idChars.length)];
+        id += idChars[mathFloorRandomIdChars];
       }
       var defaults = {
           matcher: function (measure, ctx) {
