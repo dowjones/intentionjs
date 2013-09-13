@@ -35,6 +35,11 @@
       * @public methods
       *
       **************************************************************/
+    /*!
+      *
+      * @public methods
+      *
+    **/
       // for generating random ids for axis when not specified
       var idChars = 'abcdefghijklmnopqrstuvwxyz0123456789', id = '', i;
       // create a random id for the axis
