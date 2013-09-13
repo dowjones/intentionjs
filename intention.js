@@ -9,10 +9,7 @@
 (function (root, factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
-    define('intention', [
-      'jquery',
-      'underscore'
-    ], factory);
+    define('intention', [ 'jquery', 'underscore' ], factory);
   } else {
     root.Intention = factory(root.jQuery, root._);
   }
@@ -36,10 +33,13 @@
       *
       **************************************************************/
       // for generating random ids for axis when not specified
-      var idChars = 'abcdefghijklmnopqrstuvwxyz0123456789', id = '', i;
+      var idChars = 'abcdefghijklmnopqrstuvwxyz0123456789',
+      // for caching the math functions to avoid calling them in a loop
+        mathFloorRandomIdChars = Math.floor(Math.random() * idChars.length),
+        id = '', i;
       // create a random id for the axis
       for (i = 0; i < 5; i++) {
-        id += idChars[Math.floor(Math.random() * idChars.length)];
+        id += idChars[mathFloorRandomIdChars];
       }
       var defaults = {
           matcher: function (measure, ctx) {
