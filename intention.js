@@ -267,7 +267,7 @@
       return match;
     },
     _makeSpec: function (axis, ctx, sAttr, value, spec) {
-      var axisObj, ctxObj;
+      var axisObj;//, ctxObj;
       if (spec[axis] !== undefined) {
         axisObj = spec[axis];
         if (axisObj[ctx] === undefined) {

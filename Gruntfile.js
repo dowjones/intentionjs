@@ -21,7 +21,9 @@ module.exports = function (grunt) {
         'code/context.js',
         'Gruntfile.js'
       ],
-      test: ['test/**/*'],
+      test: [
+        'test/**/*'
+      ],
       options: {
         ignores: [
           'test/vendor/**/*',
@@ -40,7 +42,7 @@ module.exports = function (grunt) {
         intention: {
           files: [{
             expand: true,
-            src: ['*.js'],
+            src: '<%= jshint.source %>',
             dest: 'code/',
             ext: '.js'
           }]
@@ -80,13 +82,19 @@ module.exports = function (grunt) {
   });
   grunt.registerTask('default', [
     'jshint:source',
+    'clean:intention',
     'fixmyjs',
     'jshint:code',
+    'clean:grunt',
     'mocha',
     'uglify',
-    'clean:grunt'
   ]);
-  grunt.registerTask('test', ['mocha']);
+  grunt.registerTask('test', [
+    'fixmyjs',
+    'jshint:code',
+    'jshint:test',
+    'mocha'
+  ]);
   grunt.registerTask('build', [
     'clean',
     'fixmyjs',

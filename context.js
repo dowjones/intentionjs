@@ -9,12 +9,12 @@
 (function () {
   'use strict';
   var context = function ($, Intention) {
-    // create a brand spankin new intention object
+    // create a brand spankin new intention object.
     var intent = new Intention(),
-      // placeholder for the horizontal axis
+      // placeholder for the horizontal axis and orientation axis.
       horizontal_axis, orientation_axis;
     // throttle function used for keeping calls to the resize responsive
-    // callback to a minimum
+    // callback to a minimum.
     function throttle(callback, interval) {
       var lastExec = new Date(), timer = null;
       return function (e) {
@@ -38,7 +38,8 @@
     // catchall
     // =======================================================================
     intent.responsive([{ name: 'base' }]).respond('base');
-    // width context?
+    //
+    // width context? 
     // =======================================================================
     horizontal_axis = intent.responsive({
       ID: 'width',
@@ -71,6 +72,7 @@
     });
     // orientation context?
     // =======================================================================
+
     orientation_axis = intent.responsive({
       ID: 'orientation',
       contexts: [
