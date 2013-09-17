@@ -1,0 +1,7 @@
+// .npmignore
+.git*
+docs/
+examples/
+support/
+test/
+.DS_Store
