@@ -139,7 +139,6 @@ describe('Intention', function () {
         ]);
         // TODO: make this que off the contexts length
         expect(intent.axes.__keys__.length).to.equal(3);
-        expect(intent.primary.length).to.equal(3);
       });
     });
   });
