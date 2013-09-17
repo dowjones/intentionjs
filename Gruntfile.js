@@ -8,69 +8,89 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-fixmyjs');
   //grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-release');
-
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     release: { options: { npm: false } },
     jshint: {
-      files: [
-        'Gruntfile.js',
+      source: [
         'intention.js',
-        'context.js',
-        'test/**/*.js'
+        'context.js'
       ],
+      code: [
+        'code/intention.js',
+        'code/context.js',
+        'Gruntfile.js'
+      ],
+      test: ['test/**/*'],
       options: {
         ignores: [
-          'test/vendor/**/*'
+          'test/vendor/**/*',
+          'code/*min.js'
         ],
-        jshintrc: '.jshintrc',
+        jshintrc: '.jshintrc'
       }
     },
     clean: {
-      intention: ['code/**/*']
+      intention: ['code/**/*'],
+      grunt: ['code/Gruntfile.js']
     },
     fixmyjs: {
       options: {
-        jshintrc: '.jshintrc'
-      },
-      intention: {
-        files: [
-          {expand: true, src: ['*.js'], dest: 'code/', ext: '.js'}
-        ]
+        jshintrc: '.jshintrc',
+        intention: {
+          files: [{
+            expand: true,
+            src: ['*.js'],
+            dest: 'code/',
+            ext: '.js'
+          }]
+        }
       }
     },
     mocha: {
-      index: ['test/index.html']
+      intention: [
+        'test/index.html',
+        'test/context-tests.html'
+      ],
+      options: {
+        run: true,
+        ui: 'bdd'
+      }
     },
     watch: {
-      files: ['<%= jshint.files %>'],
-      tasks: ['jshint', 'mocha']
+      files: [
+        '<%= jshint.source %>',
+        'test/**/*'
+      ],
+      tasks: [
+        'jshint:source',
+        'mocha'
+      ]
     },
     uglify: {
       intention: {
         options: { banner: '/*! <%= pkg.name %> v<%= pkg.version %> \n* <%= pkg.homepage %> \n* \n* intention.js \n* \n* <%=pkg.copyright %>, <%= grunt.template.today("yyyy") %>\n* <%=pkg.banner %>*/ ' },
-        files: { 'code/intention.min.js': ['intention.js'] }
+        files: { 'code/intention.min.js': ['code/intention.js'] }
       },
       context: {
         options: { banner: '/*! <%= pkg.name %> v<%= pkg.version %> \n* <%= pkg.homepage %> \n* \n* context.js \n* \n* <%=pkg.copyright %>, <%= grunt.template.today("yyyy") %>\n* <%=pkg.banner %>*/ ' },
-        files: { 'code/context.min.js': ['context.js'] }
+        files: { 'code/context.min.js': ['code/context.js'] }
       }
     }
   });
-  grunt.registerTask('test', [
-    'mocha'
-  ]);
   grunt.registerTask('default', [
-    'jshint',
-    'mocha',
+    'jshint:source',
     'fixmyjs',
+    'jshint:code',
+    'mocha',
     'uglify',
-    'watch'
+    'clean:grunt'
   ]);
+  grunt.registerTask('test', ['mocha']);
   grunt.registerTask('build', [
-    'jshint',
     'clean',
     'fixmyjs',
+    'clean:grunt',
     'mocha',
     'uglify'
   ]);
