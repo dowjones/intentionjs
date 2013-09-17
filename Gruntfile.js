@@ -1,26 +1,30 @@
 module.exports = function (grunt) {
   'use strict';
+  grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-fixmyjs');
   //grunt.loadNpmTasks('grunt-contrib-requirejs');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-release');
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     release: { options: { npm: false } },
     jshint: {
-      all: [
-        '**.js',
-        'test/*.js'
+      files: [
+        'Gruntfile.js',
+        'intention.js',
+        'context.js',
+        'test/**/*.js'
       ],
       options: {
         ignores: [
-          'code/*',
           'test/vendor/**/*'
         ],
-        jshintrc: '.jshintrc'
+        jshintrc: '.jshintrc',
       }
     },
     clean: {
@@ -32,9 +36,16 @@ module.exports = function (grunt) {
       },
       intention: {
         files: [
-          {expand: true, cwd: './', src: ['*.js'], dest: 'code/fixed/', ext: '.js'}
+          {expand: true, src: ['*.js'], dest: 'code/', ext: '.js'}
         ]
       }
+    },
+    mocha: {
+      index: ['test/index.html']
+    },
+    watch: {
+      files: ['<%= jshint.files %>'],
+      tasks: ['jshint', 'mocha']
     },
     uglify: {
       intention: {
@@ -47,14 +58,21 @@ module.exports = function (grunt) {
       }
     }
   });
+  grunt.registerTask('test', [
+    'mocha'
+  ]);
   grunt.registerTask('default', [
     'jshint',
-    'uglify'
+    'mocha',
+    'fixmyjs',
+    'uglify',
+    'watch'
   ]);
   grunt.registerTask('build', [
     'jshint',
     'clean',
     'fixmyjs',
+    'mocha',
     'uglify'
   ]);
 };

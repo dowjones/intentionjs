@@ -29,7 +29,9 @@
     "grunt-release": "~0.5.1",
     "grunt-fixmyjs": "~0.1.0",
     "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-jshint": "~0.6.4"
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-mocha": "~0.4.1",
+    "grunt-contrib-watch": "~0.5.3"
   },
   "bugs": {
     "url": "https://github.com/wsjdesign/intentionjs/issues"
