@@ -1,14 +1,17 @@
 module.exports = function (grunt) {
   'use strict';
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-fixmyjs');
   //grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-release');
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     release: { options: { npm: false } },
     jshint: {
-      files: [
+      all: [
         '**.js',
         'test/*.js'
       ],
@@ -18,6 +21,19 @@ module.exports = function (grunt) {
           'test/vendor/**/*'
         ],
         jshintrc: '.jshintrc'
+      }
+    },
+    clean: {
+      intention: ['code/**/*']
+    },
+    fixmyjs: {
+      options: {
+        jshintrc: '.jshintrc'
+      },
+      intention: {
+        files: [
+          {expand: true, cwd: './', src: ['*.js'], dest: 'code/fixed/', ext: '.js'}
+        ]
       }
     },
     uglify: {
@@ -33,6 +49,12 @@ module.exports = function (grunt) {
   });
   grunt.registerTask('default', [
     'jshint',
+    'uglify'
+  ]);
+  grunt.registerTask('build', [
+    'jshint',
+    'clean',
+    'fixmyjs',
     'uglify'
   ]);
 };
