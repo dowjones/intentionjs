@@ -13,7 +13,7 @@ describe('Intention', function () {
   // basic in-* attrs
   responsiveElm1.attr('in-mobile-class', 'mobile').attr('in-tablet-class', 'tablet').attr('in-touch-class', 'touch').attr('in-standard-class', 'standard');
   container.append(nonResponsiveElm, responsiveElm1, $('<div intent>'));
-  describe('add and remove: add and remove responsive elements', function () {
+  describe('add and remove: add and remove /esponsive elements', function () {
     var intent = new Intention();
     it('Should add three items to intent.elms', function () {
       expect(intent.elms.length).to.equal(0);
@@ -128,6 +128,7 @@ describe('Intention', function () {
       });
       width.respond('tab');
     });
+    // TODO: Only works in browser not via PhantomJS/Grunt Task
     describe('recursive responsive axis creation', function () {
       it('should create three axis by calling intent.responsive once', function () {
         var intent = new Intention();

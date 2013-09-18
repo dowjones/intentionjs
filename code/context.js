@@ -72,7 +72,6 @@
     });
     // orientation context?
     // =======================================================================
-
     orientation_axis = intent.responsive({
       ID: 'orientation',
       contexts: [
