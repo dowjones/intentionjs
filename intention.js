@@ -171,11 +171,6 @@
       }
       return this;
     },
-    /**************************************************************
-      *
-      *@private methods
-      *
-      **************************************************************/
     _responder: function (axisID, contexts, matcher, measure) {
       var currentContext;
       // called to perform a check

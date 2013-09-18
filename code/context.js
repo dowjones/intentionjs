@@ -18,82 +18,81 @@
     function throttle(callback, interval) {
       var lastExec = new Date(), timer = null;
       return function (e) {
-        var d = new Date();
-        if (d - lastExec < interval) {
-          if (timer) {
-            window.clearTimeout(timer);
-          }
-          var callbackWrapper = function (event) {
-            return function () {
-              callback(event);
-            };
-          };
-          timer = window.setTimeout(callbackWrapper(e), interval);
-          return false;
-        }
-        callback(e);
-        lastExec = d;
+	var d = new Date();
+	if (d - lastExec < interval) {
+	  if (timer) {
+	    window.clearTimeout(timer);
+	  }
+	  var callbackWrapper = function (event) {
+	    return function () {
+	      callback(event);
+	    };
+	  };
+	  timer = window.setTimeout(callbackWrapper(e), interval);
+	  return false;
+	}
+	callback(e);
+	lastExec = d;
       };
     }
     // catchall
     // =======================================================================
     intent.responsive([{ name: 'base' }]).respond('base');
     //
-    // width context? 
+    // width context?
     // =======================================================================
     horizontal_axis = intent.responsive({
       ID: 'width',
       contexts: [
-        {
-          name: 'standard',
-          min: 840
-        },
-        {
-          name: 'tablet',
-          min: 510
-        },
-        {
-          name: 'mobile',
-          min: 0
-        }
+	{
+	  name: 'standard',
+	  min: 840
+	},
+	{
+	  name: 'tablet',
+	  min: 510
+	},
+	{
+	  name: 'mobile',
+	  min: 0
+	}
       ],
       matcher: function (test, context) {
-        if (typeof test === 'string') {
-          return test === context.name;
-        }
-        return test >= context.min;
+	if (typeof test === 'string') {
+	  return test === context.name;
+	}
+	return test >= context.min;
       },
       measure: function (arg) {
-        if (typeof arg === 'string') {
-          return arg;
-        }
-        return $(window).width();
+	if (typeof arg === 'string') {
+	  return arg;
+	}
+	return $(window).width();
       }
     });
     // orientation context?
     // =======================================================================
-
     orientation_axis = intent.responsive({
       ID: 'orientation',
       contexts: [
-        {
-          name: 'portrait',
-          rotation: 0
-        },
-        {
-          name: 'landscape',
-          rotation: 90
-        }
+	{
+	  name: 'portrait',
+	  rotation: 0
+	},
+	{
+	  name: 'landscape',
+	  rotation: 90
+	}
       ],
       matcher: function (measure, ctx) {
-        return measure === ctx.rotation;
+	return measure === ctx.rotation;
       },
       measure: function () {
-        var test = Math.abs(window.orientation);
-        if (test > 0) {
-          test = 180 - test;
-        }
-        return test;
+	var test = Math.abs(window.orientation);
+	if (test > 0) {
+	  test = 180 - test;
+	}
+	return test;
       }
     });
     // ONE TIME CHECK AXES:
@@ -103,7 +102,7 @@
       ID: 'touch',
       contexts: [{ name: 'touch' }],
       matcher: function () {
-        return 'ontouchstart' in window;
+	return 'ontouchstart' in window;
       }
     }).respond();
     // retina display?
@@ -112,7 +111,7 @@
       ID: 'highres',
       contexts: [{ name: 'highres' }],
       matcher: function () {
-        return window.devicePixelRatio > 1;
+	return window.devicePixelRatio > 1;
       }
     }).respond();
     // bind events to the window
@@ -132,8 +131,8 @@
     if (typeof define === 'function' && define.amd) {
       // AMD. Register as an anonymous module.
       define('context', [
-        'jquery',
-        'intention'
+	'jquery',
+	'intention'
       ], factory);
     } else {
       // Browser globals
