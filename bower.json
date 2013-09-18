@@ -1,10 +1,10 @@
 {
   "name": "intentionjs",
-  "version": "0.9.9",
+  "versin": "0.9.9",
   "main": "intention.js",
   "scripts":
   "dependencies": {
-    "jquery": "1.9.0",
+    "jquery": "latest",
     "underscore.js": "latest"
   },
   "license": "MIT",

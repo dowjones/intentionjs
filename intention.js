@@ -171,11 +171,6 @@
       }
       return this;
     },
-    /**************************************************************
-      *
-      *@private methods
-      *
-      **************************************************************/
     _responder: function (axisID, contexts, matcher, measure) {
       var currentContext;
       // called to perform a check
@@ -267,7 +262,7 @@
       return match;
     },
     _makeSpec: function (axis, ctx, sAttr, value, spec) {
-      var axisObj;//, ctxObj;
+      var axisObj, ctxObj;
       if (spec[axis] !== undefined) {
         axisObj = spec[axis];
         if (axisObj[ctx] === undefined) {
