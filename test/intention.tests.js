@@ -135,7 +135,7 @@ describe('Intention', function () {
         intent.responsive([
           { contexts: [{ name: 'foo' }] },
           { contexts: [{ name: 'bar' }] },
-          { contexts: [{ name: 'baz' }] },
+          { contexts: [{ name: 'baz' }] }
         ]);
         // TODO: make this que off the contexts length
         expect(intent.axes.__keys__.length).to.equal(3);
