@@ -31,7 +31,7 @@
   </section>
   <section>
     <h3>Dependencies</h3>
-    <p>Intention.js requires <a href="http://jquery.com/">jQuery</a> and <a href="http://underscore.js" target="_blank">Underscore.js</a> to work. You can download and link to them manually, or you can include them via require.</p>
+    <p>Intention.js requires <a href="http://jquery.com/">jQuery</a> and <a href="http://underscorejs.org" target="_blank">Underscore.js</a> to work. You can download and link to them manually, or you can include them via require.</p>
     {% highlight html %}
 <script
    data-main="assets/js/context"
