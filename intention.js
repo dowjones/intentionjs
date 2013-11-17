@@ -29,14 +29,15 @@
     return intent;
   };
   Intention.prototype = {
+    /**************************************************************
+     *
+     * @public methods
+     *
+     **************************************************************/
     responsive: function responsive(contexts, options) {
-      /**************************************************************
-      *
-      * @public methods
-      *
-      **************************************************************/
       // for generating random ids for axis when not specified
-      var idChars = 'abcdefghijklmnopqrstuvwxyz0123456789', len = idChars.length, id = '', i;
+      var idChars = 'abcdefghijklmnopqrstuvwxyz0123456789',
+          len = idChars.length, id = '', i;
       // create a random id for the axis
       for (i = 0; i < 5; i++) {
         id += idChars[Math.floor(Math.random() * len)];
@@ -100,7 +101,7 @@
       elms.each(_.bind(function (i, elm) {
         var exists = false;
         this.elms.each(function (i, respElm) {
-          if (elm === respElm) {
+          if (elm === respElm.elm) {
             exists = true;
             return false;
           }
