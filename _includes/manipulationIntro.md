@@ -4,7 +4,7 @@
   <article class="equalize" data-pattern="2">
     <h3>Class Manipulations</h3>
     <section>
-      <p>The simplest intentional attribute is a class manipulation. This manipulation adds the current context as a class to the element. Adding <code>in-axis_name</code> to a flagged element is enough to get it working.</p>
+      <p>The simplest intentional attribute is a class manipulation. This manipulation adds the current context as a class to the element. Adding <code>in-axis_name:</code> (note the trailing colon) to a flagged element is enough to get it working.</p>
     </section>
     <section>
       {%highlight html%}
