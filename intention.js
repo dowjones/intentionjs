@@ -162,8 +162,8 @@
     },
     off: function (type, listener) {
       if (_.isArray(this._listeners[type])) {
-        var listeners = this._listeners[type], i;
-        for (i = 0; listeners.length; i++) {
+        var listeners = this._listeners[type], i = 0;
+        for (i; i < listeners.length; i++) {
           if (listeners[i] === listener) {
             listeners.splice(i, 1);
             break;
