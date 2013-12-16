@@ -283,9 +283,14 @@
       return spec;
     },
     _attrsToSpec: function (attrs, axes) {
-      var spec = {}, fullPattern = new RegExp('^(data-)?(in|intent)-(([a-zA-Z0-9][a-zA-Z0-9]*:)?([a-zA-Z0-9]*))-([A-Za-z:-]+)'), axisPattern = new RegExp('^(data-)?(in|intent)-([a-zA-Z0-9][_a-zA-Z0-9]*):$');
+      var spec = {},
+          fullPattern = new RegExp('^(data-)?(in|intent)-(([a-zA-Z0-9][a-zA-Z0-9]*:)?([a-zA-Z0-9]*))-([A-Za-z:-]+)'),
+          axisPattern = new RegExp('^(data-)?(in|intent)-([a-zA-Z0-9][_a-zA-Z0-9]*)$');
+
       _.each(attrs, function (attr) {
-        var specMatch = attr.name.match(fullPattern), axisName;
+        var specMatch = attr.name.match(fullPattern),
+            axisName;
+
         if (specMatch !== null) {
           specMatch = specMatch.slice(-3);
           axisName = specMatch[0];
@@ -299,13 +304,16 @@
           } else {
             specMatch[0] = specMatch[0].replace(/:$/, '');
           }
+
           specMatch.push(attr.value);
           specMatch.push(spec);
           spec = this._makeSpec.apply(this, specMatch);
-        } else if (axisPattern.test(attr.name)) {
+
+        } else if (axisPattern.test(attr.name) && attr.value === '*') {
+
           axisName = attr.name.match(axisPattern)[3];
           _.each(axes[axisName].contexts, function (context) {
-            this._makeSpec(axisName, context.name, 'class', context.name + ' ' + attr.value, spec);
+            this._makeSpec(axisName, context.name, 'class', context.name, spec);
           }, this);
         }
       }, this);

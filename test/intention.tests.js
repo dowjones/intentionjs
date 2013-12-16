@@ -120,7 +120,7 @@ describe('Intention', function () {
       });
       width.respond('mob');
       expect(contextFirst).to.equal(false);
-      var elm = $('<div>').attr({ 'in-width:': '' });
+      var elm = $('<div>').attr({ 'in-width': '*' });
       intent.add(elm);
       intent.on('tab', function () {
         contextFirst = false;
@@ -267,16 +267,17 @@ describe('Intention', function () {
         ]
       };
     it('should match when only one func is specified (class)', function () {
-      var intent = new Intention(), elm = $('<div>').attr({
+      var intent = new Intention(),
+      elm = $('<div>').attr({
           'in-mobile-class': 'foo',
           'in-tablet-class': 'bar',
           'in-standard-class': 'baz',
-          'in-orientation:': 'qux'
+          'in-orientation': '*'
         });
       expect(intent._attrsToSpec(elm[0].attributes, mockAxes)).to.eql({
         orientation: {
-          portrait: { 'class': 'portrait qux' },
-          landscape: { 'class': 'landscape qux' }
+          portrait: { 'class': 'portrait' },
+          landscape: { 'class': 'landscape' }
         },
         width: {
           mobile: { 'class': 'foo' },
@@ -367,7 +368,7 @@ describe('Intention', function () {
           'in-mobile-class': 'foo',
           'in-tablet-class': 'bar',
           'in-standard-class': 'baz',
-          'in-orientation:': 'qux'
+          'in-orientation': '*'
         });
       var orientation = intent.responsive({
           ID: 'orientation',
@@ -388,11 +389,9 @@ describe('Intention', function () {
       widths.respond('mobile');
       expect(elm.hasClass('foo')).to.equal(true);
       expect(elm.hasClass('portrait')).to.equal(true);
-      expect(elm.hasClass('qux')).to.equal(true);
       // switch
       orientation.respond('landscape');
       expect(elm.hasClass('landscape')).to.equal(true);
-      expect(elm.hasClass('qux')).to.equal(true);
       expect(elm.hasClass('portrait')).to.equal(false);
     });
   });
@@ -549,7 +548,8 @@ describe('Intention', function () {
   describe('regex tests', function () {
     describe('full attr match', function () {
       // TODO update intention regex
-      var attrPattern = new RegExp('^(data-)?(in|intent)-([a-zA-Z0-9][_a-zA-Z0-9]*)-([A-Za-z:-]+)');
+      var attrPattern = new RegExp('^(data-)?(in|intent)-(([a-zA-Z0-9][a-zA-Z0-9]*:)?([a-zA-Z0-9]*))-([A-Za-z:-]+)');
+
       it('should match on an abbreviated nonstandard prefix', function () {
         expect(attrPattern.test('in-mobile-class')).to.equal(true);
       });
@@ -559,21 +559,31 @@ describe('Intention', function () {
       it('should not match when context starts with an underscore', function () {
         expect(attrPattern.test('data-in-_mobile-class')).to.equal(false);
       });
+
+      it('should not match when the attr is not specified', function () {
+        expect(attrPattern.test('in-standard')).to.equal(false);
+      });
+
       it('should match on a nonstandard prefix', function () {
         expect(attrPattern.test('intent-mobile-class')).to.equal(true);
       });
       it('should match on an standard prefix', function () {
         expect(attrPattern.test('data-intent-mobile-class')).to.equal(true);
       });
-      it('should match without a prefix', function () {
+      it('should not match without a prefix', function () {
         expect(attrPattern.test('mobile-class')).to.equal(false);
       });
       it('should match a data attr', function () {
         expect(attrPattern.test('in-standard-data-toggle')).to.equal(true);
       });
+
+      it('should match with an axis specified', function () {
+        expect(attrPattern.test('in-width:standard-class')).to.equal(true);
+      });
     });
     describe('context only match', function () {
       var ctxOnlyPattern = new RegExp('^(data-)?(in|intent)-([a-zA-Z0-9][_a-zA-Z0-9]*)$');
+
       it('should match on the prefix and context', function () {
         expect(ctxOnlyPattern.test('in-standard')).to.equal(true);
       });
