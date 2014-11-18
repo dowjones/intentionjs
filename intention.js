@@ -1,31 +1,109 @@
 /*!
- * intention.js Library v0.9.9
+ * intention.js Library v1.0.0
  * http://intentionjs.com/
  *
  * Copyright 2011, 2013 Dowjones and other contributors
  * Released under the MIT license
  *
  */
+
 (function (root, factory) {
   'use strict';
-  if (typeof define === 'function' && define.amd) {
-    define('intention', [
-      'jquery',
-      'underscore'
+  if (typeof exports === 'object') {
+    module.exports = factory();
+  } else if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define([
     ], factory);
   } else {
-    root.Intention = factory(root.jQuery, root._);
+    // Browser globals
+    root.Intention = factory();
   }
-}(this, function ($, _) {
+
+}(this, function () {
+
+  // utils
+  var slice = Array.prototype.slice;
+
+  function isArray(obj) {
+    return Object.prototype.toString.call(obj) === '[object Array]';
+  }
+
+  function isObject(obj) {
+    var type = typeof obj;
+    return type === 'function' || type === 'object' && !!obj;
+  }
+
+  var Ctor = function(){};
+
+  function bind(func, context) {
+
+    var args, bound;
+    args = slice.call(arguments, 2);
+    bound = function() {
+      if (!(this instanceof bound)) return func.apply(context, args.concat(slice.call(arguments)));
+      Ctor.prototype = func.prototype;
+      var self = new Ctor;
+      Ctor.prototype = null;
+      var result = func.apply(self, args.concat(slice.call(arguments)));
+      if (isObject(result)) return result;
+      return self;
+    };
+    return bound;
+  }
+
+  function each(obj, iteratee) {
+    if (obj == null) return obj;
+    var i, length = obj.length;
+    for (i = 0; i < length; i++) {
+      iteratee(obj[i], i, obj);
+    }
+    return obj;
+  }
+
+  function some(obj, predicate) {
+    if (obj == null) return false;
+    var length = obj.length,
+        index;
+    for (index = 0; index < length; index++) {
+      if (predicate(obj[index], index, obj)) return true;
+    }
+    return false;
+  }
+
+  function every(obj, predicate) {
+    if (obj == null) return true;
+    var length = obj.length,
+        index;
+    for (index = 0; index < length; index++) {
+      if (!predicate(obj[index], index, obj)) return false;
+    }
+    return true;
+  }
+
+  function extend(obj) {
+    if (!isObject(obj)) return obj;
+    var source, prop;
+    for (var i = 1, length = arguments.length; i < length; i++) {
+      source = arguments[i];
+      for (prop in source) {
+        if (Object.prototype.hasOwnProperty.call(source, prop)) {
+          obj[prop] = source[prop];
+        }
+      }
+    }
+    return obj;
+  }
+
+
   'use strict';
   var Intention = function (params) {
-    var intent = _.extend(this, params, {
-        _listeners: {},
-        contexts: [],
-        elms: $(),
-        axes: {},
-        priority: []
-      });
+    var intent = extend(this, params, {
+      _listeners: {},
+      contexts: [],
+      axes: {},
+      priority: []
+    });
     return intent;
   };
   Intention.prototype = {
@@ -43,103 +121,49 @@
         id += idChars[Math.floor(Math.random() * len)];
       }
       var defaults = {
-          matcher: function (measure, ctx) {
-            return measure === ctx.name;
-          },
-          measure: _.identity,
-          ID: id
-        };
-      if (_.isObject(options) === false) {
+        matcher: function (measure, ctx) {
+          return measure === ctx.name;
+        },
+        measure: function(x){return x;},
+        ID: id
+      };
+      if (isObject(options) === false) {
         options = {};
       }
-      if (_.isArray(contexts) && _.isArray(contexts[0].contexts)) {
-        _.each(contexts, function (axis) {
+      if (isArray(contexts) && isArray(contexts[0].contexts)) {
+        each(contexts, bind(function (axis) {
           responsive.apply(this, axis);
-        }, this);
+        }, this));
         return;
       }
-      if (_.isArray(contexts) === false && _.isObject(contexts)) {
+      if (isArray(contexts) === false && isObject(contexts)) {
         options = contexts;
       } else {
         options.contexts = contexts;
       }
       // fill in the options
-      options = _.extend({}, defaults, options);
+      options = extend({}, defaults, options);
       // bind the respond function to the axis ID and prefix it
       // with an underscore so that it does not get whomped accidentally
-      this.on('_' + options.ID + ':', _.bind(function (e) {
+      this.on('_' + options.ID + ':', bind(function (e) {
         this.axes = this._contextualize(options.ID, e.context, this.axes);
-        this._respond(this.axes, this.elms);
+        this.postContext();
       }, this));
       var axis = {
-          ID: options.ID,
-          current: null,
-          contexts: options.contexts,
-          respond: _.bind(this._responder(options.ID, options.contexts, options.matcher, options.measure), this)
-        };
+        ID: options.ID,
+        current: null,
+        contexts: options.contexts,
+        respond: bind(this._responder(options.ID, options.contexts, options.matcher, options.measure), this)
+      };
       this.axes[options.ID] = axis;
       this.axes.__keys__ = this.priority;
       this.priority.unshift(options.ID);
       return axis;
     },
-    elements: function (scope) {
-      // find all responsive elms in a specific dom scope
-      if (!scope) {
-        scope = document;
-      }
-      $('[data-intent],[intent],[data-in],[in]', scope).each(_.bind(function (i, elm) {
-        this.add($(elm));
-      }, this));
-      return this;
-    },
-    add: function (elms, options) {
-      var spec;
-      if (!options) {
-        options = {};
-      }
-      // is expecting a jquery object
-      elms.each(_.bind(function (i, elm) {
-        var exists = false;
-        this.elms.each(function (i, respElm) {
-          if (elm === respElm.elm) {
-            exists = true;
-            return false;
-          }
-          return true;
-        });
-        if (exists === false) {
-          // create the elements responsive data
-          spec = this._fillSpec(_.extend(options, this._attrsToSpec(elm.attributes, this.axes)));
-          // make any appropriate changes based on the current contexts
-          this._makeChanges($(elm), spec, this.axes);
-          this.elms.push({
-            elm: elm,
-            spec: spec
-          });
-        }
-      }, this));
-      return this;
-    },
-    remove: function (elms) {
-      // is expecting a jquery object
-      var respElms = this.elms;
-      // elms to remove
-      elms.each(function (i, elm) {
-        // elms to check against
-        respElms.each(function (i, candidate) {
-          if (elm === candidate.elm) {
-            respElms.splice(i, 1);
-            // found the match, break the loop
-            return false;
-          }
-          return true;
-        });
-      });
-      return this;
-    },
+
     is: function (ctxName) {
       var axes = this.axes;
-      return _.some(axes.__keys__, function (key) {
+      return some(axes.__keys__, function (key) {
         return ctxName === axes[key].current;
       });
     },
@@ -161,7 +185,7 @@
       return this;
     },
     off: function (type, listener) {
-      if (_.isArray(this._listeners[type])) {
+      if (isArray(this._listeners[type])) {
         var listeners = this._listeners[type], i = 0;
         for (i; i < listeners.length; i++) {
           if (listeners[i] === listener) {
@@ -173,16 +197,19 @@
       return this;
     },
     /**************************************************************
-      *
-      *@private methods
-      *
-      **************************************************************/
+     *
+     *@private methods
+     *
+     **************************************************************/
+
+    postContext: function(){},
+
     _responder: function (axisID, contexts, matcher, measure) {
       var currentContext;
       // called to perform a check
       return function () {
         var measurement = measure.apply(this, arguments);
-        _.every(contexts, function (ctx) {
+        every(contexts, bind(function (ctx) {
           if (matcher(measurement, ctx)) {
             // first time, or different than last context
             if (currentContext === undefined || ctx.name !== currentContext.name) {
@@ -195,7 +222,15 @@
               }, currentContext, this)._emitter({
                 _type: axisID + ':',
                 context: currentContext.name
-              }, currentContext, this)._emitter(_.extend({}, { _type: axisID + ':' + currentContext.name }, currentContext), currentContext, this)._emitter(_.extend({}, { _type: currentContext.name }, currentContext), currentContext, this);
+              }, currentContext, this)
+                ._emitter(
+                  extend({},
+                           { _type: axisID + ':' + currentContext.name },
+                           currentContext),
+                  currentContext, this)
+                ._emitter(extend({},
+                                   { _type: currentContext.name },
+                                   currentContext), currentContext, this);
               // done, break the loop
               return false;
             }
@@ -203,7 +238,7 @@
             return false;
           }
           return true;
-        }, this);
+        }, this));
         // return the intention object for chaining
         return this;
       };
@@ -218,7 +253,7 @@
       if (!event._type) {
         throw new Error(event._type + ' is not a supported event.');
       }
-      if (_.isArray(this._listeners[event._type])) {
+      if (isArray(this._listeners[event._type])) {
         var listeners = this._listeners[event._type], i;
         for (i = 0; i < listeners.length; i++) {
           listeners[i].apply(this, arguments);
@@ -226,34 +261,12 @@
       }
       return this;
     },
-    _fillSpec: function (spec) {
-      var applySpec = function (fn) {
-          _.each(spec, function (axisOptions, axis) {
-            _.each(axisOptions, function (ctxOptions, ctx) {
-              fn(ctxOptions, ctx, axis);
-            });
-          });
-        }, filler = {};
-      applySpec(function (options) {
-        // check to see if the ctx val is an object, could be a string
-        if (_.isObject(options)) {
-          _.each(options, function (val, func) {
-            filler[func] = '';
-          });
-        }
-      });
-      applySpec(function (options, ctx, axis) {
-        if (_.isObject(options)) {
-          spec[axis][ctx] = _.extend({}, filler, options);
-        }
-      });
-      return spec;
-    },
+
     _assocAxis: function (ctx, axes) {
       var match = false;
-      _.every(axes.__keys__, function (axis) {
+      every(axes.__keys__, function (axis) {
         if (match === false) {
-          _.every(axes[axis].contexts, function (ctxCandidate) {
+          every(axes[axis].contexts, function (ctxCandidate) {
             if (ctxCandidate.name === ctx) {
               match = axis;
               return false;
@@ -267,97 +280,10 @@
       });
       return match;
     },
-    _makeSpec: function (axis, ctx, sAttr, value, spec) {
-      var axisObj;
-      if (spec[axis] !== undefined) {
-        axisObj = spec[axis];
-        if (axisObj[ctx] === undefined) {
-          axisObj[ctx] = {};
-        }
-      } else {
-        axisObj = {};
-        axisObj[ctx] = {};
-        spec[axis] = axisObj;
-      }
-      axisObj[ctx][sAttr] = value;
-      return spec;
-    },
-    _attrsToSpec: function (attrs, axes) {
-      var spec = {},
-          fullPattern = new RegExp('^(data-)?(in|intent)-(([a-zA-Z0-9][a-zA-Z0-9]*:)?([a-zA-Z0-9]*))-([A-Za-z:-]+)'),
-          axisPattern = new RegExp('^(data-)?(in|intent)-([a-zA-Z0-9][_a-zA-Z0-9]*)$');
 
-      _.each(attrs, function (attr) {
-        var specMatch = attr.name.match(fullPattern),
-            axisName;
-
-        if (specMatch !== null) {
-          specMatch = specMatch.slice(-3);
-          axisName = specMatch[0];
-          if (specMatch[0] === undefined || specMatch[0] === '') {
-            // if there is no axis find one:
-            specMatch[0] = this._assocAxis(specMatch[1], axes);
-            if (specMatch[0] === false) {
-              // there is no context, so get outa here
-              return;  // skipt the attr
-            }
-          } else {
-            specMatch[0] = specMatch[0].replace(/:$/, '');
-          }
-
-          specMatch.push(attr.value);
-          specMatch.push(spec);
-          spec = this._makeSpec.apply(this, specMatch);
-
-        } else if (axisPattern.test(attr.name) && attr.value === '*') {
-
-          axisName = attr.name.match(axisPattern)[3];
-          _.each(axes[axisName].contexts, function (context) {
-            this._makeSpec(axisName, context.name, 'class', context.name, spec);
-          }, this);
-        }
-      }, this);
-      return spec;
-    },
-    _contextSpec: function (ctxObj, specs) {
-      if (specs.hasOwnProperty(ctxObj.axis) && specs[ctxObj.axis].hasOwnProperty(ctxObj.ctx)) {
-        return specs[ctxObj.axis][ctxObj.ctx];
-      }
-      return {};
-    },
-    _resolveSpecs: function (currentContexts, specs) {
-      var changes = {}, moveFuncs = [
-          'append',
-          'prepend',
-          'before',
-          'after'
-        ];
-      _.each(currentContexts, function (ctxObj) {
-        // if the axis or the context to not exist in the specs object
-        // skip to the next one
-        _.each(this._contextSpec(ctxObj, specs), function (val, func) {
-          if (func === 'class') {
-            if (!changes[func]) {
-              changes[func] = [];
-            }
-            changes[func] = _.union(changes[func], val.split(' '));
-          } else if ((changes.move === undefined || changes.move.value === '') && $.inArray(func, moveFuncs) !== -1) {
-            changes.move = {
-              value: val,
-              placement: func
-            };
-          } else {
-            if (changes[func] === undefined || changes[func] === '') {
-              changes[func] = val;
-            }
-          }
-        }, this);
-      }, this);
-      return changes;
-    },
     _currentContexts: function (axes) {
       var contexts = [];
-      _.each(axes.__keys__, function (ID) {
+      each(axes.__keys__, function (ID) {
         if (axes[ID].current !== null) {
           contexts.push({
             ctx: axes[ID].current,
@@ -368,66 +294,11 @@
       });
       return contexts;
     },
-    _removeClasses: function (specs, axes) {
-      var toRemove = [];
-      _.each(axes.__keys__, function (key) {
-        var axis = axes[key];
-        _.each(axis.contexts, function (ctx) {
-          // ignore the current context, those classes SHOULD be applied
-          if (ctx.name === axis.current) {
-            return;
-          }
-          var contextSpec = this._contextSpec({
-              axis: axis.ID,
-              ctx: ctx.name
-            }, specs), classes;
-          if (contextSpec !== undefined) {
-            if (contextSpec['class'] !== undefined) {
-              classes = contextSpec['class'].split(' ');
-              if (classes !== undefined) {
-                toRemove = _.union(toRemove, classes);
-              }
-            }
-          }
-        }, this);
-      }, this);
-      return toRemove;
-    },
+
     _contextConfig: function (specs, axes) {
       return this._resolveSpecs(this._currentContexts(axes), specs, axes);
     },
-    _makeChanges: function (elm, specs, axes) {
-      if (_.isEmpty(axes) === false) {
-        var ctxConfig = this._contextConfig(specs, axes);
-        _.each(ctxConfig, function (change, func) {
-          if (func === 'move') {
-            if (specs.__placement__ !== change.placement || specs.__move__ !== change.value) {
-              $(change.value)[change.placement](elm);
-              // save the last placement of the element so
-              // we're not moving it around for no good reason
-              specs.__placement__ = change.placement;
-              specs.__move__ = change.value;
-            }
-          } else if (func === 'class') {
-            var classes = elm.attr('class') || '';
-            // the class add/remove formula
-            classes = _.union(change, _.difference(classes.split(' '), this._removeClasses(specs, axes)));
-            elm.attr('class', classes.join(' '));
-          } else {
-            elm.attr(func, change);
-          }
-        }, this);
-      }
-      return elm;
-    },
-    _respond: function (axes, elms) {
-      // go through all of the responsive elms
-      elms.each(_.bind(function (i, elm) {
-        var $elm = $(elm.elm);
-        this._makeChanges($elm, elm.spec, axes);
-        $elm.trigger('intent', this);
-      }, this));
-    },
+
     _contextualize: function (axisID, context, axes) {
       axes[axisID].current = context;
       return axes;
